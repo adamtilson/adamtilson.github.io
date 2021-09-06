@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Tilson</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <!--li><a href="/labs/ense-374/lab-2">Lab 2</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-5">Lab 5</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <!--li><a href="/labs/ense-411/schedule">Schedule</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-0">Lab 0</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-1">Lab 1</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-2">Lab 2</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <!--li><a href="/labs/ense-472/schedule">Schedule</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-1">Lab 1</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-2">Lab 2</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-1-visual-studio-code-git-and-github">Lab 1: Visual Studio Code, Git and Github</h1>
+
+<p>ENSE 374 - Software Engineering Management - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>This lab introduces some of the tools used in this course, including a modern code editor, Visual Studio Code, version control with Git, and remote repository hosting with GitHub. It will also discuss how to make your projects on GitHub stand out, with good documentation, code presentation and pages; and how to use your GitHub account as a development portfolio.</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges.</p>
+      <ul>
+        <li>These proceedures have been succesfully completed on all three operating systems, but some minor differences may exist</li>
+        <li>This lab course has also been partially tested and is likely completable on ARM Mac or ARM Linux</li>
+      </ul>
+
+    </div></div></section>
+<section id="part1visualstudiocode"><button class="collapsible">Part 1: Visual Studio Code</button><div class="text-content"><div class="text-inner">
+
+      <p>Visual Studio Code is a lightweight code editor with many extensions.</p>
+
+      <h3 id="ide-vs-editor">IDE Vs. Editor</h3>
+
+      <p>IDE - Integrated Development Environment</p>
+      <ul>
+        <li>Tend to have a larger install, slower to run, have more tools, and may be dedicated to a single language.</li>
+        <li>Examples: Visual Studio, JetBrains, Eclipse</li>
+      </ul>
+
+      <p>Code Editors - tend to be more lightweight, faster, fewer tools, universal across coding languages.</p>
+      <ul>
+        <li>Examples: Sublime Text, Atom, VS Code</li>
+      </ul>
+
+      <h3 id="ide--editor-spectrum">IDE / Editor Spectrum</h3>
+
+      <p>Subjective, on a scale of Visual Studio to Notepad…</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                     Eclipse                               Notepad++
+Visual Studio ----------|--------------------|------|--------|---------- Notepad
+                                          VS Code  Atom
+</code></pre></div>      </div>
+      <p><em>** Visual Studio Code is NOT Visual Studio **</em></p>
+
+      <p>The further you progress as a developer, the more likely you gain a preference for one tool or another.</p>
+
+      <h3 id="installation">Installation</h3>
+
+      <p><a href="https://code.visualstudio.com/">Download Visual Studio code here…</a></p>
+
+      <p>Do I have a 64 bit processor? Probably. 
+In windows you can check by…</p>
+      <ul>
+        <li>Start -&gt; Search -&gt; about your PC</li>
+      </ul>
+
+      <p><img src="res/about-windows.png" alt="" /></p>
+
+      <h3 id="major-features">Major Features</h3>
+
+      <p>Fast, cross-platform, MIT Licensed*</p>
+
+      <p><em>What they brag about on the website:</em></p>
+
+      <ul>
+        <li>IntelliSense - syntax highlighting, auto-complete.
+          <ul>
+            <li>Figures out which language you are coding in and provides “smart” solutions.</li>
+          </ul>
+        </li>
+        <li>Built in Debugging - Break points, call stacks, interactive console</li>
+        <li>Built in Git - However, we’ll stick to the command line…</li>
+        <li>Extensions - So many good ones!</li>
+      </ul>
+
+      <p>They took the best parts of other editors, and put the old M$ spin on it.</p>
+
+      <ul>
+        <li>binaries are not MIT as they contain telemetry, and not all MarketPlace extensions are not necessarilly FLOSS.</li>
+        <li>If ever they Microsoft it up, there’s always the FLOSS fork VS Codium.</li>
+      </ul>
+
+      <h3 id="layout">Layout</h3>
+
+      <p><img src="res/vs-code-ui.png" alt="" /></p>
+
+      <ol>
+        <li>Left panel - explorer, search, extensions</li>
+        <li>This area changes depending on what is selected in (1).</li>
+        <li>Tabbed interface lets you have multiple files open at once.</li>
+        <li>Centre stage is where you will edit your code</li>
+        <li>The minimap is a zoomed out view of your code, and helps you navigate quickly.</li>
+        <li>Terminal, debugging and output appear down here.</li>
+        <li>See which modes the editor is in, like language, line endings, tab size, etc.</li>
+      </ol>
+
+      <h3 id="useful-built-in-features">Useful Built-in Features</h3>
+
+      <ul>
+        <li>Emmet: HTML 5 autocomplete.</li>
+        <li>Autosave (File -&gt; Autosave)</li>
+        <li>Multi code views (ctrl+1, ctrl+2 … etc)</li>
+      </ul>
+
+      <p><img src="res/multi-view.png" alt="" /></p>
+
+      <h3 id="command-palette">Command Palette</h3>
+
+      <p>` Ctrl + Shift + P`, type in what you are looking for</p>
+
+      <p><img src="res/command-palette.png" alt="" /></p>
+
+      <h3 id="terminal">Terminal</h3>
+
+      <p><code class="language-plaintext highlighter-rouge">ctrl + shift + </code> ` (backtick)</p>
+      <ul>
+        <li>If that shortcut is cumbersome, you can always use the command palette!</li>
+        <li>Starts at the root of your workspace</li>
+        <li>You can have multiple terminals at once, e.g. one running a server and one a client. This is useful if a running service ‘consumes’ a terminal</li>
+      </ul>
+
+      <h3 id="themes">Themes</h3>
+
+      <ul>
+        <li>You can get them in the search bar for extensions, lately I like <code class="language-plaintext highlighter-rouge">Darcula</code>, <code class="language-plaintext highlighter-rouge">Horizon</code>, <code class="language-plaintext highlighter-rouge">Noctis</code>, and <code class="language-plaintext highlighter-rouge">GitHub Dark</code></li>
+        <li>Protect your eyes! Use a dark (or gentle light) theme</li>
+        <li><a href="https://vscodethemes.com/">Find your theme here</a></li>
+      </ul>
+
+      <h3 id="extensions">Extensions</h3>
+
+      <p><code class="language-plaintext highlighter-rouge">Prettier</code> (Code formatter)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">Snippets</code> (Like Emmet, but for different languages)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">Material Icon Theme</code> (Nice bold file type icons!)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">Bracket Pair Colorizer</code> (To visually spot mismatched brackets)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">AI Autocomplete</code> (A couple different ones exist… are robots going to take your job?!)</p>
+
+      <h3 id="where-to-get-help">Where to get help</h3>
+
+      <p>You can try <a href="https://code.visualstudio.com/docs/">the official docs</a></p>
+
+      <p>You can also try Google / StackOverflow</p>
+      <ul>
+        <li>Remember, it’s unlikely you are the first person to have this problem!</li>
+      </ul>
+
+    </div></div></section>
+<section id="part2git"><button class="collapsible">Part 2: Git</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="version-control">Version Control</h3>
+
+      <p>Git is version control software responsible for backing up different version of your source code over time, and letting you to restore or jump between different versions. Git aids in backup, branching, and collaboration. A Git Repository (repo) is the name for the database in which source files are stored.</p>
+
+      <h3 id="time-travel">Time Travel</h3>
+
+      <p>Git allows incremental versions. If you break something, you can always go back to a previous version. Whenever you have things working the way you like, you can check in your work to ensure you can always return to this point in time.</p>
+
+      <h3 id="parallel-universes">Parallel Universes</h3>
+
+      <p>Git allows branching. You can have multiple versions of your source existing simultaneously, e.g. different members can work on individual features in isolation, and then you can combine your work together at the end, often pain free.</p>
+
+      <h3 id="locations">Locations</h3>
+
+      <p>Your code can be stored on a local repository (repo) or a remote repo.</p>
+      <ul>
+        <li>The local repo is your personal copy, the remote repo is the copy everyone shares.</li>
+      </ul>
+
+      <h3 id="stages">Stages</h3>
+
+      <p>Your files can exist in 4 states:</p>
+
+      <p>“Working”, “Staging”, “Local Repo” and “Remote Repo”</p>
+
+      <p><img src="res/git-diagram.svg" alt="Four stages of Git tracked files" /></p>
+
+      <p>By default, files are in the working state.</p>
+
+      <ul>
+        <li>
+          <p>When you run the <code class="language-plaintext highlighter-rouge">add</code> command, a file is moved from working to staged. This means git knows to include it next time work is checked in.</p>
+        </li>
+        <li>When you run a <code class="language-plaintext highlighter-rouge">commit</code> command, all of the staged files are backed up into the local repository, and the local files are returned to the working state.
+          <ul>
+            <li>This means, if you want to do another backup, you will need to <code class="language-plaintext highlighter-rouge">add</code> them again.</li>
+          </ul>
+        </li>
+        <li>Finally, when you wish to synchronize the local repo with the remote repo, you will use a <code class="language-plaintext highlighter-rouge">push</code> command.</li>
+      </ul>
+
+      <h3 id="get-git">Get Git</h3>
+
+      <p>While GUI utilities exist, in this course we’ll use Command Line Interface (CLI) git. Once you get used to it, CLI tends to be much faster for repetitive tasks like this.</p>
+
+      <p><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">This guide explains how to install Git.</a>
+<a href="https://git-scm.com/downloads">If you are on windows, check ou this download page.</a></p>
+
+      <h3 id="git-bash--cli">Git Bash / CLI</h3>
+
+      <p>The Git Bash is a command line for working with Git. It’s a Terminal Emulator for Unix-like systems.</p>
+
+      <p>You could instead just use the one in VS Code! Or the Terminal in Mac, Linux or the Powershell in Windows.</p>
+
+      <h3 id="git-config">git config</h3>
+
+      <p>First we set up our name and credentials</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git config --global user.name "Your Name"
+&gt; git config --global user.email you@yourdomain.ca
+</code></pre></div>      </div>
+
+      <h3 id="git-init">git init</h3>
+
+      <p>Navigate to a directory we want to become a repo, and run the command:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git init -b main
+</code></pre></div>      </div>
+
+      <h3 id="git-status">git status</h3>
+
+      <p>See what’s happened, if anything:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git status
+</code></pre></div>      </div>
+
+      <h3 id="git-add">git add</h3>
+
+      <p>There are many ways to add…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git add &lt;list of files&gt;
+&gt; git add --all
+&gt; git add *.txt           txt files in current directory
+&gt; git add docs/*.txt      txt files in docs directory
+&gt; git add docs/           all files in docs directory
+&gt; git add "*.txt"         txt files in whole project
+</code></pre></div>      </div>
+
+      <h3 id="git-commit">git commit</h3>
+
+      <p>Commit your files with a message explaining your changes</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git commit -m "create initial files"
+</code></pre></div>      </div>
+      <p>And files are now committed. You can check with <code class="language-plaintext highlighter-rouge">git status</code>…</p>
+
+      <h3 id="git-directory">.git directory</h3>
+
+      <p>Where are all of these changes being stored?</p>
+
+      <p>There is a hidden directory in the root directory, <code class="language-plaintext highlighter-rouge">.git</code></p>
+
+      <p>This is your local repo - if you delete this, you lose all your commits!</p>
+
+      <p>You may not be able to see this depending on your Operating System settings - in Linux directories which begin with a <code class="language-plaintext highlighter-rouge">.</code> are hidden by default.</p>
+
+      <h3 id="where-to-get-help-1">Where to get help?</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git help
+</code></pre></div>      </div>
+
+      <p><a href="https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet">Atlassian has a pretty good Cheat Sheet</a></p>
+
+      <p><a href="https://www.atlassian.com/git/tutorials/setting-up-a-repository">Atlassian also has excellent help docs</a></p>
+
+      <p><a href="https://git-scm.com/docs">And the Git docs are pretty good too</a></p>
+
+    </div></div></section>
+<section id="part3github"><button class="collapsible">Part 3: GitHub</button><div class="text-content"><div class="text-inner">
+
+      <p>GitHub is a service for hosting remote Git repo’s.</p>
+
+      <h3 id="website">Website</h3>
+
+      <p><a href="github.com">Github</a> is now owned by our benevolent? overloads at Microsoft</p>
+
+      <ul>
+        <li>alternatives: GitLab, BitBucket. You can even host a repo on your own server!</li>
+      </ul>
+
+      <h3 id="create-account">Create account</h3>
+
+      <p>Fast, easy and free.</p>
+
+      <p>Recommended: use your real name if you can - This will hopefully become one of the spokes of your professional life online</p>
+
+      <h3 id="create-remote">Create remote</h3>
+
+      <p>Repositories -&gt; New</p>
+      <ul>
+        <li>Create a name, description, and you can omit the rest for now</li>
+      </ul>
+
+      <h3 id="link-and-push-to-remote">Link and push to remote</h3>
+
+      <p>We’ve already started our Git local, so we link and need to push to it…</p>
+
+      <p>Your commands will be different than this, but along these lines…</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git remote add origin git@github.com:adamtilson/374test1.git
+&gt; git branch -M main
+&gt; git push -u origin main
+</code></pre></div>      </div>
+
+      <h3 id="check-status-on-web">Check status on web</h3>
+
+      <p>On the website, you can click on the project name and see which files have been uploaded</p>
+
+      <h3 id="where-to-get-help-2">Where to get help</h3>
+
+      <p><a href="https://docs.github.com/en">The official help docs.</a></p>
+
+    </div></div></section>
+<section id="part4advancedgitusage"><button class="collapsible">Part 4: Advanced Git Usage</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="time-travel-1">Time travel</h3>
+
+      <p>We can “undo changes” and “rewrite history”</p>
+
+      <p>Revert from staged to working</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git reset cat.txt
+</code></pre></div>      </div>
+
+      <p>See the history of the repo with</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git log
+</code></pre></div>      </div>
+
+      <p>Note the commit hashes.</p>
+
+      <p>Undo a commit:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git revert &lt;commit&gt;
+</code></pre></div>      </div>
+
+      <p>Go back in time to a previous commit</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git checkout &lt;commit&gt;
+</code></pre></div>      </div>
+
+      <p>However, this puts us in “detached head” mode, basically we are only an observer.</p>
+      <ul>
+        <li>If you want to make changes, you can create a new branch from here, make changes, and then merge them in.</li>
+      </ul>
+
+      <h3 id="branching">Branching</h3>
+
+      <p>To create a new branch, run…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch &lt;name&gt;
+</code></pre></div>      </div>
+
+      <p>e.g. to create a branch called “cat”, do</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch cat
+</code></pre></div>      </div>
+
+      <p>The branch is created, but we haven’t switched to it. We can hop between branches with checkout, e.g. switch to cat</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git checkout cat
+</code></pre></div>      </div>
+
+      <p>Switch back to main</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout main
+</code></pre></div>      </div>
+
+      <p>Try adding, commiting, and pushing. The branch structure is maintained in the local and remote repos.</p>
+
+      <h3 id="merging">Merging</h3>
+
+      <p>to merge back into main, make sure you are in main, and then merge in the cat branch…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout main
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge cat
+</code></pre></div>      </div>
+
+      <p>If no changes were made in the main, this is a fast forward.</p>
+
+      <h3 id="more-advanced-git-log">More advanced git log</h3>
+
+      <p>As your graph grows in complexity, it can be trickier to understand. You can try this method, <code class="language-plaintext highlighter-rouge">git log adog</code></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log --all --decorate --oneline --graph
+</code></pre></div>      </div>
+
+      <h3 id="merge-conflicts">Merge conflicts</h3>
+
+      <p>When trying to merge two branches, and a file exists between both which has been edited, a merge conflict will occur.</p>
+      <ul>
+        <li>You will need to manually fix each of the differences.</li>
+        <li>If we are using VSCode, these will all be done in VS Code</li>
+        <li>A <code class="language-plaintext highlighter-rouge">diff</code> section is added to each file which has merge conflicts which you will need to manually fix. Edit this file.</li>
+        <li>Clear up all of the junk until you are left with what you are happy with</li>
+        <li>Save the file, Lock it in the results with an add, commit, push</li>
+        <li>In VSCode, there are some shortcuts at the top for common actions, eg. accept incoming, etc.</li>
+      </ul>
+
+      <h3 id="walkthrough">Walkthrough</h3>
+
+      <p>Let’s see it in action</p>
+
+      <p><code class="language-plaintext highlighter-rouge">echo text &gt;&gt; new.txt</code>, add, commit, push, status</p>
+
+      <p>create “r” branch</p>
+
+      <p>switch to “r” branch</p>
+
+      <p><code class="language-plaintext highlighter-rouge">echo red" &gt;&gt; color.txt</code>, add, commit, push</p>
+
+      <p>revert to main</p>
+
+      <p><code class="language-plaintext highlighter-rouge">echo blue" &gt;&gt; color.txt</code>, add, commit, push</p>
+
+      <p>merge in “r” branch</p>
+
+      <p>In VS Code, you can just click on the top what you want to do.</p>
+
+      <h3 id="faq">FAQ</h3>
+
+      <p>How often should you push?</p>
+      <ul>
+        <li>When working on a big project, once per day is a common minimum. Once per “unit of work” is even better, assuming your work units can be completed in less than a day.</li>
+      </ul>
+
+      <h3 id="gitignore">Gitignore</h3>
+
+      <p>Occasionally there are files we don’t want to be tracked by our project. This might include files automatically generated by a particular editor, cached objects, files added by a package manager, or compiled binaries. We can explictly ignore them by adding their filenames to another hidden file called <code class="language-plaintext highlighter-rouge">.gitignore</code></p>
+
+      <p>Additionally, if you are going to be working with a particular type of project, we can download a premade gitignore file which will automatically filter unneeded file types.</p>
+
+      <h3 id="git-pull">Git Pull</h3>
+
+      <p>If others added files to the remote repo which you do not have on your local machine, you can fetch them with…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull
+</code></pre></div>      </div>
+
+      <h3 id="cloning">Cloning</h3>
+
+      <p><code class="language-plaintext highlighter-rouge">Cloning</code> is the process of copying an entire remote repo into a new folder on your computer, making a complete second local copy of the project. This can be useful if you wish to join an existing project.</p>
+
+    </div></div></section>
+<section id="part5highqualitygithubrepos"><button class="collapsible">Part 5: High Quality Github Repos</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="git-md">Git md</h3>
+
+      <p>Git Markdown files (<code class="language-plaintext highlighter-rouge">.md</code>) are readme files written in Markdown.</p>
+      <ul>
+        <li>Markdown is an easy to read and write language for formatting documents</li>
+        <li>It’s also what I make my Lab Docs in!</li>
+        <li>You can include: text, lists, images, headers, quotes, code</li>
+      </ul>
+
+      <p><a href="https://guides.github.com/features/mastering-markdown/">A very simple guide is here</a></p>
+
+      <h3 id="git-wiki">Git wiki</h3>
+
+      <p><a href="https://docs.github.com/en/github/building-a-strong-community/about-wikis">Foster a community of collaborative developers with a wiki</a></p>
+
+      <h3 id="git-pages">Git pages</h3>
+
+      <p>You can host static webpages related to your project using <a href="https://pages.github.com/">GitHub Pages</a></p>
+
+      <p>You can even use a static site builder, like Jekyll, for making blogs which can be hosted on GitHub pages. I am also using this utility to make the lab site.</p>
+
+      <h3 id="git-portfolio">Git portfolio</h3>
+
+      <p>Check out your github profile, it includes things like projects you have worked on, what you have committed to, how frequently you commit, that sort of thing. You will want to showcase high quality work:</p>
+
+      <h3 id="avoid-code-smells">Avoid Code Smells</h3>
+
+      <p>One day a hiring manager may be browsing your github, looking at your code. What things do you not want to be there?</p>
+      <ul>
+        <li>Code smells</li>
+        <li>Big blocks of commented out code</li>
+        <li>No unit tests</li>
+        <li>Bad variable names</li>
+        <li>Lines of code that just keeps going on forever so that you wonder if the person who was writing the code even gets the concept of having line breaks or maybe their enter key is broken who knows in any case it doesn’t look the greatest in your repo (and you can spot these long lines really really fast in the minimap or when scrolling!)</li>
+      </ul>
+
+      <h3 id="embrace-clean-code">Embrace Clean Code</h3>
+
+      <p>Tim will be teaching you all about this throughout the semester. Follow the principles taught and your portfolio will be in excellent shape!</p>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <ol>
+        <li>Download and install Visual Studio Code.</li>
+        <li>Download and install Git.</li>
+        <li>Create an account on GitHub using your own name (or a variation as required).</li>
+        <li>Create a Local Repo.</li>
+        <li>Create a Remote Repo (ENSE 374 Lab 1) and link them.</li>
+        <li>Perform the following operations. 
+<strong>After each step, be sure to save, stage, commit and push.</strong>
+          <ul>
+            <li>In your favorite programming language, create a “Hello World” file. This is the simplest program you can create in that language which prints out the phrase “Hello World” to the screen.</li>
+            <li>Create a second “readme.md” file. Add some Markdown code. Add at least 3 different types of elements.</li>
+            <li>Create a “music.txt” file. Type some music you like into the file, eg. a song, artist or album.</li>
+            <li>Create a new branch called “alternate”.</li>
+            <li>Still in main, create a “timeline.txt” file. Add the text “best timeline”.</li>
+            <li>Create a “onlyone.txt” file. Add whatever text you would like to the file.</li>
+            <li>Switch to the second branch.</li>
+            <li>Ensure the “onlyone.txt” and “timeline.txt” files are not visible in this branch.</li>
+            <li>Create a “timeline.txt” file, and add the text “darkest timeline” and save.</li>
+            <li>Switch back to main</li>
+            <li>merge</li>
+            <li>fix the merge conflict however you would like
+<strong>Be sure to do a final stage, commit, push.</strong></li>
+          </ul>
+        </li>
+        <li>Verify the Git network looks like this one, local and remote:
+<img src="res/git-log-a-dog.png" alt="Final state of the log" />
+<img src="res/github-final-network.png" alt="Final state of the network" />
+          <ul>
+            <li>You can find a network graph on github in <code class="language-plaintext highlighter-rouge">Insights -&gt; Network</code></li>
+          </ul>
+        </li>
+        <li>Meet me in a breakout room and show me it is working! (Today before you leave, or during the next lab session.) Be prepared to answer some questions!</li>
+      </ol>
+
+      <p>Have fun with VS Code, Git and Github!</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
