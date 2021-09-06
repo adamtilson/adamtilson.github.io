@@ -34,7 +34,7 @@ function setDark() {
   if (typeof(Storage) !== "undefined") {
     sessionStorage.setItem("darkmode", "dark");
   }
-  for(var i = 0; i < sections.length; i++) {
+  for(var i = 0; i < highlights.length; i++) {
     highlights[i].classList.remove("light");
     highlights[i].classList.add("dark");
   }
@@ -53,7 +53,7 @@ function praiseTheSun() {
   if (typeof(Storage) !== "undefined") {
     sessionStorage.setItem("darkmode", "lidght");
   }
-  for(var i = 0; i < sections.length; i++) {
+  for(var i = 0; i < highlights.length; i++) {
     highlights[i].classList.remove("dark");
     highlights[i].classList.add("light");
   }
