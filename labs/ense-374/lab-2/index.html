@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Tilson</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <!--li><a href="/labs/ense-374/lab-2">Lab 2</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-5">Lab 5</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <!--li><a href="/labs/ense-411/schedule">Schedule</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-0">Lab 0</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-1">Lab 1</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-2">Lab 2</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-411/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <!--li><a href="/labs/ense-472/schedule">Schedule</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-1">Lab 1</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-2">Lab 2</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-2-html">Lab 2: HTML</h1>
+
+<p>ENSE 374 - Software Engineering Management - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>The purpose of this lab is to briefly introduce the View component of the MVC, and particularly to introduce the Hyper-Text Markup Language (HTML). In this tutorial we will explore the building blocks of the front end of the web by discussing the different elements that make up the View, what they do and how they interact. We will then focus especially on HTML, the core building block of all websites.</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges.</p>
+      <ul>
+        <li>A modern web browser, with a strong preference for Firefox or Chrome</li>
+        <li>A text editor, preferably VS Code</li>
+      </ul>
+
+    </div></div></section>
+<section id="part1thefullstack"><button class="collapsible">Part 1: The Full Stack</button><div class="text-content"><div class="text-inner">
+
+      <p>Over the course of the semester we will be working with the following technologies in the lab:</p>
+
+      <p><img src="res/node-stack.svg" alt="" /></p>
+
+      <p>Over the next four weeks we will focus on different parts of the View. We will then look at the Controller for two weeks, and the Model for two weeks. We’ll come back to this often to remind you how everything works.</p>
+
+      <p>Hopefully by continuing to refer to this diagram, it will be clear how the different components of the system are functioning together. (This was a point students struggled with last year.)</p>
+
+    </div></div></section>
+<section id="part2theview"><button class="collapsible">Part 2: The View</button><div class="text-content"><div class="text-inner">
+
+      <p>In Web Development (web dev) there are three types of files used to render the front end which users see: HTML, CSS and JavaScript. Sometimes these are generated by front-end libraries, like Angular, React, Vue, or incorporate useful libraries like BootStrap or jQuery, but fundamentally these are the technologies browsers run on. Your browser requests these files, they are delivered from a server over the internet, and then rendered in the browser.</p>
+
+      <h3 id="html">HTML</h3>
+
+      <p>In modern web dev, HTML is used only to specify which components will appear on the page, and define order and hierarchy (parent-child relationship, akin to a tree data-structure). If we think of front-end web dev as building a house, HTML is the blueprint and bricks. You can build a web site using only HTML, though it will probably look like a <a href="http://www.oocities.org/">90’s geocites website</a>.</p>
+
+      <h3 id="css">CSS</h3>
+
+      <p>Cascading Style Sheets (CSS) is used to style the website. This makes the elements appear where and how you want them to appear. In our analogy of building a house, CSS are the decorations. A popular library for CSS is BootStrap, which standardizes and speeds up design. We’ll look at CSS in Lab 3.</p>
+
+      <h3 id="javascript">JavaScript</h3>
+
+      <p>JavaScript is a programming language which runs in the browser, for adding animations and simple interactions with the website through the Document Object Model (DOM). For security reasons, there are limits to what can be done in JavaScript. In our house analogy, JavaScript is the electricity, it makes things work. We’ll look at JavaScript in Lab 4, and a popular extension, JQuery, in lab 5.</p>
+
+      <h3 id="single-responsibility">Single Responsibility</h3>
+
+      <p>In Software Engineering, Single Responsibility principle is the idea that each module should only perform one task. We will broadly follow this concept in this course. In other words, HTML should only handle object instantiation, CSS should only handle styling, etc. However, we will see several way we can violate this, such as:</p>
+      <ul>
+        <li>styling elements through HTML tags</li>
+        <li>adding web elements using the JavaScript through the DOM
+As much as possible, we want to avoid using these components for unintended purposes! It makes code harder to read, understand and change.</li>
+      </ul>
+
+    </div></div></section>
+<section id="part3markuptohtml"><button class="collapsible">Part 3: Markup to HTML</button><div class="text-content"><div class="text-inner">
+
+      <p>HTML is The only required element of a website. Made up of XML-like tags which surround the content and further describe what type of content it is.</p>
+
+      <h3 id="markup">Markup</h3>
+
+      <p>The term markup comes from manuscript submission, where the editor would make notes describing <em>how</em> we would like to print text. For example, underline this, emphasize this, etc.</p>
+
+      <p>Modern markup languages similarly employs tags to explain how we want the text to be rendered. There is a default rendering style, (which arguably pretty antiquated) and custom rendering styles we’ll look at later using CSS. For now, the important take away is that we are using HTML to explain <strong>the purpose</strong> of the enclosed content, regardless of the visual presentation.</p>
+
+      <h3 id="quick-example">Quick Example:</h3>
+
+      <p>Let’s try an example using a classic text, Bram Stoker’s Dracula:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CHAPTER I
+
+JONATHAN HARKER’S JOURNAL
+
+(Kept in shorthand.)
+
+3 May. Bistritz.—Left Munich at 8:35 P. M., on 1st May, arriving at Vienna early next morning; should have arrived at 6:46, but train was an hour late. Buda-Pesth seems a wonderful place, from the glimpse which I got of it from the train and the little I could walk through the streets. I feared to go very far from the station, as we had arrived late and would start as near the correct time as possible. The impression I had was that we were leaving the West and entering the East; the most western of splendid bridges over the Danube, which is here of noble width and depth, took us among the traditions of Turkish rule.
+</code></pre></div>      </div>
+
+      <p>Without any context, each chunk of text looks exactly the same.</p>
+
+      <p><img src="res/wall-of-text.png" alt="" /></p>
+
+      <p>How do we differentiate one from another? Here’s how Project Gutenberg renders the same text.</p>
+
+      <p><img src="res/dracula-formatted.png" alt="" /></p>
+
+      <p>Can we do this? Let’s start by pasting this into a new file in vs code…</p>
+
+      <h3 id="main-entry-point-indexhtml">Main entry point: <code class="language-plaintext highlighter-rouge">index.html</code></h3>
+
+      <p>By default, the main file in html is called <code class="language-plaintext highlighter-rouge">index.html</code>. Let’s create a new file called index.html and paste this in.</p>
+
+      <p><img src="res/untouched-manuscript.png" alt="" /></p>
+
+      <p>We can preview this file in a browser by double clicking the HTML…</p>
+
+      <p><img src="res/wall-of-text.png" alt="" /></p>
+
+      <p>Beautiful. Let’s start annotating it. The chapter section is a title, let’s embed it in a heading tag, h1.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>CHAPTER I<span class="nt">&lt;/h1&gt;</span>
+
+JONATHAN HARKER’S JOURNAL
+
+(Kept in shorthand.)
+
+3 May. Bistritz.—Left Munich at 8:35 P. M., on 1st May, arriving at Vienna early next morning; should have arrived at 6:46, but train was an hour late. Buda-Pesth seems a wonderful place, from the glimpse which I got of it from the train and the little I could walk through the streets. I feared to go very far from the station, as we had arrived late and would start as near the correct time as possible. The impression I had was that we were leaving the West and entering the East; the most western of splendid bridges over the Danube, which is here of noble width and depth, took us among the traditions of Turkish rule.
+</code></pre></div>      </div>
+
+      <p>What does this look like:</p>
+
+      <p><img src="res/h1-preview.png" alt="" /></p>
+
+      <p>Not exactly the way that we want, but we have achieved our goal of “marking up” the text - we have successfully described that the purpose of this text is to act as a heading. While there are methods for changing the appearance in HTML, we’ll leave this for CSS next week. Recall - separation of concern!</p>
+
+      <p>Let’s add some more tags…</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;hr&gt;</span>
+<span class="nt">&lt;h1&gt;</span>CHAPTER I<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;h2&gt;</span>JONATHAN HARKER’S JOURNAL<span class="nt">&lt;/h2&gt;</span>
+
+<span class="nt">&lt;em&gt;</span>(Kept in shorthand.)<span class="nt">&lt;/em&gt;</span>
+
+<span class="nt">&lt;p&gt;&lt;em&gt;</span>3 May. Bistritz.<span class="nt">&lt;/em&gt;</span>—Left Munich at 8:35 P. M., on 1st May, arriving at Vienna early next morning; should have arrived at 6:46, but train was an hour late. Buda-Pesth seems a wonderful place, from the glimpse which I got of it from the train and the little I could walk through the streets. I feared to go very far from the station, as we had arrived late and would start as near the correct time as possible. The impression I had was that we were leaving the West and entering the East; the most western of splendid bridges over the Danube, which is here of noble width and depth, took us among the traditions of Turkish rule.<span class="nt">&lt;/p&gt;</span>
+</code></pre></div>      </div>
+
+      <p>How does the preview look now?</p>
+
+      <p><img src="res/more-tags.png" alt="" /></p>
+
+      <p>We added a horizontal rule (hr) lower heading (h2), the emphasis tag, and the paragraph. Note that the paragraph tag encloses the emphasis tag, an example of nested tags (hierarchy).</p>
+
+      <p>While our browser is rendering our file correctly, it isn’t exactly compliant HTML. This is because we are missing some necessary tags.</p>
+
+      <h3 id="boilerplate-html">Boilerplate HTML</h3>
+
+      <p>Boilerplate refers to standard, preprinted text, needed to make a language compliant. You’ve likely already seen the c++ boilerplate…</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World!"</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+      <p>As you know, this is the bare minumum code to do anything in c++. A similar principle applies to HTML. We can create the boilerplate in VS Code using Emmet and the <code class="language-plaintext highlighter-rouge">!</code> key.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html</span>
+</code></pre></div>      </div>
+
+      <p>But where does our text go? It needs to go into the body. While we’re at it, let’s change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> tags inner HTML as well:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Dracula<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;hr&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>CHAPTER I<span class="nt">&lt;/h1&gt;</span>
+
+    <span class="nt">&lt;h2&gt;</span>JONATHAN HARKER’S JOURNAL<span class="nt">&lt;/h2&gt;</span>
+
+    <span class="nt">&lt;em&gt;</span>(Kept in shorthand.)<span class="nt">&lt;/em&gt;</span>
+
+    <span class="nt">&lt;p&gt;&lt;em&gt;</span>3 May. Bistritz.<span class="nt">&lt;/em&gt;</span>—Left Munich at 8:35 P. M., on 1st May, arriving at Vienna early next morning; should have arrived at 6:46, but train was an hour late. Buda-Pesth seems a wonderful place, from the glimpse which I got of it from the train and the little I could walk through the streets. I feared to go very far from the station, as we had arrived late and would start as near the correct time as possible. The impression I had was that we were leaving the West and entering the East; the most western of splendid bridges over the Danube, which is here of noble width and depth, took us among the traditions of Turkish rule.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>The preview doesn’t change, but the document is now HTML5 compliant. Nice! Note that the title is now displayed in the tab at the top.</p>
+
+      <p><img src="res/drac-completed-preview.png" alt="" /></p>
+
+      <h3 id="boilerplate-html-5-tags">Boilerplate HTML 5 Tags</h3>
+      <ul>
+        <li>Some of the auto populated tags include:</li>
+        <li>The Charset meta tag: Which character set we are using. Older character sets may not have letters for certain languages, or certain emoji.
+          <ul>
+            <li>UTF-8 has the best compatibility</li>
+          </ul>
+        </li>
+        <li>The Viewport meta tag: is used for mobile devices to indicate which device sizes the website was designed to run for, and is important in mobile-first design.</li>
+        <li>The HTTP-equiv tag is used for supporting legacy Internet Explorer browsers.</li>
+        <li>Other meta tags can be used as well. These are typically read by robots and used for things like putting the correct search term on google.</li>
+      </ul>
+
+    </div></div></section>
+<section id="part4tags"><button class="collapsible">Part 4: Tags</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s break down how HTML is composed.</p>
+
+      <p>The objects in angled braces are called tags</p>
+      <ul>
+        <li>Many tags surround text, formatting it and/or adding functionality
+          <ul>
+            <li>When surrounding text, the closing tag uses the <code class="language-plaintext highlighter-rouge">/</code>, e.g. <code class="language-plaintext highlighter-rouge">&lt;/h1&gt;</code></li>
+          </ul>
+        </li>
+        <li>Tags can surround other tags, this forms the tree of the page. Adjacent elements are siblings, while nested elements have a parent-child relationship.</li>
+        <li>The standard boilerplate tags make the tree:
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>html
+ |--- head
+ |     `--- title
+ |
+ `--- body
+</code></pre></div>          </div>
+        </li>
+        <li>We typically want this tree to expressed in our HTML source document through indentation, but this can be done automatically with Code Formatters.</li>
+        <li>Some are self-closing, which mean they don’t surround text, e.g.<code class="language-plaintext highlighter-rouge">&lt;hr&gt;</code></li>
+        <li>Some tags require attributes to give them further functionality</li>
+      </ul>
+
+      <h3 id="position-block-and-inline">Position, Block and Inline</h3>
+
+      <p>Nearly everything about how HTML elements can be displayed can be overwritten with CSS, which we will look at next week, however for now there are a few important concepts to help understand how elements will be displayed:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">Block</code> elements will always start on a new line, and take up the full width
+<code class="language-plaintext highlighter-rouge">Inline</code> elements will be placed adjacent to existing elements</p>
+
+      <p>We’ve already seen this - the headers were blocking elements, while the emphasis tags were inline.</p>
+
+      <p><a href="https://www.w3schools.com/html/html_blocks.asp">W3Schools on Block and Inline</a></p>
+
+      <h3 id="attributes">Attributes</h3>
+
+      <p>If a tag is like a function, attributes are like the arguments to that function. They have names and values. For example, we looked at the horizontal rule. We can make it wider with:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;hr</span> <span class="na">size=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+</code></pre></div>      </div>
+
+      <p>However, this violates one of our rules (separation of concern), since we are attempting to apply style using HTML. It is better to do this through CSS, so this approach is not advised, thus many attributes are deprecated, though some are still required.</p>
+
+      <h3 id="where-can-learn-about-tags">Where can learn about tags?</h3>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Mozilla Developer Network</a></li>
+        <li><a href="https://www.w3schools.com/tags/default.asp">W3Schools</a></li>
+        <li><a href="https://devdocs.io/html/">devdocs.io HTML</a></li>
+      </ul>
+
+      <h3 id="common-tags-and-their-usage">Common Tags and their Usage</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>tag</th>
+            <th>usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;h1&gt;text&lt;/h1&gt; to &lt;h6&gt;text&lt;/h6&gt;</code></td>
+            <td>Headings, in descending order of importance</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;hr&gt;</code></td>
+            <td>horizontal rule (Self-closing)</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;br&gt;</code></td>
+            <td>Break (self-closing)</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;p&gt;text&lt;/p&gt;</code></td>
+            <td>paragraph tag</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;em&gt;text&lt;/em&gt;</code></td>
+            <td>conveys this is important -&gt; (usually) renders as italicized</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;strong&gt;text&lt;/strong&gt;</code></td>
+            <td>even more important -&gt; renders as bold</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;ul&gt;</code><br /><code class="language-plaintext highlighter-rouge">&lt;li&gt;list text&lt;/li&gt;</code><br /><code class="language-plaintext highlighter-rouge">&lt;/ul&gt;</code></td>
+            <td>unordered (bulleted) list, with list elements (children)</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;ol&gt;</code><br /><code class="language-plaintext highlighter-rouge">&lt;li&gt;list text&lt;/li&gt;</code><br /><code class="language-plaintext highlighter-rouge">&lt;/ol&gt;</code></td>
+            <td>ordered (numbered) list, with list elements</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;img src="about.png" alt="about me"&gt;</code></td>
+            <td>self-closing image tag. <br /> Attributes: <br /><code class="language-plaintext highlighter-rouge">src</code>: source can be anywhere on the public web, e.g. a CDN, we usually want a local directory<br /> <code class="language-plaintext highlighter-rouge">alt</code>: alt-text is good for both accessibility and search engine indexers</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;a href="about.html"&gt;about me&lt;/a&gt;</code></td>
+            <td>hyper-link, I think it used to be called anchor<br />Attribures:<br /><code class="language-plaintext highlighter-rouge">href</code>: link destination. can be other pages. Can be inside the same page too<br /><code class="language-plaintext highlighter-rouge">link text</code> appears between the tags is the text which will appear for the link</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;!-- comment text --&gt;</code></td>
+            <td>Add comments like this</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="container-tags">Container tags</h3>
+
+      <p>Some HTML tags contain to functionality purpose, but simply contain text to describe the text’s purpose, and/or be styled later with CSS. Use of these tags is highly recommended by the HTML5 Standard…</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>tag</th>
+            <th>usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;div&gt;</code></td>
+            <td>Generic blocking container</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;span&gt;</code></td>
+            <td>Generic inline container</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;header&gt;</code></td>
+            <td>Container that signifies header content</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;footer&gt;</code></td>
+            <td>Container that signifies footer content</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;main&gt;</code></td>
+            <td>Container that signifies main content</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;section&gt;</code></td>
+            <td>Container that signifies a section</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;article&gt;</code></td>
+            <td>Container that signifies an article</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code></td>
+            <td>Container that signifies the navigation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>These are highly recommended for search engine optimization.</p>
+
+      <h3 id="tables">Tables</h3>
+
+      <p>You may be tempted to use tables for arrange content… don’t do it! We’ll look at a much better method next week. For now, use tables only for tabular data. Example table:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Name<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>ID<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Location<span class="nt">&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Ash<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>01234<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Pallet<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Brock<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>78452<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Pewter<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Misty<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>85246<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Cerulean<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span> 
+</code></pre></div>      </div>
+
+      <p>Which renders as…</p>
+
+      <p><img src="res/table.png" alt="" /></p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">&lt;table&gt;</code> tags signifies this is a table.
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">&lt;tr&gt;</code> tag starts are row
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">&lt;th&gt;</code> for each header cell,</li>
+                <li><code class="language-plaintext highlighter-rouge">&lt;td&gt;</code> for each data cell.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Be sure to close in the opposite order that you open!</li>
+      </ul>
+
+      <h3 id="forms">Forms</h3>
+
+      <p>Finally,  we will occasionally want to collect information from the user. This is handled through the form elements.</p>
+
+      <p>Here’s an example form:</p>
+
+      <p>Form Example: Mail Me!</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>Email Me!<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"mailto:adamtilson@gmail.com"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">enctype=</span><span class="s">"text/plain"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"name"</span><span class="nt">&gt;</span>Your name<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">id=</span><span class="s">"name"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;br&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"email"</span><span class="nt">&gt;</span>Your email<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">id=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;br&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"message"</span><span class="nt">&gt;</span>Your message<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;br&gt;</span>
+    <span class="nt">&lt;textarea</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"message"</span> <span class="na">id=</span><span class="s">"message"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+    <span class="nt">&lt;br&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre></div>      </div>
+
+      <p>What does this look like?</p>
+
+      <p><img src="res/email-form.png" alt="" /></p>
+
+      <p>These tags work slightly different than the ones we’ve seen so far. Things to note:</p>
+      <ul>
+        <li>The entire object is wrapped in the <code class="language-plaintext highlighter-rouge">&lt;form&gt;</code> tag.</li>
+        <li><code class="language-plaintext highlighter-rouge">&lt;label&gt;</code> tag explains the purpose of a form element, and specifically states which one through the <code class="language-plaintext highlighter-rouge">for</code> attribute.</li>
+        <li>Many types of input objects share the <code class="language-plaintext highlighter-rouge">&lt;input&gt;</code> tag
+          <ul>
+            <li>The specific type of object is varied through the use of the <code class="language-plaintext highlighter-rouge">type</code> attribute
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">&lt;input type="text"&gt;</code> 	Single-line text input field</li>
+                <li><code class="language-plaintext highlighter-rouge">&lt;input type="radio"&gt;</code> 	Radio button (select one of many choices)</li>
+                <li><code class="language-plaintext highlighter-rouge">&lt;input type="checkbox"&gt;</code> 	Checkbox (select zero or more of many choices)</li>
+                <li><code class="language-plaintext highlighter-rouge">&lt;input type="submit"&gt;</code> 	Submit button (submits the form)</li>
+                <li><code class="language-plaintext highlighter-rouge">&lt;input type="button"&gt;</code>   Generic button. Can be attached to a JavaScript function.</li>
+              </ul>
+            </li>
+            <li><code class="language-plaintext highlighter-rouge">id</code> and <code class="language-plaintext highlighter-rouge">name</code> attributes uniquely identify the form object.</li>
+            <li><code class="language-plaintext highlighter-rouge">value</code> provides a default value for the object</li>
+            <li>the form <code class="language-plaintext highlighter-rouge">action</code> attribute shows the destination of the form</li>
+            <li>the form <code class="language-plaintext highlighter-rouge">method</code> attribute shows how the form will be submitted, e.g. through GET or POST</li>
+            <li>some tag types even give simple validation, e.g. <code class="language-plaintext highlighter-rouge">&lt;input type="email"&gt;</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><a href="https://www.w3schools.com/html/html_forms.asp">The W3Schools Form Tutorial</a> is very good.</p>
+
+      <h3 id="learning-from-existing-sites">Learning from Existing Sites</h3>
+
+      <p>If you want to see which tag a site is using for a specific object, in Chrome or FireFox you can right click the object and go to Inspect.</p>
+
+      <h3 id="which-types-of-tags-should-i-use">Which types of tags should I use?</h3>
+      <p>You always want to use the tag which best conveys the meaning of your marked up text. So, for for emphasizing text which is rendered in italics, <code class="language-plaintext highlighter-rouge">&lt;em&gt;</code> is better than <code class="language-plaintext highlighter-rouge">&lt;i&gt;</code>.</p>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>For the lab project, we are going to be making a multi-user to-do list application. The final version of it will look similar to this:</p>
+
+      <p><img src="res/login-styled.png" alt="" /></p>
+
+      <p><img src="res/register-styled.png" alt="" /></p>
+
+      <p><img src="res/todo-page-styled.png" alt="" /></p>
+
+      <p>However, if you take away the styling, it looks much more humble:</p>
+
+      <p><img src="res/login-page-just-html.png" alt="" /></p>
+
+      <p><img src="res/todo-page-just-html.png" alt="" /></p>
+
+      <p>For this lab you are to implement the HTML for these two states.</p>
+
+      <p>Recommended approach</p>
+      <ul>
+        <li>Look at the pictures and identify potential HTML elements</li>
+        <li>Is there one form? Multiple forms?</li>
+        <li>It does not need to be perfect at this stage, because as you learn more with CSS next week, you may need to make some further adjustments to the HTML</li>
+      </ul>
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p><a href="https://www.w3schools.com/html/default.asp">W3Schools HTML</a></p>
+
+      <p><a href="https://www.w3schools.com/html/html_forms.asp">W3Schools Forms</a></p>
+
+      <p>A. Yu. The Complete Web Development Bootcamp. <a href="https://www.udemy.com/course/the-complete-web-development-bootcamp/">Udemy.com</a></p>
+
+      <h3 id="useful-exercises">Useful Exercises</h3>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Reference Document</code>
+          <ul>
+            <li>A live HTML document which serves as a massive reference sheet that includes an example of all the things you’ve learned to date</li>
+            <li>You can refer back to this later on!</li>
+            <li>I did this in all of my courses in University, trying to take a one-page reference sheet away from each one</li>
+          </ul>
+        </li>
+      </ul>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
