@@ -158,13 +158,13 @@ As much as possible, we want to avoid using these components for unintended purp
     </div></div></section>
 <section id="part3markuptohtml"><button class="collapsible">Part 3: Markup to HTML</button><div class="text-content"><div class="text-inner">
 
-      <p>HTML is The only required element of a website. Made up of XML-like tags which surround the content and further describe what type of content it is.</p>
+      <p>HTML is The only required element of a website. HTML is made up of XML-like tags which surround the content and further describe what type of content it is.</p>
 
       <h3 id="markup">Markup</h3>
 
       <p>The term markup comes from manuscript submission, where the editor would make notes describing <em>how</em> we would like to print text. For example, underline this, emphasize this, etc.</p>
 
-      <p>Modern markup languages similarly employs tags to explain how we want the text to be rendered. There is a default rendering style, (which arguably pretty antiquated) and custom rendering styles we’ll look at later using CSS. For now, the important take away is that we are using HTML to explain <strong>the purpose</strong> of the enclosed content, regardless of the visual presentation.</p>
+      <p>Modern markup languages similarly employs tags to explain how we want the text to be rendered. There is a default rendering style, (which is arguably pretty antiquated) and custom rendering styles, while we will look at later using CSS. For now, the important take away is that we are using HTML to explain <strong>the purpose</strong> of the enclosed content, regardless of the visual presentation, which we will fine tune later.</p>
 
       <h3 id="quick-example">Quick Example:</h3>
 
@@ -195,11 +195,11 @@ JONATHAN HARKER’S JOURNAL
 
       <p><img src="res/untouched-manuscript.png" alt="" /></p>
 
-      <p>We can preview this file in a browser by double clicking the HTML…</p>
+      <p>We can preview this file in a browser by double-clicking the HTML file in our file browser…</p>
 
       <p><img src="res/wall-of-text.png" alt="" /></p>
 
-      <p>Beautiful. Let’s start annotating it. The chapter section is a title, let’s embed it in a heading tag, h1.</p>
+      <p>Beautiful. Let’s start annotating it with HTML tags. The chapter section is a title, let’s embed it in a heading tag, h1.</p>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>CHAPTER I<span class="nt">&lt;/h1&gt;</span>
 
@@ -232,18 +232,19 @@ JONATHAN HARKER’S JOURNAL
 
       <p><img src="res/more-tags.png" alt="" /></p>
 
-      <p>We added a horizontal rule (hr) lower heading (h2), the emphasis tag, and the paragraph. Note that the paragraph tag encloses the emphasis tag, an example of nested tags (hierarchy).</p>
+      <p>We added a horizontal rule (hr), lower-level heading (h2), the emphasis tag, and the paragraph tag. Note that the paragraph tag encloses the emphasis tag, an example of nested tags (hierarchy).</p>
 
-      <p>While our browser is rendering our file correctly, it isn’t exactly compliant HTML. This is because we are missing some necessary tags.</p>
+      <p>While our browser is rendering our file correctly, it is not exactly compliant HTML. This is because we are missing some necessary boilerplate tags.</p>
 
       <h3 id="boilerplate-html">Boilerplate HTML</h3>
 
-      <p>Boilerplate refers to standard, preprinted text, needed to make a language compliant. You’ve likely already seen the c++ boilerplate…</p>
+      <p>Boilerplate refers to standard, preprinted text, as might be stampled on a boiler. In programming languages, this is the minimum code needed to make the language run and be compliant. You’ve likely already seen the c++ boilerplate…</p>
 
       <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
-</span>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World!"</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World!"</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
@@ -263,11 +264,9 @@ JONATHAN HARKER’S JOURNAL
 <span class="nt">&lt;/html</span>
 </code></pre></div>      </div>
 
-      <p>But where does our text go? It needs to go into the body. While we’re at it, let’s change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> tags inner HTML as well:</p>
+      <p>But where does our text go? It needs to go into the body tags of the boilerplate. While we’re at it, let’s change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> tags inner HTML as well:</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-
-<span class="cp">&lt;!DOCTYPE html&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -302,7 +301,7 @@ JONATHAN HARKER’S JOURNAL
         </li>
         <li>The Viewport meta tag: is used for mobile devices to indicate which device sizes the website was designed to run for, and is important in mobile-first design.</li>
         <li>The HTTP-equiv tag is used for supporting legacy Internet Explorer browsers.</li>
-        <li>Other meta tags can be used as well. These are typically read by robots and used for things like putting the correct search term on google.</li>
+        <li>Other meta tags can be used as well. These are typically read by robots and used for things like putting the correct search term on Google. SEO (Search Engine Optimization) is very important in the modern web.</li>
       </ul>
 
     </div></div></section>
@@ -335,8 +334,15 @@ JONATHAN HARKER’S JOURNAL
 
       <p>Nearly everything about how HTML elements can be displayed can be overwritten with CSS, which we will look at next week, however for now there are a few important concepts to help understand how elements will be displayed:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">Block</code> elements will always start on a new line, and take up the full width
-<code class="language-plaintext highlighter-rouge">Inline</code> elements will be placed adjacent to existing elements</p>
+      <ul>
+        <li>In general, elements will be placed into the page in the order in which they are deifined in the document</li>
+        <li>There are two major display types for elements:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">Block</code> elements will always start on a new line, and take up the full width</li>
+            <li><code class="language-plaintext highlighter-rouge">Inline</code> elements will be placed adjacent to existing elements</li>
+          </ul>
+        </li>
+      </ul>
 
       <p>We’ve already seen this - the headers were blocking elements, while the emphasis tags were inline.</p>
 
@@ -344,12 +350,16 @@ JONATHAN HARKER’S JOURNAL
 
       <h3 id="attributes">Attributes</h3>
 
-      <p>If a tag is like a function, attributes are like the arguments to that function. They have names and values. For example, we looked at the horizontal rule. We can make it wider with:</p>
+      <p>If we think of a tag is like a function in programming, attributes are like the named arguments to that function. They have names and values, and depending on those values may change their behaviour. For example, we looked at the horizontal rule. We can make it wider with:</p>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;hr</span> <span class="na">size=</span><span class="s">"3"</span><span class="nt">&gt;</span>
 </code></pre></div>      </div>
 
+      <p>This is an example of using an attribute to change a visual style.</p>
+
       <p>However, this violates one of our rules (separation of concern), since we are attempting to apply style using HTML. It is better to do this through CSS, so this approach is not advised, thus many attributes are deprecated, though some are still required.</p>
+
+      <p>There are other attributes which we will need to use which do not change style, but change other functionality, such as link destination and image source.</p>
 
       <h3 id="where-can-learn-about-tags">Where can learn about tags?</h3>
       <ul>
@@ -417,7 +427,7 @@ JONATHAN HARKER’S JOURNAL
 
       <h3 id="container-tags">Container tags</h3>
 
-      <p>Some HTML tags contain to functionality purpose, but simply contain text to describe the text’s purpose, and/or be styled later with CSS. Use of these tags is highly recommended by the HTML5 Standard…</p>
+      <p>Some HTML tags exist to give functionality to the enclosing text, but others simply contain text to describe the text’s purpose, and/or be styled later with CSS. Use of these tags is highly recommended by the HTML5 Standard…</p>
 
       <table>
         <thead>
@@ -462,11 +472,11 @@ JONATHAN HARKER’S JOURNAL
         </tbody>
       </table>
 
-      <p>These are highly recommended for search engine optimization.</p>
+      <p>These are highly recommended for search engine optimization. Proper use of these tags may also aid accessibility, like reader view, text to speech, etc.</p>
 
       <h3 id="tables">Tables</h3>
 
-      <p>You may be tempted to use tables for arrange content… don’t do it! We’ll look at a much better method next week. For now, use tables only for tabular data. Example table:</p>
+      <p>You may be tempted to use tables for arrange content… don’t do it! We’ll look at a much better method next week. For now, use tables only for tabular data. Tables provide an example of a component which requires nested tags in a particular order. Example table:</p>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;table&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
@@ -499,20 +509,20 @@ JONATHAN HARKER’S JOURNAL
       <ul>
         <li><code class="language-plaintext highlighter-rouge">&lt;table&gt;</code> tags signifies this is a table.
           <ul>
-            <li><code class="language-plaintext highlighter-rouge">&lt;tr&gt;</code> tag starts are row
+            <li><code class="language-plaintext highlighter-rouge">&lt;tr&gt;</code> tag encolose each row
               <ul>
-                <li><code class="language-plaintext highlighter-rouge">&lt;th&gt;</code> for each header cell,</li>
-                <li><code class="language-plaintext highlighter-rouge">&lt;td&gt;</code> for each data cell.</li>
+                <li><code class="language-plaintext highlighter-rouge">&lt;th&gt;</code> tags enclose each header cell,</li>
+                <li><code class="language-plaintext highlighter-rouge">&lt;td&gt;</code> tags enclose each data cell.</li>
               </ul>
             </li>
           </ul>
         </li>
-        <li>Be sure to close in the opposite order that you open!</li>
+        <li>Be sure to close in the tags in the opposite order that you open!</li>
       </ul>
 
       <h3 id="forms">Forms</h3>
 
-      <p>Finally,  we will occasionally want to collect information from the user. This is handled through the form elements.</p>
+      <p>Finally, we will occasionally want to collect information from the user. This is handled through the form elements.</p>
 
       <p>Here’s an example form:</p>
 
@@ -605,14 +615,16 @@ JONATHAN HARKER’S JOURNAL
       <p><a href="https://www.w3schools.com/html/html_forms.asp">W3Schools Forms</a></p>
 
       <p>A. Yu. The Complete Web Development Bootcamp. <a href="https://www.udemy.com/course/the-complete-web-development-bootcamp/">Udemy.com</a></p>
-
-      <h3 id="useful-exercises">Useful Exercises</h3>
       <ul>
-        <li><code class="language-plaintext highlighter-rouge">Reference Document</code>
+        <li>
+          <p>Adam’s Comments: An excellent overview of the Node Stack we’ll be looking at in this course. (And it regular goes on sale for about 30 bucks!) For this lab, I particularly borrowed the bricks/decoration/electricity analogy, marking up a classic text exercise, mail form, and the following exercise, which you may want to do:</p>
+        </li>
+        <li>
+          <p><code class="language-plaintext highlighter-rouge">Reference Document</code></p>
           <ul>
-            <li>A live HTML document which serves as a massive reference sheet that includes an example of all the things you’ve learned to date</li>
+            <li>Create a live HTML document which serves as a massive reference sheet that includes an example of all the things you’ve learned to date</li>
             <li>You can refer back to this later on!</li>
-            <li>I did this in all of my courses in University, trying to take a one-page reference sheet away from each one</li>
+            <li>I did this in all of my courses in University, trying to take a one-page reference sheet away from each one. This was especially helpful in courses that built on previous courses,</li>
           </ul>
         </li>
       </ul>
