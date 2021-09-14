@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1329" height="704" viewBox="0 0 1329 704">
+  <defs>
+    <clipPath id="clip-Web_1920_3">
+      <rect width="1329" height="704"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_3" data-name="Web 1920 – 3" clip-path="url(#clip-Web_1920_3)">
+    <rect width="1329" height="704" fill="#7b7b7b"/>
+    <g id="Rectangle_14" data-name="Rectangle 14" transform="translate(222 396)" fill="#ffb" stroke="#232323" stroke-width="1">
+      <rect width="127" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="126" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_34" data-name="Rectangle 34" transform="translate(222 527)" fill="#ffb" stroke="#232323" stroke-width="1">
+      <rect width="127" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="126" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_29" data-name="Rectangle 29" transform="translate(76 527)" fill="#ffb5b5" stroke="#232323" stroke-width="1">
+      <rect width="147" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="146" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_37" data-name="Rectangle 37" transform="translate(945 527)" fill="#ffb5b5" stroke="#232323" stroke-width="1">
+      <rect width="147" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="146" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_15" data-name="Rectangle 15" transform="translate(347 268)" fill="#c2ffd4" stroke="#232323" stroke-width="1">
+      <rect width="170" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="169" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_32" data-name="Rectangle 32" transform="translate(348 396)" fill="#c2ffd4" stroke="#232323" stroke-width="1">
+      <rect width="170" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="169" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_35" data-name="Rectangle 35" transform="translate(348 527)" fill="#c2ffd4" stroke="#232323" stroke-width="1">
+      <rect width="170" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="169" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_30" data-name="Rectangle 30" transform="translate(517 140)" fill="#ff9ef2" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_31" data-name="Rectangle 31" transform="translate(517 268)" fill="#ff9ef2" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_33" data-name="Rectangle 33" transform="translate(517 396)" fill="#ff9ef2" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_36" data-name="Rectangle 36" transform="translate(517 527)" fill="#ff9ef2" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <text id="Data_Encapsulation_-_What_s_actually_sent" data-name="Data Encapsulation - What&apos;s actually sent" transform="translate(409 74)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Data Encapsulation - What&apos;s actually sent</tspan></text>
+    <text id="Application" transform="translate(1191 202)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-80.141" y="0">Application</tspan></text>
+    <text id="Transport" transform="translate(1191 330)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-66.305" y="0">Transport</tspan></text>
+    <text id="Internet" transform="translate(1191 458)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-55.508" y="0">Internet</tspan></text>
+    <text id="Link" transform="translate(1191 586)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-28.414" y="0">Link</tspan></text>
+    <text id="IP_Header" data-name="IP
+Header" transform="translate(286 436)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-13.219" y="0">IP</tspan><tspan x="-51.219" y="43">Header</tspan></text>
+    <text id="IP_Header-2" data-name="IP
+Header" transform="translate(286 567)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-13.219" y="0">IP</tspan><tspan x="-51.219" y="43">Header</tspan></text>
+    <text id="Ethernet_Header" data-name="Ethernet
+Header" transform="translate(153 567)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-59.344" y="0">Ethernet</tspan><tspan x="-51.219" y="43">Header</tspan></text>
+    <text id="Ethernet_Footer" data-name="Ethernet
+Footer" transform="translate(1022 567)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-59.344" y="0">Ethernet</tspan><tspan x="-45.914" y="43">Footer</tspan></text>
+    <text id="TCP_UDP_Header" data-name="TCP / UDP
+Header" transform="translate(432 308)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-72.68" y="0">TCP / UDP</tspan><tspan x="-51.219" y="43">Header</tspan></text>
+    <text id="TCP_UDP_Header-2" data-name="TCP / UDP
+Header" transform="translate(433 436)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-72.68" y="0">TCP / UDP</tspan><tspan x="-51.219" y="43">Header</tspan></text>
+    <text id="TCP_UDP_Header-3" data-name="TCP / UDP
+Header" transform="translate(433 567)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-72.68" y="0">TCP / UDP</tspan><tspan x="-51.219" y="43">Header</tspan></text>
+    <text id="Data" transform="translate(732 202)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-32.922" y="0">Data</tspan></text>
+    <text id="Data-2" data-name="Data" transform="translate(732 330)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-32.922" y="0">Data</tspan></text>
+    <text id="Data-3" data-name="Data" transform="translate(732 458)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-32.922" y="0">Data</tspan></text>
+    <text id="Data-4" data-name="Data" transform="translate(732 589)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-32.922" y="0">Data</tspan></text>
+  </g>
+</svg>

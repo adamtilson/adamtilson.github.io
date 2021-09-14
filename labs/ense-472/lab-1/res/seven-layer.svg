@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1329" height="1080" viewBox="0 0 1329 1080">
+  <defs>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="1329" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
+    <rect width="1329" height="1080" fill="#7b7b7b"/>
+    <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(119 132)" fill="#ff9ef2" stroke="#232323" stroke-width="1">
+      <rect width="429" height="97" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="96" fill="none"/>
+    </g>
+    <g id="Rectangle_11" data-name="Rectangle 11" transform="translate(781 132)" fill="#ff9ef2" stroke="#232323" stroke-width="1">
+      <rect width="429" height="354" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="353" fill="none"/>
+    </g>
+    <g id="Rectangle_5" data-name="Rectangle 5" transform="translate(119 389)" fill="#abd5ff" stroke="#232323" stroke-width="1">
+      <rect width="429" height="97" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="96" fill="none"/>
+    </g>
+    <g id="Rectangle_10" data-name="Rectangle 10" transform="translate(119 647)" fill="#ffb" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_14" data-name="Rectangle 14" transform="translate(781 647)" fill="#ffb" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_3" data-name="Rectangle 3" transform="translate(119 261)" fill="#d7a2ff" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_6" data-name="Rectangle 6" transform="translate(119 518)" fill="#c2ffd4" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_15" data-name="Rectangle 15" transform="translate(781 518)" fill="#c2ffd4" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_9" data-name="Rectangle 9" transform="translate(119 776)" fill="#ffd997" stroke="#232323" stroke-width="1">
+      <rect width="429" height="95" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="94" fill="none"/>
+    </g>
+    <g id="Rectangle_8" data-name="Rectangle 8" transform="translate(119 905)" fill="#ffb5b5" stroke="#232323" stroke-width="1">
+      <rect width="429" height="95" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="94" fill="none"/>
+    </g>
+    <g id="Rectangle_17" data-name="Rectangle 17" transform="translate(781 776)" fill="#ffb5b5" stroke="#232323" stroke-width="1">
+      <rect width="429" height="224" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="223" fill="none"/>
+    </g>
+    <text id="OSI_7-Layer_Model" data-name="OSI 7-Layer Model" transform="translate(202 90)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">OSI 7-Layer Model</tspan></text>
+    <text id="TCP_IP_Reference_Model" data-name="TCP/IP Reference Model" transform="translate(827 90)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">TCP/IP Reference Model</tspan></text>
+    <text id="Application" transform="translate(334 194)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-80.141" y="0">Application</tspan></text>
+    <text id="Presentation" transform="translate(334 323)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-88.391" y="0">Presentation</tspan></text>
+    <text id="Session" transform="translate(334 451)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-52.75" y="0">Session</tspan></text>
+    <text id="Transport" transform="translate(334 580)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-66.305" y="0">Transport</tspan></text>
+    <text id="Network" transform="translate(334 709)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-60.211" y="0">Network</tspan></text>
+    <text id="Data_Link" data-name="Data Link" transform="translate(334 837)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-65.719" y="0">Data Link</tspan></text>
+    <text id="Physical" transform="translate(334 966)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-55.828" y="0">Physical</tspan></text>
+    <text id="Link_Physical_MAC_" data-name="Link (Physical / MAC)" transform="translate(996 902)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-147.563" y="0">Link (Physical / MAC)</tspan></text>
+    <text id="Internet_IP_" data-name="Internet (IP)" transform="translate(996 709)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-82.766" y="0">Internet (IP)</tspan></text>
+    <text id="Transport_TCP_" data-name="Transport (TCP)" transform="translate(996 580)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-106.852" y="0">Transport (TCP)</tspan></text>
+    <text id="Application_HTTP_" data-name="Application (HTTP)" transform="translate(996 323)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-131.578" y="0">Application (HTTP)</tspan></text>
+    <g id="Polygon_1" data-name="Polygon 1" transform="translate(747.526 132) rotate(90)" fill="#acacac">
+      <path d="M 352.7520446777344 168.4472961425781 L 1.247995734214783 168.4472961425781 L 177.0000152587891 0.691222071647644 L 352.7520446777344 168.4472961425781 Z" stroke="none"/>
+      <path d="M 177.0000152587891 1.382431030273438 L 2.4959716796875 167.9472961425781 L 351.5040588378906 167.9472961425781 L 177.0000152587891 1.382431030273438 M 177.0000152587891 1.52587890625e-05 L 354 168.9472961425781 L 3.0517578125e-05 168.9472961425781 L 177.0000152587891 1.52587890625e-05 Z" stroke="none" fill="#232323"/>
+    </g>
+    <g id="Polygon_2" data-name="Polygon 2" transform="translate(747.526 776) rotate(90)" fill="#ababab">
+      <path d="M 223.0686187744141 168.4473266601563 L 0.9313591122627258 168.4473266601563 L 111.9999923706055 0.9049444794654846 L 223.0686187744141 168.4473266601563 Z" stroke="none"/>
+      <path d="M 111.9999923706055 1.809844970703125 L 1.862701416015625 167.9472961425781 L 222.1372833251953 167.9472961425781 L 111.9999923706055 1.809844970703125 M 111.9999923706055 1.52587890625e-05 L 224 168.9472961425781 L -1.52587890625e-05 168.9472961425781 L 111.9999923706055 1.52587890625e-05 Z" stroke="none" fill="#232323"/>
+    </g>
+    <g id="Polygon_3" data-name="Polygon 3" transform="translate(747.526 647) rotate(90)" fill="#ababab">
+      <path d="M 95.33816528320313 168.4473266601563 L 0.6618372201919556 168.4473266601563 L 48 1.829501867294312 L 95.33816528320313 168.4473266601563 Z" stroke="none"/>
+      <path d="M 48 3.6590576171875 L 1.323699951171875 167.9473114013672 L 94.67630004882813 167.9473114013672 L 48 3.6590576171875 M 48 0 L 96 168.9473114013672 L 0 168.9473114013672 L 48 0 Z" stroke="none" fill="#232323"/>
+    </g>
+    <g id="Polygon_4" data-name="Polygon 4" transform="translate(747.526 518) rotate(90)" fill="#ababab">
+      <path d="M 95.33816528320313 168.4473266601563 L 0.6618372201919556 168.4473266601563 L 48 1.829501867294312 L 95.33816528320313 168.4473266601563 Z" stroke="none"/>
+      <path d="M 48 3.6590576171875 L 1.323699951171875 167.9473114013672 L 94.67630004882813 167.9473114013672 L 48 3.6590576171875 M 48 0 L 96 168.9473114013672 L 0 168.9473114013672 L 48 0 Z" stroke="none" fill="#232323"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1329" height="793" viewBox="0 0 1329 793">
+  <defs>
+    <clipPath id="clip-Web_1920_4">
+      <rect width="1329" height="793"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_4" data-name="Web 1920 – 4" clip-path="url(#clip-Web_1920_4)">
+    <rect width="1329" height="793" fill="#7b7b7b"/>
+    <g id="Rectangle_39" data-name="Rectangle 39" transform="translate(222 384)" fill="#ffb" stroke="#232323" stroke-width="1">
+      <rect width="127" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="126" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_44" data-name="Rectangle 44" transform="translate(220 518)" fill="#ffb" stroke="#232323" stroke-width="1">
+      <rect width="724" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="723" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_45" data-name="Rectangle 45" transform="translate(74 518)" fill="#ffb5b5" stroke="#232323" stroke-width="1">
+      <rect width="147" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="146" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_53" data-name="Rectangle 53" transform="translate(74 650)" fill="#ffb5b5" stroke="#232323" stroke-width="1">
+      <rect width="1016" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="1015" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_48" data-name="Rectangle 48" transform="translate(943 518)" fill="#ffb5b5" stroke="#232323" stroke-width="1">
+      <rect width="147" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="146" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_38" data-name="Rectangle 38" transform="translate(347 252)" fill="#c2ffd4" stroke="#232323" stroke-width="1">
+      <rect width="170" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="169" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_40" data-name="Rectangle 40" transform="translate(348 384)" fill="#c2ffd4" stroke="#232323" stroke-width="1">
+      <rect width="597" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="596" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_41" data-name="Rectangle 41" transform="translate(517 120)" fill="#ff9ef2" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <g id="Rectangle_42" data-name="Rectangle 42" transform="translate(517 252)" fill="#ff9ef2" stroke="#232323" stroke-width="1">
+      <rect width="429" height="96" stroke="none"/>
+      <rect x="0.5" y="0.5" width="428" height="95" fill="none"/>
+    </g>
+    <text id="Data_Encapsulation_-_What_each_layer_understands" data-name="Data Encapsulation - What each layer understands" transform="translate(359 74)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Data Encapsulation - What each layer understands</tspan></text>
+    <text id="Application" transform="translate(1191 182)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-80.141" y="0">Application</tspan></text>
+    <text id="Transport" transform="translate(1191 314)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-66.305" y="0">Transport</tspan></text>
+    <text id="Internet" transform="translate(1191 446)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-55.508" y="0">Internet</tspan></text>
+    <text id="IP_Header" data-name="IP
+Header" transform="translate(286 424)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-13.219" y="0">IP</tspan><tspan x="-51.219" y="43">Header</tspan></text>
+    <text id="TCP_UDP_Header" data-name="TCP / UDP
+Header" transform="translate(432 292)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-72.68" y="0">TCP / UDP</tspan><tspan x="-51.219" y="43">Header</tspan></text>
+    <text id="Application_Data_e.g._HTML_" data-name="Application Data 
+(e.g. HTML)" transform="translate(732 157)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-121.828" y="0">Application Data </tspan><tspan x="-80.406" y="43">(e.g. HTML)</tspan></text>
+    <text id="Data_101100..._" data-name="Data (101100...)" transform="translate(732 314)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-109.117" y="0">Data (101100...)</tspan></text>
+    <text id="Data_101100..._2" data-name="Data (101100...)" transform="translate(665 446)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-109.117" y="0">Data (101100...)</tspan></text>
+    <text id="Link" transform="translate(1189 577)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-28.414" y="0">Link</tspan></text>
+    <text id="Physical" transform="translate(1189 709)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-55.828" y="0">Physical</tspan></text>
+    <text id="Ethernet_Header" data-name="Ethernet
+Header" transform="translate(150 558)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-59.344" y="0">Ethernet</tspan><tspan x="-51.219" y="43">Header</tspan></text>
+    <text id="Ethernet_Footer" data-name="Ethernet
+Footer" transform="translate(1020 558)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-59.344" y="0">Ethernet</tspan><tspan x="-45.914" y="43">Footer</tspan></text>
+    <text id="Data_1011100..._" data-name="Data (1011100...)" transform="translate(582 580)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-117.742" y="0">Data (1011100...)</tspan></text>
+    <text id="Data_010010..._" data-name="Data (010010...)" transform="translate(608 712)" fill="#262626" font-size="32" font-family="SegoeUI, Segoe UI"><tspan x="-109.117" y="0">Data (010010...)</tspan></text>
+    <path id="Path_1" data-name="Path 1" d="M1657,2738.9s19.441,19.173,256.737,17.347,249.57,19.173,249.57,19.173" transform="translate(-1581.308 -2126.417)" fill="none" stroke="#000" stroke-width="4"/>
+    <path id="Path_9" data-name="Path 9" d="M1657,2738.9s14.383,19.173,189.94,17.347,184.637,19.173,184.637,19.173" transform="translate(-1434 -2257.897)" fill="none" stroke="#000" stroke-width="4"/>
+    <path id="Path_11" data-name="Path 11" d="M1657,2738.9s11.814,19.173,156.009,17.347,151.654,19.173,151.654,19.173" transform="translate(-1310 -2390.417)" fill="none" stroke="#000" stroke-width="4"/>
+    <path id="Path_13" data-name="Path 13" d="M1657,2738.9s8.059,19.173,106.428,17.347,103.457,19.173,103.457,19.173" transform="translate(-1140 -2522.417)" fill="none" stroke="#000" stroke-width="4"/>
+    <path id="Path_2" data-name="Path 2" d="M2165,2738.9s-19.507,19.173-257.6,17.347-250.4,19.173-250.4,19.173" transform="translate(-1075 -2126.417)" fill="none" stroke="#000" stroke-width="4"/>
+    <path id="Path_10" data-name="Path 10" d="M2005.422,2738.9s-13.379,19.173-176.677,17.347S1657,2775.417,1657,2775.417" transform="translate(-1059.422 -2257.897)" fill="none" stroke="#000" stroke-width="4"/>
+    <path id="Path_12" data-name="Path 12" d="M1947.337,2738.9s-11.149,19.173-147.223,17.347S1657,2775.417,1657,2775.417" transform="translate(-1002.337 -2390.897)" fill="none" stroke="#000" stroke-width="4"/>
+    <path id="Path_14" data-name="Path 14" d="M1876.115,2738.9s-8.414,19.173-111.109,17.347S1657,2775.417,1657,2775.417" transform="translate(-930.115 -2522.417)" fill="none" stroke="#000" stroke-width="4"/>
+  </g>
+</svg>
