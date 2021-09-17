@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="950" height="423" viewBox="0 0 950 423">
+  <defs>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="950" height="423"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
+    <rect width="950" height="423" fill="#fff"/>
+    <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(39 38)" fill="#fff" stroke="#707070" stroke-width="1">
+      <rect width="873" height="346" stroke="none"/>
+      <rect x="0.5" y="0.5" width="872" height="345" fill="none"/>
+    </g>
+    <g id="Rectangle_2" data-name="Rectangle 2" transform="translate(74 75)" fill="#d5d5d5" stroke="#707070" stroke-width="1">
+      <rect width="803" height="274" stroke="none"/>
+      <rect x="0.5" y="0.5" width="802" height="273" fill="none"/>
+    </g>
+    <g id="Rectangle_3" data-name="Rectangle 3" transform="translate(109 111)" fill="#fff" stroke="#707070" stroke-width="1">
+      <rect width="730" height="191" stroke="none"/>
+      <rect x="0.5" y="0.5" width="729" height="190" fill="none"/>
+    </g>
+    <g id="Rectangle_4" data-name="Rectangle 4" transform="translate(150 148)" fill="#fff" stroke="#707070" stroke-width="1">
+      <rect width="645" height="114" stroke="none"/>
+      <rect x="0.5" y="0.5" width="644" height="113" fill="none"/>
+    </g>
+    <text id="CONTENT" transform="translate(425 215)" fill="#707070" font-size="23" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">CONTENT</tspan></text>
+    <text id="PADDING" transform="translate(429 140)" fill="#707070" font-size="23" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">PADDING</tspan></text>
+    <text id="BORDER" transform="translate(434 103)" fill="#707070" font-size="23" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">BORDER</tspan></text>
+    <text id="MARGIN" transform="translate(434 66)" fill="#707070" font-size="23" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">MARGIN</tspan></text>
+  </g>
+</svg>
