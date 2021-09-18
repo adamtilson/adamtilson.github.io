@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Tilson</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <!--li><a href="/labs/ense-374/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-5">Lab 5</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <!--li><a href="/labs/ense-472/lab-2">Lab 2</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-3-css-and-bootstrap">Lab 3: CSS and Bootstrap</h1>
+
+<p>ENSE 374 - Software Engineering Management - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>This lab introduces Cascading Style Sheets (CSS), which can be used to add styles to HTML elements. We will look at the different locations styles can be placed (inline, internal and external), the different types of tags which styles can be applied to (by tag type, id or class), and some example styles which can be applied. We’ll discuss syntax, containers, positioning and the box model, and some extra add-ins to bring our page up to date. We’ll end our discussion with BootStrap CSS, a library made by twitter, which instantly modernizes web pages, as well as providing modernized controls.</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges.</p>
+      <ul>
+        <li>A modern web browser, with a strong preference for Firefox or Chrome</li>
+        <li>A text editor, preferably VS Code</li>
+      </ul>
+
+    </div></div></section>
+<section id="part1cssoverview"><button class="collapsible">Part 1: CSS Overview</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="why-we-use-css">Why we use CSS</h3>
+
+      <p>CSS is used to apply styles to our elements. This changes the way that they are rendered on the page, so they they no longer take on the default HTML which is reminiscent of the 90s.</p>
+
+      <ul>
+        <li>Before CSS, we could only style elements with HTML attributes
+          <ul>
+            <li>This is slow and not very flexible
+              <ul>
+                <li>What if we want to reuse the same styles across elements? Across pages?</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="where-to-add-css-code">Where to add CSS code?</h3>
+
+      <p>CSS code can be applied inline, internal, external</p>
+      <ul>
+        <li>If a style conflict arises, these are the places you need to check!</li>
+      </ul>
+
+      <p>Inline</p>
+      <ul>
+        <li>Embeds CSS code in an HTML tag using the <code class="language-plaintext highlighter-rouge">style</code> attribute.</li>
+        <li>e.g. <code class="language-plaintext highlighter-rouge">&lt;hr style="width:50%;text-align:left;margin-left:0"&gt;</code>
+          <ul>
+            <li>Tedious and repetitive - need to apply style on a per element basis</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Internal</p>
+      <ul>
+        <li>Write CSS code inside of the <code class="language-plaintext highlighter-rouge">&lt;style&gt;</code> tags in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of the HTML document.</li>
+        <li>Applies styles on a page-by-page basis
+          <ul>
+            <li>this is rarely optimal, we typically want site-wide styles</li>
+          </ul>
+        </li>
+        <li>e.g.</li>
+      </ul>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+    <span class="nt">a</span><span class="nd">:link</span><span class="o">,</span> <span class="nt">a</span><span class="nd">:visited</span> <span class="p">{</span> 
+    <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+    <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> 
+    <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">underline</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span> Go back to the top!<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>External</p>
+      <ul>
+        <li>All of your CSS is stored in a separate file called, e.g. <code class="language-plaintext highlighter-rouge">css/style.css</code></li>
+        <li>We add a link to this style sheet in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of the HTML:</li>
+      </ul>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/style.css"</span><span class="nt">&gt;</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>We can add this link to all pages site-wide</li>
+      </ul>
+
+      <h3 id="what-does-a-rule-look-like">What does a rule look like?</h3>
+
+      <p>The basic CSS syntax is:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">selector</span> <span class="p">{</span> <span class="py">property</span> <span class="p">:</span> <span class="n">value</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nt">who</span>        <span class="nt">what</span>       <span class="nt">how</span>
+</code></pre></div>      </div>
+      <ul>
+        <li>who do we want this to apply to, what do we want to change, how do we want to change it</li>
+      </ul>
+
+      <h3 id="how-are-rules-applied-cascading">How are rules applied? Cascading</h3>
+
+      <p>Cascading means styles inherit from other styles, i.e. “cascading down”.</p>
+      <ul>
+        <li>Often rules will conflict, so we need to determine which style will apply, based on factors:
+          <ul>
+            <li>Importance: you can specify important tags with <code class="language-plaintext highlighter-rouge">!important</code></li>
+            <li>Specificity: more specific rules (e.g. id’s) overrule less specific (e.g. classes, elements, or inherrited)
+              <ul>
+                <li>Calculated with a complex scoring system.</li>
+                <li>generally:
+                  <ul>
+                    <li>id &gt; class &gt; tag &gt; inheritted</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Source order: later rules overrule earlier ones
+              <ul>
+                <li>If you are linking multiple style sheets, more general ones should come first, more specific ones later</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>It is sometimes tough to compute precedence in our head!
+          <ul>
+            <li>General heuristic: more specific rules will override less specific rules</li>
+            <li>When learning and debugging: Use browser debug tools to see which styles are applying</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance">Here’s a good source for info on cascading</a></p>
+
+      <h3 id="cascading-example">Cascading example</h3>
+
+      <p>Copy the following code into index.html:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"style.css"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+    <span class="nt">hr</span> <span class="p">{</span>
+      <span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Welcome<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Welcome to my website!<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;hr&gt;</span>
+  <span class="nt">&lt;p&gt;</span>This is my homepage on the world wide web<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"paragraphs"</span><span class="nt">&gt;</span>I can't figure out these CSS rules!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"paragraphs3"</span> <span class="na">id=</span><span class="s">"paragraph3"</span><span class="nt">&gt;</span> Why is this so complicated?!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">style=</span><span class="s">"color:blue;"</span><span class="nt">&gt;</span> What color will this be?!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>And the following code into style.css</p>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="n">grey</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.paragraphs</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#paragraph3</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">magenta</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">hr</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">h1</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>This shows how rules can be placed in three different places, and how they apply, both through inheritance (body inherits through to paragraph), by order (the internal style sections comes after the linked, so it will overrule it), and specificity (id overerules class overrules inheritted). Fire up the debugger (F12), use the inspector, and trace how the CSS rules are overruled!</p>
+
+      <h3 id="debugger">Debugger</h3>
+
+      <p>In FireFox, you can open up the debugger with <code class="language-plaintext highlighter-rouge">F12</code>. You can use this to select elements and see which styles are applying:</p>
+
+      <p><img src="res/css-debugger.png" alt="" /></p>
+
+      <h3 id="default-style-sheet">Default Style Sheet</h3>
+
+      <p>Every page has styles, unless you specify changes they uses the default style
+This is what causes default styled HTML to look like it’s from the 90’s
+It can be useful to understand these default styles to know which changes to make:</p>
+      <ul>
+        <li><a href="https://www.w3schools.com/cssref/css_default_values.asp">Here is a link to descriptions of the default values for a CSS</a></li>
+        <li><a href="res/default.css">Here is a link to the CSS in a style sheet file.</a></li>
+      </ul>
+
+      <h3 id="syntax-checking">Syntax Checking</h3>
+
+      <p>VS Code checks your syntax as you type, look for common errors (bottom left)</p>
+
+      <h3 id="organization">Organization</h3>
+
+      <p>It’s best practice to Alphabetize Selectors and Properties 
+    - it will make yours or your colleagues life easier at some point
+Alternately, you may wish to group selectors by type, e.g. Tag, Class, ID</p>
+
+      <h3 id="comments">Comments</h3>
+
+      <p>CSS uses C-style comments:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">h1</span> <span class="p">{</span> 
+    <span class="c">/* Make h1's red. */</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div>      </div>
+      <h3 id="where-to-get-help">Where to get help?</h3>
+
+      <p>This is a great tutorial, which acknowledges how wonky CSS can be sometimes:</p>
+
+      <p><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS">Mozilla’s MDN Docs</a></p>
+
+    </div></div></section>
+<section id="part2cssselectorsproprtiesandvalues"><button class="collapsible">Part 2 CSS Selectors, Proprties and Values</button><div class="text-content"><div class="text-inner">
+
+      <p>Next let’s examine some of the details which make CSS so powerful (and also so tricky!)</p>
+
+      <h3 id="selectors">Selectors</h3>
+
+      <p>Elements can be selected by a number of rules. Some rules select individual elements, others select groups. Further, some inheritance rules apply which will propagate through to children elements.</p>
+
+      <h3 id="tag-selectors">Tag Selectors</h3>
+
+      <p>Also known as element selectors. Applies style to all tags of that type. Very broad strokes.</p>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">h1</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+      <p>This code will apply to all <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> tags.</p>
+
+      <h3 id="class-selector">Class Selector</h3>
+
+      <p>Selects all elements of a given class.</p>
+      <ul>
+        <li>You can assign elements to a class in the HTML code using the HTML attribute <code class="language-plaintext highlighter-rouge">class="&lt;class_name&gt;"</code></li>
+        <li>Multiple classes may be applied to a single object, separated by a space.
+          <ul>
+            <li>it’s best practice to only use one custom class, and attach others as needed by frameworks such as bootstrap, e.g. <code class="language-plaintext highlighter-rouge">class="&lt;custom_class&gt; &lt;bootstrap_class&gt;</code></li>
+          </ul>
+        </li>
+        <li>target them in CSS with the selector: <code class="language-plaintext highlighter-rouge">.&lt;class_name&gt;</code></li>
+      </ul>
+
+      <p>e.g.</p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"headers"</span><span class="nt">&gt;</span> Lab 3 <span class="nt">&lt;/h1&gt;</span>
+...
+</code></pre></div>      </div>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.headers</span> <span class="p">{</span> 
+  <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>This will apply to all tags that have the <code class="language-plaintext highlighter-rouge">headers</code> class assigned to the class list.</p>
+
+      <h3 id="id-selector">Id Selector</h3>
+
+      <p>Selects the single element identified with a particular ID.</p>
+      <ul>
+        <li>You can assign elements an ID in the HTML code using the HTML attribute <code class="language-plaintext highlighter-rouge">id="&lt;name&gt;"</code>.</li>
+        <li>ID’s need to be unique, that is, only one element in a page may have a given ID.</li>
+        <li>Target this element in CSS with the selector <code class="language-plaintext highlighter-rouge">#&lt;id&gt;</code></li>
+      </ul>
+
+      <p>e.g.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">"myheading"</span><span class="nt">&gt;</span> Lab 3 <span class="nt">&lt;/h1&gt;</span>
+...
+</code></pre></div>      </div>
+      <p>only ever one id selector per object
+#myheading {
+    color: black;
+}</p>
+
+      <h3 id="pseudo-classes">Pseudo Classes</h3>
+
+      <p>Some elements have pseudo-classes that are active only during interaction, e.g. link hover
+e.g.</p>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> 
+  <span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h3 id="combining-rules">Combining Rules</h3>
+
+      <p>We can very specifically target an element by combining rules</p>
+
+      <ul>
+        <li>If we want to combine multiple selectors to select for a single element or set of elements, combine them without spaces</li>
+      </ul>
+
+      <p>e.g. apply this style to target all h1’s that have the header class:</p>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">h1</span><span class="nc">.header</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+      <p>We can also find elements which are descendents of an element:</p>
+
+      <p>e.g. select all <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> elements that are children of a <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> tag:</p>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">section</span> <span class="nt">p</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>There are other rules, for example selecting a particular child or sibling. <a href="https://www.w3schools.com/css/css_combinators.asp">Check out this reference for more info.</a></p>
+
+      <p>Simple is better - Before you commit to complicated combinational logic, decide if a custom class or ID would be better! Make your life easier and your code more traceable wherever possible!</p>
+
+      <h3 id="common-properties-and-values">Common Properties and Values:</h3>
+
+      <p>Color:</p>
+      <ul>
+        <li>the <code class="language-plaintext highlighter-rouge">color</code> and <code class="language-plaintext highlighter-rouge">background-color</code> properties specify the foreground and background colors respectively</li>
+        <li>color values can be given by keyword, or hex of the style: <code class="language-plaintext highlighter-rouge">#RRGGBB</code>
+          <ul>
+            <li>e.g. red is <code class="language-plaintext highlighter-rouge">#FF0000</code>, but will be very hard on the eyes, as we’ve seen!</li>
+            <li>When starting, it’s strongly recommended not to find colors by experimentation, instead look at a palette app:
+              <ul>
+                <li><a href="https://colorhunt.co/">ColorHunt</a></li>
+                <li><a href="https://material.io/resources/color/#!/?view.left=0&amp;view.right=0">Google Material Design</a></li>
+                <li><a href="https://material.io/resources/color/#!/?view.left=0&amp;view.right=0">MDN Reference on color</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>If you can’t tell if your styles are applying, start by applying something radical, like <code class="language-plaintext highlighter-rouge">background-color: magenta</code>.
+          <ul>
+            <li>Thus you know the sheet is linked properly!</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Borders:</p>
+      <ul>
+        <li>the <code class="language-plaintext highlighter-rouge">border</code> property
+          <ul>
+            <li>generalized properties apply to the whole border</li>
+            <li>specialized properties for individual sides,</li>
+            <li>A shorthand style that defines many properties and values in one line</li>
+            <li>general properties:
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">border-style: solid;</code> - Overall style. values are keywords - dotted, dashed, solid, double, groove, ridge, insex, outset, none, hidden</li>
+                <li><code class="language-plaintext highlighter-rouge">border-width: 5px;</code> - values are in px, e.g. 5px, 15px. You can also define the top, right, bottom and left widths in one statement. (clockwise from 12 o’clock)</li>
+                <li><code class="language-plaintext highlighter-rouge">border-color: red;</code> - values are colors</li>
+                <li><code class="language-plaintext highlighter-rouge">border-radius: 10px;</code> - curves the edges. value in px, e.g. 5px</li>
+              </ul>
+            </li>
+            <li>specific properties:
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">border-top-style: dashed;</code> - changes the style of the top side</li>
+                <li><code class="language-plaintext highlighter-rouge">border-left-color: blue;</code> - changes the color of the left side</li>
+                <li>Many other combinations are available</li>
+              </ul>
+            </li>
+            <li>shorthand style
+              <ul>
+                <li>defines the width, style and color properties in one shot
+                  <ul>
+                    <li><code class="language-plaintext highlighter-rouge">border: width style color</code></li>
+                    <li><code class="language-plaintext highlighter-rouge">border: 5px solid black;</code>
+e.g.
+                      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* awful, awful style, but effective for seeing changes! */</span>
+<span class="nt">p</span> <span class="p">{</span>
+<span class="nl">border-style</span><span class="p">:</span> <span class="nb">dotted</span> <span class="nb">dashed</span> <span class="nb">solid</span> <span class="nb">double</span><span class="p">;</span>
+<span class="nl">border-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+<span class="nl">border-top-width</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>                      </div>
+                      <p><a href="https://www.w3schools.com/css/css_border.asp">Border Tutorial</a></p>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Sizing:</p>
+      <ul>
+        <li>instead of relying on an objects content to dictate size, set it manually.
+          <ul>
+            <li>May not always work for all elements depending on Display settings.</li>
+            <li><code class="language-plaintext highlighter-rouge">width</code></li>
+            <li><code class="language-plaintext highlighter-rouge">max-width</code></li>
+            <li><code class="language-plaintext highlighter-rouge">height</code></li>
+            <li><code class="language-plaintext highlighter-rouge">max-height</code>
+              <ul>
+                <li>the units can be in px, percent, mm. <code class="language-plaintext highlighter-rouge">0</code> doesn’t need units.
+<a href="https://www.w3schools.com/cssref/css_units.asp">Learn more about the many units here</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Text:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">font-family</code>: values are strings, with later values being fallbacks</li>
+        <li><code class="language-plaintext highlighter-rouge">font-size</code>: can use many units, rem is probably safest, where one REM is the size of an <code class="language-plaintext highlighter-rouge">M</code> at the root scaling. 1 rem = 16px</li>
+        <li><code class="language-plaintext highlighter-rouge">font-weight</code>: numeric, where thinner to thicker ranges from 100 to 900</li>
+        <li><code class="language-plaintext highlighter-rouge">text-decoration</code>: underline, line-through, overline, etc.
+e.g.
+          <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@import</span> <span class="sx">url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap')</span><span class="p">;</span>
+<span class="nt">p</span> <span class="p">{</span>
+<span class="nl">font-family</span><span class="p">:</span> <span class="s2">'Poppins'</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+<span class="nl">font-size</span><span class="p">:</span> <span class="m">1.2rem</span><span class="p">;</span>
+<span class="nl">font-weight</span><span class="p">:</span> <span class="m">300</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>          </div>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="part3spacingandpositioningwithcss"><button class="collapsible">Part 3: Spacing and Positioning with CSS</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="div-and-span">Div and Span</h3>
+
+      <p>Div and Span are HTML elements that exists only as a container for containing other elements</p>
+      <ul>
+        <li>can be used to apply CSS to elements</li>
+        <li><code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> a vertical container, blocking</li>
+        <li><code class="language-plaintext highlighter-rouge">&lt;span&gt;</code> is a horizontal container, non-blocking (inline)</li>
+      </ul>
+
+      <h3 id="box-model">Box Model</h3>
+
+      <p>The total space that an object takes is more than you might think, based on the CSS Box Model:</p>
+
+      <p><img src="res/box-model.svg" alt="box model" /></p>
+
+      <ul>
+        <li>Individual objects have a required size, (implicit or defined <code class="language-plaintext highlighter-rouge">width</code> and <code class="language-plaintext highlighter-rouge">height</code>), and as they expand objects around them are pushed out of the way.</li>
+        <li>But the total sizes of the element add the margin, padding, border and content to give the total dimensions of the element.
+          <ul>
+            <li>Margin and padding are buffer zones around the border.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Addition example:</p>
+      <ul>
+        <li>
+          <p>10px border + 20px padding + 20px margin = 50px * 2 sides = 100px + content</p>
+        </li>
+        <li>
+          <p>When setting margins, padding and border, the same four-sided shorthand can be used as we saw in borders, clockwise from the top:</p>
+          <ul>
+            <li>top, right, bottom, left</li>
+            <li>remember: clockwise from 12 o’clock</li>
+            <li>if only 1 value is given, it expands as (top=1, right=1, bottom=1, left=1)</li>
+            <li>if 2 values are given, they expand as (top=1, right=2, bottom=1, left=2)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>This box model even applies to the body tag, which has a default non-zero margin.</p>
+      <ul>
+        <li>This is why by default elements aren’t positioned in the upper left  of the page</li>
+        <li>
+          <p>you will need to set this to 0 if you need something in the corner, like a header!</p>
+        </li>
+        <li>Padding will stretch the background color, whereas margin will add white around it</li>
+      </ul>
+
+      <h3 id="flow-and-the-css-display-property">Flow and the CSS Display Property</h3>
+
+      <p>The Display property dictates how elements flow around this element:</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">display: block;</code> - push the next content to the next line. e.g. the default behaviour of <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">display: inline;</code> - let info come beside it. e.g. the default behaviour of <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;em&gt;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">display:inline-block;</code> - A hybrid. It’s like inline, but it can block a bit of height too. e.g. the default behaviour of <code class="language-plaintext highlighter-rouge">&lt;image&gt;</code>
+          <ul>
+            <li><a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_inline-block_span1">This w3schools example helps you learn the different</a></li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">display:none;</code> - don’t display it. It’s gone. Not just hidden. Items will not flow around it either, just take up it’s place.
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">visibility: hidden;</code> will instead allow items to flow around it.</li>
+          </ul>
+        </li>
+        <li>There’s also a new flexbox model, designed to act as an alternative to this, but I think BootStrap (which we’ll discuss later) accomplishes this better.</li>
+      </ul>
+
+      <h3 id="css-positioning">CSS Positioning</h3>
+
+      <p>Positioning is derived from HTML and CSS</p>
+
+      <ul>
+        <li>HTML should govern hierarchy and order
+          <ul>
+            <li>order means later elements are added to the flow after earlier elements</li>
+            <li>Hierarchy means child elements appear “inside” of parents
+              <ul>
+                <li>Flow still applies</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>CSS positioning beings after HTML rules are complete
+          <ul>
+            <li>Positioning rules exist</li>
+            <li>Depending on display properties, sometimes elements overlap
+              <ul>
+                <li>Z-index refers to the “depth” of objects, with higher numbers appearing on top, and lower or negative numbers behind.</li>
+              </ul>
+            </li>
+            <li>e.g.:</li>
+            <li>```html</li>
+          </ul>
+        </li>
+      </ul>
+      <div> <h1> <span> Hello </span> More text</h1> </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+### Positioning Rules
+
+Positioning can be derived from the HTML, or overridden, using the `position` property, with values:
+
+  - `position: static;` - use the HTML rules for positioning
+  - `position: relative;` - from the static position, offset the element by a specified x,y coordinate value, eg. (3, 5).
+    - does not disrupt flow
+  - `position: absolute;` - position the element by absolute coordinates relative to its parent 
+    - does disrupt document flow
+  - `position: fixed;` - always in the same place as we scroll, eg. a fixed header bar
+
+### Centering Elements
+
+A common operation which can be harder than you might think!
+
+For non-blocking elements
+```css
+    text-align : center;   
+</code></pre></div>      </div>
+      <p>For blocking elements:</p>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">max-width</span> <span class="o">:</span> <span class="err">1000</span> <span class="nt">px</span><span class="o">;</span> <span class="c">/* or whatever is appropriate*/</span>
+    <span class="nt">margin</span> <span class="o">:</span> <span class="err">0</span> <span class="nt">auto</span> <span class="err">0</span> <span class="nt">auto</span><span class="o">;</span> <span class="o">/*</span> <span class="nt">automatic</span> <span class="nt">centering</span> <span class="nt">left</span> <span class="nt">and</span> <span class="nt">right</span> <span class="o">*</span>
+</code></pre></div>      </div>
+      <ul>
+        <li>you could also have instead done:
+          <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">margin</span><span class="o">:</span> <span class="err">0</span> <span class="nt">auto</span><span class="o">;</span>
+</code></pre></div>          </div>
+          <p>Which will apply the 0 to both top and bottom, and auto to both left and right.</p>
+        </li>
+      </ul>
+
+      <h3 id="floating-and-clearing">Floating and Clearing</h3>
+
+      <p>Floating allows images to “float” around text.</p>
+      <ul>
+        <li>values: none, left, right are common</li>
+      </ul>
+
+      <p>If something floats by default, you can remove float with the “clear” property.
+eg:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">float: left;</code>
+<code class="language-plaintext highlighter-rouge">clear: left;</code></p>
+
+      <p>Floating can be overused, easy to abuse. Be careful.
+<a href="https://www.w3schools.com/css/css_float.asp">Some help with Float</a></p>
+
+    </div></div></section>
+<section id="part4boostrapcss"><button class="collapsible">Part 4: Boostrap CSS</button><div class="text-content"><div class="text-inner">
+
+      <p>BootStrap is a library originally developed by Twitter to modernize and standardize web development</p>
+
+      <ul>
+        <li>At the simplest, it can be seen as an update to the “default style sheet” which will automatically make an unstyle paged look much more modern</li>
+        <li>Additionally, there are a number of pre-defined classes which can be attached to our HTML elements to automatically give them modern styles</li>
+        <li>The Current Version, v5, was released September 2020, and broke many things from my lab last year!</li>
+      </ul>
+
+      <h3 id="how-to-install-it">How to install it?</h3>
+
+      <p>Rather than manually installing it and serving it from our server, we can have the user’s browser fetch it from a Content Delivery Network (CDN). A CDN distributes common resources on distributed servers around the world, ideally one nearby the user, and the may even have a cached copy on their own computers. (Similar to DNS) Typically employ proprietary load balancing algorithms that detect where things are in-demand and ensures local copies exist nearby!</p>
+
+      <p>This is useful for two reasons: it reduces bandwidth for our server, and if the user has previously downloaded it for any other website, it will be cached on their computer, and load instantly. The only problem is, if the CDN ever goes down, our styles will not load. But then again, if the CDN goes down, the internet likley has bigger problems than just your web page.</p>
+
+      <p>Grab a link to it from the CDN, and add the code for it into your HTML file:</p>
+
+      <p><a href="https://getbootstrap.com/">Installation guide</a></p>
+
+      <p>As with our spreadsheets, the link goes in the head, <em>before</em> our custom styles. (This will allow our custom styles to override theirs as needed.)</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
+</code></pre></div>      </div>
+      <p>You will also need to paste a JavaScript library into your HTML. This script tag is added in the last line of the body of the document.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>      </div>
+      <h3 id="what-can-it-do">What can it do?</h3>
+
+      <p>Check out the Examples on Bootstrap’s website which includes pages styled using bootstrap elements</p>
+
+      <p><a href="https://getbootstrap.com/docs/5.0/examples/">getbootstrap &gt; examples</a></p>
+
+      <p>You can also see many examples in the BootStrap cheat sheet:</p>
+
+      <p><a href="https://getbootstrap.com/docs/5.0/examples/cheatsheet/">Bootstrap Cheat Sheet</a></p>
+
+      <h3 id="where-to-get-help-1">Where to get help?</h3>
+
+      <p><a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">The official docs are excellent</a></p>
+
+      <h3 id="responsive-design">Responsive Design</h3>
+
+      <p>Today over half of the visits to your website are from mobile devices. How will your site adapt:</p>
+
+      <p>You could…</p>
+      <ol>
+        <li>Do nothing and suffer the consequences.</li>
+        <li>Create a Dedicated mobile site.</li>
+        <li>Responsive Design,.</li>
+      </ol>
+
+      <p>Consequences of doing nothing: higher bounce rate. Google pagerank suffers.</p>
+
+      <p>Dedicated mobile site is a lot of work and maintenence. Responsive design is better.</p>
+
+      <p>Bootstrap encourages Mobile First design, and their classes are all automatically responsive!</p>
+
+      <p>Some elements:</p>
+
+      <h3 id="jumbotron">Jumbotron</h3>
+      <p>A large block element near the top of the page for first impressions Sometimes called a “Hero”</p>
+      <ul>
+        <li>As of Bootstrap 5, no longer a dedicated element</li>
+      </ul>
+
+      <h3 id="navbar">Navbar</h3>
+      <p>A navigation element</p>
+
+      <h3 id="carousel">Carousel</h3>
+      <p>A container where you can swap different contents right to left usually used for showing off images
+Interval property - how often it rotates</p>
+
+      <h3 id="bootstrap-grid">Bootstrap Grid</h3>
+      <p>Represented as divs in divs</p>
+      <ul>
+        <li>The outer divs assigns the class row</li>
+        <li>the inner divs assign has class col
+The grid space is divided into 12 “units”, and our column can take up as many units as we want. Eg. 6 units would be 50% width.</li>
+        <li>It is thus easy to have 2, 3, 4 or 6 columns</li>
+        <li>We can fix our number of columns with subclasses like col-3</li>
+        <li>We can also specify how cols will work depending on screen size</li>
+      </ul>
+
+      <p>We can also specify different units depending on device.</p>
+      <ul>
+        <li>e.g. if we wanted: desktop 4 cols, ipad 3 cols, mobile 2 cols</li>
+        <li>we would use:
+<code class="language-plaintext highlighter-rouge">class="col-lg-3 col-md-4 col-sm-6"</code></li>
+      </ul>
+
+      <h3 id="bootstrap-containers">Bootstrap Containers</h3>
+
+      <p>Typically these days there are some common styling elements for containers</p>
+
+      <ul>
+        <li>take up 80% width, responsive, that sort of thing
+          <ul>
+            <li>Jarring jumps</li>
+          </ul>
+        </li>
+        <li>This container automatically works for you</li>
+        <li>Attach it to a div</li>
+      </ul>
+
+      <p>Fluid Container – 100% width and smooth scrolling</p>
+
+      <h3 id="bootstrap-cards">Bootstrap Cards</h3>
+
+      <p>A self-contained piece of data, may includes an image, text</p>
+
+      <ul>
+        <li>separated into a header, body and footer region</li>
+        <li>cards are stored in a “card deck” and stacks them appropriately</li>
+        <li>Less flexible than bootstrap grid for responsive design</li>
+      </ul>
+
+      <h3 id="bootstrap-buttons">Bootstrap Buttons</h3>
+
+      <p>Gorgeous…ish? A few different states are possible</p>
+
+      <h3 id="input-groups">Input Groups</h3>
+
+      <p>Sometimes certain inputs logically go together - you will certainly see this in our lab exercise! Check out input groups for some examples of how you might be able to put them together</p>
+
+      <h4 id="responsive-breakpoints-with-css-media-queries">Responsive Breakpoints with CSS Media Queries</h4>
+
+      <p>Media queries are a CSS modifier which checks something about the media (screen) and applies a style based on this:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@media</span> <span class="n">screen</span> <span class="p">(</span><span class="n">min-width</span><span class="p">:</span> <span class="m">900px</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c">/* Your CSS here */</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Think of it like an if block, these styles will only apply if thes econditions are met.</p>
+
+      <p>Bootstrap defines 4 cutoffs: 576, 768, 992, 1200px
+|object|size|
+|—|—|
+|phones in portrait| &lt;576|
+|phones in landscape| &gt;576, &lt;768|
+|tablets| &gt;768, &lt;992|
+|desktops| &gt;990, &lt;1200px|
+|ultrawides| &gt;1200px|</p>
+
+      <h3 id="misc-styling-stuff">Misc Styling Stuff</h3>
+
+      <h3 id="favicon">Favicon</h3>
+
+      <p>The icon which appears in your browser tab is a file called <code class="language-plaintext highlighter-rouge">favicon.ico</code>, and it is stored in the root directory of your website. You can make it with software like GIMP</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">href=</span><span class="s">"favicon.ico"</span><span class="nt">&gt;</span>
+</code></pre></div>      </div>
+
+      <p>In modern browsers, you can even use an SVG, e.g. made in Adobe XD. Export a drawing as SVG, and use:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">type=</span><span class="s">"image/svg+xml"</span> <span class="na">href=</span><span class="s">"/favicon.svg"</span><span class="nt">&gt;</span>
+</code></pre></div>      </div>
+
+      <h3 id="fonts">Fonts</h3>
+      <p>Fonts on the web are typically grabbed from the Google Fonts CDN, in a similar fashion to BootStrap</p>
+
+      <ul>
+        <li>I’m personally a big fan of Geomteric Sans Serif fonts</li>
+        <li>It’s worth knowing a few serif and sans, particularly knowing which ones to use for accent text and which ones for body text</li>
+      </ul>
+
+      <p>Some fonts I like:</p>
+      <ul>
+        <li>Montserrat, Raleway, Poppins, Lexend (Geometric Sans)</li>
+        <li>Open Sans, Roboto, Lato (Humanistic Sans)</li>
+        <li>Merriweather, Lora, Roboto Slab (Serif)
+<a href="https://www.awwwards.com/20-best-web-fonts-from-google-web-fonts-and-font-face.html">Some of the best Google Fonts from Awwwards</a></li>
+      </ul>
+
+      <p>The easiest way to use a Google font is with a CSS import statement:</p>
+      <ol>
+        <li>Find a font you like on Google Fonts</li>
+        <li>Select the weights you want to use on your webpage</li>
+        <li>Select the @import option</li>
+        <li>Copy the @import line into yous CSS</li>
+        <li>Use the font-family rule as needed</li>
+      </ol>
+
+      <p><img src="res/google-fonts.png" alt="" /></p>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>For this lab assignment, we will continue the work from lab lab, by styling our prototype to-do list.</p>
+
+      <p>This style has been slightly from last week to compensate for the style changes in BootStrap 5.</p>
+
+      <p><img src="res/login-styled.png" alt="" /></p>
+
+      <p><img src="res/register-styled.png" alt="" /></p>
+
+      <p><img src="res/todo-style-5.png" alt="" /></p>
+
+      <p>Your task is to add BootStrap and Custom CSS to your HTML files from last lab to match this style. You may need to add to or change your HTML for this to work.</p>
+
+      <p>Recommended approach</p>
+
+      <ul>
+        <li>Look at the pictures to identify elements</li>
+        <li>Use the BootStrap documentation to find appropriate elelements</li>
+        <li>Add the HTML code to make it work (containers, classes, samples, etc.)</li>
+        <li>Add custom CSS to account for anything that doesn’t look right</li>
+      </ul>
+
+      <h3 id="faq">FAQ:</h3>
+
+      <p>Which font are you using:</p>
+      <ul>
+        <li>Poppins (One of my faves)</li>
+      </ul>
+
+      <p>Which elements interact:</p>
+      <ul>
+        <li>On the login page, the Login and Register sections collapse to reveal the other</li>
+        <li>On the todo page, when the user’s name is clicked on, the log out section drops down</li>
+      </ul>
+
+      <p>Where’s the gear icon from?</p>
+      <ul>
+        <li>Here! Copy and paste the SVG code into your HTML as if it were an element</li>
+      </ul>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+  <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+</svg>
+      <p><a href="https://icons.getbootstrap.com/icons/gear-fill/">Bootstrap gear icon</a></p>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission:</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>This lab will be submitted via URCourses. Please submit any HTML files and CSS files. You do not need submit the BootStrap library or any dependencies which can be fetched from the CDN.</li>
+      </ul>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
