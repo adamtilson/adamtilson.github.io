@@ -277,6 +277,7 @@
 </code></pre></div>      </div>
 
       <p>And the following code into style.css</p>
+
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
   <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
   <span class="nl">background-color</span><span class="p">:</span> <span class="n">grey</span><span class="p">;</span>
@@ -355,6 +356,7 @@ Alternately, you may wish to group selectors by type, e.g. Tag, Class, ID</p>
       <h3 id="tag-selectors">Tag Selectors</h3>
 
       <p>Also known as element selectors. Applies style to all tags of that type. Very broad strokes.</p>
+
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">h1</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
 <span class="p">}</span>
@@ -375,6 +377,7 @@ Alternately, you may wish to group selectors by type, e.g. Tag, Class, ID</p>
       </ul>
 
       <p>e.g.</p>
+
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"headers"</span><span class="nt">&gt;</span> Lab 3 <span class="nt">&lt;/h1&gt;</span>
 ...
@@ -402,15 +405,19 @@ Alternately, you may wish to group selectors by type, e.g. Tag, Class, ID</p>
 <span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">"myheading"</span><span class="nt">&gt;</span> Lab 3 <span class="nt">&lt;/h1&gt;</span>
 ...
 </code></pre></div>      </div>
-      <p>only ever one id selector per object
-#myheading {
-    color: black;
-}</p>
+
+      <p>only ever one id selector per object</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#myheading</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
 
       <h3 id="pseudo-classes">Pseudo Classes</h3>
 
       <p>Some elements have pseudo-classes that are active only during interaction, e.g. link hover
 e.g.</p>
+
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> 
   <span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span>
 <span class="p">}</span>
@@ -425,6 +432,7 @@ e.g.</p>
       </ul>
 
       <p>e.g. apply this style to target all h1’s that have the header class:</p>
+
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">h1</span><span class="nc">.header</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
 <span class="p">}</span>
@@ -432,6 +440,7 @@ e.g.</p>
       <p>We can also find elements which are descendents of an element:</p>
 
       <p>e.g. select all <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> elements that are children of a <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> tag:</p>
+
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">section</span> <span class="nt">p</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
 <span class="p">}</span>
@@ -492,18 +501,7 @@ e.g.</p>
                 <li>defines the width, style and color properties in one shot
                   <ul>
                     <li><code class="language-plaintext highlighter-rouge">border: width style color</code></li>
-                    <li><code class="language-plaintext highlighter-rouge">border: 5px solid black;</code>
-e.g.
-                      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* awful, awful style, but effective for seeing changes! */</span>
-<span class="nt">p</span> <span class="p">{</span>
-<span class="nl">border-style</span><span class="p">:</span> <span class="nb">dotted</span> <span class="nb">dashed</span> <span class="nb">solid</span> <span class="nb">double</span><span class="p">;</span>
-<span class="nl">border-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
-<span class="nl">border-top-width</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
-<span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>                      </div>
-                      <p><a href="https://www.w3schools.com/css/css_border.asp">Border Tutorial</a></p>
-                    </li>
+                    <li><code class="language-plaintext highlighter-rouge">border: 5px solid black;</code></li>
                   </ul>
                 </li>
               </ul>
@@ -511,6 +509,18 @@ e.g.
           </ul>
         </li>
       </ul>
+
+      <p>e.g.</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* awful, awful style, but effective for seeing changes! */</span>
+<span class="nt">p</span> <span class="p">{</span>
+  <span class="nl">border-style</span><span class="p">:</span> <span class="nb">dotted</span> <span class="nb">dashed</span> <span class="nb">solid</span> <span class="nb">double</span><span class="p">;</span>
+  <span class="nl">border-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+  <span class="nl">border-top-width</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+      <p><a href="https://www.w3schools.com/css/css_border.asp">Border Tutorial</a></p>
 
       <p>Sizing:</p>
       <ul>
@@ -536,16 +546,16 @@ e.g.
         <li><code class="language-plaintext highlighter-rouge">font-size</code>: can use many units, rem is probably safest, where one REM is the size of an <code class="language-plaintext highlighter-rouge">M</code> at the root scaling. 1 rem = 16px</li>
         <li><code class="language-plaintext highlighter-rouge">font-weight</code>: numeric, where thinner to thicker ranges from 100 to 900</li>
         <li><code class="language-plaintext highlighter-rouge">text-decoration</code>: underline, line-through, overline, etc.
-e.g.
-          <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@import</span> <span class="sx">url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap')</span><span class="p">;</span>
-<span class="nt">p</span> <span class="p">{</span>
-<span class="nl">font-family</span><span class="p">:</span> <span class="s2">'Poppins'</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
-<span class="nl">font-size</span><span class="p">:</span> <span class="m">1.2rem</span><span class="p">;</span>
-<span class="nl">font-weight</span><span class="p">:</span> <span class="m">300</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>          </div>
-        </li>
+e.g.</li>
       </ul>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@import</span> <span class="sx">url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap')</span><span class="p">;</span>
+<span class="nt">p</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s2">'Poppins'</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">1.2rem</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="m">300</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
 
     </div></div></section>
 <section id="part3spacingandpositioningwithcss"><button class="collapsible">Part 3: Spacing and Positioning with CSS</button><div class="text-content"><div class="text-inner">
@@ -642,43 +652,53 @@ e.g.
                 <li>Z-index refers to the “depth” of objects, with higher numbers appearing on top, and lower or negative numbers behind.</li>
               </ul>
             </li>
-            <li>e.g.:</li>
-            <li>```html</li>
+            <li>e.g.</li>
           </ul>
         </li>
       </ul>
-      <div> <h1> <span> Hello </span> More text</h1> </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-### Positioning Rules
 
-Positioning can be derived from the HTML, or overridden, using the `position` property, with values:
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div&gt;</span> <span class="nt">&lt;h1&gt;</span> <span class="nt">&lt;span&gt;</span> Hello <span class="nt">&lt;/span</span> <span class="nt">&gt;</span> More text<span class="nt">&lt;/h1&gt;</span> <span class="nt">&lt;/div&gt;</span>
+</code></pre></div>      </div>
 
-  - `position: static;` - use the HTML rules for positioning
-  - `position: relative;` - from the static position, offset the element by a specified x,y coordinate value, eg. (3, 5).
-    - does not disrupt flow
-  - `position: absolute;` - position the element by absolute coordinates relative to its parent 
-    - does disrupt document flow
-  - `position: fixed;` - always in the same place as we scroll, eg. a fixed header bar
+      <h3 id="positioning-rules">Positioning Rules</h3>
 
-### Centering Elements
+      <p>Positioning can be derived from the HTML, or overridden, using the <code class="language-plaintext highlighter-rouge">position</code> property, with values:</p>
 
-A common operation which can be harder than you might think!
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">position: static;</code> - use the HTML rules for positioning</li>
+        <li><code class="language-plaintext highlighter-rouge">position: relative;</code> - from the static position, offset the element by a specified x,y coordinate value, eg. (3, 5).
+          <ul>
+            <li>does not disrupt flow</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">position: absolute;</code> - position the element by absolute coordinates relative to its parent
+          <ul>
+            <li>does disrupt document flow</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">position: fixed;</code> - always in the same place as we scroll, eg. a fixed header bar</li>
+      </ul>
 
-For non-blocking elements
-```css
-    text-align : center;   
+      <h3 id="centering-elements">Centering Elements</h3>
+
+      <p>A common operation which can be harder than you might think!</p>
+
+      <p>For non-blocking elements</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">text-align</span> <span class="o">:</span> <span class="nt">center</span><span class="o">;</span>   
 </code></pre></div>      </div>
       <p>For blocking elements:</p>
+
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">max-width</span> <span class="o">:</span> <span class="err">1000</span> <span class="nt">px</span><span class="o">;</span> <span class="c">/* or whatever is appropriate*/</span>
     <span class="nt">margin</span> <span class="o">:</span> <span class="err">0</span> <span class="nt">auto</span> <span class="err">0</span> <span class="nt">auto</span><span class="o">;</span> <span class="o">/*</span> <span class="nt">automatic</span> <span class="nt">centering</span> <span class="nt">left</span> <span class="nt">and</span> <span class="nt">right</span> <span class="o">*</span>
 </code></pre></div>      </div>
       <ul>
-        <li>you could also have instead done:
-          <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">margin</span><span class="o">:</span> <span class="err">0</span> <span class="nt">auto</span><span class="o">;</span>
-</code></pre></div>          </div>
-          <p>Which will apply the 0 to both top and bottom, and auto to both left and right.</p>
-        </li>
+        <li>you could also have instead done:</li>
       </ul>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">margin</span><span class="o">:</span> <span class="err">0</span> <span class="nt">auto</span><span class="o">;</span>
+</code></pre></div>      </div>
+      <p>Which will apply the 0 to both top and bottom, and auto to both left and right.</p>
 
       <h3 id="floating-and-clearing">Floating and Clearing</h3>
 
@@ -923,12 +943,12 @@ The grid space is divided into 12 “units”, and our column can take up as man
 
       <p>Where’s the gear icon from?</p>
       <ul>
-        <li>Here! Copy and paste the SVG code into your HTML as if it were an element</li>
+        <li>Here: <a href="https://icons.getbootstrap.com/icons/gear-fill/">Bootstrap gear icon</a></li>
+        <li>Copy and paste the SVG code into your HTML as if it were an element</li>
       </ul>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
   <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
 </svg>
-      <p><a href="https://icons.getbootstrap.com/icons/gear-fill/">Bootstrap gear icon</a></p>
 
     </div></div></section>
 <section id="submission"><button class="collapsible">Submission:</button><div class="text-content"><div class="text-inner">

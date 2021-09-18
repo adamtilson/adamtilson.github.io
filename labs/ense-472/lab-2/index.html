@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Tilson</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <!--li><a href="/labs/ense-374/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-5">Lab 5</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <!--li><a href="/labs/ense-472/lab-2">Lab 2</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-2-business-network-with-packet-tracer">Lab 2: Business Network with Packet Tracer</h1>
+
+<p>ENSE 472 - Digital Networks - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>The purpose of this lab is to further your understanding of networks using Packet Tracer, and in particular to learn about some of the security concerns involved with setting up switches and routers for business. We will look at advanced topics such as creating VLANs and Virtual Private Networks (Tunneling) for secure communication. We will also consider physically planning a network using Packet Tracer’s Physical View.</p>
+
+      <p>Simulationy stuff!</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Packet Tracer is available for Windows, Mac and Linux. However, the instructor will only be testing on Windows - please schedule a meeting or meet me after the pre-lab if you are having difficulties getting this working on your local machine.</p>
+
+    </div></div></section>
+<section id="part1packettracerphysicalview"><button class="collapsible">Part 1: Packet Tracer Physical View</button><div class="text-content"><div class="text-inner">
+
+    </div></div></section>
+<section id="part2switchsecurity"><button class="collapsible">Part 2: Switch Security</button><div class="text-content"><div class="text-inner">
+
+    </div></div></section>
+<section id="part3vlans"><button class="collapsible">Part 3: VLANs</button><div class="text-content"><div class="text-inner">
+
+    </div></div></section>
+<section id="part4virtualprivatenetworks"><button class="collapsible">Part 4: Virtual Private Networks</button><div class="text-content"><div class="text-inner">
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>In this assignment, imagine you you are being employed by a Software business startup incubator, (Similar to the Conexus Cultivator). The incubator currently hosts office space for three startups, and it is your job to ensure they have the network requirements to run their business.</p>
+
+      <p>The companies include:</p>
+      <ul>
+        <li>An Indie Game Developer
+          <ul>
+            <li>Thay have created an indie fighting game</li>
+            <li>As the game is currently in a closed beta, they need to host downloads, which is ~1 GB download</li>
+            <li>They will also need to host a server for online matches</li>
+          </ul>
+        </li>
+        <li>A Progress Web App Developer
+          <ul>
+            <li>Their app allows schools to host video content and quizzes</li>
+          </ul>
+        </li>
+        <li>An e-commerce platform for local food producers to sell their goods
+          <ul>
+            <li>Currently they have three customers: A local cheese maker, a small craft brewery, and a apiary.</li>
+            <li>The customers will need to securely connect to the service to update their products</li>
+          </ul>
+        </li>
+      </ul>
+
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
