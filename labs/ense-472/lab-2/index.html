@@ -105,29 +105,691 @@
 
 <hr />
 
+<p>This lab is still under development, expect some changes, additions, clarifications, etc!</p>
+
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>The purpose of this lab is to further your understanding of networks using Packet Tracer, and in particular to learn about some of the security concerns involved with setting up switches and routers for business. We will look at advanced topics such as creating VLANs and Virtual Private Networks (Tunneling) for secure communication. We will also consider physically planning a network using Packet Tracer’s Physical View.</p>
-
-      <p>Simulationy stuff!</p>
+      <p>The purpose of this lab is to further your understanding of networks using Packet Tracer, and in particular to learn about some of the security concerns involved with setting up switches and routers for business. We will look at static routing, advanced topics such as creating VLANs and IPSec VPN Tunneling for secure communication, and the simulation view. We will also consider physically planning a network using Packet Tracer’s Physical View. This is not a comprehensive overview of all of the security concerns, but rather an introduction highlighting some interesting concepts.</p>
 
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
 
-      <p>Packet Tracer is available for Windows, Mac and Linux. However, the instructor will only be testing on Windows - please schedule a meeting or meet me after the pre-lab if you are having difficulties getting this working on your local machine.</p>
+      <p>A Windows, Mac or Linux computer running Packet Tracer. The instructor will only be testing on Windows - please schedule a meeting or meet me after the pre-lab if you are having difficulties getting this working on your local computer.</p>
 
     </div></div></section>
 <section id="part1packettracerphysicalview"><button class="collapsible">Part 1: Packet Tracer Physical View</button><div class="text-content"><div class="text-inner">
 
-    </div></div></section>
-<section id="part2switchsecurity"><button class="collapsible">Part 2: Switch Security</button><div class="text-content"><div class="text-inner">
+      <p>The Packet Tracer physical view enables you to plan your network physically, in terms of cities and buildings</p>
+      <ul>
+        <li>We have seceral levels of granularity - Intercity (country, or world, or province, etc.), home city (city, or neighborhood), office level (floorplan), and wiring closet
+          <ul>
+            <li>What is the name for a network that exists at each of these scales?</li>
+          </ul>
+        </li>
+        <li>You can assign individual background to each level to better represent the areas</li>
+        <li>The lowest level, the wiring closet, is where networking infrasctructure is houses, like a datacenter
+          <ul>
+            <li>There may need to be multiple wiring closets in each floor and each building</li>
+          </ul>
+        </li>
+        <li>In the physical view you see the physical representation of your equipment
+          <ul>
+            <li>You can place elements where you believe are important</li>
+            <li>Smaller routers may go on tables, servers are rack-mounted.</li>
+          </ul>
+        </li>
+        <li>You always cable from the logical view, as we saw last week…
+          <ul>
+            <li>But when you return to the physical view, the cables will be there</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>The physical view rounds out your understanding of how these objects work in the real world.</p>
+
+      <p>Download the following image assets, care of Google and University of Regina:</p>
+
+      <p><img src="res/city-regina.png" alt="" /></p>
+
+      <p><img src="res/university.png" alt="" /></p>
+
+      <p><img src="res/floor-plan-library-6f.png" alt="" /></p>
+
+      <p>Let’s quickly look at setting up an environment using some photos from Google Maps:</p>
+
+      <p><img src="res/physical-set-background.png" alt="" /></p>
+
+      <p><img src="res/physical-set-background-2.png" alt="" /></p>
+
+      <p>You can navigate up and down layers:</p>
+
+      <p><img src="res/up-and-down.png" alt="" /></p>
+
+      <p>One you have completed one layer, drop down to the next layer by double clicking on the smaller view. Here’s an example of three layers:</p>
+
+      <p><img src="res/complete.png" alt="" /></p>
+
+      <p>You can also have multiple cities in a country, multiple floorplans in a city, multiple wiring closets in a floorplan, etc.</p>
+
+      <p>Other things you can do</p>
+
+      <ul>
+        <li>See Wifi Ranges (But these will only be accurate if you set all of your container sizes properly)</li>
+      </ul>
+
+      <p><img src="res/wifi.png" alt="" /></p>
+
+      <p>Finally, you can add furniture and equipment to your wiring closets using:</p>
+
+      <p><img src="res/add-furniture.png" alt="" /></p>
+
+      <p>And add elements by dragging and dropping from the equipment area, as we did last week. Where should each element go?</p>
+
+      <p>When you switch back to logical view, elements are placed somewhat randomly, so you’ll want to also organize them to match appropriate topologies:</p>
+
+      <p><img src="res/logical-view.png" alt="" /></p>
+
+      <p>Connect elements appropriately from this view.</p>
 
     </div></div></section>
-<section id="part3vlans"><button class="collapsible">Part 3: VLANs</button><div class="text-content"><div class="text-inner">
+<section id="part2accessingandsecuringaswitch"><button class="collapsible">Part 2: Accessing and Securing a Switch</button><div class="text-content"><div class="text-inner">
+
+      <p>In the last lab we saw how we could program a router using the Packet Tracer command line interface</p>
+      <ul>
+        <li>But how do you do it in the real world?
+          <ul>
+            <li>You would connect using a laptop using TTY over COM (Or USB to COM)</li>
+            <li>Or, if the Switch has an IP address assigned, you could Telnet or SSH in remotely</li>
+            <li>Let’s see an example of each:</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Start by adding a latpop, a 2960 Switch and a 4321 Router</p>
+      <ul>
+        <li>Connect the Laptop to the Switch using a Console cable. (RS232 to Console)</li>
+        <li>Use the <code class="language-plaintext highlighter-rouge">Terminal</code> application, leave the default settings, and press okay.
+          <ul>
+            <li>This is an application similar to PuTTy on Windows, which would use Serial emulation with the same settimgs</li>
+          </ul>
+        </li>
+        <li>The same procedure could be used for the Router</li>
+      </ul>
+
+      <p>Commands for configuring the switch are issued from different modes. In this sense, it acts something like a state machine. The following diagram lists a few modes we will need to use for different operations, and how to get to them:</p>
+
+      <p><img src="res/config-modes.svg" alt="" /></p>
+
+      <p>This set of states is not exhaustive, but gives a good starting place.</p>
+
+      <h3 id="basic-commands">Basic commands:</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?
+</code></pre></div>      </div>
+      <p>lists commands and what they do. These will differ by mode.</p>
+
+      <p>You can also find all commands which start with a single letter, eg.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>con?
+</code></pre></div>      </div>
+
+      <p>will show: <code class="language-plaintext highlighter-rouge">configure</code> <code class="language-plaintext highlighter-rouge">connect</code></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf?
+</code></pre></div>      </div>
+
+      <p>will only show <code class="language-plaintext highlighter-rouge">configure</code></p>
+
+      <p>If your command would only match a single result, you can use that shortened term as an alternative for the longer command</p>
+
+      <p>e.g. instead of typing <code class="language-plaintext highlighter-rouge">configure</code>, you can just type <code class="language-plaintext highlighter-rouge">conf</code></p>
+
+      <p>you can also query the next command, e.g.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>configure ?
+</code></pre></div>      </div>
+
+      <p>returns <code class="language-plaintext highlighter-rouge">terminal</code></p>
+
+      <p>So the full command is:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>configure terminal
+</code></pre></div>      </div>
+
+      <p>or simply</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf t
+</code></pre></div>      </div>
+
+      <p>You can also use tab completion.</p>
+
+      <p>A useful configuration to set right away, from global config is:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>no ip domain-looksup
+</code></pre></div>      </div>
+
+      <ul>
+        <li>This prevents the router for thinking that mistyped commands are actually domain names, and attempting to do a DNS lookup.</li>
+      </ul>
+
+      <p>As you are just starting, expect some typos, this will keep the switch from hanging for a few minutes on every typo!</p>
+
+      <h3 id="setting-a-password-for-the-console-connection">Setting a password for the console connection</h3>
+
+      <p>Notice that we were able to just plug into our switch and start issuing commands. This isn’t secure very, we could be physically hacked by anyone who knows how to program a switch. Let’s set a password for the console port:</p>
+
+      <p>From User Exec Mode:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enable
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>configure terminal
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line console 0``` - this applies to connections made to the console port
+
+</code></pre></div>      </div>
+      <p>password switch1234``` - add a password to this connection</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>login
+</code></pre></div>      </div>
+      <ul>
+        <li>forces login</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+</code></pre></div>      </div>
+
+      <p>a few times, and when you start again, you’ll be prompted for the 
+password</p>
+
+      <h3 id="setting-a-password-on-privileged-exec-mode">Setting a password on privileged exec mode</h3>
+
+      <p>Privileged is like our <code class="language-plaintext highlighter-rouge">sudo</code> or <code class="language-plaintext highlighter-rouge">root</code> account. It let’s us make changes to the configuration. We should put a password on this account too.</p>
+
+      <p>From User Exec Mode:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enable
+configure terminal
+enable secret admin12345
+</code></pre></div>      </div>
+      <p>this password will be hashed</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+exit
+</code></pre></div>      </div>
+
+      <h3 id="inspecting-our-configuration">Inspecting our configuration</h3>
+
+      <p>From privileged exec:</p>
+
+      <p>See running configuration with:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show running-configuration
+</code></pre></div>      </div>
+
+      <p>you can see the password, but it’s hashed (MD5)
+you can also find the line console password in plain text. We’ll fix this in a bit.</p>
+
+      <h3 id="adding-passwords-to-ssh-lines">Adding passwords to SSH lines</h3>
+
+      <p>you can also find a few other ways to access the console, for example over telnet. We should set passwords here too!</p>
+
+      <p>From line configure…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line vty 0 15
+</code></pre></div>      </div>
+
+      <p>vty stands for virtual teletype</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>password switch123
+login
+exit
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show run
+</code></pre></div>      </div>
+
+      <p>You can now see passwords for all of the lines.</p>
+
+      <p>Let’s hash those passwords:</p>
+
+      <p>from priviledged exec:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service password-encryption
+exit
+show run
+</code></pre></div>      </div>
+
+      <p>This is a type 7 hash. It’s less secure but it’s better than plain text!</p>
+
+      <h3 id="telnet-access">Telnet access</h3>
+
+      <ul>
+        <li>assign the device an IP on the VLAN</li>
+      </ul>
+
+      <p>From global configuration:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface vlan 1
+ip address 192.168.0.2 255.255.255.0
+ip default-gateway 192.168.0.1
+no shutdown
+</code></pre></div>      </div>
+
+      <ul>
+        <li>then telnet to that IP</li>
+      </ul>
+
+      <p>assign the connected computer a static ip:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>192.168.0.10 255.255.255.0
+</code></pre></div>      </div>
+
+      <p>Connect the computer with an ethernet cable</p>
+
+      <p>and then from the computers command line:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telnet 192.168.0.2
+</code></pre></div>      </div>
+      <ul>
+        <li>use the vty password</li>
+      </ul>
 
     </div></div></section>
-<section id="part4virtualprivatenetworks"><button class="collapsible">Part 4: Virtual Private Networks</button><div class="text-content"><div class="text-inner">
+<section id="sshaccress"><button class="collapsible">SSH accress</button><div class="text-content"><div class="text-inner">
+      <ul>
+        <li>ensure your PC has the ip address 192.168.0.5 255.255.255.0</li>
+        <li>ensure the router has the ip address 192.168.0.2 255.255.255.0
+          <ul>
+            <li>That was done in the <code class="language-plaintext highlighter-rouge">telnet access</code> section</li>
+            <li>From global config, run:</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostnam S1
+</code></pre></div>      </div>
+      <p>gives the switch a proper name</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip domain-name mynetwork.com
+</code></pre></div>      </div>
+      <p>gives the current network a domain</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto key generate rsa
+</code></pre></div>      </div>
+      <p>generates a ssh key</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2048
+</code></pre></div>      </div>
+      <p>number of bits. 2048 is still considered secure so far.</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip ssh version 2
+</code></pre></div>      </div>
+      <p>start ssh version 2</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line vty 0 15
+</code></pre></div>      </div>
+      <p>configure vty for all lines</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>transport input ssh
+</code></pre></div>      </div>
+      <p>turn on ssh on all lines</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>login local
+</code></pre></div>      </div>
+      <p>force login</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>username admin password admin123456
+</code></pre></div>      </div>
+      <p>set a username and password</p>
+
+      <p>Now you should be able to connect over SSH</p>
+
+      <p>from the command line of a device connected over ethernet:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -l admin 192.168.0.2
+</code></pre></div>      </div>
+
+      <h3 id="saving-our-work">Saving our work</h3>
+
+      <p>Recall from last week that all of our changes exist only in the device RAM. We can load this configuration on startup with:</p>
+
+      <p>from Priviledged Exec Mode</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>copy running-config startup-config
+</code></pre></div>      </div>
+
+      <p>or, shorthand:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>copy run start
+</code></pre></div>      </div>
+
+      <p><em>Always do this before leaving packet tracer so your work is saved!</em></p>
+
+      <h3 id="part-3-static-routing">Part 3: Static Routing</h3>
+
+      <p>Most of these same commands apply to routers as well.</p>
+
+      <p>As we say last week, additional tasks we need to do in routers include configuring gateway addresses on interaces.</p>
+
+      <p>We may also wish to assign static routes using routers</p>
+      <ul>
+        <li>This tells the router, that, for a given destination address, the address of the connected device which is the next hop</li>
+      </ul>
+
+      <p>Syntax:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route &lt;destination&gt; &lt;subnet&gt; &lt;next hop&gt;
+</code></pre></div>      </div>
+
+      <p>example, if the next hop to get to 192.168.10.x / 24, is 10.0.0.100</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 192.168.10.0 255.255.255.0 10.0.0.100
+</code></pre></div>      </div>
+
+      <p>Placing a <code class="language-plaintext highlighter-rouge">0</code> is the destination address in the fourth octet, matches any value for this octet. This will route all packets with the destination address 192.168.10.x to the next hops destination 10.0.0.100. This is a known as a wildcard match, and is powerful.</p>
+
+      <p>We can also have an exit interface, e.g.`</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 192.168.10.0 255.255.255.0 g0/0
+</code></pre></div>      </div>
+
+      <p>We can see our routes using the following, from priviledged exec:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show ip route
+</code></pre></div>      </div>
+
+      <p>default route (used as a last resort)</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 0.0.0.0 0.0.0.0 {dest}
+</code></pre></div>      </div>
+
+      <p>Recall, 0’s are wildcards, so this means match any IP and any subnet mask.</p>
+
+    </div></div></section>
+<section id="part4virtuallans"><button class="collapsible">Part 4: Virtual LANs</button><div class="text-content"><div class="text-inner">
+
+      <p>When computers connect to a switch, by default they are assumed to all be on the same subnet. This means that packets may be shared freely among these computers using broadcast. Additionally, all these computers are in the same collision domain. This is particularly inefficient if computers have no need to communicate, for example if they network was shared by different departments or companies. We could fix this by:</p>
+      <ul>
+        <li>buying more switches, however this is costly</li>
+        <li>Using VLANs, Virtual LANs, which splits up a switch into a number of Virtual LANs to better manage traffic
+          <ul>
+            <li>Also VLANs can be configured to provide different Quality of Service for the different VLANs, including data and voice</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>We already looked at the 2960 Router. This router has 24 fast ehternet ports, and 2 gigabit ethernet ports, which we can slice up into VLANs.</p>
+
+      <p>Additionally, we can create something called a trunk, an interface which is shared by the different VLANs to all access the internet.</p>
+
+      <p>Let create 3 VLANS, one for 2 devices, one for 3 devices, and one for 4 devices.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enable
+configure terminal
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlan 99
+name mgt&amp;native
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlan 10
+name Lab-1
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlan 20
+name Lab-2
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlan 30
+name Lab-3
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+copy running-config startup-config
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf t
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int range fa0/6-10
+switchport mode access
+switchport access vlan 10
+</code></pre></div>      </div>
+      <p>fast ethernet 0 ports 6 through 10</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int range fa0/11-17
+switchport mode access
+switchport access vlan 20
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int range fa0/18-23
+switchport mode access
+switchport access vlan 30
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int fa0/24
+switchport mode access
+switchport access vlan 99`       
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>end
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show vlan brief
+</code></pre></div>      </div>
+
+      <p>configure the trunk</p>
+      <pre><code class="language-enable">
+</code></pre>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf t
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int range fa0/1-2
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>switchport mode trunk
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>switchport trunk native vlan 99``` &lt;- native is for compatibility, for older switches that don't understand what vlans are
+
+The management vlan needs an private IP for doing managmeent
+```conf t
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface vlan 99
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip address 192.168.99.2 255.255.255.0
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>no shutdown
+</code></pre></div>      </div>
+
+      <p>Setting up the trunk</p>
+      <pre><code class="language-en">
+</code></pre>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf t
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int fa0/1
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>switchport mode trunk
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>switchport truink allowed vlan 1-99
+</code></pre></div>      </div>
+
+      <p>We want this trunk to go to the router</p>
+
+      <p>on the router side, we need to unpack all three sides of the trunk:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface gigabitEthernet 0/0/0.10
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>encapsulation dot1Q 10
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip address 192.168.10.1 255.255.255.0
+</code></pre></div>      </div>
+
+      <p>This will unpack the packets with the subnet, and forward them as needed.</p>
+
+      <p>This was tricky, probably want to do it again!</p>
+
+    </div></div></section>
+<section id="part5simulationmode"><button class="collapsible">Part 5: Simulation Mode</button><div class="text-content"><div class="text-inner">
+
+      <p>So far we have largely stayed out of simulation mode.</p>
+      <ul>
+        <li>
+          <p>Switching into Simulation Mode</p>
+        </li>
+        <li>
+          <p>Event List</p>
+        </li>
+        <li>
+          <p>Simulation Panel</p>
+        </li>
+        <li>
+          <p>Play Controls</p>
+        </li>
+        <li>
+          <p>Details</p>
+        </li>
+        <li>
+          <p>Filters</p>
+        </li>
+        <li>
+          <p>Seven Layers</p>
+        </li>
+        <li>
+          <p>Packets</p>
+
+          <ul>
+            <li>What can you learn about your packet by inspection</li>
+          </ul>
+        </li>
+        <li>
+          <p>Limitations</p>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="part6virtualprivatenetworks"><button class="collapsible">Part 6: Virtual Private Networks</button><div class="text-content"><div class="text-inner">
+
+      <p>To</p>
+
+      <p>PC -&gt; Switch -&gt; Router -&gt; Router -&gt; Router -&gt; Switch -&gt; PC
+                            -&gt; Server</p>
+
+      <p>We want to create a tunnel that “bypasses” the middle router</p>
+      <ul>
+        <li>in the two ends of the tunnel…</li>
+      </ul>
+
+      <p>this is on a 1941 router</p>
+
+      <p>Upgrade the firmware to allow security</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>en
+conf t
+licence boot module c1900 technology-package securityk9
+copy run start
+&lt;enter&gt;
+reload
+</code></pre></div>      </div>
+
+      <p>Check the upgraded firmware</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>en
+show version
+</code></pre></div>      </div>
+      <ul>
+        <li>a new security package is enabled</li>
+      </ul>
+
+      <p>we want to encrypt data between these two</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>en
+conf t
+access-list 100 permit ip 192.168.10.0 0.0.0.255 192.168.30.0  0.0.0.255
+</code></pre></div>      </div>
+
+      <ul>
+        <li>like an inverse subnet mask - this time the 0’s are what we care about, the 1s what we don’t.</li>
+      </ul>
+
+      <p>Inital setup for the routers:</p>
+
+      <p>3x 1941s
+2x 2690s
+2x PCs</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname R1
+interface g0/1
+ip address 192.168.1.1 255.255.255.0
+no shut
+interface g0/0
+ip address 209.165.100.1 255.255.255.0
+no shut
+exit
+ip route 0.0.0.0 0.0.0.0 209.165.100.2
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname ISP
+interface g0/1
+ip address 209.165.200.2 255.255.255.0
+no shut
+interface g0/0
+ip address 209.165.100.2 255.255.255.0
+no shut
+exit
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname R3
+interface g0/1
+ip address 192.168.3.1 255.255.255.0
+no shut
+interface g0/0
+ip address 209.165.200.1 255.255.255.1
+no shut
+exit
+ip route 0.0.0.0 0.0.0.0 209.165.200.2
+</code></pre></div>      </div>
+
+      <p>Note: Right now there is no route from PC to PC! We’ll build it with</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>access-list 100 permit ip 192.168.1.0 0.0.0.255 192.168.3.0 0.0.0.255
+</code></pre></div>      </div>
+
+      <p>swap them for the other router:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>access-list 100 permit ip 192.168.3.0 0.0.0.255 192.168.1.0 0.0.0.255
+</code></pre></div>      </div>
+
+      <p>set up the isakmp policy on each side</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cypto isakmp policy 10
+  encryption aes 256
+  authentication pre-share
+  group 5
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+</code></pre></div>      </div>
+
+      <p>create our key, giving the outside interface to the other router:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto isakmp key secretkey address 209.165.200.1
+</code></pre></div>      </div>
+      <p>change the address on the other side, but you want the same password!</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto isakmp key secretkey address 209.165.100.1
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto ipsec transform-set R1-&gt;R3 esp-aes 256 esp-sha-hmac
+</code></pre></div>      </div>
+
+      <p>change the names on the other way, R3-&gt;R1</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto map IPSEC-MAP 10 ipsec-isakmp
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set peer 209.165.200.1
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set pfs group5
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set security-association lifetime seconds 86400
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set transform-set R1-&gt;R3
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>match address 100
+</code></pre></div>      </div>
+
+      <p>and you need to make some reverses for the other way…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int g0/0
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto map IPSEC-MAP
+</code></pre></div>      </div>
+
+      <p>ping across, and capture a packet in the ISP. You can see the outer header, which is sending it to the other outer router, and the encypted packets inside. Very cool!</p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
@@ -143,19 +805,42 @@
             <li>They will also need to host a server for online matches</li>
           </ul>
         </li>
-        <li>A Progress Web App Developer
+        <li>A Progressive Web App Developer
           <ul>
-            <li>Their app allows schools to host video content and quizzes</li>
+            <li>Their app allows schools to host interactive video content and quizzes</li>
           </ul>
         </li>
-        <li>An e-commerce platform for local food producers to sell their goods
+        <li>An encryption algorithm developer
           <ul>
-            <li>Currently they have three customers: A local cheese maker, a small craft brewery, and a apiary.</li>
-            <li>The customers will need to securely connect to the service to update their products</li>
+            <li>They have one user who is working remote, and needs secure (encrypted) communication with their computers in the office
+All of these companies have clients in Regina</li>
           </ul>
         </li>
       </ul>
 
+      <p>You will need to:</p>
+      <ul>
+        <li>Add appropriate images for the intercity, city, and office views</li>
+        <li>Add locations for the remote worker</li>
+        <li>Add locations for a home user who will access the PWA and the Fighting Game</li>
+        <li>Ensure connectivity through</li>
+        <li>
+          <p>Employ all of the best security principles as discussed in the course</p>
+        </li>
+        <li>Assume you only have access to a 2960 Switch, a 4321 Router, and a WRT300N Wireless Router. (You do not need to use all three)
+          <ul>
+            <li>You may not necessarily need to use all of the objects</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>You may model the internet with a</p>
+
+      <p><strong>Be sure all configurations are saved!</strong></p>
+
+      <ul>
+        <li>I still need a small section on static routing</li>
+      </ul>
     </div></div></section>
 
     </main>
