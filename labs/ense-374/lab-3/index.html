@@ -108,7 +108,7 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>This lab introduces Cascading Style Sheets (CSS), which can be used to add styles to HTML elements. We will look at the different locations styles can be placed (inline, internal and external), the different types of tags which styles can be applied to (by tag type, id or class), and some example styles which can be applied. We’ll discuss syntax, containers, positioning and the box model, and some extra add-ins to bring our page up to date. We’ll end our discussion with BootStrap CSS, a library made by twitter, which instantly modernizes web pages, as well as providing modernized controls.</p>
+      <p>This lab introduces Cascading Style Sheets (CSS), which can be used to add styles to HTML elements. We will look at the different locations styles can be placed (inline, internal and external), the different types of tags which styles can be applied to (by tag type, id or class), and some example styles which can be applied. We’ll discuss syntax, containers, positioning and the box model, and some extra add-ins to bring our page up to date. We’ll end our discussion with Bootstrap CSS, a library made by twitter, which instantly modernizes web pages, as well as providing modernized controls.</p>
 
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
@@ -220,12 +220,12 @@
         <li>Often rules will conflict, so we need to determine which style will apply, based on factors:
           <ul>
             <li>Importance: you can specify important tags with <code class="language-plaintext highlighter-rouge">!important</code></li>
-            <li>Specificity: more specific rules (e.g. id’s) overrule less specific (e.g. classes, elements, or inherrited)
+            <li>Specificity: more specific rules (e.g. id’s) overrule less specific (e.g. classes, elements, or inherited)
               <ul>
                 <li>Calculated with a complex scoring system.</li>
                 <li>generally:
                   <ul>
-                    <li>id &gt; class &gt; tag &gt; inheritted</li>
+                    <li>id &gt; class &gt; tag &gt; inherited</li>
                   </ul>
                 </li>
               </ul>
@@ -301,7 +301,7 @@
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>This shows how rules can be placed in three different places, and how they apply, both through inheritance (body inherits through to paragraph), by order (the internal style sections comes after the linked, so it will overrule it), and specificity (id overerules class overrules inheritted). Fire up the debugger (F12), use the inspector, and trace how the CSS rules are overruled!</p>
+      <p>This shows how rules can be placed in three different places, and how they apply, both through inheritance (body inherits through to paragraph), by order (the internal style sections comes after the linked, so it will overrule it), and specificity (id overrules class overrules inherited). Fire up the debugger (F12), use the inspector, and trace how the CSS rules are overruled!</p>
 
       <h3 id="debugger">Debugger</h3>
 
@@ -345,7 +345,7 @@ Alternately, you may wish to group selectors by type, e.g. Tag, Class, ID</p>
       <p><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS">Mozilla’s MDN Docs</a></p>
 
     </div></div></section>
-<section id="part2cssselectorsproprtiesandvalues"><button class="collapsible">Part 2 CSS Selectors, Proprties and Values</button><div class="text-content"><div class="text-inner">
+<section id="part2cssselectorspropertiesandvalues"><button class="collapsible">Part 2 CSS Selectors, Properties and Values</button><div class="text-content"><div class="text-inner">
 
       <p>Next let’s examine some of the details which make CSS so powerful (and also so tricky!)</p>
 
@@ -370,7 +370,7 @@ Alternately, you may wish to group selectors by type, e.g. Tag, Class, ID</p>
         <li>You can assign elements to a class in the HTML code using the HTML attribute <code class="language-plaintext highlighter-rouge">class="&lt;class_name&gt;"</code></li>
         <li>Multiple classes may be applied to a single object, separated by a space.
           <ul>
-            <li>it’s best practice to only use one custom class, and attach others as needed by frameworks such as bootstrap, e.g. <code class="language-plaintext highlighter-rouge">class="&lt;custom_class&gt; &lt;bootstrap_class&gt;</code></li>
+            <li>it’s best practice to only use one custom class, and attach others as needed by frameworks such as Bootstrap, e.g. <code class="language-plaintext highlighter-rouge">class="&lt;custom_class&gt; &lt;bootstrap_class&gt;</code></li>
           </ul>
         </li>
         <li>target them in CSS with the selector: <code class="language-plaintext highlighter-rouge">.&lt;class_name&gt;</code></li>
@@ -402,13 +402,13 @@ Alternately, you may wish to group selectors by type, e.g. Tag, Class, ID</p>
       <p>e.g.</p>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
-<span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">"myheading"</span><span class="nt">&gt;</span> Lab 3 <span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">"my-heading"</span><span class="nt">&gt;</span> Lab 3 <span class="nt">&lt;/h1&gt;</span>
 ...
 </code></pre></div>      </div>
 
       <p>only ever one id selector per object</p>
 
-      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#myheading</span> <span class="p">{</span>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#my-heading</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
@@ -422,6 +422,8 @@ e.g.</p>
   <span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
+
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Read more on MDN</a></p>
 
       <h3 id="combining-rules">Combining Rules</h3>
 
@@ -437,7 +439,7 @@ e.g.</p>
     <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
-      <p>We can also find elements which are descendents of an element:</p>
+      <p>We can also find elements which are descendants of an element:</p>
 
       <p>e.g. select all <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> elements that are children of a <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> tag:</p>
 
@@ -483,7 +485,7 @@ e.g.</p>
             <li>A shorthand style that defines many properties and values in one line</li>
             <li>general properties:
               <ul>
-                <li><code class="language-plaintext highlighter-rouge">border-style: solid;</code> - Overall style. values are keywords - dotted, dashed, solid, double, groove, ridge, insex, outset, none, hidden</li>
+                <li><code class="language-plaintext highlighter-rouge">border-style: solid;</code> - Overall style. values are keywords - dotted, dashed, solid, double, groove, ridge, inset, outset, none, hidden</li>
                 <li><code class="language-plaintext highlighter-rouge">border-width: 5px;</code> - values are in px, e.g. 5px, 15px. You can also define the top, right, bottom and left widths in one statement. (clockwise from 12 o’clock)</li>
                 <li><code class="language-plaintext highlighter-rouge">border-color: red;</code> - values are colors</li>
                 <li><code class="language-plaintext highlighter-rouge">border-radius: 10px;</code> - curves the edges. value in px, e.g. 5px</li>
@@ -626,7 +628,7 @@ e.g.</li>
             <li><code class="language-plaintext highlighter-rouge">visibility: hidden;</code> will instead allow items to flow around it.</li>
           </ul>
         </li>
-        <li>There’s also a new flexbox model, designed to act as an alternative to this, but I think BootStrap (which we’ll discuss later) accomplishes this better.</li>
+        <li>There’s also a new flexbox model, designed to act as an alternative to this, but I think Bootstrap (which we’ll discuss later) accomplishes this better.</li>
       </ul>
 
       <h3 id="css-positioning">CSS Positioning</h3>
@@ -676,7 +678,7 @@ e.g.</li>
             <li>does disrupt document flow</li>
           </ul>
         </li>
-        <li><code class="language-plaintext highlighter-rouge">position: fixed;</code> - always in the same place as we scroll, eg. a fixed header bar</li>
+        <li><code class="language-plaintext highlighter-rouge">position: fixed;</code> - always in the same place as we scroll, e.g. a fixed header bar</li>
       </ul>
 
       <h3 id="centering-elements">Centering Elements</h3>
@@ -719,10 +721,10 @@ eg:</p>
     </div></div></section>
 <section id="part4boostrapcss"><button class="collapsible">Part 4: Boostrap CSS</button><div class="text-content"><div class="text-inner">
 
-      <p>BootStrap is a library originally developed by Twitter to modernize and standardize web development</p>
+      <p>Bootstrap is a library originally developed by Twitter to modernize and standardize web development</p>
 
       <ul>
-        <li>At the simplest, it can be seen as an update to the “default style sheet” which will automatically make an unstyle paged look much more modern</li>
+        <li>At the simplest, it can be seen as an update to the “default style sheet” which will automatically make an unstyled paged look much more modern</li>
         <li>Additionally, there are a number of pre-defined classes which can be attached to our HTML elements to automatically give them modern styles</li>
         <li>The Current Version, v5, was released September 2020, and broke many things from my lab last year!</li>
       </ul>
@@ -731,7 +733,7 @@ eg:</p>
 
       <p>Rather than manually installing it and serving it from our server, we can have the user’s browser fetch it from a Content Delivery Network (CDN). A CDN distributes common resources on distributed servers around the world, ideally one nearby the user, and the may even have a cached copy on their own computers. (Similar to DNS) Typically employ proprietary load balancing algorithms that detect where things are in-demand and ensures local copies exist nearby!</p>
 
-      <p>This is useful for two reasons: it reduces bandwidth for our server, and if the user has previously downloaded it for any other website, it will be cached on their computer, and load instantly. The only problem is, if the CDN ever goes down, our styles will not load. But then again, if the CDN goes down, the internet likley has bigger problems than just your web page.</p>
+      <p>This is useful for two reasons: it reduces bandwidth for our server, and if the user has previously downloaded it for any other website, it will be cached on their computer, and load instantly. The only problem is, if the CDN ever goes down, our styles will not load. But then again, if the CDN goes down, the internet likely has bigger problems than just your web page.</p>
 
       <p>Grab a link to it from the CDN, and add the code for it into your HTML file:</p>
 
@@ -739,19 +741,19 @@ eg:</p>
 
       <p>As with our spreadsheets, the link goes in the head, <em>before</em> our custom styles. (This will allow our custom styles to override theirs as needed.)</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/Bootstrap@5.0.2/dist/css/Bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
 </code></pre></div>      </div>
       <p>You will also need to paste a JavaScript library into your HTML. This script tag is added in the last line of the body of the document.</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/Bootstrap@5.0.2/dist/js/Bootstrap.bundle.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div>      </div>
       <h3 id="what-can-it-do">What can it do?</h3>
 
-      <p>Check out the Examples on Bootstrap’s website which includes pages styled using bootstrap elements</p>
+      <p>Check out the Examples on Bootstrap’s website which includes pages styled using Bootstrap elements</p>
 
-      <p><a href="https://getbootstrap.com/docs/5.0/examples/">getbootstrap &gt; examples</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.0/examples/">Examples</a></p>
 
-      <p>You can also see many examples in the BootStrap cheat sheet:</p>
+      <p>You can also see many examples in the Bootstrap cheat sheet:</p>
 
       <p><a href="https://getbootstrap.com/docs/5.0/examples/cheatsheet/">Bootstrap Cheat Sheet</a></p>
 
@@ -770,34 +772,113 @@ eg:</p>
         <li>Responsive Design,.</li>
       </ol>
 
-      <p>Consequences of doing nothing: higher bounce rate. Google pagerank suffers.</p>
+      <p>Consequences of doing nothing: higher bounce rate. Google PageRank suffers.</p>
 
-      <p>Dedicated mobile site is a lot of work and maintenence. Responsive design is better.</p>
+      <p>Dedicated mobile site is a lot of work and maintenance. Responsive design is better.</p>
 
       <p>Bootstrap encourages Mobile First design, and their classes are all automatically responsive!</p>
 
       <p>Some elements:</p>
 
-      <h3 id="jumbotron">Jumbotron</h3>
-      <p>A large block element near the top of the page for first impressions Sometimes called a “Hero”</p>
+      <h3 id="bootstrap-containers">Bootstrap Containers</h3>
+
+      <p>The container class is assigned to a div to make the contents automatically responsive regarding the size of the viewport.</p>
       <ul>
-        <li>As of Bootstrap 5, no longer a dedicated element</li>
+        <li>An easy way to make things look pretty good without caring too much about the details</li>
+        <li>take up 80% width, responsive
+          <ul>
+            <li>By default has some jarring jumps at different breakpoints</li>
+          </ul>
+        </li>
       </ul>
 
-      <h3 id="navbar">Navbar</h3>
-      <p>A navigation element</p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This is some content that is inside of a container. It should automatically resize as you resize the window. This is some content that is inside of a container. It should automatically resize as you resize the window. This is some content that is inside of a container. It should automatically resize as you resize the window. This is some content that is inside of a container. It should automatically resize as you resize the window.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>      </div>
 
-      <h3 id="carousel">Carousel</h3>
-      <p>A container where you can swap different contents right to left usually used for showing off images
-Interval property - how often it rotates</p>
+      <p><code class="language-plaintext highlighter-rouge">container-fluid</code> – Always takes up 100% of the screen width, which is visible when resizing</p>
+
+      <p>We are not stuck with the styles Bootstrap gives us, we can also further customize with our own custom CSS:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container-fluid</span> <span class="p">{</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">30px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h3 id="bootstrap-buttons">Bootstrap Buttons</h3>
+
+      <p>Let’s add some buttons to our text:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;button&gt;</span>Subscribe<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button&gt;</span>Learn More<span class="nt">&lt;/button&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Even with Bootstrap they are still kind of boring.</p>
+
+      <p>We need to attach the appropriate Bootstrap classes. <a href="https://getbootstrap.com/docs/5.0/components/buttons/">Looking at the Bootstrap documentation…</a></p>
+
+      <p>We can see primary buttons, outline buttons. Let’s try outline buttons…</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-outline-primary"</span><span class="nt">&gt;</span>Subscribe<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-outline-secondary"</span><span class="nt">&gt;</span>Learn More<span class="nt">&lt;/button&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Say we’re not super happy with how these buttons look. We can use the box model to figure out how they are automatically styled in Bootstrap…</p>
+
+      <p><img src="res/box-model-outline-button.png" alt="" /></p>
+
+      <p>And we can edit these until we are happy it. Then we can record the changes we like in our custom CSS:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.btn</span> <span class="p">{</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">.5rem</span> <span class="m">1rem</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
 
       <h3 id="bootstrap-grid">Bootstrap Grid</h3>
-      <p>Represented as divs in divs</p>
+
+      <p>The Bootstrap Grid aligns elements in a grid, and allows responsive resizing, for example, show 4 grid elements on a desktop site, 3 on a tablet, and 1 on a mobile device.</p>
+
+      <p>The HTML:</p>
       <ul>
-        <li>The outer divs assigns the class row</li>
-        <li>the inner divs assign has class col
-The grid space is divided into 12 “units”, and our column can take up as many units as we want. Eg. 6 units would be 50% width.</li>
-        <li>It is thus easy to have 2, 3, 4 or 6 columns</li>
+        <li>The outer div’s assigns the class row</li>
+        <li>the inner divs assign has class col</li>
+      </ul>
+
+      <p>simplest version</p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>I'm in a grid!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>I'm also in a grid!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>      </div>
+
+      <p>If we want to use responsive design, we need to attach the number of units to each grid element</p>
+
+      <p>The total grid space is divided into 12 “units”, and our column can take up as many units as we want.</p>
+      <ul>
+        <li>If we wanted our column to take up 50%, this would be 6 units.</li>
+        <li>By using 12 base units, is easy to have 2, 3, 4 or 6 columns</li>
+      </ul>
+
+      <p>Let’s look at 3 columns which take 25% of the screen:</p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-3"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>I'm in a grid!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-3"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>I'm also in a grid!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-3"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>A third element!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>      </div>
+
+      <ul>
         <li>We can fix our number of columns with subclasses like col-3</li>
         <li>We can also specify how cols will work depending on screen size</li>
       </ul>
@@ -809,59 +890,146 @@ The grid space is divided into 12 “units”, and our column can take up as man
 <code class="language-plaintext highlighter-rouge">class="col-lg-3 col-md-4 col-sm-6"</code></li>
       </ul>
 
-      <h3 id="bootstrap-containers">Bootstrap Containers</h3>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-sm-6 col-md-4 col-lg-3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>grid<span class="nt">&lt;/h1&gt;</span>
+      <span class="nt">&lt;p&gt;</span>I'm in a grid!<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-sm-6 col-md-4 col-lg-3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>grid<span class="nt">&lt;/h1&gt;</span>
+      <span class="nt">&lt;p&gt;</span>I'm also in a grid!<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-sm-6 col-md-4 col-lg-3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>grid<span class="nt">&lt;/h1&gt;</span>
+      <span class="nt">&lt;p&gt;</span>Another grid example!<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-sm-6 col-md-4 col-lg-3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>grid<span class="nt">&lt;/h1&gt;</span>
+      <span class="nt">&lt;p&gt;</span>A final grid column!<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>      </div>
+      <p>Note: If a viewport column size is not specified, it defaults to 100% width.</p>
 
-      <p>Typically these days there are some common styling elements for containers</p>
+      <h3 id="jumbotron">Jumbotron</h3>
 
+      <p>Other components in Bootstrap require multiple HTML elements to work. Generally speaking for these I tend to start from samples to find the code, and then make changes as needed.</p>
+
+      <p>The JumboTron is a large block element near the top of the page for first impressions Sometimes called a “Hero”. It makes a good “Hello World” element to immediately see the effects of Bootstrap</p>
       <ul>
-        <li>take up 80% width, responsive, that sort of thing
-          <ul>
-            <li>Jarring jumps</li>
-          </ul>
-        </li>
-        <li>This container automatically works for you</li>
-        <li>Attach it to a div</li>
+        <li>Unfortunately, as of Bootstrap 5, no longer a dedicated element</li>
+        <li>The following is grabbed from the Bootstrap 5 sample source code:</li>
       </ul>
 
-      <p>Fluid Container – 100% width and smooth scrolling</p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"p-5 mb-4 bg-light rounded-3"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid py-5"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"display-5 fw-bold"</span><span class="nt">&gt;</span>Custom jumbotron<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"col-md-8 fs-4"</span><span class="nt">&gt;</span>Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-primary btn-lg"</span> <span class="na">type=</span><span class="s">"button"</span><span class="nt">&gt;</span>Example button<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+Each of the attached elements and classes serves a purpose. We've seen some of these classes before, but not all. If you want to figure out what one does, let's say `py-5`, we can look it up in the Bootstrap Docs.
+(Or google `Bootstrap 5 py-5`, [which takes you to spacing...](https://getbootstrap.com/docs/5.0/utilities/spacing/))
+
+Here we can see that this is setting padding in the y direction to 3 spacer units. (Where the spacer size is defined in SASS, something we don't look at in this lab.)
+
+</code></pre></div>      </div>
+      <h3 id="navbar">Navbar</h3>
+
+      <p>A navigation element. At it’s core it’s an unordered list, wrapped in various div’s. This one is modified from the examples page:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"pb-3 mb-4 border-bottom"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-expand-md navbar-dark fixed-top bg-dark"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Carousel<span class="nt">&lt;/a&gt;</span>
+          <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-bs-toggle=</span><span class="s">"collapse"</span> <span class="na">data-bs-target=</span><span class="s">"#navbarCollapse"</span> <span class="na">aria-controls=</span><span class="s">"navbarCollapse"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+          <span class="nt">&lt;/button&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarCollapse"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav ms-auto mb-2 mb-md-0"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link active"</span> <span class="na">aria-current=</span><span class="s">"page"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span>
+              <span class="nt">&lt;/li&gt;</span>
+              <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span>
+              <span class="nt">&lt;/li&gt;</span>
+              <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link disabled"</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">tabindex=</span><span class="s">"-1"</span> <span class="na">aria-disabled=</span><span class="s">"true"</span><span class="nt">&gt;</span>Disabled<span class="nt">&lt;/a&gt;</span>
+              <span class="nt">&lt;/li&gt;</span>
+            <span class="nt">&lt;/ul&gt;</span>
+          <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/nav&gt;</span>
+<span class="nt">&lt;/header&gt;</span>
+</code></pre></div>      </div>
+
+      <h3 id="carousel">Carousel</h3>
+      <p>A container which automatically cycles content over time, typically used for displaying images like a slideshow</p>
+
+      <p><a href="https://getbootstrap.com/docs/5.1/components/carousel/">Bootstrap Carousel</a></p>
 
       <h3 id="bootstrap-cards">Bootstrap Cards</h3>
 
-      <p>A self-contained piece of data, may includes an image, text</p>
+      <p>A self-contained group of elements, typically includes an image, text</p>
 
       <ul>
         <li>separated into a header, body and footer region</li>
         <li>cards are stored in a “card deck” and stacks them appropriately</li>
-        <li>Less flexible than bootstrap grid for responsive design</li>
+        <li>Less flexible than Bootstrap grid for responsive design</li>
       </ul>
 
-      <h3 id="bootstrap-buttons">Bootstrap Buttons</h3>
-
-      <p>Gorgeous…ish? A few different states are possible</p>
+      <p><a href="https://getbootstrap.com/docs/5.0/components/card/">Bootstrap Cards</a></p>
 
       <h3 id="input-groups">Input Groups</h3>
 
       <p>Sometimes certain inputs logically go together - you will certainly see this in our lab exercise! Check out input groups for some examples of how you might be able to put them together</p>
 
+      <p><a href="https://getbootstrap.com/docs/5.0/forms/input-group/">Input Groups</a></p>
+
       <h4 id="responsive-breakpoints-with-css-media-queries">Responsive Breakpoints with CSS Media Queries</h4>
 
-      <p>Media queries are a CSS modifier which checks something about the media (screen) and applies a style based on this:</p>
+      <p>If you ever need to style responsive CSS without bootstrap, you can use CSS Media Queries, a CSS modifier which checks something about the media (screen) and applies a style based on this:</p>
 
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@media</span> <span class="n">screen</span> <span class="p">(</span><span class="n">min-width</span><span class="p">:</span> <span class="m">900px</span><span class="p">)</span> <span class="p">{</span>
     <span class="c">/* Your CSS here */</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>Think of it like an if block, these styles will only apply if thes econditions are met.</p>
+      <p>Think of it like an if block, these styles will only apply if these conditions are met.</p>
 
-      <p>Bootstrap defines 4 cutoffs: 576, 768, 992, 1200px
-|object|size|
-|—|—|
-|phones in portrait| &lt;576|
-|phones in landscape| &gt;576, &lt;768|
-|tablets| &gt;768, &lt;992|
-|desktops| &gt;990, &lt;1200px|
-|ultrawides| &gt;1200px|</p>
+      <p>Bootstrap defines 4 cutoffs: 576, 768, 992, 1200px</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>object</th>
+            <th>size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>phones in portrait</td>
+            <td>&lt;576</td>
+          </tr>
+          <tr>
+            <td>phones in landscape</td>
+            <td>&gt;576, &lt;768</td>
+          </tr>
+          <tr>
+            <td>tablets</td>
+            <td>&gt;768, &lt;992</td>
+          </tr>
+          <tr>
+            <td>desktops</td>
+            <td>&gt;990, &lt;1200px</td>
+          </tr>
+          <tr>
+            <td>ultrawides</td>
+            <td>&gt;1200px</td>
+          </tr>
+        </tbody>
+      </table>
 
       <h3 id="misc-styling-stuff">Misc Styling Stuff</h3>
 
@@ -878,11 +1046,12 @@ The grid space is divided into 12 “units”, and our column can take up as man
 </code></pre></div>      </div>
 
       <h3 id="fonts">Fonts</h3>
-      <p>Fonts on the web are typically grabbed from the Google Fonts CDN, in a similar fashion to BootStrap</p>
+
+      <p>Fonts on the web are typically grabbed from the Google Fonts CDN, in a similar fashion to Bootstrap</p>
 
       <ul>
-        <li>I’m personally a big fan of Geomteric Sans Serif fonts</li>
-        <li>It’s worth knowing a few serif and sans, particularly knowing which ones to use for accent text and which ones for body text</li>
+        <li>I’m personally a big fan of Geometeric Sans Serif fonts</li>
+        <li>It’s worth learning about a few serif and sans fonts, and knowing which ones to use for accent text and which ones for body text</li>
       </ul>
 
       <p>Some fonts I like:</p>
@@ -904,12 +1073,18 @@ The grid space is divided into 12 “units”, and our column can take up as man
 
       <p><img src="res/google-fonts.png" alt="" /></p>
 
+      <h3 id="bootstrap-icons">Bootstrap Icons</h3>
+
+      <p>Bootstrap has created a set of SVG icons you can use in your sites completely for free. Just copy the SVG code right into your HTML page</p>
+
+      <p><a href="https://icons.getbootstrap.com/">Bootstrap Icons</a></p>
+
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>For this lab assignment, we will continue the work from lab lab, by styling our prototype to-do list.</p>
+      <p>For this lab assignment, we will continue the work from last lab, by styling our prototype to-do list.</p>
 
-      <p>This style has been slightly from last week to compensate for the style changes in BootStrap 5.</p>
+      <p>This style has been slightly modified from last week to compensate for the style changes in Bootstrap 5.</p>
 
       <p><img src="res/login-styled.png" alt="" /></p>
 
@@ -917,15 +1092,18 @@ The grid space is divided into 12 “units”, and our column can take up as man
 
       <p><img src="res/todo-style-5.png" alt="" /></p>
 
-      <p>Your task is to add BootStrap and Custom CSS to your HTML files from last lab to match this style. You may need to add to or change your HTML for this to work.</p>
+      <p><img src="res/todo-style-logout.png" alt="" /></p>
+
+      <p>Your task is to add Bootstrap and Custom CSS to your HTML files from last lab to match this style. You may need to add to or change your HTML for this to work.</p>
 
       <p>Recommended approach</p>
 
       <ul>
         <li>Look at the pictures to identify elements</li>
-        <li>Use the BootStrap documentation to find appropriate elelements</li>
-        <li>Add the HTML code to make it work (containers, classes, samples, etc.)</li>
-        <li>Add custom CSS to account for anything that doesn’t look right</li>
+        <li>Use the Bootstrap documentation to find appropriate elements</li>
+        <li>Add the required Bootstrap libraries from the CDN links</li>
+        <li>Combine the appropriate Bootstrap HTML to make it look right (containers, classes, samples, etc.) with your HTML elements from last week, making changes as needed</li>
+        <li>Add custom CSS to account for anything that does not look right. You can also attry attaching the Bootstrap styles for adding padding</li>
       </ul>
 
       <h3 id="faq">FAQ:</h3>
@@ -950,11 +1128,31 @@ The grid space is divided into 12 “units”, and our column can take up as man
   <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
 </svg>
 
+      <p>Can I modify the style?</p>
+      <ul>
+        <li>Yes, but you will lose grades if it is deemed to be of lower complexity and/or usability. For example, trying different colors styles is fine as it does not reduce complexity or usability.</li>
+      </ul>
+
+      <p>How will it be graded?
+Some things the TA will look for include</p>
+      <ul>
+        <li>Appropriate HTML elements included for all pages</li>
+        <li>Bootstrap properly included, with appropriate Bootstrap classes used</li>
+        <li>General layout of Login, Register and Todo pages</li>
+        <li>Each of the different types of todo list task states appropriately styled</li>
+        <li>Some specific styling details, which you’ll have to figure out yourself</li>
+      </ul>
+
     </div></div></section>
-<section id="submission"><button class="collapsible">Submission:</button><div class="text-content"><div class="text-inner">
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
 
       <ul>
-        <li>This lab will be submitted via URCourses. Please submit any HTML files and CSS files. You do not need submit the BootStrap library or any dependencies which can be fetched from the CDN.</li>
+        <li>This lab will be submitted via URCourses.</li>
+        <li>Please submit any HTML files and CSS files.
+          <ul>
+            <li>You do not need submit the Bootstrap library or any dependencies which can be fetched from the CDN.</li>
+          </ul>
+        </li>
       </ul>
     </div></div></section>
 
