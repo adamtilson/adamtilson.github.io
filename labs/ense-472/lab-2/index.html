@@ -105,8 +105,6 @@
 
 <hr />
 
-<p>This lab is still under development, expect some changes, additions, clarifications, etc!</p>
-
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
@@ -122,24 +120,24 @@
 
       <p>The Packet Tracer physical view enables you to plan your network physically, in terms of cities and buildings</p>
       <ul>
-        <li>We have seceral levels of granularity - Intercity (country, or world, or province, etc.), home city (city, or neighborhood), office level (floorplan), and wiring closet
+        <li>We have several levels of granularity - Intercity (country, or world, or province, etc.), home city (city, or neighborhood), office level (floorplan), and wiring closet
           <ul>
-            <li>What is the name for a network that exists at each of these scales?</li>
+            <li>Lecutre tie in: What is the name for a network that exists at each of these scales?</li>
           </ul>
         </li>
         <li>You can assign individual background to each level to better represent the areas</li>
-        <li>The lowest level, the wiring closet, is where networking infrasctructure is houses, like a datacenter
+        <li>The lowest level, the wiring closet, is where networking infrasctructure is housed, akin a datacenter
           <ul>
             <li>There may need to be multiple wiring closets in each floor and each building</li>
           </ul>
         </li>
         <li>In the physical view you see the physical representation of your equipment
           <ul>
-            <li>You can place elements where you believe are important</li>
+            <li>You can place elements where you believe they belong</li>
             <li>Smaller routers may go on tables, servers are rack-mounted.</li>
           </ul>
         </li>
-        <li>You always cable from the logical view, as we saw last week…
+        <li>You will want to cable from the logical view, to create the create network topologies, as we saw last week…
           <ul>
             <li>But when you return to the physical view, the cables will be there</li>
           </ul>
@@ -172,19 +170,22 @@
 
       <p>You can also have multiple cities in a country, multiple floorplans in a city, multiple wiring closets in a floorplan, etc.</p>
 
-      <p>Other things you can do</p>
-
+      <p>Other things you can do in physical view:</p>
       <ul>
         <li>See Wifi Ranges (But these will only be accurate if you set all of your container sizes properly)</li>
       </ul>
 
       <p><img src="res/wifi.png" alt="" /></p>
 
-      <p>Finally, you can add furniture and equipment to your wiring closets using:</p>
+      <ul>
+        <li>add furniture and equipment to your wiring closets:</li>
+      </ul>
 
       <p><img src="res/add-furniture.png" alt="" /></p>
 
-      <p>And add elements by dragging and dropping from the equipment area, as we did last week. Where should each element go?</p>
+      <ul>
+        <li>add elements by dragging and dropping from the equipment area, as we did last week.</li>
+      </ul>
 
       <p>When you switch back to logical view, elements are placed somewhat randomly, so you’ll want to also organize them to match appropriate topologies:</p>
 
@@ -195,26 +196,32 @@
     </div></div></section>
 <section id="part2accessingandsecuringaswitch"><button class="collapsible">Part 2: Accessing and Securing a Switch</button><div class="text-content"><div class="text-inner">
 
-      <p>In the last lab we saw how we could program a router using the Packet Tracer command line interface</p>
+      <p>In the last lab we saw how we could program a router using the Packet Tracer Command Line Interface (CLI)</p>
       <ul>
-        <li>But how do you do it in the real world?
+        <li>But how do you access this CLI in a real world?
           <ul>
             <li>You would connect using a laptop using TTY over COM (Or USB to COM)</li>
             <li>Or, if the Switch has an IP address assigned, you could Telnet or SSH in remotely</li>
-            <li>Let’s see an example of each:</li>
+            <li>All of this can be simulated in Packet Tracer, so you can gain some <code class="language-plaintext highlighter-rouge">virtual</code> real world experience
+              <ul>
+                <li>Let’s see an example of each:</li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
 
+      <p>Note: We’re going to start with a Switch, but many of these processes also work with a Router</p>
+
       <p>Start by adding a latpop, a 2960 Switch and a 4321 Router</p>
       <ul>
         <li>Connect the Laptop to the Switch using a Console cable. (RS232 to Console)</li>
-        <li>Use the <code class="language-plaintext highlighter-rouge">Terminal</code> application, leave the default settings, and press okay.
+        <li>On the PC, use the <code class="language-plaintext highlighter-rouge">Terminal</code> application.
           <ul>
-            <li>This is an application similar to PuTTy on Windows, which would use Serial emulation with the same settimgs</li>
+            <li>Leave the default settings, and press okay.</li>
+            <li>This is an application similar to PuTTy on Windows, which corresponds to Serial emulation with the same settings</li>
           </ul>
         </li>
-        <li>The same procedure could be used for the Router</li>
       </ul>
 
       <p>Commands for configuring the switch are issued from different modes. In this sense, it acts something like a state machine. The following diagram lists a few modes we will need to use for different operations, and how to get to them:</p>
@@ -223,13 +230,16 @@
 
       <p>This set of states is not exhaustive, but gives a good starting place.</p>
 
-      <h3 id="basic-commands">Basic commands:</h3>
+      <h3 id="switch-and-router-commands">Switch and Router commands:</h3>
+
+      <p>Commands will vary by device and mode. To start, query commands:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?
 </code></pre></div>      </div>
-      <p>lists commands and what they do. These will differ by mode.</p>
 
-      <p>You can also find all commands which start with a single letter, eg.</p>
+      <p>-lists commands and what they do. These will differ by mode.</p>
+
+      <p>You can also find all commands which start with a letter or series of letters, e.g.</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>con?
 </code></pre></div>      </div>
@@ -241,7 +251,10 @@
 
       <p>will only show <code class="language-plaintext highlighter-rouge">configure</code></p>
 
-      <p>If your command would only match a single result, you can use that shortened term as an alternative for the longer command</p>
+      <p>If your command would only match a single result, you can tab complete.</p>
+      <ul>
+        <li>You can also issue that shortened phrase as an alternative for the longer command</li>
+      </ul>
 
       <p>e.g. instead of typing <code class="language-plaintext highlighter-rouge">configure</code>, you can just type <code class="language-plaintext highlighter-rouge">conf</code></p>
 
@@ -262,8 +275,6 @@
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf t
 </code></pre></div>      </div>
 
-      <p>You can also use tab completion.</p>
-
       <p>A useful configuration to set right away, from global config is:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>no ip domain-looksup
@@ -271,54 +282,77 @@
 
       <ul>
         <li>This prevents the router for thinking that mistyped commands are actually domain names, and attempting to do a DNS lookup.</li>
+        <li>As you are just starting, expect some typos,
+          <ul>
+            <li>this will keep the switch from hanging for a few minutes on every typo!</li>
+          </ul>
+        </li>
       </ul>
-
-      <p>As you are just starting, expect some typos, this will keep the switch from hanging for a few minutes on every typo!</p>
 
       <h3 id="setting-a-password-for-the-console-connection">Setting a password for the console connection</h3>
 
-      <p>Notice that we were able to just plug into our switch and start issuing commands. This isn’t secure very, we could be physically hacked by anyone who knows how to program a switch. Let’s set a password for the console port:</p>
-
-      <p>From User Exec Mode:</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enable
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>configure terminal
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line console 0``` - this applies to connections made to the console port
-
-</code></pre></div>      </div>
-      <p>password switch1234``` - add a password to this connection</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>login
-</code></pre></div>      </div>
+      <p>Notice that we were able to just plug a cable into our switch and start issuing commands.</p>
       <ul>
-        <li>forces login</li>
+        <li>This isn’t very secure, we could be ‘physically hacked’ by anyone who knows how to program a Switch.</li>
+        <li>Let’s set a password for the console port:</li>
       </ul>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
-</code></pre></div>      </div>
-
-      <p>a few times, and when you start again, you’ll be prompted for the 
-password</p>
-
-      <h3 id="setting-a-password-on-privileged-exec-mode">Setting a password on privileged exec mode</h3>
-
-      <p>Privileged is like our <code class="language-plaintext highlighter-rouge">sudo</code> or <code class="language-plaintext highlighter-rouge">root</code> account. It let’s us make changes to the configuration. We should put a password on this account too.</p>
 
       <p>From User Exec Mode:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enable
 configure terminal
-enable secret admin12345
 </code></pre></div>      </div>
-      <p>this password will be hashed</p>
+
+      <ul>
+        <li>we want to configure line connections to the console port</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line console 0
+</code></pre></div>      </div>
+
+      <ul>
+        <li>assign a password to this interface</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>password switch1234
+</code></pre></div>      </div>
+
+      <ul>
+        <li>force the user to login</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+login
+</code></pre></div>      </div>
+
+      <ul>
+        <li>we want to return to the default state of the router:</li>
+      </ul>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
 exit
+exit
 </code></pre></div>      </div>
+
+      <p>Next time you try to reach user exec mode, you’ll be prompted for the password</p>
+
+      <h3 id="setting-a-password-on-privileged-exec-mode">Setting a password on privileged exec mode</h3>
+
+      <p>Privileged Exec Mode is similar to a <code class="language-plaintext highlighter-rouge">sudo</code> or <code class="language-plaintext highlighter-rouge">root</code> account on linux.</p>
+      <ul>
+        <li>It is our entry point to making changes to the configuration.</li>
+        <li>We should put a password on this account too.</li>
+      </ul>
+
+      <p>From Global Config:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enable secret admin12345
+</code></pre></div>      </div>
+
+      <ul>
+        <li>secret means this password will be hashed</li>
+        <li>As before you can exit out, and then when you come back in confirm that both passwords are prompted</li>
+      </ul>
 
       <h3 id="inspecting-our-configuration">Inspecting our configuration</h3>
 
@@ -329,33 +363,49 @@ exit
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show running-configuration
 </code></pre></div>      </div>
 
-      <p>you can see the password, but it’s hashed (MD5)
-you can also find the line console password in plain text. We’ll fix this in a bit.</p>
+      <ul>
+        <li>you can see the password, but it’s hashed (MD5)</li>
+        <li>you can also find the line console password in plain text.
+          <ul>
+            <li>We’ll fix this in a bit.</li>
+          </ul>
+        </li>
+      </ul>
 
       <h3 id="adding-passwords-to-ssh-lines">Adding passwords to SSH lines</h3>
 
-      <p>you can also find a few other ways to access the console, for example over telnet. We should set passwords here too!</p>
+      <p>There are a few other ways you can access the command line,</p>
+      <ul>
+        <li>e.g. a computer connected with ethernet could access it over telnet.</li>
+        <li>We should set passwords here too!</li>
+      </ul>
 
-      <p>From line configure…</p>
+      <p>From Global Configuration…</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line vty 0 15
 </code></pre></div>      </div>
 
-      <p>vty stands for virtual teletype</p>
+      <p>vty stands for virtual teletype, aka telnet, and 0 15 opens 16 concurrent sessions, numbered 0 to 15</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>password switch123
 login
-exit
 </code></pre></div>      </div>
+      <ul>
+        <li>
+          <p>assign a password and force login</p>
+        </li>
+        <li>
+          <p>return to pivileged exec mode and run:</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show run
+</code></pre></div>          </div>
+        </li>
+      </ul>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show run
-</code></pre></div>      </div>
-
-      <p>You can now see passwords for all of the lines.</p>
+      <p>You can now see passwords for all of the sessions.</p>
 
       <p>Let’s hash those passwords:</p>
 
-      <p>from priviledged exec:</p>
+      <p>from privileged exec:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service password-encryption
 exit
@@ -366,9 +416,7 @@ show run
 
       <h3 id="telnet-access">Telnet access</h3>
 
-      <ul>
-        <li>assign the device an IP on the VLAN</li>
-      </ul>
+      <p>If you want to access a Switch over ethernet, first we must assign the device an IP on the VLAN:</p>
 
       <p>From global configuration:</p>
 
@@ -393,62 +441,87 @@ no shutdown
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telnet 192.168.0.2
 </code></pre></div>      </div>
+
       <ul>
         <li>use the vty password</li>
+        <li>now you can configure the router remotely</li>
+        <li>If you don’t want all the connected devices to be able to configure the router, you can restrict access to individual VLANs, which will be explained in a later section.</li>
       </ul>
 
     </div></div></section>
 <section id="sshaccress"><button class="collapsible">SSH accress</button><div class="text-content"><div class="text-inner">
+
+      <p>Instead of Telnet, you can also access your Switch using SSH. The difference is that SSH encrypts operations which are being sent, compared to telnet which sends them in plain text.</p>
+
       <ul>
         <li>ensure your PC has the ip address 192.168.0.5 255.255.255.0</li>
         <li>ensure the router has the ip address 192.168.0.2 255.255.255.0
           <ul>
             <li>That was done in the <code class="language-plaintext highlighter-rouge">telnet access</code> section</li>
-            <li>From global config, run:</li>
           </ul>
         </li>
       </ul>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostnam S1
+      <p>From global config, run:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname S1
 </code></pre></div>      </div>
+
       <p>gives the switch a proper name</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip domain-name mynetwork.com
 </code></pre></div>      </div>
       <p>gives the current network a domain</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto key generate rsa
 </code></pre></div>      </div>
+
       <p>generates a ssh key</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2048
 </code></pre></div>      </div>
+
       <p>number of bits. 2048 is still considered secure so far.</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip ssh version 2
 </code></pre></div>      </div>
+
       <p>start ssh version 2</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line vty 0 15
 </code></pre></div>      </div>
+
       <p>configure vty for all lines</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>transport input ssh
 </code></pre></div>      </div>
+
       <p>turn on ssh on all lines</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>login local
 </code></pre></div>      </div>
+
       <p>force login</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>username admin password admin123456
 </code></pre></div>      </div>
+
       <p>set a username and password</p>
 
       <p>Now you should be able to connect over SSH</p>
 
-      <p>from the command line of a device connected over ethernet:</p>
+      <p>from the command line of a device connected over ethernet run:</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -l admin 192.168.0.2
 </code></pre></div>      </div>
+
+      <p>Now the commands you send will be encrypted.</p>
 
       <h3 id="saving-our-work">Saving our work</h3>
 
       <p>Recall from last week that all of our changes exist only in the device RAM. We can load this configuration on startup with:</p>
 
-      <p>from Priviledged Exec Mode</p>
+      <p>from Privileged Exec Mode</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>copy running-config startup-config
 </code></pre></div>      </div>
@@ -458,18 +531,24 @@ no shutdown
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>copy run start
 </code></pre></div>      </div>
 
-      <p><em>Always do this before leaving packet tracer so your work is saved!</em></p>
+      <p><em>Always do this before leaving packet tracer so your configuration work is saved!</em></p>
 
-      <h3 id="part-3-static-routing">Part 3: Static Routing</h3>
+    </div></div></section>
+<section id="part3arp"><button class="collapsible">Part 3: ARP</button><div class="text-content"><div class="text-inner">
 
-      <p>Most of these same commands apply to routers as well.</p>
+      <p>Add this section or remove it?</p>
 
-      <p>As we say last week, additional tasks we need to do in routers include configuring gateway addresses on interaces.</p>
+    </div></div></section>
+<section id="part3staticrouting"><button class="collapsible">Part 3: Static Routing</button><div class="text-content"><div class="text-inner">
 
-      <p>We may also wish to assign static routes using routers</p>
+      <p>Last week we saw how to configure gateway addresses on interaces.</p>
+
+      <p>This week we’ll look at assigning static routes to routers</p>
       <ul>
         <li>This tells the router, that, for a given destination address, the address of the connected device which is the next hop</li>
       </ul>
+
+      <p>Note that most of these same commands apply to routers as well, so we can follow the same processes to connect to and secure routers as we did with our switches.</p>
 
       <p>Syntax:</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route &lt;destination&gt; &lt;subnet&gt; &lt;next hop&gt;
@@ -482,28 +561,45 @@ no shutdown
 
       <p>Placing a <code class="language-plaintext highlighter-rouge">0</code> is the destination address in the fourth octet, matches any value for this octet. This will route all packets with the destination address 192.168.10.x to the next hops destination 10.0.0.100. This is a known as a wildcard match, and is powerful.</p>
 
-      <p>We can also have an exit interface, e.g.`</p>
+      <p>We can also have an exit interface, e.g.</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 192.168.10.0 255.255.255.0 g0/0
 </code></pre></div>      </div>
 
+      <p>In this case, rather than specifying the destination IP address of the next hop, we specify which physical interface to send packets on.</p>
+
       <p>We can see our routes using the following, from priviledged exec:</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show ip route
 </code></pre></div>      </div>
 
-      <p>default route (used as a last resort)</p>
+      <p>We can also set a default route, which is used as a last resport if no other destination is found.</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 0.0.0.0 0.0.0.0 {dest}
 </code></pre></div>      </div>
 
-      <p>Recall, 0’s are wildcards, so this means match any IP and any subnet mask.</p>
+      <p>e.g.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 0.0.0.0 0.0.0.0 10.0.0.100
+</code></pre></div>      </div>
+
+      <p>Recall, 0’s are wildcards, so this means match any IP and any subnet mask, and send the results to the destination.</p>
 
     </div></div></section>
 <section id="part4virtuallans"><button class="collapsible">Part 4: Virtual LANs</button><div class="text-content"><div class="text-inner">
 
-      <p>When computers connect to a switch, by default they are assumed to all be on the same subnet. This means that packets may be shared freely among these computers using broadcast. Additionally, all these computers are in the same collision domain. This is particularly inefficient if computers have no need to communicate, for example if they network was shared by different departments or companies. We could fix this by:</p>
+      <p>When computers connect to a switch, by default they are all on the same Virtual LAN (VLAN). This means that packets may be shared freely among these computers using broadcast. Additionally, all these computers are in the same collision domain, though most of the limitations of this are mitigated by using a Switch rather than a hub once it has populated the mac address table. This is both inefficient and insecure if computers have no need to communicate, for example if they network was shared by different departments or companies which would not communicate directly. We could fix this by:</p>
+
       <ul>
         <li>buying more switches, however this is costly</li>
         <li>Using VLANs, Virtual LANs, which splits up a switch into a number of Virtual LANs to better manage traffic
           <ul>
+            <li>A Virtual LAN acts just like a LAN
+              <ul>
+                <li>computers inside the VLAN can communicate directly with other computers in the VLAN</li>
+                <li>computers outside the VLAN cannot directly communicate with computers in the VLAN</li>
+              </ul>
+            </li>
             <li>Also VLANs can be configured to provide different Quality of Service for the different VLANs, including data and voice</li>
           </ul>
         </li>
@@ -838,9 +934,38 @@ All of these companies have clients in Regina</li>
 
       <p><strong>Be sure all configurations are saved!</strong></p>
 
+      <p>Other things of value at this stage:</p>
       <ul>
-        <li>I still need a small section on static routing</li>
+        <li>ARP</li>
+        <li>Looking at Mac Tables</li>
+        <li>on a PC: <code class="language-plaintext highlighter-rouge">arp -a</code>
+delete it
+<code class="language-plaintext highlighter-rouge">arp -d</code>
+now we’re lost. We need arp to work.
+if we send a ping now and watch every thing occur, we’ll see arp happen first</li>
+        <li>peak inside, it’s a broadbase. Send me eveywhere. We’re looking for a particular IP address, and we want an IP back.</li>
       </ul>
+
+      <p>Dan video: https://www.youtube.com/watch?v=1QVvXRitLvQ</p>
+
+      <p>is topology:</p>
+
+      <p>Pc -&gt; switch -&gt; gateway (R) -&gt; ISP (R)-&gt; Server
+       ^
+       PC
+Using 2960s and 4321s and 3 networks</p>
+
+      <p>Switch is a layer 2 device, deals in MACs
+so PCs, need to know MACs of their destinations to do Pings
+Can get those over ARP. Cool.</p>
+
+      <p>On the swtich:
+show mac address-table
+switches act like hubs once it’s learned mac addresses</p>
+
+      <p>PC A only ever learns the network addresses of devices on it’s own network (PCA,PCB, Gateway) and not the server.</p>
+
+      <p>Because of the trunk, can we communicate back to the other VLANs? I think so but I’m not 100% sure.</p>
     </div></div></section>
 
     </main>

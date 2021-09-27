@@ -430,8 +430,6 @@ Gateway: 10.0.0.1</p>
 
       <p>Click on the router and run the following commands.</p>
 
-      <p><img src="res/gateway-interfaces.png" alt="" /></p>
-
       <p>Type in the following</p>
 
       <p>At the <code class="language-plaintext highlighter-rouge">automatically configure</code> prompt, type:</p>
@@ -485,6 +483,8 @@ Gateway: 10.0.0.1</p>
       <p><code class="language-plaintext highlighter-rouge">&lt;enter&gt;</code></p>
 
       <p>We’ll dig into the Command Line interface more in the next lab, this should be enough to get you through this lab.</p>
+
+      <p><img src="res/gateway-interfaces.png" alt="" /></p>
 
       <p>Finally, our network should be complete. Test it using the appropriate methods.</p>
 
@@ -598,6 +598,14 @@ Gateway: 10.0.0.1</p>
           <ul>
             <li>You can fix this by “turning wifi on and off” by going to the home gateway, and toggling DHCP off and then On again.</li>
             <li>Maybe just restarting it will work too? You can try.</li>
+          </ul>
+        </li>
+        <li>On Mac, after saving files, sometimes swapping modules breaks
+          <ul>
+            <li><a href="https://community.cisco.com/t5/cisco-software-discussions/can-t-add-modules-on-cisco-packet-tracer-8-0-on-macbook/td-p/4301822">Try the advice in this link</a></li>
+            <li>From terminal, navigate to the Cisco Packet Tracer 8 Directory</li>
+            <li><code class="language-plaintext highlighter-rouge">umask 011</code></li>
+            <li><code class="language-plaintext highlighter-rouge">umask -S</code></li>
           </ul>
         </li>
       </ul>
