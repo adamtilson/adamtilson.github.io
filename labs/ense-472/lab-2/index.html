@@ -108,7 +108,7 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>The purpose of this lab is to further your understanding of networks using Packet Tracer, and in particular to learn about some of the security concerns involved with setting up switches and routers for business. We will look at static routing, advanced topics such as creating VLANs and IPSec VPN Tunneling for secure communication, and the simulation view. We will also consider physically planning a network using Packet Tracer’s Physical View. This is not a comprehensive overview of all of the security concerns, but rather an introduction highlighting some interesting concepts.</p>
+      <p>The purpose of this lab is to further your understanding of networks using Packet Tracer, and in particular to learn about some of the security concerns involved with setting up switches and routers for business. We will look at static routing, advanced topics such as creating VLANs for efficient communication, and the simulation view. We will also consider physically planning a network using Packet Tracer’s Physical View. This is not a comprehensive overview of all of the security concerns, but rather an introduction highlighting some interesting concepts.</p>
 
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
@@ -534,11 +534,6 @@ no shutdown
       <p><em>Always do this before leaving packet tracer so your configuration work is saved!</em></p>
 
     </div></div></section>
-<section id="part3arp"><button class="collapsible">Part 3: ARP</button><div class="text-content"><div class="text-inner">
-
-      <p>Add this section or remove it?</p>
-
-    </div></div></section>
 <section id="part3staticrouting"><button class="collapsible">Part 3: Static Routing</button><div class="text-content"><div class="text-inner">
 
       <p>Last week we saw how to configure gateway addresses on interaces.</p>
@@ -585,6 +580,8 @@ no shutdown
 
       <p>Recall, 0’s are wildcards, so this means match any IP and any subnet mask, and send the results to the destination.</p>
 
+      <p>We’ll end this lab by looking at Virtual LANs.</p>
+
     </div></div></section>
 <section id="part4virtuallans"><button class="collapsible">Part 4: Virtual LANs</button><div class="text-content"><div class="text-inner">
 
@@ -607,285 +604,187 @@ no shutdown
 
       <p>We already looked at the 2960 Router. This router has 24 fast ehternet ports, and 2 gigabit ethernet ports, which we can slice up into VLANs.</p>
 
-      <p>Additionally, we can create something called a trunk, an interface which is shared by the different VLANs to all access the internet.</p>
+      <p>Additionally, we can create a trunk, an interface which is shared by the different VLANs to all pass traffic to a router using one port.</p>
 
-      <p>Let create 3 VLANS, one for 2 devices, one for 3 devices, and one for 4 devices.</p>
+      <p>Let create 4 VLANS, 3 for devices and one for management</p>
 
+      <p>From the Switch CLI…</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enable
 configure terminal
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlan 99
-name mgt&amp;native
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlan 10
-name Lab-1
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlan 20
-name Lab-2
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlan 30
-name Lab-3
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+
+vlan 99
+name mgt
+exit
+
+vlan 10
+name lab-1
+exit
+
+vlan 20
+name lab-2
+exit
+
+vlan 30
+name lab-3
+exit
+exit
 copy running-config startup-config
+&lt;enter&gt;
 </code></pre></div>      </div>
+
+      <p>Next, we need tp assign some interfaces to each of these vlans 
+add…</p>
+      <ul>
+        <li>fast ethernet 0 ports 6 through 10 to vlan 10
+          <ul>
+            <li>This VLAN will use the <code class="language-plaintext highlighter-rouge">192.168.10.x</code> address range</li>
+          </ul>
+        </li>
+        <li>fast ethernet 0 ports 11 through 17 to vlan 20
+          <ul>
+            <li>This VLAN will use the <code class="language-plaintext highlighter-rouge">192.168.20.x</code> address range</li>
+          </ul>
+        </li>
+        <li>fast ethernet 0 ports 18 through 23 to vlan 30
+          <ul>
+            <li>This VLAN will use the <code class="language-plaintext highlighter-rouge">192.168.30.x</code> address range</li>
+          </ul>
+        </li>
+        <li>fast ethernet 0 port 24 to vlan99
+          <ul>
+            <li>This VLAN will use the <code class="language-plaintext highlighter-rouge">192.168.99.x</code> address range</li>
+          </ul>
+        </li>
+      </ul>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf t
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int range fa0/6-10
+
+int range fastEthernet 0/6-10
 switchport mode access
 switchport access vlan 10
-</code></pre></div>      </div>
-      <p>fast ethernet 0 ports 6 through 10</p>
+exit
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int range fa0/11-17
+int range fastEthernet 0/11-17
 switchport mode access
 switchport access vlan 20
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int range fa0/18-23
+exit
+
+int range fastEthernet 0/18-23
 switchport mode access
 switchport access vlan 30
-</code></pre></div>      </div>
+exit
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int fa0/24
+int fastEthernet 0/24
 switchport mode access
-switchport access vlan 99`       
+switchport access vlan 99
+exit
+
+exit
 </code></pre></div>      </div>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>end
-</code></pre></div>      </div>
+      <p>We can see the current state of the VLAN with:</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show vlan brief
 </code></pre></div>      </div>
 
-      <p>configure the trunk</p>
-      <pre><code class="language-enable">
-</code></pre>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf t
+      <p>The management vlan needs an private IP for doing managmeent. The other VLANs will never need to ping the router, and thus does not need an IP address on that VLAN.</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>en
+conf t
+interface vlan 99
+ip address 192.168.99.2 255.255.255.0
+no shutdown
+exit
 </code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int range fa0/1-2
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>switchport mode trunk
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>switchport trunk native vlan 99``` &lt;- native is for compatibility, for older switches that don't understand what vlans are
 
-The management vlan needs an private IP for doing managmeent
-```conf t
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface vlan 99
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip address 192.168.99.2 255.255.255.0
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>no shutdown
-</code></pre></div>      </div>
+      <p>Native is for compatibility, for older switches that don’t understand what vlans are</p>
 
       <p>Setting up the trunk</p>
-      <pre><code class="language-en">
-</code></pre>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf t
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>en
+conf t
+interface fastEthernet 0/1
+switchport mode trunk
+switchport trunk allowed vlan 1-99
 </code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int fa0/1
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>switchport mode trunk
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>switchport truink allowed vlan 1-99
-</code></pre></div>      </div>
-
-      <p>We want this trunk to go to the router</p>
+      <p>We will need to connect this  want this trunk to go to the router</p>
 
       <p>on the router side, we need to unpack all three sides of the trunk:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface gigabitEthernet 0/0/0.10
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>encapsulation dot1Q 10
-</code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip address 192.168.10.1 255.255.255.0
+      <p>Add the following to a Router CLI</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enable
+conf t
+
+interface gigabitEthernet 0/0/0.10
+encapsulation dot1Q 10
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+exit
+
+interface gigabitEthernet 0/0/0.20
+encapsulation dot1Q 20
+ip address 192.168.20.1 255.255.255.0
+no shutdown
+exit
+
+interface gigabitEthernet 0/0/0.30
+encapsulation dot1Q 30
+ip address 192.168.30.1 255.255.255.0
+no shutdown
+exit
+
+interface gigabitEthernet 0/0/0.99
+encapsulation dot1Q 99
+ip address 192.168.99.1 255.255.255.0
+no shutdown
+exit
+
+interface gigabitEthernet 0/0/0
+no shutdown
+exit
+
 </code></pre></div>      </div>
 
-      <p>This will unpack the packets with the subnet, and forward them as needed.</p>
+      <p>Now this router will act as a gateway for each of hte VLANs. The router will unpack the packets with the subnet, and forward them as needed.</p>
 
-      <p>This was tricky, probably want to do it again!</p>
+      <p>Peculiarly, this configuration is called a Router on a Stick. It’s a bit of a 90s approach, and typically superseded by Layer 3 Switches.</p>
+
+      <p>Now connect some computers to the different VLANs, assign appropriate IP Addresses, and see that this works.</p>
 
     </div></div></section>
 <section id="part5simulationmode"><button class="collapsible">Part 5: Simulation Mode</button><div class="text-content"><div class="text-inner">
 
-      <p>So far we have largely stayed out of simulation mode.</p>
-      <ul>
-        <li>
-          <p>Switching into Simulation Mode</p>
-        </li>
-        <li>
-          <p>Event List</p>
-        </li>
-        <li>
-          <p>Simulation Panel</p>
-        </li>
-        <li>
-          <p>Play Controls</p>
-        </li>
-        <li>
-          <p>Details</p>
-        </li>
-        <li>
-          <p>Filters</p>
-        </li>
-        <li>
-          <p>Seven Layers</p>
-        </li>
-        <li>
-          <p>Packets</p>
+      <p>So far we have largely stayed out of simulation mode. We can use it now to see how our network works. Try sending packets across one VLAN, and across different VLANS.</p>
 
-          <ul>
-            <li>What can you learn about your packet by inspection</li>
-          </ul>
-        </li>
-        <li>
-          <p>Limitations</p>
-        </li>
+      <p><img src="res/simulation-workflow.png" alt="" /></p>
+
+      <ol>
+        <li>Switch into Simulation Mode</li>
+        <li>Send a PDU</li>
+        <li>Select start point</li>
+        <li>Select end point</li>
+        <li>The play controls let you skip through actions step by step</li>
+        <li>The event list shows discrete oprations and protocolas</li>
+      </ol>
+
+      <p>The packets populate the event list:</p>
+
+      <p><img src="res/packets-recieved.png" alt="" /></p>
+
+      <p>Note: The first time you send a simple PDU, there may be additional traffic. This is because devices are still building their routing tables, and thus require flooding to learn MAC Addresses.</p>
+
+      <p>If there is too much traffic on the event list, you can hide some of it by setting up filters in the lower right. Pings, for example. our simple PDU, use the ICMP Protocol, so we can turn others off to only see those packets.</p>
+      <ul>
+        <li>It may be quicker to show none, and then allow only ICMP</li>
       </ul>
 
-    </div></div></section>
-<section id="part6virtualprivatenetworks"><button class="collapsible">Part 6: Virtual Private Networks</button><div class="text-content"><div class="text-inner">
+      <p>In particular, we see that this packet only needed to get routed through the switch. Let’s also try sending a packet across VLANs.</p>
 
-      <p>To</p>
+      <p><img src="res/across-vlans.png" alt="" /></p>
 
-      <p>PC -&gt; Switch -&gt; Router -&gt; Router -&gt; Router -&gt; Switch -&gt; PC
-                            -&gt; Server</p>
+      <p>We can look inside a packet by clicking on the envelope:</p>
 
-      <p>We want to create a tunnel that “bypasses” the middle router</p>
-      <ul>
-        <li>in the two ends of the tunnel…</li>
-      </ul>
+      <p><img src="res/pdu-details.png" alt="" /></p>
 
-      <p>this is on a 1941 router</p>
-
-      <p>Upgrade the firmware to allow security</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>en
-conf t
-licence boot module c1900 technology-package securityk9
-copy run start
-&lt;enter&gt;
-reload
-</code></pre></div>      </div>
-
-      <p>Check the upgraded firmware</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>en
-show version
-</code></pre></div>      </div>
-      <ul>
-        <li>a new security package is enabled</li>
-      </ul>
-
-      <p>we want to encrypt data between these two</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>en
-conf t
-access-list 100 permit ip 192.168.10.0 0.0.0.255 192.168.30.0  0.0.0.255
-</code></pre></div>      </div>
-
-      <ul>
-        <li>like an inverse subnet mask - this time the 0’s are what we care about, the 1s what we don’t.</li>
-      </ul>
-
-      <p>Inital setup for the routers:</p>
-
-      <p>3x 1941s
-2x 2690s
-2x PCs</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname R1
-interface g0/1
-ip address 192.168.1.1 255.255.255.0
-no shut
-interface g0/0
-ip address 209.165.100.1 255.255.255.0
-no shut
-exit
-ip route 0.0.0.0 0.0.0.0 209.165.100.2
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname ISP
-interface g0/1
-ip address 209.165.200.2 255.255.255.0
-no shut
-interface g0/0
-ip address 209.165.100.2 255.255.255.0
-no shut
-exit
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname R3
-interface g0/1
-ip address 192.168.3.1 255.255.255.0
-no shut
-interface g0/0
-ip address 209.165.200.1 255.255.255.1
-no shut
-exit
-ip route 0.0.0.0 0.0.0.0 209.165.200.2
-</code></pre></div>      </div>
-
-      <p>Note: Right now there is no route from PC to PC! We’ll build it with</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>access-list 100 permit ip 192.168.1.0 0.0.0.255 192.168.3.0 0.0.0.255
-</code></pre></div>      </div>
-
-      <p>swap them for the other router:</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>access-list 100 permit ip 192.168.3.0 0.0.0.255 192.168.1.0 0.0.0.255
-</code></pre></div>      </div>
-
-      <p>set up the isakmp policy on each side</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cypto isakmp policy 10
-  encryption aes 256
-  authentication pre-share
-  group 5
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
-</code></pre></div>      </div>
-
-      <p>create our key, giving the outside interface to the other router:</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto isakmp key secretkey address 209.165.200.1
-</code></pre></div>      </div>
-      <p>change the address on the other side, but you want the same password!</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto isakmp key secretkey address 209.165.100.1
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto ipsec transform-set R1-&gt;R3 esp-aes 256 esp-sha-hmac
-</code></pre></div>      </div>
-
-      <p>change the names on the other way, R3-&gt;R1</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto map IPSEC-MAP 10 ipsec-isakmp
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set peer 209.165.200.1
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set pfs group5
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set security-association lifetime seconds 86400
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set transform-set R1-&gt;R3
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>match address 100
-</code></pre></div>      </div>
-
-      <p>and you need to make some reverses for the other way…</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int g0/0
-</code></pre></div>      </div>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crypto map IPSEC-MAP
-</code></pre></div>      </div>
-
-      <p>ping across, and capture a packet in the ISP. You can see the outer header, which is sending it to the other outer router, and the encypted packets inside. Very cool!</p>
+      <p>The Major Limitation to the Packet Tracer simulation is that we cannot perform complex simulations, time them, and take data, for example, for research puropses. This is more intended just for learning.</p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
@@ -898,74 +797,39 @@ ip route 0.0.0.0 0.0.0.0 209.165.200.2
           <ul>
             <li>Thay have created an indie fighting game</li>
             <li>As the game is currently in a closed beta, they need to host downloads, which is ~1 GB download</li>
-            <li>They will also need to host a server for online matches</li>
+            <li>They will also need to host a web server for online matches</li>
           </ul>
         </li>
         <li>A Progressive Web App Developer
           <ul>
-            <li>Their app allows schools to host interactive video content and quizzes</li>
+            <li>Their app allows schools to host interactive video content and quizze</li>
           </ul>
         </li>
-        <li>An encryption algorithm developer
+        <li>An algorithm developer
           <ul>
-            <li>They have one user who is working remote, and needs secure (encrypted) communication with their computers in the office
-All of these companies have clients in Regina</li>
+            <li>They have a developer who is working remote, and needs to connect to their computers in the office</li>
           </ul>
         </li>
       </ul>
+
+      <p>All of these companies have clients in Regina</p>
 
       <p>You will need to:</p>
       <ul>
         <li>Add appropriate images for the intercity, city, and office views</li>
-        <li>Add locations for the remote worker</li>
-        <li>Add locations for a home user who will access the PWA and the Fighting Game</li>
-        <li>Ensure connectivity through</li>
+        <li>Add locations for the remote worker. For simplicity this user can also be a test user for the PWA and the Fighting Game</li>
+        <li>Ensure the home user can connect to all businesses</li>
         <li>
           <p>Employ all of the best security principles as discussed in the course</p>
         </li>
-        <li>Assume you only have access to a 2960 Switch, a 4321 Router, and a WRT300N Wireless Router. (You do not need to use all three)
+        <li>Assume you only have access to a 2960 Switch, and a 4321 Routers.
           <ul>
-            <li>You may not necessarily need to use all of the objects</li>
+            <li>For this lab, you may represent the internet by an external 4321 router,</li>
+            <li>represent the developer user as an external PC connected to this external router.</li>
           </ul>
         </li>
+        <li>Represent the internet with a router, with an appropriate routing table</li>
       </ul>
-
-      <p>You may model the internet with a</p>
-
-      <p><strong>Be sure all configurations are saved!</strong></p>
-
-      <p>Other things of value at this stage:</p>
-      <ul>
-        <li>ARP</li>
-        <li>Looking at Mac Tables</li>
-        <li>on a PC: <code class="language-plaintext highlighter-rouge">arp -a</code>
-delete it
-<code class="language-plaintext highlighter-rouge">arp -d</code>
-now we’re lost. We need arp to work.
-if we send a ping now and watch every thing occur, we’ll see arp happen first</li>
-        <li>peak inside, it’s a broadbase. Send me eveywhere. We’re looking for a particular IP address, and we want an IP back.</li>
-      </ul>
-
-      <p>Dan video: https://www.youtube.com/watch?v=1QVvXRitLvQ</p>
-
-      <p>is topology:</p>
-
-      <p>Pc -&gt; switch -&gt; gateway (R) -&gt; ISP (R)-&gt; Server
-       ^
-       PC
-Using 2960s and 4321s and 3 networks</p>
-
-      <p>Switch is a layer 2 device, deals in MACs
-so PCs, need to know MACs of their destinations to do Pings
-Can get those over ARP. Cool.</p>
-
-      <p>On the swtich:
-show mac address-table
-switches act like hubs once it’s learned mac addresses</p>
-
-      <p>PC A only ever learns the network addresses of devices on it’s own network (PCA,PCB, Gateway) and not the server.</p>
-
-      <p>Because of the trunk, can we communicate back to the other VLANs? I think so but I’m not 100% sure.</p>
     </div></div></section>
 
     </main>
