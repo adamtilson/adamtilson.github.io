@@ -44,7 +44,7 @@
                   <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
                   <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
                   <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
-                  <!--li><a href="/labs/ense-374/lab-4">Lab 4</a></li-->
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
                   <!--li><a href="/labs/ense-374/lab-5">Lab 5</a></li-->
                   <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
                   <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
@@ -108,7 +108,7 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>This lab introduces JavaScript (JS) which is a programing language which runs in the Web Browser. In addition to being able to perform typical programming language tasks, like data storage and computation, it can additionally interact with the HTML and CSS on a web page through the Document Object Model (DOM), allowing real time interactions with the page performed on the client side. We’ll look at the capabilities of JavaScript in this lab.</p>
+      <p>This lab introduces JavaScript (JS) which is a programming language which runs in the Web Browser. In addition to being able to perform typical programming language tasks, like data storage and computation, it can additionally interact with the HTML and CSS on a web page through the Document Object Model (DOM), allowing real time interactions with the page performed on the client side. We’ll look at the capabilities of JavaScript in this lab.</p>
 
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
@@ -138,26 +138,44 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello World</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div>          </div>
         </li>
-        <li>Actual scripts linked</li>
       </ul>
 
-      <h3 id="learning-and-mastering-javascript">Learning and Mastering Javascript:</h3>
+      <h3 id="locations-for-js-in-html">Locations for JS in HTML</h3>
+
+      <p>Inline (in a tag):</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">a</span> <span class="nx">onload</span><span class="o">=</span><span class="dl">"</span><span class="s2">alert(</span><span class="dl">"</span><span class="nx">Hello</span><span class="dl">"</span><span class="s2">)&gt;&lt;/a&gt;
+</span></code></pre></div>      </div>
+
+      <p>Internal:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text/javascript</span><span class="dl">"</span><span class="o">&gt;</span> <span class="p">...</span> <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div>      </div>
+
+      <p>External:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">index.js</span><span class="dl">"</span> <span class="nx">charset</span><span class="o">=</span><span class="dl">"</span><span class="s2">utf-8</span><span class="dl">"</span><span class="o">&gt;</span> <span class="p">...</span> <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div>      </div>
+
+      <p><em>Always link the external page as the last element in the <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> tag, this is to ensure necessary HTML elements are loaded before the script executes</em></p>
+
+      <h3 id="learning-and-mastering-javascript">Learning and Mastering Javascript</h3>
 
       <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN - JavaScript</a>
 JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27reilly">Read for Free on O’Reilly Higher Education</a></p>
 
-      <h3 id="whitespace">Whitespace</h3>
+      <h3 id="white-space">White Space</h3>
 
       <ul>
-        <li>c-style, mostly optional, but recommended for readability</li>
+        <li>C-style, mostly optional, but recommended for readability</li>
         <li><a href="https://github.com/rwaldron/idiomatic.js">Style Guide</a></li>
       </ul>
 
       <h3 id="comments">Comments</h3>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// line style</span>
 <span class="cm">/* block comments */</span>
 </code></pre></div>      </div>
-      <p>wrong, obsolete and obvious comments are worse than none!</p>
+      <p><em>Wrong, obsolete and obvious comments are worse than none!</em>
+<strong>Strive for self-documenting code through good variable and method names and logical control structures</strong></p>
 
       <h3 id="creating--assigning-variables">Creating / Assigning Variables</h3>
 
@@ -167,22 +185,25 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
 </code></pre></div>      </div>
       <p>Once constants are set they cannot be changed:</p>
 
-      <pre><code class="language-javascipt">const cmPerInch = 2.54;
-</code></pre>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cmPerInch</span> <span class="o">=</span> <span class="mf">2.54</span><span class="p">;</span>
+</code></pre></div>      </div>
 
-      <p>Globally scoped variables should be avoided:</p>
+      <p>Globally scoped variables should be avoided where possible:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">phrase</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Pretend I don't exist</span><span class="dl">"</span><span class="p">;</span>
 </code></pre></div>      </div>
 
-      <p>type is inferred from the literal, and it can change later on</p>
+      <p>Type is inferred from the literal, and it can change later on</p>
+      <ul>
+        <li>If you want more rigorous typing, TypeScript is a JavaScript extension which imposes additional rules on the language during development, but compiles back to vanilla JavaScript.</li>
+      </ul>
 
       <h3 id="variable-names">Variable Names</h3>
 
       <ul>
         <li>letter followed by letters, digits, underscores.
           <ul>
-            <li>no spaces</li>
+            <li>no spaces (as in all programming languages!)</li>
           </ul>
         </li>
         <li><a href="https://www.w3schools.com/js/js_reserved.asp">no reserved words allowed!</a></li>
@@ -202,8 +223,8 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
       <p>All numbers are 64-bit floats (double).</p>
       <ul>
         <li><code class="language-plaintext highlighter-rouge">1e2</code> means <code class="language-plaintext highlighter-rouge">100</code></li>
-        <li>negatives work</li>
-        <li><code class="language-plaintext highlighter-rouge">NaN</code> means Not a Number, eg. a 0/0 error.</li>
+        <li><code class="language-plaintext highlighter-rouge">-37</code></li>
+        <li><code class="language-plaintext highlighter-rouge">NaN</code> means Not a Number, e.g. a 0/0 error.</li>
         <li><code class="language-plaintext highlighter-rouge">Infinity</code> exists if the magnitude of a number is huge (&gt;310 0’s).
           <ul>
             <li>Also returned by div/0 errors.</li>
@@ -212,11 +233,11 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
         </li>
         <li><code class="language-plaintext highlighter-rouge">-0</code> is legal.</li>
         <li>There are methods for numbers, e.g. <code class="language-plaintext highlighter-rouge">Math.floor(number)</code></li>
-        <li>Math object defines common methods, e.g. <code class="language-plaintext highlighter-rouge">pow</code>, <code class="language-plaintext highlighter-rouge">abs</code>, <code class="language-plaintext highlighter-rouge">floor</code>, <code class="language-plaintext highlighter-rouge">random</code></li>
+        <li>Math object defines common methods, e.g. <code class="language-plaintext highlighter-rouge">Math.pow(...)</code>, <code class="language-plaintext highlighter-rouge">Math.abs(...)</code>, <code class="language-plaintext highlighter-rouge">Math.floor(...)</code>, <code class="language-plaintext highlighter-rouge">Math.random(...)</code></li>
         <li><code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">+=</code>, <code class="language-plaintext highlighter-rouge">-=</code>, <code class="language-plaintext highlighter-rouge">++</code>, <code class="language-plaintext highlighter-rouge">--</code> all work as expected</li>
       </ul>
 
-      <p>Built in functions:</p>
+      <p>Number type built in functions:</p>
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">number</span><span class="p">.</span><span class="nx">toExponential</span><span class="p">()</span>
 <span class="nx">number</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="nx">totalDigits</span><span class="p">)</span>
 <span class="nx">number</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="nx">decimalPoints</span><span class="p">)</span>
@@ -225,19 +246,32 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
 
       <h3 id="strings">Strings</h3>
       <ul>
-        <li>Single <code class="language-plaintext highlighter-rouge">'</code> or double <code class="language-plaintext highlighter-rouge">"</code> quotes</li>
-        <li>zero or more characters</li>
+        <li>Single <code class="language-plaintext highlighter-rouge">'</code> or double <code class="language-plaintext highlighter-rouge">"</code> quotes
+          <ul>
+            <li>Double is preferred most of the time</li>
+          </ul>
+        </li>
+        <li>Zero or more characters</li>
         <li><code class="language-plaintext highlighter-rouge">\</code> used as an escape character: <code class="language-plaintext highlighter-rouge">\\</code>, <code class="language-plaintext highlighter-rouge">\'</code>, <code class="language-plaintext highlighter-rouge">\"</code>, <code class="language-plaintext highlighter-rouge">\n</code>, and others</li>
-        <li>no char type, only length one strings</li>
-        <li>length property.
+        <li>No char type, only length one strings</li>
+        <li><code class="language-plaintext highlighter-rouge">length</code> property.
           <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="dl">"</span><span class="s2">word</span><span class="dl">"</span><span class="p">.</span><span class="nx">length</span>
 <span class="mi">4</span>
 </code></pre></div>          </div>
         </li>
-        <li>Strings are immutable - once made can’t change directly</li>
+        <li>Strings are immutable - once made they can’t be changed directly</li>
         <li><code class="language-plaintext highlighter-rouge">+</code> for concatenation</li>
-        <li>Strings have methods, e.g. toUpperCase()</li>
-        <li>If your strings needs to include one type of quotes, you can use the other to show it’s a string, e.g. <code class="language-plaintext highlighter-rouge">"he said 'hi' "</code> or <code class="language-plaintext highlighter-rouge">'she said "see ya later!" '</code>
+        <li>Strings have methods, e.g. <code class="language-plaintext highlighter-rouge">toUpperCase()</code></li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="dl">"</span><span class="s2">word</span><span class="dl">"</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span>
+<span class="dl">"</span><span class="s2">WORD</span><span class="dl">"</span>
+<span class="o">&gt;&gt;</span> <span class="dl">"</span><span class="s2">WORD</span><span class="dl">"</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+<span class="dl">"</span><span class="s2">word</span><span class="dl">"</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>If your strings needs to include one type of quotes as a character in the string, you can use the other to delimit the string, e.g. <code class="language-plaintext highlighter-rouge">"He said 'hi' "</code> or <code class="language-plaintext highlighter-rouge">'They said "see ya later!" '</code>
           <ul>
             <li>This can be more convenient than escaping</li>
           </ul>
@@ -245,7 +279,7 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
         <li>Positions are indexed, like in arrays (but are read only!)</li>
       </ul>
 
-      <p>template literals</p>
+      <p>Template Literals</p>
       <ul>
         <li>strings declared surrounded by the backtick character: e.g. :`
           <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">`I counted </span><span class="p">${</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span><span class="p">}</span><span class="s2"> apples`</span> 
@@ -257,17 +291,16 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
         </li>
       </ul>
 
-      <p><code class="language-plaintext highlighter-rouge">parseInt</code> and <code class="language-plaintext highlighter-rouge">parseFloat</code> extracts the leading number from a string until it something non numeric.
-<code class="language-plaintext highlighter-rouge">slice</code> lets you extract substrings</p>
+      <p><code class="language-plaintext highlighter-rouge">parseInt</code> and <code class="language-plaintext highlighter-rouge">parseFloat</code> extracts the leading number from a string until it something non numeric.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">slice</code> lets you extract substrings</p>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Robot</span><span class="dl">"</span>
 <span class="o">&gt;&gt;</span> <span class="nx">name</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 <span class="s2">`obo`</span>
 </code></pre></div>      </div>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="dl">"</span><span class="s2">word</span><span class="dl">"</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span>
-<span class="dl">"</span><span class="s2">WORD</span><span class="dl">"</span>
-<span class="o">&gt;&gt;</span> <span class="dl">"</span><span class="s2">WORD</span><span class="dl">"</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
-<span class="dl">"</span><span class="s2">word</span><span class="dl">"</span>
-</code></pre></div>      </div>
+
+      <p>Some more useful built-in functions…</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">string</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">pos</span><span class="p">)</span>
 <span class="nx">string</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">pos</span><span class="p">)</span>
@@ -286,17 +319,17 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
 <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">char</span><span class="p">...)</span>
 </code></pre></div>      </div>
 
-      <p>Can cascade methods, eg. <code class="language-plaintext highlighter-rouge">string.trim().toUpperCase()</code></p>
+      <p>Can cascade methods, e.g. <code class="language-plaintext highlighter-rouge">string.trim().toUpperCase()</code></p>
 
       <h3 id="booleans">Booleans</h3>
 
       <ul>
         <li>Values that represent False: <code class="language-plaintext highlighter-rouge">false</code>, <code class="language-plaintext highlighter-rouge">null</code>, <code class="language-plaintext highlighter-rouge">undefined</code>, <code class="language-plaintext highlighter-rouge">""</code>, <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">NaN</code>
           <ul>
-            <li>Everything else represents true</li>
+            <li>Everything else represents <code class="language-plaintext highlighter-rouge">true</code></li>
           </ul>
         </li>
-        <li>Testing equality: always use === (also tests type)</li>
+        <li>Testing equality: always use <code class="language-plaintext highlighter-rouge">===</code> (also tests type)</li>
         <li><code class="language-plaintext highlighter-rouge">!</code> toggles truthiness</li>
       </ul>
 
@@ -345,12 +378,22 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
         <li>loop (<code class="language-plaintext highlighter-rouge">for</code>, <code class="language-plaintext highlighter-rouge">do</code>, <code class="language-plaintext highlighter-rouge">while</code>)</li>
       </ul>
 
-      <p>mostly work as expected in c++, exceptions:
-    - switch “cases” do not need to be const’s.</p>
+      <p>Mostly work as expected in c++, exceptions:</p>
+      <ul>
+        <li>e.g. switch “cases” do not need to be const’s.</li>
+      </ul>
+
+      <p>If you like syntax diagrams, JavaScript the Good Parts will show you what you need.</p>
+
+      <p>e.g., here’s one on whitespace</p>
+
+      <p><img src="res/whitespace-syntax-diagram.png" alt="" /></p>
+
+      <p>Source: JavaScript The Good Parts. Douglas Crockford. 2008.</p>
 
       <h3 id="conditions">Conditions</h3>
 
-      <p>In JavaScript, if-else if-else and switch-case exist:</p>
+      <p>In JavaScript, <code class="language-plaintext highlighter-rouge">if...else if...else</code> and <code class="language-plaintext highlighter-rouge">switch-case</code> exist:</p>
 
       <p>Example from <a href="https://www.w3schools.com/js/js_if_else.asp">W3Schools JS If Else ElseIf</a></p>
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span> <span class="nx">time</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">)</span> <span class="p">{</span>
@@ -386,10 +429,12 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
 
       <ul>
         <li>Cases can be any type</li>
-        <li>Fallthrough will occur without <code class="language-plaintext highlighter-rouge">break</code></li>
+        <li>Fall-through will occur until a <code class="language-plaintext highlighter-rouge">break</code> is encountered</li>
       </ul>
 
       <h3 id="loops">Loops</h3>
+
+      <p>There are several types of <code class="language-plaintext highlighter-rouge">for</code> loops:</p>
 
       <p><a href="https://www.w3schools.com/js/js_loop_for.asp">Examples from W3Schools JS Loop For</a></p>
 
@@ -422,7 +467,7 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>While</p>
+      <p>There are also <code class="language-plaintext highlighter-rouge">while</code> loops:</p>
 
       <p><a href="https://www.w3schools.com/js/js_loop_while.asp">Example from W3Schools Loop While</a></p>
 
@@ -432,7 +477,7 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>Do While</p>
+      <p>And <code class="language-plaintext highlighter-rouge">do...while</code> loops:</p>
 
       <p><a href="https://www.w3schools.com/js/js_loop_while.asp">Example from W3Schools Loop While</a></p>
 
@@ -445,6 +490,8 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
 
       <h3 id="try-throw-catches">Try Throw Catches</h3>
 
+      <p>An additional control structure for running risky code and catching errors is the <code class="language-plaintext highlighter-rouge">try-throw-catch</code></p>
+
       <p><a href="https://www.w3schools.com/js/js_errors.asp">Example from W3School JS Errors</a></p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myFunction</span><span class="p">()</span> <span class="p">{</span>
@@ -452,7 +499,7 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
   <span class="nx">message</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
   <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">demo</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
   <span class="k">try</span> <span class="p">{</span>
-    <span class="c1">// block fo risky code to try</span>
+    <span class="c1">// block for risky code to try</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">x</span> <span class="o">==</span> <span class="dl">""</span><span class="p">)</span> <span class="k">throw</span> <span class="dl">"</span><span class="s2">is empty</span><span class="dl">"</span><span class="p">;</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span> <span class="k">throw</span> <span class="dl">"</span><span class="s2">is not a number</span><span class="dl">"</span><span class="p">;</span>
     <span class="nx">x</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
@@ -485,6 +532,7 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
       </ul>
 
       <h3 id="creating-objects">Creating Objects</h3>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// string style keys</span>
 <span class="kd">var</span> <span class="nx">personString</span> <span class="o">=</span> <span class="p">{</span>
     <span class="dl">"</span><span class="s2">first-name</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Adam</span><span class="dl">"</span><span class="p">,</span>
@@ -500,14 +548,16 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
 
       <h3 id="reading-objects">Reading Objects</h3>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">personString</span><span class="p">[</span><span class="dl">"</span><span class="s2">first-name</span><span class="dl">"</span><span class="p">]</span>
-<span class="nx">personName</span><span class="p">.</span><span class="nx">firstName</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//string style lookup</span>
+<span class="nx">personString</span><span class="p">[</span><span class="dl">"</span><span class="s2">first-name</span><span class="dl">"</span><span class="p">];</span>
+<span class="c1">//name style lookup</span>
+<span class="nx">personName</span><span class="p">.</span><span class="nx">firstName</span><span class="p">;</span>
 </code></pre></div>      </div>
 
       <ul>
-        <li>if a value doesn’t exist, it is undefined</li>
+        <li>If a value doesn’t exist, it returns undefined</li>
         <li>Can use <code class="language-plaintext highlighter-rouge">||</code> to fill in a default, eg. <code class="language-plaintext highlighter-rouge">personName.firstName || "Adam"</code></li>
-        <li>If you need to retrieve from a nested obj, make sure it exists first
+        <li>If you need to retrieve from a nested obj, make sure it exists first:
           <ul>
             <li><code class="language-plaintext highlighter-rouge">adam.schedule</code> &amp;&amp; <code class="language-plaintext highlighter-rouge">adam.schedule.morning</code></li>
           </ul>
@@ -518,28 +568,30 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
       <h3 id="updating-objects">Updating Objects</h3>
 
       <ul>
-        <li>Use the assignment operator,
-          <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">personString</span><span class="p">[</span><span class="dl">"</span><span class="s2">first-name</span><span class="dl">"</span><span class="p">]</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">A</span><span class="dl">"</span>
-</code></pre></div>          </div>
-          <p>Objects are passed by reference, not copied</p>
-        </li>
+        <li>Use the assignment operator,</li>
       </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">personString</span><span class="p">[</span><span class="dl">"</span><span class="s2">first-name</span><span class="dl">"</span><span class="p">]</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">A</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">personName</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">A</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div>      </div>
+
+      <p>Objects are passed by reference, not copied</p>
 
       <h3 id="deleting-objects">Deleting Objects</h3>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">delete</span> <span class="nx">personString</span><span class="p">[</span><span class="dl">"</span><span class="s2">first-name</span><span class="dl">"</span><span class="p">]</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">delete</span> <span class="nx">personString</span><span class="p">[</span><span class="dl">"</span><span class="s2">first-name</span><span class="dl">"</span><span class="p">];</span>
 </code></pre></div>      </div>
 
       <h3 id="prototyping">Prototyping</h3>
 
       <p>You can link an object to a prototype to inherit properties. This is like in C++ where you must first define a class before you can create an instance of it.
-Do this with a constructor</p>
+This allows you to use a constructor:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span> <span class="nx">last</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">eyecolor</span><span class="p">)</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span> <span class="nx">last</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">eyeColor</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">last</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">eyeColor</span> <span class="o">=</span> <span class="nx">eyecolor</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eyeColor</span> <span class="o">=</span> <span class="nx">eyeColor</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">myFather</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="dl">"</span><span class="s2">blue</span><span class="dl">"</span><span class="p">);</span>
@@ -547,50 +599,63 @@ Do this with a constructor</p>
 </code></pre></div>      </div>
 
       <p>We can modify the prototype later by adding a new prototype with a default value:</p>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">nationality</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">English</span><span class="dl">"</span><span class="p">;</span>
 </code></pre></div>      </div>
 
       <p>Add a function later</p>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
 <span class="p">};</span>
-<span class="nx">You</span> <span class="nx">can</span> <span class="nx">mess</span> <span class="kd">with</span> <span class="nx">your</span> <span class="nx">own</span> <span class="nx">prototypes</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">don</span><span class="dl">'</span><span class="s1">t mess with others</span><span class="dl">'</span>
 </code></pre></div>      </div>
+
+      <p>Rule: you can modify your own prototypes, but probably shouldn’t modify others’!</p>
 
       <h3 id="arrays">Arrays</h3>
 
-      <p>Arrays are just objects that allow using ints for the names. They also have some shortcuts and built in methods to make them operate like arrays do in other languages.</p>
+      <p>Arrays are simply objects that allow using ints for the names.</p>
+      <ul>
+        <li>They also have some shortcuts and built in methods to make them operate like arrays do in other languages.</li>
+      </ul>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
 <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">one</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">two</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">three</span><span class="dl">"</span><span class="p">]</span> <span class="o">-</span> <span class="nx">associative</span> <span class="nx">arrays</span>
 </code></pre></div>      </div>
+
       <ul>
-        <li>length property
-          <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-<span class="mi">3</span>
-</code></pre></div>          </div>
-        </li>
+        <li>length property</li>
       </ul>
 
-      <p>Two ways to append a value to the end of the list</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="mi">3</span>
+</code></pre></div>      </div>
+
+      <p>Two ways to append a value to the end of the list:</p>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">[</span><span class="nx">x</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>   
 <span class="nx">x</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 </code></pre></div>      </div>
+
       <ul>
-        <li>deleting values leaves holes in the array
+        <li>Deleting values leaves holes in the array
           <ul>
             <li>Rather than deleting, you can splice instead
-e.g. start at 2, delete 1:
-              <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">x</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-</code></pre></div>              </div>
-            </li>
+e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
           </ul>
         </li>
-        <li>no 2d support out of the box, but you can make an array of arrays.</li>
       </ul>
 
-      <p>Class methods:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">x</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>No 2d support out of the box, but you can make an array of arrays.</li>
+      </ul>
+
+      <p>Array class methods:</p>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">array</span><span class="p">.</span><span class="nx">concat</span> <span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="p">...)</span>
 <span class="nx">array</span><span class="p">.</span><span class="nx">join</span> <span class="p">(</span><span class="nx">separator</span><span class="p">)</span> <span class="o">-</span> <span class="nx">make</span> <span class="nx">a</span> <span class="nx">string</span> <span class="k">from</span> <span class="nx">an</span> <span class="nx">array</span>
 <span class="nx">array</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
@@ -598,7 +663,7 @@ e.g. start at 2, delete 1:
 <span class="nx">array</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
 <span class="nx">array</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span> <span class="o">-</span> <span class="nx">like</span> <span class="nx">pop</span> <span class="nx">but</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">first</span> <span class="nx">element</span>
 <span class="nx">array</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">)</span> <span class="o">-</span> <span class="nx">copy</span> <span class="nx">a</span> <span class="nx">portion</span> <span class="k">of</span> <span class="nx">an</span> <span class="nx">array</span>
-<span class="nx">array</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">comparefunction</span><span class="p">)</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">compareFunction</span><span class="p">)</span>
 <span class="nx">array</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span>
 <span class="nx">array</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="p">...)</span> <span class="o">-</span> <span class="nx">push</span> <span class="nx">front</span>
 </code></pre></div>      </div>
@@ -606,31 +671,34 @@ e.g. start at 2, delete 1:
     </div></div></section>
 <section id="part4functions"><button class="collapsible">Part 4: Functions</button><div class="text-content"><div class="text-inner">
 
-      <h3 id="functions">Functions</h3>
+      <p>A simple addition function:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
+      <p>Note: <code class="language-plaintext highlighter-rouge">function</code> keyword, and no explicitly defined argument or return types</p>
+
       <h3 id="anonymous-functions">Anonymous Functions</h3>
 
       <p>Functions can be created anonymously as expressions.</p>
 
-      <p>In this case we can assign these to variables, however, we’ll see later how we can also declare these as callbacks to other functions directly from their parameter list.</p>
+      <p>In this case we can assign these to variables, however, we’ll see later how we can also declare these functions directly from their parameter list of other functions as callbacks.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
-      <p>or as an arrow function</p>
+
+      <p>Or using the popular arrow syntax:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>or even as a one-liner…</p>
+      <p>or even as a one-liner, but this is a bit difficult…</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
 </code></pre></div>      </div>
@@ -639,8 +707,8 @@ e.g. start at 2, delete 1:
 
       <p>In JavaScript functions are objects, so they can be stored in variables or passed as parameters!</p>
 
-    </div></div></section>
-<section id="callingfunctions"><button class="collapsible">Calling Functions</button><div class="text-content"><div class="text-inner">
+      <h3 id="calling-functions">Calling Functions</h3>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">add</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </code></pre></div>      </div>
 
@@ -648,7 +716,7 @@ e.g. start at 2, delete 1:
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span>
         <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">arguments</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="nx">sum</span><span class="p">;</span>
@@ -689,22 +757,22 @@ e.g. start at 2, delete 1:
 <span class="nx">outer</span><span class="p">();</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
+
       <p>This is basically awful, so we should instead use <code class="language-plaintext highlighter-rouge">let</code>!</p>
 
       <p>A scope search happens where JS looks for the variable in local scope first, if not it will fall back to parent block scope, e.g. in nested functions, then grandparent, etc.</p>
 
       <h3 id="high-order-functions-and-callbacks">High order functions and callbacks</h3>
 
-      <p>A high order function is a function which takes a function as an argument, or returns a function</p>
+      <p>A high order function is a function which takes a function as an argument, or returns a function:</p>
 
-      <p>or a function expression:</p>
+      <p>Or a function expression:</p>
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
-      <p>Because functions are objects we can store them in arrays, and pass the same args to each element.</p>
 
-      <p>a simple example: call twice:</p>
+      <p>A simple example: call twice:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">callTwice</span><span class="p">(</span><span class="nx">func</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">func</span><span class="p">()</span>
@@ -712,9 +780,14 @@ e.g. start at 2, delete 1:
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>When we pass a function in here, don’t include the ()’s, that is, we want to pass a reference to function, we don’t want to run the function and pass in its return value</p>
+      <p>When we pass a function in here</p>
+      <ul>
+        <li>don’t include the ()’s,</li>
+        <li>that is, we want to pass a reference to function</li>
+        <li>we don’t want to run the function and pass in its return value</li>
+      </ul>
 
-      <p>We can also have a function which returns a function. This is like a function factory</p>
+      <p>We can also have a function which returns a function. This is like a function factory:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getAFunction</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -722,6 +795,8 @@ e.g. start at 2, delete 1:
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
+
+      <p>Here’s how we can use that factory:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">makeBetweenFunc</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
@@ -733,7 +808,7 @@ e.g. start at 2, delete 1:
 
       <p>We sometimes need to invoke anonymous functions:</p>
 
-      <p>The following JavaSCript built in function calls a function passed as an argument after 5000 ms:</p>
+      <p>The following JavaScript built in function calls a function passed as an argument after 5000 ms:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setTimeout</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
 </code></pre></div>      </div>
@@ -748,32 +823,18 @@ e.g. start at 2, delete 1:
       <p>Callbacks are extremely useful, and we’ll see them a lot when working with both UI operations and Node.js in a few weeks.</p>
 
     </div></div></section>
-<section id="part4dom"><button class="collapsible">Part 4: DOM</button><div class="text-content"><div class="text-inner">
-
-      <h3 id="locations-for-js-in-html">Locations for JS in HTML</h3>
-
-      <p>inline (in a tag):</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">a</span> <span class="nx">onload</span><span class="o">=</span><span class="dl">"</span><span class="s2">alert(</span><span class="dl">"</span><span class="nx">Hello</span><span class="dl">"</span><span class="s2">)&gt;&lt;/a&gt;
-</span></code></pre></div>      </div>
-
-      <p>internal:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text/javascript</span><span class="dl">"</span><span class="o">&gt;</span> <span class="p">...</span> <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div>      </div>
-
-      <p>external:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">index.js</span><span class="dl">"</span> <span class="nx">charset</span><span class="o">=</span><span class="dl">"</span><span class="s2">utf-8</span><span class="dl">"</span><span class="o">&gt;</span> <span class="p">...</span> <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div>      </div>
-
-      <p><em>Always link the external page as the last element in the <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> tag</em></p>
+<section id="part5dom"><button class="collapsible">Part 5: DOM</button><div class="text-content"><div class="text-inner">
 
       <h3 id="dom-overview">DOM Overview</h3>
 
-      <p>The document object model (DOM) catalogs the elents of a webpage into JavaScript objects which you can manipulate, namely HTML and CSS.</p>
+      <p>The document object model (DOM) catalogs the elements of a webpage into JavaScript objects which you can manipulate, namely HTML and CSS.</p>
       <ul>
         <li>We can also listen to user interactions (Events) and respond to them.</li>
-        <li>all of the attributes we can use for the object are there, not only the ones we manually define. You can read it with “dir”)</li>
+        <li>All of the HTML Attributes exist in the JS object, not only the ones we manually define through HTML Code.
+          <ul>
+            <li>You can read it with <code class="language-plaintext highlighter-rouge">dir</code></li>
+          </ul>
+        </li>
       </ul>
 
       <h3 id="single-responsibility">Single Responsibility</h3>
@@ -782,66 +843,56 @@ e.g. start at 2, delete 1:
       <ul>
         <li>Should we? No!</li>
         <li>Recall, all of our styles should be defined in CSS style sheets, e.g. using classes</li>
-        <li>Instead, you could attach or detatch classes in JS, which will update the styles</li>
+        <li>Instead, you could attach or detach classes in JS, which will update the styles</li>
       </ul>
 
       <h3 id="what-you-need-to-know-for-this-lab">What you need to know for this lab?</h3>
 
       <p>You don’t need to memorize all of the syntax (We’ll use JQuery next week which simplifies the syntax)</p>
 
-      <p>Instead, spend more time learning what you can do, than how you do it.</p>
+      <p>Instead, spend more time learning what you can do, more than specifically how you do it.</p>
 
       <h3 id="waiting-for-user-interactions">Waiting for user interactions</h3>
 
-      <p>We can attach event listeners, which wait for a user to do an action, and then call  function when a user does that action</p>
+      <p>We can attach event listeners, which wait for a user to do an action, and then call a function when a user does that action</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">btnObj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">mouseover</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">hi</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
-      <h3 id="adding-images-to-google">Adding images to Google</h3>
+      <h3 id="small-example---logoswap-cube-firefox">Small Example - LogoSwap Cube Firefox</h3>
 
-      <p>This example let’s you inspect the DOM of an existing page, e.g. Google. and add an image to it live in your browser:</p>
+      <p>In Firefox, on the start page, we have the FireFox Logo on the page</p>
+      <ul>
+        <li>Find the Class using the inspector</li>
+        <li>“.logo” is the class name
+          <ul>
+            <li>The image is being set using the “background” property</li>
+            <li>We could find a replacement, say… <code class="language-plaintext highlighter-rouge">https://i.redd.it/11nzhiq68x631.png</code></li>
+          </ul>
+        </li>
+        <li>In our JavaScript console…</li>
+      </ul>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myImage</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElemnt</span><span class="p">(</span><span class="dl">"</span><span class="s2">img</span><span class="dl">"</span><span class="p">)</span>
-<span class="nx">myImg</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">some image source</span><span class="dl">"</span>
-<span class="nx">myImage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">200px</span><span class="dl">"</span><span class="p">;</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">myImg</span><span class="p">);</span>
-<span class="nx">myImg</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">translate(300px,200px);
-</span></code></pre></div>      </div>
-
-      <p>bounce the image randomly</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setInterval</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">clientWidth</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">())</span>
-    <span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">clientHeight</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">())</span>
-<span class="nx">myImg</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">px, {y}px`</span>
-<span class="p">},</span> <span class="mi">2000</span><span class="p">)</span>
-</code></pre></div>      </div>
-
-      <p>To make it smooth:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">myImg</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transition</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">all 2s</span><span class="dl">"</span> <span class="c1">// this is just CSS</span>
-</code></pre></div>      </div>
-
-      <p>bounce everything?</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">allEls</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
-<span class="nx">setInterval</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">el</span> <span class="k">of</span> <span class="nx">allEls</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">clientWidth</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">())</span>
-    <span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">clientHeight</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">())</span>
-    <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">px, {y}px`</span>
-    <span class="p">}</span>    
-<span class="p">},</span> <span class="mi">2000</span><span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.logo</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundImage</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">url(https://i.redd.it/11nzhiq68x631.png)</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundRepeat</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">repeat</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundPosition</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">0px 3px</span><span class="dl">"</span><span class="p">;</span> 
+<span class="nx">img</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">border</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">2px solid magenta</span><span class="dl">"</span><span class="p">;</span> <span class="c1">//neon vibes</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderRadius</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">5px</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">logoText</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.wordmark</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">logoText</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">logoText</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <h3 id="the-root-of-the-dom-the-document-object">The Root of the DOM: The Document object</h3>
 
-      <p>YOu can learn more about the document object using the</p>
+      <p>You can learn more about the document object using the:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nb">document</span><span class="p">)</span> <span class="o">=</span> <span class="nx">there</span><span class="dl">'</span><span class="s1">s lots of stuff in here!
-</span></code></pre></div>      </div>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nb">document</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>You can also do this with individual elements.</p>
 
       <h3 id="selecting-and-element-from-the-dom">Selecting and element from the DOM</h3>
 
@@ -854,7 +905,7 @@ e.g. start at 2, delete 1:
 
       <ul>
         <li>The returned elements is a JavaScript object representing a chunk of HTML.</li>
-        <li>If you store it in a variable, e.g. const img.
+        <li>If you store it in a variable, e.g. <code class="language-plaintext highlighter-rouge">const img</code>.
           <ul>
             <li>Then you will have an object you can use. Using the CRUD principles we discussed, you can manipulate it!</li>
           </ul>
@@ -862,28 +913,30 @@ e.g. start at 2, delete 1:
         <li>
           <p>HTML objects have prototypes, eg. <code class="language-plaintext highlighter-rouge">HTMLImageElement</code></p>
         </li>
-        <li>If you call any of these getElementBy… functions on an HTML element, the return objects will be from the HTML element’s children</li>
+        <li>If you call any of these getElementBy…() functions on an HTML element, the returned objects will be from the HTML element’s children, rather than the documents children.</li>
       </ul>
 
       <h3 id="htmlcollections">HTMLCollections</h3>
 
       <p>You can use array access <code class="language-plaintext highlighter-rouge">[]</code> and <code class="language-plaintext highlighter-rouge">.length</code>, that’s likely all you’ll need.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">)</span><span class="nx">l</span>
 <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">input</span> <span class="k">of</span> <span class="nx">inputs</span><span class="p">)</span> <span class="p">{</span> 
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
       <h3 id="queryselector">querySelector</h3>
 
       <ul>
-        <li>The newest and best selector by far</li>
+        <li>The newer, best selector by far</li>
         <li>Pass in a CSS-style selector, using the same syntax as in CSS</li>
-        <li><code class="language-plaintext highlighter-rouge">querySelector</code> returns 1, <code class="language-plaintext highlighter-rouge">querySelectorAll</code> returns all.
-          <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#my-image</span><span class="dl">"</span><span class="p">);</span>
-</code></pre></div>          </div>
-        </li>
+        <li><code class="language-plaintext highlighter-rouge">querySelector</code> returns 1, <code class="language-plaintext highlighter-rouge">querySelectorAll</code> returns all.</li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#my-image</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+      <ul>
         <li>can even use the advanced CSS Selection rules like <code class="language-plaintext highlighter-rouge">ul li.second</code> for the <code class="language-plaintext highlighter-rouge">li</code> with class <code class="language-plaintext highlighter-rouge">second</code> that is a child of a <code class="language-plaintext highlighter-rouge">ul</code></li>
       </ul>
 
@@ -897,28 +950,32 @@ e.g. start at 2, delete 1:
 
       <h3 id="css-attribute-selector">CSS Attribute Selector</h3>
 
-      <p>document.quertSelector(“input[type=’password’]”)</p>
+      <p>If you need to target a specific type of input…</p>
 
-      <h3 id="most-important-properties-and-methods">Most important properties and methods:</h3>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">input[type='password']</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>      </div>
 
-      <p>classList
-getAttribute()
-setAttribute()
-appendChild()
-append()
-prepend()
-removeChild()
-remove()
-createElement
-innerText
-textContent
-innerHTML
-value
-parentElement
-children
-nextElementSibling
-previousElementSibling
-style</p>
+      <h3 id="most-important-dom-properties-and-methods">Most important DOM properties and methods:</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">element</span><span class="p">.</span><span class="nx">classList</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">()</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">()</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">()</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">append</span><span class="p">()</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">prepend</span><span class="p">()</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">()</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">remove</span><span class="p">()</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">createElement</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">innerText</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">value</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">parentElement</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">children</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">nextElementSibling</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">previousElementSibling</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">style</span>
+</code></pre></div>      </div>
 
       <h3 id="innertext-and-textcontent">innerText and textContent</h3>
 
@@ -929,7 +986,11 @@ style</p>
         <li>
           <p>If you change it, it will drop all children, and overwrite it with just text</p>
         </li>
-        <li><code class="language-plaintext highlighter-rouge">textContent</code> includes internal spacing, stuff that isn’t rendered on the page but is part of the document. less likely to use this one.</li>
+        <li><code class="language-plaintext highlighter-rouge">textContent</code> includes internal spacing, stuff that isn’t rendered on the page but is part of the document.
+          <ul>
+            <li>Less likely to use this one.</li>
+          </ul>
+        </li>
       </ul>
 
       <h3 id="innerhtml">innerHTML</h3>
@@ -959,9 +1020,9 @@ Many of these can be easily accessed. However, not all!</p>
       <p><code class="language-plaintext highlighter-rouge">getAttribute</code>, <code class="language-plaintext highlighter-rouge">setAttribute</code></p>
 
       <p>e.g. <code class="language-plaintext highlighter-rouge">getAttribute('max')</code>
-elg. <code class="language-plaintext highlighter-rouge">setAttribute('max', 1000)</code></p>
+e.g. <code class="language-plaintext highlighter-rouge">setAttribute('max', 1000)</code></p>
 
-      <p>you can even change type attribute, eg. for form elements</p>
+      <p>you can even change type attribute, e.g. for form elements</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">).</span><span class="nx">attributes</span><span class="p">;</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">).</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">href</span><span class="dl">"</span><span class="p">);</span>
@@ -973,14 +1034,14 @@ elg. <code class="language-plaintext highlighter-rouge">setAttribute('max', 1000
       <p>If you’ve selected an element but want the next one, or child inside, what do you do?
 <code class="language-plaintext highlighter-rouge">parentElement</code> property gets the parent (Only one)
 <code class="language-plaintext highlighter-rouge">children</code> - returns an HTMLCollection element. (Many)
-<code class="language-plaintext highlighter-rouge">nextElementSibling</code> and <code class="language-plaintext highlighter-rouge">previousElementSibling</code> work as expected.</p>
+<code class="language-plaintext highlighter-rouge">nextElementSibling</code> and <code class="language-plaintext highlighter-rouge">previousElementSibling</code> get the next or previous sibling, respectively.</p>
 
       <h3 id="changing-multiple-values-at-once">Changing multiple values at once</h3>
 
-      <p>Typically would include a querySelectorAll, followed by a loop over all elements and changing properties</p>
+      <p>Typically would include a querySelectorAll, followed by a loop over all elements and changing properties individually.</p>
 
     </div></div></section>
-<section id="part5settingstylesthroughcss"><button class="collapsible">Part 5: Setting styles through CSS</button><div class="text-content"><div class="text-inner">
+<section id="part6settingstylesthroughcss"><button class="collapsible">Part 6: Setting styles through CSS</button><div class="text-content"><div class="text-inner">
 
       <h3 id="changing-styles">Changing styles</h3>
 
@@ -993,16 +1054,18 @@ elg. <code class="language-plaintext highlighter-rouge">setAttribute('max', 1000
             <li>this is bad practice.</li>
           </ul>
         </li>
-        <li>Because “-“ is not allowed in JavaScript identifiers, we switch to camelCase instead of kebab-case</li>
+        <li>Because “-“ is not allowed in JavaScript identifiers, we switch from css-style <code class="language-plaintext highlighter-rouge">kebab-case</code> to JavaScript style <code class="language-plaintext highlighter-rouge">camelCase</code>.</li>
       </ul>
 
       <p>e.g. <code class="language-plaintext highlighter-rouge">font-family</code> becomes <code class="language-plaintext highlighter-rouge">fontFamily</code></p>
 
-      <p>All of the properties must be strings, eg. “30 px”, “30%”, “3rem”</p>
+      <p>All of the properties must be assigned as strings, eg. “30px”, “30%”, “3rem”</p>
 
       <h3 id="finding-the-computed-style">Finding the Computed Style</h3>
 
-      <p><code class="language-plaintext highlighter-rouge">getComputedStyle(element)</code></p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span>
+</code></pre></div>      </div>
+
       <ul>
         <li>returns an object-like structure with key-value pairs for all the CSS properties.</li>
         <li>Many value will be default.</li>
@@ -1010,66 +1073,141 @@ elg. <code class="language-plaintext highlighter-rouge">setAttribute('max', 1000
 
       <h3 id="changing-class-with-classlist">Changing class with classList</h3>
 
-      <p>a better way to change styles, particularly if there are many changes is to just define different classes in your external css and then switch classes.
-classList returns a DOMTokenList object in which you can add elements easy enough
-    - functions: .remove(‘classname’)
-     .add (‘classname’)
-    toggle - if the class is not there, add it. If it is there, remove it.</p>
+      <p>A better way to change styles, particularly if there are many changes is to just define different classes in your external CSS which are not linked to any objects, and then use JavaScript to attach those classes.</p>
+
+      <p>classList returns a DOMTokenList object in which you can add elements easy enough</p>
+
+      <ul>
+        <li>functions:</li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">classname</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">classList</span><span class="p">.</span><span class="nx">add</span> <span class="p">(</span><span class="dl">'</span><span class="s1">classname</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="dl">'</span><span class="s1">classname</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div>      </div>
+      <ul>
+        <li>With toggle, if the class is not there, add it. If it is there, remove it.</li>
+      </ul>
 
       <h3 id="creating-elements">Creating Elements</h3>
 
-      <p>new h1 = document.createElement(‘h1’)
-    from here you can add whatever you want, classes, attributes, etc.
-    then you just need to add it to the DOM somewhere
-    appendChild, append
-    prependChild, prepend
-    insertBerfore (afterElement, newbeforeElement) 
-    precise positioning with insertAdjacentElement</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">h1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">h1</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>From here you can add whatever you want, classes, attributes, etc.</li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">h1</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">A new heading!</span><span class="dl">"</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>Then you just need to add it to the DOM somewhere</li>
+        <li>separately find the parent you would like to attach it to…</li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">findElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-div</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">parent.appendChild(h1)</code>, appends it as the last child of the element</li>
+        <li><code class="language-plaintext highlighter-rouge">parent.prependChild(h1)</code>, prepends it as the first child of the element</li>
+        <li><code class="language-plaintext highlighter-rouge">insertBerfore(newNode, existingNode)</code> allows insertion at a specific point</li>
+      </ul>
+
+      <p>precise positioning with insertAdjacentElement</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">span</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">span</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">newSpan</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">newSpan</span><span class="p">,</span> <span class="nx">span</span><span class="p">);</span>
+</code></pre></div>      </div>
 
       <h3 id="removing">Removing</h3>
 
       <p>remove, removeChild</p>
 
-      <p>self.remove () 
+      <p><code class="language-plaintext highlighter-rouge">self.remove ()</code>
 or 
-parent.removeChild(element)</p>
+<code class="language-plaintext highlighter-rouge">parent.removeChild(element)</code></p>
 
-      <h3 id="part-5-dom-events">Part 5: DOM Events</h3>
+      <h3 id="part-7-dom-events">Part 7: DOM Events</h3>
 
       <h3 id="events">Events</h3>
 
-      <p>a small set of  events: clicks, drags, drops, hovers, scrolls, form fill or submit, focus or blur, key presses, double click, screen resize, audio, animation</p>
+      <p>A small set of events we can manage:</p>
+      <ul>
+        <li>clicks</li>
+        <li>drags</li>
+        <li>drops</li>
+        <li>hovers</li>
+        <li>scrolls</li>
+        <li>form fill</li>
+        <li>form submit</li>
+        <li>focus or blur</li>
+        <li>key presses</li>
+        <li>double click</li>
+        <li>screen resize</li>
+        <li>audio</li>
+        <li>animation</li>
+      </ul>
 
-      <p>check out the mdn event reference!</p>
+      <p>Check out the <a href="https://developer.mozilla.org/en-US/docs/Web/Events">MDN event reference</a>!</p>
 
       <p>Events link an element, a user interaction, and a response (function)</p>
 
-      <h3 id="adding-events">adding events</h3>
+      <h3 id="adding-events">Adding Events</h3>
 
-      <p>Bad ways to register - in the html tag (onclick=”alert(‘hi’)”)</p>
+      <p>Bad ways to register that you will likely see in examples, including mine:</p>
 
-      <p>Another not recommended way:
-button.onclick = function () { … }</p>
+      <ul>
+        <li>in the html tag</li>
+      </ul>
 
-      <p>A good way: element.addEventListener(“click”, function () { … } )</p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">onclick=</span><span class="s">"alert('hi')"</span><span class="nt">&gt;</span>Click Me<span class="nt">&lt;/a&gt;</span>
+</code></pre></div>      </div>
 
-      <h3 id="anonymous-vs-named-functions-as-callbacks">anonymous vs named functions as callbacks</h3>
+      <p>Also not recommended, in JavaScript…</p>
 
-      <p>may need to include the “this” keyword to specify that you are talking about the object which it is assigned to</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-button</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</code></pre></div>      </div>
 
-      <h3 id="event-objects">event objects</h3>
+      <p>The good way to register:</p>
 
-      <p>invoking an event creates an object which has more info about that event, eg. your moue location, screen location, modifiers, etc.
-This can be the first arg of the callback, typically “e”</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-button</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span> <span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>The last method is universal, consistent between different types of events, and also uses callback syntax for declaring the function.</p>
+
+      <h3 id="event-objects">Event objects</h3>
+
+      <p>Invoking an event sometimes creates an object which has more info about that event, eg. your mouse location, screen location, modifiers, etc.
+This is passed as the first arg of the callback, typically given the variable “e”</p>
 
       <h3 id="keydown-keyup-keypress">keydown, keyup, keypress</h3>
 
-      <p>keydown and keyup fire on rising or falling edges, for any key on the kb. keypress only fires if pressing the key actually changes the textbox contents. Not ideal for games!
-If you want to say, process an enter in a textbox, do a keypress, look inside the event e to see if enter was pressed, and if so, do your code</p>
+      <p><code class="language-plaintext highlighter-rouge">keydown</code> and <code class="language-plaintext highlighter-rouge">keyup</code> fire on rising or falling edges for any key on the keyboard.</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">keypress</code> only fires once per rising edge and falling edge</li>
+        <li>Both <code class="language-plaintext highlighter-rouge">keydown</code> and <code class="language-plaintext highlighter-rouge">keypress</code> are subject to keyboard repeat</li>
+        <li>If you want to process an <code class="language-plaintext highlighter-rouge">enter</code> in a textbox, do a keypress event, look inside the event <code class="language-plaintext highlighter-rouge">e</code> to see if <code class="language-plaintext highlighter-rouge">enter</code> was pressed, and if so, then execute code</li>
+        <li>If you want to only register one key press, avoiding keyboard repetition, set a flag variable on the <code class="language-plaintext highlighter-rouge">keydown</code> even, clear it on the <code class="language-plaintext highlighter-rouge">keyup</code> event, and use the flag variable to update your code.</li>
+        <li>Example from <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/keypress_event">MDN Keypress Event</a></li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">log</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">log</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">keypress</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">log</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">+=</span> <span class="s2">` </span><span class="p">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">code</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
 
       <h3 id="bubbling">Bubbling</h3>
 
-      <p>When input is captured, it registers on the target element, then bubbles up through all the parents.</p>
+      <p>When a click input is captured, it registers on the targeted element, then bubbles up through all the parent elements.</p>
 
       <p><a href="https://javascript.info/bubbling-and-capturing">Example from JavaScript.info Bubbling and Capturing</a></p>
 
@@ -1087,15 +1225,82 @@ If you want to say, process an enter in a textbox, do a keypress, look inside th
 <span class="nt">&lt;/form&gt;</span>
 </code></pre></div>      </div>
 
-      <p>If you need to, you can use <code class="language-plaintext highlighter-rouge">event.stopPropagation()</code> to halt the bubbling process prematurely. Just be carely this doesn’t break other expected functionality.</p>
+      <p>If you need to, you can use <code class="language-plaintext highlighter-rouge">event.stopPropagation()</code> to halt the bubbling process prematurely. Just be careful this doesn’t break other expected functionality - in other words, bubbling in JavaScript / DOM is an intended feature, not a bug, so you should have a good reason for disabling it!</p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>We’re going to take a break from our main project for now - we’ll get back to that in the next lab.</p>
+      <p>We’re going to take a break from our main project for now - we’ll get back to that in the next lab. But this lab should help.</p>
 
       <p>For this lab, we’re going to implement a sorted list form. Original, I know!</p>
 
+      <p>The purpose is to get you used to finding and modifying DOM elements with JavaScript.</p>
+
+      <p>Depending on your comfort with JavaScript, there are three version you may attempt:</p>
+
+      <h3 id="version-1">Version 1</h3>
+
+      <p>There are five fixed text boxes, a text box and a button used to add elements, and a textbox used to sort</p>
+      <ul>
+        <li>I’m using a style similar to the previous assignment. You should have completed this and get this style basically for free:</li>
+      </ul>
+
+      <p><img src="res/sorta-easy-1.png" alt="" /></p>
+
+      <p>In version 1 you can add elements to the list.</p>
+      <ul>
+        <li>There is a static length of the list, 5,</li>
+        <li>when more than 5 items are added, start back at the top overwriting elements.</li>
+        <li>You can also sort the elements</li>
+      </ul>
+
+      <p>Adding words:</p>
+
+      <p><img src="res/sorta-easy-1-filling-in.png" alt="" /></p>
+
+      <h3 id="version-2">Version 2</h3>
+
+      <p>In V2, there is no length to the list. You can add as many elements as you like and sort them.</p>
+      <ul>
+        <li>The list will start empty</li>
+      </ul>
+
+      <p><img src="res/sorta-easy-2-blank.png" alt="" /></p>
+
+      <ul>
+        <li>When you add an element it appears in the list</li>
+      </ul>
+
+      <p><img src="res/sorta-easy-2-add.png" alt="" /></p>
+
+      <ul>
+        <li>regardless of the length of the list, sort works as expected</li>
+      </ul>
+
+      <p><img src="res/sorta-easy-2-sort.png" alt="" /></p>
+
+      <ul>
+        <li>adding more elements just pushes them to the bottom of the list</li>
+      </ul>
+
+      <h3 id="version-3">Version 3</h3>
+
+      <ul>
+        <li>The final version work as in V2, but when you sort the list items, the text boxes should fade out for 1 second, and then move in an animated way to show them being reordered.</li>
+        <li>You may want to look into: The Set Interval CallBack
+          <ul>
+            <li>The CSS Transition Property, as well as modifying Opacity through JavaScript</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="submission">Submission</h3>
+
+      <p>You may complete any of the versions.</p>
+      <ul>
+        <li>The things you learn will be directly applicable to the next hand-in assignment.</li>
+        <li>Your progress will be checked by a demo next week! Good Luck.</li>
+      </ul>
     </div></div></section>
 
     </main>
