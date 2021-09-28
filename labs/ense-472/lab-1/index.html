@@ -593,22 +593,23 @@ Gateway: 10.0.0.1</p>
       <p>Please submit your Packet Tracer file (.pkt) to URCourses by the deadline.</p>
 
       <h3 id="packet-tracer-quirks--help">Packet Tracer Quirks / Help</h3>
+
+      <p>Warning - sometimes Home Gateway does not automatically pass the DNS server to the over DHCP. Frustrating!</p>
       <ul>
-        <li>Warning - sometimes Home Gateway does not automatically pass the DNS server to the over DHCP. Frustrating!
-          <ul>
-            <li>You can fix this by “turning wifi on and off” by going to the home gateway, and toggling DHCP off and then On again.</li>
-            <li>Maybe just restarting it will work too? You can try.</li>
-          </ul>
-        </li>
-        <li>On Mac, after saving files, sometimes swapping modules breaks
-          <ul>
-            <li><a href="https://community.cisco.com/t5/cisco-software-discussions/can-t-add-modules-on-cisco-packet-tracer-8-0-on-macbook/td-p/4301822">Try the advice in this link</a></li>
-            <li>From terminal, navigate to the Cisco Packet Tracer 8 Directory</li>
-            <li><code class="language-plaintext highlighter-rouge">umask 011</code></li>
-            <li><code class="language-plaintext highlighter-rouge">umask -S</code></li>
-          </ul>
-        </li>
-        <li>How do I configure IP on the HomeGateway?</li>
+        <li>You can fix this by “turning wifi on and off” by going to the home gateway, and toggling DHCP off and then On again.</li>
+        <li>Maybe just restarting it will work too? You can try.</li>
+      </ul>
+
+      <p>On Mac, after saving files, sometimes swapping modules breakscd</p>
+      <ul>
+        <li><a href="https://community.cisco.com/t5/cisco-software-discussions/can-t-add-modules-on-cisco-packet-tracer-8-0-on-macbook/td-p/4301822">Try the advice in this link</a></li>
+        <li>From terminal, navigate to the Cisco Packet Tracer 8 Directory</li>
+        <li><code class="language-plaintext highlighter-rouge">umask 011</code></li>
+        <li><code class="language-plaintext highlighter-rouge">umask -S</code></li>
+      </ul>
+
+      <p>How do I configure IP on the HomeGateway?</p>
+      <ul>
         <li>The HomeGateway assigns all connected devices IPs over DHCP by default</li>
         <li>However, it needs to have an IP statically assigned
           <ul>
