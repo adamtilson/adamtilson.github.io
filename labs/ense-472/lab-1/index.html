@@ -608,6 +608,20 @@ Gateway: 10.0.0.1</p>
             <li><code class="language-plaintext highlighter-rouge">umask -S</code></li>
           </ul>
         </li>
+        <li>How do I configure IP on the HomeGateway?</li>
+        <li>The HomeGateway assigns all connected devices IPs over DHCP by default</li>
+        <li>However, it needs to have an IP statically assigned
+          <ul>
+            <li>In config-&gt;internet, set IP to static</li>
+            <li>This will include the ability to specify an Address, Subnet Mask, Gateway Address and DNS Server</li>
+          </ul>
+        </li>
+        <li>Determine the appropriate addresses for your ISP Network (The HomeGateway Address and the actual Gateway Address which will go on the router)
+          <ul>
+            <li>Assign these statically</li>
+            <li>When devices connect to the HomeGateway, the DNS server will automatically be passed to them along with the IP address</li>
+          </ul>
+        </li>
       </ul>
     </div></div></section>
 
