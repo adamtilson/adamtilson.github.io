@@ -148,11 +148,11 @@
 </span></code></pre></div>      </div>
 
       <p>Internal:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text/javascript</span><span class="dl">"</span><span class="o">&gt;</span> <span class="p">...</span> <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text/javascript</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span></code></pre></div>      </div>
 
       <p>External:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">index.js</span><span class="dl">"</span> <span class="nx">charset</span><span class="o">=</span><span class="dl">"</span><span class="s2">utf-8</span><span class="dl">"</span><span class="o">&gt;</span> <span class="p">...</span> <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">index.js</span><span class="dl">"</span> <span class="nx">charset</span><span class="o">=</span><span class="dl">"</span><span class="s2">utf-8</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span></code></pre></div>      </div>
 
       <p><em>Always link the external page as the last element in the <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> tag, this is to ensure necessary HTML elements are loaded before the script executes</em></p>
@@ -334,16 +334,18 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
       </ul>
 
       <h3 id="infix-operators">Infix Operators</h3>
-      <p>By precedence:
-<code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">/</code>, <code class="language-plaintext highlighter-rouge">%</code>  (modulo), <code class="language-plaintext highlighter-rouge">**</code> (power).
-<code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code> 
-<code class="language-plaintext highlighter-rouge">&gt;=</code>, <code class="language-plaintext highlighter-rouge">&lt;=</code>, <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;</code>
-<code class="language-plaintext highlighter-rouge">===</code>, <code class="language-plaintext highlighter-rouge">!==</code>
-<code class="language-plaintext highlighter-rouge">||</code>, <code class="language-plaintext highlighter-rouge">&amp;&amp;</code></p>
+      <p>By precedence:</p>
+
       <ul>
-        <li>override precedence with <code class="language-plaintext highlighter-rouge">( )</code>’s 
-*Technically <code class="language-plaintext highlighter-rouge">==</code> exists in JavaScript, you should pretend it doesn’t.</li>
+        <li><code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">/</code>, <code class="language-plaintext highlighter-rouge">%</code>  (modulo), <code class="language-plaintext highlighter-rouge">**</code> (power).</li>
+        <li><code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code></li>
+        <li><code class="language-plaintext highlighter-rouge">&gt;=</code>, <code class="language-plaintext highlighter-rouge">&lt;=</code>, <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">===</code>, <code class="language-plaintext highlighter-rouge">!==</code></li>
+        <li><code class="language-plaintext highlighter-rouge">||</code>, <code class="language-plaintext highlighter-rouge">&amp;&amp;</code></li>
+        <li>override precedence with <code class="language-plaintext highlighter-rouge">( )</code>’s</li>
       </ul>
+
+      <p>*Technically <code class="language-plaintext highlighter-rouge">==</code> exists in JavaScript, you should pretend it doesn’t.</p>
 
       <h3 id="typeof">Typeof</h3>
 
@@ -767,7 +769,7 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
       <p>A high order function is a function which takes a function as an argument, or returns a function:</p>
 
       <p>Or a function expression:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">hello</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
@@ -920,7 +922,7 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
 
       <p>You can use array access <code class="language-plaintext highlighter-rouge">[]</code> and <code class="language-plaintext highlighter-rouge">.length</code>, that’s likely all you’ll need.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">)</span><span class="nx">l</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">)</span>
 <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">input</span> <span class="k">of</span> <span class="nx">inputs</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
 <span class="p">};</span>
@@ -1036,9 +1038,48 @@ e.g. <code class="language-plaintext highlighter-rouge">setAttribute('max', 1000
 <code class="language-plaintext highlighter-rouge">children</code> - returns an HTMLCollection element. (Many)
 <code class="language-plaintext highlighter-rouge">nextElementSibling</code> and <code class="language-plaintext highlighter-rouge">previousElementSibling</code> get the next or previous sibling, respectively.</p>
 
-      <h3 id="changing-multiple-values-at-once">Changing multiple values at once</h3>
+      <h3 id="creating-elements">Creating Elements</h3>
 
-      <p>Typically would include a querySelectorAll, followed by a loop over all elements and changing properties individually.</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">h1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">h1</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>From here you can add whatever you want, classes, attributes, etc.</li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">h1</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">A new heading!</span><span class="dl">"</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>Then you just need to add it to the DOM somewhere</li>
+        <li>separately find the parent you would like to attach it to…</li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">findElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-div</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">parent.appendChild(h1)</code>, appends it as the last child of the element</li>
+        <li><code class="language-plaintext highlighter-rouge">parent.prependChild(h1)</code>, prepends it as the first child of the element</li>
+        <li><code class="language-plaintext highlighter-rouge">insertBerfore(newNode, existingNode)</code> allows insertion at a specific point</li>
+      </ul>
+
+      <p>precise positioning with insertAdjacentElement</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">span</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">span</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">newSpan</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">newSpan</span><span class="p">,</span> <span class="nx">span</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h3 id="removing">Removing</h3>
+
+      <p>remove, removeChild</p>
+
+      <p><code class="language-plaintext highlighter-rouge">self.remove ()</code>
+or 
+<code class="language-plaintext highlighter-rouge">parent.removeChild(element)</code></p>
 
     </div></div></section>
 <section id="part6settingstylesthroughcss"><button class="collapsible">Part 6: Setting styles through CSS</button><div class="text-content"><div class="text-inner">
@@ -1089,50 +1130,8 @@ e.g. <code class="language-plaintext highlighter-rouge">setAttribute('max', 1000
         <li>With toggle, if the class is not there, add it. If it is there, remove it.</li>
       </ul>
 
-      <h3 id="creating-elements">Creating Elements</h3>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">h1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">h1</span><span class="dl">'</span><span class="p">)</span>
-</code></pre></div>      </div>
-
-      <ul>
-        <li>From here you can add whatever you want, classes, attributes, etc.</li>
-      </ul>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">h1</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">A new heading!</span><span class="dl">"</span>
-</code></pre></div>      </div>
-
-      <ul>
-        <li>Then you just need to add it to the DOM somewhere</li>
-        <li>separately find the parent you would like to attach it to…</li>
-      </ul>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">findElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-div</span><span class="dl">"</span><span class="p">);</span>
-</code></pre></div>      </div>
-
-      <ul>
-        <li><code class="language-plaintext highlighter-rouge">parent.appendChild(h1)</code>, appends it as the last child of the element</li>
-        <li><code class="language-plaintext highlighter-rouge">parent.prependChild(h1)</code>, prepends it as the first child of the element</li>
-        <li><code class="language-plaintext highlighter-rouge">insertBerfore(newNode, existingNode)</code> allows insertion at a specific point</li>
-      </ul>
-
-      <p>precise positioning with insertAdjacentElement</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">span</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">div</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">span</span><span class="p">)</span>
-<span class="kd">let</span> <span class="nx">newSpan</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">div</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">newSpan</span><span class="p">,</span> <span class="nx">span</span><span class="p">);</span>
-</code></pre></div>      </div>
-
-      <h3 id="removing">Removing</h3>
-
-      <p>remove, removeChild</p>
-
-      <p><code class="language-plaintext highlighter-rouge">self.remove ()</code>
-or 
-<code class="language-plaintext highlighter-rouge">parent.removeChild(element)</code></p>
-
-      <h3 id="part-7-dom-events">Part 7: DOM Events</h3>
+    </div></div></section>
+<section id="part7domevents"><button class="collapsible">Part 7: DOM Events</button><div class="text-content"><div class="text-inner">
 
       <h3 id="events">Events</h3>
 
