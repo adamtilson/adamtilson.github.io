@@ -10,6 +10,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
   <link rel="stylesheet" href="/assets/css/style.css?v=">
   <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+    </script>
+    <script type="text/javascript" async src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 </head>
 <body>
   <nav id="site">
@@ -106,11 +115,531 @@
 <hr />
 
 <p><button class="expandall">Collapse All</button></p>
-<section id="underconstruction"><button class="collapsible">Under Construction</button><div class="text-content"><div class="text-inner">
+<section id="introduction"><button class="collapsible">Introduction</button><div class="text-content"><div class="text-inner">
 
-      <p>I am still porting this lab from previous semesters.</p>
+      <p><img src="res/haiku.png" alt="" /></p>
 
-      <p>If you are working way ahead, you can check ou the <a href="https://inst.eecs.berkeley.edu/~cs188/su21/project3/">berkley lab doc</a></p>
+      <p>Pacman seeks reward.</p>
+
+      <p>Should he eat or should he run?</p>
+
+      <p>When in doubt, Q-learn.</p>
+
+      <p>In this lab, you will implement value iteration and Q-learning. You will test your agents first on Gridworld (from class), then apply them to a simulated robot controller (Crawler) and Pacman.</p>
+
+      <p>As in previous labs, this lab includes an autograder for you to grade your solutions on your machine. This can be run on all questions with the command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py
+</code></pre></div>      </div>
+
+      <p>It can be run for one particular question, such as q2, by:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q2
+</code></pre></div>      </div>
+
+      <p>It can be run for one particular test by commands of the form:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -t test_cases/q2/1-bridge-grid
+</code></pre></div>      </div>
+
+      <p>See the autograder tutorial in Lab 0 for more information about using the autograder. The code for this lab contains the following files, which are available in a zip archive <code class="language-plaintext highlighter-rouge">lab-3-reinforcement.zip</code></p>
+
+      <h3 id="files-youll-edit">Files you’ll edit:</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>file</th>
+            <th>purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">valueIterationAgents.py</code></td>
+            <td>A value iteration agent for solving known MDPs.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">qlearningAgents.py</code></td>
+            <td>Q-learning agents for Gridworld, Crawler and Pacman.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">analysis.py</code></td>
+            <td>A file to put your answers to questions given in the Lab.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="files-you-should-read-but-not-edit">Files you should read but NOT edit:</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>file</th>
+            <th>purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">mdp.py</code></td>
+            <td>Defines methods on general MDPs.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">learningAgents.py</code></td>
+            <td>Defines the base classes ValueEstimationAgent and QLearningAgent, which your agents will extend.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">util.py</code></td>
+            <td>Utilities, including util.Counter, which is particularly useful for Q-learners.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">gridworld.py</code></td>
+            <td>The Gridworld implementation.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">featureExtractors.py</code></td>
+            <td>Classes for extracting features on (state,action) pairs. Used for the approximate Q-learning agent (in qlearningAgents.py).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="files-you-can-ignore">Files you can ignore:</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>file</th>
+            <th>purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">environment.py</code></td>
+            <td>Abstract class for general reinforcement learning environments. Used by gridworld.py.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">graphicsGridworldDisplay.py</code></td>
+            <td>Gridworld graphical display.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">graphicsUtils.py</code></td>
+            <td>Graphics utilities.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">textGridworldDisplay.py</code></td>
+            <td>Plug-in for the Gridworld text interface.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">crawler.py</code></td>
+            <td>The crawler code and test harness. You will run this but not edit it.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">graphicsCrawlerDisplay.py</code></td>
+            <td>GUI for the crawler robot.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">autograder.py</code></td>
+            <td>Lab autograder</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">testParser.py</code></td>
+            <td>Parses autograder test and solution files</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">testClasses.py</code></td>
+            <td>General autograding test classes</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">test_cases/</code></td>
+            <td>Directory containing the test cases for each question</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">reinforcementTestClasses.py</code></td>
+            <td>Lab 3 specific autograding test classes</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>Files to Edit and Submit:</strong> You will fill in portions of <code class="language-plaintext highlighter-rouge">valueIterationAgents.py</code>, <code class="language-plaintext highlighter-rouge">qlearningAgents.py</code>, and <code class="language-plaintext highlighter-rouge">analysis.py</code> during the assignment. You should submit these files with your code and comments. Please do not change the other files in this distribution or submit any of our original files other than these files.</p>
+
+      <p><strong>Evaluation:</strong> Your code will be autograded for technical correctness. Please do not change the names of any provided functions or classes within the code, or you will wreak havoc on the autograder. However, the correctness of your implementation – not the autograder’s judgements – will be the final judge of your score. If necessary, we will review and grade assignments individually to ensure that you receive due credit for your work.</p>
+
+      <p><strong>Academic Dishonesty:</strong> We will be checking your code against other submissions in the class for logical redundancy. If you copy someone else’s code and submit it with minor changes, we will know. These cheat detectors are quite hard to fool, so please don’t try. We trust you all to submit your own work only; please don’t let us down. If you do, we will pursue the strongest consequences available to us.</p>
+
+    </div></div></section>
+<section id="mdps"><button class="collapsible">MDPs</button><div class="text-content"><div class="text-inner">
+
+      <p>To get started, run Gridworld in manual control mode, which uses the arrow keys:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -m
+</code></pre></div>      </div>
+
+      <p>You will see the two-exit layout from class. The blue dot is the agent. Note that when you press up, the agent only actually moves north 80% of the time. Such is the life of a Gridworld agent!</p>
+
+      <p>You can control many aspects of the simulation. A full list of options is available by running:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -h
+</code></pre></div>      </div>
+
+      <p>The default agent moves randomly</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -g MazeGrid
+</code></pre></div>      </div>
+
+      <p>You should see the random agent bounce around the grid until it happens upon an exit. Not the finest hour for an AI agent.</p>
+
+      <p><em>Note:</em> The Gridworld MDP is such that you first must enter a pre-terminal state (the double boxes shown in the GUI) and then take the special ‘exit’ action before the episode actually ends (in the true terminal state called <code class="language-plaintext highlighter-rouge">TERMINAL_STATE</code>, which is not shown in the GUI). If you run an episode manually, your total return may be less than you expected, due to the discount rate (<code class="language-plaintext highlighter-rouge">-d</code> to change; <code class="language-plaintext highlighter-rouge">0.9</code> by default).</p>
+
+      <p>Look at the console output that accompanies the graphical output (or use -t for all text). You will be told about each transition the agent experiences (to turn this off, use <code class="language-plaintext highlighter-rouge">-q</code>).</p>
+
+      <p>As in Pacman, positions are represented by <code class="language-plaintext highlighter-rouge">(x,y)</code> Cartesian coordinates and any arrays are indexed by <code class="language-plaintext highlighter-rouge">[x][y]</code>, with ‘north’ being the direction of increasing y, etc. By default, most transitions will receive a reward of zero, though you can change this with the living reward option <code class="language-plaintext highlighter-rouge">(-r)</code>.</p>
+
+    </div></div></section>
+<section id="q1valueiteration"><button class="collapsible">Q1: Value Iteration</button><div class="text-content"><div class="text-inner">
+      <h3 id="points">(4 points)</h3>
+
+      <p>Recall the value iteration state update equation:</p>
+
+\[V_{k+1}(s) \leftarrow  \underset{a}{\max} \sum_{s'} T(s,a,s')[R(s,a,s')+\gamma V_k(s')]\]
+
+      <p>Write a value iteration agent in <code class="language-plaintext highlighter-rouge">ValueIterationAgent</code>, which has been partially specified for you in <code class="language-plaintext highlighter-rouge">valueIterationAgents.py</code>. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option <code class="language-plaintext highlighter-rouge">-i</code>) in its initial planning phase. <code class="language-plaintext highlighter-rouge">ValueIterationAgent</code> takes an MDP on construction and runs value iteration for the specified number of iterations before the constructor returns.</p>
+
+      <p>Value iteration computes k-step estimates of the optimal values, V<sub>k</sub>. In addition to running value iteration, implement the following methods for <code class="language-plaintext highlighter-rouge">ValueIterationAgent</code> using V<sub>k</sub>.</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">computeActionFromValues(state)</code> computes the best action according to the value function given by <code class="language-plaintext highlighter-rouge">self.values</code>.</li>
+        <li><code class="language-plaintext highlighter-rouge">computeQValueFromValues(state, action)</code> returns the Q-value of the (state, action) pair given by the value function given by <code class="language-plaintext highlighter-rouge">self.values</code>.</li>
+      </ul>
+
+      <p>These quantities are all displayed in the GUI: values are numbers in squares, Q-values are numbers in square quarters, and policies are arrows out from each square.</p>
+
+      <p><strong>Important:</strong> Use the “batch” version of value iteration where each vector V<sub>k</sub> is computed from a fixed vector V<sub>k-1</sub> (like in lecture), not the “online” version where one single weight vector is updated in place. This means that when a state’s value is updated in iteration k based on the values of its successor states, the successor state values used in the value update computation should be those from iteration k-1 (even if some of the successor states had already been updated in iteration k). The difference is discussed in Sutton &amp; Barto in the 6th paragraph of chapter 4.1.</p>
+
+      <p><em>Note:</em> A policy synthesized from values of depth k (which reflect the next k rewards) will actually reflect the next k+1 rewards (i.e. you return \(\pi\) <sub>k+1</sub>). Similarly, the Q-values will also reflect one more reward than the values (i.e. you return Qk+1).</p>
+
+      <p>You should return the synthesized policy \(\pi\) <sub>k+1</sub></p>
+
+      <p>Hint: Use the <code class="language-plaintext highlighter-rouge">util.Counter</code> class in <code class="language-plaintext highlighter-rouge">util.py</code>, which is a dictionary with a default value of zero. Methods such as <code class="language-plaintext highlighter-rouge">totalCount</code> should simplify your code. However, be careful with <code class="language-plaintext highlighter-rouge">argMax</code>: the actual <code class="language-plaintext highlighter-rouge">argmax</code> you want may be a key not in the counter!</p>
+
+      <p><em>Note:</em> Make sure to handle the case when a state has no available actions in an MDP (think about what this means for future rewards).</p>
+
+      <p>To test your implementation, run the autograder:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q1
+</code></pre></div>      </div>
+
+      <p>The following command loads your <code class="language-plaintext highlighter-rouge">ValueIterationAgent</code>, which will compute a policy and execute it 10 times. Press a key to cycle through values, Q-values, and the simulation. You should find that the value of the start state (V(start), which you can read off of the GUI) and the empirical resulting average reward (printed after the 10 rounds of execution finish) are quite close.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -a value -i 100 -k 10
+</code></pre></div>      </div>
+
+      <p>Hint: On the default BookGrid, running value iteration for 5 iterations should give you this output:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -a value -i 5
+</code></pre></div>      </div>
+
+      <p><img src="res/value-after-5.png" alt="" /></p>
+
+      <p><strong>Grading:</strong> Your value iteration agent will be graded on a new grid. We will check your values, Q-values, and policies after fixed numbers of iterations and at convergence (e.g. after 100 iterations).</p>
+
+    </div></div></section>
+<section id="q2bridgecrossinganalysis"><button class="collapsible">Q2: Bridge Crossing Analysis</button><div class="text-content"><div class="text-inner">
+      <h3 id="point">(1 point)</h3>
+
+      <p>BridgeGrid is a grid world map with the a low-reward terminal state and a high-reward terminal state separated by a narrow “bridge”, on either side of which is a chasm of high negative reward. The agent starts near the low-reward state. With the default discount of 0.9 and the default noise of 0.2, the optimal policy does not cross the bridge. Change only ONE of the discount and noise parameters so that the optimal policy causes the agent to attempt to cross the bridge. Put your answer in <code class="language-plaintext highlighter-rouge">question2()</code> of <code class="language-plaintext highlighter-rouge">analysis.py</code>. (Noise refers to how often an agent ends up in an unintended successor state when they perform an action.) The default corresponds to:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -a value -i 100 -g BridgeGrid --discount 0.9 --noise 0.2
+</code></pre></div>      </div>
+
+      <p><img src="res/bridge-crossing.png" alt="" /></p>
+
+      <p><strong>Grading:</strong> We will check that you only changed one of the given parameters, and that with this change, a correct value iteration agent should cross the bridge. To check your answer, run the autograder:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q2
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="q3policies"><button class="collapsible">Q3: Policies</button><div class="text-content"><div class="text-inner">
+      <h3 id="points-1">(5 points)</h3>
+
+      <p>Consider the <code class="language-plaintext highlighter-rouge">DiscountGrid</code> layout, shown below. This grid has two terminal states with positive payoff (in the middle row), a close exit with payoff +1 and a distant exit with payoff +10. The bottom row of the grid consists of terminal states with negative payoff (shown in red); each state in this “cliff” region has payoff -10. The starting state is the yellow square. We distinguish between two types of paths: (1) paths that “risk the cliff” and travel near the bottom row of the grid; these paths are shorter but risk earning a large negative payoff, and are represented by the red arrow in the figure below. (2) paths that “avoid the cliff” and travel along the top edge of the grid. These paths are longer but are less likely to incur huge negative payoffs. These paths are represented by the green arrow in the figure below.</p>
+
+      <p><img src="res/policies.png" alt="" /></p>
+
+      <p>In this question, you will choose settings of the discount, noise, and living reward parameters for this MDP to produce optimal policies of several different types. Your setting of the parameter values for each part should have the property that, if your agent followed its optimal policy without being subject to any noise, it would exhibit the given behavior. If a particular behavior is not achieved for any setting of the parameters, assert that the policy is impossible by returning the string <code class="language-plaintext highlighter-rouge">'NOT POSSIBLE'</code>.</p>
+
+      <p>Here are the optimal policy types you should attempt to produce:
+a. Prefer the close exit (+1), risking the cliff (-10)
+b. Prefer the close exit (+1), but avoiding the cliff (-10)
+c. Prefer the distant exit (+10), risking the cliff (-10)
+d. Prefer the distant exit (+10), avoiding the cliff (-10)
+e. Avoid both exits and the cliff (so an episode should never terminate)
+To check your answers, run the autograder:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q3
+</code></pre></div>      </div>
+
+      <p><code class="language-plaintext highlighter-rouge">question3a()</code> through <code class="language-plaintext highlighter-rouge">question3e()</code> should each return a 3-item tuple of (<code class="language-plaintext highlighter-rouge">discount</code>, <code class="language-plaintext highlighter-rouge">noise</code>, <code class="language-plaintext highlighter-rouge">livingReward</code>) in <code class="language-plaintext highlighter-rouge">analysis.py</code>.</p>
+
+      <p><em>Note:</em> You can check your policies in the GUI. For example, using a correct answer to 3(a), the arrow in (0,1) should point east, the arrow in (1,1) should also point east, and the arrow in (2,1) should point north.</p>
+
+      <p>e.g. <code class="language-plaintext highlighter-rouge">(discount=0.9, noise=0.2, livingReward=-11)</code></p>
+      <ul>
+        <li>Immediately jump off cliff!</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -a value -i 100 -g DiscountGrid -d 0.9 -n 0.2 -r -11
+</code></pre></div>      </div>
+
+      <p><em>Note:</em> On some machines you may not see an arrow. In this case, press a button on the keyboard to switch to qValue display, and mentally calculate the policy by taking the arg max of the available qValues for each state.</p>
+
+      <p><strong>Grading:</strong> We will check that the desired policy is returned in each case.</p>
+
+    </div></div></section>
+<section id="q4asynchronousvalueiteration"><button class="collapsible">Q4: Asynchronous Value Iteration</button><div class="text-content"><div class="text-inner">
+      <h3 id="point-1">(1 point)</h3>
+
+      <p>Write a value iteration agent in <code class="language-plaintext highlighter-rouge">AsynchronousValueIterationAgent</code>, which has been partially specified for you in <code class="language-plaintext highlighter-rouge">valueIterationAgents.py</code>. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option <code class="language-plaintext highlighter-rouge">-i</code>) in its initial planning phase. <code class="language-plaintext highlighter-rouge">AsynchronousValueIterationAgent</code> takes an MDP on construction and runs <em>cyclic</em> value iteration (described in the next paragraph) for the specified number of iterations before the constructor returns. Note that all this value iteration code should be placed inside the constructor (<code class="language-plaintext highlighter-rouge">__init__</code> method).</p>
+
+      <p>The reason this class is called <code class="language-plaintext highlighter-rouge">AsynchronousValueIterationAgent</code> is because we will update only <strong>one</strong> state in each iteration, as opposed to doing a batch-style update. Here is how cyclic value iteration works. In the first iteration, only update the value of the first state in the states list. In the second iteration, only update the value of the second. Keep going until you have updated the value of each state once, then start back at the first state for the subsequent iteration. <strong>If the state picked for updating is terminal, nothing happens in that iteration.</strong> You can implement it as indexing into the states variable defined in the code skeleton.</p>
+
+      <p>Value iteration iterates a fixed-point equation, as discussed in class. It is also possible to update the state values in different ways, such as in a random order (i.e., select a state randomly, update its value, and repeat) or in a batch style (as in Q1). In this question, we will explore another technique.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">AsynchronousValueIterationAgent</code> inherits from <code class="language-plaintext highlighter-rouge">ValueIterationAgent</code> from Q1, so the only method you need to implement is <code class="language-plaintext highlighter-rouge">runValueIteration</code>. Since the superclass constructor calls <code class="language-plaintext highlighter-rouge">runValueIteration</code>, overriding it is sufficient to change the agent’s behavior as desired.</p>
+
+      <p><em>Note:</em> Make sure to handle the case when a state has no available actions in an MDP (think about what this means for future rewards).</p>
+
+      <p>To test your implementation, run the autograder. It should take less than a second to run. ** If it takes much longer, you may run into issues later in the project, so make your implementation more efficient now.**</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q4
+</code></pre></div>      </div>
+
+      <p>The following command loads your <code class="language-plaintext highlighter-rouge">AsynchronousValueIterationAgent</code> in the Gridworld, which will compute a policy and execute it 10 times. Press a key to cycle through values, Q-values, and the simulation. You should find that the value of the start state (V(start), which you can read off of the GUI) and the empirical resulting average reward (printed after the 10 rounds of execution finish) are quite close.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -a asynchvalue -i 1000 -k 10
+</code></pre></div>      </div>
+
+      <p><strong>Grading:</strong> Your value iteration agent will be graded on a new grid. We will check your values, Q-values, and policies after fixed numbers of iterations and at convergence (e.g., after 1000 iterations).</p>
+
+    </div></div></section>
+<section id="q5prioritizedsweepingvalueiteration"><button class="collapsible">Q5: Prioritized Sweeping Value Iteration</button><div class="text-content"><div class="text-inner">
+      <h3 id="points-2">(3 points)</h3>
+
+      <p>You will now implement <code class="language-plaintext highlighter-rouge">PrioritizedSweepingValueIterationAgent</code>, which has been partially specified for you in <code class="language-plaintext highlighter-rouge">valueIterationAgents.py</code>. Note that this class derives from <code class="language-plaintext highlighter-rouge">AsynchronousValueIterationAgent</code>, so the only method that needs to change is <code class="language-plaintext highlighter-rouge">runValueIteration</code>, which actually runs the value iteration.</p>
+
+      <p>Prioritized sweeping attempts to focus updates of state values in ways that are likely to change the policy.</p>
+
+      <p>For this project, you will implement a simplified version of the standard prioritized sweeping algorithm, which is described in <a href="https://proceedings.neurips.cc/paper/1992/file/55743cc0393b1cb4b8b37d09ae48d097-Paper.pdf">this paper</a>. We’ve adapted this algorithm for our setting. First, we define the <strong>predecessors</strong> of a state s as all states that have a <strong>nonzero</strong> probability of reaching <code class="language-plaintext highlighter-rouge">s</code> by taking some action <code class="language-plaintext highlighter-rouge">a</code>. Also, <code class="language-plaintext highlighter-rouge">theta</code>, which is passed in as a parameter, will represent our tolerance for error when deciding whether to update the value of a state. Here’s the algorithm you should follow in your implementation.</p>
+
+      <ul>
+        <li>Compute predecessors of all states.</li>
+        <li>Initialize an empty priority queue.</li>
+        <li>For each non-terminal state s, do: (<strong>note: to make the autograder work for this question, you must iterate over states in the order returned by</strong> <code class="language-plaintext highlighter-rouge">self.mdp.getStates()</code>)
+          <ul>
+            <li>Find the absolute value of the difference between the current value of <code class="language-plaintext highlighter-rouge">s</code> in <code class="language-plaintext highlighter-rouge">self.values</code> and the highest Q-value across all possible actions from <code class="language-plaintext highlighter-rouge">s</code> (this represents what the value should be); call this number <code class="language-plaintext highlighter-rouge">diff</code>. Do NOT update <code class="language-plaintext highlighter-rouge">self.values[s]</code> in this step.</li>
+            <li>Push <code class="language-plaintext highlighter-rouge">s</code> into the priority queue with priority <code class="language-plaintext highlighter-rouge">-diff</code> (note that this is <strong>negative</strong>). We use a negative because the priority queue is a min heap, but we want to prioritize updating states that have a <strong>higher</strong> error.</li>
+          </ul>
+        </li>
+        <li>For <code class="language-plaintext highlighter-rouge">iteration</code> in <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">1</code>, <code class="language-plaintext highlighter-rouge">2</code>, …, <code class="language-plaintext highlighter-rouge">self.iterations - 1</code>, do:
+          <ul>
+            <li>If the priority queue is empty, then terminate.</li>
+            <li>Pop a state s off the priority queue.</li>
+            <li>Update the value of s (if it is not a terminal state) in <code class="language-plaintext highlighter-rouge">self.values</code>.</li>
+            <li>For each predecessor <code class="language-plaintext highlighter-rouge">p</code> of <code class="language-plaintext highlighter-rouge">s</code>, do:
+              <ul>
+                <li>Find the absolute value of the difference between the current value of <code class="language-plaintext highlighter-rouge">p</code> in <code class="language-plaintext highlighter-rouge">self.values</code> and the highest Q-value across all possible actions from <code class="language-plaintext highlighter-rouge">p</code> (this represents what the value should be); call this number <code class="language-plaintext highlighter-rouge">diff</code>. Do NOT update <code class="language-plaintext highlighter-rouge">self.values[p]</code> in this step.</li>
+                <li>If <code class="language-plaintext highlighter-rouge">diff &gt; theta</code>, push <code class="language-plaintext highlighter-rouge">p</code> into the priority queue with priority <code class="language-plaintext highlighter-rouge">-diff</code> (note that this is <strong>negative</strong>), as long as it does not already exist in the priority queue with equal or lower priority. As before, we use a negative because the priority queue is a min heap, but we want to prioritize updating states that have a <strong>higher</strong> error.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>A couple of important notes on implementation:</p>
+
+      <ul>
+        <li>When you compute predecessors of a state, make sure to store them in a <strong>set</strong>, not a list, to avoid duplicates.</li>
+        <li>Please use <code class="language-plaintext highlighter-rouge">util.PriorityQueue</code> in your implementation. The update method in this class will likely be useful; look at its documentation. 
+To test your implementation, run the autograder. <strong>It should take about 1 second to run. If it takes much longer, you may run into issues later in the project, so make your implementation more efficient now.</strong></li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q5
+</code></pre></div>      </div>
+
+      <p>You can run the <code class="language-plaintext highlighter-rouge">PrioritizedSweepingValueIterationAgent</code> in the Gridworld using the following command.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -a priosweepvalue -i 1000
+</code></pre></div>      </div>
+
+      <p><strong>Grading:</strong> Your prioritized sweeping value iteration agent will be graded on a new grid. We will check your values, Q-values, and policies after fixed numbers of iterations and at convergence (e.g., after 1000 iterations).</p>
+
+    </div></div></section>
+<section id="q6qlearning"><button class="collapsible">Q6: Q-Learning</button><div class="text-content"><div class="text-inner">
+      <h3 id="points-3">(4 points)</h3>
+
+      <p>Note that your value iteration agent does not actually learn from experience. Rather, it ponders its MDP model to arrive at a complete policy before ever interacting with a real environment. When it does interact with the environment, it simply follows the precomputed policy (e.g. it becomes a reflex agent). This distinction may be subtle in a simulated environment like a Gridword, but it’s very important in the real world, where the real MDP is not available.</p>
+
+      <p>You will now write a Q-learning agent, which does very little on construction, but instead learns by trial and error from interactions with the environment through its <code class="language-plaintext highlighter-rouge">update(state, action, nextState, reward)</code> method. A stub of a Q-learner is specified in <code class="language-plaintext highlighter-rouge">QLearningAgent</code> in <code class="language-plaintext highlighter-rouge">qlearningAgents.py</code>, and you can select it with the option <code class="language-plaintext highlighter-rouge">'-a q'</code>. For this question, you must implement the <code class="language-plaintext highlighter-rouge">update</code>, <code class="language-plaintext highlighter-rouge">computeValueFromQValues</code>, <code class="language-plaintext highlighter-rouge">getQValue</code>, and <code class="language-plaintext highlighter-rouge">computeActionFromQValues</code> methods.</p>
+
+      <p><em>Note:</em> For <code class="language-plaintext highlighter-rouge">computeActionFromQValues</code>, you should break ties randomly for better behavior. The <code class="language-plaintext highlighter-rouge">random.choice()</code> function will help. In a particular state, actions that your agent hasn’t seen before still have a Q-value, specifically a Q-value of zero, and if all of the actions that your agent has seen before have a negative Q-value, an unseen action may be optimal.</p>
+
+      <p>Important: Make sure that in your <code class="language-plaintext highlighter-rouge">computeValueFromQValues</code> and <code class="language-plaintext highlighter-rouge">computeActionFromQValues</code> functions, you only access Q values by calling <code class="language-plaintext highlighter-rouge">getQValue</code>. This abstraction will be useful for question 8 when you override <code class="language-plaintext highlighter-rouge">getQValue</code> to use features of state-action pairs rather than state-action pairs directly.</p>
+
+      <p>With the Q-learning update in place, you can watch your Q-learner learn under manual control, using the keyboard:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -a q -k 5 -m
+</code></pre></div>      </div>
+
+      <p>Recall that <code class="language-plaintext highlighter-rouge">-k</code> will control the number of episodes your agent gets to learn. Watch how the agent learns about the state it was just in, not the one it moves to, and “leaves learning in its wake.” Hint: to help with debugging, you can turn off noise by using the <code class="language-plaintext highlighter-rouge">--noise 0.0</code> parameter (though this obviously makes Q-learning less interesting). If you manually steer Pacman north and then east along the optimal path for four episodes, you should see the following Q-values:</p>
+
+      <p><img src="res/current-q-val.png" alt="" /></p>
+
+      <p><strong>Grading:</strong> We will run your Q-learning agent and check that it learns the same Q-values and policy as our reference implementation when each is presented with the same set of examples. To grade your implementation, run the autograder:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q6
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="q7epsilongreedy"><button class="collapsible">Q7: Epsilon Greedy</button><div class="text-content"><div class="text-inner">
+      <h3 id="points-4">(2 points)</h3>
+
+      <p>Complete your Q-learning agent by implementing epsilon-greedy action selection in <code class="language-plaintext highlighter-rouge">getAction</code>, meaning it chooses random actions an epsilon fraction of the time, and follows its current best Q-values otherwise. Note that choosing a random action may result in choosing the best action - that is, you should not choose a random sub-optimal action, but rather <em>any</em> random legal action.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -a q -k 100 
+</code></pre></div>      </div>
+
+      <p>Your final Q-values should resemble those of your value iteration agent, especially along well-traveled paths. However, your average returns will be lower than the Q-values predict because of the random actions and the initial learning phase.</p>
+
+      <p>You can choose an element from a list uniformly at random by calling the <code class="language-plaintext highlighter-rouge">random.choice</code> function. You can simulate a binary variable with probability <code class="language-plaintext highlighter-rouge">p</code> of success by using <code class="language-plaintext highlighter-rouge">util.flipCoin(p)</code>, which returns <code class="language-plaintext highlighter-rouge">True</code> with probability <code class="language-plaintext highlighter-rouge">p</code> and <code class="language-plaintext highlighter-rouge">False</code> with probability <code class="language-plaintext highlighter-rouge">1-p</code>.</p>
+
+      <p>To test your implementation, run the autograder:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q7
+</code></pre></div>      </div>
+
+      <p>With no additional code, you should now be able to run a Q-learning crawler robot:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python crawler.py
+</code></pre></div>      </div>
+
+      <p>If this doesn’t work, you’ve probably written some code too specific to the <code class="language-plaintext highlighter-rouge">GridWorld</code> problem and you should make it more general to all MDPs.</p>
+
+      <p>This will invoke the crawling robot from class using your Q-learner. Play around with the various learning parameters to see how they affect the agent’s policies and actions. Note that the step delay is a parameter of the simulation, whereas the learning rate and epsilon are parameters of your learning algorithm, and the discount factor is a property of the environment.</p>
+
+    </div></div></section>
+<section id="q8bridgecrossingrevisited"><button class="collapsible">Q8: Bridge Crossing Revisited</button><div class="text-content"><div class="text-inner">
+      <h3 id="point-2">(1 point)</h3>
+
+      <p>First, train a completely random Q-learner with the default learning rate on the noiseless BridgeGrid for 50 episodes and observe whether it finds the optimal policy.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gridworld.py -a q -k 50 -n 0 -g BridgeGrid -e 1
+</code></pre></div>      </div>
+
+      <p>Now try the same experiment with an epsilon of 0. Is there an epsilon and a learning rate for which it is highly likely (greater than 99%) that the optimal policy will be learned after 50 iterations? <code class="language-plaintext highlighter-rouge">question8()</code> in <code class="language-plaintext highlighter-rouge">analysis.py</code> should return EITHER a 2-item tuple of <code class="language-plaintext highlighter-rouge">(epsilon, learning rate)</code> OR the string <code class="language-plaintext highlighter-rouge">'NOT POSSIBLE'</code> if there is none. Epsilon is controlled by <code class="language-plaintext highlighter-rouge">-e</code>, learning rate by <code class="language-plaintext highlighter-rouge">-l</code>.</p>
+
+      <p><em>Note:</em> Your response should be not depend on the exact tie-breaking mechanism used to choose actions. This means your answer should be correct even if for instance we rotated the entire bridge grid world 90 degrees.</p>
+
+      <p>To grade your answer, run the autograder:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q8
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="q9qlearningandpacman"><button class="collapsible">Q9: Q-Learning and Pacman</button><div class="text-content"><div class="text-inner">
+      <h3 id="point-3">(1 point)</h3>
+
+      <p>Time to play some Pacman! Pacman will play games in two phases. In the first phase, training, Pacman will begin to learn about the values of positions and actions. Because it takes a very long time to learn accurate Q-values even for tiny grids, Pacman’s training games run in quiet mode by default, with no GUI (or console) display. Once Pacman’s training is complete, he will enter testing mode. When testing, Pacman’s <code class="language-plaintext highlighter-rouge">self.epsilon</code> and <code class="language-plaintext highlighter-rouge">self.alpha</code> will be set to 0.0, effectively stopping Q-learning and disabling exploration, in order to allow Pacman to exploit his learned policy. Test games are shown in the GUI by default. Without any code changes you should be able to run Q-learning Pacman for very tiny grids as follows:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python pacman.py -p PacmanQAgent -x 2000 -n 2010 -l smallGrid 
+</code></pre></div>      </div>
+
+      <p>Note that <code class="language-plaintext highlighter-rouge">PacmanQAgent</code> is already defined for you in terms of the <code class="language-plaintext highlighter-rouge">QLearningAgent</code> you’ve already written. <code class="language-plaintext highlighter-rouge">PacmanQAgent</code> is only different in that it has default learning parameters that are more effective for the Pacman problem (<code class="language-plaintext highlighter-rouge">epsilon=0.05, alpha=0.2, gamma=0.8</code>). You will receive full credit for this question if the command above works without exceptions and your agent wins at least 80% of the time. The autograder will run 100 test games after the 2000 training games.</p>
+
+      <p>Hint: If your <code class="language-plaintext highlighter-rouge">QLearningAgent</code> works for <code class="language-plaintext highlighter-rouge">gridworld.py</code> and <code class="language-plaintext highlighter-rouge">crawler.py</code> but does not seem to be learning a good policy for Pacman on <code class="language-plaintext highlighter-rouge">smallGrid</code>, it may be because your <code class="language-plaintext highlighter-rouge">getAction</code> and/or <code class="language-plaintext highlighter-rouge">computeActionFromQValues</code> methods do not in some cases properly consider unseen actions. In particular, because unseen actions have by definition a Q-value of zero, if all of the actions that have been seen have negative Q-values, an unseen action may be optimal. Beware of the argmax function from <code class="language-plaintext highlighter-rouge">util.Counter</code>!</p>
+
+      <p><em>Note:</em> To grade your answer, run:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q9
+</code></pre></div>      </div>
+
+      <p><em>Note:</em> If you want to experiment with learning parameters, you can use the option <code class="language-plaintext highlighter-rouge">-a</code>, for example <code class="language-plaintext highlighter-rouge">-a epsilon=0.1,alpha=0.3,gamma=0.7</code>. These values will then be accessible as <code class="language-plaintext highlighter-rouge">self.epsilon</code>, <code class="language-plaintext highlighter-rouge">self.gamma</code> and <code class="language-plaintext highlighter-rouge">self.alpha</code> inside the agent.</p>
+
+      <p><em>Note:</em> While a total of 2010 games will be played, the first 2000 games will not be displayed because of the option <code class="language-plaintext highlighter-rouge">-x 2000</code>, which designates the first 2000 games for training (no output). Thus, you will only see Pacman play the last 10 of these games. The number of training games is also passed to your agent as the option <code class="language-plaintext highlighter-rouge">numTraining</code>.</p>
+
+      <p><em>Note:</em> If you want to watch 10 training games to see what’s going on, use the command:</p>
+
+      <p>python pacman.py -p PacmanQAgent -n 10 -l smallGrid -a numTraining=10</p>
+
+      <p>During training, you will see output every 100 games with statistics about how Pacman is faring. Epsilon is positive during training, so Pacman will play poorly even after having learned a good policy: this is because he occasionally makes a random exploratory move into a ghost. As a benchmark, it should take between 1,000 and 1400 games before Pacman’s rewards for a 100 episode segment becomes positive, reflecting that he’s started winning more than losing. By the end of training, it should remain positive and be fairly high (between 100 and 350).</p>
+
+      <p>Make sure you understand what is happening here: the MDP state is the exact board configuration facing Pacman, with the now complex transitions describing an entire ply of change to that state. The intermediate game configurations in which Pacman has moved but the ghosts have not replied are not MDP states, but are bundled in to the transitions.</p>
+
+      <p>Once Pacman is done training, he should win very reliably in test games (at least 90% of the time), since now he is exploiting his learned policy.</p>
+
+      <p>However, you will find that training the same agent on the seemingly simple <code class="language-plaintext highlighter-rouge">mediumGrid</code> does not work well. In our implementation, Pacman’s average training rewards remain negative throughout training. At test time, he plays badly, probably losing all of his test games. Training will also take a long time, despite its ineffectiveness.</p>
+
+      <p>Pacman fails to win on larger layouts because each board configuration is a separate state with separate Q-values. He has no way to generalize that running into a ghost is bad for all positions. Obviously, this approach will not scale.</p>
+
+    </div></div></section>
+<section id="q10approximateqlearning"><button class="collapsible">Q10: Approximate Q-Learning</button><div class="text-content"><div class="text-inner">
+      <h3 id="points-5">(3 points)</h3>
+
+      <p>Implement an approximate Q-learning agent that learns weights for features of states, where many states might share the same features. Write your implementation in <code class="language-plaintext highlighter-rouge">ApproximateQAgent</code> class in <code class="language-plaintext highlighter-rouge">qlearningAgents.py</code>, which is a subclass of <code class="language-plaintext highlighter-rouge">PacmanQAgent</code>.</p>
+
+      <p><em>Note:</em> Approximate Q-learning assumes the existence of a feature function f(s, a) over state and action pairs, which yields a vector \([f_1(s,a), ..., f_i(s,a), ..., f_n(s,a)]\) of feature values. We provide feature functions for you in <code class="language-plaintext highlighter-rouge">featureExtractors.py</code>. Feature vectors are <code class="language-plaintext highlighter-rouge">util.Counter</code> (like a dictionary) objects containing the non-zero pairs of features and values; all omitted features have value zero.</p>
+
+      <p>The approximate Q-function takes the following form:</p>
+
+\[Q(s,a)=\sum_{i=1}^n f_i(s,a)w_i\]
+
+      <p>where each weight  is associated with a particular feature . In your code, you should implement the weight vector as a dictionary mapping features (which the feature extractors will return) to weight values. You will update your weight vectors similarly to how you updated Q-values:</p>
+
+\[w_i \leftarrow w_i + \alpha \cdot \text{difference} \cdot f_i(s,a)\]
+
+\[\text{difference} = (r + \gamma \underset{a'}{\max} Q(s',a')) - Q(s,a)\]
+
+      <p>Note that the difference term is the same as in normal Q-learning, and r is the experienced reward.</p>
+
+      <p>By default, <code class="language-plaintext highlighter-rouge">ApproximateQAgent</code> uses the <code class="language-plaintext highlighter-rouge">IdentityExtractor</code>, which assigns a single feature to every <code class="language-plaintext highlighter-rouge">(state,action)</code> pair. With this feature extractor, your approximate Q-learning agent should work identically to <code class="language-plaintext highlighter-rouge">PacmanQAgent</code>. You can test this with the following command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python pacman.py -p ApproximateQAgent -x 2000 -n 2010 -l smallGrid 
+</code></pre></div>      </div>
+
+      <p>Important: <code class="language-plaintext highlighter-rouge">ApproximateQAgent</code> is a subclass of <code class="language-plaintext highlighter-rouge">QLearningAgent</code>, and it therefore shares several methods like <code class="language-plaintext highlighter-rouge">getAction</code>. Make sure that your methods in <code class="language-plaintext highlighter-rouge">QLearningAgent</code> call <code class="language-plaintext highlighter-rouge">getQValue</code> instead of accessing Q-values directly, so that when you override getQValue in your approximate agent, the new approximate q-values are used to compute actions.</p>
+
+      <p>Once you’re confident that your approximate learner works correctly with the identity features, run your approximate Q-learning agent with our custom feature extractor, which can learn to win with ease:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python pacman.py -p ApproximateQAgent -a extractor=SimpleExtractor -x 50 -n 60 -l mediumGrid
+</code></pre></div>      </div>
+
+      <p>Even much larger layouts should be no problem for your <code class="language-plaintext highlighter-rouge">ApproximateQAgent</code>. (warning: this may take a few minutes to train)</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python pacman.py -p ApproximateQAgent -a extractor=SimpleExtractor -x 50 -n 60 -l mediumClassic
+</code></pre></div>      </div>
+
+      <p>If you have no errors, your approximate Q-learning agent should win almost every time with these simple features, even with only 50 training games.</p>
+
+      <p><strong>Grading:</strong> We will run your approximate Q-learning agent and check that it learns the same Q-values and feature weights as our reference implementation when each is presented with the same set of examples. To grade your implementation, run the autograder:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q10
+</code></pre></div>      </div>
+
+      <p>Congratulations! You have a learning Pacman agent!</p>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>Please submit all the three python files that you have modified. Use the following command:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ense411/bin/submit Lab03 valueIterationAgents.py qlearningAgents.py analysis.py
+</code></pre></div>      </div>
+
+      <p>You may check that you have submitted your assignment correctly by typing</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ense411/bin/submit -check
+</code></pre></div>      </div>
+
+      <p>And you can check the grades of your previous assignments by typing</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ense411/bin/submit -grade
+</code></pre></div>      </div>
     </div></div></section>
 
     </main>

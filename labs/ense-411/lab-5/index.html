@@ -10,6 +10,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
   <link rel="stylesheet" href="/assets/css/style.css?v=">
   <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+    </script>
+    <script type="text/javascript" async src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 </head>
 <body>
   <nav id="site">
@@ -105,12 +114,506 @@
 
 <hr />
 
+<p>In this project you will build a neural network to classify digits, and more!</p>
+
+<p>Introduction</p>
+
+<p>This project will be an introduction to machine learning.</p>
+
+<p>The code for this project contains the following files, available on Snoopy as a <code class="language-plaintext highlighter-rouge">lab-5-MachineLearning.zip</code></p>
+
+<p>Files you’ll edit:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>file</th>
+      <th>purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">models.py</code></td>
+      <td>Perceptron and neural network models for a variety of applications.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Files you should read but NOT edit:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>file</th>
+      <th>purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">nn.py</code></td>
+      <td>Neural network mini-library</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Files you will not edit:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>file</th>
+      <th>purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">autograder.py</code></td>
+      <td>Project autograder</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">backend.py</code></td>
+      <td>Backend code for various machine learning tasks</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">data</code></td>
+      <td>Datasets for digit classification and language identification</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">submission_autograder.py</code></td>
+      <td>Submission autograder (generates tokens for submission)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Files to Edit and Submit: You will fill in portions of <code class="language-plaintext highlighter-rouge">models.py</code> during the assignment. Please do not change the other files in this distribution.</p>
+
+<p><strong>Evaluation:</strong> Your code will be autograded for technical correctness. Please do not change the names of any provided functions or classes within the code, or you will wreak havoc on the autograder. However, the correctness of your implementation – not the autograder’s judgements – will be the final judge of your score. If necessary, we will review and grade assignments individually to ensure that you receive due credit for your work.</p>
+
+<p><strong>Academic Dishonesty:</strong> We will be checking your code against other submissions in the class for logical redundancy. If you copy someone else’s code and submit it with minor changes, we will know. These cheat detectors are quite hard to fool, so please don’t try. We trust you all to submit your own work only; please don’t let us down. If you do, we will pursue the strongest consequences available to us.</p>
+
+<p><strong>Proper Dataset Use:</strong> Part of your score for this project will depend on how well the models you train perform on the test set included with the autograder. We do not provide any APIs for you to access the test set directly. Any attempts to bypass this separation or to use the testing data during training will be considered cheating.</p>
+
 <p><button class="expandall">Collapse All</button></p>
-<section id="underconstruction"><button class="collapsible">Under Construction</button><div class="text-content"><div class="text-inner">
+<section id="installation"><button class="collapsible">Installation</button><div class="text-content"><div class="text-inner">
 
-      <p>I am still porting this lab from previous semesters.</p>
+      <p>For this project, you will need to install the following two libraries:</p>
+      <ul>
+        <li><a href="https://numpy.org">numpy</a>, which provides support for large multi-dimensional arrays - <a href="https://numpy.org/install/">installation instructions</a></li>
+        <li><a href="https://matplotlib.org/">matplotlib</a>, a 2D plotting library - <a href="https://matplotlib.org/stable/users/installing.html">installation instructions</a></li>
+      </ul>
 
-      <p>If you are working way ahead, you can check ou the <a href="https://inst.eecs.berkeley.edu/~cs188/su21/project5/">berkley lab doc</a></p>
+      <p>If you have a conda environment, you can install both packages on the command line by running:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate [your environment name]
+pip install numpy
+pip install matplotlib
+</code></pre></div>      </div>
+
+      <p>You will not be using these libraries directly, but they are required in order to run the provided code and autograder.</p>
+
+      <p>To test that everything has been installed, run:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py --check-dependencies
+</code></pre></div>      </div>
+
+      <p>If numpy and matplotlib are installed correctly, you should see a window pop up where a line segment spins in a circle:</p>
+
+      <p><img src="res/linear.png" alt="" /></p>
+
+      <h3 id="provided-code-part-i">Provided Code (Part I)</h3>
+
+      <p>For this project, you have been provided with a neural network mini-library (<code class="language-plaintext highlighter-rouge">nn.py</code>) and a collection of datasets (<code class="language-plaintext highlighter-rouge">backend.py</code>).</p>
+
+      <p>The library in <code class="language-plaintext highlighter-rouge">nn.py</code> defines a collection of node objects. Each node represents a real number or a matrix of real numbers. Operations on node objects are optimized to work faster than using Python’s built-in types (such as lists).</p>
+
+      <p>Here are a few of the provided node types:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">nn.Constant</code> represents a matrix (2D array) of floating point numbers. It is typically used to represent input features or target outputs/labels. Instances of this type will be provided to you by other functions in the API; you will not need to construct them directly.</li>
+        <li><code class="language-plaintext highlighter-rouge">nn.Parameter</code> represents a trainable parameter of a perceptron or neural network.</li>
+        <li><code class="language-plaintext highlighter-rouge">nn.DotProduct</code> computes a dot product between its inputs.</li>
+      </ul>
+
+      <p>Additional provided functions:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">nn.as_scalar</code> can extract a Python floating-point number from a node. 
+When training a perceptron or neural network, you will be passed a <code class="language-plaintext highlighter-rouge">dataset</code> object. You can retrieve batches of training examples by calling <code class="language-plaintext highlighter-rouge">dataset.iterate_once(batch_size)</code>:</li>
+      </ul>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">.</span><span class="n">iterate_once</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+    <span class="p">...</span>
+</code></pre></div>      </div>
+
+      <p>For example, let’s extract a batch of size 1 (i.e., a single training example) from the perceptron training data:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">.</span><span class="n">iterate_once</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+<span class="p">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="p">...</span>     <span class="k">break</span>
+<span class="p">...</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x3</span> <span class="n">at</span> <span class="mh">0x11a8856a0</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11a89efd0</span><span class="o">&gt;</span>
+</code></pre></div>      </div>
+
+      <p>The input features <code class="language-plaintext highlighter-rouge">x</code> and the correct label <code class="language-plaintext highlighter-rouge">y</code> are provided in the form of <code class="language-plaintext highlighter-rouge">nn.Constant</code> nodes. The shape of <code class="language-plaintext highlighter-rouge">x</code> will be <code class="language-plaintext highlighter-rouge">batch_size x num_features</code>, and the shape of <code class="language-plaintext highlighter-rouge">y</code> is <code class="language-plaintext highlighter-rouge">batch_size x num_outputs</code>. Here is an example of computing a dot product of <code class="language-plaintext highlighter-rouge">x</code> with itself, first as a node and then as a Python number.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; nn.DotProduct(x, x)
+&lt;DotProduct shape=1x1 at 0x11a89edd8&gt;
+&gt;&gt;&gt; nn.as_scalar(nn.DotProduct(x, x))
+1.9756581717465536
+</code></pre></div>      </div>
+    </div></div></section>
+<section id="question1perceptron"><button class="collapsible">Question 1: Perceptron</button><div class="text-content"><div class="text-inner">
+      <h3 id="points">(6 points)</h3>
+
+      <p>Before starting this part, be sure you have <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code> installed!</p>
+
+      <p>In this part, you will implement a binary perceptron. Your task will be to complete the implementation of the <code class="language-plaintext highlighter-rouge">PerceptronModel</code> class in <code class="language-plaintext highlighter-rouge">models.py</code>.</p>
+
+      <p>For the perceptron, the output labels will be either 1 or -1, meaning that data points <code class="language-plaintext highlighter-rouge">(x, y)</code> from the dataset will have <code class="language-plaintext highlighter-rouge">y</code> be a <code class="language-plaintext highlighter-rouge">nn.Constant</code> node that contains either 1 or -1 as its entries.</p>
+
+      <p>We have already initialized the perceptron weights <code class="language-plaintext highlighter-rouge">self.w</code> to be a \(1 \times \text{dimensions}\) parameter node. The provided code will include a bias feature inside <code class="language-plaintext highlighter-rouge">x</code> when needed, so you will not need a separate parameter for the bias.</p>
+
+      <p>Your tasks are to:</p>
+      <ul>
+        <li>Implement the <code class="language-plaintext highlighter-rouge">run(self, x)</code> method. This should compute the dot product of the stored weight vector and the given input, returning an <code class="language-plaintext highlighter-rouge">nn.DotProduct</code> object.</li>
+        <li>Implement <code class="language-plaintext highlighter-rouge">get_prediction(self, x)</code>, which should return 1 if the dot product is non-negative or -1 otherwise. You should use <code class="language-plaintext highlighter-rouge">nn.as_scalar</code> to convert a scalar <code class="language-plaintext highlighter-rouge">Node</code> into a Python floating-point number.</li>
+        <li>Write the <code class="language-plaintext highlighter-rouge">train(self)</code> method. This should repeatedly loop over the data set and make updates on examples that are misclassified. Use the <code class="language-plaintext highlighter-rouge">update</code> method of the <code class="language-plaintext highlighter-rouge">nn.Parameter</code> class to update the weights. When an entire pass over the data set is completed without making any mistakes, 100% training accuracy has been achieved, and training can terminate.</li>
+      </ul>
+
+      <p>In this project, the only way to change the value of a parameter is by calling <code class="language-plaintext highlighter-rouge">parameter.update(direction, multiplier)</code>, which will perform the update to the weights:</p>
+
+\[\text{weights} \leftarrow \text{weights} + \text{direction} \cdot \text{multiplier}\]
+
+      <p>The <code class="language-plaintext highlighter-rouge">direction</code> argument is a <code class="language-plaintext highlighter-rouge">Node</code> with the same shape as the parameter, and the <code class="language-plaintext highlighter-rouge">multiplier</code> argument is a Python scalar.
+To test your implementation, run the autograder:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q1
+</code></pre></div>      </div>
+
+      <p><strong>Note:</strong> the autograder should take at most 20 seconds or so to run for a correct implementation. If the autograder is taking forever to run, your code probably has a bug.</p>
+
+      <h3 id="neural-network-tips">Neural Network Tips</h3>
+
+      <p>In the remaining parts of the project, you will implement the following models:</p>
+      <ul>
+        <li>Q2: Regression</li>
+        <li>Q3: Handwritten Digit Classification</li>
+        <li>Q4: Language Identification</li>
+      </ul>
+
+      <h3 id="building-neural-nets">Building Neural Nets</h3>
+
+      <p>Throughout the applications portion of the project, you’ll use the framework provided in <code class="language-plaintext highlighter-rouge">nn.py</code> to create neural networks to solve a variety of machine learning problems. A simple neural network has layers, where each layer performs a linear operation (just like perceptron). Layers are separated by a <em>non-linearity</em>, which allows the network to approximate general functions. We’ll use the ReLU operation for our non-linearity, defined as \(relu(x) = \max(x,0)\) . For example, a simple two-layer neural network for mapping an input row vector \(\mathbf{x}\) to an output vector \(\mathbf{f(x)}\) would be given by the function:</p>
+
+\[\mathbf{f(x)} = relu(x \cdot \mathbf{W_1} + \mathbf{b_1}) \cdot \mathbf{W_2}+\mathbf{b_2}\]
+
+      <p>where we have parameter matrices \(\mathbf{W_1}\) and \(\mathbf{W_2}\) and parameter vectors \(\mathbf{b_1}\) and \(\mathbf{b_2}\) to learn during gradient descent. \(\mathbf{W_1}\) will be an \(i \times h\) matrix, where \(i\) is the dimension of our input vectors \(\mathbf{x}\), and \(h\) is the <em>hidden layer size</em>. \(\mathbf{b_1}\) will be a size \(h\) vector. We are free to choose any value we want for the hidden size (we will just need to make sure the dimensions of the other matrices and vectors agree so that we can perform the operations). Using a larger hidden size will usually make the network more powerful (able to fit more training data), but can make the network harder to train (since it adds more parameters to all the matrices and vectors we need to learn), or can lead to overfitting on the training data.
+We can also create deeper networks by adding more layers, for example a three-layer net:</p>
+
+\[\mathbf{f(x)} = relu(relu(x \cdot \mathbf{W_1} + \mathbf{b_1}) \cdot \mathbf{W_2}+\mathbf{b_2}) \cdot \mathbf{W_3}+\mathbf{b_3}\]
+
+      <h3 id="note-on-batching">Note on Batching</h3>
+
+      <p>For efficiency, you will be required to process whole batches of data at once rather than a single example at a time. This means that instead of a single input row vector \(\mathbf{x}\) with size \(i\), you will be presented with a batch of \(b\) inputs represented as a \(b \times i\) matrix \(\mathbf{X}\) . We provide an example for linear regression to demonstrate how a linear layer can be implemented in the batched setting.</p>
+
+      <h3 id="note-on-randomness">Note on Randomness</h3>
+
+      <p>The parameters of your neural network will be randomly initialized, and data in some tasks will be presented in shuffled order. Due to this randomness, it’s possible that you will still occasionally fail some tasks even with a strong architecture – this is the problem of local optima! This should happen very rarely, though – if when testing your code you fail the autograder twice in a row for a question, you should explore other architectures.</p>
+
+      <h3 id="practical-tips">Practical tips</h3>
+
+      <p>Designing neural nets can take some trial and error. Here are some tips to help you along the way:</p>
+      <ul>
+        <li>Be systematic. Keep a log of every architecture you’ve tried, what the hyperparameters (layer sizes, learning rate, etc.) were, and what the resulting performance was. As you try more things, you can start seeing patterns about which parameters matter. If you find a bug in your code, be sure to cross out past results that are invalid due to the bug.</li>
+        <li>Start with a shallow network (just two layers, i.e. one non-linearity). Deeper networks have exponentially more hyperparameter combinations, and getting even a single one wrong can ruin your performance. Use the small network to find a good learning rate and layer size; afterwards you can consider adding more layers of similar size.</li>
+        <li>If your learning rate is wrong, none of your other hyperparameter choices matter. You can take a state-of-the-art model from a research paper, and change the learning rate such that it performs no better than random. A learning rate too low will result in the model learning too slowly, and a learning rate too high may cause loss to diverge to infinity. Begin by trying different learning rates while looking at how the loss decreases over time.</li>
+        <li>Smaller batches require lower learning rates. When experimenting with different batch sizes, be aware that the best learning rate may be different depending on the batch size.</li>
+        <li>Refrain from making the network too wide (hidden layer sizes too large) If you keep making the network wider accuracy will gradually decline, and computation time will increase quadratically in the layer size – you’re likely to give up due to excessive slowness long before the accuracy falls too much. The full autograder for all parts of the project takes 2-12 minutes to run with staff solutions; if your code is taking much longer you should check it for efficiency.</li>
+        <li>If your model is returning Infinity or NaN, your learning rate is probably too high for your current architecture.</li>
+        <li>Recommended values for your hyperparameters:
+          <ul>
+            <li>Hidden layer sizes: between 10 and 400.</li>
+            <li>Batch size: between 1 and the size of the dataset. For Q2 and Q3, we require that total size of the dataset be evenly divisible by the batch size.</li>
+            <li>Learning rate: between 0.001 and 1.0.</li>
+            <li>Number of hidden layers: between 1 and 3.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="provided-code-part-ii">Provided Code (Part II)</h3>
+
+      <p>Here is a full list of nodes available in <code class="language-plaintext highlighter-rouge">nn.py</code>. You will make use of these in the remaining parts of the assignment:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">nn.Constant</code> represents a matrix (2D array) of floating point numbers. It is typically used to represent input features or target outputs/labels. Instances of this type will be provided to you by other functions in the API; you will not need to construct them directly.</li>
+        <li><code class="language-plaintext highlighter-rouge">nn.Parameter</code> represents a trainable parameter of a perceptron or neural network. All parameters must be 2-dimensional.
+          <ul>
+            <li>Usage: <code class="language-plaintext highlighter-rouge">nn.Parameter(n, m)</code> constructs a parameter with shape \(n \times m\)</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">nn.Add</code> adds matrices element-wise.
+          <ul>
+            <li>Usage: <code class="language-plaintext highlighter-rouge">nn.Add(x, y)</code> accepts two nodes of shape \(\text{batch_size} \times \text{num_features}\) and constructs a node that also has shape \(\text{batch_size}\times \text{num_features}\)</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">nn.AddBias</code> adds a bias vector to each feature vector.
+          <ul>
+            <li>Usage: <code class="language-plaintext highlighter-rouge">nn.AddBias(features, bias)</code> accepts <code class="language-plaintext highlighter-rouge">features</code> of shape \(\text{batch_size} \times \text{num_features}\) and bias of shape \(1 \times \text{num_features}\) , and constructs a node that has shape \(\text{batch_size} \times \text{num_features}\) .</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">nn.Linear</code> applies a linear transformation (matrix multiplication) to the input.
+          <ul>
+            <li>Usage: <code class="language-plaintext highlighter-rouge">nn.Linear(features, weights)</code> accepts features of shape \(\text{batch_size} \times \text{num_input_features}\) and weights of shape \(\text{ num_input_features} \times \text{num_output_features}\) , and constructs a node that has shape \(\text{ batch_size} \times \text{num_output_features}\) .</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">nn.ReLU</code> applies the element-wise Rectified Linear Unit nonlinearity \(relu(x) = \max(x,0)\) . This nonlinearity replaces all negative entries in its input with zeros.
+          <ul>
+            <li>Usage: <code class="language-plaintext highlighter-rouge">nn.ReLU(features)</code>, which returns a node with the same shape as the input.</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">nn.SquareLoss</code> computes a batched square loss, used for regression problems
+          <ul>
+            <li>Usage: <code class="language-plaintext highlighter-rouge">nn.SquareLoss(a, b)</code>, where <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> both have shape \(\text{batch_size} \times \text{num_outputs}\) .</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">nn.SoftmaxLoss</code> computes a batched softmax loss, used for classification problems.
+          <ul>
+            <li>Usage: <code class="language-plaintext highlighter-rouge">nn.SoftmaxLoss(logits, labels)</code>, where <code class="language-plaintext highlighter-rouge">logits</code> and <code class="language-plaintext highlighter-rouge">labels</code> both have shape \(\text{batch_size} \times \text{num_classes}\) . The term “logits” refers to scores produced by a model, where each entry can be an arbitrary real number. The labels, however, must be non-negative and have each row sum to 1. Be sure not to swap the order of the arguments!</li>
+          </ul>
+        </li>
+        <li><em>Do not use <code class="language-plaintext highlighter-rouge">nn.DotProduct</code> for any model other than the perceptron.</em></li>
+      </ul>
+
+      <p>The following methods are available in <code class="language-plaintext highlighter-rouge">nn.py</code>:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">nn.gradients</code> computes gradients of a loss with respect to provided parameters.
+          <ul>
+            <li>Usage: <code class="language-plaintext highlighter-rouge">nn.gradients(loss, [parameter_1, parameter_2, ..., parameter_n])</code> will return a list <code class="language-plaintext highlighter-rouge">[gradient_1, gradient_2, ..., gradient_n]</code>, where each element is an <code class="language-plaintext highlighter-rouge">nn.Constant</code> containing the gradient of the loss with respect to a parameter.</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">nn.as_scalar</code> can extract a Python floating-point number from a loss node. This can be useful to determine when to stop training.
+          <ul>
+            <li>Usage: <code class="language-plaintext highlighter-rouge">nn.as_scalar(node)</code>, where <code class="language-plaintext highlighter-rouge">node</code> is either a loss node or has shape <code class="language-plaintext highlighter-rouge">(1,1)</code>.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>The datasets provided also have two additional methods:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">dataset.iterate_forever(batch_size)</code> yields an infinite sequences of batches of examples.</li>
+        <li><code class="language-plaintext highlighter-rouge">dataset.get_validation_accuracy()</code> returns the accuracy of your model on the validation set. This can be useful to determine when to stop training.</li>
+      </ul>
+
+      <h3 id="example-linear-regression">Example: Linear Regression</h3>
+
+      <p>As an example of how the neural network framework works, let’s fit a line to a set of data points. We’ll start four points of training data constructed using the function \(y = 7x_0 + 8x_1 + 3\) . In batched form, our data is:</p>
+
+      <p>\(\mathbf{X} = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \\ 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix}\) and \(\mathbf{Y} = \begin{bmatrix} 3 \\ 11 \\ 10 \\ 18 \end{bmatrix}\)</p>
+
+      <p>Suppose the data is provided to us in the form of nn.Constant nodes:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="n">x2</span> <span class="n">at</span> <span class="mh">0x10a30fe80</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x10a30fef0</span><span class="o">&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Let’s construct and train a model of the form \(f(x)=x_0 \cdot m_0 + x_1 \cdot m_1 + b\). If done correctly, we should be able to learn than \(m_0=7\), \(m_1=8\), and \(b=3\).</p>
+
+      <p>First, we create our trainable parameters. In matrix form, these are:</p>
+
+      <p>\(\mathbf{M} = \begin{bmatrix} m_0 \\ m_1 \end{bmatrix}\) and \(\mathbf{B} = \begin{bmatrix} b \end{bmatrix}\)</p>
+
+      <p>Which corresponds to the following code:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">m</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Printing them gives:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">m</span>
+<span class="o">&lt;</span><span class="n">Parameter</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x112b8b208</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+<span class="o">&lt;</span><span class="n">Parameter</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x112b8beb8</span><span class="o">&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Next, we compute our model’s predictions for y:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">xm</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="n">predicted_y</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">AddBias</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Our goal is to have the predicted y-values match the provided data. In linear regression we do this by minimizing the square loss:</p>
+
+\[\mathcal{L} = \frac{1}{2N}  \sum_{(x,y)} (y-f(x))^2\]
+
+      <p>We construct a loss node:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">loss</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">SquareLoss</span><span class="p">(</span><span class="n">predicted_y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>In our framework, we provide a method that will return the gradients of the loss with respect to the parameters:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grad_wrt_m</span><span class="p">,</span> <span class="n">grad_wrt_b</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+</code></pre></div>      </div>
+
+      <p>Printing the nodes used gives:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">xm</span>
+<span class="o">&lt;</span><span class="n">Linear</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11a869588</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">predicted_y</span>
+<span class="o">&lt;</span><span class="n">AddBias</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11c23aa90</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">loss</span>
+<span class="o">&lt;</span><span class="n">SquareLoss</span> <span class="n">shape</span><span class="o">=</span><span class="p">()</span> <span class="n">at</span> <span class="mh">0x11c23a240</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">grad_wrt_m</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11a8cb160</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">grad_wrt_b</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11a8cb588</span><span class="o">&gt;</span>
+</code></pre></div>      </div>
+
+      <p>We can then use the <code class="language-plaintext highlighter-rouge">update</code> method to update our parameters. Here is an update for <code class="language-plaintext highlighter-rouge">m</code>, assuming we have already initialized a <code class="language-plaintext highlighter-rouge">multiplier</code> variable based on a suitable learning rate of our choosing:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">m</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">grad_wrt_m</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>If we also include an update for <code class="language-plaintext highlighter-rouge">b</code> and add a loop to repeatedly perform gradient updates, we will have the full training procedure for linear regression.</p>
+
+    </div></div></section>
+<section id="question2nonlinearregression"><button class="collapsible">Question 2: Non-linear Regression</button><div class="text-content"><div class="text-inner">
+      <h3 id="points-1">(6 points)</h3>
+
+      <p>For this question, you will train a neural network to approximate \(\sin(x)\) over \([−2 \pi,2 \pi]\).</p>
+
+      <p>You will need to complete the implementation of the <code class="language-plaintext highlighter-rouge">RegressionModel</code> class in <code class="language-plaintext highlighter-rouge">models.py</code>. For this problem, a relatively simple architecture should suffice (see Neural Network Tips for architecture tips.) Use <code class="language-plaintext highlighter-rouge">nn.SquareLoss</code> as your loss.
+Your tasks are to:</p>
+      <ul>
+        <li>Implement <code class="language-plaintext highlighter-rouge">RegressionModel.__init__</code> with any needed initialization</li>
+        <li>Implement <code class="language-plaintext highlighter-rouge">RegressionModel.run</code> to return a batch_size×1 node that represents your model’s prediction.</li>
+        <li>Implement <code class="language-plaintext highlighter-rouge">RegressionModel.get_loss</code> to return a loss for given inputs and target outputs.</li>
+        <li>Implement <code class="language-plaintext highlighter-rouge">RegressionModel.train</code>, which should train your model using gradient-based updates. 
+There is only a single dataset split for this task (i.e., there is only training data and no validation data or test set). Your implementation will receive full points if it gets a loss of 0.02 or better, averaged across all examples in the dataset. You may use the training loss to determine when to stop training (use <code class="language-plaintext highlighter-rouge">nn.as_scalar</code> to convert a loss node to a Python number). Note that it should take the model a few minutes to train.</li>
+      </ul>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python</span> <span class="n">autograder</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">q</span> <span class="n">q2</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="question3digitclassification"><button class="collapsible">Question 3: Digit Classification</button><div class="text-content"><div class="text-inner">
+      <h3 id="points-2">(6 points)</h3>
+
+      <p>For this question, you will train a network to classify handwritten digits from the MNIST dataset.</p>
+
+      <p>Each digit is of size \(28 \times 28\) pixels, the values of which are stored in a \(784\) -dimensional vector of floating point numbers. Each output we provide is a 10-dimensional vector which has zeros in all positions, except for a one in the position corresponding to the correct class of the digit.</p>
+
+      <p>Complete the implementation of the <code class="language-plaintext highlighter-rouge">DigitClassificationModel</code> class in <code class="language-plaintext highlighter-rouge">models.py</code>. The return value from <code class="language-plaintext highlighter-rouge">DigitClassificationModel.run()</code> should be a \(\text{batch_size} \times \text{10}\) node containing scores, where higher scores indicate a higher probability of a digit belonging to a particular class (0-9). You should use <code class="language-plaintext highlighter-rouge">nn.SoftmaxLoss</code> as your loss. Do not put a ReLU activation after the last layer of the network.</p>
+
+      <p>For both this question and Q4, in addition to training data, there is also validation data and a test set. You can use <code class="language-plaintext highlighter-rouge">dataset.get_validation_accuracy()</code> to compute validation accuracy for your model, which can be useful when deciding whether to stop training. The test set will be used by the autograder.</p>
+
+      <p>To receive points for this question, your model should achieve an accuracy of at least 97% on the test set. For reference, our staff implementation consistently achieves an accuracy of 98% on the validation data after training for around 5 epochs. Note that the test grades you on <strong>test accuracy</strong>, while you only have access to <strong>validation accuracy</strong> - so if your validation accuracy meets the 97% threshold, you may still fail the test if your test accuracy does not meet the threshold. Therefore, it may help to set a slightly higher stopping threshold on validation accuracy, such as 97.5% or 98%.</p>
+
+      <p>To test your implementation, run the autograder:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python</span> <span class="n">autograder</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">q</span> <span class="n">q3</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="question4deepqlearning"><button class="collapsible">Question 4: Deep Q-Learning</button><div class="text-content"><div class="text-inner">
+      <h3 id="points-3">(7 points)</h3>
+
+      <p>For the final project question of the semester, you will combine concepts from Q-learning and ML. In <code class="language-plaintext highlighter-rouge">models.py</code>, you will implement <code class="language-plaintext highlighter-rouge">DeepQNetwork</code>, which is a neural network that predicts the Q values for all possible actions given a state.</p>
+
+      <p>You will implement the following functions:</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">__init__()</code>: Just like all other models, you will initialize all the parameters of your neural network here. You must also initialize the following variables:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">self.parameters</code>: A list containing all your parameters in order of your forward pass.</li>
+            <li><code class="language-plaintext highlighter-rouge">self.learning_rate</code>: You will use this in <code class="language-plaintext highlighter-rouge">gradient_update()</code>.</li>
+            <li><code class="language-plaintext highlighter-rouge">self.numTrainingGames</code>: The number of games that Pacman will play to collect transitions from and learn its Q values; note that this should be greater than 1000, since roughly the first 1000 games are used for exploration and are not used to update the Q network.</li>
+            <li><code class="language-plaintext highlighter-rouge">self.batch_size</code>: The number of transitions the model should use for each gradient update. The autograder will use this variable; you should not need to access this variable after setting it.</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">get_loss()</code>: Return the square loss between predicted Q values (outputted by your network), and the Q_targets (which you will treat as the ground truth).</li>
+        <li><code class="language-plaintext highlighter-rouge">run()</code>: Similar to the method of other models, you will return the result of a forward pass through your Q network. (The output should be a vector of size (batch_size, num_actions), since we want to return the Q value for all possible actions given a state.)</li>
+        <li><code class="language-plaintext highlighter-rouge">gradient_update()</code>: Iterate through your <code class="language-plaintext highlighter-rouge">self.parameters</code> and update each of them according to the computed gradients. However, unlike all other models, you are not iterating over the entire dataset in this function, nor are you repeatedly updating the parameters until convergence. This function should only perform a single gradient update for each parameter. The autograder will repeatedly call this function to update your network.</li>
+      </ul>
+
+      <p>Other than <code class="language-plaintext highlighter-rouge">models.py</code>, you will also need to implement the missing parts for the deep Q learning algorithm in <code class="language-plaintext highlighter-rouge">compute_q_targets()</code> for <code class="language-plaintext highlighter-rouge">PacmanDeepQAgent</code> in <code class="language-plaintext highlighter-rouge">qLearningAgents.py</code> .</p>
+
+      <p>Recall that the update rule for Q-Learning is</p>
+
+\[Q(s,a) = Q(s,a) + \alpha [r(s,a,s')+(1−\text{done})\gamma \underset{a'}\max Q(s',a')−Q(s,a)]\]
+
+      <p>So for the Q values to converge to optimal, it is necessary that:</p>
+
+\[[r+(1−\text{done})\gamma \underset{a'}\max Q(s',a')] − Q(s,a) = 0\]
+
+      <p>In Deep Q Learning, we have 2 networks with the same architecture: a Q network \(Q(s,a)\) and a target network \(\hat{Q}(s,a)\). The task is to run regression to fit \(Q(s,a)\) to a target matrix which you compute in <code class="language-plaintext highlighter-rouge">compute_q_targets()</code>.</p>
+
+      <p>The target matrix you return from this method should be of size <code class="language-plaintext highlighter-rouge">(batch_size, num_actions)</code>, and should be first set equal to the Q network’s prediction (please copy the values or strange things will happen).</p>
+
+      <p>Each row of the target matrix is a <code class="language-plaintext highlighter-rouge">(1,num_actions)</code> vector, and is the target computed from a transition \((s,a,r,s′,\text{done})\) . We set its \(a\) -th entry \(target(s,a) = r+(1−\text{done}) \gamma \hat{Q} (s', \underset{a'}{\operatorname{argmax}}  Q(s′,a′))+ \text{exploration bonus}\) , which basically means we still select the best action using Q network ( \(a'= \underset{a'}{\operatorname{argmax}} Q(s',a')\) ), but we calculate the value using target network ( \(\hat{Q}(s',a')\) ).</p>
+
+      <p>The exploration bonus aims to encourage exploring more states and actions following this expression: \(\text{exploration bonus} = \frac{1}{2 \sqrt{\frac{N(s)+1}{100}}}\) where \(N(s)\) is the number of times the agent visits that state. You can access this information in <code class="language-plaintext highlighter-rouge">self.counts</code> (a matrix that stores the counts in the corresponding x,y positions. \(N(s)+1=\text{self.counts}[x,y]\) )</p>
+
+      <p>Sanity check: An example with <code class="language-plaintext highlighter-rouge">batch_size=1</code>, <code class="language-plaintext highlighter-rouge">num_actions=2</code>, <code class="language-plaintext highlighter-rouge">legal_actions=[0,1,2,3]</code></p>
+
+      <p>Since <code class="language-plaintext highlighter-rouge">batch_size=1</code>, the input (the parameter) will only have one piece of transition \((s,a,r,s′, \text{done})\) , and the output (target matrix) will be a \(\text{1} \times \text{4}\) “matrix” (which is \(\text{batch_size} \times \text{num_actions}\) ).</p>
+
+      <p>Suppose action \(a=2\), reward \(r=4\), \(\text{done}=\text{False}=0\), visit count \(N(s)=99\), discount factor \(\gamma = 0.9\) .</p>
+
+      <ul>
+        <li>First, we plug state \(s\) into the Q network and get \(Q(s,\cdot )=[10,20,30,40]\). (The dot means “for all 4 actions”)</li>
+        <li>Then, we calculate the exploration bonus and get \(\text{exploration bonus} = \frac{1}{2 \sqrt{\frac{99+1}{100}}} = \frac{1}{2}.\)</li>
+        <li>
+          <p>In order to get the next state’s Q value, we plug next state \(s'\) into both the Q network and the target network and get \(Q(s',\cdot)=[5,6,7,8], \hat{Q}(s′,⋅)=[11,12,13,14].\) We pick the index with the maximum value for the Q network, which is index 3 having a max value of 8. In other words, \(\underset{a'}{\operatorname{argmax}} Q(s',a') = 3\). We then take the value in target network’s output in that index, which is \(\hat{Q}(s',\underset{a'}{\operatorname{argmax}} Q(s',a'))=\hat{Q}(s',3)=14.\)</p>
+        </li>
+        <li>We use the exploration bonus, the target network’s output, and the reward to calculate the new Q value estimate \(target(s,a)=r+(1−\text{done})\gamma \hat{Q}(s',\underset{a'}{\operatorname{argmax}}Q(s',a'))+\text{exploration bonus}=4+(1−0)×0.9×14+\frac{1}{2}=17.1\) .</li>
+        <li>Finally, we set the values for the output target “matrix”. All the values should first be copied from the Q network output, except for the action’s entry being the new Q value estimate. So the matrix we return will be \(target=[10,20,17.1,40]\) , the third entry (the action entry) is set to be \(17.1\).</li>
+        <li>This target output is then sent to <code class="language-plaintext highlighter-rouge">gradient_update()</code> in the model to calculate mean square error with the Q network’s output. So <code class="language-plaintext highlighter-rouge">loss=nn.SquareLoss([10,20,30,40], [10,20,17.1,40])</code> = \(frac{1}{4}(0+0+(30−17.1)2+0)12=20.8\) . (Don’t worry about how <code class="language-plaintext highlighter-rouge">SquareLoss</code> works here.) And with this loss, we can perform back propagation to update our Q network.</li>
+      </ul>
+
+      <p>When doing matrix operations, we should use numpy arrays instead of the Node class in this project. You can access the numpy matrix in the node by <code class="language-plaintext highlighter-rouge">node.data</code>. We’ve provided you all the variables in the mini batch: <code class="language-plaintext highlighter-rouge">states</code>, <code class="language-plaintext highlighter-rouge">actions</code>, <code class="language-plaintext highlighter-rouge">rewards</code>, <code class="language-plaintext highlighter-rouge">next_states</code>, and <code class="language-plaintext highlighter-rouge">dones</code>. Only states and <code class="language-plaintext highlighter-rouge">next_states</code> are “nodes” (in order to act as inputs for the neural networks), all other variables are numpy arrays. We’ve also provided a numpy version of states called <code class="language-plaintext highlighter-rouge">states_np</code> for your convenience when calculating the exploration bonus.</p>
+
+      <p>Some numpy functions you might need to look at include but not limited to: <code class="language-plaintext highlighter-rouge">np.copy()</code>, <code class="language-plaintext highlighter-rouge">np.sqrt()</code>, <code class="language-plaintext highlighter-rouge">np.arange()</code>, <code class="language-plaintext highlighter-rouge">np.argmax()</code>, and basic indexing in numpy matrix.</p>
+
+      <p>Try to use as many batched (vectorized) operations from numpy as possible instead of for loops over the samples to speed up learning.</p>
+
+      <p><strong>Grading:</strong> You will get 3 points if you compute the targets correctly even if you don’t have a good model. We will run your Deep Q learning Pacman agent for 10 games after your agent trains on <code class="language-plaintext highlighter-rouge">self.numTrainingGames</code> games. If your agent wins at least 6/10 of the games, then you will receive full credit. If your agent wins at least 8/10 of the games, then you will receive 1 extra credit. Please note that deep Q learning is not known for its stability, despite some of the tricks we have implemented in the backend training loop. The number of games your agent wins may vary for each run. To achieve the extra credit point, your implementation should consistently beat the 80% threshold.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q4
+</code></pre></div>      </div>
+
+      <p>In case that you’re interested in learning how Deep Q-learning works, here is some nice pseudocode from the famous DQN atari game paper on vanilla Deep Q-learning. Notice that we are NOT implementing this version of DQN in this project (in fact, many things are different) so don’t use this paper as a reference. It’s just here for you to see how deep Q-learning works besides the functions you implement. Here’s another paper about Double Deep Q-learning (DDQN) which is more similar on what we’re doing here (in terms of having two networks and etc.).</p>
+
+      <p><img src="res/DQN.png" alt="" /></p>
+
+      <p>Congratulations! You have trained a deep RL Pacman and finished all the projects in ENSE 411! If you thought this was cool, try training your model on harder layouts:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python pacman.py -p PacmanDeepQAgent -x [numGames] -n [numGames + 10] -l testClassic
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>Please note that during grading, your submissions will be run through the autograder and only be given about 20 minutes of training time on a modern CPU workstation. If an algorithm is taking significantly longer to train (30 minuites+), you need to optimize your algorithm. My solutions take 14 minutes to run (and get full marks).</p>
+
+      <p>Please submit <code class="language-plaintext highlighter-rouge">nn.py</code> that you have modified. Use the following command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ense411/bin/submit Lab05 models.py
+</code></pre></div>      </div>
+
+      <p>You may check that you have submitted your assignment correctly by typing</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ense411/bin/submit -check
+</code></pre></div>      </div>
+
+      <p>And you can check the grades of your previous assignments by typing</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ense411/bin/submit -grade
+</code></pre></div>      </div>
+
+      <p>Congratulations! This was the last project for ENSE 411!</p>
     </div></div></section>
 
     </main>
