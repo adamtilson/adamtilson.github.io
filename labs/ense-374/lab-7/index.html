@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Tilson</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-7-ejs-and-template">Lab 7: EJS And Template</h1>
+
+<p>ENSE 374 - Software Engineering Management - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>This lab introduces EJS, a Node.js library for Embedded JavaScript Templates. With this, we will be able to create Templated HTML files which will have placeholders for different variables that will be automatically filled from the Express Server with Node.js. Additionally, we can create reusable chunks of files, called Partials, that can be dynamically inserted into pages.</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges.</p>
+      <ul>
+        <li>A modern web browser, with a strong preference for Firefox or Chrome</li>
+        <li>A text editor, preferably VS Code</li>
+      </ul>
+
+    </div></div></section>
+<section id="part1introtoejs"><button class="collapsible">Part 1: Intro to EJS</button><div class="text-content"><div class="text-inner">
+
+      <p>Recall our stack, as well as our progress so far…</p>
+
+      <p><img src="res/node-stack.svg" alt="node stack" /></p>
+
+      <p>So far we have understand how all of the files on the front end work, as well as how those files get passed over from server. But how do we add data to those files?</p>
+
+      <h3 id="template-processing">Template Processing</h3>
+
+      <p>In the previous lab, we used <code class="language-plaintext highlighter-rouge">express</code> to send data back using <code class="language-plaintext highlighter-rouge">res.send</code> and <code class="language-plaintext highlighter-rouge">res.sendfile</code>.</p>
+
+      <p>Either we could build the entire HTML page from scratch using <code class="language-plaintext highlighter-rouge">res.send</code> and HTML tags, or send a completed page with <code class="language-plaintext highlighter-rouge">res.sendfile</code>.</p>
+
+      <p>What if we want to send mostly complete HTML files where only small parts of them get changed, for example a name or a form?</p>
+
+      <p>If we did send an entire HTML page built using JavaScript, which principle would we be violating?</p>
+
+      <h3 id="installing-ejs">Installing EJS</h3>
+
+      <p>You can install EJS with:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install ejs
+</code></pre></div>      </div>
+
+      <p>You can bring it into your express app with:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">view engine</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">ejs</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Remember to call this after you set app to <code class="language-plaintext highlighter-rouge">express</code>!</p>
+
+    </div></div></section>
+<section id="part2ejstemplatesandsendingvariables"><button class="collapsible">Part 2: EJS Templates and sending variables</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="creating-an-ejs-templated-html-file">Creating an ejs templated HTML file</h3>
+
+      <p>You EJS files need to be put in a special directory:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/views
+</code></pre></div>      </div>
+
+      <p>So, our main file is typically called: <code class="language-plaintext highlighter-rouge">/views/index.ejs</code>, but we can have others too, like <code class="language-plaintext highlighter-rouge">/views/about.ejs</code> or <code class="language-plaintext highlighter-rouge">/views/contact.ejs</code>.</p>
+
+      <p>These files are mostly HTML files…</p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Welcome to my page, user!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Wouldn’t it be nice if we could personalize our page with our user’s name?</p>
+
+      <h3 id="variable-templates">Variable templates</h3>
+
+      <p>In your HTML file, where you want a passed variable to be rendered, you use this syntax:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;%= variable %&gt;
+</code></pre></div>      </div>
+      <p>All of the variables you want to render you need to pass, otherwise you’ll get an error</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Welcome to my page, <span class="nt">&lt;</span><span class="err">%=</span> <span class="na">username</span> <span class="err">%</span><span class="nt">&gt;</span>!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <h3 id="send-variables-to-the-template">Send Variables to the Template</h3>
+
+      <p>Rather than using send, Passing a variable to a template using the following syntax:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">"</span><span class="s2">index</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Adam</span><span class="dl">"</span><span class="p">})</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p><code class="language-plaintext highlighter-rouge">res.render</code> means to render using the EJS view engine
+<code class="language-plaintext highlighter-rouge">"index"</code> means look for a file in views called <code class="language-plaintext highlighter-rouge">index.ejs</code>
+The second argument is a JavaScript object of name, value pairs, in this case:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">name</code> is the variable in the EJS file</li>
+        <li><code class="language-plaintext highlighter-rouge">Adam</code> is what we wish to write there</li>
+      </ul>
+
+      <p>And when we preview our page, now we our username will be displayed!</p>
+
+    </div></div></section>
+<section id="part3ejscontrolcode"><button class="collapsible">Part 3: EJS Control Code</button><div class="text-content"><div class="text-inner">
+
+      <p>Sending individual variables is useful, but we can actually do more with EJS. We can send Arrays and work with them using EJS control structures.</p>
+
+      <p>Control structures are similar in syntax to JavaScript, though not all of the functionality exists. Each <code class="language-plaintext highlighter-rouge">scriptlet</code> line is wrapped in <code class="language-plaintext highlighter-rouge">&lt;% %&gt;</code> tags.</p>
+
+      <p>e.g. looping and rendering items in an array:</p>
+
+      <p>in your express route…</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">apples</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">orange</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">peach</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">mango</span><span class="dl">"</span><span class="p">];</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">"</span><span class="s2">index</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="na">listItems</span><span class="p">:</span> <span class="nx">items</span><span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>in your template…</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;</span><span class="err">%</span> <span class="na">for</span> <span class="err">(</span><span class="na">let</span> <span class="na">i = </span><span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">listItems.length</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span> <span class="err">%</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;li&gt;</span> <span class="nt">&lt;</span><span class="err">%=</span> <span class="na">listItems</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">%</span><span class="nt">&gt;</span> <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;</span><span class="err">%</span> <span class="err">}</span> <span class="err">%</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Other loop structures are available as well.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+<span class="nt">&lt;</span><span class="err">%</span> <span class="na">for</span> <span class="err">(</span><span class="na">let</span> <span class="na">item</span> <span class="na">of</span> <span class="na">listItems</span><span class="err">)</span> <span class="err">{</span> <span class="err">%</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li&gt;</span> <span class="nt">&lt;</span><span class="err">%=</span> <span class="na">item</span> <span class="err">%</span><span class="nt">&gt;</span> <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;</span><span class="err">%</span> <span class="err">}</span> <span class="err">%</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div>      </div>
+
+      <p>We can also have conditions:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">%</span> <span class="na">if</span> <span class="na">(username =</span><span class="s">==</span> <span class="err">"</span><span class="na">Adam</span><span class="err">")</span> <span class="err">{</span> <span class="err">%</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span> Welcome <span class="nt">&lt;</span><span class="err">%=</span> <span class="na">username</span> <span class="err">%</span><span class="nt">&gt;</span> <span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;</span><span class="err">%</span> <span class="err">}</span> <span class="na">else</span> <span class="err">{</span> <span class="err">%</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span> Sorry, I don't know you <span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;</span><span class="err">%</span> <span class="err">}</span> <span class="err">%</span><span class="nt">&gt;</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part4partials"><button class="collapsible">Part 4: Partials</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="static-components-layouts">Static components: Layouts</h3>
+
+      <p>If you have common static components you wish to use on many pages, e.g. a header or a footer, you can create an EJS layout to include this component.</p>
+
+      <p>Template include code for the HTML pages:</p>
+
+      <p>e.g. in <code class="language-plaintext highlighter-rouge">/views/layouts/header.ejs</code></p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;h1&gt;</span> Welcome to my page! <span class="nt">&lt;/h1&gt;</span>
+</code></pre></div>      </div>
+
+      <p>and in <code class="language-plaintext highlighter-rouge">/views/layouts/footer.ejs</code></p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>2021 BY-NC-SA<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>To include this in another page, add the following snippets where you want these components to appear:</p>
+
+      <p>e.g. in <code class="language-plaintext highlighter-rouge">views/index.ejs</code></p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">%</span><span class="na">-</span> <span class="na">include</span><span class="err">("</span><span class="na">layouts</span><span class="err">/</span><span class="na">header</span><span class="err">")</span> <span class="na">-</span><span class="err">%</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;p&gt;</span> Welcome to my page, <span class="nt">&lt;</span><span class="err">%=</span> <span class="na">username</span> <span class="err">%</span><span class="nt">&gt;</span> <span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;</span><span class="err">%</span><span class="na">-</span> <span class="na">include</span><span class="err">("</span><span class="na">layouts</span><span class="err">/</span><span class="na">footer</span><span class="err">")</span> <span class="na">-</span><span class="err">%</span><span class="nt">&gt;</span>
+</code></pre></div>      </div>
+
+      <p>You can include boilerplate code, css, javascript, whatever you need, so that only the content for that page remains. This is super slick and highly recommended!</p>
+
+      <p>This paradigm is used heavily in and expanded on in front-end frameworks like React and Vue</p>
+
+      <h3 id="dynamic-components-partials">Dynamic Components: Partials</h3>
+
+      <p>Partials are similar to layouts, but you can pass through parameters to them to modify them slightly.</p>
+
+      <p>In other words, the variables which are passed to your EJS page from express, can then be further passed to a partial.</p>
+
+      <p>These are saved in:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">/views/partials/component.ejs</code></p>
+
+      <p>Call it with</p>
+
+      <p>&lt;%- include(“partials/component.ejs”, { partialVarName : varValue }) -%&gt;</p>
+
+      <p>example:</p>
+
+      <p>in <code class="language-plaintext highlighter-rouge">/views/partials/greeting.ejs</code></p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span> Welcome to my page, <span class="nt">&lt;</span><span class="err">%=</span> <span class="na">partialUsername</span> <span class="err">%</span><span class="nt">&gt;</span> <span class="nt">&lt;/p&gt;</span>
+</code></pre></div>      </div>
+
+      <p>and our final <code class="language-plaintext highlighter-rouge">views/index.ejs</code>:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">%</span><span class="na">-</span> <span class="na">include</span><span class="err">("</span><span class="na">header</span><span class="err">")</span> <span class="na">-</span><span class="err">%</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="err">%</span><span class="na">-</span> <span class="na">include</span><span class="err">("</span><span class="na">partials</span><span class="err">/</span><span class="na">component.ejs</span><span class="err">",</span> <span class="err">{</span> <span class="na">partialUsername</span> <span class="na">:</span> <span class="na">username</span> <span class="err">})</span> <span class="na">-</span><span class="err">%</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="err">%</span><span class="na">-</span> <span class="na">include</span><span class="err">("</span><span class="na">footer</span><span class="err">")</span> <span class="na">-</span><span class="err">%</span><span class="nt">&gt;</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>In this lab you will implement the remaining functionality of the application, but without the added security and database operations we will discuss in the following weeks. Consider this lab a learning exercise on using node and passing data with the controller: not everything we do will be best practices and should not be followed in production environments!</p>
+
+      <h3 id="data-setup">Data setup</h3>
+
+      <p>In lieu of database storage, you will use simple arrays of JavaScript Objects to represent both the user and the tasks. The classes should be created as follows:</p>
+
+      <p>User object:
+    • username (string)
+    • password (string)</p>
+
+      <p>Task object:
+    • _id (int) - assign sequential numbers, must be unique
+    • name (string)
+    • owner (User)
+    • creator (User)
+    • done (boolean)
+    • cleared (boolean)</p>
+
+      <p>Create constructors for each of these objects, and instantiate an array of each object, a user list and a task list. Create two users in the user list. Create 5 tasks in the task list including:
+    • 1 unclaimed task
+    • 1 claimed by user1 and unfinished
+    • 1 claimed by user2 and unfinished
+    • 1 claimed by user1 and finished
+    • 1 claimed by user2 and finished</p>
+
+      <p>For unclaimed tasks, the <code class="language-plaintext highlighter-rouge">owner</code> should be <code class="language-plaintext highlighter-rouge">undefined</code></p>
+
+      <p>Finally, create functions for saving and loading each list to or from a .json file, then save them.</p>
+
+      <p>** Note: It is extremely insecure to save user passwords in plain text objects. Do not use any realistic passwords for any accounts! We will make this more secure in Lab 4! **</p>
+
+      <h3 id="user-registration-and-login">User registration and login</h3>
+
+      <p>Render the login page on the “/” route.</p>
+
+      <p>Give the following functionality to the login page:</p>
+
+      <p>Link the login form to the “/login” route with POST. In this route perform the following:
+    • check through the user list to see if the entered username is registered
+    • if so, check if the user’s password matches the password for the entry
+    • if so, redirect the user with the POST variables to the “/todo” route.</p>
+
+      <p>Link the register form to the “/register” route. In this route perform the following:
+    • ensure that the sign up authorization matches a constant value you have in your script
+    • check that no users exists with the username entered
+    • If not, create a new user with the username and password supplied
+    • finally, redirect with the POST variables to the “/todo” route.</p>
+
+      <p>Be sure to save the updated user list to the JSON file when a user registers</p>
+
+      <h3 id="to-do-list-display">To-do list display</h3>
+
+      <p>Use EJS to render the to-do list on the “/todo” route</p>
+
+      <p>When rendering the route, ensure the following data is passed to the EJS file
+    • a title for the todo-list (string)
+    • the logged in user’s username (string)
+    • the list of tasks (array)</p>
+
+      <p>On the todo list, render the following:
+    • The logout block
+    • The to-do list display
+    • Each of the different task states:
+        ◦ Unclaimed
+        ◦ Claimed by the current user but unfinished
+        ◦ Claimed by the current user and finished
+        ◦ Claimed by a different user but unfinished
+        ◦ Claimed by a different user and finished
+            ▪ Render each of these as partials
+    • A section for adding new tasks
+    • A button for removing complete tasks
+Any task flagged as “cleared” should not be displayed</p>
+
+      <p>The tasks should be decorated as in the previous labs.</p>
+
+      <p>Hints:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>• Use EJS scriptlet control flow to loop over all of the tasks
+    ◦ using EJS scriptlet control flow, task properties and username, decide how to display each task
+• when adding a task to the page, use a hidden element to contain the task's _id to uniquely identify it
+• Make a unique form for each Task that has interactivity with a unique route, which will be explained in the next section
+    ◦ You can submit a form when a checkbox is clicked
+• Use a hidden input to store the username value, this will automatically pass it back to Node.js when you submit as a POST parameter
+</code></pre></div>      </div>
+
+      <p>** Note: Storing the current user in POST and passing it around via redirects works, but it’s not best practice. In lab 4 we’ll replace this functionality with sessions**</p>
+
+      <h3 id="to-do-list-functionality">To-do list functionality</h3>
+
+      <p>Finally, code up all of the routes to give your application functionality
+Name your routes, use the methods, and implement as follows:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>route</th>
+            <th>method</th>
+            <th>purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>/logout</td>
+            <td>get</td>
+            <td>logs out the user and returns to the main screen</td>
+          </tr>
+          <tr>
+            <td>/addtask</td>
+            <td>post</td>
+            <td>adds a new unclaimed task to the task list, and redirects to “/todo”</td>
+          </tr>
+          <tr>
+            <td>/claim</td>
+            <td>post</td>
+            <td>claims the task for the user who clicks on the claim button, and redirects back to “/todo”</td>
+          </tr>
+          <tr>
+            <td>/abandonorcomplete</td>
+            <td>post</td>
+            <td>checks if the user clicked on abandon or complete, updates the task appropriately, and redirects to “/todo”</td>
+          </tr>
+          <tr>
+            <td>/unfinish</td>
+            <td>post</td>
+            <td>for the selected task, sets the task state to unfinished, and redirects back to “/todo”</td>
+          </tr>
+          <tr>
+            <td>/purge</td>
+            <td>post</td>
+            <td>Set all tasks where “done” is true such that “cleared” is true. and redirects back to “/todo”</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>The following state diagram represents state transition for tasks owned by the currently signed in user:</p>
+
+      <p><img src="res/state-diagram.png" alt="" /></p>
+
+      <h3 id="submission">Submission</h3>
+
+      <p>Please submit to URCourses by the due date.</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

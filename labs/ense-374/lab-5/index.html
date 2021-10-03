@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Tilson</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-5-jquery">Lab 5: jQuery</h1>
+
+<p>ENSE 374 - Software Engineering Management - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>This lab introduces jQuery, a JavaScript library which makes writing JavaScript code, particularly involving DOM operations, much faster. In particular it handles things like DOM traversal and manipulation, event handling and animations. Additionally, jQuery acts as an introduction to JavaScript libraries, of which many exist, so that you can understand the process of finding, integrating and using a JavaScript library.</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges.</p>
+      <ul>
+        <li>A modern web browser, with a strong preference for Firefox or Chrome</li>
+        <li>A text editor, preferably VS Code</li>
+      </ul>
+
+    </div></div></section>
+<section id="part1introductiontojquery"><button class="collapsible">Part 1: Introduction to JQuery</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="why-use-jquery">Why use jQuery</h3>
+
+      <p>jQuery can simplify JavaScript DOM operations using shortcuts:</p>
+
+      <ul>
+        <li>finding elements with the query selector</li>
+        <li>adding event listeners</li>
+        <li>
+          <p>changing css</p>
+        </li>
+        <li>Makes common things you do faster / easier
+          <ul>
+            <li>Because we don’t like typing!</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="is-it-worth-learning-in-2021">Is it Worth Learning in 2021</h3>
+
+      <ul>
+        <li>Debatable.</li>
+        <li>For small projects, it may be better to exclude it for performance</li>
+        <li>For bigger projects, it may be better to use something like a FrameWork (Vue, React or Angular)</li>
+        <li>Just this year BootStrap dropped it as a dependency in favour of vanilla JavaScript</li>
+      </ul>
+
+      <h3 id="how-do-we-get-it">How do we get it</h3>
+
+      <p>You can get JQuery from the CDN!</p>
+      <ul>
+        <li><a href="https://developers.google.com/speed/libraries">Google has a good one</a> that will likely be cached many people’s browsers:
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script></li>
+      </ul>
+
+      <h3 id="where-to-add-the-link">Where to add the link:</h3>
+
+      <p>jQuery, like other JavaScript, is bottom of the HTML
+    - Add it before the closing <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> tag, before your custom JavaScript.
+    - Your browser reads HTML top to bottom, so we want to know about jQuery functionality before running our own scripts</p>
+
+      <h3 id="where-can-i-get-help">Where can I get help?</h3>
+
+      <p>The official docs are not bad: <a href="https://api.jquery.com/">jQuery API</a></p>
+
+      <p>This cheat sheet is quite useful: <a href="https://oscarotero.com/jquery/">Cheat Sheet</a></p>
+
+      <h3 id="main-entry">Main Entry</h3>
+
+      <ul>
+        <li>Create a JavaScript file, link it in the HTML (After the jQuery link), and add the following:</li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> 
+ <span class="p">...</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>Recall this is callback syntax with an anonymous function</li>
+      </ul>
+
+      <h3 id="minifyed-libraries">“Minify”ed Libraries</h3>
+
+      <ul>
+        <li>If you try to read jQuery code, it’s gonna be illegible. Why?
+          <ul>
+            <li>Minifying.</li>
+            <li>Removes all whitespace (which is for humans, not computers) so that we pass less data over the network.</li>
+            <li>The same thing happens with Bootstrap (min).</li>
+          </ul>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="part2selectionwithjquery"><button class="collapsible">Part 2: Selection with jQuery</button><div class="text-content"><div class="text-inner">
+
+      <p><a href="https://learn.jquery.com/using-jquery-core/selecting-elements/">Selection tutorial</a></p>
+
+      <p>Selection is the core operation of jQuery</p>
+      <ul>
+        <li>Selection rules are based off of the querySelectorAll
+          <ul>
+            <li>Recall this is based off of CSS selectors</li>
+          </ul>
+        </li>
+        <li>the basic selection function is: $(“…”)</li>
+      </ul>
+
+      <p>e.g.</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">myId</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#my-id</span><span class="dl">"</span> <span class="p">);</span>
+<span class="kd">let</span> <span class="nx">myClass</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">.my-class</span><span class="dl">"</span> <span class="p">);</span>
+<span class="kd">let</span> <span class="nx">firstNameInput</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">input[name='first-name']</span><span class="dl">"</span> <span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h3 id="whats-with-the--dollar-sign">What’s with the <code class="language-plaintext highlighter-rouge">$</code> (dollar sign)?</h3>
+      <p>In JavaScript, it’s legal to use <code class="language-plaintext highlighter-rouge">$</code> as a variable name. It is used as an alias for <code class="language-plaintext highlighter-rouge">jQuery</code>.</p>
+      <ul>
+        <li>Theoretically (but unlikely) there could be conflicts with other frameworks using this variable.</li>
+      </ul>
+
+    </div></div></section>
+<section id="part3addingandremovingelements"><button class="collapsible">Part 3: Adding and Removing elements</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="adding-elements">Adding elements</h3>
+
+      <p><code class="language-plaintext highlighter-rouge">before</code>, <code class="language-plaintext highlighter-rouge">after</code> -&gt; before or after an elements, outside the tag
+<code class="language-plaintext highlighter-rouge">prepend</code>, <code class="language-plaintext highlighter-rouge">append</code> -&gt; first or last thing inside the element tag</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;button&gt;new&lt;/button&gt;</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;h1&gt;</span>     Hello World     <span class="nt">&lt;/h1&gt;</span>  
+   ^       ^              ^        ^
+before   prepend      append     after
+</code></pre></div>      </div>
+
+      <h3 id="removing-elements">Removing elements</h3>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part4settingcssusingjquery"><button class="collapsible">Part 4: Setting CSS using jQuery</button><div class="text-content"><div class="text-inner">
+
+      <p><code class="language-plaintext highlighter-rouge">.css("property", "value")</code></p>
+
+      <ul>
+        <li>uses strings so it avoids all the awful kebab-case to camelCase nonsense we saw last week</li>
+        <li>If a single argument is used, it is acts as a getter.</li>
+        <li>If two arguments are used, it acts as a setting</li>
+      </ul>
+
+      <p>Finding a variable and setting css:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="dl">"</span><span class="s2">background-color</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#986D8E</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>More common, we use cascading rather than saving things in a temp variable:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="dl">"</span><span class="s2">background-color</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#986D8E</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h3 id="css-separation-of-concern">CSS Separation of Concern</h3>
+
+      <p>Recall last week Tutorial</p>
+      <ul>
+        <li>it’s a bad move to do CSS styles through JS / DOM,</li>
+        <li>it makes more sense just to change classes</li>
+      </ul>
+
+      <p>Instead use functions:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">).</span><span class="nx">hasClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part5changingattributes"><button class="collapsible">Part 5: Changing Attributes</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="setting-text">Setting text</h3>
+
+      <p>Rather than DOM <code class="language-plaintext highlighter-rouge">innerText</code>, it’s just <code class="language-plaintext highlighter-rouge">text</code></p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="dl">"</span><span class="s2">Bye</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Similarly, rather than <code class="language-plaintext highlighter-rouge">InnerHTML</code>, in jQuery it’s <code class="language-plaintext highlighter-rouge">HTML</code></p>
+
+      <h3 id="manipulating-attributes">Manipulating Attributes</h3>
+
+      <p>getter:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">img</span><span class="dl">"</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>      </div>
+      <p>setter:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">img</span><span class="dl">"</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">https://www.google.com</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part6events"><button class="collapsible">Part 6: Events</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="adding-event-listeners">Adding event listeners</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="p">....</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <h3 id="adding-keypress-listeners">Adding KeyPress listeners</h3>
+
+      <p>To an element…</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">).</span><span class="nx">keypress</span><span class="p">(</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+   <span class="p">...</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+      <p>To a document…</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">keypress</span><span class="p">(</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+   <span class="p">...</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <h3 id="adding-other-listeners">Adding other listeners</h3>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">mouseover</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="dl">"</span><span class="s2">color</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">purple</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">})</span><span class="nx">l</span>
+</code></pre></div>      </div>
+
+      <h3 id="part-7-animating-with-jquery">Part 7: Animating with jQuery</h3>
+
+      <ul>
+        <li>jQuery lets you animate over CSS properties</li>
+        <li>You start at one position and end at another
+          <ul>
+            <li>This is called “tweening”</li>
+          </ul>
+        </li>
+        <li>Only works with numeric values, with the exceptions of show, hide and toggle</li>
+      </ul>
+
+      <p>https://www.w3schools.com/jquery/eff_animate.asp</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span> <span class="nx">will</span> <span class="nx">hide</span> <span class="nx">an</span> <span class="nx">element</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">toggle</span><span class="p">();</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">();</span> <span class="o">-</span> <span class="nx">Remove</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">less</span> <span class="nx">jarring</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">();</span> <span class="o">-</span> <span class="nx">Remove</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">less</span> <span class="nx">jarring</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">fadeToggle</span><span class="p">();</span> <span class="o">-</span> <span class="nx">Remove</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">less</span> <span class="nx">jarring</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">slideUp</span><span class="p">();</span>  <span class="c1">// down, toggle</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">animate</span><span class="p">(</span>  <span class="nx">the</span> <span class="nx">CSS</span> <span class="nx">rule</span> <span class="nx">we</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">tween</span> <span class="nx">to</span>  <span class="p">);</span>
+</code></pre></div>      </div>
+      <ul>
+        <li>only works for numeric properties - it’s hard to tween to things like colors</li>
+      </ul>
+
+      <p>You can chain animations:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">slideUp</span><span class="p">().</span><span class="nx">SlideDown</span><span class="p">().</span><span class="nx">animate</span><span class="p">({...});</span>
+</code></pre></div>      </div>
+      <ul>
+        <li>does the things in order</li>
+      </ul>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>In this lab we come back to the lab project. Recall, the end goal is to create a collaborative to-do list. For now, we are going to simulate the a single users’ interactivity using JavaScript and DOM manipulations. Later, you will replace much of this functionality with server side Node.js code. This lab will be primarily jQuery, but you can modify as needed your HTML, CSS, Bootstrap, and JavaScript.</p>
+
+      <p>Non-persistent interactivity</p>
+
+      <p>Using JavaScript / jQuery DOM manipulation, add the following functionality to the todo page:</p>
+
+      <ul>
+        <li>When the user enters text and clicks the add task button, create and add an unclaimed task to the task list
+          <ul>
+            <li>Ensure the task text matches the textbox content</li>
+            <li>Experiment with jQuery animations for adding the new task</li>
+          </ul>
+        </li>
+        <li>Ensure the task properly transitions through the following states (for one user):
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">unclaimed</code> -&gt; <code class="language-plaintext highlighter-rouge">claimed but unfinished</code> (Claim button)</li>
+            <li><code class="language-plaintext highlighter-rouge">claimed but unfinished</code> -&gt; <code class="language-plaintext highlighter-rouge">unclaimed</code> (Abandon)</li>
+            <li><code class="language-plaintext highlighter-rouge">claimed but unfinished</code> -&gt; <code class="language-plaintext highlighter-rouge">finished</code> (Checkbox to checked)</li>
+            <li><code class="language-plaintext highlighter-rouge">finished</code> -&gt; <code class="language-plaintext highlighter-rouge">claimed but unfinished </code> (Checkbox to unchecked)</li>
+          </ul>
+        </li>
+        <li>Finally, when the user clicks remove complete, remove all of the completed tasks
+          <ul>
+            <li>Experiment with jQuery animations for removing completed tasks</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Interaction is further described by the following diagram:</p>
+
+      <p><img src="res/states.png" alt="" /></p>
+
+      <ul>
+        <li>when the user enters a new task (a) and presses button (b), a new task is created as in 2.</li>
+        <li>When the user presses the claim button (d), the task is transformed into state 3.</li>
+        <li>when the user clicks the abandon button (f), the task returns to state 2.</li>
+        <li>when the user clicks the checkbox (e), the task transitions to state 4</li>
+        <li>when the user unclicks the checkbox (g), the task transitions back to state 3</li>
+        <li>
+          <p>When the user clicks remove complete (c), all of the completed tasks (state 4) are removed</p>
+        </li>
+        <li>Note: You may now remove the old template tasks from the previous labs, but make sure you have a backup of the code for a future lab! *</li>
+      </ul>
+
+      <h3 id="submission">Submission</h3>
+
+      <p>Please submit to URCourses by the due date.</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

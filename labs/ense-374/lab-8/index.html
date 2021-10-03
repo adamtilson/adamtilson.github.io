@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Tilson</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-8-mysql-and-mongodb">Lab 8: MySQL and MongoDB</h1>
+
+<p>ENSE 374 - Software Engineering Management - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>This lab introduces databases. In particular, we will discuss MySQL, since it is a more structured database language, and then MongoDB which is typically used in Node stack applications.</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges.</p>
+      <ul>
+        <li>A modern web browser, with a strong preference for Firefox or Chrome</li>
+        <li>A text editor, preferably VS Code</li>
+      </ul>
+
+    </div></div></section>
+<section id="part1sql"><button class="collapsible">Part 1: SQL</button><div class="text-content"><div class="text-inner">
+
+      <p><a href="https://www.w3schools.com/sql/default.asp">Basic tutorial on W3Schools</a></p>
+
+      <p>Trying out SQL:</p>
+
+      <p>Find an online SQL Playground such as <a href="https://sqliteonline.com/">sqlite online</a></p>
+
+      <p>Table</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>games</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+          </tr>
+          <tr>
+            <td>name</td>
+          </tr>
+          <tr>
+            <td>price</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Rows</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th><em>id</em></th>
+            <th>name</th>
+            <th>price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Gone Golfing</td>
+            <td>4.99</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="setup">Setup</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE games (
+   id INT NOT NULL,
+   name STRING,
+   price MONEY,
+   PRIMARY KEY (id)
+)
+</code></pre></div>      </div>
+
+      <p><img src="res/games.png" alt="" /></p>
+
+      <h3 id="create">Create</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO games VALUES(
+    1,
+    "Gone Golfing",
+    4.99
+)
+</code></pre></div>      </div>
+
+      <p><img src="res/first-add.png" alt="" /></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO games(
+    id,
+    name
+)
+VALUES(
+    2,
+    "Outlast"
+)
+</code></pre></div>      </div>
+
+      <p><img src="res/partial-add.png" alt="" /></p>
+
+      <p>This is fine, but you can’t leave out ID!</p>
+
+      <h3 id="read">Read</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM games
+</code></pre></div>      </div>
+
+      <p>or</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM games WHERE id=2 
+</code></pre></div>      </div>
+
+      <p><img src="res/select-with-where.png" alt="" /></p>
+
+      <p>There are more fancy comparators too.</p>
+
+      <h3 id="update">Update</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UPDATE games
+SET price = 22.79
+WHERE name = "Outlast"
+</code></pre></div>      </div>
+
+      <p><img src="res/price-update.png" alt="" /></p>
+
+      <p>Adding Columns?</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER TABLE games
+ADD rating INT
+</code></pre></div>      </div>
+
+      <p><img src="res/alter.png" alt="" /></p>
+
+      <p>No default, gotta go back and add them! Can you update to:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|*id* | name | price|rating|
+|---|---|---|---|
+|1|Gone Golfing|4.99|85|
+|2|Outlast|22.79|80|
+</code></pre></div>      </div>
+
+      <p><img src="res/rating-updates.png" alt="" /></p>
+
+      <h3 id="delete">Delete</h3>
+
+      <p>Dangerous, don’t run without a WHERE, or you could remove all rows!</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE FROM games
+WHERE name = "Outlast"
+</code></pre></div>      </div>
+
+      <p>better</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE FROM games
+WHERE id = 2
+</code></pre></div>      </div>
+
+      <h3 id="relationships">Relationships</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE ratings (
+    id INT NOT NULL,
+    game_id INT,
+    rating STRING,
+    PRIMARY KEY (id),
+    FOREIGN KEY (game_id) REFERENCES games(id)
+)
+</code></pre></div>      </div>
+
+      <p><img src="res/ratings.png" alt="" /></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO ratings VALUES (
+    1,
+    1,
+    "An ordinary game about mini golf, nothing strange here"
+)
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT games.name, games.rating, ratings.rating
+FROM ratings
+INNER JOIN games ON ratings.game_id = games.id
+</code></pre></div>      </div>
+
+      <p><img src="res/inner-join.png" alt="" /></p>
+
+    </div></div></section>
+<section id="part2nosqlandmongodb"><button class="collapsible">Part 2: NoSQL and MongoDB</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="sql-vs-nosql">SQL vs NoSQL</h3>
+
+      <p>Structured Query Language vs. Not only Structure Query Language</p>
+      <ul>
+        <li>SQL: MySQL, PostgreSQL</li>
+        <li>NoSQL: Mongo, Redis</li>
+      </ul>
+
+      <table>
+        <thead>
+          <tr>
+            <th>SQL</th>
+            <th>NoSQL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Old Reliable</td>
+            <td>New and Cool</td>
+          </tr>
+          <tr>
+            <td>Tables</td>
+            <td>Collections</td>
+          </tr>
+          <tr>
+            <td>Records / Rows</td>
+            <td>Documents</td>
+          </tr>
+          <tr>
+            <td>Schema Enforced</td>
+            <td>Schema Optional</td>
+          </tr>
+          <tr>
+            <td>Relational!</td>
+            <td>Only kinda relational</td>
+          </tr>
+          <tr>
+            <td>Scales Vertically</td>
+            <td>Scales Horizontally</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Comparable to C++ vs JavaScript objects - in C++ all fields must be filled, in JavaScript it can be a lot more “ad-hoc”</p>
+
+      <h3 id="installation">Installation</h3>
+
+      <p>This procedure will discuss Windows.</p>
+
+      <ol>
+        <li>I downloaded the MSI. (224 MB) Running…
+          <ul>
+            <li>Complete Install.</li>
+            <li>Install as a Network Service User</li>
+            <li>Do not Install Mongo Compass</li>
+            <li>Reboot is required…</li>
+          </ul>
+        </li>
+        <li>Create the default directory
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:/data/db
+</code></pre></div>          </div>
+          <p>This is the default place to store data, if you need to move this use a config file</p>
+        </li>
+        <li>After this I needed to make an Alias file:</li>
+      </ol>
+
+      <p>Find where Mongo is installed…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo $profile
+</code></pre></div>      </div>
+
+      <p>cd into this directory.</p>
+
+      <p>Then run…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-Alias mongod "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"
+Set-Alias mongo "C:\Program Files\MongoDB\Server\4.4\bin\mongo.exe"
+</code></pre></div>      </div>
+
+      <ol>
+        <li>check it is working with:</li>
+      </ol>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongo --version
+</code></pre></div>      </div>
+
+      <h3 id="installation-guides">Installation guides</h3>
+
+      <p><a href="https://docs.mongodb.com/manual/administration/install-on-linux/">Linux</a>
+<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">Ubuntu</a>
+<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x">Mac</a>
+<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/">Windows</a></p>
+
+      <h3 id="mongod">mongod</h3>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">mongod</code> is the mongo demon</li>
+        <li>
+          <p>It runs the database as a service, and allows you to connect to it from a client</p>
+        </li>
+        <li>Needs to run as sudo in linux.
+          <ul>
+            <li>Not a great solution, but it worked.</li>
+          </ul>
+        </li>
+        <li>Connect to the database with a second terminal, and run <code class="language-plaintext highlighter-rouge">mongo</code>.</li>
+      </ul>
+
+      <h3 id="help">Help</h3>
+
+      <p>To show help, run…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>help
+</code></pre></div>      </div>
+
+      <h3 id="mongo">mongo</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongo
+</code></pre></div>      </div>
+
+      <ul>
+        <li>Command line application to perform database operations</li>
+      </ul>
+
+      <h3 id="database">database</h3>
+
+      <p>The largest data structure in mongo db is a database (db). These are further composed of collections which is further composed of documents.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>sql</th>
+            <th>mongo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>database</td>
+            <td>db</td>
+          </tr>
+          <tr>
+            <td>table</td>
+            <td>collection</td>
+          </tr>
+          <tr>
+            <td>row</td>
+            <td>document</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show dbs
+</code></pre></div>      </div>
+
+      <p>shows database names - includes some default ones</p>
+
+      <h3 id="creating-a-database">Creating a database</h3>
+
+      <p>We can create or use a db with…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use testdb
+</code></pre></div>      </div>
+
+      <h3 id="database-1">database</h3>
+
+      <p>However, if we check it again with…</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show dbs
+</code></pre></div>      </div>
+      <ul>
+        <li>The database still hasn’t created until we add a document</li>
+      </ul>
+
+      <p>Check the current db with…</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db
+</code></pre></div>      </div>
+
+      <h3 id="collection">collection</h3>
+
+      <p>these are like tables in SQL</p>
+      <ul>
+        <li>a collection of documents</li>
+        <li>documents are like table rows or records</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show collections
+</code></pre></div>      </div>
+
+      <p>However, we haven’t created the collection yet! We need to insert a document into the collection in order to create it.</p>
+
+    </div></div></section>
+<section id="part3mongodbcrudoperations"><button class="collapsible">Part 3: Mongo DB CRUD Operations</button><div class="text-content"><div class="text-inner">
+
+      <p>CRUD = Create, Read, Update, Delete</p>
+
+      <p><a href="https://docs.mongodb.com/manual/crud/">Read the Manual!</a></p>
+      <ul>
+        <li>Actually very good!</li>
+      </ul>
+
+      <h3 id="create-1">CREATE</h3>
+
+      <p>You can insert elements into the database with:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.collections.insertOne ( ... ) 
+db.collections.insertMany ( ... )
+</code></pre></div>      </div>
+
+      <p>These are functions. Parameters are javascript objects.</p>
+
+      <p>e.g.</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.insertOne(
+    {
+        _id:1,
+        name:"Gone Golfing",
+        price:4.99
+    }
+)
+</code></pre></div>      </div>
+
+      <h3 id="read-1">READ</h3>
+
+      <p>To find an element from our collection, use:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.find()
+</code></pre></div>      </div>
+
+      <p>shows all of the games.</p>
+
+      <p>We can also pass a json object into find( … ) to only match certain criteria.</p>
+      <ul>
+        <li>returns “Projections” - slices of the collection which contain only the relevant data!</li>
+      </ul>
+
+      <p><a href="https://docs.mongodb.com/manual/reference/operator/query/">Query Selectors let you find objects based on Comparisons</a></p>
+
+      <p>{price: {$gt:1}} Note the funky syntax!</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.find({name:"Gone Golfing"})
+</code></pre></div>      </div>
+
+      <p>Note the following, which will return nothing:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.find({price: {$lt:2.00}})
+</code></pre></div>      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>operator</th>
+            <th>use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$eq</td>
+            <td>Matches values that are equal to a specified value.</td>
+          </tr>
+          <tr>
+            <td>$gt</td>
+            <td>Matches values that are greater than a specified value.</td>
+          </tr>
+          <tr>
+            <td>$gte</td>
+            <td>Matches values that are greater than or equal to a specified value.</td>
+          </tr>
+          <tr>
+            <td>$in</td>
+            <td>Matches any of the values specified in an array.</td>
+          </tr>
+          <tr>
+            <td>$lt</td>
+            <td>Matches values that are less than a specified value.</td>
+          </tr>
+          <tr>
+            <td>$lte</td>
+            <td>Matches values that are less than or equal to a specified value.</td>
+          </tr>
+          <tr>
+            <td>$ne</td>
+            <td>Matches all values that are not equal to a specified value.</td>
+          </tr>
+          <tr>
+            <td>$nin</td>
+            <td>Matches none of the values specified in an array.</td>
+          </tr>
+          <tr>
+            <td>$and</td>
+            <td>Joins query clauses with a logical AND returns all documents that match the conditions of both clauses.</td>
+          </tr>
+          <tr>
+            <td>$not</td>
+            <td>Inverts the effect of a query expression and returns documents that do not match the query expression.</td>
+          </tr>
+          <tr>
+            <td>$nor</td>
+            <td>Joins query clauses with a logical NOR returns all documents that fail to match both clauses.</td>
+          </tr>
+          <tr>
+            <td>$or</td>
+            <td>Joins query clauses with a logical OR returns all documents that match the conditions of either clause.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="update-1">UPDATE</h3>
+
+      <p>We need to use syntax similar to Find to find the document we want to update, and then we can add a new record as needed</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.updateOne({name:"Gone Golfing"}, {$set : {price:2.99}});
+</code></pre></div>      </div>
+
+      <h3 id="delete-1">DELETE</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.deleteOne({_id:1});
+</code></pre></div>      </div>
+
+      <p>We can also remove an existing database with the following command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.dropDatabase();
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part4relationships"><button class="collapsible">Part 4: Relationships</button><div class="text-content"><div class="text-inner">
+
+      <p>A common practice in databases design, to avoid redundancy, is that a document may need to reference to a second document to get more information.</p>
+
+      <p>There are several types of relationships:</p>
+
+      <p>One to One</p>
+      <ul>
+        <li>If each user has exactly one game, you could use an embedded approach</li>
+      </ul>
+
+      <p>One to Many</p>
+      <ul>
+        <li>If one game has many reviews, it may make sense to use the embedded document approach.</li>
+      </ul>
+
+      <p>Many to Many</p>
+      <ul>
+        <li>Many users have many games, and vice versa
+          <ul>
+            <li>A reference approach is preferred</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="embedded">Embedded</h3>
+
+      <p>Example, we can reviews into a list:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.insertOne(
+    {
+        _id:1,
+        name:"Gone Golfing",
+        price:4.99
+        reviews: [
+            {
+                userName: "Adam",
+                rating: 1,
+                review: "Bug in the first screen"
+            }
+            {
+                userName: "HorrorFan",
+                rating: 5,
+                review: "Classic"
+            }
+        ]
+    }
+)
+</code></pre></div>      </div>
+
+      <h3 id="reference">Reference</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.insertOne(
+    {
+        _id:1,
+        name:"Gone Golfing",
+        price:4.99
+        reviews: [
+            {
+                user_id: 1,
+                rating: 1,
+                review: "Bug in the first screen"
+            }
+            {
+                user_id: 2,
+                rating: 5,
+                review: "Classic"
+            }
+        ]
+    }
+)
+</code></pre></div>      </div>
+
+      <h3 id="schemas">Schemas</h3>
+
+      <p>If the ad-hoc nature of MongoDB is too painful for you, you can also define schemas, which are more like table templates</p>
+      <ul>
+        <li>list the fields that you need</li>
+        <li>list dataTypes for those fields</li>
+        <li>list of those fields are required</li>
+        <li>list default values for them</li>
+        <li>You can do this in Mongo, we’ll do this in Mongoose</li>
+      </ul>
+
+      <h3 id="part-5-mongoose">Part 5: Mongoose</h3>
+
+      <p>Mongoose is a Node.js library for connecting to your database, and performing database operations. It can be triggered by any code in your Node.js script, but you will most likely want to use it on your routes.</p>
+
+      <p><em>Always make sure <code class="language-plaintext highlighter-rouge">mongod</code> is running!</em></p>
+
+      <h3 id="what-is-it">What is it?</h3>
+
+      <p>The default driver for mongo for node.js is a little bit tedious.
+A theme in this class is introducing tools to make your life easier
+These are also widely used in Industry</p>
+
+      <h3 id="installation-1">Installation</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i mongoose
+</code></pre></div>      </div>
+
+      <h3 id="boilerplate">Boilerplate</h3>
+
+      <p>Right from the front page:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Require and connect (ensure mongod is running!)</span>
+<span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">mongoose</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// connects to the "test" database</span>
+<span class="c1">// the later args fix some deprecation warnings</span>
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="dl">'</span><span class="s1">mongodb://localhost:27017/test</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span><span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span><span class="p">});</span>
+
+<span class="c1">// create a schema</span>
+<span class="kd">const</span> <span class="nx">Cat</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="nb">String</span> <span class="p">});</span>
+
+<span class="c1">// create a document following that schema</span>
+<span class="kd">const</span> <span class="nx">kitty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Zildjian</span><span class="dl">'</span> <span class="p">});</span>
+<span class="nx">kitty</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">meow</span><span class="dl">'</span><span class="p">));</span>
+</code></pre></div>      </div>
+
+      <p>That’s all it takes to do database stuff from Node!</p>
+
+      <h3 id="creating-a-schema">Creating a Schema</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">gameSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">rating</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="na">review</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>These types are called SchemaTypes. Read the docs for more info.</p>
+
+      <p>Types:</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">String</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Number</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Date</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Buffer</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Boolean</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Mixed</code></li>
+        <li><code class="language-plaintext highlighter-rouge">ObjectId</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Array</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Decimal128</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Map</code></li>
+      </ul>
+
+      <p>You can omit _id, then Mongoose will do it for you. Or you can be explicit, but you must ALWAYS set one, or it will not save.</p>
+
+      <h3 id="using-a-collection">Using a Collection</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// this creates a collection called Games</span>
+<span class="kd">const</span> <span class="nx">Game</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span> <span class="p">(</span><span class="dl">"</span><span class="s2">Game</span><span class="dl">"</span><span class="p">,</span> <span class="nx">gameSchema</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h3 id="adding-a-document">Adding a Document</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Game</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">rating</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span>
+    <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">classic</span><span class="dl">"</span>
+<span class="p">});</span>
+
+<span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+</code></pre></div>      </div>
+
+      <p>Typically you run this once from a node.js script, and then comment out the save lines to prevent multiple identical copies of things in your DB!</p>
+      <ul>
+        <li>Probably don’t want nodemon running here, instead just do a node</li>
+        <li>Otherwise every time you do an update, expect more copies in the</li>
+      </ul>
+
+      <p>Be sure to run the <code class="language-plaintext highlighter-rouge">mongod</code> server</p>
+
+      <h3 id="mongoose-help">Mongoose Help</h3>
+
+      <p><a href="https://mongoosejs.com/docs/guide.html">The docs. Pretty good.</a></p>
+
+      <p>Aside: Async Javascript</p>
+      <ul>
+        <li>Basically the new hotness</li>
+        <li>A function with the “async” keyword</li>
+        <li>It’s going to do some computations</li>
+        <li>Rather than returning a value, it returns a “promise” that it will return a value</li>
+        <li>It’s parallel coding and it kinda hurts my brain</li>
+        <li>You can call something after it’s finished using the callback function</li>
+        <li>You can also use the “await” syntax, which we will use.
+          <ul>
+            <li>It’s less optimal, but I think cleaner code for learning.</li>
+            <li>If you are rereading these notes later, e.g. for your capstone, investigate <code class="language-plaintext highlighter-rouge">async</code> further and use it properly!</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="reading-from-a-db">Reading from a DB</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">results</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// this is where we have access to our results</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>returns an array of our games in a JavaScript object</li>
+        <li>We can traverse it just like any other JS Object</li>
+        <li>For Each loops? Yep!</li>
+      </ul>
+
+      <h3 id="closing-the-connection">Closing the connection</h3>
+
+      <p>The last time you use Mongoose, you should close the connection</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</code></pre></div>      </div>
+      <ul>
+        <li>eg. in the last find callback.</li>
+      </ul>
+
+      <h3 id="validation-with-mongoose">Validation with Mongoose</h3>
+
+      <p>https://mongoosejs.com/docs/validation.html#built-in-validators</p>
+
+      <p>When specifying your schema, you can force certain values or ranges for elements, and return custom error messages if the users do not meet them:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">breakfastSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Schema</span><span class="p">({</span>
+    <span class="na">eggs</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+        <span class="na">min</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Too few eggs</span><span class="dl">'</span><span class="p">],</span>
+        <span class="na">max</span><span class="p">:</span> <span class="mi">12</span>
+    <span class="p">},</span>
+    <span class="na">bacon</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+        <span class="na">required</span><span class="p">:</span> <span class="p">[</span><span class="kc">true</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Why no bacon?</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="na">drink</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+        <span class="na">enum</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Coffee</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Tea</span><span class="dl">'</span><span class="p">],</span>
+        <span class="na">required</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">bacon</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <h3 id="update-2">Update</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span> <span class="p">(</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="na">$set</span><span class="p">:</span> <span class="p">{</span><span class="na">rating</span><span class="p">:</span><span class="mi">3</span><span class="p">}},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <h3 id="delete-2">Delete</h3>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">deleteOne</span> <span class="p">(</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>There is also a deleteMany function.</p>
+
+      <h3 id="adding-relationships">Adding Relationships</h3>
+
+      <p>We need to add the thing to the schema</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">personSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">age</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="na">favouriteFruit</span><span class="p">:</span> <span class="nx">fruitSchema</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>If we do this, we embed it in the document. But it’s actually a reference because they have the same _id.</p>
+
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

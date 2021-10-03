@@ -172,3 +172,33 @@ window.addEventListener('load', (event) => {
   }
 });
 
+// Graciously borrowed from: https://www.aleksandrhovhannisyan.com/blog/how-to-add-a-copy-to-clipboard-button-to-your-jekyll-blog/
+
+codeblocks = document.querySelectorAll("div.highlighter-rouge")
+for (const codeblock of codeblocks){
+  let outerDiv = document.createElement("div");
+  outerDiv.classList.add("code-header");
+  let button = document.createElement("button");
+  button.classList.add("copy-code-button");
+  button.ariaLabel = "Copy code to clipboard";
+  outerDiv.appendChild(button)
+  codeblock.parentNode.insertBefore(outerDiv,codeblock)
+}
+
+const codeBlocks = document.querySelectorAll('.code-header + .highlighter-rouge');
+const copyCodeButtons = document.querySelectorAll('.copy-code-button');
+
+copyCodeButtons.forEach((copyCodeButton, index) => {
+  if (typeof codeBlocks[index] !== "undefined"){
+    const code = codeBlocks[index].innerText;
+
+    copyCodeButton.addEventListener('click', () => {
+      window.navigator.clipboard.writeText(code);
+      copyCodeButton.classList.add('copied');
+
+      setTimeout(() => {
+        copyCodeButton.classList.remove('copied');
+      }, 2000);
+    });
+  }
+});

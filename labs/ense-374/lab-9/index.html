@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Tilson</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-9-mongoose-and-passport">Lab 9: Mongoose and Passport</h1>
+
+<p>ENSE 374 - Software Engineering Management - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>This lab introduces Mongoose, which connects Node.js to the MongoDB database, and allows performing CRUD operations. Additionally,</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges.</p>
+      <ul>
+        <li>A modern web browser, with a strong preference for Firefox or Chrome</li>
+        <li>A text editor, preferably VS Code</li>
+      </ul>
+
+      <p>Background
+So far our to-do list is functional, but not at all secure. How can we make it more secure?
+What’s wrong with this approach?
+What if you push passwords to github?
+What about storing them on the cloud?
+What if users use the same password as in other services?</p>
+
+      <p>Encryption
+Encrypt our passwords - Scramble our passwords using Encryption
+    - If you haven’t already, you’ll learn all the math behind this later.
+    - mongoose-encryption package
+    - We need a Secret string - this is our encryption and decryption key. It should be kept secret!
+    - We then need to plug in the encryption to the schema
+    - automatically encrypts on a save and decrypts on a read
+     - Now our system is only as secure as our “secret” - which we don’t want to just push to github!
+     - So how do we store our secret more… secretly?</p>
+
+      <p>Environment Variables
+A hidden file which can stores our secrets in a safe location</p>
+
+      <p>We can use this for our “Authorization” key. We could also use it for API keys, logins.</p>
+
+      <p>In npm:
+npm install dotenv</p>
+
+      <p>In our js file:
+require(“dotenv”).config();</p>
+
+      <p>In our root directory:
+Create “.env” file in the root. 
+This is the whole name of the file
+Save your variables here:
+DB_HOST=localhost
+DB_USER=root
+No quotations for strings</p>
+
+      <p>Access in variables in our node js file:</p>
+
+      <p>process.env.DB_HOST</p>
+
+      <p>Finally, add this file to your gitignore!
+.env</p>
+
+      <p>This will keep the file from getting pushed to the  github.</p>
+
+      <p>When you upload your files to the server, they will have a secure method for editing your apps Environment Variables.</p>
+
+      <p>Salting and Hashing
+Encrypting and Decrypting is weak, better to Hash!
+Hash functions are a mathematical equation which turns a string into a hash, and it’s impossible (or at least ridiculously hard) to go backwards
+How are the hashing functions made - usually involves factoring prime numbers
+We know going forward produces consistent results, thus we can ask for a password, hash it, and compare  with our  hashed password
+Example: MD5 application
+If a website ever sends you a plain-text version of your password, you can believe  that they aren’t hashing!
+Hacking 101 - Make a hack(sh) table of common passwords, and compare.
+Modern GPUs - 20Bill Hashes per Second!
+What could you do - add a salt and then hash!
+Generate a random string, concatenate then hash. It must be stored in the database too.
+Finally, use a Slow Hash like bcrypt
+Salting rounds - salt it, hash it, salt it, hash it, do it 5 times?
+You can set the number of rounds you want to salt - adding one salt round doubles the time to compute it.
+node bcrypt - you can hash, choose the number of salt rounds, etc.</p>
+
+      <p>Cookies
+Cookies are a piece of data that is stored on the users browser
+We are going to use it to store an “access token” - a hash which identifies which user is logged in.</p>
+
+      <p>Sessions
+The amount of time that a browser interacts with a server
+Cookies let you maintain your session</p>
+
+      <p>passport
+passport-local
+passport-local-mongoose
+express-session (not express-sessions)</p>
+
+      <p>npm i passport passport-local passport-local-mongoose express-session</p>
+
+      <p>This is easy to mess up, so let’s go slow</p>
+      <ol>
+        <li>const session = require(“express-session”)
+const passport = require(“passport”)
+const passportLocalMongoose = require(“passport-local-mongoose”)</li>
+      </ol>
+
+      <p>We don’t need  to directly user passport-local, so don’t need access to it through a const</p>
+
+      <ol>
+        <li>Use session
+app.use(session({
+ secret: “Our little secret.”,
+ resave: false,
+ saveUninitialized: false
+}));
+app.use (passport.initialize());
+app.use (passport.session());</li>
+      </ol>
+
+      <p>Create the userSchema</p>
+
+      <p>const userSchema = new mongoose.Schema ({
+    email: String
+    password: String
+})</p>
+
+      <p>userSchema.plugin(passportLocalMongoose);</p>
+
+      <p>const User = new mongoose.Model(“User”, userSchema);</p>
+
+      <ol>
+        <li></li>
+      </ol>
+
+      <p>passport.use(User.createStrategy());</p>
+
+      <p>passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());</p>
+
+      <p>These settings are explained in the help docs</p>
+
+      <p>Very important you use these things in the order they are used in this example.</p>
+
+      <ol>
+        <li>Register users:</li>
+      </ol>
+
+      <p>User.register ({username : req.body.username}, req.body.password, function(err, user){
+    if (err) {
+       console.log(err);
+        res.redirect(“/register”);
+    } else {
+        passport.authentical(“local”)(req, res, function() {
+            res.redirect(“/secrets”);
+        });
+    }
+})</p>
+
+      <p>app.get(“/secrets”, function(req,res) {
+    if (req.isAuthenticated()) {
+        res.render(“secrets”);
+    } else {
+        res.redirect(“/login”) 
+    }
+});</p>
+
+      <p>once signed in, we can get the user with:
+req.user.username</p>
+
+      <p>app.post(“/login”, function (req, res){
+      const user = new User ({
+        username: req.body.username,
+        password: req.body.password
+     })
+    req.login (user, function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            passport.authenticate(“local”)(req, res, function() {
+                res.redirect(“/secrets”); 
+            });
+        }
+    }
+})</p>
+
+      <p>app.get(“/logout”, function (req, res){
+    req.logout();
+    res.redirect(“/”);
+});</p>
+
+      <p>Note, when you restart your server (nodemon does it all the time) all of the cookies expire, so you will be logged out.</p>
+
+      <p>OAuth
+Outside of the scope of this class</p>
+
+      <p>The new paradigm for Autorization is OAuth, where we basically subcontract another company to do authorization for us. (Google, FaceBook). The user logs in with their credentials for that account.</p>
+
+      <p>It is possible with passport oauth modules.</p>
+
+      <p>Assignment:</p>
+
+      <p>In this lab you will not add any new functionality to the application, but instead improve usability and security by adding in a database for storing tasks, as well as authentication using cookies and sessions. These concepts are safe and recommended for production environments!</p>
+
+      <ol>
+        <li>Database Initialization (20 marks)
+In the previous lab you defined a “User” and “Task” Object as prototyped JavaScript objects. In this lab you need to change these into Schemas using Mongoose.  The Task Schema will store tasks, The User Schema will also be used for authenticating users.</li>
+      </ol>
+
+      <p>Recall the object contents:</p>
+
+      <p>User object:
+    • username (string)
+    • password (string)</p>
+
+      <p>Task object:
+    • _id (int)
+    • name (string)
+    • owner (User)
+    • creator (User)
+    • done (boolean)
+    • cleared (boolean)</p>
+
+      <p>Modify owner and creator to be database references.</p>
+
+      <ol>
+        <li>User registration and login (30 marks)</li>
+      </ol>
+
+      <p>Modify the login page on the “/” route.</p>
+
+      <p>Link the login form to the “/login” route with POST. In this route perform the following:
+    • using passport, log in and authenticate the user
+    • if authentication fails, redirect back to “/”
+    • If registration succeeds, redirect to “/todo”</p>
+
+      <p>Link the register form to the “/register” route. In this route perform the following:
+    • register a new user using passport
+    • if registration fails, redirect back to “/”
+    • If registration succeed, redirect to “/todo”
+ToDo should only be available to Authenticated users. As long as user is authenticated, they should be able to return to “/todo” without logging in again, until the cookie expires or they log out.</p>
+
+      <ol>
+        <li>To-do list display (20 marks)</li>
+      </ol>
+
+      <p>Use EJS to render the to-do list on the “/todo” route</p>
+
+      <p>Modify your server-side code from Lab 3 to instead read from the database.</p>
+
+      <p>Reuse as much code as possible! The front-end should not need to change.</p>
+
+      <p>The tasks should be decorated as in the following screenshot:</p>
+
+      <ol>
+        <li>To-do list functionality (30 marks)</li>
+      </ol>
+
+      <p>Modify the code from Lab 3 to use the database. The same operations should be performed:</p>
+
+      <p>route
+method
+description
+/logout
+get
+logs out the user and returns to the main screen
+/addtask
+post
+adds a new unclaimed task to the task list, and redirects to “/todo”
+/claim
+post
+claims the task for the user who clicks on the claim button, and redirects back to “/todo”
+/abandonorcomplete
+post
+checks if the user clicked on abandon or complete, updates the task appropriately, and redirects to “/todo”
+/unfinish
+post
+for the selected task, sets the task state to unfinished, and redirects back to “/todo”
+/purge
+post
+Set all tasks where “done” is true such that “cleared” is true. and redirects back to “/todo”</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

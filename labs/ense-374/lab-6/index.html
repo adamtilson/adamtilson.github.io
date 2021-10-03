@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Tilson</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-6-nodejs">Lab 6: Node.js</h1>
+
+<p>ENSE 374 - Software Engineering Management - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>This lab introduces Node.js, a server-side runtime environment that uses JavaScript. This application allows you to write code in JavaScript that exists on the server and can perform actions like serving files, doing database lookups and modifying files at runtime through templates.</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges.</p>
+      <ul>
+        <li>A modern web browser, with a strong preference for Firefox or Chrome</li>
+        <li>A text editor, preferably VS Code</li>
+      </ul>
+
+    </div></div></section>
+<section id="part1mvcandbackendoverview"><button class="collapsible">Part 1: MVC and Back-End Overview</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="unix-cli-refresher">Unix CLI Refresher</h3>
+
+      <p>To use node we will need to issue commands through the Terminal.</p>
+
+      <p>In VS Code, you can open the integrate terminal with:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">Ctrl + shift + \</code>` (backtick), or you can use the Command Palette</p>
+
+      <p><a href="https://files.fosswire.com/2007/08/fwunixref.pdf">Unix terminal cheat sheet</a></p>
+
+      <p>WSL2 - Windows System for Linux - Optional, if you are in Windows and need more linux in your life</p>
+
+      <h3 id="mvc-controller">MVC: Controller</h3>
+
+      <p>Recall the stack we are developing with in this course:</p>
+
+      <p><img src="res/node-stack.svg" alt="" /></p>
+
+      <p>We are now moving over the controller side. The controller should:</p>
+      <ul>
+        <li>Control the flow of the application execution</li>
+        <li>Handling requests from the view and returning responses from the model</li>
+        <li>Act like a negotiator between the view and the model
+          <ul>
+            <li>view wants to read or update the database? OK.</li>
+            <li>let me check if they are making the request correctly</li>
+            <li>let me check if they are authorized</li>
+            <li>Okay, everything looks good. Database, give me data. Okay, here you go view!</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="back-end">Back-end</h3>
+
+      <p>” Full-stack “ means you code both front-end and back-end</p>
+      <ul>
+        <li>We looked at Front-end as the GUI / Client / Browser</li>
+        <li>Back-end is the Program Logic / Server</li>
+        <li>Typically Runs on a remote computer connected over the internet</li>
+        <li>Why?
+          <ul>
+            <li>Anyone can read your JavaScript code!</li>
+            <li>Anything that needs to be secret needs to go on the back end
+              <ul>
+                <li>trade secrets, business logic, transaction details, etc.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>The back end typically includes the “Controller” and the “Model”.</li>
+      </ul>
+
+      <h3 id="common-back-end-technologies">Common Back-end Technologies</h3>
+
+      <p>Php, Ruby, Java, Python, Node.js</p>
+
+      <p>Frameworks: Cake (PHP), Rails (Ruby), Express.js (Node)</p>
+
+    </div></div></section>
+<section id="part2nodejs"><button class="collapsible">Part 2: Node.js</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="what-is-nodejs">What is Node.js</h3>
+
+      <p>An extension to JavaScript that allows it to be used outside of the browser</p>
+      <ul>
+        <li>We’ll use it on the server</li>
+        <li>But it can also be used on Desktops, eg. to build VS Code, Atom, Discord using the Electron framework</li>
+      </ul>
+
+      <h3 id="why-use-it">Why use it?</h3>
+
+      <p>It allows you to perform operations directly on the server, such as: Access filesystem file, access a database, use computer hardware directly, etc.</p>
+
+      <h3 id="where-do-i-get-help">Where do I get help:</h3>
+
+      <p><a href="https://nodejs.org/api/">The official documentation</a></p>
+
+      <h3 id="how-well-use-it-in-this-course">How we’ll use it in this course:</h3>
+
+      <p>We are going to be developing on our local machines rather than using a dedicate server.</p>
+      <ul>
+        <li>Both the “server side” applications (like Node.js, Mongodb) and the “client side” applications (Firefox) will run on your local device</li>
+        <li>This is a common development practice</li>
+        <li>It allows you to test your application before deployment</li>
+        <li>This may be a bit confusing when starting
+          <ul>
+            <li>Remember that all of the Node.js code and files would later be stored on a remote server</li>
+            <li>They would be accessed through an domain name</li>
+            <li>instead, we’ll connect using the loopback address (localhost)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="installing-node">Installing Node</h3>
+
+      <p>Installation Node.JS is mostly pain-free!</p>
+      <ul>
+        <li>
+          <p>MongoDB will be worse in a few weeks.</p>
+        </li>
+        <li>If you Windows or Mac you can run an installer</li>
+        <li>If you have a custom package manager like Chocolaty on Windows or Homebrew on Mac, you can get it through these</li>
+        <li>If on Linux, use the package manager, like Apt or Yum</li>
+      </ul>
+
+      <p>Important: You will want to be able to call node and npm from the path!</p>
+
+      <h3 id="node-repl">Node REPL</h3>
+
+      <p>The interpreter-style environment in Node is the REPL: Read Execute Print Loop</p>
+
+      <p>It’s a sandbox environment for testing things, like the Python Prompt or JavaScript console</p>
+
+      <ul>
+        <li>Run commands, immediately see output</li>
+      </ul>
+
+      <p>Once Node.js is installed, you can run it with <code class="language-plaintext highlighter-rouge">node</code></p>
+
+      <p><img src="res/node-repl.png" alt="" /></p>
+
+      <h3 id="running-node-scripts">Running Node Scripts</h3>
+
+      <p>As with JavaScript it is much more powerful to write many lines of code and save it in a script.</p>
+      <ul>
+        <li>Save it in a file with the <code class="language-plaintext highlighter-rouge">.js</code> extension, e.g. <code class="language-plaintext highlighter-rouge">app.js</code></li>
+        <li>Then run it with node using:</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node app.js
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part3nodemodulesandnpm"><button class="collapsible">Part 3: Node modules and NPM</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="node-built-in-modules">Node Built-in modules</h3>
+
+      <p>One of the major advantages of Node.js is that you can easily use modules</p>
+      <ul>
+        <li>This includes ones installed in Node.js</li>
+        <li>You can also install others from the Node Package Manager (npm).</li>
+      </ul>
+
+      <p>Example built in modules you can use</p>
+
+      <p><code class="language-plaintext highlighter-rouge">crypto</code>, <code class="language-plaintext highlighter-rouge">fs</code>, <code class="language-plaintext highlighter-rouge">os</code>, <code class="language-plaintext highlighter-rouge">path</code>, <code class="language-plaintext highlighter-rouge">readline</code>, <code class="language-plaintext highlighter-rouge">http</code></p>
+
+      <p>You can read more about these in the official docs!</p>
+
+      <h3 id="adding-a-module">Adding a module</h3>
+
+      <p>At the beginning of a file, add:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>These are like c++ includes or python imports</p>
+
+      <h3 id="a-simple-server-with-http">A Simple Server with HTTP</h3>
+
+      <ul>
+        <li>You do not need to memorize this, we’ll use the Express module instead in the next lab!</li>
+      </ul>
+
+      <p><a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Node_server_without_framework">Tutorial from the MDN</a></p>
+
+      <h3 id="javascript-object-notation-json">JavaScript Object Notation (JSON)</h3>
+
+      <p>JavaScript Object Notation (JSON) is a way to represent a method for storing data, e.g. in a text files, based on the syntax of JavaScript objects. In particular, it has support for nested objects and properties which are arrays:</p>
+
+      <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adam"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tilson"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"streetAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Fake St."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Springfield"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"phoneNumbers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"home"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 456-7890"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"work"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"789 456-1230"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"spouse"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p><a href="https://www.json.org/json-en.html">JSON Syntax diagrams</a></p>
+
+      <p>JSON objects let you quickly write data to files which may be read in and turned back into objects. Additionally, it is well supported in various languages through different modules. We’ll make use of this syntax extensively in Mongo DB.</p>
+
+      <h3 id="writing-a-json-file">Writing a JSON File</h3>
+
+      <p>Example: Writing an object to a json file</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span> <span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">myObj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Adam</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span> <span class="p">(</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">object.json</span><span class="dl">"</span><span class="p">,</span> 
+                   <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span> <span class="nx">myObj</span> <span class="p">),</span> 
+                   <span class="dl">"</span><span class="s2">utf8</span><span class="dl">"</span><span class="p">,</span> 
+                   <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h3 id="external-modules">External modules</h3>
+
+      <p>Node shines when you tap into the vast amount of code that other people have written</p>
+
+      <p>eg.</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>In order to get these packages, we can use <code class="language-plaintext highlighter-rouge">npm</code></p>
+
+      <p>We’ll talk about Express a little later!</p>
+
+      <h3 id="npm">npm</h3>
+
+      <p>Node Package Manager - An application which allows you to install dependencies for your application, thus avoiding “dependency hell”.</p>
+
+      <p>In the bad old days, when you would download a package, it would rely on other packages, so you would download all of those, and some of those would depend on other packages, so you would download those. A package manager essentially builds a dependency graph and ensures all of the requirements are downloaded automatically.</p>
+
+      <h3 id="npm-init">npm init</h3>
+
+      <p><code class="language-plaintext highlighter-rouge">npm init</code> create a <code class="language-plaintext highlighter-rouge">package.json</code> file which describes your package and its dependencies</p>
+
+      <ul>
+        <li>
+          <p>Essentially a wizard that walks you through initializing your application</p>
+        </li>
+        <li>
+          <p>If you ever download a package from someone else, it will include this file</p>
+        </li>
+        <li>
+          <p>With this file, you can download all the project dependencies automatically with <code class="language-plaintext highlighter-rouge">npm install</code></p>
+        </li>
+      </ul>
+
+      <h3 id="creating-your-own-node-modules">Creating your own node modules</h3>
+
+      <p>Using good SSE principles, you know the power of separating your code into manageable files and libraries.</p>
+
+      <ul>
+        <li>Node modules are like libraries</li>
+        <li>Modules need user accessible components
+          <ul>
+            <li>At the end of your node script, add elements to the <code class="language-plaintext highlighter-rouge">module.exports</code> object</li>
+            <li>These will be available in the module which imports it</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Exports can be variables, classes, functions</p>
+
+      <p>Example: Exports in <code class="language-plaintext highlighter-rouge">calc.js</code></p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="nx">add</span><span class="p">;</span>
+</code></pre></div>      </div>
+
+      <p>The user is able to access “exports”, and the members inside</p>
+
+      <p>For you imports, you need syntax like, e.g. in <code class="language-plaintext highlighter-rouge">app.js</code>:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">calculate</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/calc.js</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="nx">calculate</span><span class="p">.</span><span class="nx">add</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part4expressjs"><button class="collapsible">Part 4: Express JS</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="what-is-expressjs">What is Express.js</h3>
+
+      <p><a href="https://expressjs.com/en/4x/api.html">Express JS</a></p>
+
+      <ul>
+        <li>A module for Node.js that makes all of the server stuff very easy</li>
+        <li>Think of it like jQuery for Node server operations</li>
+        <li>We briefly saw how to do server operations in Node without a framework, but why bother if there are packages that make your life easier?</li>
+      </ul>
+
+      <h3 id="how-to-get-it">How to get it</h3>
+
+      <p><a href="https://www.npmjs.com/package/express">Express on NPM</a></p>
+
+      <p>run:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install express
+</code></pre></div>      </div>
+
+      <p>This will install express into the current project, and also add it to the <code class="language-plaintext highlighter-rouge">package.json</code> as a dependency.</p>
+
+      <h3 id="adding-express-to-your-app">Adding Express to your app</h3>
+
+      <p>In <code class="language-plaintext highlighter-rouge">app.js</code>, add the following imports and boilerplate</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span> <span class="p">);</span>
+
+<span class="c1">// this is a canonical alias to make your life easier, like jQuery to $.</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span> 
+
+<span class="c1">// a common localhost test port</span>
+<span class="kd">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span> 
+
+<span class="c1">// Simple server operation</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span> <span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// template literal</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="s2">`Server is running on http://localhost:</span><span class="p">${</span><span class="nx">port</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>We start up our server, and use this callback to run once the server starts running.</p>
+
+      <p>We could access this server from our browser using:
+<code class="language-plaintext highlighter-rouge">http://localhost:3000</code></p>
+
+      <p>However, it is not running anything just yet!</p>
+
+      <h3 id="running-your-server">Running your server</h3>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node index.js
+</code></pre></div>      </div>
+
+      <p>Note that this is a server. It is a program which takes over the console and runs until you terminate it, typically with <code class="language-plaintext highlighter-rouge">ctrl+c</code>. Closing the terminal may kill this process, killing your server. You don’t want to do this unless you are done with your server!</p>
+
+      <p>However, if you make any changes to your file, the sever is not automatically restarted.</p>
+
+      <h3 id="nodemon">nodemon</h3>
+
+      <p><a href="https://www.npmjs.com/package/nodemon">nodemon</a> is a utility which monitors for changes in your server code and automatically restarts it. Saves you from repetitive stress injuries!</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install -g nodemon
+</code></pre></div>      </div>
+
+      <p>The <code class="language-plaintext highlighter-rouge">-g</code> flag means <code class="language-plaintext highlighter-rouge">install globally</code>, so all your projects can use it, not just the current one.</p>
+
+      <p>Run it with</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nodemon
+</code></pre></div>      </div>
+
+      <p>Note - it will watch ALL of the files for changes, if you want to ignore a particular type of files, e.g. text files, then use the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nodemon --ignore "*.txt"
+</code></pre></div>      </div>
+
+      <h3 id="responding-to-get-requests">Responding to GET requests</h3>
+
+      <p>The general syntax for handing an http request is:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">httpMethod</span><span class="p">(</span><span class="nx">route</span><span class="p">,</span> <span class="nx">callbackFunction</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>So, for example, let’s return some simple HTML when the user requests the root directory “/” using GET:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;h1&gt; Hello Node World! &lt;/h1&gt;</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">req</code> and <code class="language-plaintext highlighter-rouge">res</code> are the canonical callback function argument names you see commonly used, short for <code class="language-plaintext highlighter-rouge">request</code> and <code class="language-plaintext highlighter-rouge">response</code>.
+          <ul>
+            <li>Caution, if you use nested callbacks later without thinking, you might reuse these variables! Be careful and think of scoping!</li>
+            <li>We can print out the request to the console to see what all is included inside the callback:
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">console.log(req);</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>The “/” route maps to the root of your site, when hosted locally, this is at: <code class="language-plaintext highlighter-rouge">http://localhost:3000</code></li>
+      </ul>
+
+      <h3 id="routes">Routes</h3>
+
+      <p>We can respond to specific URLs using Routes</p>
+
+      <p>eg. <code class="language-plaintext highlighter-rouge">http://localhost:3000/about</code></p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/about</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;h1&gt; I am a SSE student at U of R! &lt;/h1&gt;</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>Typically put this before the <code class="language-plaintext highlighter-rouge">app.listen</code>.</li>
+      </ul>
+
+      <h3 id="sending-a-file">Sending a file</h3>
+      <p>It’s useful to send text, but even better to send complete HTML files!</p>
+
+      <p><code class="language-plaintext highlighter-rouge">res.sendfile</code> will instead return a file as a response.</p>
+
+      <p>e.g.</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">sendfile</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/index.html</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">__dirname</code> gives you the local directory
+          <ul>
+            <li>this is the directory your node project is running in</li>
+          </ul>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="part5sendingdatatotheserverwithforms"><button class="collapsible">Part 5: Sending data to the server with forms</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="passing-data-to-the-server-using-forms">Passing data to the server using forms</h3>
+
+      <p>on the HTML side:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"my-text"</span> <span class="na">id=</span><span class="s">"my-text"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre></div>      </div>
+
+      <p>When this form is submit, it will send data to the root <code class="language-plaintext highlighter-rouge">/</code> using <code class="language-plaintext highlighter-rouge">POST</code></p>
+
+      <h3 id="parsing-data-on-the-server">Parsing data on the server</h3>
+
+      <p>In the server, specify a route for root with post…</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">message received</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>However, we’re not doing anything with the returned data. How do we do that?</p>
+
+      <h3 id="using-the-sent-data">Using the Sent Data</h3>
+
+      <p>The easiest way is to use a plugin for express called <code class="language-plaintext highlighter-rouge">bodyparser</code></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install body-parser
+</code></pre></div>      </div>
+
+      <p>In your code, import body parser and configure it to read data over POST messages</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">body-parser</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> 
+</code></pre></div>      </div>
+
+      <p>In our application, how do we check the data we got?</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">message received</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>This will dump all of the submitted elements to the server’s console.</p>
+      <ul>
+        <li>Now you see the structure and can play with them!</li>
+      </ul>
+
+      <h3 id="serving-static-resources-like-stylesheets">Serving static resources like stylesheets</h3>
+
+      <p>By default, express won’t serve up static website resources like <code class="language-plaintext highlighter-rouge">.css</code>, and <code class="language-plaintext highlighter-rouge">.js</code> files that give your site functionality</p>
+      <ul>
+        <li>To add this functionality, make a new folder called “public”, and put all of the static files in there.</li>
+      </ul>
+
+      <p>Then add the line:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kd">static</span><span class="p">(</span><span class="dl">"</span><span class="s2">public</span><span class="dl">"</span><span class="p">))</span>
+</code></pre></div>      </div>
+
+      <p>In public use the same directory structure as before, eg. <code class="language-plaintext highlighter-rouge">css/style.css</code>, <code class="language-plaintext highlighter-rouge">js/script.js</code> etc.</p>
+
+      <h3 id="redirect">Redirect</h3>
+
+      <p>Sometimes, after handling the users data, you will need to redirect them to another page. This could be used, for example, to block users who haven’t entered the correct username or password.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>If you need to forward the POST data to the new page as well, use the following:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="mi">307</span><span class="p">,</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <h3 id="gitignore">.gitignore</h3>
+
+      <p>By now you’ve likely noticed a lot of stuff in your directory that doesn’t really need to be under version control.</p>
+
+      <p>We can use a <code class="language-plaintext highlighter-rouge">.gitignore</code> file which lists files and directories not to include in git adds</p>
+
+      <p><a href="https://github.com/github/gitignore/blob/master/Node.gitignore">You can also download one:</a></p>
+
+      <p>Add it to your directory as .gitignore</p>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>For this assignment, use <code class="language-plaintext highlighter-rouge">Node.js</code> and <code class="language-plaintext highlighter-rouge">express</code> to create a server which which hosts your site as it exists at the end of lab 5.</p>
+      <ul>
+        <li>All of the files developed so far should get sent.
+          <ul>
+            <li>This includes the <code class="language-plaintext highlighter-rouge">.css</code>, <code class="language-plaintext highlighter-rouge">.js</code>, and one HTML page per request</li>
+            <li>The “/” route should direct to the login page</li>
+          </ul>
+        </li>
+        <li>If the user attempts to log in to the login page using the username <code class="language-plaintext highlighter-rouge">username</code> and the password <code class="language-plaintext highlighter-rouge">password</code>, admit them to the todo list.
+          <ul>
+            <li>In other words, when the user submits the form, submit it to a new route, e.g. <code class="language-plaintext highlighter-rouge">/todo</code>
+              <ul>
+                <li>In the code for <code class="language-plaintext highlighter-rouge">/todo</code>, check username and password
+                  <ul>
+                    <li>Only grant access to the page if correct allow them in</li>
+                    <li>If the username and password is not correct, send them back to the login page.</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>No other functionality is needed yet.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><em>Warning - storing passwords in plain text is a very bad practice! We only doing to learn. We will replace it with more secure methods in the future!</em></p>
+
+      <h3 id="submission">Submission</h3>
+
+      <p>This lab will be graded through live demo / interview next week!</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
