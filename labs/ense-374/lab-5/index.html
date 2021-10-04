@@ -176,13 +176,24 @@
         <li>Create a JavaScript file, link it in the HTML (After the jQuery link), and add the following:</li>
       </ul>
 
+      <p>in <code class="language-plaintext highlighter-rouge">index.html</code>…</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>in <code class="language-plaintext highlighter-rouge">script.js</code>…</p>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> 
- <span class="p">...</span>
+ <span class="c1">//...</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
       <ul>
-        <li>Recall this is callback syntax with an anonymous function</li>
+        <li>Recall this is callback syntax with an anonymous function being called when the document is ready</li>
       </ul>
 
       <h3 id="minifyed-libraries">“Minify”ed Libraries</h3>
@@ -193,6 +204,7 @@
             <li>Minifying.</li>
             <li>Removes all whitespace (which is for humans, not computers) so that we pass less data over the network.</li>
             <li>The same thing happens with Bootstrap (min).</li>
+            <li>If you want to read the code, you need to find a non-min version of the library.</li>
           </ul>
         </li>
       </ul>
@@ -204,12 +216,12 @@
 
       <p>Selection is the core operation of jQuery</p>
       <ul>
-        <li>Selection rules are based off of the querySelectorAll
+        <li>Selection rules are the same as <code class="language-plaintext highlighter-rouge">querySelectorAll</code>
           <ul>
-            <li>Recall this is based off of CSS selectors</li>
+            <li>Recall this is the same as CSS selectors</li>
           </ul>
         </li>
-        <li>the basic selection function is: $(“…”)</li>
+        <li>the basic selection function is: <code class="language-plaintext highlighter-rouge">$("...")</code></li>
       </ul>
 
       <p>e.g.</p>
@@ -221,8 +233,15 @@
       <h3 id="whats-with-the--dollar-sign">What’s with the <code class="language-plaintext highlighter-rouge">$</code> (dollar sign)?</h3>
       <p>In JavaScript, it’s legal to use <code class="language-plaintext highlighter-rouge">$</code> as a variable name. It is used as an alias for <code class="language-plaintext highlighter-rouge">jQuery</code>.</p>
       <ul>
+        <li>You could, instead, use <code class="language-plaintext highlighter-rouge">jQuery</code> everywhere for more readable code, though that defeats the purpose of jQuery!</li>
         <li>Theoretically (but unlikely) there could be conflicts with other frameworks using this variable.</li>
       </ul>
+
+      <h3 id="cascading">Cascading</h3>
+
+      <p>Recall from last week we can cascade function calls. This is the intended usage of jQuery, rather than storing things in variables where possible:</p>
+      <pre><code class="language-jQuery">$( "#my-div" ).text( "Some new text" );
+</code></pre>
 
     </div></div></section>
 <section id="part3addingandremovingelements"><button class="collapsible">Part 3: Adding and Removing elements</button><div class="text-content"><div class="text-inner">
@@ -232,7 +251,7 @@
       <p><code class="language-plaintext highlighter-rouge">before</code>, <code class="language-plaintext highlighter-rouge">after</code> -&gt; before or after an elements, outside the tag
 <code class="language-plaintext highlighter-rouge">prepend</code>, <code class="language-plaintext highlighter-rouge">append</code> -&gt; first or last thing inside the element tag</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;button&gt;new&lt;/button&gt;</span><span class="dl">"</span><span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span> <span class="p">).</span><span class="nx">before</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;button&gt;new&lt;/button&gt;</span><span class="dl">"</span> <span class="p">)</span>
 </code></pre></div>      </div>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;h1&gt;</span>     Hello World     <span class="nt">&lt;/h1&gt;</span>  
@@ -241,7 +260,7 @@ before   prepend      append     after
 </code></pre></div>      </div>
 
       <h3 id="removing-elements">Removing elements</h3>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
 </code></pre></div>      </div>
 
     </div></div></section>
@@ -256,12 +275,14 @@ before   prepend      append     after
       </ul>
 
       <p>Finding a variable and setting css:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">p</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="dl">"</span><span class="s2">background-color</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#986D8E</span><span class="dl">"</span><span class="p">);</span>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">p</span><span class="dl">"</span> <span class="p">);</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span> <span class="dl">"</span><span class="s2">background-color</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#986D8E</span><span class="dl">"</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>More common, we use cascading rather than saving things in a temp variable:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="dl">"</span><span class="s2">background-color</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#986D8E</span><span class="dl">"</span><span class="p">);</span>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">p</span><span class="dl">"</span> <span class="p">).</span><span class="nx">css</span><span class="p">(</span> <span class="dl">"</span><span class="s2">background-color</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#986D8E</span><span class="dl">"</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
       <h3 id="css-separation-of-concern">CSS Separation of Concern</h3>
@@ -273,9 +294,10 @@ before   prepend      append     after
       </ul>
 
       <p>Instead use functions:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">).</span><span class="nx">hasClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span><span class="p">)</span>
-<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span><span class="p">)</span>
-<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span><span class="p">)</span>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">p</span><span class="dl">"</span> <span class="p">).</span><span class="nx">hasClass</span><span class="p">(</span> <span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">p</span><span class="dl">"</span> <span class="p">).</span><span class="nx">addClass</span><span class="p">(</span> <span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">p</span><span class="dl">"</span> <span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span> <span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span> <span class="p">)</span>
 </code></pre></div>      </div>
 
     </div></div></section>
@@ -285,7 +307,7 @@ before   prepend      append     after
 
       <p>Rather than DOM <code class="language-plaintext highlighter-rouge">innerText</code>, it’s just <code class="language-plaintext highlighter-rouge">text</code></p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="dl">"</span><span class="s2">Bye</span><span class="dl">"</span><span class="p">);</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span> <span class="p">).</span><span class="nx">text</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Bye</span><span class="dl">"</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>Similarly, rather than <code class="language-plaintext highlighter-rouge">InnerHTML</code>, in jQuery it’s <code class="language-plaintext highlighter-rouge">HTML</code></p>
@@ -293,10 +315,10 @@ before   prepend      append     after
       <h3 id="manipulating-attributes">Manipulating Attributes</h3>
 
       <p>getter:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">img</span><span class="dl">"</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">img</span><span class="dl">"</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="dl">"</span><span class="s2">src</span><span class="dl">"</span> <span class="p">)</span>
 </code></pre></div>      </div>
       <p>setter:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">img</span><span class="dl">"</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">https://www.google.com</span><span class="dl">"</span><span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">img</span><span class="dl">"</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">https://www.google.com</span><span class="dl">"</span> <span class="p">)</span>
 </code></pre></div>      </div>
 
     </div></div></section>
@@ -304,8 +326,8 @@ before   prepend      append     after
 
       <h3 id="adding-event-listeners">Adding event listeners</h3>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="p">....</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span> <span class="p">).</span><span class="nx">click</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
@@ -313,21 +335,21 @@ before   prepend      append     after
 
       <p>To an element…</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">).</span><span class="nx">keypress</span><span class="p">(</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-   <span class="p">...</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">input</span><span class="dl">"</span> <span class="p">).</span><span class="nx">keypress</span><span class="p">(</span> <span class="p">(</span> <span class="nx">e</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">//  ...</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
       <p>To a document…</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">keypress</span><span class="p">(</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-   <span class="p">...</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">keypress</span><span class="p">(</span> <span class="p">(</span> <span class="nx">e</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span> <span class="nx">e</span><span class="p">.</span><span class="nx">code</span> <span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
       <h3 id="adding-other-listeners">Adding other listeners</h3>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">mouseover</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="dl">"</span><span class="s2">color</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">purple</span><span class="dl">"</span><span class="p">);</span>
-<span class="p">})</span><span class="nx">l</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="dl">"</span><span class="s2">mouseover</span><span class="dl">"</span> <span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span> <span class="p">).</span><span class="nx">css</span><span class="p">(</span> <span class="dl">"</span><span class="s2">color</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">purple</span><span class="dl">"</span><span class="p">)</span> <span class="p">;</span>
+<span class="p">});</span>
 </code></pre></div>      </div>
 
       <h3 id="part-7-animating-with-jquery">Part 7: Animating with jQuery</h3>
@@ -342,36 +364,41 @@ before   prepend      append     after
         <li>Only works with numeric values, with the exceptions of show, hide and toggle</li>
       </ul>
 
-      <p>https://www.w3schools.com/jquery/eff_animate.asp</p>
+      <p><a href="https://www.w3schools.com/jquery/eff_animate.asp">Animating with jQuery</a></p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span> <span class="nx">will</span> <span class="nx">hide</span> <span class="nx">an</span> <span class="nx">element</span>
-<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
-<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">toggle</span><span class="p">();</span>
-<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">();</span> <span class="o">-</span> <span class="nx">Remove</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">less</span> <span class="nx">jarring</span>
-<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">();</span> <span class="o">-</span> <span class="nx">Remove</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">less</span> <span class="nx">jarring</span>
-<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">fadeToggle</span><span class="p">();</span> <span class="o">-</span> <span class="nx">Remove</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">less</span> <span class="nx">jarring</span>
-<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">slideUp</span><span class="p">();</span>  <span class="c1">// down, toggle</span>
-<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">animate</span><span class="p">(</span>  <span class="nx">the</span> <span class="nx">CSS</span> <span class="nx">rule</span> <span class="nx">we</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">tween</span> <span class="nx">to</span>  <span class="p">);</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span><span class="na">width</span><span class="p">:</span> <span class="dl">"</span><span class="s2">500px</span><span class="dl">"</span><span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span> <span class="c1">// will hide an element, i.e. display: none</span>
+<span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+<span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">toggle</span><span class="p">();</span>
+<span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">fadeOut</span><span class="p">();</span> <span class="c1">// like hide, but less jarring</span>
+<span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">fadeIn</span><span class="p">();</span>
+<span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">fadeToggle</span><span class="p">();</span>
+<span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">slideUp</span><span class="p">();</span>  <span class="c1">// another type of hiding. Up =&gt; Hide, Down =&gt; Show, Toggle</span>
+<span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">animate</span><span class="p">(</span>  <span class="cm">/*the CSS rule we want to tween to*/</span>  <span class="p">);</span>
 </code></pre></div>      </div>
       <ul>
-        <li>only works for numeric properties - it’s hard to tween to things like colors</li>
+        <li><code class="language-plaintext highlighter-rouge">animate</code> only works for numeric properties - it’s hard to tween to things like colors</li>
       </ul>
 
       <p>You can chain animations:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">element</span><span class="dl">"</span><span class="p">).</span><span class="nx">slideUp</span><span class="p">().</span><span class="nx">SlideDown</span><span class="p">().</span><span class="nx">animate</span><span class="p">({...});</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">slideUp</span><span class="p">().</span><span class="nx">SlideDown</span><span class="p">().</span><span class="nx">animate</span><span class="p">({</span> <span class="cm">/*...*/</span> <span class="p">});</span>
 </code></pre></div>      </div>
       <ul>
-        <li>does the things in order</li>
+        <li>animations will play in order, left to right</li>
       </ul>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>In this lab we come back to the lab project. Recall, the end goal is to create a collaborative to-do list. For now, we are going to simulate the a single users’ interactivity using JavaScript and DOM manipulations. Later, you will replace much of this functionality with server side Node.js code. This lab will be primarily jQuery, but you can modify as needed your HTML, CSS, Bootstrap, and JavaScript.</p>
+      <p>In this lab we come back to the lab project. Recall, the end goal is to create a collaborative to-do list. For now, we are going to simulate the a single users’ interactivity using JavaScript, jQuery and DOM manipulations. Later, you will replace much of this functionality with server-side Node.js code. This lab will be primarily jQuery, but you can modify as needed your HTML, CSS, Bootstrap, and JavaScript.</p>
 
-      <p>Non-persistent interactivity</p>
+      <h3 id="non-persistent-interactivity">Non-persistent interactivity</h3>
 
-      <p>Using JavaScript / jQuery DOM manipulation, add the following functionality to the todo page:</p>
+      <p>Using JavaScript / jQuery DOM manipulation, add the following functionality to the <code class="language-plaintext highlighter-rouge">todo</code> page:</p>
 
       <ul>
         <li>When the user enters text and clicks the add task button, create and add an unclaimed task to the task list
