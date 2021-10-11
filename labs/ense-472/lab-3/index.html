@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ENSE 472 Lab 3 </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <!--li><a href="/labs/ense-472/lab-3">Lab 3</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-3-intro-to-omnet--inet-and-ethernet-networks">Lab 3: Intro to OMNeT++ / INET and Ethernet Networks</h1>
+
+<p>ENSE 472 - Digital Networks - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>The purpose of this lab is to introduce you to the application OMNeT++ / INET. OMNeT++ is a discrete event simulation framework, which is primarily used for building network simulators, but can be used in other domains. OMNet++ simulations can be run and explored through graphical and command line interfaces. INET is a library for OMNeT++ which includes models for wired, wireless and mobile networks. Together, these applications can define and simulate networks and collect data to help us quantify network design decisions. These applications are open source software which are free to use for academic purposes.</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>A Windows, Mac or Linux computer with OMNeT++ / INET installed. You may either install this yourself, or instead use the provided VirtualBox image which includes these applications installed in a light-weight Ubuntu environment.</p>
+
+    </div></div></section>
+<section id="part1installationandstartup"><button class="collapsible">Part 1: Installation and Startup</button><div class="text-content"><div class="text-inner">
+
+      <p>If you wish to install OmNET++ on a windows machine, you must build it from source. This may sound intimidating, but it’s actually not that bad. <a href="https://www.youtube.com/watch?v=PfAWhrmoYgM">If you are on windows, this video explains the process very well.</a>. If you follow this video, you can ignore the parts about VEINS and SUMO, we will not be using these frameworks in this course. <a href="https://doc.omnetpp.org/omnetpp/InstallGuide.pdf">Regardless of your operating system, you can follow the installation guide.</a>.</p>
+
+      <p>Alternatively, you may download my VirtualBox Image which has the software installed and ready to go. You should have learned how to use VirtualBox in ENSE 353.</p>
+
+      <h3 id="note-to-adam---add-link-to-virtualbox-once-it-is-uploaded">Note to Adam - Add Link to VirtualBox once it is uploaded!</h3>
+      <h3 id="other-note-to-adam---see-if-there-is-a-way-to-export-virtual-boxes">Other note to Adam - see if there is a way to export virtual boxes</h3>
+      <h3 id="final-note-to-adam---incremental-backups-jeez-1-server-2-xfce-min-3-guest-additions-and-downloads-4-build-omnet-5-build-inet">Final note to Adam - incremental backups, jeez (1-server) (2-xfce-min) (3-guest-additions-and-downloads) (4-build-omnet) (5-build-inet)</h3>
+
+      <h3 id="virtualbox-image-questions">VirtualBox Image Questions</h3>
+
+      <h3 id="outdates-as-i-switched-to-xfce-for-better-student-support">Outdates as I switched to XFCE for better student support!</h3>
+
+      <p>Username and Password: omnet / omnet</p>
+
+      <p>Image Base: Ubuntu Server + XFCE with no bloat</p>
+      <ul>
+        <li>
+          <p>The installation guide was then followed for Ubuntu</p>
+        </li>
+        <li>Note, when I moved computers, I had to reattach the disk image</li>
+        <li>This was done through File -&gt; Media Manager -&gt; Find and detatch the VDI if it is there</li>
+        <li>Next reattach it in the actual virtual box settings (Settings -&gt; Controller (SATA) -&gt; omnet.vdi)</li>
+        <li>there is a handy desktop shortcut to start running the app!</li>
+      </ul>
+
+      <p>How do I shut down Debian?</p>
+      <ul>
+        <li>Upper left, Applications -&gt; Log Out -&gt; Shut Down</li>
+      </ul>
+
+      <p>We can ensure that we have the application working by looking at the ALOHAnet sample. Lecture tie-in: What was ALOHANet?</p>
+
+      <p><img src="res/starting-aloha.png" alt="" /></p>
+
+      <p><img src="res/aloha-settings.png" alt="" /></p>
+
+      <p><img src="res/aloha-sim-in-action.png" alt="" /></p>
+
+    </div></div></section>
+<section id="part2omnetoverview"><button class="collapsible">Part 2: OMNeT++ Overview</button><div class="text-content"><div class="text-inner">
+
+      <p>OMNeT++ is a Discrete Event simulation framework</p>
+      <ul>
+        <li>primarily used for building network simulators</li>
+        <li>Can be used in other domains
+          <ul>
+            <li>e.g. processor development</li>
+            <li>e.g. complex software systems.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>OMNet++ simulations can be run and explored through graphical and command line interfaces.</p>
+
+      <p>An OMNeT++ network is comprised of a number of modules</p>
+      <ul>
+        <li>Can be written once and reused</li>
+        <li>Messages can be exchanges between:
+          <ul>
+            <li>Simple modules</li>
+            <li>Compound modules which are composed of simple modules.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Simple modules are written in C++, using the <code class="language-plaintext highlighter-rouge">simulation</code> class library</p>
+
+      <p><img src="res/modules.png" alt="" /></p>
+
+      <p>With OMNeT++ we can…</p>
+      <ul>
+        <li>Create hierarchical modules
+          <ul>
+            <li>Essentially the entire system is a compound module</li>
+            <li>Module topology specified in a <code class="language-plaintext highlighter-rouge">ned</code> file.</li>
+          </ul>
+        </li>
+        <li>Specify module gates, which are the source and destinations of messages</li>
+        <li>Specify links, how modules are connected
+          <ul>
+            <li>Can optionally specify parameters like data rate, propagation delay, bit error rate, packet error rate</li>
+            <li>this creates a <code class="language-plaintext highlighter-rouge">channel</code></li>
+          </ul>
+        </li>
+        <li>Model packet transmission, either in the <code class="language-plaintext highlighter-rouge">.ned</code> file or the <code class="language-plaintext highlighter-rouge">ompnetpp.ini</code> file</li>
+        <li>Modify parameters to change how our network operates</li>
+      </ul>
+
+      <h3 id="the-ned-file">The NED File</h3>
+
+      <p>Describes the networks</p>
+      <ul>
+        <li>Create simple modules</li>
+        <li>Create compound modules</li>
+        <li>Combine them into a network</li>
+        <li>Can also specify channels</li>
+        <li>Scalable due to hierarchical nature, component-based, interfaces and inheritance</li>
+        <li>Java-like Packages to reduce namespace collisions</li>
+      </ul>
+
+      <h3 id="the-omnet-ide">The OMNeT++ IDE</h3>
+
+      <p>The IDE included is  skin of Eclipse, specifically created for writing OMNeT++ simulations.</p>
+      <ul>
+        <li>It is already configured for building and running your applications!</li>
+        <li>Lets tour the UI</li>
+      </ul>
+
+      <p><img src="res/omnet-ide.png" alt="" /></p>
+      <ol>
+        <li>The project workspace is here. By default OMNeT++ Loads INET and Sample Projects.</li>
+        <li>In center stage, you can edit source and view and modify the topology</li>
+        <li>The palette lets you add submodules to this module</li>
+        <li>Switch between <code class="language-plaintext highlighter-rouge">Design and Source</code> here</li>
+        <li>The task bar allows you to run and debug applications.</li>
+      </ol>
+
+      <p>Let’s look at some NED files…</p>
+
+      <h3 id="investigating-aloha">Investigating Aloha</h3>
+
+      <p>In the Aloha app, the Host.<code class="language-plaintext highlighter-rouge">ned</code>…</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// A computer in the ALOHAnet network.</span>
+<span class="c1">//</span>
+<span class="n">simple</span> <span class="n">Host</span>
+<span class="p">{</span>
+    <span class="nl">parameters:</span>
+        <span class="err">@</span><span class="n">signal</span><span class="p">[</span><span class="n">state</span><span class="p">](</span><span class="n">type</span><span class="o">=</span><span class="s">"long"</span><span class="p">);</span>
+        <span class="err">@</span><span class="n">statistic</span><span class="p">[</span><span class="n">radioState</span><span class="p">](</span><span class="n">source</span><span class="o">=</span><span class="s">"state"</span><span class="p">;</span><span class="n">title</span><span class="o">=</span><span class="s">"Radio state"</span><span class="p">;</span><span class="k">enum</span><span class="o">=</span><span class="s">"IDLE=0,TRANSMIT=1"</span><span class="p">;</span><span class="n">record</span><span class="o">=</span><span class="n">vector</span><span class="p">);</span>
+        <span class="kt">double</span> <span class="n">txRate</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">bps</span><span class="p">);</span>          <span class="c1">// transmission rate</span>
+        <span class="k">volatile</span> <span class="kt">int</span> <span class="n">pkLenBits</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>   <span class="c1">// packet length in bits</span>
+        <span class="k">volatile</span> <span class="kt">double</span> <span class="n">iaTime</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>   <span class="c1">// packet interarrival time</span>
+        <span class="kt">double</span> <span class="n">slotTime</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>          <span class="c1">// zero means no slots (pure Aloha)</span>
+        <span class="kt">double</span> <span class="n">x</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>                 <span class="c1">// the x coordinate of the host</span>
+        <span class="kt">double</span> <span class="n">y</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>                 <span class="c1">// the y coordinate of the host</span>
+        <span class="kt">double</span> <span class="n">idleAnimationSpeed</span><span class="p">;</span>         <span class="c1">// used when there is no packet being transmitted</span>
+        <span class="kt">double</span> <span class="n">transmissionEdgeAnimationSpeed</span><span class="p">;</span> <span class="c1">// used when the propagation of a first or last bit is visible</span>
+        <span class="kt">double</span> <span class="n">midTransmissionAnimationSpeed</span><span class="p">;</span> <span class="c1">// used during transmission</span>
+        <span class="kt">bool</span> <span class="n">controlAnimationSpeed</span> <span class="o">=</span> <span class="k">default</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+        <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"i=device/pc_s"</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div>      </div>
+      <p>and the Aloha network…</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// The Aloha network consists of hosts which talk to the central "server" via</span>
+<span class="c1">// the Aloha or Slotted Aloha protocol</span>
+<span class="c1">//</span>
+<span class="n">network</span> <span class="n">Aloha</span>
+<span class="p">{</span>
+    <span class="nl">parameters:</span>
+        <span class="kt">int</span> <span class="n">numHosts</span><span class="p">;</span>  <span class="c1">// number of hosts</span>
+        <span class="kt">double</span> <span class="n">txRate</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">bps</span><span class="p">);</span>  <span class="c1">// transmission rate</span>
+        <span class="kt">double</span> <span class="n">slotTime</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">ms</span><span class="p">);</span>  <span class="c1">// zero means no slots (pure Aloha)</span>
+        <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"bgi=background/terrain,s;bgb=1000,1000"</span><span class="p">);</span>
+    <span class="nl">submodules:</span>
+        <span class="nl">server:</span> <span class="n">Server</span><span class="p">;</span>
+        <span class="n">host</span><span class="p">[</span><span class="n">numHosts</span><span class="p">]</span><span class="o">:</span> <span class="n">Host</span> <span class="p">{</span>
+            <span class="n">txRate</span> <span class="o">=</span> <span class="n">txRate</span><span class="p">;</span>
+            <span class="n">slotTime</span> <span class="o">=</span> <span class="n">slotTime</span><span class="p">;</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h3 id="tic-toc-tutorial">Tic-Toc Tutorial</h3>
+
+      <p>If you would like to learn more about basic OMNeT++ usage, the <a href="https://docs.omnetpp.org/tutorials/tictoc/">tic-toc tutorial</a> is strongly recommended!</p>
+
+      <p>Here’s the topolgy for tic-toc:</p>
+
+      <p><img src="res/tictoc.png" alt="" /></p>
+
+      <p>Here’s the <code class="language-plaintext highlighter-rouge">tictoc1.ned</code> file:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">simple</span> <span class="n">Txc1</span>
+<span class="p">{</span>
+    <span class="nl">gates:</span>
+        <span class="n">input</span> <span class="n">in</span><span class="p">;</span>
+        <span class="n">output</span> <span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//</span>
+<span class="c1">// Two instances (tic and toc) of Txc1 connected both ways.</span>
+<span class="c1">// Tic and toc will pass messages to one another.</span>
+<span class="c1">//</span>
+<span class="n">network</span> <span class="n">Tictoc1</span>
+<span class="p">{</span>
+    <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"bgb=147,144"</span><span class="p">);</span>
+    <span class="nl">submodules:</span>
+        <span class="nl">tic:</span> <span class="n">Txc1</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=32,103"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">toc:</span> <span class="n">Txc1</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=119,30"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="nl">connections:</span>
+        <span class="n">tic</span><span class="p">.</span><span class="n">out</span> <span class="o">--&gt;</span> <span class="p">{</span>  <span class="n">delay</span> <span class="o">=</span> <span class="mx">100ms</span><span class="p">;</span> <span class="p">}</span> <span class="o">--&gt;</span> <span class="n">toc</span><span class="p">.</span><span class="n">in</span><span class="p">;</span>
+        <span class="n">tic</span><span class="p">.</span><span class="n">in</span> <span class="o">&lt;--</span> <span class="p">{</span>  <span class="n">delay</span> <span class="o">=</span> <span class="mx">100ms</span><span class="p">;</span> <span class="p">}</span> <span class="o">&lt;--</span> <span class="n">toc</span><span class="p">.</span><span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>And here’s the simulation code:</p>
+
+      <p>Here’s the <code class="language-plaintext highlighter-rouge">txc1.cc</code> file:
+(Note that <code class="language-plaintext highlighter-rouge">.cc</code> is a filename convention for c++ files, functionally equivalent to <code class="language-plaintext highlighter-rouge">.cpp</code>.)</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;string.h&gt;
+#include &lt;omnetpp.h&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">omnetpp</span><span class="p">;</span>
+
+<span class="cm">/**
+ * Derive the Txc1 class from cSimpleModule. In the Tictoc1 network,
+ * both the `tic' and `toc' modules are Txc1 objects, created by OMNeT++
+ * at the beginning of the simulation.
+ */</span>
+<span class="k">class</span> <span class="nc">Txc1</span> <span class="o">:</span> <span class="k">public</span> <span class="n">cSimpleModule</span>
+<span class="p">{</span>
+  <span class="nl">protected:</span>
+    <span class="c1">// The following redefined virtual function holds the algorithm.</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">initialize</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleMessage</span><span class="p">(</span><span class="n">cMessage</span> <span class="o">*</span><span class="n">msg</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// The module class needs to be registered with OMNeT++</span>
+<span class="n">Define_Module</span><span class="p">(</span><span class="n">Txc1</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="n">Txc1</span><span class="o">::</span><span class="n">initialize</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// Initialize is called at the beginning of the simulation.</span>
+    <span class="c1">// To bootstrap the tic-toc-tic-toc process, one of the modules needs</span>
+    <span class="c1">// to send the first message. Let this be `tic'.</span>
+
+    <span class="c1">// Am I Tic or Toc?</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="s">"tic"</span><span class="p">,</span> <span class="n">getName</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// create and send first message on gate "out". "tictocMsg" is an</span>
+        <span class="c1">// arbitrary string which will be the name of the message object.</span>
+        <span class="n">cMessage</span> <span class="o">*</span><span class="n">msg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">cMessage</span><span class="p">(</span><span class="s">"tictocMsg"</span><span class="p">);</span>
+        <span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s">"out"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Txc1</span><span class="o">::</span><span class="n">handleMessage</span><span class="p">(</span><span class="n">cMessage</span> <span class="o">*</span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// The handleMessage() method is called whenever a message arrives</span>
+    <span class="c1">// at the module. Here, we just send it to the other module, through</span>
+    <span class="c1">// gate `out'. Because both `tic' and `toc' does the same, the message</span>
+    <span class="c1">// will bounce between the two.</span>
+    <span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s">"out"</span><span class="p">);</span> <span class="c1">// send out the message</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h3 id="omnet-documentation">OMNeT++ Documentation</h3>
+
+      <p>It’s always a great idea to read the docs</p>
+
+      <p><a href="https://omnetpp.org/documentation/">OMNeT++ documentation</a></p>
+
+      <p>Useful Links: <a href="https://omnetpp.org/documentation/simulation-with-omnet">How to create a simulation in OMNeT++</a></p>
+
+    </div></div></section>
+<section id="part3inetframework"><button class="collapsible">Part 3: INET Framework</button><div class="text-content"><div class="text-inner">
+
+      <p>OMNeT++ is a generic discrete event simulator, which could be used to model any type of system. Thus, it does not have any built-in modules for common internet modules. We could code these up ourselves, however this would be very time consuming. The INET Framework is a collection of modules for OMNeT++, which simulate wired, wireless and mobile networks. By using these modules, we don’t need to code them ourselves, and can quickly model real world network configurations.</p>
+
+      <p>Once we have downloaded and unzipped INET, we can add it to our project with…</p>
+
+      <p><img src="res/add-inet-to-proj.png" alt="" /></p>
+
+      <p>We then build the application. Be warned, this will take a while! (~25 minutes on my machine)</p>
+
+      <h3 id="inet-documentation">INET Documentation</h3>
+
+      <p>The Documentation for INET is also quite good!</p>
+
+      <p><a href="https://inet.omnetpp.org/docs/">Read the Docus</a></p>
+
+    </div></div></section>
+<section id="part4ethernetnetwork"><button class="collapsible">Part 4: Ethernet Network</button><div class="text-content"><div class="text-inner">
+
+      <p>Our First exercise in OMNeT++ will be to create an Ethernet Network using the Bus Topology and CSMA/CD.</p>
+
+      <p>The Ethernet Network refers to devices connected to Layer 2 devices, i.e. hubs and bridges (switches), typically using Ethernet cable. These devices are all modelled for us in the INET framework, we just need to put them together the way we would like.</p>
+      <ul>
+        <li>Recall that in layer 2, addressing is performed by MAC addresses.</li>
+        <li>Hubs pass messages by simply flooding all devices, using the CSMA/CD algorithm to reduce collisions.</li>
+        <li>A Switch instead learns which MAC Address(es) are connected to which ports, using ARP, so that packets may be forwarded specifically to the devices which need them.</li>
+      </ul>
+
+      <p><a href="https://omnetpp.org/documentation/simulation-with-omnet">INET Framework Documentation on the Ethernet</a></p>
+
+      <p>Let’s start with a sample network from an <a href="https://inet.omnetpp.org/docs/showcases/visualizer/canvas/datalinkactivity/doc/index.htmlsn">example on this page</a>:</p>
+
+      <p><img src="res/ethernet-network.png" alt="" /></p>
+
+      <h3 id="address-resolution-protocol-arp">Address Resolution Protocol (ARP)</h3>
+
+      <p>Recall layer 2 devices do not understand IP addresses, only MAC Addresses</p>
+      <ul>
+        <li>Thus, a layer 2 device has to know which interface each physical MAC address is connected to</li>
+        <li>An ARP request is a special packet which is flooded through the networking, asking for a response from the target device
+          <ul>
+            <li>The Switch remembers the address which initiated the request, adding it to the ARP table</li>
+          </ul>
+        </li>
+        <li>If a packet arrives at a device which is not the target, it is ignored</li>
+        <li>If the packet arrives at the destination, a response is issued
+          <ul>
+            <li>The response propagates back through the network in the reverse order.
+              <ul>
+                <li>We no longer need to flood, we remember our reverse order</li>
+              </ul>
+            </li>
+            <li>The devices remember the location of the return response, updating the ARP table</li>
+          </ul>
+        </li>
+        <li>Once the entire</li>
+      </ul>
+
+    </div></div></section>
+<section id="part5simulation"><button class="collapsible">Part 5: Simulation</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="presenting-your-results">Presenting your Results</h3>
+
+      <ul>
+        <li>OMNeT++ will typically be configured to display data in a raw format.</li>
+        <li>It will often be appropriate to display this data in some form of graph.</li>
+        <li>The IDE has some built in tools for visualizing messages being sent
+          <ul>
+            <li>Instead, you may with to use a data visualization utility like MatLab or MatPlotLib</li>
+          </ul>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>Using our lab example as a starting point, individually implement:</li>
+        <li>The Star Topology</li>
+        <li>The Bus Topology
+          <ul>
+            <li>Which type of device do you need to use for each? How many?</li>
+            <li>Which networks require an algorithm for Collision Detection?</li>
+          </ul>
+        </li>
+        <li>Rerun the Simulation</li>
+      </ul>
+
+      <h3 id="submission">Submission</h3>
+      <ul>
+        <li>Please submit the source files for each of your topologies</li>
+        <li>Additionally, submit a 1-page report with relevant data you collected and analysis. (Be brief!)</li>
+      </ul>
+
+      <h3 id="references">References:</h3>
+
+      <p>J. Skiles. <a href="https://www.youtube.com/watch?v=PfAWhrmoYgM">Getting started with OMNET++, INET, Veins, and SUMO</a>. YouTube.com. May 26, 2020. [Online].</p>
+
+      <p>J. Skiles. <a href="https://www.youtube.com/watch?v=oBRrhuaMxGk">How To Set Up OMNet++ in Ubuntu 20+</a>. YouTube.com. January 10, 2021. [Online].</p>
+
+      <p>J. Skiles. <a href="https://www.youtube.com/watch?v=Ez8tTS9iXe4">An Overview of OMNET++</a>. YouTube.com. June 21, 2020. [Online].</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

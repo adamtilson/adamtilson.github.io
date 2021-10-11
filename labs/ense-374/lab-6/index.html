@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adam Tilson</title>
+  <title> ENSE 374 Lab 6 </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
   <link rel="stylesheet" href="/assets/css/style.css?v=">
   <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
@@ -110,7 +110,7 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>This lab introduces Node.js, a server-side runtime environment that uses JavaScript. This application allows you to write code in JavaScript that exists on the server and can perform actions like serving files, doing database lookups and modifying files at runtime through templates.</p>
+      <p>This lab introduces Node.js, a server-side runtime environment that uses JavaScript. This application allows you to write code in JavaScript that exists on the server and can perform actions like serving files, performing database operations and customizing files at runtime through templates.</p>
 
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
@@ -138,37 +138,47 @@
 
       <h3 id="mvc-controller">MVC: Controller</h3>
 
-      <p>Recall the stack we are developing with in this course:</p>
+      <p>Recall the stack we are developing within this course:</p>
 
       <p><img src="res/node-stack.svg" alt="" /></p>
 
       <p>We are now moving over the controller side. The controller should:</p>
       <ul>
         <li>Control the flow of the application execution</li>
-        <li>Handling requests from the view and returning responses from the model</li>
-        <li>Act like a negotiator between the view and the model
-          <ul>
-            <li>view wants to read or update the database? OK.</li>
-            <li>let me check if they are making the request correctly</li>
-            <li>let me check if they are authorized</li>
-            <li>Okay, everything looks good. Database, give me data. Okay, here you go view!</li>
-          </ul>
-        </li>
+        <li>Handle requests from the view and return responses from the model</li>
+        <li>Act like a negotiator between the view and the model</li>
+      </ul>
+
+      <p>e.g.</p>
+      <ul>
+        <li>view: I want to read or update the database</li>
+        <li>controller: let me check if they are making the request correctly</li>
+        <li>controller: let me check if they are authorized</li>
+        <li>controller: database, give me data</li>
+        <li>database: okay, here you go, controller!</li>
+        <li>controller: okay, here you go, view!</li>
       </ul>
 
       <h3 id="back-end">Back-end</h3>
 
-      <p>” Full-stack “ means you code both front-end and back-end</p>
+      <p>Instead of thinking our system as model-view-control (functional modules), we can think of it as front-end and back-end.
+“Full-stack” means you code both front-end and back-end</p>
       <ul>
         <li>We looked at Front-end as the GUI / Client / Browser</li>
-        <li>Back-end is the Program Logic / Server</li>
-        <li>Typically Runs on a remote computer connected over the internet</li>
-        <li>Why?
+        <li>Back-end is the Program Logic / Server
           <ul>
-            <li>Anyone can read your JavaScript code!</li>
-            <li>Anything that needs to be secret needs to go on the back end
+            <li>Typically runs on a remote computer connected over the internet
               <ul>
-                <li>trade secrets, business logic, transaction details, etc.</li>
+                <li>Why?
+                  <ul>
+                    <li>Anyone can read your JavaScript code!</li>
+                    <li>Anything that needs to be secret needs to go on the back end
+                      <ul>
+                        <li>trade secrets, business logic, transaction details, etc.</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
               </ul>
             </li>
           </ul>
@@ -190,12 +200,20 @@
       <p>An extension to JavaScript that allows it to be used outside of the browser</p>
       <ul>
         <li>We’ll use it on the server</li>
-        <li>But it can also be used on Desktops, eg. to build VS Code, Atom, Discord using the Electron framework</li>
+        <li>But it can also be used on Desktops, e.g. to build VS Code, Atom, Discord using the Electron framework</li>
       </ul>
 
       <h3 id="why-use-it">Why use it?</h3>
 
       <p>It allows you to perform operations directly on the server, such as: Access filesystem file, access a database, use computer hardware directly, etc.</p>
+      <ul>
+        <li>We already saw how Browser-based JavaScript could not do these operations</li>
+        <li>Browser-based JS is also running on the client, dedicated to a singlel user
+          <ul>
+            <li>but our database is on the server, and shared by multiple users</li>
+          </ul>
+        </li>
+      </ul>
 
       <h3 id="where-do-i-get-help">Where do I get help:</h3>
 
@@ -211,7 +229,7 @@
         <li>This may be a bit confusing when starting
           <ul>
             <li>Remember that all of the Node.js code and files would later be stored on a remote server</li>
-            <li>They would be accessed through an domain name</li>
+            <li>They would be accessed through a domain name (e.g. www.mywebsite.ca )</li>
             <li>instead, we’ll connect using the loopback address (localhost)</li>
           </ul>
         </li>
@@ -241,9 +259,11 @@
         <li>Run commands, immediately see output</li>
       </ul>
 
-      <p>Once Node.js is installed, you can run it with <code class="language-plaintext highlighter-rouge">node</code></p>
+      <p>Once Node.js is installed, you can run the REPL with <code class="language-plaintext highlighter-rouge">node</code></p>
 
       <p><img src="res/node-repl.png" alt="" /></p>
+
+      <p>We can try some common opeartions like <code class="language-plaintext highlighter-rouge">console.log("...")</code></p>
 
       <h3 id="running-node-scripts">Running Node Scripts</h3>
 
@@ -282,7 +302,7 @@
 
       <p>These are like c++ includes or python imports</p>
 
-      <h3 id="a-simple-server-with-http">A Simple Server with HTTP</h3>
+      <h3 id="a-simple-http-server">A Simple HTTP Server</h3>
 
       <ul>
         <li>You do not need to memorize this, we’ll use the Express module instead in the next lab!</li>
@@ -333,7 +353,7 @@
                    <span class="dl">"</span><span class="s2">utf8</span><span class="dl">"</span><span class="p">,</span> 
                    <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">err</span> <span class="p">);</span>
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span> <span class="p">);</span>
@@ -341,10 +361,10 @@
 
       <h3 id="external-modules">External modules</h3>
 
-      <p>Node shines when you tap into the vast amount of code that other people have written</p>
+      <p>Node shines when you tap into the vast amount of code that other people have written…</p>
 
       <p>eg.</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>In order to get these packages, we can use <code class="language-plaintext highlighter-rouge">npm</code></p>
@@ -418,9 +438,9 @@
       <p><a href="https://expressjs.com/en/4x/api.html">Express JS</a></p>
 
       <ul>
-        <li>A module for Node.js that makes all of the server stuff very easy</li>
-        <li>Think of it like jQuery for Node server operations</li>
-        <li>We briefly saw how to do server operations in Node without a framework, but why bother if there are packages that make your life easier?</li>
+        <li>A module for Node.js that makes running an HTTP server easy</li>
+        <li>Think of it like jQuery for Node.js HTTP server operations</li>
+        <li>We briefly saw how to do server operations in Node.js without a framework, but why bother if there are packages that make your life easier?</li>
       </ul>
 
       <h3 id="how-to-get-it">How to get it</h3>
@@ -464,9 +484,9 @@
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node index.js
 </code></pre></div>      </div>
 
-      <p>Note that this is a server. It is a program which takes over the console and runs until you terminate it, typically with <code class="language-plaintext highlighter-rouge">ctrl+c</code>. Closing the terminal may kill this process, killing your server. You don’t want to do this unless you are done with your server!</p>
+      <p>Note that this is a server. The running program will not complete, but instead take over the console and runs until you terminate it, typically with <code class="language-plaintext highlighter-rouge">ctrl+c</code>. Closing the terminal may kill this process, killing your server. You don’t want to do this unless you are done with your server!</p>
 
-      <p>However, if you make any changes to your file, the sever is not automatically restarted.</p>
+      <p>However, if you make any changes to your file, the sever is not automatically restarted. You would need to restart it manually, unless…</p>
 
       <h3 id="nodemon">nodemon</h3>
 
@@ -511,14 +531,22 @@
             </li>
           </ul>
         </li>
-        <li>The “/” route maps to the root of your site, when hosted locally, this is at: <code class="language-plaintext highlighter-rouge">http://localhost:3000</code></li>
+        <li>
+          <p>The “/” route maps to the root of your site, when hosted locally, this is at: <code class="language-plaintext highlighter-rouge">http://localhost:3000</code></p>
+        </li>
+        <li>Test our your server by opening up your browser (e.g. Firefox), and navigating to that address:</li>
       </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:3000
+</code></pre></div>      </div>
 
       <h3 id="routes">Routes</h3>
 
       <p>We can respond to specific URLs using Routes</p>
 
-      <p>eg. <code class="language-plaintext highlighter-rouge">http://localhost:3000/about</code></p>
+      <p>e.g. If we wanted to offer a page for the address <code class="language-plaintext highlighter-rouge">http://localhost:3000/about</code></p>
+
+      <p>Then the corresponding javascript is…</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/about</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;h1&gt; I am a SSE student at U of R! &lt;/h1&gt;</span><span class="dl">"</span><span class="p">);</span>
@@ -527,9 +555,11 @@
 
       <ul>
         <li>Typically put this before the <code class="language-plaintext highlighter-rouge">app.listen</code>.</li>
+        <li>We can have multiple of these functions for different routes.</li>
       </ul>
 
       <h3 id="sending-a-file">Sending a file</h3>
+
       <p>It’s useful to send text, but even better to send complete HTML files!</p>
 
       <p><code class="language-plaintext highlighter-rouge">res.sendfile</code> will instead return a file as a response.</p>
@@ -542,6 +572,7 @@
         <li><code class="language-plaintext highlighter-rouge">__dirname</code> gives you the local directory
           <ul>
             <li>this is the directory your node project is running in</li>
+            <li>thus this will return the file names <code class="language-plaintext highlighter-rouge">index.html</code> in your project directory</li>
           </ul>
         </li>
       </ul>
@@ -558,7 +589,7 @@
 <span class="nt">&lt;/form&gt;</span>
 </code></pre></div>      </div>
 
-      <p>When this form is submit, it will send data to the root <code class="language-plaintext highlighter-rouge">/</code> using <code class="language-plaintext highlighter-rouge">POST</code></p>
+      <p>When this form is submitted, it will send data to the root <code class="language-plaintext highlighter-rouge">/</code> using <code class="language-plaintext highlighter-rouge">POST</code></p>
 
       <h3 id="parsing-data-on-the-server">Parsing data on the server</h3>
 
@@ -569,7 +600,7 @@
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>However, we’re not doing anything with the returned data. How do we do that?</p>
+      <p>This function has captured that data being passed from the form in the <code class="language-plaintext highlighter-rouge">req</code> object, however, we’re not doing anything with the data. How do we use it?</p>
 
       <h3 id="using-the-sent-data">Using the Sent Data</h3>
 
@@ -596,6 +627,7 @@
       <p>This will dump all of the submitted elements to the server’s console.</p>
       <ul>
         <li>Now you see the structure and can play with them!</li>
+        <li>Just use the appropriate object access notation in order to use the objects.</li>
       </ul>
 
       <h3 id="serving-static-resources-like-stylesheets">Serving static resources like stylesheets</h3>
@@ -615,6 +647,8 @@
       <h3 id="redirect">Redirect</h3>
 
       <p>Sometimes, after handling the users data, you will need to redirect them to another page. This could be used, for example, to block users who haven’t entered the correct username or password.</p>
+
+      <p>The following code redirects them back to the root route:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">)</span>
 </code></pre></div>      </div>
@@ -642,7 +676,7 @@
         <li>All of the files developed so far should get sent.
           <ul>
             <li>This includes the <code class="language-plaintext highlighter-rouge">.css</code>, <code class="language-plaintext highlighter-rouge">.js</code>, and one HTML page per request</li>
-            <li>The “/” route should direct to the login page</li>
+            <li>The “/” route should give the user the login page</li>
           </ul>
         </li>
         <li>If the user attempts to log in to the login page using the username <code class="language-plaintext highlighter-rouge">username</code> and the password <code class="language-plaintext highlighter-rouge">password</code>, admit them to the todo list.
