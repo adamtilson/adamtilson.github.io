@@ -208,12 +208,28 @@
       <p>It allows you to perform operations directly on the server, such as: Access filesystem file, access a database, use computer hardware directly, etc.</p>
       <ul>
         <li>We already saw how Browser-based JavaScript could not do these operations</li>
-        <li>Browser-based JS is also running on the client, dedicated to a singlel user
+        <li>Browser-based JS is also running on the client, dedicated to a single user
           <ul>
             <li>but our database is on the server, and shared by multiple users</li>
           </ul>
         </li>
       </ul>
+
+      <h3 id="installing-node">Installing Node</h3>
+
+      <p><a href="https://nodejs.org/en/download/">Get Node.js here!</a></p>
+
+      <p>Installation Node.js is mostly pain-free!</p>
+      <ul>
+        <li>
+          <p>MongoDB will be worse in a few weeks.</p>
+        </li>
+        <li>If you Windows or Mac you can run an installer</li>
+        <li>If you have a custom package manager like Chocolaty on Windows or Homebrew on Mac, you can get it here</li>
+        <li>If on Linux, use the package manager, like Apt or Yum</li>
+      </ul>
+
+      <p>Important: You will want to be able to call <code class="language-plaintext highlighter-rouge">node</code> and <code class="language-plaintext highlighter-rouge">npm</code> from the path!</p>
 
       <h3 id="where-do-i-get-help">Where do I get help:</h3>
 
@@ -229,25 +245,11 @@
         <li>This may be a bit confusing when starting
           <ul>
             <li>Remember that all of the Node.js code and files would later be stored on a remote server</li>
-            <li>They would be accessed through a domain name (e.g. www.mywebsite.ca )</li>
-            <li>instead, we’ll connect using the loopback address (localhost)</li>
+            <li>They would be accessed through a domain name ( e.g. www.mywebsite.ca )</li>
+            <li>instead, we’ll connect using the loopback address ( i.e. localhost)</li>
           </ul>
         </li>
       </ul>
-
-      <h3 id="installing-node">Installing Node</h3>
-
-      <p>Installation Node.JS is mostly pain-free!</p>
-      <ul>
-        <li>
-          <p>MongoDB will be worse in a few weeks.</p>
-        </li>
-        <li>If you Windows or Mac you can run an installer</li>
-        <li>If you have a custom package manager like Chocolaty on Windows or Homebrew on Mac, you can get it through these</li>
-        <li>If on Linux, use the package manager, like Apt or Yum</li>
-      </ul>
-
-      <p>Important: You will want to be able to call node and npm from the path!</p>
 
       <h3 id="node-repl">Node REPL</h3>
 
@@ -263,7 +265,7 @@
 
       <p><img src="res/node-repl.png" alt="" /></p>
 
-      <p>We can try some common opeartions like <code class="language-plaintext highlighter-rouge">console.log("...")</code></p>
+      <p>We can try some common operations like <code class="language-plaintext highlighter-rouge">console.log("...")</code></p>
 
       <h3 id="running-node-scripts">Running Node Scripts</h3>
 
@@ -348,7 +350,7 @@
 
 <span class="kd">var</span> <span class="nx">myObj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Adam</span><span class="dl">"</span> <span class="p">};</span>
 
-<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span> <span class="p">(</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">object.json</span><span class="dl">"</span><span class="p">,</span> 
+<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span> <span class="p">(</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/object.json</span><span class="dl">"</span><span class="p">,</span> 
                    <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span> <span class="nx">myObj</span> <span class="p">),</span> 
                    <span class="dl">"</span><span class="s2">utf8</span><span class="dl">"</span><span class="p">,</span> 
                    <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
