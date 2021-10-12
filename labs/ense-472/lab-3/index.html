@@ -48,7 +48,7 @@
                   <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
                   <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
                   <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
-                  <!--li><a href="/labs/ense-374/lab-6">Lab 6</a></li-->
+                  <!li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
                   <!--li><a href="/labs/ense-374/lab-7">Lab 7</a></li-->
                   <!--li><a href="/labs/ense-374/lab-8">Lab 8</a></li-->
                   <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
@@ -377,7 +377,7 @@
 
       <h3 id="omnet-documentation">OMNeT++ Documentation</h3>
 
-      <p>It’s always a great idea to read the docs</p>
+      <p>It’s always a great idea to read the docs!</p>
 
       <p><a href="https://omnetpp.org/documentation/">OMNeT++ documentation</a></p>
 
@@ -386,13 +386,15 @@
     </div></div></section>
 <section id="part3inetframework"><button class="collapsible">Part 3: INET Framework</button><div class="text-content"><div class="text-inner">
 
-      <p>OMNeT++ is a generic discrete event simulator, which could be used to model any type of system. Thus, it does not have any built-in modules for common internet modules. We could code these up ourselves, however this would be very time consuming. The INET Framework is a collection of modules for OMNeT++, which simulate wired, wireless and mobile networks. By using these modules, we don’t need to code them ourselves, and can quickly model real world network configurations.</p>
+      <p>OMNeT++ is a generic discrete event simulator, which could be used to model any type of system. Thus, it does not have any built-in modules for common internet modules. We could code these ourselves, however this would be very time consuming. The INET Framework is a collection of modules for OMNeT++ which simulate wired, wireless and mobile networks. By using these modules, we don’t need to code them ourselves, and can quickly model real world network configurations.</p>
 
       <p>Once we have downloaded and unzipped INET, we can add it to our project with…</p>
 
       <p><img src="res/add-inet-to-proj.png" alt="" /></p>
 
-      <p>We then build the application. Be warned, this will take a while! (~25 minutes on my machine)</p>
+      <p>We then build the application. Be warned, this will take a while! (&gt;1h minutes on my machine)</p>
+
+      <p><img src="res/inet-build.png" alt="" /></p>
 
       <h3 id="inet-documentation">INET Documentation</h3>
 
@@ -402,8 +404,6 @@
 
     </div></div></section>
 <section id="part4ethernetnetwork"><button class="collapsible">Part 4: Ethernet Network</button><div class="text-content"><div class="text-inner">
-
-      <p>Our First exercise in OMNeT++ will be to create an Ethernet Network using the Bus Topology and CSMA/CD.</p>
 
       <p>The Ethernet Network refers to devices connected to Layer 2 devices, i.e. hubs and bridges (switches), typically using Ethernet cable. These devices are all modelled for us in the INET framework, we just need to put them together the way we would like.</p>
       <ul>
@@ -417,6 +417,75 @@
       <p>Let’s start with a sample network from an <a href="https://inet.omnetpp.org/docs/showcases/visualizer/canvas/datalinkactivity/doc/index.htmlsn">example on this page</a>:</p>
 
       <p><img src="res/ethernet-network.png" alt="" /></p>
+
+      <p>In the <code class="language-plaintext highlighter-rouge">.ned</code> file…</p>
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">package</span> <span class="n">inet</span><span class="p">.</span><span class="n">showcases</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">datalinkactivity</span><span class="p">;</span>
+
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">networklayer</span><span class="p">.</span><span class="n">configurator</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">Ipv4NetworkConfigurator</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">aodv</span><span class="p">.</span><span class="n">AodvRouter</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">ethernet</span><span class="p">.</span><span class="n">Eth100M</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">ethernet</span><span class="p">.</span><span class="n">EthernetSwitch</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">inet</span><span class="p">.</span><span class="n">AdhocHost</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">inet</span><span class="p">.</span><span class="n">StandardHost</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">physicallayer</span><span class="p">.</span><span class="n">wireless</span><span class="p">.</span><span class="n">ieee80211</span><span class="p">.</span><span class="n">packetlevel</span><span class="p">.</span><span class="n">Ieee80211ScalarRadioMedium</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">DataLinkVisualizer</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">IntegratedMultiVisualizer</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">IntegratedVisualizer</span><span class="p">;</span>
+
+<span class="n">network</span> <span class="n">DataLinkVisualizerFilteringShowcase</span>
+<span class="p">{</span>
+    <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"bgb=900,600"</span><span class="p">);</span>
+    <span class="nl">submodules:</span>
+        <span class="nl">visualizer:</span> <span class="n">IntegratedVisualizer</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=80,50"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">configurator:</span> <span class="n">Ipv4NetworkConfigurator</span> <span class="p">{</span>
+            <span class="nl">parameters:</span>
+                <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=80,120"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">etherSwitch1:</span> <span class="n">EthernetSwitch</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=376.896,169.12"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">etherSwitch3:</span> <span class="n">EthernetSwitch</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=723.592,200.528"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">source1:</span> <span class="n">StandardHost</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=206.568,50.736"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">etherSwitch4:</span> <span class="n">EthernetSwitch</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=484.408,283.88"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">destination1:</span> <span class="n">StandardHost</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=556.888,485.616"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">destination2:</span> <span class="n">StandardHost</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=798.488,343.072"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">source2:</span> <span class="n">StandardHost</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=173.952,227.104"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">etherSwitch2:</span> <span class="n">EthernetSwitch</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=329.784,428.84"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">host1:</span> <span class="n">StandardHost</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=233.144,506.152"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nl">host2:</span> <span class="n">StandardHost</span> <span class="p">{</span>
+            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=822.648,135.296"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="nl">connections:</span>
+        <span class="n">etherSwitch1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">source1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">etherSwitch1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">etherSwitch4</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">etherSwitch4</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">etherSwitch3</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">etherSwitch1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">source2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">etherSwitch3</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">destination2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">etherSwitch4</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">etherSwitch2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">etherSwitch2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">destination1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">etherSwitch3</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">host2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">etherSwitch2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">host1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
 
       <h3 id="address-resolution-protocol-arp">Address Resolution Protocol (ARP)</h3>
 
@@ -439,7 +508,7 @@
             <li>The devices remember the location of the return response, updating the ARP table</li>
           </ul>
         </li>
-        <li>Once the entire</li>
+        <li>Once the entire response is returned, the intermediate devices have learned the pathway to</li>
       </ul>
 
     </div></div></section>
@@ -448,7 +517,11 @@
       <h3 id="presenting-your-results">Presenting your Results</h3>
 
       <ul>
-        <li>OMNeT++ will typically be configured to display data in a raw format.</li>
+        <li>OMNeT++ will typically be configured to display data in a raw format.
+          <ul>
+            <li>e.g. dumping the results to a log file</li>
+          </ul>
+        </li>
         <li>It will often be appropriate to display this data in some form of graph.</li>
         <li>The IDE has some built in tools for visualizing messages being sent
           <ul>
