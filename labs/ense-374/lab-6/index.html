@@ -361,11 +361,13 @@
 <span class="p">}</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
+      <p>Try using our more complicated JSON object we included earlier!</p>
+
       <h3 id="external-modules">External modules</h3>
 
       <p>Node shines when you tap into the vast amount of code that other people have written…</p>
 
-      <p>eg.</p>
+      <p>e.g.</p>
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
@@ -490,36 +492,18 @@
 
       <p>However, if you make any changes to your file, the sever is not automatically restarted. You would need to restart it manually, unless…</p>
 
-      <h3 id="nodemon">nodemon</h3>
-
-      <p><a href="https://www.npmjs.com/package/nodemon">nodemon</a> is a utility which monitors for changes in your server code and automatically restarts it. Saves you from repetitive stress injuries!</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install -g nodemon
-</code></pre></div>      </div>
-
-      <p>The <code class="language-plaintext highlighter-rouge">-g</code> flag means <code class="language-plaintext highlighter-rouge">install globally</code>, so all your projects can use it, not just the current one.</p>
-
-      <p>Run it with</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nodemon
-</code></pre></div>      </div>
-
-      <p>Note - it will watch ALL of the files for changes, if you want to ignore a particular type of files, e.g. text files, then use the following:</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nodemon --ignore "*.txt"
-</code></pre></div>      </div>
-
       <h3 id="responding-to-get-requests">Responding to GET requests</h3>
 
       <p>The general syntax for handing an http request is:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">httpMethod</span><span class="p">(</span><span class="nx">route</span><span class="p">,</span> <span class="nx">callbackFunction</span><span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">httpMethod</span><span class="p">(</span><span class="nx">route</span><span class="p">,</span> <span class="nx">callbackFunction</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>So, for example, let’s return some simple HTML when the user requests the root directory “/” using GET:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;h1&gt; Hello Node World! &lt;/h1&gt;</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">A user requested the root route</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
       <ul>
@@ -550,24 +534,59 @@
 
       <p>Then the corresponding javascript is…</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/about</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/about</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;h1&gt; I am a SSE student at U of R! &lt;/h1&gt;</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">A user requested the about page</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
       <ul>
         <li>Typically put this before the <code class="language-plaintext highlighter-rouge">app.listen</code>.</li>
-        <li>We can have multiple of these functions for different routes.</li>
+        <li>
+          <p>We can have multiple of these functions for different routes.</p>
+        </li>
+        <li>If you place the <code class="language-plaintext highlighter-rouge">server</code> terminal next to the browser window, you can see the interaction occurring.
+          <ul>
+            <li>Where do the console.log messages go? Are they in the browser?</li>
+          </ul>
+        </li>
       </ul>
+
+      <p><img src="res/apps-side-by-side.png" alt="" /></p>
+
+      <h3 id="nodemon">nodemon</h3>
+
+      <p>Every time we made a change, we had to restart node. Can we automate this?</p>
+
+      <p><a href="https://www.npmjs.com/package/nodemon">nodemon</a> is a utility which monitors for changes in your server code and automatically restarts it. Saves you from repetitive stress injuries!</p>
+
+      <p>Install it with…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install -g nodemon
+</code></pre></div>      </div>
+
+      <p>The <code class="language-plaintext highlighter-rouge">-g</code> flag means <code class="language-plaintext highlighter-rouge">install globally</code>, so all your projects can use it, not just the current one.</p>
+
+      <p>Run it with</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nodemon
+</code></pre></div>      </div>
+
+      <p>Note - it will watch ALL of the files for changes, if you want to ignore a particular type of files, e.g. JSON files, then use the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nodemon --ignore "*.json"
+</code></pre></div>      </div>
+
+      <p>Note: If you are still saving a file using writeFileSync, this will be detected as a change in the directory, and restart nodemon. Either comment this out, or ignore changes to this type of file.</p>
 
       <h3 id="sending-a-file">Sending a file</h3>
 
       <p>It’s useful to send text, but even better to send complete HTML files!</p>
 
-      <p><code class="language-plaintext highlighter-rouge">res.sendfile</code> will instead return a file as a response.</p>
+      <p><code class="language-plaintext highlighter-rouge">res.sendFile</code> will instead return a file as a response.</p>
 
       <p>e.g.</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">sendfile</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/index.html</span><span class="dl">"</span><span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/index.html</span><span class="dl">"</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <ul>
@@ -588,6 +607,7 @@
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"my-text"</span> <span class="na">id=</span><span class="s">"my-text"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/form&gt;</span>
 </code></pre></div>      </div>
 
@@ -597,30 +617,23 @@
 
       <p>In the server, specify a route for root with post…</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">message received</span><span class="dl">"</span><span class="p">);</span>
-<span class="p">}</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">message received</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></div>      </div>
 
       <p>This function has captured that data being passed from the form in the <code class="language-plaintext highlighter-rouge">req</code> object, however, we’re not doing anything with the data. How do we use it?</p>
 
       <h3 id="using-the-sent-data">Using the Sent Data</h3>
 
-      <p>The easiest way is to use a plugin for express called <code class="language-plaintext highlighter-rouge">bodyparser</code></p>
+      <p>To use our form data, we need to add another line to our file, after declaring <code class="language-plaintext highlighter-rouge">app</code>…</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install body-parser
-</code></pre></div>      </div>
-
-      <p>In your code, import body parser and configure it to read data over POST messages</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">body-parser</span><span class="dl">"</span><span class="p">);</span>
-
-<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> 
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> 
 </code></pre></div>      </div>
 
       <p>In our application, how do we check the data we got?</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">message received</span><span class="dl">"</span><span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
 <span class="p">}</span>
@@ -628,8 +641,12 @@
 
       <p>This will dump all of the submitted elements to the server’s console.</p>
       <ul>
-        <li>Now you see the structure and can play with them!</li>
-        <li>Just use the appropriate object access notation in order to use the objects.</li>
+        <li>You can see that <code class="language-plaintext highlighter-rouge">body</code> is an object, like any other.</li>
+        <li>You see the object structure and collect the fields as needed!
+          <ul>
+            <li>Use the appropriate object access notation in order to use the object properties.</li>
+          </ul>
+        </li>
       </ul>
 
       <h3 id="serving-static-resources-like-stylesheets">Serving static resources like stylesheets</h3>
@@ -644,7 +661,24 @@
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kd">static</span><span class="p">(</span><span class="dl">"</span><span class="s2">public</span><span class="dl">"</span><span class="p">))</span>
 </code></pre></div>      </div>
 
-      <p>In public use the same directory structure as before, eg. <code class="language-plaintext highlighter-rouge">css/style.css</code>, <code class="language-plaintext highlighter-rouge">js/script.js</code> etc.</p>
+      <p>In public use the same directory structure as before, e.g. <code class="language-plaintext highlighter-rouge">css/style.css</code>, <code class="language-plaintext highlighter-rouge">js/script.js</code> etc.</p>
+
+      <p>From our HTML, link stylesheets as if the base directory is in <code class="language-plaintext highlighter-rouge">public</code>, so…</p>
+
+      <p>If the stylesheet is located in…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public/css/style.css
+</code></pre></div>      </div>
+
+      <p>In <code class="language-plaintext highlighter-rouge">index.html</code>, link your stylesheet as…</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/style.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Can you do the same with <code class="language-plaintext highlighter-rouge">.js</code> files?</p>
 
       <h3 id="redirect">Redirect</h3>
 
@@ -655,7 +689,9 @@
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">)</span>
 </code></pre></div>      </div>
 
-      <p>If you need to forward the POST data to the new page as well, use the following:</p>
+      <p>This will run whatever code you have in the root route handler.</p>
+
+      <p>You may wish to further pass along the body data for further processing. If you need to forward the POST data to the new page as well, use the following:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="mi">307</span><span class="p">,</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">)</span>
 </code></pre></div>      </div>
@@ -698,7 +734,7 @@
         </li>
       </ul>
 
-      <p><em>Warning - storing passwords in plain text is a very bad practice! We only doing to learn. We will replace it with more secure methods in the future!</em></p>
+      <p><em>Warning - storing passwords in plain text is a very bad practice! We are only doing to learn. We will replace it with more secure methods in the future!</em></p>
 
       <h3 id="submission">Submission</h3>
 
