@@ -122,32 +122,42 @@
 
       <p>If you wish to install OmNET++ on a windows machine, you must build it from source. This may sound intimidating, but it’s actually not that bad. <a href="https://www.youtube.com/watch?v=PfAWhrmoYgM">If you are on windows, this video explains the process very well.</a>. If you follow this video, you can ignore the parts about VEINS and SUMO, we will not be using these frameworks in this course. <a href="https://doc.omnetpp.org/omnetpp/InstallGuide.pdf">Regardless of your operating system, you can follow the installation guide.</a>.</p>
 
-      <p>Alternatively, you may download my VirtualBox Image which has the software installed and ready to go. You should have learned how to use VirtualBox in ENSE 353.</p>
+      <p>Alternatively, you may download my VirtualBox Image which has the software installed and ready to go.</p>
 
-      <h3 id="note-to-adam---add-link-to-virtualbox-once-it-is-uploaded">Note to Adam - Add Link to VirtualBox once it is uploaded!</h3>
-      <h3 id="other-note-to-adam---see-if-there-is-a-way-to-export-virtual-boxes">Other note to Adam - see if there is a way to export virtual boxes</h3>
-      <h3 id="final-note-to-adam---incremental-backups-jeez-1-server-2-xfce-min-3-guest-additions-and-downloads-4-build-omnet-5-build-inet">Final note to Adam - incremental backups, jeez (1-server) (2-xfce-min) (3-guest-additions-and-downloads) (4-build-omnet) (5-build-inet)</h3>
+    </div></div></section>
+<section id="virtualboxfaq"><button class="collapsible">VirtualBox FAQ</button><div class="text-content"><div class="text-inner">
 
-      <h3 id="virtualbox-image-questions">VirtualBox Image Questions</h3>
-
-      <h3 id="outdates-as-i-switched-to-xfce-for-better-student-support">Outdates as I switched to XFCE for better student support!</h3>
+      <p>The same principles for running a VirtualBox apply as you learned in ENSE 353.</p>
 
       <p>Username and Password: omnet / omnet</p>
 
+      <p>Run OMNeT++ through the desktop shortcut</p>
+
       <p>Image Base: Ubuntu Server + XFCE with no bloat</p>
       <ul>
-        <li>
-          <p>The installation guide was then followed for Ubuntu</p>
+        <li>Guest Additions were installed.
+          <ul>
+            <li>This enables clipboard sharing through Devices -&gt; Shared Clipboard</li>
+            <li>It also enables smart desktop resizing, one of my favourite features</li>
+          </ul>
         </li>
-        <li>Note, when I moved computers, I had to reattach the disk image</li>
-        <li>This was done through File -&gt; Media Manager -&gt; Find and detatch the VDI if it is there</li>
-        <li>Next reattach it in the actual virtual box settings (Settings -&gt; Controller (SATA) -&gt; omnet.vdi)</li>
-        <li>there is a handy desktop shortcut to start running the app!</li>
+        <li>The  OMNeT++ / INET installation guides were followed for Ubuntu</li>
       </ul>
 
-      <p>How do I shut down Debian?</p>
+      <p>You may need to reattach the disk image:</p>
       <ul>
-        <li>Upper left, Applications -&gt; Log Out -&gt; Shut Down</li>
+        <li>This was done through <code class="language-plaintext highlighter-rouge">File</code> -&gt; <code class="language-plaintext highlighter-rouge">Media Manager</code> -&gt; Find and detach the VDI if it is there</li>
+        <li>Next reattach it in the actual virtual box settings (Settings -&gt; Controller (SATA) -&gt; omnet.vdi)</li>
+      </ul>
+
+      <p>How do I shut down XFCE?</p>
+      <ul>
+        <li>Lower left application menu, <code class="language-plaintext highlighter-rouge">Leave</code> -&gt; <code class="language-plaintext highlighter-rouge">Shut Down</code></li>
+      </ul>
+
+      <p>How do I get files in and out of the VirtualBox?</p>
+      <ul>
+        <li>Drag and Drop can be enables in <code class="language-plaintext highlighter-rouge">Devices</code> -&gt; <code class="language-plaintext highlighter-rouge">Drag and Drop</code></li>
       </ul>
 
       <p>We can ensure that we have the application working by looking at the ALOHAnet sample. Lecture tie-in: What was ALOHANet?</p>
