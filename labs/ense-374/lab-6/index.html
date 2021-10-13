@@ -600,6 +600,37 @@
         </li>
       </ul>
 
+      <h3 id="serving-static-resources-like-stylesheets">Serving static resources like stylesheets</h3>
+
+      <p>By default, express won’t serve up static website resources like <code class="language-plaintext highlighter-rouge">.css</code>, and <code class="language-plaintext highlighter-rouge">.js</code> files that give your site functionality</p>
+      <ul>
+        <li>To add this functionality, make a new folder called “public”, and put all of the static files in there.</li>
+      </ul>
+
+      <p>Then add the line:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kd">static</span><span class="p">(</span><span class="dl">"</span><span class="s2">public</span><span class="dl">"</span><span class="p">))</span>
+</code></pre></div>      </div>
+
+      <p>In public use the same directory structure as before, e.g. <code class="language-plaintext highlighter-rouge">css/style.css</code>, <code class="language-plaintext highlighter-rouge">js/script.js</code> etc.</p>
+
+      <p>From our HTML, link stylesheets as if the base directory is in <code class="language-plaintext highlighter-rouge">public</code>, so…</p>
+
+      <p>If the stylesheet is located in…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public/css/style.css
+</code></pre></div>      </div>
+
+      <p>In <code class="language-plaintext highlighter-rouge">index.html</code>, link your stylesheet as…</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/style.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Can you do the same with <code class="language-plaintext highlighter-rouge">.js</code> files?</p>
+
     </div></div></section>
 <section id="part5sendingdatatotheserverwithforms"><button class="collapsible">Part 5: Sending data to the server with forms</button><div class="text-content"><div class="text-inner">
 
@@ -650,37 +681,6 @@
           </ul>
         </li>
       </ul>
-
-      <h3 id="serving-static-resources-like-stylesheets">Serving static resources like stylesheets</h3>
-
-      <p>By default, express won’t serve up static website resources like <code class="language-plaintext highlighter-rouge">.css</code>, and <code class="language-plaintext highlighter-rouge">.js</code> files that give your site functionality</p>
-      <ul>
-        <li>To add this functionality, make a new folder called “public”, and put all of the static files in there.</li>
-      </ul>
-
-      <p>Then add the line:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kd">static</span><span class="p">(</span><span class="dl">"</span><span class="s2">public</span><span class="dl">"</span><span class="p">))</span>
-</code></pre></div>      </div>
-
-      <p>In public use the same directory structure as before, e.g. <code class="language-plaintext highlighter-rouge">css/style.css</code>, <code class="language-plaintext highlighter-rouge">js/script.js</code> etc.</p>
-
-      <p>From our HTML, link stylesheets as if the base directory is in <code class="language-plaintext highlighter-rouge">public</code>, so…</p>
-
-      <p>If the stylesheet is located in…</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public/css/style.css
-</code></pre></div>      </div>
-
-      <p>In <code class="language-plaintext highlighter-rouge">index.html</code>, link your stylesheet as…</p>
-
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/style.css"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
-</code></pre></div>      </div>
-
-      <p>Can you do the same with <code class="language-plaintext highlighter-rouge">.js</code> files?</p>
 
       <h3 id="redirect">Redirect</h3>
 
