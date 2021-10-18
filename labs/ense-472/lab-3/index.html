@@ -120,37 +120,57 @@
     </div></div></section>
 <section id="part1installationandstartup"><button class="collapsible">Part 1: Installation and Startup</button><div class="text-content"><div class="text-inner">
 
-      <p>If you wish to install OmNET++ on a windows machine, you must build it from source. This may sound intimidating, but it’s actually not that bad. <a href="https://www.youtube.com/watch?v=PfAWhrmoYgM">If you are on windows, this video explains the process very well.</a>. If you follow this video, you can ignore the parts about VEINS and SUMO, we will not be using these frameworks in this course. <a href="https://doc.omnetpp.org/omnetpp/InstallGuide.pdf">Regardless of your operating system, you can follow the installation guide.</a>.</p>
+      <p>If you wish to install OmNET++ on a windows machine, you must build it from source. This may sound intimidating, but it’s actually not that bad. <a href="https://doc.omnetpp.org/omnetpp/InstallGuide.pdf">You can follow the installation guide</a>, or <a href="https://www.youtube.com/watch?v=PfAWhrmoYgM">this video for Windows</a>.</p>
 
       <p>Alternatively, you may download my VirtualBox Image which has the software installed and ready to go.</p>
 
-    </div></div></section>
-<section id="virtualboxfaq"><button class="collapsible">VirtualBox FAQ</button><div class="text-content"><div class="text-inner">
+      <h3 id="using-the-virtual-box">Using the Virtual Box:</h3>
 
       <p>The same principles for running a VirtualBox apply as you learned in ENSE 353.</p>
 
-      <p>Username and Password: omnet / omnet</p>
+      <p>Download the VirtualBox file (~4GB)</p>
 
-      <p>Run OMNeT++ through the desktop shortcut</p>
+      <p>Import the Appliance:</p>
 
-      <p>Image Base: Ubuntu Server + XFCE with no bloat</p>
+      <p><img src="res/import-virtualbox.png" alt="" /></p>
+
+      <p>Locate the image</p>
+
+      <p><img src="res/locate-image.png" alt="" /></p>
+
+      <p>Make adjustments as needed, e.g. to the amount of RAM:</p>
+
+      <p><img src="res/adjustments.png" alt="" /></p>
+
+      <p>Importing will take a few minutes. The Hard Drive ma expand to about 20GB, so make sure you have room!</p>
+
+      <p>Boot it up!</p>
+
+      <p><img src="res/boot.png" alt="" /></p>
+
+      <p>Sign in:</p>
+
+      <p>Username and Password: <code class="language-plaintext highlighter-rouge">omnet</code> / <code class="language-plaintext highlighter-rouge">omnet</code></p>
+
+      <p>Run OMNeT++ through the desktop shortcut!</p>
+
+      <h3 id="about-the-virtual-box-image-and-omnet-configuration">About the Virtual Box Image and Omnet Configuration</h3>
+
+      <p>Image Base: Ubuntu Server + LXDE with no bloat</p>
       <ul>
+        <li>You may want to install some apps!</li>
         <li>Guest Additions were installed.
           <ul>
-            <li>This enables clipboard sharing through Devices -&gt; Shared Clipboard</li>
+            <li>This enables clipboard sharing, drag and drop</li>
             <li>It also enables smart desktop resizing, one of my favourite features</li>
           </ul>
         </li>
         <li>The  OMNeT++ / INET installation guides were followed for Ubuntu</li>
       </ul>
 
-      <p>You may need to reattach the disk image:</p>
-      <ul>
-        <li>This was done through <code class="language-plaintext highlighter-rouge">File</code> -&gt; <code class="language-plaintext highlighter-rouge">Media Manager</code> -&gt; Find and detach the VDI if it is there</li>
-        <li>Next reattach it in the actual virtual box settings (Settings -&gt; Controller (SATA) -&gt; omnet.vdi)</li>
-      </ul>
+      <p>I’ve create a workspace in <code class="language-plaintext highlighter-rouge">/home/omnet/workspace</code> and set some defaults for you.</p>
 
-      <p>How do I shut down XFCE?</p>
+      <p>How do I shut down LXDE?</p>
       <ul>
         <li>Lower left application menu, <code class="language-plaintext highlighter-rouge">Leave</code> -&gt; <code class="language-plaintext highlighter-rouge">Shut Down</code></li>
       </ul>
@@ -160,11 +180,33 @@
         <li>Drag and Drop can be enables in <code class="language-plaintext highlighter-rouge">Devices</code> -&gt; <code class="language-plaintext highlighter-rouge">Drag and Drop</code></li>
       </ul>
 
+      <p>How do I get code in and out of the VirtualBox?</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Devices -&gt; Shared Clipboard</code> allows copy-pasting</li>
+      </ul>
+
+      <p><img src="res/sharing-stuff.png" alt="" /></p>
+
+      <p>Where are important files stored?</p>
+      <ul>
+        <li>OMNeT++ is found in <code class="language-plaintext highlighter-rouge">/home/omnet/omnetpp-5.7/</code></li>
+        <li>INET is found in <code class="language-plaintext highlighter-rouge">/home/omnet/inet</code></li>
+        <li>IDE deafult workspace is in <code class="language-plaintext highlighter-rouge">/home/omnet/workspace/</code></li>
+      </ul>
+
+      <h3 id="aloha-world">ALOHA World!</h3>
+
       <p>We can ensure that we have the application working by looking at the ALOHAnet sample. Lecture tie-in: What was ALOHANet?</p>
+
+      <p><img src="res/importing-aloha.png" alt="" /></p>
 
       <p><img src="res/starting-aloha.png" alt="" /></p>
 
+      <p>You can run as a pure C++ application, this is fine, confirm a few times. It will build and run.</p>
+
       <p><img src="res/aloha-settings.png" alt="" /></p>
+
+      <p><img src="res/aloha-run.png" alt="" /></p>
 
       <p><img src="res/aloha-sim-in-action.png" alt="" /></p>
 
@@ -177,7 +219,7 @@
         <li>Can be used in other domains
           <ul>
             <li>e.g. processor development</li>
-            <li>e.g. complex software systems.</li>
+            <li>e.g. complex software systems</li>
           </ul>
         </li>
       </ul>
@@ -199,7 +241,7 @@
 
       <p><img src="res/modules.png" alt="" /></p>
 
-      <p>With OMNeT++ we can…</p>
+      <p>With OMNeT++ we can:</p>
       <ul>
         <li>Create hierarchical modules
           <ul>
@@ -232,7 +274,7 @@
 
       <h3 id="the-omnet-ide">The OMNeT++ IDE</h3>
 
-      <p>The IDE included is  skin of Eclipse, specifically created for writing OMNeT++ simulations.</p>
+      <p>The IDE included is a skin of Eclipse, specifically created for writing OMNeT++ simulations.</p>
       <ul>
         <li>It is already configured for building and running your applications!</li>
         <li>Lets tour the UI</li>
@@ -247,97 +289,118 @@
         <li>The task bar allows you to run and debug applications.</li>
       </ol>
 
-      <p>Let’s look at some NED files…</p>
+      <p>Let’s look at some NED files:</p>
 
       <h3 id="investigating-aloha">Investigating Aloha</h3>
 
-      <p>In the Aloha app, the Host.<code class="language-plaintext highlighter-rouge">ned</code>…</p>
+      <p>In the Aloha app, the <code class="language-plaintext highlighter-rouge">Host.ned</code>:</p>
 
-      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+      <p><img src="res/finding-ned.png" alt="" /></p>
+
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
 <span class="c1">// A computer in the ALOHAnet network.</span>
 <span class="c1">//</span>
-<span class="n">simple</span> <span class="n">Host</span>
-<span class="p">{</span>
+<span class="n">simple</span> <span class="nc">Host</span>
+<span class="o">{</span>
     <span class="nl">parameters:</span>
-        <span class="err">@</span><span class="n">signal</span><span class="p">[</span><span class="n">state</span><span class="p">](</span><span class="n">type</span><span class="o">=</span><span class="s">"long"</span><span class="p">);</span>
-        <span class="err">@</span><span class="n">statistic</span><span class="p">[</span><span class="n">radioState</span><span class="p">](</span><span class="n">source</span><span class="o">=</span><span class="s">"state"</span><span class="p">;</span><span class="n">title</span><span class="o">=</span><span class="s">"Radio state"</span><span class="p">;</span><span class="k">enum</span><span class="o">=</span><span class="s">"IDLE=0,TRANSMIT=1"</span><span class="p">;</span><span class="n">record</span><span class="o">=</span><span class="n">vector</span><span class="p">);</span>
-        <span class="kt">double</span> <span class="n">txRate</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">bps</span><span class="p">);</span>          <span class="c1">// transmission rate</span>
-        <span class="k">volatile</span> <span class="kt">int</span> <span class="n">pkLenBits</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>   <span class="c1">// packet length in bits</span>
-        <span class="k">volatile</span> <span class="kt">double</span> <span class="n">iaTime</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>   <span class="c1">// packet interarrival time</span>
-        <span class="kt">double</span> <span class="n">slotTime</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>          <span class="c1">// zero means no slots (pure Aloha)</span>
-        <span class="kt">double</span> <span class="n">x</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>                 <span class="c1">// the x coordinate of the host</span>
-        <span class="kt">double</span> <span class="n">y</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>                 <span class="c1">// the y coordinate of the host</span>
-        <span class="kt">double</span> <span class="n">idleAnimationSpeed</span><span class="p">;</span>         <span class="c1">// used when there is no packet being transmitted</span>
-        <span class="kt">double</span> <span class="n">transmissionEdgeAnimationSpeed</span><span class="p">;</span> <span class="c1">// used when the propagation of a first or last bit is visible</span>
-        <span class="kt">double</span> <span class="n">midTransmissionAnimationSpeed</span><span class="p">;</span> <span class="c1">// used during transmission</span>
-        <span class="kt">bool</span> <span class="n">controlAnimationSpeed</span> <span class="o">=</span> <span class="k">default</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
-        <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"i=device/pc_s"</span><span class="p">);</span>
-<span class="p">}</span>
+        <span class="nd">@signal</span><span class="o">[</span><span class="n">state</span><span class="o">](</span><span class="n">type</span><span class="o">=</span><span class="s">"long"</span><span class="o">);</span>
+        <span class="nd">@statistic</span><span class="o">[</span><span class="n">radioState</span><span class="o">](</span><span class="n">source</span><span class="o">=</span><span class="s">"state"</span><span class="o">;</span><span class="n">title</span><span class="o">=</span><span class="s">"Radio state"</span><span class="o">;</span><span class="kd">enum</span><span class="o">=</span><span class="s">"IDLE=0,TRANSMIT=1"</span><span class="o">;</span><span class="n">record</span><span class="o">=</span><span class="n">vector</span><span class="o">);</span>
+        <span class="kt">double</span> <span class="n">txRate</span> <span class="nd">@unit</span><span class="o">(</span><span class="n">bps</span><span class="o">);</span>          <span class="c1">// transmission rate</span>
+        <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">pkLenBits</span> <span class="nd">@unit</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>   <span class="c1">// packet length in bits</span>
+        <span class="kd">volatile</span> <span class="kt">double</span> <span class="n">iaTime</span> <span class="nd">@unit</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>   <span class="c1">// packet interarrival time</span>
+        <span class="kt">double</span> <span class="n">slotTime</span> <span class="nd">@unit</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>          <span class="c1">// zero means no slots (pure Aloha)</span>
+        <span class="kt">double</span> <span class="n">x</span> <span class="nd">@unit</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>                 <span class="c1">// the x coordinate of the host</span>
+        <span class="kt">double</span> <span class="n">y</span> <span class="nd">@unit</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>                 <span class="c1">// the y coordinate of the host</span>
+        <span class="kt">double</span> <span class="n">idleAnimationSpeed</span><span class="o">;</span>         <span class="c1">// used when there is no packet being transmitted</span>
+        <span class="kt">double</span> <span class="n">transmissionEdgeAnimationSpeed</span><span class="o">;</span> <span class="c1">// used when the propagation of a first or last bit is visible</span>
+        <span class="kt">double</span> <span class="n">midTransmissionAnimationSpeed</span><span class="o">;</span> <span class="c1">// used during transmission</span>
+        <span class="n">bool</span> <span class="n">controlAnimationSpeed</span> <span class="o">=</span> <span class="k">default</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="nd">@display</span><span class="o">(</span><span class="s">"i=device/pc_s"</span><span class="o">);</span>
+<span class="o">}</span>
 
 </code></pre></div>      </div>
-      <p>and the Aloha network…</p>
+      <p>and the Aloha network:</p>
 
-      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
 <span class="c1">// The Aloha network consists of hosts which talk to the central "server" via</span>
 <span class="c1">// the Aloha or Slotted Aloha protocol</span>
 <span class="c1">//</span>
-<span class="n">network</span> <span class="n">Aloha</span>
-<span class="p">{</span>
+<span class="n">network</span> <span class="nc">Aloha</span>
+<span class="o">{</span>
     <span class="nl">parameters:</span>
-        <span class="kt">int</span> <span class="n">numHosts</span><span class="p">;</span>  <span class="c1">// number of hosts</span>
-        <span class="kt">double</span> <span class="n">txRate</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">bps</span><span class="p">);</span>  <span class="c1">// transmission rate</span>
-        <span class="kt">double</span> <span class="n">slotTime</span> <span class="err">@</span><span class="n">unit</span><span class="p">(</span><span class="n">ms</span><span class="p">);</span>  <span class="c1">// zero means no slots (pure Aloha)</span>
-        <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"bgi=background/terrain,s;bgb=1000,1000"</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">numHosts</span><span class="o">;</span>  <span class="c1">// number of hosts</span>
+        <span class="kt">double</span> <span class="n">txRate</span> <span class="nd">@unit</span><span class="o">(</span><span class="n">bps</span><span class="o">);</span>  <span class="c1">// transmission rate</span>
+        <span class="kt">double</span> <span class="n">slotTime</span> <span class="nd">@unit</span><span class="o">(</span><span class="n">ms</span><span class="o">);</span>  <span class="c1">// zero means no slots (pure Aloha)</span>
+        <span class="nd">@display</span><span class="o">(</span><span class="s">"bgi=background/terrain,s;bgb=1000,1000"</span><span class="o">);</span>
     <span class="nl">submodules:</span>
-        <span class="nl">server:</span> <span class="n">Server</span><span class="p">;</span>
-        <span class="n">host</span><span class="p">[</span><span class="n">numHosts</span><span class="p">]</span><span class="o">:</span> <span class="n">Host</span> <span class="p">{</span>
-            <span class="n">txRate</span> <span class="o">=</span> <span class="n">txRate</span><span class="p">;</span>
-            <span class="n">slotTime</span> <span class="o">=</span> <span class="n">slotTime</span><span class="p">;</span>
-        <span class="p">}</span>
-<span class="p">}</span>
+        <span class="nl">server:</span> <span class="nc">Server</span><span class="o">;</span>
+        <span class="n">host</span><span class="o">[</span><span class="n">numHosts</span><span class="o">]:</span> <span class="nc">Host</span> <span class="o">{</span>
+            <span class="n">txRate</span> <span class="o">=</span> <span class="n">txRate</span><span class="o">;</span>
+            <span class="n">slotTime</span> <span class="o">=</span> <span class="n">slotTime</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div>      </div>
+
+      <p>We can briefly glean that these models have a number of parameters set, and the submodule architecture is laid out in the Aloha network.</p>
+
+      <p>We can also look inside the <code class="language-plaintext highlighter-rouge">Host.cc</code> and <code class="language-plaintext highlighter-rouge">Server.cc</code>, but it’s a bit intense. Let’s start with something a little easier!</p>
 
       <h3 id="tic-toc-tutorial">Tic-Toc Tutorial</h3>
 
-      <p>If you would like to learn more about basic OMNeT++ usage, the <a href="https://docs.omnetpp.org/tutorials/tictoc/">tic-toc tutorial</a> is strongly recommended!</p>
+      <p>To understand OMNeT++ usage, let’s work through the <a href="https://docs.omnetpp.org/tutorials/tictoc/">tic-toc tutorial</a>. It walks through all the steps of setting up an example, simulating it, and collecting data.</p>
 
-      <p>Here’s the topolgy for tic-toc:</p>
+      <p>The tic-toc application will consist of two nodes. One node will create a packet, and then the packet will get passed back and forth.</p>
 
-      <p><img src="res/tictoc.png" alt="" /></p>
+      <p>Quick setup:</p>
 
-      <p>Here’s the <code class="language-plaintext highlighter-rouge">tictoc1.ned</code> file:</p>
+      <p>Let’s add a <code class="language-plaintext highlighter-rouge">tictoc</code> project to our workspace:</p>
 
-      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">simple</span> <span class="n">Txc1</span>
-<span class="p">{</span>
+      <p><img src="res/add-a-project.png" alt="" /></p>
+
+      <p>Let’s add a <code class="language-plaintext highlighter-rouge">tictoc1.ned</code> and <code class="language-plaintext highlighter-rouge">txc1.cc</code> file:</p>
+
+      <p><img src="res/adding-source-files.png" alt="" /></p>
+
+      <p>In <code class="language-plaintext highlighter-rouge">tictoc1.ned</code> source add the contents:</p>
+
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">simple</span> <span class="nc">Txc1</span>
+<span class="o">{</span>
     <span class="nl">gates:</span>
-        <span class="n">input</span> <span class="n">in</span><span class="p">;</span>
-        <span class="n">output</span> <span class="n">out</span><span class="p">;</span>
-<span class="p">}</span>
+        <span class="n">input</span> <span class="n">in</span><span class="o">;</span>
+        <span class="n">output</span> <span class="n">out</span><span class="o">;</span>
+<span class="o">}</span>
 
 <span class="c1">//</span>
 <span class="c1">// Two instances (tic and toc) of Txc1 connected both ways.</span>
 <span class="c1">// Tic and toc will pass messages to one another.</span>
 <span class="c1">//</span>
-<span class="n">network</span> <span class="n">Tictoc1</span>
-<span class="p">{</span>
-    <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"bgb=147,144"</span><span class="p">);</span>
+<span class="n">network</span> <span class="nc">Tictoc1</span>
+<span class="o">{</span>
+    <span class="nd">@display</span><span class="o">(</span><span class="s">"bgb=147,144"</span><span class="o">);</span>
     <span class="nl">submodules:</span>
-        <span class="nl">tic:</span> <span class="n">Txc1</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=32,103"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">toc:</span> <span class="n">Txc1</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=119,30"</span><span class="p">);</span>
-        <span class="p">}</span>
+        <span class="nl">tic:</span> <span class="nc">Txc1</span> <span class="o">{</span>
+            <span class="nd">@display</span><span class="o">(</span><span class="s">"p=32,103"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nl">toc:</span> <span class="nc">Txc1</span> <span class="o">{</span>
+            <span class="nd">@display</span><span class="o">(</span><span class="s">"p=119,30"</span><span class="o">);</span>
+        <span class="o">}</span>
     <span class="nl">connections:</span>
-        <span class="n">tic</span><span class="p">.</span><span class="n">out</span> <span class="o">--&gt;</span> <span class="p">{</span>  <span class="n">delay</span> <span class="o">=</span> <span class="mx">100ms</span><span class="p">;</span> <span class="p">}</span> <span class="o">--&gt;</span> <span class="n">toc</span><span class="p">.</span><span class="n">in</span><span class="p">;</span>
-        <span class="n">tic</span><span class="p">.</span><span class="n">in</span> <span class="o">&lt;--</span> <span class="p">{</span>  <span class="n">delay</span> <span class="o">=</span> <span class="mx">100ms</span><span class="p">;</span> <span class="p">}</span> <span class="o">&lt;--</span> <span class="n">toc</span><span class="p">.</span><span class="n">out</span><span class="p">;</span>
-<span class="p">}</span>
+        <span class="n">tic</span><span class="o">.</span><span class="na">out</span> <span class="o">--&gt;</span> <span class="o">{</span>  <span class="n">delay</span> <span class="o">=</span> <span class="mi">100</span><span class="n">ms</span><span class="o">;</span> <span class="o">}</span> <span class="o">--&gt;</span> <span class="n">toc</span><span class="o">.</span><span class="na">in</span><span class="o">;</span>
+        <span class="n">tic</span><span class="o">.</span><span class="na">in</span> <span class="o">&lt;--</span> <span class="o">{</span>  <span class="n">delay</span> <span class="o">=</span> <span class="mi">100</span><span class="n">ms</span><span class="o">;</span> <span class="o">}</span> <span class="o">&lt;--</span> <span class="n">toc</span><span class="o">.</span><span class="na">out</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre></div>      </div>
+
+      <p>If you switch back to the <code class="language-plaintext highlighter-rouge">design</code> mode, you can see the configuration. You can drag elements around if you need to.</p>
+
+      <p>Here’s the topology for tic-toc:</p>
+
+      <p><img src="res/tictoc.png" alt="" /></p>
 
       <p>And here’s the simulation code:</p>
 
-      <p>Here’s the <code class="language-plaintext highlighter-rouge">txc1.cc</code> file:
-(Note that <code class="language-plaintext highlighter-rouge">.cc</code> is a filename convention for c++ files, functionally equivalent to <code class="language-plaintext highlighter-rouge">.cpp</code>.)</p>
+      <p>Here’s the <code class="language-plaintext highlighter-rouge">txc1.cc</code> file:</p>
+
+      <p>(Note that <code class="language-plaintext highlighter-rouge">.cc</code> is a filename convention for c++ files, functionally equivalent to <code class="language-plaintext highlighter-rouge">.cpp</code>.)</p>
 
       <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;string.h&gt;
 #include &lt;omnetpp.h&gt;
@@ -385,6 +448,60 @@
 <span class="p">}</span>
 </code></pre></div>      </div>
 
+      <p>Next, we need to include an <code class="language-plaintext highlighter-rouge">omnetpp.ini</code></p>
+
+      <p><img src="res/add-omnetpp-ini.png" alt="" /></p>
+
+      <p>Include the following:</p>
+
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nc">General</span><span class="o">]</span>
+<span class="n">network</span> <span class="o">=</span> <span class="nc">Tictoc1</span>
+</code></pre></div>      </div>
+
+      <p>Now we need to build and run it:</p>
+
+      <p><strong>Important - always select NO when it says switch to Release config. The reason for this is that I’ve only compiled the debug libraries in the VirtualBox. If you start building the release libraries, expect it to take over an hour.</strong></p>
+
+      <p><img src="res/build-and-run.png" alt="" /></p>
+
+      <p>Run with the run controls near the top. You will see the two nodes sending messages back and forth, with the events being logged in the lower left.</p>
+
+      <p>The run controls briefly are:</p>
+      <ul>
+        <li>Step through simulation (F4)</li>
+        <li>Run with graphics (F5)</li>
+        <li>Run without graphics (F6, faster)</li>
+        <li>Run without graphics on console logging (F7, maximum speed for your hardware)</li>
+        <li>Stop (F8)</li>
+      </ul>
+
+      <p>If you wish to record an event log, you can add this line to the <code class="language-plaintext highlighter-rouge">omnetpp.ini</code>:</p>
+
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nc">General</span><span class="o">]</span>
+<span class="n">network</span> <span class="o">=</span> <span class="nc">Tictoc1</span>
+<span class="n">record</span><span class="o">-</span><span class="n">eventlog</span> <span class="o">=</span> <span class="kc">true</span>
+</code></pre></div>      </div>
+
+      <p>This will create a file in your workspace in <code class="language-plaintext highlighter-rouge">tictoc/results/Tictoc1-#0.elog</code></p>
+
+      <p>If you open this file, you can see the results on the simulation graphically in a sequence chart:</p>
+
+      <p><img src="res/event-log.png" alt="" /></p>
+
+      <p>However, these log files can use up a lot of space, so it’s better to leave them off when they aren’t strictly needed:</p>
+
+      <p>You can continue reading the tic-toc tutorial to learn about</p>
+      <ul>
+        <li>improving the model display and console logging</li>
+        <li>adding parameters</li>
+        <li>using NED inheritance</li>
+        <li>Adding delay to your messages</li>
+        <li>Randomization</li>
+        <li>Timeout and Retransmission</li>
+      </ul>
+
+      <p>However, for now I think it’s worth moving ahead into INET</p>
+
       <h3 id="omnet-documentation">OMNeT++ Documentation</h3>
 
       <p>It’s always a great idea to read the docs!</p>
@@ -398,13 +515,7 @@
 
       <p>OMNeT++ is a generic discrete event simulator, which could be used to model any type of system. Thus, it does not have any built-in modules for common internet modules. We could code these ourselves, however this would be very time consuming. The INET Framework is a collection of modules for OMNeT++ which simulate wired, wireless and mobile networks. By using these modules, we don’t need to code them ourselves, and can quickly model real world network configurations.</p>
 
-      <p>Once we have downloaded and unzipped INET, we can add it to our project with…</p>
-
-      <p><img src="res/add-inet-to-proj.png" alt="" /></p>
-
-      <p>We then build the application. Be warned, this will take a while! (&gt;1h minutes on my machine)</p>
-
-      <p><img src="res/inet-build.png" alt="" /></p>
+      <p>In the provided VirtualBox, INET is already added to your workspace. Additionally, the application has been built, but only in the debug configuration, not the release configuration. If you are ever asked to switch to the release configuration, say no, unless you have &gt;1 hour to spend rebuilding INET!</p>
 
       <h3 id="inet-documentation">INET Documentation</h3>
 
@@ -412,10 +523,12 @@
 
       <p><a href="https://inet.omnetpp.org/docs/">Read the Docus</a></p>
 
+      <p>In the next section, we are going to use INET to build an Ethernet Network.</p>
+
     </div></div></section>
 <section id="part4ethernetnetwork"><button class="collapsible">Part 4: Ethernet Network</button><div class="text-content"><div class="text-inner">
 
-      <p>The Ethernet Network refers to devices connected to Layer 2 devices, i.e. hubs and bridges (switches), typically using Ethernet cable. These devices are all modelled for us in the INET framework, we just need to put them together the way we would like.</p>
+      <p>The Ethernet Network refers to devices connected to Layer 2 devices, i.e. hubs and bridges (switches), typically using Ethernet cable. These devices are all modelled for us in the INET framework, we just need to configure them as we would like.</p>
       <ul>
         <li>Recall that in layer 2, addressing is performed by MAC addresses.</li>
         <li>Hubs pass messages by simply flooding all devices, using the CSMA/CD algorithm to reduce collisions.</li>
@@ -424,78 +537,125 @@
 
       <p><a href="https://omnetpp.org/documentation/simulation-with-omnet">INET Framework Documentation on the Ethernet</a></p>
 
-      <p>Let’s start with a sample network from an <a href="https://inet.omnetpp.org/docs/showcases/visualizer/canvas/datalinkactivity/doc/index.htmlsn">example on this page</a>:</p>
+      <p>Let’s try to recreate the Tic-Toc application this time using INET modules.</p>
 
-      <p><img src="res/ethernet-network.png" alt="" /></p>
+      <p>Start with a new project, this time adding source and simulations folders:</p>
 
-      <p>In the <code class="language-plaintext highlighter-rouge">.ned</code> file…</p>
-      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="n">package</span> <span class="n">inet</span><span class="p">.</span><span class="n">showcases</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">datalinkactivity</span><span class="p">;</span>
+      <p><img src="res/new-inet-project.png" alt="" /></p>
 
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">networklayer</span><span class="p">.</span><span class="n">configurator</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">Ipv4NetworkConfigurator</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">aodv</span><span class="p">.</span><span class="n">AodvRouter</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">ethernet</span><span class="p">.</span><span class="n">Eth100M</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">ethernet</span><span class="p">.</span><span class="n">EthernetSwitch</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">inet</span><span class="p">.</span><span class="n">AdhocHost</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">inet</span><span class="p">.</span><span class="n">StandardHost</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">physicallayer</span><span class="p">.</span><span class="n">wireless</span><span class="p">.</span><span class="n">ieee80211</span><span class="p">.</span><span class="n">packetlevel</span><span class="p">.</span><span class="n">Ieee80211ScalarRadioMedium</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">DataLinkVisualizer</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">IntegratedMultiVisualizer</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">inet</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">IntegratedVisualizer</span><span class="p">;</span>
+      <p>We need to add a reference to inet to use it as a dependency.</p>
 
-<span class="n">network</span> <span class="n">DataLinkVisualizerFilteringShowcase</span>
-<span class="p">{</span>
-    <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"bgb=900,600"</span><span class="p">);</span>
-    <span class="nl">submodules:</span>
-        <span class="nl">visualizer:</span> <span class="n">IntegratedVisualizer</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=80,50"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">configurator:</span> <span class="n">Ipv4NetworkConfigurator</span> <span class="p">{</span>
-            <span class="nl">parameters:</span>
-                <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=80,120"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">etherSwitch1:</span> <span class="n">EthernetSwitch</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=376.896,169.12"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">etherSwitch3:</span> <span class="n">EthernetSwitch</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=723.592,200.528"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">source1:</span> <span class="n">StandardHost</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=206.568,50.736"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">etherSwitch4:</span> <span class="n">EthernetSwitch</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=484.408,283.88"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">destination1:</span> <span class="n">StandardHost</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=556.888,485.616"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">destination2:</span> <span class="n">StandardHost</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=798.488,343.072"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">source2:</span> <span class="n">StandardHost</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=173.952,227.104"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">etherSwitch2:</span> <span class="n">EthernetSwitch</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=329.784,428.84"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">host1:</span> <span class="n">StandardHost</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=233.144,506.152"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nl">host2:</span> <span class="n">StandardHost</span> <span class="p">{</span>
-            <span class="err">@</span><span class="n">display</span><span class="p">(</span><span class="s">"p=822.648,135.296"</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="nl">connections:</span>
-        <span class="n">etherSwitch1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">source1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">etherSwitch1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">etherSwitch4</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">etherSwitch4</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">etherSwitch3</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">etherSwitch1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">source2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">etherSwitch3</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">destination2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">etherSwitch4</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">etherSwitch2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">etherSwitch2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">destination1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">etherSwitch3</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">host2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">etherSwitch2</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="n">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">host1</span><span class="p">.</span><span class="n">ethg</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
+      <p><img src="res/add-inet-as-dependency.png" alt="" /></p>
+
+      <p>Note, using this configuration will add a package file. This is similar to Java packages, and keeps together your project.</p>
+
+      <p>In <code class="language-plaintext highlighter-rouge">/ethernet-inet/simulations/package.ned</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package ethernet_inet.simulations;
+
+@license(LGPL);
 </code></pre></div>      </div>
+
+      <p>Note that the package name mirrors the folder structure - unless the code is in the <code class="language-plaintext highlighter-rouge">src</code> folder:</p>
+
+      <p>in <code class="language-plaintext highlighter-rouge">/ethernet-inet/src/package.ned</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package ethernet_inet;
+
+@license(LGPL);
+</code></pre></div>      </div>
+
+      <p>So, lets create our <code class="language-plaintext highlighter-rouge">ethtictoc.ned</code>, and additionally place in a package declaration:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package ethernet_inet;
+</code></pre></div>      </div>
+
+      <p>This time, let’s create our network using the <code class="language-plaintext highlighter-rouge">Design</code> Tab.</p>
+
+      <p>Start by adding a network:</p>
+
+      <p><img src="res/add-eth-network.png" alt="" /></p>
+
+      <p>Let’s add two computers which are connected together directly. One will send packets forward over TCP and the other will respond to these packets. This is similar to our tic-toc configuration.</p>
+
+      <ul>
+        <li>Add two Standard Hosts</li>
+        <li>Connect them together with Ethernet</li>
+        <li>Add an IPv4Configurator, which auto-assigns IP’s, similar to DHCP</li>
+      </ul>
+
+      <p><img src="res/simple-network.png" alt="" /></p>
+
+      <p>The Standard Host is a Compound Module. We can actually see all of the internals by double clicking on it:</p>
+
+      <p><img src="res/simple-host-not-so-simple.png" alt="" /></p>
+
+      <p>Some other compound nodes like this are:</p>
+      <ul>
+        <li>Ethernet Switch - A ethernet switch with a relay and a mac address for each port.</li>
+        <li>Router - Contains common routing protocols</li>
+        <li>IPV4 Configurator - Automatically assign IPv4 addresses for hosts and routers, similar to DHCP</li>
+      </ul>
+
+      <p>Let’s rename our nodes so that they are a little easier to understand:</p>
+
+      <p><img src="res/nodes-renamed.png" alt="" /></p>
+
+      <p>I found the default way that the code generated did not run nicely, so here’s some minor modifications:</p>
+
+      <p>in <code class="language-plaintext highlighter-rouge">ethtictoc.ned</code></p>
+
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">ethernet_inet</span><span class="o">;</span>
+
+<span class="nd">@license</span><span class="o">(</span><span class="no">LGPL</span><span class="o">);</span>
+
+
+<span class="kn">package</span> <span class="nn">ethenet_inet</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">inet.node.ethernet.Eth100M</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">inet.node.inet.StandardHost</span><span class="o">;</span>
+
+<span class="n">network</span> <span class="nc">TicTocEthernet</span>
+<span class="o">{</span>
+    <span class="nd">@display</span><span class="o">(</span><span class="s">"bgb=403,251"</span><span class="o">);</span>
+
+    <span class="nl">submodules:</span>
+        <span class="nl">tic:</span> <span class="nc">StandardHost</span> <span class="o">{</span>
+            <span class="nd">@display</span><span class="o">(</span><span class="s">"p=75,136"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nl">toc:</span> <span class="nc">StandardHost</span> <span class="o">{</span>
+            <span class="nd">@display</span><span class="o">(</span><span class="s">"p=321,136"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nl">configurator:</span> <span class="nc">Ipv4NetworkConfigurator</span> <span class="o">{</span>
+            <span class="nd">@display</span><span class="o">(</span><span class="s">"p=298,41"</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="nl">connections:</span>
+        <span class="n">tic</span><span class="o">.</span><span class="na">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="nc">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">toc</span><span class="o">.</span><span class="na">ethg</span><span class="o">++;</span>
+<span class="o">}</span>
+</code></pre></div>      </div>
+
+      <p>let’s also create our <code class="language-plaintext highlighter-rouge">omnetpp.ini</code></p>
+
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nc">General</span><span class="o">]</span>
+<span class="n">network</span> <span class="o">=</span> <span class="nc">TicTocEthernet</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">numApps</span> <span class="o">=</span> <span class="mi">1</span> <span class="err">#</span> <span class="n">number</span> <span class="n">of</span> <span class="n">applications</span> <span class="n">on</span> <span class="n">clients</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">typename</span> <span class="o">=</span> <span class="s">"TcpSessionApp"</span> <span class="err">#</span> <span class="n">client</span> <span class="n">application</span> <span class="n">type</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">connectAddress</span> <span class="o">=</span> <span class="s">"toc"</span> <span class="err">#</span> <span class="n">destination</span> <span class="n">address</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">connectPort</span> <span class="o">=</span> <span class="mi">1000</span> <span class="err">#</span> <span class="n">destination</span> <span class="n">port</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">sendBytes</span> <span class="o">=</span> <span class="mi">1</span><span class="no">MB</span> <span class="err">#</span> <span class="n">amount</span> <span class="n">of</span> <span class="n">data</span> <span class="n">to</span> <span class="n">send</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">toc</span><span class="o">.</span><span class="na">numApps</span> <span class="o">=</span> <span class="mi">1</span> <span class="err">#</span> <span class="n">number</span> <span class="n">of</span> <span class="n">applications</span> <span class="n">on</span> <span class="n">server</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">toc</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">typename</span> <span class="o">=</span> <span class="s">"TcpEchoApp"</span> <span class="err">#</span> <span class="n">server</span> <span class="n">application</span> <span class="n">type</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">toc</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">localPort</span> <span class="o">=</span> <span class="mi">1000</span> <span class="err">#</span> <span class="no">TCP</span> <span class="n">server</span> <span class="n">listen</span> <span class="n">port</span>
+</code></pre></div>      </div>
+
+      <p>This code tells <code class="language-plaintext highlighter-rouge">tic</code> to run one app, named <code class="language-plaintext highlighter-rouge">TcpSessionApp</code> <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.tcpapp.TcpSessionApp.html">Docs</a>, to attempt to connect to a server named <code class="language-plaintext highlighter-rouge">toc</code>, on port <code class="language-plaintext highlighter-rouge">1000</code>, and to send <code class="language-plaintext highlighter-rouge">1MB</code> of data.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">toc</code> is also going to run one app, which is the <code class="language-plaintext highlighter-rouge">TcpEchoApp</code> <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.tcpapp.TcpEchoApp.html">Docs</a>, which will echo back the same data to <code class="language-plaintext highlighter-rouge">tic</code>.</p>
+
+      <p>Once the entire process is complete, the simulation will end.</p>
+
+      <p>We can build and run this as a release to see the messages being exchanged. In particular, ARP requests, REQs, and data all send.</p>
+
+      <p><img src="res/tic-toc-eth-with-tcp.png" alt="" /></p>
 
       <h3 id="address-resolution-protocol-arp">Address Resolution Protocol (ARP)</h3>
 
@@ -521,53 +681,285 @@
         <li>Once the entire response is returned, the intermediate devices have learned the pathway to</li>
       </ul>
 
-    </div></div></section>
-<section id="part5simulation"><button class="collapsible">Part 5: Simulation</button><div class="text-content"><div class="text-inner">
+      <h3 id="tic-toc-with-udp">Tic-toc with UDP</h3>
 
-      <h3 id="presenting-your-results">Presenting your Results</h3>
-
+      <p>Let’s make an iterative change to our system and use UDP rather than TCP.</p>
       <ul>
-        <li>OMNeT++ will typically be configured to display data in a raw format.
-          <ul>
-            <li>e.g. dumping the results to a log file</li>
-          </ul>
-        </li>
-        <li>It will often be appropriate to display this data in some form of graph.</li>
-        <li>The IDE has some built in tools for visualizing messages being sent
-          <ul>
-            <li>Instead, you may with to use a data visualization utility like MatLab or MatPlotLib</li>
-          </ul>
-        </li>
+        <li>UDP is a connectionless protocol</li>
+      </ul>
+
+      <p>We will this time use the <code class="language-plaintext highlighter-rouge">UdpBasicApp</code> <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.udpapp.UdpBasicApp.html">Docs</a> and <code class="language-plaintext highlighter-rouge">UdpEchoApp</code> <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.udpapp.UdpEchoApp.html">Docs</a></p>
+
+      <p>update your <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> to:</p>
+
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nc">General</span><span class="o">]</span>
+<span class="n">network</span> <span class="o">=</span> <span class="nc">TicTocEthernet</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">numApps</span> <span class="o">=</span> <span class="mi">1</span> <span class="err">#</span> <span class="n">number</span> <span class="n">of</span> <span class="n">applications</span> <span class="n">on</span> <span class="n">client</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">typename</span> <span class="o">=</span> <span class="s">"UdpBasicApp"</span> <span class="err">#</span> <span class="n">client</span> <span class="n">application</span> <span class="n">type</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">destAddresses</span> <span class="o">=</span> <span class="s">"toc"</span> <span class="err">#</span> <span class="n">destination</span> <span class="n">address</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">destPort</span> <span class="o">=</span> <span class="mi">1000</span> <span class="err">#</span> <span class="n">destination</span> <span class="n">port</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">messageLength</span> <span class="o">=</span> <span class="mi">1024</span><span class="no">B</span> <span class="err">#</span> <span class="n">amount</span> <span class="n">of</span> <span class="n">data</span> <span class="n">to</span> <span class="n">send</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">sendInterval</span> <span class="o">=</span> <span class="n">exponential</span><span class="o">(</span><span class="mi">100</span><span class="n">ms</span><span class="o">)</span> <span class="err">#</span><span class="n">randomly</span> <span class="n">send</span> <span class="n">data</span> <span class="n">packets</span> <span class="n">about</span> <span class="mi">10</span><span class="o">/</span><span class="n">second</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">tic</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">stopTime</span> <span class="o">=</span> <span class="mi">100</span><span class="n">s</span> <span class="err">#</span><span class="n">run</span> <span class="n">our</span> <span class="n">simulation</span> <span class="k">for</span> <span class="mi">100</span><span class="n">s</span>
+
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">toc</span><span class="o">.</span><span class="na">numApps</span> <span class="o">=</span> <span class="mi">1</span> <span class="err">#</span> <span class="n">number</span> <span class="n">of</span> <span class="n">applications</span> <span class="n">on</span> <span class="n">server</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">toc</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">typename</span> <span class="o">=</span> <span class="s">"UdpEchoApp"</span> <span class="err">#</span> <span class="n">server</span> <span class="n">application</span> <span class="n">type</span>
+<span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">toc</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">localPort</span> <span class="o">=</span> <span class="mi">1000</span> <span class="err">#</span> <span class="no">UDP</span> <span class="n">server</span> <span class="n">listen</span> <span class="n">port</span>
+</code></pre></div>      </div>
+
+      <p>This will randomly send about 10 packets per second, and run for 100 seconds.</p>
+
+      <p>Do we need to update our <code class="language-plaintext highlighter-rouge">ethtictoc.ned</code>? No, because nothing has changed in the physical configuration of our nodes.</p>
+
+      <p><img src="res/tic-toc-eth-with-udp.png" alt="" /></p>
+
+    </div></div></section>
+<section id="part5exploringyourresults"><button class="collapsible">Part 5: Exploring your Results</button><div class="text-content"><div class="text-inner">
+
+      <p>After your simulation is complete, a new folder is generated in <code class="language-plaintext highlighter-rouge">src/results</code>.</p>
+
+      <p>In this folder are your results.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">.sca</code> files hold scalar statistics and <code class="language-plaintext highlighter-rouge">.vec</code> hold vector statistics, which aggregate values over time. Double click on any of these and create a new <code class="language-plaintext highlighter-rouge">General.anf</code> file to analyze your results. In here you can click around and look at your collected data.</p>
+
+      <p>Let’s look at vector data -&gt; throughput.</p>
+
+      <p><img src="res/finding-throughput.png" alt="" /></p>
+
+      <p><img src="res/throughput.png" alt="" /></p>
+
+      <p>Why is it throughput bounces up and down? Think about how we sent our packets.</p>
+
+      <p>There are many ways to export this data for use in other applications.</p>
+
+    </div></div></section>
+<section id="part6thebustopology"><button class="collapsible">Part 6: The Bus Topology</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s expand what we have so far to create a full bus topology. We will dynamically create 10 clients and connect each to a bus:</p>
+
+      <p>Create a new OMNeT++ project <code class="language-plaintext highlighter-rouge">ethernet-bus</code>. Link in INET. Create <code class="language-plaintext highlighter-rouge">ethernetbusnetwork.ned</code> and <code class="language-plaintext highlighter-rouge">omnetpp.ini</code>.</p>
+
+      <p>In <code class="language-plaintext highlighter-rouge">ethernetbusnetwork.ned</code>:</p>
+
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">ethernet_bus</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">inet.node.ethernet.Eth100M</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">inet.node.inet.StandardHost</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">inet.node.inet.Router</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">inet.linklayer.ethernet.EtherBus</span><span class="o">;</span>
+
+
+<span class="n">network</span> <span class="nc">EthernetBusNetwork</span>
+<span class="o">{</span>
+    <span class="nl">parameters:</span>
+        <span class="kt">int</span> <span class="n">numClients</span><span class="o">;</span> <span class="c1">// number of clients in the network</span>
+    <span class="nl">submodules:</span>
+        <span class="nl">configurator:</span> <span class="nc">Ipv4NetworkConfigurator</span><span class="o">;</span> <span class="c1">// network autoconfiguration</span>
+        <span class="nl">server:</span> <span class="nc">StandardHost</span><span class="o">;</span> <span class="c1">// predefined standard host</span>
+        <span class="nl">router:</span> <span class="nc">Router</span><span class="o">;</span> <span class="c1">// predefined router</span>
+        <span class="nl">bus:</span> <span class="nc">EtherBus</span><span class="o">;</span> <span class="c1">// predefined ethernet switch</span>
+        <span class="n">client</span><span class="o">[</span><span class="n">numClients</span><span class="o">]:</span> <span class="nc">StandardHost</span><span class="o">;</span>
+    <span class="nl">connections:</span> <span class="c1">// network level connections</span>
+        <span class="n">router</span><span class="o">.</span><span class="na">pppg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="nc">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">server</span><span class="o">.</span><span class="na">pppg</span><span class="o">++;</span> <span class="c1">// PPP</span>
+        <span class="n">bus</span><span class="o">.</span><span class="na">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="nc">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">router</span><span class="o">.</span><span class="na">ethg</span><span class="o">++;</span> <span class="c1">// bidirectional ethernet</span>
+        <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">..</span><span class="na">numClients</span><span class="o">-</span><span class="mi">1</span> <span class="o">{</span>
+            <span class="n">client</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">ethg</span><span class="o">++</span> <span class="o">&lt;--&gt;</span> <span class="nc">Eth100M</span> <span class="o">&lt;--&gt;</span> <span class="n">bus</span><span class="o">.</span><span class="na">ethg</span><span class="o">++;</span> <span class="c1">// ethernet</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>      </div>
+
+      <p>In <code class="language-plaintext highlighter-rouge">omentpp.ini</code>:</p>
+
+      <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nc">Config</span> <span class="nc">BusTopology</span><span class="o">]</span>
+<span class="n">network</span> <span class="o">=</span> <span class="nc">EthernetBusNetwork</span>
+<span class="o">*.</span><span class="na">numClients</span> <span class="o">=</span> <span class="mi">10</span> <span class="err">#</span> <span class="n">number</span> <span class="n">of</span> <span class="n">clients</span> <span class="n">in</span> <span class="n">network</span>
+<span class="o">*.</span><span class="na">client</span><span class="o">[*].</span><span class="na">numApps</span> <span class="o">=</span> <span class="mi">1</span> <span class="err">#</span> <span class="n">number</span> <span class="n">of</span> <span class="n">applications</span> <span class="n">on</span> <span class="n">client</span>
+<span class="o">*.</span><span class="na">client</span><span class="o">[*].</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">typename</span> <span class="o">=</span> <span class="s">"UdpBasicApp"</span> <span class="err">#</span> <span class="n">client</span> <span class="n">application</span> <span class="n">type</span>
+<span class="o">*.</span><span class="na">client</span><span class="o">[*].</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">destAddresses</span> <span class="o">=</span> <span class="s">"server"</span> <span class="err">#</span> <span class="n">destination</span> <span class="n">address</span>
+<span class="o">*.</span><span class="na">client</span><span class="o">[*].</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">destPort</span> <span class="o">=</span> <span class="mi">1000</span> <span class="err">#</span> <span class="n">destination</span> <span class="n">port</span>
+<span class="o">*.</span><span class="na">client</span><span class="o">[*].</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">messageLength</span> <span class="o">=</span> <span class="mi">1024</span><span class="no">B</span> <span class="err">#</span> <span class="n">amount</span> <span class="n">of</span> <span class="n">data</span> <span class="n">to</span> <span class="n">send</span>
+<span class="o">*.</span><span class="na">client</span><span class="o">[*].</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">sendInterval</span> <span class="o">=</span> <span class="mi">100</span><span class="n">ms</span> <span class="err">#</span><span class="n">randomly</span> <span class="n">send</span> <span class="n">data</span> <span class="n">packets</span> <span class="n">about</span> <span class="mi">10</span><span class="o">/</span><span class="n">second</span>
+<span class="o">*.</span><span class="na">client</span><span class="o">[*].</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">stopTime</span> <span class="o">=</span> <span class="mi">100</span><span class="n">s</span> <span class="err">#</span><span class="n">run</span> <span class="n">our</span> <span class="n">simulation</span> <span class="k">for</span> <span class="mi">100</span><span class="n">s</span>
+<span class="o">*.</span><span class="na">bus</span><span class="o">.</span><span class="na">positions</span> <span class="o">=</span> <span class="s">"5"</span> <span class="err">#</span><span class="n">distance</span> <span class="n">in</span> <span class="n">m</span> <span class="n">between</span> <span class="n">each</span> <span class="n">client</span> <span class="n">and</span> <span class="n">the</span> <span class="n">bus</span>
+<span class="o">*.</span><span class="na">server</span><span class="o">.</span><span class="na">numApps</span> <span class="o">=</span> <span class="mi">1</span> <span class="err">#</span> <span class="n">number</span> <span class="n">of</span> <span class="n">applications</span> <span class="n">on</span> <span class="n">server</span>
+<span class="o">*.</span><span class="na">server</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">typename</span> <span class="o">=</span> <span class="s">"UdpEchoApp"</span> <span class="err">#</span> <span class="n">server</span> <span class="n">application</span> <span class="n">type</span>
+<span class="o">*.</span><span class="na">server</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">localPort</span> <span class="o">=</span> <span class="mi">1000</span> <span class="err">#</span> <span class="no">UDP</span> <span class="n">server</span> <span class="n">listen</span> <span class="n">port</span>
+<span class="err">#</span> <span class="n">enable</span> <span class="n">csma</span> <span class="o">/</span> <span class="n">cd</span>
+<span class="o">**.</span><span class="na">eth</span><span class="o">[*].</span><span class="na">csmacdSupport</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="o">**.</span><span class="na">eth</span><span class="o">[*].</span><span class="na">mac</span><span class="o">.</span><span class="na">duplexMode</span> <span class="o">=</span> <span class="kc">false</span>
+</code></pre></div>      </div>
+
+      <p>Major changes from before is that we are using wildcard matching (*), and we removed our random exponential sends.</p>
+
+      <p><img src="res/ether-bus-network.png" alt="" /></p>
+
+      <p>Recall that a Bus network is essentially a number of ethernet cables spliced together into a bus using cable taps. They share a physical medium. This is classic ethernet.</p>
+
+      <p>What do we see when we simulate it? So many JAM signals…</p>
+      <ul>
+        <li>Despite this, do we still get through all our packets?</li>
+        <li>Can we detect how many collisions ocurred using our data viewer?</li>
+        <li>If we change back to our random exponential sends, then how many collisions occur?</li>
       </ul>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
       <ul>
-        <li>Using our lab example as a starting point, individually implement:</li>
-        <li>The Star Topology</li>
-        <li>The Bus Topology
+        <li>
+          <p>Using our lab example as a starting point, individually implement:</p>
+        </li>
+        <li>The Star Topology
           <ul>
-            <li>Which type of device do you need to use for each? How many?</li>
-            <li>Which networks require an algorithm for Collision Detection?</li>
+            <li>This topology has all of the devices connected to a Ethernet Switch</li>
+            <li>You will also need the server connected, through a router</li>
+            <li>You can leave the simulation settings in <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> the same, or modify them if needed</li>
+            <li>You may want to look at the <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.node.ethernet.EtherSwitch.html">EtherSwitch</a>
+              <ul>
+                <li>For example, does this node use the <code class="language-plaintext highlighter-rouge">positions</code> parameter?</li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li>Rerun the Simulation</li>
+        <li>The Ring Topology
+          <ul>
+            <li>This topology has each computer connected to a Switch, and the switches connected around in a loop
+              <ul>
+                <li>Typically this loop is one directional, but it will be easier for us to model it bidirectional</li>
+              </ul>
+            </li>
+            <li>Try to implement this as a parametric model using loops, but if you cannot it, it’s okay to hard code it with a set number of nodes</li>
+            <li>You may get a <code class="language-plaintext highlighter-rouge">broadcast storm</code> attempting to resolve ARP on this network. You can skip the ARP step altogether with:</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>in your <code class="language-plaintext highlighter-rouge">omnetpp.ini</code>:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**.ipv4.arp.typename = "GlobalArp"
+</code></pre></div>      </div>
+
+      <p><img src="res/ring-example.png" alt="" /></p>
+
+      <ul>
+        <li>
+          <p>Rerun the Simulation for each topology, and browse the data.</p>
+        </li>
+        <li>
+          <p>Finally, write a 1 to 2-page report which attempts to answer some research questions either within or between the topologies we studied</p>
+          <ul>
+            <li>You must formulate the hypothesis / research questions</li>
+            <li>You need to provide answers based on your observations
+              <ul>
+                <li>Back up your observations with data and graphs as appropriate!</li>
+                <li>e.g. If I switch from a bus to a switch topology, I believe my throughput will…</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="hints-and-tricks">Hints and Tricks:</h3>
+
+      <ul>
+        <li>Note: You can add multiple networks in a single ned file, and as well multiple configurations in an <code class="language-plaintext highlighter-rouge">omnetpp.ini</code>. The syntax looks like:
+In the <code class="language-plaintext highlighter-rouge">ned</code> file:</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+network EthernetStarNetwork
+{
+    parameters:
+    // etc.
+}
+
+network EthernetRingNetwork
+{
+    parameters:
+    // etc.
+}
+</code></pre></div>      </div>
+
+      <p>in <code class="language-plaintext highlighter-rouge">omnetpp.ini</code>:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Config StarTopology]
+network = EthernetStarNetwork
+# etc.
+
+[Config RingTopology]
+network = EthernetRingNetwork
+# etc.
+</code></pre></div>      </div>
+
+      <ul>
+        <li>
+          <p>When you go to run it, you will need to select from the available configurations</p>
+        </li>
+        <li>When looking for research questions you could…
+          <ul>
+            <li>Try comparing networks with and without CSMA/CD (Half Duplex vs Full Duplex)</li>
+            <li>Try comparing networks where hosts act at the same time vs staggered using the exponential random function.</li>
+            <li>Try networks at different scales (4 nodes vs 10 nodes)</li>
+          </ul>
+        </li>
+        <li>
+          <p>Try removing the numClients line, and rerun your simulation. What happens?</p>
+        </li>
+        <li>Which parameters should I look at?
+          <ul>
+            <li>Consider looking for throughput, collisions, received packet lifetime,</li>
+          </ul>
+        </li>
       </ul>
 
       <h3 id="submission">Submission</h3>
       <ul>
-        <li>Please submit the source files for each of your topologies</li>
-        <li>Additionally, submit a 1-page report with relevant data you collected and analysis. (Be brief!)</li>
+        <li>Please submit the source files for each of your topologies, and you report.</li>
+      </ul>
+
+      <h3 id="faq">FAQ</h3>
+
+      <ul>
+        <li>I accidentally switched to release…
+          <ul>
+            <li>You could…
+              <ul>
+                <li>Wait out the build time, I guess.
+                  <ul>
+                    <li>I couldn’t figure out how to interrupt and switch back without the original build attempting to complete.</li>
+                  </ul>
+                </li>
+                <li>On the plus side, once inet release is built, you shouldn’t have to build it again.</li>
+              </ul>
+            </li>
+            <li>Or you could…
+              <ul>
+                <li>Save your work back out of the virtual box, restore the working state from the download, and copy your work back in.</li>
+                <li>Sounds dumb. Might save your life if it’s minutes before submission time!</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>I get the error <code class="language-plaintext highlighter-rouge">imported NED not found</code>.
+          <ul>
+            <li>Have you properly referenced in INET?</li>
+          </ul>
+        </li>
       </ul>
 
       <h3 id="references">References:</h3>
+
+      <p>A. Sekercioglu et. al. <a href="https://docs.omnetpp.org/tutorials/tictoc/">Tic Toc Tutorial</a>. OpenSim Ltd. [Online].</p>
+
+      <p>INET User Guide. <a href="https://inet.omnetpp.org/docs/users-guide/ch-networks.html">Networks</a> OpenSim Ltd. [Online].</p>
 
       <p>J. Skiles. <a href="https://www.youtube.com/watch?v=PfAWhrmoYgM">Getting started with OMNET++, INET, Veins, and SUMO</a>. YouTube.com. May 26, 2020. [Online].</p>
 
       <p>J. Skiles. <a href="https://www.youtube.com/watch?v=oBRrhuaMxGk">How To Set Up OMNet++ in Ubuntu 20+</a>. YouTube.com. January 10, 2021. [Online].</p>
 
       <p>J. Skiles. <a href="https://www.youtube.com/watch?v=Ez8tTS9iXe4">An Overview of OMNET++</a>. YouTube.com. June 21, 2020. [Online].</p>
+
+      <p>B. Ricks. <a href="http://wnss.sv.cmu.edu/teaching/14814/s14/files/14814s14_t1.pdf">OMNeT++ and INET Tutorial Slides</a>. Carnegie-Melon University. 2014. [Online].</p>
     </div></div></section>
 
     </main>
