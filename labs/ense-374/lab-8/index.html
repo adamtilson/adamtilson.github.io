@@ -172,35 +172,35 @@
 
       <h3 id="setup">Setup</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE games (
-   id INT NOT NULL,
-   name STRING,
-   price MONEY,
-   PRIMARY KEY (id)
-)
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">games</span> <span class="p">(</span>
+   <span class="n">id</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+   <span class="n">name</span> <span class="n">STRING</span><span class="p">,</span>
+   <span class="n">price</span> <span class="n">MONEY</span><span class="p">,</span>
+   <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">)</span>
 </code></pre></div>      </div>
 
       <p><img src="res/games.png" alt="" /></p>
 
       <h3 id="create">Create</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO games VALUES(
-    1,
-    "Gone Golfing",
-    4.99
-)
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">games</span> <span class="k">VALUES</span><span class="p">(</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="nv">"Gone Golfing"</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">.</span><span class="mi">99</span>
+<span class="p">)</span>
 </code></pre></div>      </div>
 
       <p><img src="res/first-add.png" alt="" /></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO games(
-    id,
-    name
-)
-VALUES(
-    2,
-    "Outlast"
-)
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">games</span><span class="p">(</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="n">name</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="p">(</span>
+    <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">"Outlast"</span>
+<span class="p">)</span>
 </code></pre></div>      </div>
 
       <p><img src="res/partial-add.png" alt="" /></p>
@@ -209,12 +209,12 @@ VALUES(
 
       <h3 id="read">Read</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM games
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">games</span>
 </code></pre></div>      </div>
 
       <p>or</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM games WHERE id=2 
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">games</span> <span class="k">WHERE</span> <span class="n">id</span><span class="o">=</span><span class="mi">2</span> 
 </code></pre></div>      </div>
 
       <p><img src="res/select-with-where.png" alt="" /></p>
@@ -223,28 +223,47 @@ VALUES(
 
       <h3 id="update">Update</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UPDATE games
-SET price = 22.79
-WHERE name = "Outlast"
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">games</span>
+<span class="k">SET</span> <span class="n">price</span> <span class="o">=</span> <span class="mi">22</span><span class="p">.</span><span class="mi">79</span>
+<span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="nv">"Outlast"</span>
 </code></pre></div>      </div>
 
       <p><img src="res/price-update.png" alt="" /></p>
 
       <p>Adding Columns?</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER TABLE games
-ADD rating INT
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">games</span>
+<span class="k">ADD</span> <span class="n">rating</span> <span class="nb">INT</span>
 </code></pre></div>      </div>
 
       <p><img src="res/alter.png" alt="" /></p>
 
       <p>No default, gotta go back and add them! Can you update to:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|*id* | name | price|rating|
-|---|---|---|---|
-|1|Gone Golfing|4.99|85|
-|2|Outlast|22.79|80|
-</code></pre></div>      </div>
+      <table>
+        <thead>
+          <tr>
+            <th><em>id</em></th>
+            <th>name</th>
+            <th>price</th>
+            <th>rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Gone Golfing</td>
+            <td>4.99</td>
+            <td>85</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Outlast</td>
+            <td>22.79</td>
+            <td>80</td>
+          </tr>
+        </tbody>
+      </table>
 
       <p><img src="res/rating-updates.png" alt="" /></p>
 
@@ -252,39 +271,39 @@ ADD rating INT
 
       <p>Dangerous, don’t run without a WHERE, or you could remove all rows!</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE FROM games
-WHERE name = "Outlast"
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">games</span>
+<span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="nv">"Outlast"</span>
 </code></pre></div>      </div>
 
       <p>better</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE FROM games
-WHERE id = 2
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">games</span>
+<span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">2</span>
 </code></pre></div>      </div>
 
       <h3 id="relationships">Relationships</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE ratings (
-    id INT NOT NULL,
-    game_id INT,
-    rating STRING,
-    PRIMARY KEY (id),
-    FOREIGN KEY (game_id) REFERENCES games(id)
-)
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">ratings</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">game_id</span> <span class="nb">INT</span><span class="p">,</span>
+    <span class="n">rating</span> <span class="n">STRING</span><span class="p">,</span>
+    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">id</span><span class="p">),</span>
+    <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">game_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">games</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">)</span>
 </code></pre></div>      </div>
 
       <p><img src="res/ratings.png" alt="" /></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO ratings VALUES (
-    1,
-    1,
-    "An ordinary game about mini golf, nothing strange here"
-)
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">ratings</span> <span class="k">VALUES</span> <span class="p">(</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="nv">"An ordinary game about mini golf, nothing strange here"</span>
+<span class="p">)</span>
 </code></pre></div>      </div>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT games.name, games.rating, ratings.rating
-FROM ratings
-INNER JOIN games ON ratings.game_id = games.id
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">games</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">games</span><span class="p">.</span><span class="n">rating</span><span class="p">,</span> <span class="n">ratings</span><span class="p">.</span><span class="n">rating</span>
+<span class="k">FROM</span> <span class="n">ratings</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">games</span> <span class="k">ON</span> <span class="n">ratings</span><span class="p">.</span><span class="n">game_id</span> <span class="o">=</span> <span class="n">games</span><span class="p">.</span><span class="n">id</span>
 </code></pre></div>      </div>
 
       <p><img src="res/inner-join.png" alt="" /></p>
@@ -335,48 +354,75 @@ INNER JOIN games ON ratings.game_id = games.id
         </tbody>
       </table>
 
-      <p>Comparable to C++ vs JavaScript objects - in C++ all fields must be filled, in JavaScript it can be a lot more “ad-hoc”</p>
+      <p>Comparable to C++ vs JavaScript objects - in C++ all fields must be filled, in JavaScript it can be ad-hoc.</p>
 
       <h3 id="installation">Installation</h3>
 
-      <p>This procedure will discuss Windows.</p>
+      <p>This procedure will discuss Windows. Download the Community Server from their website…</p>
+
+      <p><img src="res/download.png" alt="" /></p>
 
       <ol>
-        <li>I downloaded the MSI. (224 MB) Running…
+        <li>I downloaded the MSI. (276 MB)
           <ul>
-            <li>Complete Install.</li>
-            <li>Install as a Network Service User</li>
-            <li>Do not Install Mongo Compass</li>
-            <li>Reboot is required…</li>
+            <li>Run it…
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">Complete</code> Install.</li>
+                <li>Install as a Network Service User</li>
+                <li>Do not Install Mongo Compass</li>
+                <li>Reboot is required…</li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li>I will let you back in.</li>
           </ul>
         </li>
-        <li>Create the default directory
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:/data/db
-</code></pre></div>          </div>
-          <p>This is the default place to store data, if you need to move this use a config file</p>
-        </li>
+      </ol>
+
+      <p><img src="res/install-config.png" alt="" /></p>
+
+      <p><strong>Keep track of these directories, we’ll need them in a bit!</strong></p>
+
+      <p><img src="res/no-compass.png" alt="" /></p>
+
+      <ol>
         <li>After this I needed to make an Alias file:</li>
       </ol>
 
-      <p>Find where Mongo is installed…</p>
+      <p>Open your powershell profile:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo $profile
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>notepad $profile
 </code></pre></div>      </div>
 
-      <p>cd into this directory.</p>
+      <p>and paste in:</p>
 
-      <p>Then run…</p>
+      <p>(Note, your directories may be different than mine! Keep track in the previous section!)</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-Alias mongod "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"
-Set-Alias mongo "C:\Program Files\MongoDB\Server\4.4\bin\mongo.exe"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-Alias mongod "C:\Program Files\MongoDB\Server\5.0\bin\mongod.exe"
+Set-Alias mongo "C:\Program Files\MongoDB\Server\5.0\bin\mongo.exe"
 </code></pre></div>      </div>
 
-      <ol>
-        <li>check it is working with:</li>
-      </ol>
+      <p>Save, close, and restart powershell.</p>
+
+      <p>If you get text warning you you can’t run scripts, you will need to:</p>
+
+      <ul>
+        <li>Open a powershell as an administrator</li>
+        <li>Run the following:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">Set-ExecutionPolicy Unrestricted</code></li>
+            <li>Restart all powershell instances</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Check it is working with:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongo --version
 </code></pre></div>      </div>
+
+      <p><img src="res/working-on-windows.png" alt="" /></p>
 
       <h3 id="installation-guides">Installation guides</h3>
 
@@ -385,19 +431,18 @@ Set-Alias mongo "C:\Program Files\MongoDB\Server\4.4\bin\mongo.exe"
 <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x">Mac</a>
 <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/">Windows</a></p>
 
+      <ul>
+        <li>in Linux in particular, you need both the <code class="language-plaintext highlighter-rouge">server</code> and the <code class="language-plaintext highlighter-rouge">shell</code></li>
+      </ul>
+
       <h3 id="mongod">mongod</h3>
 
       <ul>
         <li><code class="language-plaintext highlighter-rouge">mongod</code> is the mongo demon</li>
-        <li>
-          <p>It runs the database as a service, and allows you to connect to it from a client</p>
-        </li>
-        <li>Needs to run as sudo in linux.
-          <ul>
-            <li>Not a great solution, but it worked.</li>
-          </ul>
-        </li>
-        <li>Connect to the database with a second terminal, and run <code class="language-plaintext highlighter-rouge">mongo</code>.</li>
+        <li>It runs the database as a service, and allows you to connect 
+to it from a client</li>
+        <li>Needs to run as sudo in linux.</li>
+        <li>To connect to the database, open a second terminal, and run <code class="language-plaintext highlighter-rouge">mongo</code>, the Mongo shell</li>
       </ul>
 
       <h3 id="help">Help</h3>
@@ -407,7 +452,7 @@ Set-Alias mongo "C:\Program Files\MongoDB\Server\4.4\bin\mongo.exe"
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>help
 </code></pre></div>      </div>
 
-      <h3 id="mongo">mongo</h3>
+      <h3 id="mongo-shell">Mongo shell</h3>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongo
 </code></pre></div>      </div>
@@ -416,9 +461,9 @@ Set-Alias mongo "C:\Program Files\MongoDB\Server\4.4\bin\mongo.exe"
         <li>Command line application to perform database operations</li>
       </ul>
 
-      <h3 id="database">database</h3>
+      <h3 id="the-database-db">The Database (db)</h3>
 
-      <p>The largest data structure in mongo db is a database (db). These are further composed of collections which is further composed of documents.</p>
+      <p>The largest data structure in mongo db is a database (db). These are further composed of collections which is further composed of documents. We can compare this to SQL:</p>
 
       <table>
         <thead>
@@ -443,10 +488,12 @@ Set-Alias mongo "C:\Program Files\MongoDB\Server\4.4\bin\mongo.exe"
         </tbody>
       </table>
 
+      <p>To show databases:</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show dbs
 </code></pre></div>      </div>
 
-      <p>shows database names - includes some default ones</p>
+      <p>Mostly these will just be the defaults to start.</p>
 
       <h3 id="creating-a-database">Creating a database</h3>
 
@@ -455,67 +502,76 @@ Set-Alias mongo "C:\Program Files\MongoDB\Server\4.4\bin\mongo.exe"
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use testdb
 </code></pre></div>      </div>
 
-      <h3 id="database-1">database</h3>
-
       <p>However, if we check it again with…</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show dbs
 </code></pre></div>      </div>
       <ul>
         <li>The database still hasn’t created until we add a document</li>
+        <li>Unlike in MySQL where everything is created first and then objects are stored, NoSQL is more ad-hoc, with containers only appearing once they contain data.</li>
       </ul>
 
       <p>Check the current db with…</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db
 </code></pre></div>      </div>
 
-      <h3 id="collection">collection</h3>
+      <h3 id="collection">Collection</h3>
 
       <p>these are like tables in SQL</p>
       <ul>
-        <li>a collection of documents</li>
-        <li>documents are like table rows or records</li>
+        <li>a collection of documents
+          <ul>
+            <li>where documents are like table rows or records</li>
+          </ul>
+        </li>
       </ul>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show collections
 </code></pre></div>      </div>
 
-      <p>However, we haven’t created the collection yet! We need to insert a document into the collection in order to create it.</p>
+      <p>However, we haven’t created the collection yet!</p>
+      <ul>
+        <li>Again, it’s ad-hoc.
+          <ul>
+            <li>We need to insert a document into the collection in order to create it.</li>
+          </ul>
+        </li>
+      </ul>
 
     </div></div></section>
 <section id="part3mongodbcrudoperations"><button class="collapsible">Part 3: Mongo DB CRUD Operations</button><div class="text-content"><div class="text-inner">
 
-      <p>CRUD = Create, Read, Update, Delete</p>
+      <p>Common database operations are defined by the acronym <code class="language-plaintext highlighter-rouge">CRUD</code>: Create, Read, Update, Delete</p>
 
       <p><a href="https://docs.mongodb.com/manual/crud/">Read the Manual!</a></p>
       <ul>
-        <li>Actually very good!</li>
+        <li>Adam’s Docs review: actually pretty good!</li>
       </ul>
 
       <h3 id="create-1">CREATE</h3>
 
-      <p>You can insert elements into the database with:</p>
+      <p>You can insert elements into the database with the following functions:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.collections.insertOne ( ... ) 
-db.collections.insertMany ( ... )
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">collections</span><span class="p">.</span><span class="nx">insertOne</span> <span class="p">(</span> <span class="p">...</span> <span class="p">);</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">collections</span><span class="p">.</span><span class="nx">insertMany</span> <span class="p">(</span> <span class="p">...</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
-      <p>These are functions. Parameters are javascript objects.</p>
+      <p>The parameters are javascript objects.</p>
 
       <p>e.g.</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.insertOne(
-    {
-        _id:1,
-        name:"Gone Golfing",
-        price:4.99
-    }
-)
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="na">_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span>
+    <span class="p">}</span>
+<span class="p">)</span>
 </code></pre></div>      </div>
 
       <h3 id="read-1">READ</h3>
 
       <p>To find an element from our collection, use:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.find()
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
 </code></pre></div>      </div>
 
       <p>shows all of the games.</p>
@@ -527,14 +583,17 @@ db.collections.insertMany ( ... )
 
       <p><a href="https://docs.mongodb.com/manual/reference/operator/query/">Query Selectors let you find objects based on Comparisons</a></p>
 
-      <p>{price: {$gt:1}} Note the funky syntax!</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ price: { $gt: 1 } } 
+</code></pre></div>      </div>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.find({name:"Gone Golfing"})
+      <p>Note the funky nested object syntax!</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">})</span>
 </code></pre></div>      </div>
 
       <p>Note the following, which will return nothing:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.find({price: {$lt:2.00}})
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">price</span><span class="p">:</span> <span class="p">{</span><span class="na">$lt</span><span class="p">:</span> <span class="mf">2.00</span><span class="p">}</span> <span class="p">})</span>
 </code></pre></div>      </div>
 
       <table>
@@ -600,29 +659,30 @@ db.collections.insertMany ( ... )
 
       <p>We need to use syntax similar to Find to find the document we want to update, and then we can add a new record as needed</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.updateOne({name:"Gone Golfing"}, {$set : {price:2.99}});
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">},</span> 
+                   <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">price</span><span class="p">:</span> <span class="mf">2.99</span> <span class="p">}</span> <span class="p">});</span>
 </code></pre></div>      </div>
 
       <h3 id="delete-1">DELETE</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.deleteOne({_id:1});
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">deleteOne</span><span class="p">({</span> <span class="na">_id</span><span class="p">:</span> <span class="mi">1</span> <span class="p">});</span>
 </code></pre></div>      </div>
 
       <p>We can also remove an existing database with the following command:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.dropDatabase();
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">dropDatabase</span><span class="p">();</span>
 </code></pre></div>      </div>
 
     </div></div></section>
 <section id="part4relationships"><button class="collapsible">Part 4: Relationships</button><div class="text-content"><div class="text-inner">
 
-      <p>A common practice in databases design, to avoid redundancy, is that a document may need to reference to a second document to get more information.</p>
+      <p>A common practice in databases design, to avoid redundancy, is for a document to reference to a second document for more information. These secondary documents can be either embedded, such that the entire entry exists each place it is needed, or referenced, so that only a single referenced document exists which can be referenced multiple times.</p>
 
       <p>There are several types of relationships:</p>
 
       <p>One to One</p>
       <ul>
-        <li>If each user has exactly one game, you could use an embedded approach</li>
+        <li>If each user has exactly one unique game, you could use an embedded approach</li>
       </ul>
 
       <p>One to Many</p>
@@ -632,7 +692,7 @@ db.collections.insertMany ( ... )
 
       <p>Many to Many</p>
       <ul>
-        <li>Many users have many games, and vice versa
+        <li>If many users have many games, and vice versa
           <ul>
             <li>A reference approach is preferred</li>
           </ul>
@@ -641,64 +701,86 @@ db.collections.insertMany ( ... )
 
       <h3 id="embedded">Embedded</h3>
 
-      <p>Example, we can reviews into a list:</p>
+      <p>Example, we can create reviews in array notation:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.insertOne(
-    {
-        _id:1,
-        name:"Gone Golfing",
-        price:4.99
-        reviews: [
-            {
-                userName: "Adam",
-                rating: 1,
-                review: "Bug in the first screen"
-            }
-            {
-                userName: "HorrorFan",
-                rating: 5,
-                review: "Classic"
-            }
-        ]
-    }
-)
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="na">_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span>
+        <span class="na">reviews</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Adam</span><span class="dl">"</span><span class="p">,</span>
+                <span class="na">rating</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bug in the first screen</span><span class="dl">"</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">HorrorFan</span><span class="dl">"</span><span class="p">,</span>
+                <span class="na">rating</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Classic</span><span class="dl">"</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">)</span>
 </code></pre></div>      </div>
 
       <h3 id="reference">Reference</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.games.insertOne(
-    {
-        _id:1,
-        name:"Gone Golfing",
-        price:4.99
-        reviews: [
-            {
-                user_id: 1,
-                rating: 1,
-                review: "Bug in the first screen"
-            }
-            {
-                user_id: 2,
-                rating: 5,
-                review: "Classic"
-            }
-        ]
-    }
-)
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insertMany</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="na">_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Games</span><span class="dl">"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="na">_id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Robin Speedruns</span><span class="dl">"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+
+<span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="na">_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span>
+        <span class="na">reviews</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="na">user_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="na">rating</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bug in the first screen</span><span class="dl">"</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="na">user_id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="na">rating</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Classic</span><span class="dl">"</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>We could match the user to the review by looking up in both tables:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> 
+    <span class="na">_id</span><span class="p">:</span> <span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">find</span><span class="p">()[</span><span class="mi">0</span><span class="p">].</span><span class="nx">reviews</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">users_id</span>
+<span class="p">})</span>
 </code></pre></div>      </div>
 
       <h3 id="schemas">Schemas</h3>
 
-      <p>If the ad-hoc nature of MongoDB is too painful for you, you can also define schemas, which are more like table templates</p>
+      <p>If the ad-hoc nature of MongoDB is too frustrating for you, you can also define schemas, which are more like table templates</p>
       <ul>
         <li>list the fields that you need</li>
         <li>list dataTypes for those fields</li>
         <li>list of those fields are required</li>
         <li>list default values for them</li>
-        <li>You can do this in Mongo, we’ll do this in Mongoose</li>
+        <li>You can do this in Mongo, we’ll do this in Mongoose in just a bit!</li>
       </ul>
 
-      <h3 id="part-5-mongoose">Part 5: Mongoose</h3>
+    </div></div></section>
+<section id="part5mongoose"><button class="collapsible">Part 5: Mongoose</button><div class="text-content"><div class="text-inner">
 
       <p>Mongoose is a Node.js library for connecting to your database, and performing database operations. It can be triggered by any code in your Node.js script, but you will most likely want to use it on your routes.</p>
 
@@ -706,7 +788,7 @@ db.collections.insertMany ( ... )
 
       <h3 id="what-is-it">What is it?</h3>
 
-      <p>The default driver for mongo for node.js is a little bit tedious.
+      <p>The default driver for mongo for Node.js is a little bit tedious.
 A theme in this class is introducing tools to make your life easier
 These are also widely used in Industry</p>
 
@@ -717,25 +799,28 @@ These are also widely used in Industry</p>
 
       <h3 id="boilerplate">Boilerplate</h3>
 
-      <p>Right from the front page:</p>
+      <p>Modified from the front page:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Require and connect (ensure mongod is running!)</span>
-<span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">mongoose</span><span class="dl">'</span><span class="p">);</span>
-<span class="c1">// connects to the "test" database</span>
-<span class="c1">// the later args fix some deprecation warnings</span>
-<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="dl">'</span><span class="s1">mongodb://localhost:27017/test</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span><span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span><span class="p">});</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Bring in mongoose</span>
+<span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongoose</span><span class="dl">'</span> <span class="p">);</span>
+
+<span class="c1">// connects to the "test" database (ensure mongod is running!)</span>
+<span class="c1">// the later arguments fix some deprecation warnings</span>
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongodb://localhost:27017/test</span><span class="dl">'</span><span class="p">,</span> 
+                  <span class="p">{</span> <span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
 
 <span class="c1">// create a schema</span>
-<span class="kd">const</span> <span class="nx">Cat</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="nb">String</span> <span class="p">});</span>
+<span class="kd">const</span> <span class="nx">Cat</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span> <span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="nb">String</span> <span class="p">});</span>
 
 <span class="c1">// create a document following that schema</span>
 <span class="kd">const</span> <span class="nx">kitty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Zildjian</span><span class="dl">'</span> <span class="p">});</span>
-<span class="nx">kitty</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">meow</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">kitty</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">meow</span><span class="dl">'</span><span class="p">)</span> <span class="p">);</span>
 </code></pre></div>      </div>
-
-      <p>That’s all it takes to do database stuff from Node!</p>
+      <p>That’s all it takes to do database stuff from Node! Let’s look at these in more depth…</p>
 
       <h3 id="creating-a-schema">Creating a Schema</h3>
+
+      <p>Creating a schema for our game example:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">gameSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">({</span>
     <span class="na">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
@@ -745,7 +830,7 @@ These are also widely used in Industry</p>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
-      <p>These types are called SchemaTypes. Read the docs for more info.</p>
+      <p>There are explicit data types assigned, as in SQL. These are called SchemaTypes. <a href="https://mongoosejs.com/docs/guide.html">Read the docs for more info!</a></p>
 
       <p>Types:</p>
 
@@ -762,15 +847,18 @@ These are also widely used in Industry</p>
         <li><code class="language-plaintext highlighter-rouge">Map</code></li>
       </ul>
 
-      <p>You can omit _id, then Mongoose will do it for you. Or you can be explicit, but you must ALWAYS set one, or it will not save.</p>
+      <p>If you omit _id, then Mongoose will add it for as a unique ObjectID. Or you can be explicit, but you must ALWAYS set one, or it will not save.</p>
 
       <h3 id="using-a-collection">Using a Collection</h3>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// this creates a collection called Games</span>
-<span class="kd">const</span> <span class="nx">Game</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span> <span class="p">(</span><span class="dl">"</span><span class="s2">Game</span><span class="dl">"</span><span class="p">,</span> <span class="nx">gameSchema</span><span class="p">);</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// this creates a collection called `games` (Weird, but intuitive)</span>
+<span class="kd">const</span> <span class="nx">Game</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">Game</span><span class="dl">"</span><span class="p">,</span> <span class="nx">gameSchema</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
       <h3 id="adding-a-document">Adding a Document</h3>
+
+      <p>We want to add a new game document to our games collection</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Game</span><span class="p">({</span>
     <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span>
@@ -784,50 +872,122 @@ These are also widely used in Industry</p>
 
       <p>Typically you run this once from a node.js script, and then comment out the save lines to prevent multiple identical copies of things in your DB!</p>
       <ul>
-        <li>Probably don’t want nodemon running here, instead just do a node</li>
-        <li>Otherwise every time you do an update, expect more copies in the</li>
-      </ul>
-
-      <p>Be sure to run the <code class="language-plaintext highlighter-rouge">mongod</code> server</p>
-
-      <h3 id="mongoose-help">Mongoose Help</h3>
-
-      <p><a href="https://mongoosejs.com/docs/guide.html">The docs. Pretty good.</a></p>
-
-      <p>Aside: Async Javascript</p>
-      <ul>
-        <li>Basically the new hotness</li>
-        <li>A function with the “async” keyword</li>
-        <li>It’s going to do some computations</li>
-        <li>Rather than returning a value, it returns a “promise” that it will return a value</li>
-        <li>It’s parallel coding and it kinda hurts my brain</li>
-        <li>You can call something after it’s finished using the callback function</li>
-        <li>You can also use the “await” syntax, which we will use.
+        <li>You likely won’t want nodemon running here when doing database tests, instead just use <code class="language-plaintext highlighter-rouge">node app.js</code>
           <ul>
-            <li>It’s less optimal, but I think cleaner code for learning.</li>
-            <li>If you are rereading these notes later, e.g. for your capstone, investigate <code class="language-plaintext highlighter-rouge">async</code> further and use it properly!</li>
+            <li>Otherwise every time you do an update, expect more copies in the database!</li>
           </ul>
         </li>
       </ul>
 
-      <h3 id="reading-from-a-db">Reading from a DB</h3>
+      <p>Also, make sure you have <code class="language-plaintext highlighter-rouge">mongod</code> server running in a separate terminal!</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <p>Let’s use mongo shell and find our game. From a separate terminal</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongo
+use test
+db.games.find()
+</code></pre></div>      </div>
+
+      <p>A few extra entries were added, but it’s basically what we expect:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+<span class="p">{</span> <span class="dl">"</span><span class="s2">_id</span><span class="dl">"</span> <span class="p">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="dl">"</span><span class="s2">617747c24de34db695e58f96</span><span class="dl">"</span><span class="p">),</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">rating</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="dl">"</span><span class="s2">price</span><span class="dl">"</span> <span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span> <span class="dl">"</span><span class="s2">review</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">classic</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">__v</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">0</span> <span class="p">}</span>
+
+</code></pre></div>      </div>
+
+      <h3 id="mongoose-help">Mongoose Help</h3>
+
+      <p><a href="https://mongoosejs.com/docs/guide.html">The docs. That are… just okay.</a></p>
+
+      <h3 id="important-aside-async-javascript">Important Aside: Async Javascript</h3>
+
+      <ul>
+        <li>In modern JavaScript, it’s important to write non-blocking code
+          <ul>
+            <li>i.e., if an operation is slow, rather than waiting for it, we can allow other operations go first
+              <ul>
+                <li>e.g. Database operations take time, especially for big databases on slow hard drives!</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">async</code> is a modern JavaScript keyword that allows this
+          <ul>
+            <li>Signified by a function with the <code class="language-plaintext highlighter-rouge">async</code> keyword</li>
+            <li>Rather than returning a value, it returns a “promise” that it will return a value, once it completes.</li>
+          </ul>
+        </li>
+        <li>Previously, once the operation is complete, you can resume execution via a callback function
+          <ul>
+            <li>In much the same way in JavaScript DOM we used callbacks to wait for a user to click a button, and then did something</li>
+            <li>In this case we are waiting for the database to read, and then do something in a callback
+              <ul>
+                <li>The problem - what if you need to wait for one thing, which waits for another things, which waits for another</li>
+                <li>It can lead to nested callbacks and callback hell</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Thus, we’ll make use of the <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code> syntax.
+          <ul>
+            <li>This code reads like it’s synchronous, but it’s not</li>
+            <li>I think it leads to cleaner code, better for when learning.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><em>The reason we are forced to look at this is now is: Mongoose has no synchronous API! We have to use async, either through callbacks, promises, or async/await</em></p>
+
+      <h3 id="reading-from-a-mongodb">Reading from a MongoDB</h3>
+
+      <p>Here’s doing a find operation using callback syntax:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">},</span> <span class="p">(</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">results</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">error</span> <span class="p">);</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">results</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// this is where we have access to our results</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">results</span> <span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nx">results</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">no results found</span><span class="dl">"</span> <span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
         <span class="p">}</span>
+        <span class="c1">// this is where we have access to our results</span>
     <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
+      <p>Or we can use the <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code> syntax.</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">findInDatabase</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">});</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nx">results</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">no results founds</span><span class="dl">"</span> <span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// this is where we have access to our results</span>
+        
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">error</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">findInDatabase</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <p>While these may seem similar, if you are doing repeated calls which require the results of multiple functions, your code can get very deeply nested in the callback approach.</p>
+
+      <p>Enough syntax talk, what does our code actually do?</p>
+
       <ul>
-        <li>returns an array of our games in a JavaScript object</li>
-        <li>We can traverse it just like any other JS Object</li>
-        <li>For Each loops? Yep!</li>
+        <li>returns an array of our games in a JavaScript object called ‘results’
+          <ul>
+            <li>We can traverse it just like any other JS Object</li>
+            <li>Can we use <code class="language-plaintext highlighter-rouge">for...of</code> loops? Yep!</li>
+            <li>Can we pass it to EJS and use it there? Yep!</li>
+          </ul>
+        </li>
       </ul>
 
       <h3 id="closing-the-connection">Closing the connection</h3>
@@ -837,45 +997,32 @@ These are also widely used in Industry</p>
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 </code></pre></div>      </div>
       <ul>
-        <li>eg. in the last find callback.</li>
+        <li>e.g. in the last find callback.</li>
+        <li>In our server operations, the server will stay open, so we don’t need to explicitly close</li>
       </ul>
-
-      <h3 id="validation-with-mongoose">Validation with Mongoose</h3>
-
-      <p>https://mongoosejs.com/docs/validation.html#built-in-validators</p>
-
-      <p>When specifying your schema, you can force certain values or ranges for elements, and return custom error messages if the users do not meet them:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">breakfastSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Schema</span><span class="p">({</span>
-    <span class="na">eggs</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">type</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
-        <span class="na">min</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Too few eggs</span><span class="dl">'</span><span class="p">],</span>
-        <span class="na">max</span><span class="p">:</span> <span class="mi">12</span>
-    <span class="p">},</span>
-    <span class="na">bacon</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">type</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
-        <span class="na">required</span><span class="p">:</span> <span class="p">[</span><span class="kc">true</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Why no bacon?</span><span class="dl">'</span><span class="p">]</span>
-    <span class="p">},</span>
-    <span class="na">drink</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
-        <span class="na">enum</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Coffee</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Tea</span><span class="dl">'</span><span class="p">],</span>
-        <span class="na">required</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">bacon</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>      </div>
 
       <h3 id="update-2">Update</h3>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span> <span class="p">(</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="na">$set</span><span class="p">:</span> <span class="p">{</span><span class="na">rating</span><span class="p">:</span><span class="mi">3</span><span class="p">}},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <p>Here we can do an async update by creating an async anonymous function and immediately calling it:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span> <span class="p">{</span> <span class="na">gameName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Dead Space</span><span class="dl">"</span><span class="p">},</span> 
+                              <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">rating</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">});</span>
+        <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span> <span class="p">{</span> <span class="na">gameName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Dead Space</span><span class="dl">"</span><span class="p">},</span> 
+                              <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Needs a remaster already!</span><span class="dl">"</span> <span class="p">}</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">});</span>
+<span class="p">})()</span>
 </code></pre></div>      </div>
 
+      <p>This is an example where the await syntax avoided us nesting callbacks</p>
+
       <h3 id="delete-2">Delete</h3>
+
+      <p>Back to callback syntax:</p>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">deleteOne</span> <span class="p">(</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span>
@@ -887,17 +1034,274 @@ These are also widely used in Industry</p>
 
       <h3 id="adding-relationships">Adding Relationships</h3>
 
-      <p>We need to add the thing to the schema</p>
+      <p>To add a relationship, we need to create a schema</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">personSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">({</span>
     <span class="na">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
     <span class="na">age</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
-    <span class="na">favouriteFruit</span><span class="p">:</span> <span class="nx">fruitSchema</span>
+    <span class="na">favouriteGame</span><span class="p">:</span> <span class="nx">gameSchema</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
-      <p>If we do this, we embed it in the document. But it’s actually a reference because they have the same _id.</p>
+      <p>The syntax makes it appear as if we are embedding a document, but it’s actually a reference. Neat!</p>
 
+    </div></div></section>
+<section id="part6fullexample"><button class="collapsible">Part 6: Full example</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s create a form for users to rate games. Users can enter their name, the game name, score, and rating text. They will then be taken to a page that lists all scores.</p>
+
+      <p>Project setup:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eg-mongoose
+|- index.html
+|- app.js
+|- views
+    |- reviews.ejs
+</code></pre></div>      </div>
+
+      <p>initializing commands</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init
+npm i express ejs
+</code></pre></div>      </div>
+
+      <p>and, lets add some text to:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">index.html</code></p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Add Reviews<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/submit"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"userName"</span><span class="nt">&gt;</span>User Name<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"userName"</span> <span class="na">id=</span><span class="s">"userName"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;br&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"gameName"</span><span class="nt">&gt;</span>Game Name<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"gameName"</span> <span class="na">id=</span><span class="s">"gameName"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;br&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"score"</span><span class="nt">&gt;</span>Score<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"score"</span> <span class="na">id=</span><span class="s">"score"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;br&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"reviewText"</span><span class="nt">&gt;</span>Review Text<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"reviewText"</span> <span class="na">id=</span><span class="s">"reviewText"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p><code class="language-plaintext highlighter-rouge">reviews.ejs</code></p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>All Reviews<span class="nt">&lt;/title&gt;</span>
+    <span class="c">&lt;!-- Styles from w3Schools table tutorial --&gt;</span>
+    <span class="nt">&lt;style&gt;</span>
+        <span class="nt">table</span> <span class="p">{</span>
+          <span class="nl">font-family</span><span class="p">:</span> <span class="n">arial</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+          <span class="nl">border-collapse</span><span class="p">:</span> <span class="nb">collapse</span><span class="p">;</span>
+          <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="nt">td</span><span class="o">,</span> <span class="nt">th</span> <span class="p">{</span>
+          <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#dddddd</span><span class="p">;</span>
+          <span class="nl">text-align</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+          <span class="nl">padding</span><span class="p">:</span> <span class="m">8px</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="nt">tr</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">even</span><span class="o">)</span> <span class="p">{</span>
+          <span class="nl">background-color</span><span class="p">:</span> <span class="m">#dddddd</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;table&gt;</span>
+    <span class="nt">&lt;thead&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;</span>User Name<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Game Name<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Score<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Review Text<span class="nt">&lt;/th&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/thead&gt;</span>
+    <span class="nt">&lt;tbody&gt;</span>
+        <span class="c">&lt;!-- We want to repeat this for each game in the database --&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;td&gt;</span>Adam<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;</span>Limbo<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;</span>5<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;</span>Couldn't beat the part with the blow darts.<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="c">&lt;!-- End repeating bit --&gt;</span>
+    <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p><code class="language-plaintext highlighter-rouge">app.js</code></p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span> <span class="p">);</span>
+
+<span class="c1">// this is a canonical alias to make your life easier, like jQuery to $.</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span> 
+<span class="c1">// a common localhost test port</span>
+<span class="kd">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span> 
+
+<span class="c1">// body-parser is now built into express!</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span> <span class="p">);</span> 
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span> <span class="dl">"</span><span class="s2">view engine</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">ejs</span><span class="dl">"</span> <span class="p">);</span>
+
+<span class="c1">// Simple server operation</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span> <span class="p">(</span> <span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// template literal</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span> <span class="s2">`Server is running on http://localhost:</span><span class="p">${</span><span class="nx">port</span><span class="p">}</span><span class="s2">`</span> <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is accessing the root route using get</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/index.html</span><span class="dl">"</span> <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is accessing the reviews route using get</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span> <span class="dl">"</span><span class="s2">reviews</span><span class="dl">"</span> <span class="p">);</span> <span class="c1">//pass data to EJS from the Database here</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/submit</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is posting data to the submit route</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="c1">//write and update the Database here</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>We need to:</p>
+      <ol>
+        <li>Add the database boilerplate</li>
+        <li>Add a schema</li>
+        <li>Capture data from the form and store it in the database</li>
+        <li>Read from the database and send it to EJS
+          <ul>
+            <li>Do this in two places</li>
+          </ul>
+        </li>
+        <li>In EJS render all of the data</li>
+      </ol>
+
+      <h3 id="add-database-boilerplate">Add database boilerplate</h3>
+
+      <ul>
+        <li>add mongoose with <code class="language-plaintext highlighter-rouge">npm i mongoose</code></li>
+        <li>in requires:
+          <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">"</span><span class="s2">mongoose</span><span class="dl">"</span> <span class="p">);</span>
+<span class="c1">// connect to mongoose on port 27017</span>
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">mongodb://localhost:27017/games</span><span class="dl">"</span><span class="p">,</span> 
+                <span class="p">{</span> <span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> 
+                  <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span><span class="p">});</span>
+</code></pre></div>          </div>
+        </li>
+      </ul>
+
+      <h3 id="add-a-schema">Add a schema</h3>
+
+      <p>After connecting, add the following code:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// create a mongoose schema for a game</span>
+<span class="kd">const</span> <span class="nx">gameSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">({</span>
+    <span class="na">userName</span><span class="p">:</span>   <span class="nb">String</span><span class="p">,</span>
+    <span class="na">gameName</span><span class="p">:</span>   <span class="nb">String</span><span class="p">,</span>
+    <span class="na">score</span><span class="p">:</span>      <span class="nb">Number</span><span class="p">,</span>
+    <span class="na">reviewText</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">Game</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">Game</span><span class="dl">"</span><span class="p">,</span> <span class="nx">gameSchema</span> <span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h3 id="capture-form-data-into-the-database">Capture form data into the database</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// save into the database on post</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/submit</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is posting the following review</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span> <span class="p">)</span>
+
+    <span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Game</span><span class="p">({</span>
+        <span class="na">userName</span><span class="p">:</span>   <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">userName</span><span class="p">,</span>
+        <span class="na">gameName</span><span class="p">:</span>   <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">gameName</span><span class="p">,</span>
+        <span class="na">score</span><span class="p">:</span>      <span class="nb">parseInt</span><span class="p">(</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">score</span> <span class="p">),</span>
+        <span class="na">reviewText</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">reviewText</span>
+    <span class="p">});</span>
+
+    <span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">)</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <h3 id="read-from-the-database-and-send-it-to-ejs">Read from the database and send it to EJS</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span><span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is accessing the reviews route using get, and found the following:</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">results</span> <span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span> <span class="dl">"</span><span class="s2">reviews</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">results</span><span class="p">:</span> <span class="nx">results</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">error</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <h3 id="post-it-using-ejs">Post it using EJS</h3>
+
+      <p>Let’s iterate over the results:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c">&lt;!-- We want to repeat this for each game in the database --&gt;</span>
+    <span class="nt">&lt;</span><span class="err">%</span> <span class="na">for</span> <span class="err">(</span> <span class="na">const</span> <span class="na">result</span> <span class="na">of</span> <span class="na">results</span> <span class="err">)</span> <span class="err">{</span> <span class="err">%</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;</span><span class="err">%=</span> <span class="na">result.userName</span> <span class="err">%</span><span class="nt">&gt;&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;</span><span class="err">%=</span> <span class="na">result.gameName</span> <span class="err">%</span><span class="nt">&gt;&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;</span><span class="err">%=</span> <span class="na">result.score</span> <span class="err">%</span><span class="nt">&gt;&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;</span><span class="err">%=</span> <span class="na">result.reviewText</span> <span class="err">%</span><span class="nt">&gt;&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;</span><span class="err">%</span> <span class="err">}</span> <span class="err">%</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- End repeating bit --&gt;</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>The penultimate lab assignment, which will due by demo next week, is to:</p>
+
+      <ul>
+        <li>
+          <p>Have MongoDB and Mongoose installed on your local machine</p>
+        </li>
+        <li>Based on your application at the end of lab 7, create Mongoose schemas for:
+          <ul>
+            <li>Your users</li>
+            <li>Your tasks</li>
+          </ul>
+        </li>
+        <li>Additionally, create code to populate your starter users and tasks into the database from the previous lab
+          <ul>
+            <li>Create the schema objects and save them.</li>
+          </ul>
+        </li>
+        <li>You do not need to completely get all of the functionality of your application working with MongoDB / Mongoose, though that will be part of the final big submission next week, so if you have extra time you could work on that too.
+          <ul>
+            <li>If you were careful with your model in the last lab, this shouldn’t take too much work to change!</li>
+          </ul>
+        </li>
+      </ul>
     </div></div></section>
 
     </main>

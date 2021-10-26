@@ -97,7 +97,7 @@
 
     <main id="content" class="main-content" role="main">
         <p></p>
-        <h1 id="lab-9-mongoose-and-passport">Lab 9: Mongoose and Passport</h1>
+        <h1 id="lab-9-passport">Lab 9: Passport</h1>
 
 <p>ENSE 374 - Software Engineering Management - Laboratory</p>
 
@@ -121,41 +121,70 @@
         <li>A text editor, preferably VS Code</li>
       </ul>
 
-      <p>Background
-So far our to-do list is functional, but not at all secure. How can we make it more secure?
-What’s wrong with this approach?
-What if you push passwords to github?
-What about storing them on the cloud?
-What if users use the same password as in other services?</p>
+      <h3 id="background">Background</h3>
 
-      <p>Encryption
-Encrypt our passwords - Scramble our passwords using Encryption
-    - If you haven’t already, you’ll learn all the math behind this later.
-    - mongoose-encryption package
-    - We need a Secret string - this is our encryption and decryption key. It should be kept secret!
-    - We then need to plug in the encryption to the schema
-    - automatically encrypts on a save and decrypts on a read
-     - Now our system is only as secure as our “secret” - which we don’t want to just push to github!
-     - So how do we store our secret more… secretly?</p>
+      <p>So far our to-do list is functional, but not at all secure. How can we make it more secure?</p>
+      <ul>
+        <li>What’s wrong with what we’ve done so far?</li>
+        <li>What happens if you push passwords to github?</li>
+        <li>What about storing them on the cloud?</li>
+        <li>What if users use the same password as in other services?</li>
+      </ul>
 
-      <p>Environment Variables
-A hidden file which can stores our secrets in a safe location</p>
+      <h3 id="encryption">Encryption</h3>
 
-      <p>We can use this for our “Authorization” key. We could also use it for API keys, logins.</p>
+      <p>We can scramble our passwords using Encryption</p>
+      <ul>
+        <li>If you haven’t already, you’ll learn all the math behind this later. (RSA)</li>
+        <li>We can use the <code class="language-plaintext highlighter-rouge">mongoose-encryption</code> package
+          <ul>
+            <li>We need a Secret string - this is our encryption and decryption key. It should be kept secret!</li>
+            <li>We then need to plug in the encryption to the schema</li>
+          </ul>
+        </li>
+        <li>Automatically encrypts on a save and decrypts on a read</li>
+        <li>Now our system is only as secure as our “secret” - which we don’t want to just push to github!
+          <ul>
+            <li>So how do we store our secret more… secretly?</li>
+          </ul>
+        </li>
+      </ul>
 
-      <p>In npm:
-npm install dotenv</p>
+      <h3 id="environment-variables">Environment Variables</h3>
 
-      <p>In our js file:
-require(“dotenv”).config();</p>
+      <ul>
+        <li>A hidden file which can stores our secrets in a safe location</li>
+        <li>We can use this for our “Authorization” key.
+          <ul>
+            <li>We could also use it for API keys.</li>
+          </ul>
+        </li>
+      </ul>
 
-      <p>In our root directory:
-Create “.env” file in the root. 
-This is the whole name of the file
-Save your variables here:
+      <p>From npm:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install dotenv
+</code></pre></div>      </div>
+
+      <p>In our js file:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">dotenv</span><span class="dl">"</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span>
+</code></pre></div>      </div>
+
+      <p>In our root directory:</p>
+
+      <p>Create a <code class="language-plaintext highlighter-rouge">.env</code> file in the root.</p>
+      <ul>
+        <li>This is the whole name of the file
+          <ul>
+            <li>Like with the `</li>
+          </ul>
+        </li>
+        <li>Save your variables here:
 DB_HOST=localhost
 DB_USER=root
-No quotations for strings</p>
+No quotations for strings</li>
+      </ul>
 
       <p>Access in variables in our node js file:</p>
 
@@ -164,7 +193,7 @@ No quotations for strings</p>
       <p>Finally, add this file to your gitignore!
 .env</p>
 
-      <p>This will keep the file from getting pushed to the  github.</p>
+      <p>This will keep the file from getting pushed to the github.</p>
 
       <p>When you upload your files to the server, they will have a secure method for editing your apps Environment Variables.</p>
 
