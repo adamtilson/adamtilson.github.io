@@ -616,13 +616,14 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
 
       <h3 id="faq---how-do-i-store-an-array-into-a-json-file">FAQ - How do I store an array into a JSON file?</h3>
 
-      <p>Use syntax similar to:
-{“employees”:[  <br />
-    {“name”:”Ram”, “email”:”ram@gmail.com”, “age”:23},  <br />
-    {“name”:”Shyam”, “email”:”shyam23@gmail.com”, “age”:28},<br />
-    {“name”:”John”, “email”:”john@gmail.com”, “age”:33},  <br />
-    {“name”:”Bob”, “email”:”bob32@gmail.com”, “age”:41} <br />
-]}</p>
+      <p>Use syntax similar to:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="dl">"</span><span class="s2">employees</span><span class="dl">"</span><span class="p">:[</span>    
+    <span class="p">{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Ram</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">ram@gmail.com</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span><span class="mi">23</span><span class="p">},</span>    
+    <span class="p">{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Shyam</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">shyam23@gmail.com</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span><span class="mi">28</span><span class="p">},</span>  
+    <span class="p">{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">john@gmail.com</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span><span class="mi">33</span><span class="p">},</span>    
+    <span class="p">{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Bob</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">bob32@gmail.com</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span><span class="mi">41</span><span class="p">}</span>   
+<span class="p">]}</span> 
+</code></pre></div>      </div>
 
       <p><a href="https://www.javatpoint.com/json-array">Source</a></p>
 
@@ -661,7 +662,6 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
       <p>In order for this to work, you need to have properly configured express to pass arguments like body-parser.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}));</span> 
-
 </code></pre></div>      </div>
 
       <p>Make sure this code runs before any <code class="language-plaintext highlighter-rouge">app.listen</code>, <code class="language-plaintext highlighter-rouge">app.post</code> or <code class="language-plaintext highlighter-rouge">app.get</code> calls!</p>
