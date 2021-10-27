@@ -649,6 +649,23 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
 
       <p><em>Be sure to save the updated user list to the JSON file when a user registers</em></p>
 
+      <h3 id="faq">FAQ</h3>
+
+      <p>How do I do a redirect which maintains the form data from one route to another?</p>
+
+      <p>Use this syntax:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="mi">307</span><span class="p">,</span> <span class="dl">"</span><span class="s2">/newroute</span><span class="dl">"</span> <span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>In order for this to work, you need to have properly configured express to pass arguments like body-parser.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}));</span> 
+
+</code></pre></div>      </div>
+
+      <p>Make sure this code runs before any <code class="language-plaintext highlighter-rouge">app.listen</code>, <code class="language-plaintext highlighter-rouge">app.post</code> or <code class="language-plaintext highlighter-rouge">app.get</code> calls!</p>
+
       <h3 id="to-do-list-display">To-do list display</h3>
 
       <p>Use EJS to render the to-do list on the “/todo” route</p>
