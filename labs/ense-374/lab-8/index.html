@@ -388,16 +388,19 @@
 
       <p>Make an Alias file:</p>
 
-      <p>Open your powershell profile:</p>
+      <p>Open powershell and open your powershell profile:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo $profile
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>notepad $profile
 </code></pre></div>      </div>
 
-      <p>Navigate to this folder.</p>
+      <p>If you get an error that the path doesn’t exist, then you can create it with:</p>
 
-      <p>You may need to create the parent folder <code class="language-plaintext highlighter-rouge">WindowsPowerShell</code> and the file <code class="language-plaintext highlighter-rouge">Microsoft.PowerShell_profile.ps1</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>New-item -Path $profile -ItemType File -Force
+</code></pre></div>      </div>
 
-      <p>and paste in:</p>
+      <p>Then attempt to open the file again.</p>
+
+      <p>Now paste in:</p>
 
       <p>(Note, your directories may be different than mine! Keep track in the previous section!)</p>
 
@@ -421,10 +424,15 @@ Set-Alias mongo "C:\Program Files\MongoDB\Server\5.0\bin\mongo.exe"
 
       <p>Create a data directory</p>
 
-      <p>create the folders:
-<code class="language-plaintext highlighter-rouge">c:/data</code>
-and
-<code class="language-plaintext highlighter-rouge">c:/data/db</code></p>
+      <p>create the folders:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">c:/data</code></p>
+
+      <p>and</p>
+
+      <p><code class="language-plaintext highlighter-rouge">c:/data/db</code></p>
+
+      <!-- I learned when you just run mongo, it loads up the default, unless it can find mongo.conf-->
 
       <p>This is where your databases will be stored.</p>
 
@@ -514,8 +522,10 @@ to it from a client</li>
 </code></pre></div>      </div>
 
       <p>However, if we check it again with…</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show dbs
 </code></pre></div>      </div>
+
       <ul>
         <li>The database still hasn’t created until we add a document</li>
         <li>Unlike in MySQL where everything is created first and then objects are stored, NoSQL is more ad-hoc, with containers only appearing once they contain data.</li>
@@ -527,7 +537,7 @@ to it from a client</li>
 
       <h3 id="collection">Collection</h3>
 
-      <p>these are like tables in SQL</p>
+      <p>These are like tables in SQL</p>
       <ul>
         <li>a collection of documents
           <ul>
@@ -585,7 +595,7 @@ to it from a client</li>
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
 </code></pre></div>      </div>
 
-      <p>shows all of the games.</p>
+      <p>Which shows all of the games.</p>
 
       <p>We can also pass a json object into find( … ) to only match certain criteria.</p>
       <ul>
@@ -594,7 +604,7 @@ to it from a client</li>
 
       <p><a href="https://docs.mongodb.com/manual/reference/operator/query/">Query Selectors let you find objects based on Comparisons</a></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ price: { $gt: 1 } } 
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="nl">price</span><span class="p">:</span> <span class="p">{</span> <span class="na">$gt</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">}</span> 
 </code></pre></div>      </div>
 
       <p>Note the funky nested object syntax!</p>
