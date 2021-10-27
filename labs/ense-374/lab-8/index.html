@@ -364,23 +364,21 @@
 
       <p><img src="res/download.png" alt="" /></p>
 
-      <ol>
-        <li>I downloaded the MSI. (276 MB)
+      <p>Download the MSI. (276 MB)</p>
+      <ul>
+        <li>Run it…
           <ul>
-            <li>Run it…
+            <li><code class="language-plaintext highlighter-rouge">Complete</code> Install.</li>
+            <li>Install as a Network Service User</li>
+            <li>Do not Install Mongo Compass</li>
+            <li>Reboot is required…
               <ul>
-                <li><code class="language-plaintext highlighter-rouge">Complete</code> Install.</li>
-                <li>Install as a Network Service User</li>
-                <li>Do not Install Mongo Compass</li>
-                <li>Reboot is required…</li>
+                <li>I will let you back in.</li>
               </ul>
             </li>
           </ul>
-          <ul>
-            <li>I will let you back in.</li>
-          </ul>
         </li>
-      </ol>
+      </ul>
 
       <p><img src="res/install-config.png" alt="" /></p>
 
@@ -388,14 +386,16 @@
 
       <p><img src="res/no-compass.png" alt="" /></p>
 
-      <ol>
-        <li>After this I needed to make an Alias file:</li>
-      </ol>
+      <p>Make an Alias file:</p>
 
       <p>Open your powershell profile:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>notepad $profile
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo $profile
 </code></pre></div>      </div>
+
+      <p>Navigate to this folder.</p>
+
+      <p>You may need to create the parent folder <code class="language-plaintext highlighter-rouge">WindowsPowerShell</code> and the file <code class="language-plaintext highlighter-rouge">Microsoft.PowerShell_profile.ps1</code></p>
 
       <p>and paste in:</p>
 
@@ -418,6 +418,15 @@ Set-Alias mongo "C:\Program Files\MongoDB\Server\5.0\bin\mongo.exe"
           </ul>
         </li>
       </ul>
+
+      <p>Create a data directory</p>
+
+      <p>create the folders:
+<code class="language-plaintext highlighter-rouge">c:/data</code>
+and
+<code class="language-plaintext highlighter-rouge">c:/data/db</code></p>
+
+      <p>This is where your databases will be stored.</p>
 
       <p>Check it is working with:</p>
 
@@ -553,8 +562,8 @@ to it from a client</li>
 
       <p>You can insert elements into the database with the following functions:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">collections</span><span class="p">.</span><span class="nx">insertOne</span> <span class="p">(</span> <span class="p">...</span> <span class="p">);</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">collections</span><span class="p">.</span><span class="nx">insertMany</span> <span class="p">(</span> <span class="p">...</span> <span class="p">);</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">collections</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">(</span> <span class="p">...</span> <span class="p">);</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">collections</span><span class="p">.</span><span class="nx">insertMany</span><span class="p">(</span> <span class="p">...</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>The parameters are javascript objects.</p>
