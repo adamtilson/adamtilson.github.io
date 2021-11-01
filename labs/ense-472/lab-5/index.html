@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ENSE 472 Lab 4 </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
+                  <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
+                  <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
+                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-472/lab-3">Lab 3</a></li>
+                  <!--li><a href="/labs/ense-472/lab-4">Lab 4</a></li-->
+                  <!--li><a href="/labs/ense-472/lab-5">Lab 5</a></li-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-4-routing-information-protocol-in-omnet--inet">Lab 4: Routing Information Protocol in OMNeT++ / INET</h1>
+
+<p>ENSE 472 - Digital Networks - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
+
+      <p>The purpose of this lab is to study the Routing Information Protocol (RIP), an early distance-vector routing protocol which relies on hop count. In particular, this lab looks at implementing RIP using the INET framework,and looks at analyzing the performance of the network.</p>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>A Windows, Mac or Linux computer with OMNeT++ / INET installed. You may either install this yourself, or instead use the provided VirtualBox image which includes these applications installed in a light-weight Ubuntu environment. Please see the prior lab for details on setting up the VirtualBox, especially if you experience a black screen on boot.</p>
+
+    </div></div></section>
+<section id="part1routinginformationprotocol"><button class="collapsible">Part 1: Routing Information Protocol</button><div class="text-content"><div class="text-inner">
+
+      <p>The Routing Information Protocol (RIP) is one of the oldest routing algorithms</p>
+      <ul>
+        <li>Unlikely to see much use today, but great to learn about routing</li>
+        <li>It was in part popularized due to its inclusion in BSD Unix.</li>
+        <li>Implementing the Bellman-Ford and related algorithms, distance-vector routing protocols were used in precursors to the internet, and seek to find the best path to a destination network by minimizing hop count.
+          <ul>
+            <li>This strategy ignores other important statistics such as time to reach the destination.</li>
+          </ul>
+        </li>
+        <li>Each router is responsible for keeping track of its routing table, connected networks, and the number of hops to each network.
+          <ul>
+            <li>For example, a router A directly connected to network N would be zero hops away.</li>
+            <li>Router B, connected to Router A, would be one hop away from N, and the next hop towards N would be Router A.</li>
+          </ul>
+        </li>
+        <li>These routing tables are broadcast to connected routers at regular intervals over UDP.</li>
+        <li>Using these tables, each router can update its best path to each destination network by checking if the newly given path, plus one hop, is shorter than what’s currently in the routing table.</li>
+        <li>After a number of iterations, the network will converge on optimal paths in terms of the least number of hops.</li>
+        <li>The algorithms also adapt to networks are routers going down.</li>
+      </ul>
+
+      <p><a href="https://book.systemsapproach.org/internetworking/routing.html#distance-vector-rip">Background: An excellent overview of Distance Vector</a></p>
+
+      <p><img src="res/hop-count.png" alt="" /></p>
+
+      <p>On the upper path we can see 3 hops to reach our destination, on the lower path 4.</p>
+
+      <h3 id="real-world-example">Real world example</h3>
+
+      <p>On Windows, can we see how many hops it takes to get to a given server? Run <code class="language-plaintext highlighter-rouge">tracert google.com</code></p>
+
+      <h3 id="problems-with-rip">Problems with RIP</h3>
+
+      <p>Why is hop count no longer the best metric?</p>
+      <ul>
+        <li>Congestion</li>
+      </ul>
+
+      <p><img src="res/congestion.png" alt="" /></p>
+
+      <ul>
+        <li>Bandwidth</li>
+      </ul>
+
+      <h3 id="benefits-to-rip">Benefits to RIP</h3>
+
+      <ul>
+        <li>Easies to set up than Static Routing, and more adaptive</li>
+        <li>Great for small networks, labs</li>
+      </ul>
+
+      <h3 id="technical-details--limitations">Technical Details / Limitations</h3>
+
+      <ul>
+        <li>Updates are sent every 30 seconds over broadcast, which can lead to congestion
+          <ul>
+            <li>Particularly bad if routers send at the same time, better if clocks are staggered</li>
+          </ul>
+        </li>
+        <li>If a router goes down, we wait 180 seconds (3 minutes) for the update, it is then marked invalid (unreachable)
+          <ul>
+            <li>However, these entries are left in the table, and only removed at garbage collection (Flush) intervals, e.g. 120 or 240 seconds (2-4 minutes).</li>
+          </ul>
+        </li>
+        <li>Maximum hop count of 15 has rendered it impractical in the modern internet</li>
+        <li>Old versions have nomno Variable Length Subnet Masks (VLSM), only the old Class-based (Class A, Class B, Class C, etc.)</li>
+      </ul>
+
+    </div></div></section>
+<section id="part2staticroutinginomnetinet"><button class="collapsible">Part 2: Static Routing in OMNeT++ / INET</button><div class="text-content"><div class="text-inner">
+
+      <p>This section is based on the <a href="https://inet.omnetpp.org/docs/tutorials/rip/doc/index.html">OMNeT++ RIP Tutorial</a></p>
+
+      <p>Head to Part 1 here, download and <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> and the <code class="language-plaintext highlighter-rouge">RipNetworkA.ned</code></p>
+      <ul>
+        <li>Start a new Omnet++ Project, <code class="language-plaintext highlighter-rouge">rip-tutorial</code></li>
+        <li>Reference in INET</li>
+        <li>Open the File Manager (PCManFM-Qt) and navigate to <code class="language-plaintext highlighter-rouge">~/workspace/rip-tutorial/src</code></li>
+        <li>Drag and drop the <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> and <code class="language-plaintext highlighter-rouge">RipNetworkA.ned</code> into your <code class="language-plaintext highlighter-rouge">src</code> folder.
+          <ul>
+            <li>If is not working, you could instead download the files right from the terminal…
+              <ul>
+                <li>open <code class="language-plaintext highlighter-rouge">QTerminal</code> from the Applications menu -&gt; System Tools</li>
+                <li>
+                  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/workspace/rip-tutorial/src
+</code></pre></div>                  </div>
+                </li>
+                <li>
+                  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://inet.omnetpp.org/docs/_downloads/577859d0f9c9cfa45fcac193fae42e26/omnetpp.ini
+wget https://inet.omnetpp.org/docs/_downloads/6885266c9632f739e9242f9b68ef449c/RipNetworkA.ned
+</code></pre></div>                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>To see the newly added source files, in OMNeT++, right click on the <code class="language-plaintext highlighter-rouge">src</code> folder and click <code class="language-plaintext highlighter-rouge">Refresh</code></li>
+        <li>Update the the <code class="language-plaintext highlighter-rouge">RipNetworkA.ned</code> source to have the package name match the package in <code class="language-plaintext highlighter-rouge">package.ned</code>,
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">package rip_tutorial;</code></li>
+          </ul>
+        </li>
+        <li>Run the application by clicking on <code class="language-plaintext highlighter-rouge">omnetpp.ini</code>, then run
+          <ul>
+            <li>Do not switch to release</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>See the parameters in <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> in the <code class="language-plaintext highlighter-rouge">[Config Step1]</code> section</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step1</span><span class="p">]</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">"Static routing"</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">RipNetworkA</span>
+
+<span class="c1"># do not add direct routes
+</span><span class="o">*</span><span class="p">.</span><span class="n">configurator</span><span class="p">.</span><span class="n">addDirectRoutes</span> <span class="o">=</span> <span class="n">false</span>
+
+<span class="c1"># Application parameters
+</span><span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">numApps</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"PingApp"</span>
+<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">destAddr</span> <span class="o">=</span> <span class="s">"host6"</span>
+
+<span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">arp</span><span class="p">.</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"GlobalArp"</span>
+
+<span class="c1"># Visualizer settings
+</span><span class="o">*</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">interfaceTableVisualizer</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">displayInterfaceTables</span> <span class="o">=</span> <span class="n">true</span>
+</code></pre></div>      </div>
+
+      <p>In this version, we are simply allowing the configurator to pre-compute static routes to each of the connected devices, which is significantly less painful than doing it ourselves, as we saw in Lab 2 (Packet Tracer). We are also using the PingApp on host0, and attempting to ping host6.</p>
+
+      <p><img src="res/static-routing.png" alt="" /></p>
+
+      <p>Note that static routes are displayed only on the routers, not the switches. Why is this?</p>
+
+    </div></div></section>
+<section id="part3simplerip"><button class="collapsible">Part 3: Simple RIP</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s look at the first iteration of <a href="https://inet.omnetpp.org/docs/tutorials/rip/doc/step2.html">RIP</a></p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="p">[</span><span class="n">Config</span> <span class="n">Step2</span><span class="p">]</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">"Pinging after RIP convergence"</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">RipNetworkA</span>
+
+<span class="c1"># adding default routes in all hosts
+</span><span class="o">*</span><span class="p">.</span><span class="n">configurator</span><span class="p">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;config&gt; </span><span class="se">\
+</span><span class="s">                                &lt;interface hosts='**' address='10.x.x.x' netmask='255.x.x.x'/&gt; </span><span class="se">\
+</span><span class="s">                                &lt;autoroute sourceHosts='host*'/&gt; </span><span class="se">\
+</span><span class="s">                             &lt;/config&gt;"</span><span class="p">)</span>
+
+<span class="o">*</span><span class="p">.</span><span class="n">configurator</span><span class="p">.</span><span class="n">addStaticRoutes</span> <span class="o">=</span> <span class="n">true</span>
+
+<span class="c1"># RIP parameters on routers
+</span><span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">hasRip</span> <span class="o">=</span> <span class="n">true</span>
+<span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">startupTime</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="n">s</span><span class="p">)</span>
+<span class="c1"># disable advanced features for now!
+</span><span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">ripConfig</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;config&gt; </span><span class="se">\
+</span><span class="s">                                  &lt;interface hosts='router*' mode='NoSplitHorizon' /&gt; </span><span class="se">\
+</span><span class="s">                               &lt;/config&gt;"</span><span class="p">)</span>
+<span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">triggeredUpdate</span> <span class="o">=</span> <span class="n">false</span>
+
+<span class="c1"># Application parameters
+</span><span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">numApps</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"PingApp"</span>
+<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">destAddr</span> <span class="o">=</span> <span class="s">"host6"</span>
+<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">startTime</span> <span class="o">=</span> <span class="mi">50</span><span class="n">s</span>
+
+<span class="c1"># turning on global ARP to focus on the RIP messages
+</span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">arp</span><span class="p">.</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"GlobalArp"</span>  <span class="c1"># TODO: for some reasons GlobalArp does not work -&gt; it seems to work now
+</span>
+<span class="c1"># Visualizer settings
+</span><span class="o">*</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">interfaceTableVisualizer</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">displayInterfaceTables</span> <span class="o">=</span> <span class="n">true</span>
+</code></pre></div>      </div>
+      <p>We can see that Static Routes are configured via XML. Recall how this was done in Packet Tracer from the command line.</p>
+
+      <p>We also see RIP is configured via XML. In particular, we see <code class="language-plaintext highlighter-rouge">NoSplitHorizon</code> is set. This is an advanced feature of RIP. Without it, when a router receives new tables from an adjacent router, if these new tables cause an update in its own tables, it will echo that new route back to the node which caused the update. This can decrease network stability if a link goes down, and neither of the communicating routers knows has a route back to the router which went down. This is called the <em>count to infinity</em> problem.</p>
+
+      <p>When we demo this, we can see RIP updates propagating, and once a new path is found, arrows are drawn to visualize.</p>
+
+      <p><img src="res/RIP-request.png" alt="" /></p>
+
+      <p>You may see visualizations of function calls. These are the function calls which update RIP. If you want to not visualize them, right click on the canvas and go to <code class="language-plaintext highlighter-rouge">Animation Settings</code> -&gt; Uncheck <code class="language-plaintext highlighter-rouge">Animate method calls</code></p>
+
+    </div></div></section>
+<section id="part4linkbreakageandrecovery"><button class="collapsible">Part 4: Link Breakage and Recovery</button><div class="text-content"><div class="text-inner">
+
+      <p>In this section, we are going to see what happens when a link goes down. In particular, the connection to host6 will be severed at 50 seconds.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step3</span><span class="p">]</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">"Link breakage"</span>
+<span class="n">extends</span> <span class="o">=</span> <span class="n">Step2</span>
+
+<span class="c1"># Enable split horizon in order for the scenario to work properly
+</span><span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">ripConfig</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;config&gt; </span><span class="se">\
+</span><span class="s">                                  &lt;interface hosts='router*' mode='SplitHorizon' /&gt; </span><span class="se">\
+</span><span class="s">                               &lt;/config&gt;"</span><span class="p">)</span>
+<span class="c1"># Disable ping application
+</span><span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">numApps</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="o">*</span><span class="p">.</span><span class="n">scenarioManager</span><span class="p">.</span><span class="n">script</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;scenario&gt; </span><span class="se">\
+</span><span class="s">                                    &lt;disconnect t='50' src-module='router2' dest-module='switch2' /&gt; </span><span class="se">\
+</span><span class="s">                                &lt;/scenario&gt;"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>When we simulate this one, we see the link go down between the 30s and 60s updates:</p>
+
+      <p><img src="res/link-down.png" alt="" /></p>
+
+      <h3 id="link-recovery---3-scenarios">Link Recovery - 3 Scenarios</h3>
+
+      <p>Next we’ll look at three scenarios for the link coming back online,</p>
+
+      <ul>
+        <li>Before the link is invalidated</li>
+        <li>After the link is invalidated</li>
+        <li>After the link is flushed</li>
+      </ul>
+
+      <p>You will need to add the following to <code class="language-plaintext highlighter-rouge">src/scenario5.xml</code>, <code class="language-plaintext highlighter-rouge">src/scenario6.xml</code> and <code class="language-plaintext highlighter-rouge">src/scenario7.xml</code>, respectively</p>
+
+      <p>In <code class="language-plaintext highlighter-rouge">src/scenario5.xml</code>:</p>
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;scenario&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"50"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;disconnect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"150"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[0]"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[3]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"switch1"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[3]"</span> <span class="na">dest-module=</span><span class="s">"router2"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[0]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+<span class="nt">&lt;/scenario&gt;</span>
+</code></pre></div>      </div>
+      <p>In <code class="language-plaintext highlighter-rouge">src/scenario6.xml</code>:</p>
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- scenario6.xml --&gt;</span>
+<span class="nt">&lt;scenario&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"50"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;disconnect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"300"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[0]"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[3]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"switch1"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[3]"</span> <span class="na">dest-module=</span><span class="s">"router2"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[0]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+<span class="nt">&lt;/scenario&gt;</span>
+</code></pre></div>      </div>
+      <p>In <code class="language-plaintext highlighter-rouge">src/scenario7.xml</code>:</p>
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- scenario7.xml --&gt;</span>
+<span class="nt">&lt;scenario&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"50"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;disconnect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"602"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[0]"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[3]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"switch1"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[3]"</span> <span class="na">dest-module=</span><span class="s">"router2"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[0]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+<span class="nt">&lt;/scenario&gt;</span>
+</code></pre></div>      </div>
+
+      <p>These scenarios are loaded in each of the 4X configs:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step4A</span><span class="p">]</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">"RIP timers: Link comes back online before the timeout timer expires"</span>
+<span class="n">extends</span> <span class="o">=</span> <span class="n">Step2</span>
+
+<span class="c1"># Enable split horizon in order for the scenario to work properly
+</span><span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">ripConfig</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;config&gt; </span><span class="se">\
+</span><span class="s">                                  &lt;interface hosts='router*' mode='SplitHorizon' /&gt; </span><span class="se">\
+</span><span class="s">                               &lt;/config&gt;"</span><span class="p">)</span>
+<span class="c1"># disable ping application
+</span><span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">numApps</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Break the router2 &lt;--&gt; switch1 link at t=50 s. and reconnect at t=150 s.
+</span><span class="o">*</span><span class="p">.</span><span class="n">scenarioManager</span><span class="p">.</span><span class="n">script</span> <span class="o">=</span> <span class="n">xmldoc</span><span class="p">(</span><span class="s">"scenario5.xml"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step4B</span><span class="p">]</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">"RIP timers: Link comes back online before the garbage-collection timer expires"</span>
+<span class="n">extends</span> <span class="o">=</span> <span class="n">Step2</span>
+<span class="c1"># (garbage-collection timer is also called hold-down timer)
+</span>
+<span class="c1"># Break the router2 &lt;--&gt; switch1 link at t=50 s. and reconnect at t=300 s.
+</span><span class="o">*</span><span class="p">.</span><span class="n">scenarioManager</span><span class="p">.</span><span class="n">script</span> <span class="o">=</span> <span class="n">xmldoc</span><span class="p">(</span><span class="s">"scenario6.xml"</span><span class="p">)</span>
+</code></pre></div>      </div>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step4C</span><span class="p">]</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">"RIP timers: Link comes back online after the garbage-collection timer expires"</span>
+<span class="n">extends</span> <span class="o">=</span> <span class="n">Step2</span>
+
+<span class="c1"># Break the router2 &lt;--&gt; switch1 link at t=50 s. and reconnect at t=400 s.
+</span><span class="o">*</span><span class="p">.</span><span class="n">scenarioManager</span><span class="p">.</span><span class="n">script</span> <span class="o">=</span> <span class="n">xmldoc</span><span class="p">(</span><span class="s">"scenario7.xml"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>There are still some additional features of RIP that are worth investigating, such as triggered updates (when a device receives an update from a neighbor, which causes it to update its routes, it immediately sends those updates out to its neighbors, so that they can stay up to date. However, this has problems too, such as the count to infinity problem, addressed with Split Horizon or Split Horizon with Poisoning. For now we will keep it simple and stick to this phase for the assignment.</p>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>Your goal is to create sequence charts to visualize the network behavior in terms of packets location at the destination in each of the three scenarios described in the previous section</li>
+        <li>Perform the following tasks:
+          <ul>
+            <li>Replace the Application on host0 with the UDPBasicApp</li>
+            <li>Replace the application on host6 with the UDPEchoApp</li>
+            <li>Configure the application to send packets every 15 seconds, starting at t=5 seconds, from host0 to host6</li>
+          </ul>
+        </li>
+        <li>Run the simulation for 12 minutes simulated time.
+          <ul>
+            <li>Track the locations of the packets over time</li>
+          </ul>
+        </li>
+        <li>In a 1-2 page report, add your graphs, and make some comments on what is happening in the system at each of the times of the drops.
+          <ul>
+            <li>In particular, comment on when paths are changing and why</li>
+            <li>Comment also on when the network is down</li>
+            <li>You may wish to zoom in on graphs at different times to highlight particular behaviour</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="references">References</h3>
+
+      <p>L. Peterson and B. Davie, <a href="https://book.systemsapproach.org/internetworking/routing.html#distance-vector-rip">3.4 Routing</a>, Computer Networks: A Systems Approach, 2019. [<a href="https://book.systemsapproach.org/">Online</a>]</p>
+
+      <p>OMNeT++ / Inet. <a href="https://inet.omnetpp.org/docs/tutorials/rip/doc/index.html">RIP Routing Tutorial</a>, INET Framework. [Online].</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
