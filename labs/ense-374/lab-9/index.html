@@ -51,7 +51,7 @@
                   <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
                   <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
                   <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
-                  <!--li><a href="/labs/ense-374/lab-9">Lab 9</a></li-->
+                  <li><a href="/labs/ense-374/lab-9">Lab 9</a></li>
                 </ul>
               </div>
 
@@ -110,7 +110,7 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>This lab introduces Mongoose, which connects Node.js to the MongoDB database, and allows performing CRUD operations. Additionally,</p>
+      <p>This lab introduces Passport, which handles authentication using a number of different strategies. We will use the strategy of registering users in the MongoDB database using mongoose. Additionally, we will discuss other important security concepts such as storing environment variables securely.</p>
 
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
@@ -120,6 +120,9 @@
         <li>A modern web browser, with a strong preference for Firefox or Chrome</li>
         <li>A text editor, preferably VS Code</li>
       </ul>
+
+    </div></div></section>
+<section id="part1authenticationandsecurity"><button class="collapsible">Part 1: Authentication and Security</button><div class="text-content"><div class="text-inner">
 
       <h3 id="background">Background</h3>
 
@@ -136,9 +139,9 @@
       <p>We can scramble our passwords using Encryption</p>
       <ul>
         <li>If you haven’t already, you’ll learn all the math behind this later. (RSA)</li>
-        <li>We can use the <code class="language-plaintext highlighter-rouge">mongoose-encryption</code> package
+        <li>We can use the <code class="language-plaintext highlighter-rouge">mongoose-encryption</code> package <a href="https://www.npmjs.com/package/mongoose-encryption">available on NPM</a>
           <ul>
-            <li>We need a Secret string - this is our encryption and decryption key. It should be kept secret!</li>
+            <li>We need two Secret string - this is our encryption and decryption key. It should be kept secret!</li>
             <li>We then need to plug in the encryption to the schema</li>
           </ul>
         </li>
@@ -177,238 +180,620 @@
       <ul>
         <li>This is the whole name of the file
           <ul>
-            <li>Like with the `</li>
+            <li>Similar to the <code class="language-plaintext highlighter-rouge">.gitignore</code> file</li>
           </ul>
         </li>
-        <li>Save your variables here:
-DB_HOST=localhost
-DB_USER=root
-No quotations for strings</li>
+        <li>Save your variables here:</li>
       </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DB_HOST=localhost
+DB_USER=root
+</code></pre></div>      </div>
+
+      <p>No quotations for strings</p>
 
       <p>Access in variables in our node js file:</p>
 
-      <p>process.env.DB_HOST</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DB_HOST</span>
+</code></pre></div>      </div>
 
-      <p>Finally, add this file to your gitignore!
-.env</p>
+      <p>Finally, add this file to your gitignore!</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.env
+</code></pre></div>      </div>
 
       <p>This will keep the file from getting pushed to the github.</p>
 
       <p>When you upload your files to the server, they will have a secure method for editing your apps Environment Variables.</p>
 
-      <p>Salting and Hashing
-Encrypting and Decrypting is weak, better to Hash!
-Hash functions are a mathematical equation which turns a string into a hash, and it’s impossible (or at least ridiculously hard) to go backwards
-How are the hashing functions made - usually involves factoring prime numbers
-We know going forward produces consistent results, thus we can ask for a password, hash it, and compare  with our  hashed password
-Example: MD5 application
-If a website ever sends you a plain-text version of your password, you can believe  that they aren’t hashing!
-Hacking 101 - Make a hack(sh) table of common passwords, and compare.
-Modern GPUs - 20Bill Hashes per Second!
-What could you do - add a salt and then hash!
-Generate a random string, concatenate then hash. It must be stored in the database too.
-Finally, use a Slow Hash like bcrypt
-Salting rounds - salt it, hash it, salt it, hash it, do it 5 times?
-You can set the number of rounds you want to salt - adding one salt round doubles the time to compute it.
-node bcrypt - you can hash, choose the number of salt rounds, etc.</p>
+      <h3 id="salting-and-hashing">Salting and Hashing</h3>
 
-      <p>Cookies
-Cookies are a piece of data that is stored on the users browser
-We are going to use it to store an “access token” - a hash which identifies which user is logged in.</p>
+      <p>Encrypting and Decrypting passwords has some flaws, it’s better to Hash!</p>
 
-      <p>Sessions
-The amount of time that a browser interacts with a server
-Cookies let you maintain your session</p>
+      <p>Hash functions are a mathematical equation which turns a string into a hash code</p>
+      <ul>
+        <li>Deterministic, so the same input always produces the same hash</li>
+        <li>It’s impossible (or at least ridiculously hard) to go backwards (one-way function)</li>
+      </ul>
 
-      <p>passport
-passport-local
-passport-local-mongoose
-express-session (not express-sessions)</p>
+      <p>Since we know going forward produces consistent results, thus we can ask for a password, hash it, and store the hashed value in our database. The next time the user enters the password, the entered password is hashed and checks with what’s in our database.</p>
 
-      <p>npm i passport passport-local passport-local-mongoose express-session</p>
+      <p>Example: MD5 application</p>
 
-      <p>This is easy to mess up, so let’s go slow</p>
-      <ol>
-        <li>const session = require(“express-session”)
-const passport = require(“passport”)
-const passportLocalMongoose = require(“passport-local-mongoose”)</li>
-      </ol>
+      <p>If a website ever sends you a plain-text version of your password, you know that they aren’t hashing!</p>
+
+      <p>How can we beat this?</p>
+      <ul>
+        <li>Make a hash table of common passwords, and compare.</li>
+        <li>Modern GPUs can do 20Bill Hashes per Second!</li>
+      </ul>
+
+      <p>How else can we improve security?</p>
+
+      <p>Use a slow hashing function, like bcrypt</p>
+      <ul>
+        <li>This will prevent how much brute forcing can be done</li>
+      </ul>
+
+      <p>Add a salt and then hash!</p>
+      <ul>
+        <li>generate a random string (Salt)
+          <ul>
+            <li>concatenate it to the password</li>
+            <li>hash the whole thing!</li>
+            <li>This will produce a different value than only hashing the password</li>
+            <li>Save the salt into the database too for future reuse
+              <ul>
+                <li>When testing new use passwords, grab the old salt, concatenate it, and hash, then check</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>More security? Salting rounds</p>
+      <ul>
+        <li>salt it, hash it, salt it, hash it,</li>
+        <li>do it 5 times?</li>
+      </ul>
+
+      <p>You can set the number of rounds you want to salt</p>
+      <ul>
+        <li>adding one salt round doubles the time to compute it.</li>
+      </ul>
+
+      <p>Can we do this in node? sure!</p>
+
+      <p><code class="language-plaintext highlighter-rouge">bcrypt</code> <a href="https://www.npmjs.com/package/bcrypt">Bcrypt on NPM</a></p>
+      <ul>
+        <li>you can hash, choose the number of salt rounds, etc.</li>
+      </ul>
+
+      <h3 id="cookies">Cookies</h3>
+
+      <p>Cookies are a piece of data that is stored on the users browser
+We are going to use it to store an “access token”</p>
+      <ul>
+        <li>a hash which identifies which user is logged in.</li>
+      </ul>
+
+      <h3 id="sessions">Sessions</h3>
+
+      <p>The amount of time that a browser interacts with a server</p>
+      <ul>
+        <li>Cookies let you maintain your session</li>
+      </ul>
+
+      <h3 id="open-authorization-oauth">Open Authorization (OAuth)</h3>
+
+      <p>Beyond the scope of this lab but worth mentioning:</p>
+      <ul>
+        <li>OAuth is the cool new paradigm for authorization</li>
+        <li>We essentially subcontract another company to do authorization for us
+          <ul>
+            <li>Google, FaceBook, GitHub, etc.</li>
+            <li>The user logs in with their credentials for that account</li>
+            <li>The third party verifies the users identity without exchanging any passwords. Cool!</li>
+          </ul>
+        </li>
+        <li>This is possible to achieve using passport OAuth modules.</li>
+      </ul>
+
+    </div></div></section>
+<section id="part2usageandexample"><button class="collapsible">Part 2: Usage and Example</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s see how this application works by example. Let’s build on our Game Review submission application from last week.</p>
+
+      <p>Recall we basically made it here, with some minor adjustments…:</p>
+
+      <p>Set up the following directory structure:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|-- /views
+|    |-- reviews.ejs
+|    |-- add-review.ejs
+|-- .env
+|-- index.html
+|-- add.js
+</code></pre></div>      </div>
+
+      <p>in <code class="language-plaintext highlighter-rouge">/views/reviews.ejs</code></p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+    <span class="c">&lt;!-- Styles from w3Schools table tutorial --&gt;</span>
+    <span class="nt">&lt;style&gt;</span>
+        <span class="nt">table</span> <span class="p">{</span>
+          <span class="nl">font-family</span><span class="p">:</span> <span class="n">arial</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+          <span class="nl">border-collapse</span><span class="p">:</span> <span class="nb">collapse</span><span class="p">;</span>
+          <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="nt">td</span><span class="o">,</span> <span class="nt">th</span> <span class="p">{</span>
+          <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#dddddd</span><span class="p">;</span>
+          <span class="nl">text-align</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+          <span class="nl">padding</span><span class="p">:</span> <span class="m">8px</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="nt">tr</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">even</span><span class="o">)</span> <span class="p">{</span>
+          <span class="nl">background-color</span><span class="p">:</span> <span class="m">#dddddd</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;table&gt;</span>
+    <span class="nt">&lt;thead&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;</span>User Name<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Game Name<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Score<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Review Text<span class="nt">&lt;/th&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/thead&gt;</span>
+    <span class="nt">&lt;tbody&gt;</span>
+    <span class="c">&lt;!-- We want to repeat this for each game in the database --&gt;</span>
+    <span class="nt">&lt;</span><span class="err">%</span> <span class="na">for</span> <span class="err">(</span><span class="na">const</span> <span class="na">result</span> <span class="na">of</span> <span class="na">results</span><span class="err">)</span> <span class="err">{</span> <span class="err">%</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;</span><span class="err">%=</span> <span class="na">result.userName</span> <span class="err">%</span><span class="nt">&gt;&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;</span><span class="err">%=</span> <span class="na">result.gameName</span> <span class="err">%</span><span class="nt">&gt;&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;</span><span class="err">%=</span> <span class="na">result.score</span> <span class="err">%</span><span class="nt">&gt;&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;</span><span class="err">%=</span> <span class="na">result.reviewText</span> <span class="err">%</span><span class="nt">&gt;&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;</span><span class="err">%</span> <span class="err">}</span> <span class="err">%</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- End repeating bit --&gt;</span>
+    <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/add-review"</span> <span class="na">method=</span><span class="s">"get"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Add a Review!"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/logout"</span> <span class="na">method=</span><span class="s">"get"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Log Out!"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Let’s modify our <code class="language-plaintext highlighter-rouge">index.html</code> into <code class="language-plaintext highlighter-rouge">add-review.ejs</code></p>
+
+      <p>in <code class="language-plaintext highlighter-rouge">/views/add-review.ejs</code></p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Add Reviews<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/submit"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"gameName"</span><span class="nt">&gt;</span>Game Name<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"gameName"</span> <span class="na">id=</span><span class="s">"gameName"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;br&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"score"</span><span class="nt">&gt;</span>Score<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"score"</span> <span class="na">id=</span><span class="s">"score"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;br&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"reviewText"</span><span class="nt">&gt;</span>Review Text<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"reviewText"</span> <span class="na">id=</span><span class="s">"reviewText"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Let’s add a new register and sign up page, <code class="language-plaintext highlighter-rouge">index.html</code></p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Register or Log In<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body</span> <span class="na">class=</span><span class="s">"text-center"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-signin"</span> <span class="na">action=</span><span class="s">"/register"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Register<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"inputEmail"</span><span class="nt">&gt;</span>Email address<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span> <span class="na">id=</span><span class="s">"inputEmail"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">placeholder=</span><span class="s">"Email address"</span> <span class="na">required</span> <span class="na">autofocus</span> <span class="na">name=</span><span class="s">"username"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"inputPassword"</span><span class="nt">&gt;</span>Password<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">id=</span><span class="s">"inputPassword"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">placeholder=</span><span class="s">"Password"</span> <span class="na">required</span> <span class="na">name=</span><span class="s">"password"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-lg btn-primary btn-block"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Register<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+
+    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-signin"</span> <span class="na">action=</span><span class="s">"/login"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Sign in<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"inputEmail"</span><span class="nt">&gt;</span>Email address<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span> <span class="na">id=</span><span class="s">"inputEmail"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">placeholder=</span><span class="s">"Email address"</span> <span class="na">required</span> <span class="na">autofocus</span> <span class="na">name=</span><span class="s">"username"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"inputPassword"</span><span class="nt">&gt;</span>Password<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">id=</span><span class="s">"inputPassword"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">placeholder=</span><span class="s">"Password"</span> <span class="na">required</span> <span class="na">name=</span><span class="s">"password"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-lg btn-primary btn-block"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Sign in<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>And finally, our <code class="language-plaintext highlighter-rouge">app.js</code></p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span> <span class="p">);</span>
+<span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">"</span><span class="s2">mongoose</span><span class="dl">"</span> <span class="p">);</span>
+
+<span class="c1">// 1. Require dependencies /////////////////////////////////////////</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+
+<span class="c1">// this is a canonical alias to make your life easier, like jQuery to $.</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span> 
+<span class="c1">// a common localhost test port</span>
+<span class="kd">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span> 
+
+<span class="c1">// body-parser is now built into express!</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">(</span> <span class="p">{</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">true</span><span class="p">}</span> <span class="p">)</span> <span class="p">);</span> 
+
+<span class="c1">// 2. Create a session. The secret is used to sign the session ID.</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span> <span class="dl">"</span><span class="s2">view engine</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">ejs</span><span class="dl">"</span> <span class="p">);</span>
+
+<span class="c1">// connect to mongoose on port 27017</span>
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongodb://localhost:27017/games</span><span class="dl">'</span><span class="p">,</span> 
+                 <span class="p">{</span> <span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+
+<span class="c1">// 3. Create the userSchema ////////////////////////////////////////</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+
+<span class="kd">const</span> <span class="nx">gameSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+    <span class="na">userName</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">gameName</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">score</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="na">reviewText</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">Game</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Game</span><span class="dl">"</span><span class="p">,</span> <span class="nx">gameSchema</span> <span class="p">);</span>
+
+
+<span class="c1">// 4. Add our strategy for using Passport, using the local user from MongoDB</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+
+<span class="c1">// Simple server operation</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span> <span class="p">(</span> <span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// template literal</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span> <span class="s2">`Server is running on http://localhost:</span><span class="p">${</span><span class="nx">port</span><span class="p">}</span><span class="s2">`</span> <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// 5. Register a user with the following code, which needs to be in the appropriate route</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+
+<span class="c1">// 6. Log in users on the login route //////////////////////////////</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is accessing the root route using get</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/index.html</span><span class="dl">"</span> <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// 7. Register get routes for reviews and add-review ///////////////</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span><span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is accessing the reviews route using get, and found:</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">results</span> <span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span> <span class="dl">"</span><span class="s2">reviews</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">results</span> <span class="p">:</span> <span class="nx">results</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">error</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/add-review</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is accessing the add-review route using get</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span> <span class="dl">"</span><span class="s2">add-review</span><span class="dl">"</span> <span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+
+<span class="c1">// 8. Logout ///////////////////////////////////////////////////////</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+
+<span class="c1">// 9. Submit a post to the database ////////////////////////////////</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
+
+      <p>And set up our requirements with:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init
+npm i express ejs mongoose
+</code></pre></div>      </div>
+
+      <p>Make sure <code class="language-plaintext highlighter-rouge">mongod</code> is running!</p>
+
+      <h3 id="required-packages">Required packages</h3>
+
+      <p>We are going to install the following packages:</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">passport</code> - An authentication middleware for express making use of different strategies</li>
+        <li><code class="language-plaintext highlighter-rouge">passport-local</code> - A username and password authentication strategy</li>
+        <li><code class="language-plaintext highlighter-rouge">passport-local-mongoose</code> - Simplifies using username/password with Mongo</li>
+        <li><code class="language-plaintext highlighter-rouge">express-session</code> (not express-sessions) -Middleware for creating sessions.</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i passport passport-local passport-local-mongoose express-session dotenv
+</code></pre></div>      </div>
+
+      <p>Note: It’s very important to use these snippets in the order they are used in this example. I have thus included locations in the sample code for where to insert each bit by number!</p>
+
+      <h3 id="add-needed-packages">Add needed packages:</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 1. Require dependencies /////////////////////////////////////////</span>
+<span class="kd">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express-session</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">passport</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">passport</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">passportLocalMongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">passport-local-mongoose</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">dotenv</span><span class="dl">"</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
 
       <p>We don’t need  to directly user passport-local, so don’t need access to it through a const</p>
 
-      <ol>
-        <li>Use session
-app.use(session({
- secret: “Our little secret.”,
- resave: false,
- saveUninitialized: false
-}));
-app.use (passport.initialize());
-app.use (passport.session());</li>
-      </ol>
+      <h3 id="set-up-the-dotenv-file">Set up the dotenv file</h3>
 
-      <p>Create the userSchema</p>
+      <p>Create and add the following to the <code class="language-plaintext highlighter-rouge">/.env</code> file:</p>
 
-      <p>const userSchema = new mongoose.Schema ({
-    email: String
-    password: String
-})</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SECRET=Something secret to encrypt our session
+</code></pre></div>      </div>
 
-      <p>userSchema.plugin(passportLocalMongoose);</p>
+      <h3 id="use-session">Use session</h3>
 
-      <p>const User = new mongoose.Model(“User”, userSchema);</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 2. Create a session. The secret is used to sign the session ID.</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+    <span class="na">secret</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">SECRET</span><span class="p">,</span>
+    <span class="na">resave</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">saveUninitialized</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}));</span>
 
-      <ol>
-        <li></li>
-      </ol>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="p">(</span><span class="nx">passport</span><span class="p">.</span><span class="nx">initialize</span><span class="p">());</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="p">(</span><span class="nx">passport</span><span class="p">.</span><span class="nx">session</span><span class="p">());</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
 
-      <p>passport.use(User.createStrategy());</p>
+      <h3 id="create-the-userschema">Create the userSchema</h3>
 
-      <p>passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());</p>
+      <p>We need to use a specific schema for passport-local-mongoose, make sure your fields are named as follows:</p>
 
-      <p>These settings are explained in the help docs</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 3. Create the userSchema /////////////////////////////////////////</span>
+<span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">({</span>
+    <span class="na">username</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">password</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">})</span>
 
-      <p>Very important you use these things in the order they are used in this example.</p>
+<span class="c1">// plugins extend Schema functionality</span>
+<span class="nx">userSchema</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">passportLocalMongoose</span><span class="p">);</span>
 
-      <ol>
-        <li>Register users:</li>
-      </ol>
+<span class="kd">const</span> <span class="nx">User</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="dl">"</span><span class="s2">User</span><span class="dl">"</span><span class="p">,</span> <span class="nx">userSchema</span><span class="p">);</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
 
-      <p>User.register ({username : req.body.username}, req.body.password, function(err, user){
-    if (err) {
-       console.log(err);
-        res.redirect(“/register”);
-    } else {
-        passport.authentical(“local”)(req, res, function() {
-            res.redirect(“/secrets”);
-        });
-    }
-})</p>
+      <h3 id="set-our-passport-strategy">Set our Passport strategy:</h3>
 
-      <p>app.get(“/secrets”, function(req,res) {
-    if (req.isAuthenticated()) {
-        res.render(“secrets”);
-    } else {
-        res.redirect(“/login”) 
-    }
-});</p>
+      <p>This section creates the Passport strategy, and encodes our user into the session. 
+passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting for us.</p>
 
-      <p>once signed in, we can get the user with:
-req.user.username</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 4. Add our strategy for using Passport, using the local user from MongoDB</span>
+<span class="nx">passport</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">User</span><span class="p">.</span><span class="nx">createStrategy</span><span class="p">());</span>
 
-      <p>app.post(“/login”, function (req, res){
-      const user = new User ({
-        username: req.body.username,
-        password: req.body.password
-     })
-    req.login (user, function(err) {
-        if (err) {
-            console.log(err);
-        } else {
-            passport.authenticate(“local”)(req, res, function() {
-                res.redirect(“/secrets”); 
-            });
-        }
-    }
-})</p>
+<span class="nx">passport</span><span class="p">.</span><span class="nx">serializeUser</span><span class="p">(</span><span class="nx">User</span><span class="p">.</span><span class="nx">serializeUser</span><span class="p">());</span>
+<span class="nx">passport</span><span class="p">.</span><span class="nx">deserializeUser</span><span class="p">(</span><span class="nx">User</span><span class="p">.</span><span class="nx">deserializeUser</span><span class="p">());</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
 
-      <p>app.get(“/logout”, function (req, res){
-    req.logout();
-    res.redirect(“/”);
-});</p>
+      <h3 id="register-users">Register users:</h3>
 
-      <p>Note, when you restart your server (nodemon does it all the time) all of the cookies expire, so you will be logged out.</p>
+      <p>Add the following snippet to register users.</p>
 
-      <p>OAuth
-Outside of the scope of this class</p>
+      <p>Note the weird syntax on <code class="language-plaintext highlighter-rouge">passport.authenticate</code>. This is a higher-order function which returns a function, (i.e. a function factory,) the second set of args are passed to the returned function.</p>
 
-      <p>The new paradigm for Autorization is OAuth, where we basically subcontract another company to do authorization for us. (Google, FaceBook). The user logs in with their credentials for that account.</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 5. Register a user with the following code, which needs to be in the appropriate route</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/register</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">User </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is attempting to register</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="nx">User</span><span class="p">.</span><span class="nx">register</span><span class="p">({</span> <span class="na">username</span> <span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span> <span class="p">},</span> 
+                    <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> 
+                    <span class="p">(</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">user</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">err</span> <span class="p">);</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/register</span><span class="dl">"</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span> <span class="dl">"</span><span class="s2">local</span><span class="dl">"</span> <span class="p">)(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
 
-      <p>It is possible with passport oauth modules.</p>
+      <p>Once signed in, we can get the username with:</p>
 
-      <p>Assignment:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span>
+</code></pre></div>      </div>
 
-      <p>In this lab you will not add any new functionality to the application, but instead improve usability and security by adding in a database for storing tasks, as well as authentication using cookies and sessions. These concepts are safe and recommended for production environments!</p>
+      <h3 id="log-in-users">Log-in Users:</h3>
 
-      <ol>
-        <li>Database Initialization (20 marks)
-In the previous lab you defined a “User” and “Task” Object as prototyped JavaScript objects. In this lab you need to change these into Schemas using Mongoose.  The Task Schema will store tasks, The User Schema will also be used for authenticating users.</li>
-      </ol>
+      <p>Logging in users is similar to registering users…</p>
 
-      <p>Recall the object contents:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 6. Log in users on the login route ////////////////////////////////</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/login</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">User </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is attempting to log in</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span> <span class="p">({</span>
+        <span class="na">username</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+        <span class="na">password</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span>
+    <span class="p">});</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">login</span> <span class="p">(</span> <span class="nx">user</span><span class="p">,</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">err</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span> <span class="dl">"</span><span class="s2">local</span><span class="dl">"</span> <span class="p">)(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">);</span> 
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
 
-      <p>User object:
-    • username (string)
-    • password (string)</p>
+      <h3 id="allow-in-authenticated-users">Allow in authenticated users</h3>
 
-      <p>Task object:
-    • _id (int)
-    • name (string)
-    • owner (User)
-    • creator (User)
-    • done (boolean)
-    • cleared (boolean)</p>
+      <p>Only users who are authenticated should be able to access the <code class="language-plaintext highlighter-rouge">reviews</code> page. Ditto for the <code class="language-plaintext highlighter-rouge">add-review</code> page</p>
 
-      <p>Modify owner and creator to be database references.</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 7. Register get routes for reviews and add-review ////////////////</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span><span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">A user is accessing the reviews route using get, and...</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nx">req</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">()</span> <span class="p">){</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">was authorized and found:</span><span class="dl">"</span> <span class="p">);</span>
+            <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">results</span> <span class="p">);</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span> <span class="dl">"</span><span class="s2">reviews</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">results</span> <span class="p">:</span> <span class="nx">results</span> <span class="p">});</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">error</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">was not authorized.</span><span class="dl">"</span> <span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
 
-      <ol>
-        <li>User registration and login (30 marks)</li>
-      </ol>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/add-review</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is accessing the add-review page, and...</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">was authorized</span><span class="dl">"</span> <span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span> <span class="dl">"</span><span class="s2">add-review</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">was not authorized</span><span class="dl">"</span> <span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span> <span class="p">)</span> 
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
+
+      <h3 id="log-out-users">Log-out Users:</h3>
+
+      <p>We can log out users on the logout route with the following</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 8. Logout ///////////////////////////////////////////////////////</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/logout</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is logging out</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
+
+      <h3 id="using-the-session-when-posting-reviews">Using the session when posting reviews:</h3>
+
+      <p>Finally, lets complete our application by by adding in the submit route:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 9. Submit a post to the database ////////////////////////////////</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/submit</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span><span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">User </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is adding the review:</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span> <span class="p">)</span>
+    <span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Game</span><span class="p">({</span>
+        <span class="na">userName</span><span class="p">:</span>   <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+        <span class="na">gameName</span><span class="p">:</span>   <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">gameName</span><span class="p">,</span>
+        <span class="na">score</span><span class="p">:</span>      <span class="nb">parseInt</span><span class="p">(</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">score</span> <span class="p">),</span>
+        <span class="na">reviewText</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">reviewText</span>
+    <span class="p">});</span>
+
+    <span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">)</span>
+<span class="p">});</span>
+<span class="c1">////////////////////////////////////////////////////////////////////</span>
+</code></pre></div>      </div>
+
+      <p>Note, when you restart your server (Which nodemon does frequently!) all of the cookies expire, so you will be logged out.</p>
+
+    </div></div></section>
+<section id="labassignment"><button class="collapsible">Lab Assignment:</button><div class="text-content"><div class="text-inner">
+
+      <p>For the final big assignment, you will add complete database integration into the application from Lab 7. You finally have a stack which is ready for a production environment!</p>
+
+      <h3 id="schema">Schema</h3>
+
+      <p>Update you Schemas from Lab 8, if needed, to work with Passport / Mongoose</p>
+
+      <h3 id="user-registration-and-login">User registration and login:</h3>
 
       <p>Modify the login page on the “/” route.</p>
 
-      <p>Link the login form to the “/login” route with POST. In this route perform the following:
-    • using passport, log in and authenticate the user
-    • if authentication fails, redirect back to “/”
-    • If registration succeeds, redirect to “/todo”</p>
+      <p>Link the login form to the “/login” route with POST. In this route perform the following:</p>
+      <ul>
+        <li>Using passport, log in and authenticate the user</li>
+        <li>If authentication fails, redirect back to “/”</li>
+        <li>If registration succeeds, redirect to “/todo”</li>
+      </ul>
 
-      <p>Link the register form to the “/register” route. In this route perform the following:
-    • register a new user using passport
-    • if registration fails, redirect back to “/”
-    • If registration succeed, redirect to “/todo”
-ToDo should only be available to Authenticated users. As long as user is authenticated, they should be able to return to “/todo” without logging in again, until the cookie expires or they log out.</p>
+      <p>Link the register form to the “/register” route. In this route perform the following:</p>
+      <ul>
+        <li>Register a new user using passport</li>
+        <li>If registration fails, redirect back to “/”</li>
+        <li>If registration succeed, redirect to “/todo”</li>
+        <li>The Authentication key, which is checked against when registering users, should be stored in the <code class="language-plaintext highlighter-rouge">.env</code> file!</li>
+      </ul>
 
-      <ol>
-        <li>To-do list display (20 marks)</li>
-      </ol>
+      <p><code class="language-plaintext highlighter-rouge">todo</code> should only be available to Authenticated users.</p>
+      <ul>
+        <li>As long as user is authenticated, they should be able to return to “/todo” without logging in again, until the cookie expires or they log out.</li>
+      </ul>
 
-      <p>Use EJS to render the to-do list on the “/todo” route</p>
+      <h3 id="to-do-list-display">To-do list display</h3>
 
-      <p>Modify your server-side code from Lab 3 to instead read from the database.</p>
+      <p>Use EJS to render the to-do list on the <code class="language-plaintext highlighter-rouge">/todo</code> route</p>
 
-      <p>Reuse as much code as possible! The front-end should not need to change.</p>
+      <ul>
+        <li>
+          <p>Modify your code from Lab 7 to instead read from the database.</p>
+        </li>
+        <li>
+          <p>Reuse as much code as possible! The front-end should have minimal to no changes.</p>
+        </li>
+      </ul>
 
-      <p>The tasks should be decorated as in the following screenshot:</p>
+      <h3 id="to-do-list-functionality">To-do list functionality</h3>
 
-      <ol>
-        <li>To-do list functionality (30 marks)</li>
-      </ol>
+      <p>Modify the code from Lab 7 to use the database.</p>
+      <ul>
+        <li>All of the same functionality should exist,
+          <ul>
+            <li>Now all operations should read and write to the database instead read from the database rather than the JSON file</li>
+          </ul>
+        </li>
+      </ul>
 
-      <p>Modify the code from Lab 3 to use the database. The same operations should be performed:</p>
+      <h3 id="submission">Submission</h3>
 
-      <p>route
-method
-description
-/logout
-get
-logs out the user and returns to the main screen
-/addtask
-post
-adds a new unclaimed task to the task list, and redirects to “/todo”
-/claim
-post
-claims the task for the user who clicks on the claim button, and redirects back to “/todo”
-/abandonorcomplete
-post
-checks if the user clicked on abandon or complete, updates the task appropriately, and redirects to “/todo”
-/unfinish
-post
-for the selected task, sets the task state to unfinished, and redirects back to “/todo”
-/purge
-post
-Set all tasks where “done” is true such that “cleared” is true. and redirects back to “/todo”</p>
+      <p>Please submit to URCourses by the due date!</p>
     </div></div></section>
 
     </main>
