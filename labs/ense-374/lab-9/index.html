@@ -445,6 +445,7 @@ We are going to use it to store an “access token”</p>
 <span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">"</span><span class="s2">mongoose</span><span class="dl">"</span> <span class="p">);</span>
 
 <span class="c1">// 1. Require dependencies /////////////////////////////////////////</span>
+<span class="c1">//Your code here!</span>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 
 <span class="c1">// this is a canonical alias to make your life easier, like jQuery to $.</span>
@@ -456,6 +457,7 @@ We are going to use it to store an “access token”</p>
 <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">(</span> <span class="p">{</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">true</span><span class="p">}</span> <span class="p">)</span> <span class="p">);</span> 
 
 <span class="c1">// 2. Create a session. The secret is used to sign the session ID.</span>
+<span class="c1">//Your code here!</span>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 
 
@@ -466,6 +468,7 @@ We are going to use it to store an “access token”</p>
                  <span class="p">{</span> <span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
 
 <span class="c1">// 3. Create the userSchema ////////////////////////////////////////</span>
+<span class="c1">//Your code here!</span>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 
 <span class="kd">const</span> <span class="nx">gameSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
@@ -479,6 +482,7 @@ We are going to use it to store an “access token”</p>
 
 
 <span class="c1">// 4. Add our strategy for using Passport, using the local user from MongoDB</span>
+<span class="c1">//Your code here!</span>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 
 <span class="c1">// Simple server operation</span>
@@ -488,9 +492,11 @@ We are going to use it to store an “access token”</p>
 <span class="p">});</span>
 
 <span class="c1">// 5. Register a user with the following code, which needs to be in the appropriate route</span>
+<span class="c1">//Your code here!</span>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 
 <span class="c1">// 6. Log in users on the login route //////////////////////////////</span>
+<span class="c1">//Your code here!</span>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 
 <span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -499,6 +505,7 @@ We are going to use it to store an “access token”</p>
 <span class="p">});</span>
 
 <span class="c1">// 7. Register get routes for reviews and add-review ///////////////</span>
+<span class="c1">//Your code will replace this section!</span>
 <span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span><span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is accessing the reviews route using get, and found:</span><span class="dl">"</span> <span class="p">);</span>
     <span class="k">try</span> <span class="p">{</span>
@@ -517,9 +524,11 @@ We are going to use it to store an “access token”</p>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 
 <span class="c1">// 8. Logout ///////////////////////////////////////////////////////</span>
+<span class="c1">//Your code here!</span>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 
 <span class="c1">// 9. Submit a post to the database ////////////////////////////////</span>
+<span class="c1">//Your code here!</span>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 </code></pre></div>      </div>
 
