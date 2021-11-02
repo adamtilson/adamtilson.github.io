@@ -110,7 +110,7 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>This lab introduces Passport, which handles authentication using a number of different strategies. We will use the strategy of registering users in the MongoDB database using mongoose. Additionally, we will discuss other important security concepts such as storing environment variables securely.</p>
+      <p>This lab discusses important concepts for securely storing passwords in a database, and authenticating users. During implementation, we will use Passport, which handles authentication using several strategies. We will use the strategy of registering users in the local MongoDB database using mongoose, supported by a number of plugins to facilitate this process. Additionally, we will discuss sessions, and storing environment variables securely in a .env file.</p>
 
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
@@ -136,30 +136,52 @@
 
       <h3 id="encryption">Encryption</h3>
 
-      <p>We can scramble our passwords using Encryption</p>
+      <p>First level of defence: scramble our passwords using encryption</p>
+
+      <p>(This section is for information, we’ll use a higher level approach!)</p>
+
       <ul>
         <li>If you haven’t already, you’ll learn all the math behind this later. (RSA)</li>
         <li>We can use the <code class="language-plaintext highlighter-rouge">mongoose-encryption</code> package <a href="https://www.npmjs.com/package/mongoose-encryption">available on NPM</a>
           <ul>
-            <li>We need two Secret string - this is our encryption and decryption key. It should be kept secret!</li>
-            <li>We then need to plug in the encryption to the schema</li>
+            <li>We need two Secret strings - these are used to generate our encryption and decryption keys.</li>
+            <li>They should be kept secret!</li>
+            <li>We then apply the encryption to the Schema using middleware
+              <ul>
+                <li>Middleware are libraries which plug into existing applications and extend their functionality</li>
+                <li>The middleware automatically encrypts on a save and decrypts on a read</li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li>Automatically encrypts on a save and decrypts on a read</li>
-        <li>Now our system is only as secure as our “secret” - which we don’t want to just push to github!
+        <li>Now our system is only as secure as our Secret strings
           <ul>
+            <li>We don’t want to just push to github!</li>
             <li>So how do we store our secret more… secretly?</li>
           </ul>
         </li>
       </ul>
 
+      <p>Is it perfect?</p>
+      <ul>
+        <li>No, as technology improves, what’s secure one day is much less secure the next!</li>
+      </ul>
+
       <h3 id="environment-variables">Environment Variables</h3>
 
+      <p>We need a method to securely store our Secrets, and other important environment variables.</p>
+
+      <p>(We will include this approach in our final product)</p>
+
       <ul>
-        <li>A hidden file which can stores our secrets in a safe location</li>
-        <li>We can use this for our “Authorization” key.
+        <li>We could use tht <code class="language-plaintext highlighter-rouge">.env</code> file
           <ul>
-            <li>We could also use it for API keys.</li>
+            <li>A hidden file which can stores our secrets in a safe location</li>
+            <li>We can use this for our “Authorization” key in the todo list application.
+              <ul>
+                <li>We could also use it for any API keys</li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -190,7 +212,7 @@
 DB_USER=root
 </code></pre></div>      </div>
 
-      <p>No quotations for strings</p>
+      <p>No quotations for strings. Multiple words after the equals are fine.</p>
 
       <p>Access in variables in our node js file:</p>
 
@@ -203,23 +225,35 @@ DB_USER=root
 
       <p>This will keep the file from getting pushed to the github.</p>
 
-      <p>When you upload your files to the server, they will have a secure method for editing your apps Environment Variables.</p>
+      <p>When you upload your files to the server, securely upload your Environment Variables rather than push and pulling from GitHub!</p>
 
-      <h3 id="salting-and-hashing">Salting and Hashing</h3>
+      <h3 id="hashing">Hashing</h3>
 
-      <p>Encrypting and Decrypting passwords has some flaws, it’s better to Hash!</p>
+      <p>Next level of defence: Hashing</p>
+
+      <p>(This section is for information, we’ll use a higher level approach!)</p>
 
       <p>Hash functions are a mathematical equation which turns a string into a hash code</p>
       <ul>
         <li>Deterministic, so the same input always produces the same hash</li>
-        <li>It’s impossible (or at least ridiculously hard) to go backwards (one-way function)</li>
+        <li>It’s impossible (or at least ridiculously hard) to go backwards
+          <ul>
+            <li>This is called a “one-way function”</li>
+          </ul>
+        </li>
       </ul>
 
-      <p>Since we know going forward produces consistent results, thus we can ask for a password, hash it, and store the hashed value in our database. The next time the user enters the password, the entered password is hashed and checks with what’s in our database.</p>
+      <p>We know going forward function call produces consistent results
+    - At registration time, we can ask for a password, 
+      - hash it, 
+      - and store the hashed value in our database. 
+    - At login time, the user enters the password
+      - the entered password is hashed 
+      - and if the hashed value matches what’s in the database,
+      - the password must be correct!
+    - Unfortunately hash functions can have multiple inputs map to the same output, but it’s incredibly rare</p>
 
-      <p>Example: MD5 application</p>
-
-      <p>If a website ever sends you a plain-text version of your password, you know that they aren’t hashing!</p>
+      <p>Example: <a href="http://www.md5.cz/">MD5 application</a></p>
 
       <p>How can we beat this?</p>
       <ul>
@@ -231,79 +265,129 @@ DB_USER=root
 
       <p>Use a slow hashing function, like bcrypt</p>
       <ul>
-        <li>This will prevent how much brute forcing can be done</li>
+        <li>This will slow down brute forcing</li>
+        <li>But technology will improve</li>
       </ul>
 
+      <h3 id="salting-and-hashing">Salting and Hashing</h3>
+
+      <p>Let’s upgrade our security one more level:</p>
+
       <p>Add a salt and then hash!</p>
+
+      <p>(This is what we’ll do, but we’ll have Passport do it for us!)</p>
+
       <ul>
-        <li>generate a random string (Salt)
+        <li>generate a random string, called a Salt
           <ul>
             <li>concatenate it to the password</li>
-            <li>hash the whole thing!</li>
-            <li>This will produce a different value than only hashing the password</li>
-            <li>Save the salt into the database too for future reuse
+            <li>hash the whole thing!
               <ul>
-                <li>When testing new use passwords, grab the old salt, concatenate it, and hash, then check</li>
+                <li>This will produce a different value than only hashing the password</li>
+              </ul>
+            </li>
+            <li>Save the salt into the database too for future reuse</li>
+            <li>When testing new use passwords,
+              <ul>
+                <li>grab the old salt</li>
+                <li>concatenate it to the new password</li>
+                <li>hash the whole thing</li>
+                <li>check that they match</li>
               </ul>
             </li>
           </ul>
         </li>
       </ul>
 
-      <p>More security? Salting rounds</p>
+      <p>Want more security?</p>
       <ul>
-        <li>salt it, hash it, salt it, hash it,</li>
-        <li>do it 5 times?</li>
+        <li>Salting rounds!
+          <ul>
+            <li>salt it, hash it, salt it, hash it,</li>
+            <li>do it 5 times?</li>
+            <li>each salt/hash round doubles the time to compute it.</li>
+          </ul>
+        </li>
       </ul>
 
-      <p>You can set the number of rounds you want to salt</p>
-      <ul>
-        <li>adding one salt round doubles the time to compute it.</li>
-      </ul>
-
-      <p>Can we do this in node? sure!</p>
+      <p>Can we do this manually in node? sure!</p>
 
       <p><code class="language-plaintext highlighter-rouge">bcrypt</code> <a href="https://www.npmjs.com/package/bcrypt">Bcrypt on NPM</a></p>
       <ul>
         <li>you can hash, choose the number of salt rounds, etc.</li>
+        <li>However, we’ll have Passport do this for us!</li>
       </ul>
 
       <h3 id="cookies">Cookies</h3>
 
-      <p>Cookies are a piece of data that is stored on the users browser
-We are going to use it to store an “access token”</p>
+      <p>Once the user is logged in, how do we track which user they are?
+    - This is done through cookies and sessions</p>
+
+      <p>Cookies are delicious delicacies - Mozilla, 1999</p>
       <ul>
-        <li>a hash which identifies which user is logged in.</li>
+        <li>a piece of persistent data that is stored on the users browser
+          <ul>
+            <li>It can be used to authorize a user by means of an “access token”
+              <ul>
+                <li>a hash which identifies which user is logged in.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Cookies persist between visits, which is why you do not need to manually log back into websites</li>
       </ul>
 
       <h3 id="sessions">Sessions</h3>
 
-      <p>The amount of time that a browser interacts with a server</p>
+      <p>Sessions, on the other hand, persist only during one visit to a website</p>
       <ul>
-        <li>Cookies let you maintain your session</li>
+        <li>A session is one complete dialogue between the client and the server</li>
+        <li>You can think of it like a lock being generated on the server side
+          <ul>
+            <li>We give the user the key, and store it inside a cookie</li>
+            <li>When the user presents the cookie with the key, if it unlocks, we let them in</li>
+            <li>The sessions ends when the server changes the lock (typically after a certain amount of time),
+              <ul>
+                <li>the user discards the key (when closing the browser)</li>
+                <li>or ideally both (logging out)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>We will be using sessions to keep our users authorized during one visit, until they log out</li>
       </ul>
 
       <h3 id="open-authorization-oauth">Open Authorization (OAuth)</h3>
 
       <p>Beyond the scope of this lab but worth mentioning:</p>
       <ul>
-        <li>OAuth is the cool new paradigm for authorization</li>
+        <li>OAuth is the cool new approach and open standard for authorization</li>
         <li>We essentially subcontract another company to do authorization for us
           <ul>
             <li>Google, FaceBook, GitHub, etc.</li>
             <li>The user logs in with their credentials for that account</li>
-            <li>The third party verifies the users identity without exchanging any passwords. Cool!</li>
+            <li>The third party verifies the users identity without exchanging any passwords. Cool!
+              <ul>
+                <li>You put all your trust in one company rather than distributing it around</li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li>This is possible to achieve using passport OAuth modules.</li>
+        <li>This is possible to achieve using passport OAuth modules, but we will not look into it for this lab.</li>
       </ul>
 
     </div></div></section>
 <section id="part2usageandexample"><button class="collapsible">Part 2: Usage and Example</button><div class="text-content"><div class="text-inner">
 
-      <p>Let’s see how this application works by example. Let’s build on our Game Review submission application from last week.</p>
-
-      <p>Recall we basically made it here, with some minor adjustments…:</p>
+      <p>Let’s see how this authorization works by example.</p>
+      <ul>
+        <li>We’ll build on our Game Review submission application from last week.</li>
+        <li>We are basically starting from where we made it last week,
+          <ul>
+            <li>with some minor adjustments for what we’re doing today:</li>
+          </ul>
+        </li>
+      </ul>
 
       <p>Set up the following directory structure:</p>
 
