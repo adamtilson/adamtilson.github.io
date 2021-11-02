@@ -887,6 +887,51 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
       <h3 id="submission">Submission</h3>
 
       <p>Please submit to URCourses by the due date!</p>
+
+      <h3 id="aside-the-next-steps">Aside: The Next Steps</h3>
+
+      <p>If Full-Stack Web Dev has won you over as your dream job, in my opinion, the most important things we did not cover in this lab are:</p>
+
+      <ul>
+        <li>
+          <p>A modern View engine, such as <a href="https://reactjs.org/">React</a>, <a href="https://angular.io/">Angular</a> or <a href="https://vuejs.org/">Vue.js</a></p>
+        </li>
+        <li>
+          <p>Better JavaScript with <a href="https://www.typescriptlang.org/">TypeScript</a></p>
+        </li>
+        <li>
+          <p>Having your Browser-side JavaScript talk directly to the Server-side Node.js, e.g. with AJAX, or with the Fetch API</p>
+          <ul>
+            <li>With this you could link up Labs 3 and 9 to create a site which updates on demand!</li>
+            <li>With this, if our to-do list app was live, we could periodically check if other users had added new data, and if so automatically update our site using the DOM</li>
+            <li>This is how infinite scroll websites fetch data without reloading the page!</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>An example of how this would work with AJAX <a href="https://stackoverflow.com/questions/53897250/how-to-call-a-server-side-nodejs-function-using-client-side-javascript">found on StackOverflow</a></p>
+
+      <p>In Node.js with Express:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/hello</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Your function to be called goes here.</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="na">data</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span> <span class="p">})</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>In JavaScript using jQuery:</p>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/hello</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="na">error</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>Even better, create a <a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api">REST API</a></p>
     </div></div></section>
 
     </main>
