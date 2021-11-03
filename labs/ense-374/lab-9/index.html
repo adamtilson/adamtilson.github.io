@@ -122,7 +122,7 @@
       </ul>
 
     </div></div></section>
-<section id="part1authenticationandsecurity"><button class="collapsible">Part 1: Authentication and Security</button><div class="text-content"><div class="text-inner">
+<section id="part1passwordsecurity"><button class="collapsible">Part 1: Password Security</button><div class="text-content"><div class="text-inner">
 
       <h3 id="background">Background</h3>
 
@@ -318,6 +318,9 @@ DB_USER=root
         <li>However, we’ll have Passport do this for us!</li>
       </ul>
 
+    </div></div></section>
+<section id="part2authentication"><button class="collapsible">Part 2: Authentication</button><div class="text-content"><div class="text-inner">
+
       <h3 id="cookies">Cookies</h3>
 
       <p>Once the user is logged in, how do we track which user they are?
@@ -377,7 +380,7 @@ DB_USER=root
       </ul>
 
     </div></div></section>
-<section id="part2usageandexample"><button class="collapsible">Part 2: Usage and Example</button><div class="text-content"><div class="text-inner">
+<section id="part3passportusageandexample"><button class="collapsible">Part 3: Passport Usage and Example</button><div class="text-content"><div class="text-inner">
 
       <p>Let’s see how this authorization works by example.</p>
       <ul>
@@ -396,7 +399,7 @@ DB_USER=root
 |    |-- add-review.ejs
 |-- .env
 |-- index.html
-|-- add.js
+|-- app.js
 </code></pre></div>      </div>
 
       <p>in <code class="language-plaintext highlighter-rouge">/views/reviews.ejs</code></p>
@@ -677,6 +680,8 @@ npm i express ejs mongoose
       <p>We need to use a specific schema for passport-local-mongoose, make sure your fields are named as follows:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 3. Create the userSchema /////////////////////////////////////////</span>
+<span class="c1">// It is important not to change these names</span>
+<span class="c1">// passport-local-mongoose expects these. Use `username` and `password`!</span>
 <span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">({</span>
     <span class="na">username</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
     <span class="na">password</span><span class="p">:</span> <span class="nb">String</span>
@@ -709,6 +714,8 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
       <p>Note the weird syntax on <code class="language-plaintext highlighter-rouge">passport.authenticate</code>. This is a higher-order function which returns a function, (i.e. a function factory,) the second set of args are passed to the returned function.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 5. Register a user with the following code, which needs to be in the appropriate route</span>
+<span class="c1">// As in (3), be sure to use req.body.username and req.body.password, and ensure the </span>
+<span class="c1">// html forms match these values as well</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/register</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">User </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is attempting to register</span><span class="dl">"</span> <span class="p">);</span>
     <span class="nx">User</span><span class="p">.</span><span class="nx">register</span><span class="p">({</span> <span class="na">username</span> <span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span> <span class="p">},</span> 
@@ -716,7 +723,7 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
                     <span class="p">(</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">user</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">err</span> <span class="p">);</span>
-            <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/register</span><span class="dl">"</span> <span class="p">);</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span> <span class="p">);</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
             <span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span> <span class="dl">"</span><span class="s2">local</span><span class="dl">"</span> <span class="p">)(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
                 <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">);</span>
@@ -746,6 +753,7 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
     <span class="nx">req</span><span class="p">.</span><span class="nx">login</span> <span class="p">(</span> <span class="nx">user</span><span class="p">,</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="p">{</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">err</span> <span class="p">);</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span> <span class="p">);</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
             <span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span> <span class="dl">"</span><span class="s2">local</span><span class="dl">"</span> <span class="p">)(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
                 <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">);</span> 
@@ -808,8 +816,10 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
       <p>Finally, lets complete our application by by adding in the submit route:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 9. Submit a post to the database ////////////////////////////////</span>
+<span class="c1">// Note that in the username, we are using the username from the</span>
+<span class="c1">// session rather than the form</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/submit</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span><span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">User </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is adding the review:</span><span class="dl">"</span> <span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">User </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is adding the review:</span><span class="dl">"</span> <span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span> <span class="p">)</span>
     <span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Game</span><span class="p">({</span>
         <span class="na">userName</span><span class="p">:</span>   <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
@@ -820,15 +830,15 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
 
     <span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
 
-    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">)</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">////////////////////////////////////////////////////////////////////</span>
 </code></pre></div>      </div>
 
-      <p>Note, when you restart your server (Which nodemon does frequently!) all of the cookies expire, so you will be logged out.</p>
+      <p>Note, when you restart your server (which nodemon does frequently!) all of the cookies expire, so you will need to log in again.</p>
 
     </div></div></section>
-<section id="labassignment"><button class="collapsible">Lab Assignment:</button><div class="text-content"><div class="text-inner">
+<section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
       <p>For the final big assignment, you will add complete database integration into the application from Lab 7. You finally have a stack which is ready for a production environment!</p>
 
