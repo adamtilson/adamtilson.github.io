@@ -196,7 +196,7 @@
 
       <p>This section is based on the <a href="https://inet.omnetpp.org/docs/tutorials/rip/doc/index.html">OMNeT++ RIP Tutorial</a></p>
 
-      <p>Head to Part 1 here, download and <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> and the <code class="language-plaintext highlighter-rouge">RipNetworkA.ned</code></p>
+      <p>Head to Part 1 <a href="https://inet.omnetpp.org/docs/tutorials/rip/doc/step1.html">here</a>, download <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> and the <code class="language-plaintext highlighter-rouge">RipNetworkA.ned</code></p>
       <ul>
         <li>Start a new Omnet++ Project, <code class="language-plaintext highlighter-rouge">rip-tutorial</code></li>
         <li>Reference in INET</li>
@@ -424,12 +424,17 @@ wget https://inet.omnetpp.org/docs/_downloads/6885266c9632f739e9242f9b68ef449c/R
           <ul>
             <li>Replace the Application on host0 with the UDPBasicApp</li>
             <li>Replace the application on host6 with the UDPEchoApp</li>
-            <li>Configure the application to send packets every 15 seconds, starting at t=5 seconds, from host0 to host6</li>
+            <li>Configure the application to send packets approximately every 15 seconds, starting at t=5 seconds, from host0 to host6</li>
           </ul>
         </li>
         <li>Run the simulation for 12 minutes simulated time.
           <ul>
-            <li>Track the locations of the packets over time</li>
+            <li>Track the locations of the packets over time in a sequence graph
+              <ul>
+                <li>Review lab 3 for more information if you are stuck</li>
+                <li>Reminder - you need to turn on event logging</li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li>In a 1-2 page report, add your graphs, and make some comments on what is happening in the system at each of the times of the drops.
@@ -437,9 +442,25 @@ wget https://inet.omnetpp.org/docs/_downloads/6885266c9632f739e9242f9b68ef449c/R
             <li>In particular, comment on when paths are changing and why</li>
             <li>Comment also on when the network is down</li>
             <li>You may wish to zoom in on graphs at different times to highlight particular behaviour</li>
+            <li>Important: Do not include your entire graphs! Just take snippets of important areas: when things change!</li>
           </ul>
         </li>
       </ul>
+
+      <p>Hints: 
+When setting up your apps, look at the inheritance of the scenarios in <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> and ensure your apps are getting run!</p>
+      <ul>
+        <li>Are they being inherited by the inheriting scenario?</li>
+        <li>Are they getting turned off in in the inheriting state?</li>
+      </ul>
+
+      <p>Use the event log filters to only show important nodes, as well as only the messages you care about! 
+<code class="language-plaintext highlighter-rouge">Module Filter -&gt; by name -&gt; host* / router* -&gt; Eth* -&gt; mac</code>
+<code class="language-plaintext highlighter-rouge">Message Filter -&gt; by name -&gt; UdpBasicAppData*</code>
+<img src="filter-example.png" alt="" /></p>
+
+      <p>Chart Example: Sending packets before RIP completes die:
+<img src="Example.png" alt="" /></p>
 
       <h3 id="references">References</h3>
 
