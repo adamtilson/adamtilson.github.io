@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> ENSE 472 Lab 4 </title>
+  <title> ENSE 472 Lab 5 </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
   <link rel="stylesheet" href="/assets/css/style.css?v=">
   <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
@@ -97,7 +97,7 @@
 
     <main id="content" class="main-content" role="main">
         <p></p>
-        <h1 id="lab-4-routing-information-protocol-in-omnet--inet">Lab 4: Routing Information Protocol in OMNeT++ / INET</h1>
+        <h1 id="lab-5-routing-information-protocol-in-omnet--inet">Lab 5: Routing Information Protocol in OMNeT++ / INET</h1>
 
 <p>ENSE 472 - Digital Networks - Laboratory</p>
 
@@ -115,7 +115,7 @@
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
 
-      <p>A Windows, Mac or Linux computer with OMNeT++ / INET installed. You may either install this yourself, or instead use the provided VirtualBox image which includes these applications installed in a light-weight Ubuntu environment. Please see the prior lab for details on setting up the VirtualBox, especially if you experience a black screen on boot.</p>
+      <p>A Windows, Mac or Linux computer with OMNeT++ / INET installed. You may either install this yourself, or instead use the provided VirtualBox image which includes these applications installed in a light-weight Ubuntu environment. Please see Lab 3 for details on setting up the VirtualBox, especially if you experience a black screen on boot.</p>
 
     </div></div></section>
 <section id="part1routinginformationprotocol"><button class="collapsible">Part 1: Routing Information Protocol</button><div class="text-content"><div class="text-inner">
@@ -123,8 +123,8 @@
       <p>The Routing Information Protocol (RIP) is one of the oldest routing algorithms</p>
       <ul>
         <li>Unlikely to see much use today, but great to learn about routing</li>
-        <li>It was in part popularized due to its inclusion in BSD Unix.</li>
-        <li>Implementing the Bellman-Ford and related algorithms, distance-vector routing protocols were used in precursors to the internet, and seek to find the best path to a destination network by minimizing hop count.
+        <li>In part popularized due to its inclusion in BSD Unix.</li>
+        <li>Implementing Bellman-Ford and related algorithms, distance-vector routing protocols were used in precursors to the internet, and seek to find the best path to a destination network by minimizing hop count.
           <ul>
             <li>This strategy ignores other important statistics such as time to reach the destination.</li>
           </ul>
@@ -150,6 +150,9 @@
       <h3 id="real-world-example">Real world example</h3>
 
       <p>On Windows, can we see how many hops it takes to get to a given server? Run <code class="language-plaintext highlighter-rouge">tracert google.com</code></p>
+      <ul>
+        <li>Three packets are sent, and the time for each is displayed</li>
+      </ul>
 
       <h3 id="problems-with-rip">Problems with RIP</h3>
 
@@ -176,7 +179,7 @@
       <ul>
         <li>Updates are sent every 30 seconds over broadcast, which can lead to congestion
           <ul>
-            <li>Particularly bad if routers send at the same time, better if clocks are staggered</li>
+            <li>Particularly bad if routers send at the same time, better if updates are staggered</li>
           </ul>
         </li>
         <li>If a router goes down, we wait 180 seconds (3 minutes) for the update, it is then marked invalid (unreachable)
@@ -185,7 +188,7 @@
           </ul>
         </li>
         <li>Maximum hop count of 15 has rendered it impractical in the modern internet</li>
-        <li>Old versions have nomno Variable Length Subnet Masks (VLSM), only the old Class-based (Class A, Class B, Class C, etc.)</li>
+        <li>Older versions do not support Variable Length Subnet Masks (VLSM), e.g. /23, /22, /19, only the older Class-based (Class A, Class B, Class C, etc.)</li>
       </ul>
 
     </div></div></section>
@@ -200,7 +203,7 @@
         <li>Open the File Manager (PCManFM-Qt) and navigate to <code class="language-plaintext highlighter-rouge">~/workspace/rip-tutorial/src</code></li>
         <li>Drag and drop the <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> and <code class="language-plaintext highlighter-rouge">RipNetworkA.ned</code> into your <code class="language-plaintext highlighter-rouge">src</code> folder.
           <ul>
-            <li>If is not working, you could instead download the files right from the terminal…
+            <li>If it is not working, you could instead download the files right from the terminal…
               <ul>
                 <li>open <code class="language-plaintext highlighter-rouge">QTerminal</code> from the Applications menu -&gt; System Tools</li>
                 <li>
@@ -224,7 +227,7 @@ wget https://inet.omnetpp.org/docs/_downloads/6885266c9632f739e9242f9b68ef449c/R
         </li>
         <li>Run the application by clicking on <code class="language-plaintext highlighter-rouge">omnetpp.ini</code>, then run
           <ul>
-            <li>Do not switch to release</li>
+            <li>Do not switch to release unless you built the release binaries in lab 3!</li>
           </ul>
         </li>
       </ul>
@@ -249,7 +252,7 @@ wget https://inet.omnetpp.org/docs/_downloads/6885266c9632f739e9242f9b68ef449c/R
 </span><span class="o">*</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">interfaceTableVisualizer</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">displayInterfaceTables</span> <span class="o">=</span> <span class="n">true</span>
 </code></pre></div>      </div>
 
-      <p>In this version, we are simply allowing the configurator to pre-compute static routes to each of the connected devices, which is significantly less painful than doing it ourselves, as we saw in Lab 2 (Packet Tracer). We are also using the PingApp on host0, and attempting to ping host6.</p>
+      <p>In this version, we are simply allowing the configurator to pre-compute static routes to each of the connected devices, which is significantly less painful than doing it ourselves, as we experienced in Lab 2 (Packet Tracer). We are also using the PingApp on host0, and attempting to ping host6.</p>
 
       <p><img src="res/static-routing.png" alt="" /></p>
 
@@ -288,8 +291,8 @@ wget https://inet.omnetpp.org/docs/_downloads/6885266c9632f739e9242f9b68ef449c/R
 <span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">startTime</span> <span class="o">=</span> <span class="mi">50</span><span class="n">s</span>
 
 <span class="c1"># turning on global ARP to focus on the RIP messages
-</span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">arp</span><span class="p">.</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"GlobalArp"</span>  <span class="c1"># TODO: for some reasons GlobalArp does not work -&gt; it seems to work now
-</span>
+</span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">arp</span><span class="p">.</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"GlobalArp"</span>
+
 <span class="c1"># Visualizer settings
 </span><span class="o">*</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">interfaceTableVisualizer</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">displayInterfaceTables</span> <span class="o">=</span> <span class="n">true</span>
 </code></pre></div>      </div>
@@ -401,6 +404,7 @@ wget https://inet.omnetpp.org/docs/_downloads/6885266c9632f739e9242f9b68ef449c/R
 <span class="c1"># Break the router2 &lt;--&gt; switch1 link at t=50 s. and reconnect at t=300 s.
 </span><span class="o">*</span><span class="p">.</span><span class="n">scenarioManager</span><span class="p">.</span><span class="n">script</span> <span class="o">=</span> <span class="n">xmldoc</span><span class="p">(</span><span class="s">"scenario6.xml"</span><span class="p">)</span>
 </code></pre></div>      </div>
+
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step4C</span><span class="p">]</span>
 <span class="n">description</span> <span class="o">=</span> <span class="s">"RIP timers: Link comes back online after the garbage-collection timer expires"</span>
 <span class="n">extends</span> <span class="o">=</span> <span class="n">Step2</span>
