@@ -138,7 +138,7 @@
         <li>These routing tables are broadcast to connected routers at regular intervals over UDP.</li>
         <li>Using these tables, each router can update its best path to each destination network by checking if the newly given path, plus one hop, is shorter than what’s currently in the routing table.</li>
         <li>After a number of iterations, the network will converge on optimal paths in terms of the least number of hops.</li>
-        <li>The algorithms also adapt to networks are routers going down.</li>
+        <li>The algorithm also adapts to networks as routers going down and come back online.</li>
       </ul>
 
       <p><a href="https://book.systemsapproach.org/internetworking/routing.html#distance-vector-rip">Background: An excellent overview of Distance Vector</a></p>
@@ -340,6 +340,8 @@ wget https://inet.omnetpp.org/docs/_downloads/6885266c9632f739e9242f9b68ef449c/R
         <li>After the link is invalidated</li>
         <li>After the link is flushed</li>
       </ul>
+
+      <p>In these scenarios, we’ll instead break the connection between</p>
 
       <p>You will need to add the following to <code class="language-plaintext highlighter-rouge">src/scenario5.xml</code>, <code class="language-plaintext highlighter-rouge">src/scenario6.xml</code> and <code class="language-plaintext highlighter-rouge">src/scenario7.xml</code>, respectively</p>
 
