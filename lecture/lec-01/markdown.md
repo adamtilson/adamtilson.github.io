@@ -41,7 +41,7 @@ Note:
 ]
 
 ---
-## Discrene Mathemics 
+## Discrete Mathematics 
 
 ![](bender-is-discreet.png)
 ---
@@ -490,7 +490,7 @@ $$ \forall n \in \text{Evens}, \exists p, q \in \text{Primes}, n = p + q.  $$
 ---
 ## Negating Quantifiers
 
-$$\forall n \in N, P(n)$$
+$$\forall n \in \mathbb{N}, P(n)$$
 
 $$\neg (\forall n \in \mathbb{N}, P(n)) \equiv \exists n \in \mathbb{N}, \neg P(n)$$
 
