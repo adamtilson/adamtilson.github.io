@@ -201,7 +201,7 @@ $P$ | $Q$ | $\neg P$ | $\neg Q$ | $\neg P \Rightarrow \neg Q$ | $P \Rightarrow Q
 ---|---|---|---|---|---|---
 T|T|F|F|T|T|$\checkmark$
 T|F|F|T|T|F|$\times$
-F|T|T|F|F|T|Don't care
+F|T|T|F|F|T|$\times$
 F|F|T|T|T|T|$\checkmark$
 
 This inference does not hold for all cases, thus is not valid.
@@ -241,14 +241,16 @@ Theorem: Every party of 6 people includes a group of 3 peoples who, pairwise, ha
     - Case 1.1: Among the three who have met $x$, none have met eachother (strangers)
     - Case 1.2: Among the three who have met $x$, at least one pair has met (friends)
     - Case 2.1: At least one pair has not met before (strangers)
-    - Case 2.2: Every pair has met each other (a,b) (a,c), (b,d) (friends) 
+    - Case 2.2: Every pair has met each other (friends) 
 - The proof holds for all sub-cases. $\square$
 ]
 ???
 
-Note that, by combination theory, there are actually 156 possible combinations. We could have done them all. But that's painful! 
+~32,000 combinations can be broken down into 4 cases, and that's pretty cool!
 
 https://en.wikipedia.org/wiki/Theorem_on_friends_and_strangers
+
+https://www.youtube.com/watch?v=xdiL-ADRTxQ
 
 ---
 .left-column[
@@ -335,6 +337,8 @@ Theorem: $\forall n \in \mathbb{N},$ if $n^2$ is odd then $n$ is odd.
 - $P(n) \Rightarrow Q(n)$
 
 Proof: We assume the contrapositive
+
+$\neg Q(n) \Rightarrow \neg P(n)$
 
 $\forall n \in \mathbb{N},$ if $n$ is even then $n^2$ is even.
 
