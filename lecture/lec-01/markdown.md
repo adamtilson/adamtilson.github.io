@@ -514,7 +514,7 @@ This too hurts my head
 - e.g. we know this equivalence is valid:
 $$ (P \Rightarrow Q) \equiv (\neg Q \Rightarrow \neg P) $$
 What about:
-$$ (P \Rightarrow Q) \wedge (Q \Rightarrow P) $$
+$$ (P \Rightarrow Q) \equiv (Q \Rightarrow P) $$
 - Satisfiable, (If P and Q are both false or true) but not Valid!
 
 ---
