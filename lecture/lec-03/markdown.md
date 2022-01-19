@@ -361,7 +361,7 @@ Proof: By ordinary induction
 ## Final Tips on Induction
 - Did I prove the base case?
 - Did I use the induction hypothesis, i.e. use $P(n)$ somewhere in the proof?
-- Did I logically show than, assuming $P(n), P(n+1)$ is also true?
+- Did I logically show that, assuming $P(n), P(n+1)$ is also true?
 - Are there any steps from $1...n$ where this induction would not hold?
     - We'll look at strategies for this in the next lecture!
 
