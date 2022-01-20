@@ -201,7 +201,7 @@ $P$ | $Q$ | $\neg P$ | $\neg Q$ | $\neg P \Rightarrow \neg Q$ | $P \Rightarrow Q
 ---|---|---|---|---|---|---
 T|T|F|F|T|T|$\checkmark$
 T|F|F|T|T|F|$\times$
-F|T|T|F|F|T|$\times$
+~~F~~|~~T~~|~~T~~|~~F~~|~~F~~|~~T~~|Don't care
 F|F|T|T|T|T|$\checkmark$
 
 This inference does not hold for all cases, thus is not valid.
