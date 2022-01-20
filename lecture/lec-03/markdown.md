@@ -170,7 +170,7 @@ Induction Hypothesis: $\forall n \in \mathbb{N}, P(n) := 3 \mid (n^3-n)$
 
 Base Case:
 
-$P(n)=0^3-0$
+$P(0)=0^3-0$
 $= 0$
 
 $3\mid 0 \checkmark$
@@ -361,7 +361,7 @@ Proof: By ordinary induction
 ## Final Tips on Induction
 - Did I prove the base case?
 - Did I use the induction hypothesis, i.e. use $P(n)$ somewhere in the proof?
-- Did I logically show that, assuming $P(n), P(n+1)$ is also true?
+- Did I logically show than, assuming $P(n), P(n+1)$ is also true?
 - Are there any steps from $1...n$ where this induction would not hold?
     - We'll look at strategies for this in the next lecture!
 

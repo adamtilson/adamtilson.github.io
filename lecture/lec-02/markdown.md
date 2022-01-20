@@ -356,7 +356,7 @@ $P \iff Q$
 
 $(P \implies Q) \wedge (Q \implies P)$
 
-Theorem: $\forall n \in \mathbb{N}. n^2 $is even if an only if n is even.
+Theorem: $\forall n \in \mathbb{N}. n^2 $is even if and only if n is even.
 
 Proof: Prove that $P \implies Q$ and vice versa.
 
@@ -428,14 +428,13 @@ $\therefore$ every value $x_i$ equals the mean, $\mu$. $\square$
 ### Proof by Contra- diction
 ]
 .right-column[
-If an assertion implies something is false, then the assertion itself must be false.
+If we assume a proposition to be false, and that assumption leads to a sound mathematical contradiction, the proposition must be true. 
 
 Theorem: $\sqrt{2}$ is irrational
 - Proof (By contradiction)
 - Assume for the purpose of contradiction that $\sqrt{2}$ is rational
 - $\sqrt{2} = \dfrac{n}{d}, n \in \mathbb{Z}, d \in \mathbb{Z}, d \neq 0$
 - $\dfrac{n}{d}$ is a fraction in lowest terms, i.e. $n, d$ have no common divisors
-- $\sqrt{2} = \dfrac{n}{d}$
 ]
 
 ---
