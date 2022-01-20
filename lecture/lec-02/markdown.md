@@ -467,6 +467,8 @@ Theorem: $\sqrt{2}$ is irrational
 - $\dfrac{n}{d}$ is not in lowest terms
 - this is a contradiction. ⨳
 - $\therefore \sqrt{2}$ is irrational. $\square$
+
+Caveat: Only works if the contradiction arrived at is through sound logic, not simply because you made a mistake!
 ]
 ---
 ## Good Proofs in Practice
