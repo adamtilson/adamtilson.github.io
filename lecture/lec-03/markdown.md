@@ -314,7 +314,7 @@ Induction Step: $P(n) \Rightarrow P(n+1)$
 
 We need to consider a $2^n \times 2^n$ courtyard, compared to a $2^{n+1} \times 2^{n+1}$ courtyard.
 
-Each time the dimensions doubles.
+Each time the dimensions double.
 
 The total size increases 4$\times$.
 

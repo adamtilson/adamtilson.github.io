@@ -59,12 +59,10 @@ Template:
 
 ---
 ## Solve a Tougher Problem
-- Why can't we?
-    - Our inductive hypothesis relies on our $n \times n$ region having a center tile missing.
-- We could restructure our proof with Lemmas, Corallaries, etc.
-    
-- Sometimes it's easier to solve a tougher problem!
+- Sometimes with induction, it's easier to solve a tougher problem!
     - What is a "harder" formulation of this same problem which gives us more freedom?
+    - e.g. with the tile puzzle - placing the empty square in ANY square rather than a Center square
+    - This gave us more freedom in how we could use the inductive hypothesis P(n)
 ---
 ## 8 Puzzle
 ![](8-puzzle.png)
@@ -289,7 +287,9 @@ When to use strong induction
 - Define our Induction Hypothesis, $P(n)$, defining the induction variable $n$
 - Prove the base case: $P(0)$ is true
 - Prove the inductive step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
-- By induction, conclude P(n) is true for all $n \in \mathbb{D}$
+- By strong induction, conclude $P(n)$ is true for all $n \in \mathbb{D}$
+
+Warning: Sometimes using strong induction means you need to prove additional base cases!
 
 ---
 
@@ -336,7 +336,7 @@ Prove: By strong induction, that every integer greater than 1 is a product of pr
 - By cases:
     - Case A: P(n+1) is prime. Then it's a product of itself. $\checkmark$
     - Case B: P(n+1) is not prime.
-    - Then there exists some integers $a,b$ for all of $n$ , $2 \leq a,b \leq n$, such that 
+    - Then there exists some integers $a,b$ for all of $n$ , $2 \leq (a,b) \leq n$, such that 
         - $n+1 = a \times b$
     - By strong induction, both a and b are the product of primes. Thus $n+1 = a \times b$ is the product of primes. $\square$
 
