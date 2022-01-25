@@ -180,30 +180,30 @@ $3\mid 0 \checkmark$
 
 Induction step: Show $ P(n) \Rightarrow P(n+1)$ 
 
-$P(n+1) \stackrel{?}{=} 3 \mid ((n+1)^3 - (n+1))$
+$P(n+1) = 3 \mid ((n+1)^3 - (n+1))$ ?
 
-$\stackrel{?}{=} 3 \mid ((n+1)^3 - (n+1))$
+$= 3 \mid ((n+1)^3 - (n+1))$ ?
 
-$\stackrel{?}{=} 3 \mid (n^3 + 3n^2 + 3n + 1) - (n + 1)$
+$= 3 \mid (n^3 + 3n^2 + 3n + 1) - (n + 1)$ ?
 
-$\stackrel{?}{=} 3 \mid n^3 + 3n^2 + 2n$ 
+$= 3 \mid n^3 + 3n^2 + 2n$ ?
 
 ? Now what ? We haven't really used the Induction yet.
 
 ---
 ## Example 2
 
-$\stackrel{?}{=} 3 \mid n^3 + 3n^2 + 2n - n + n$ 
+$= 3 \mid n^3 + 3n^2 + 2n - n + n$ ?
 
-$\stackrel{?}{=} 3 \mid (n^3 -n) + 3n^2 + 3n$ 
+$= 3 \mid (n^3 -n) + 3n^2 + 3n$ ?
 
-$\stackrel{?}{=} 3 \mid (n^3 -n) + 3n^2 + 3n$ ?
+$= 3 \mid (n^3 -n) + 3n^2 + 3n$ ?
 
 We know $3 \mid 3n, 3 \mid 3n^2$,
 
 By the inductive hypothesis, we assume $3 \mid (n^3 -n)$
 
-$\because 3 \mid $ each term, $3 \mid P(n+1) \checkmark$
+$\because 3 \mid $ each term, $3 \mid P(n+1)$
 
 $\therefore$, by ordinary induction,  $\forall n \in \mathbb{N}, P(n)$ is true. $\square$
 

@@ -247,19 +247,17 @@ Proof of Theorem:
 - Last class we saw: Solve a Tougher Problem
 - We can also use a stronger form of induction
 - In strong induction, we need to...
-    - Prove the base case
+    - Prove the base cases (May be several!)
     - Set up the hypothesis that *EVERY* step together implies the induction step
     - Rather than assuming $P(n)$ is true, we assume $P$ is true for every number up to and including $n$
     - Prove the hypothesis
 - If we knock down the first domino,
-    - AND the first domino is knocked over, AND the second, AND...
+    - AND the second domino is knocked over, AND the third, AND...
     - Then all dominos are knocked over
 
 ---
 
 ### Strong Induction Comparison
-- Last class we say: Solve a Tougher Problem
-- We can also use a stronger form of induction
 
 Ordinary Induction:
 
@@ -275,18 +273,25 @@ Which problem did we look at that would have been solved by strong induction?
 ---
 
 ### When to use Strong Induction
-When to use strong induction
+
 - When there is no obvious connection between $P(n)$ and $P(n+1)$
+
 - i.e. we can't use $P(n)$ directly to prove $P(n+1)$
+
 - However, we may be able to use some combination of $P(0), P(1), P(2) ... P(N)$
 
 ---
 
 ### How to use Strong Induction: Proof Template
+
 - State that we are solving the problem by strong induction
+
 - Define our Induction Hypothesis, $P(n)$, defining the induction variable $n$
-- Prove the base case: $P(0)$ is true
+
+- Prove the base case(s): $P(0)$ is true, may be others
+
 - Prove the inductive step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
+
 - By strong induction, conclude $P(n)$ is true for all $n \in \mathbb{D}$
 
 Warning: Sometimes using strong induction means you need to prove additional base cases!
