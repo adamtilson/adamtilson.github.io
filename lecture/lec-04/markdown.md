@@ -285,13 +285,9 @@ Which problem did we look at that would have been solved by strong induction?
 ### How to use Strong Induction: Proof Template
 
 - State that we are solving the problem by strong induction
-
 - Define our Induction Hypothesis, $P(n)$, defining the induction variable $n$
-
 - Prove the base case(s): $P(0)$ is true, may be others
-
 - Prove the inductive step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
-
 - By strong induction, conclude $P(n)$ is true for all $n \in \mathbb{D}$
 
 Warning: Sometimes using strong induction means you need to prove additional base cases!
@@ -328,9 +324,9 @@ Prove: By strong induction, that every integer greater than 1 is a product of pr
 - Inductive Hypothesis: $P(n)$ is a product of two primes
 - Induction Step: $P(n) \Rightarrow P(n+1)$
 - By cases:
-    - Case A: P(n+1) is prime. Then it's a product of itself. $\checkmark$
-    - Case B: P(n+1) is not prime. Then it must be a product of two integers smaller than itself.
-    - What we need to make this work: All integers smaller than itself: $P(2), P(3), P(4), ... P(n)$
+    - Case A: $P(n+1)$ is prime. Then it's a product of itself. $\checkmark$
+    - Case B: $P(n+1)$ is not prime. Then it must be a product of two integers smaller than itself.
+    - What we need to make this work: All integers smaller than itself: $P(2), P(3), P(4), ..., P(n)$
     - What we have access to at this point: Only $P(n)$
     - We are stuck.
 ---
@@ -339,11 +335,11 @@ Prove: By strong induction, that every integer greater than 1 is a product of pr
 - Inductive Hypothesis: $P(n)$ is a product of two primes
 - Induction Step: $P(2) \wedge P(3) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
 - By cases:
-    - Case A: P(n+1) is prime. Then it's a product of itself. $\checkmark$
-    - Case B: P(n+1) is not prime.
+    - Case A: $P(n+1)$ is prime. Then it's a product of itself. $\checkmark$
+    - Case B: $P(n+1)$ is not prime.
     - Then there exists some integers $a,b$ for all of $n$ , $2 \leq (a,b) \leq n$, such that 
         - $n+1 = a \times b$
-    - By strong induction, both a and b are the product of primes. Thus $n+1 = a \times b$ is the product of primes. $\square$
+    - By strong induction, both $a$ and $b$ are the product of primes. Thus $n+1 = a \times b$ is the product of primes. $\square$
 
 ---
 ## The N-Block game
@@ -428,9 +424,9 @@ Induction Hypothesis: For all $n \in \mathbb{N}, n \geq 2$ all strategies for th
 
 Base Case: $n=2$.
 
-S(2) = 1. 
+$S(2) = 1 \times 1 = 1.$
 
-S(2) = $\dfrac{2(2-1)}{2} = 1 \checkmark $. 
+$S(2) = \dfrac{2(2-1)}{2} = 1 \checkmark $. 
 
 Inductive Step: Assume $P(1) \wedge P(2) \wedge ... \wedge P(n)$ to prove $P(n+1)$
 ---
