@@ -17,7 +17,7 @@ layout: false
 .right-column[
 1. Review: Lecture 3 Highlights
 1. 8-Puzzle
-1. Invariant
+1. Invariant###### Wed Jan 26 02:50:20 CST 2022
 1. Strong Induction
 1. Well Ordering Principle
 1. Examples
