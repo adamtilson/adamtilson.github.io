@@ -98,7 +98,7 @@ We already used the Well-Ordering principle when we proved $\sqrt{2}$ is not rat
 - We then showed that each of these numbers was even
   - this meant there exists a smaller fraction which satisfies the same conditions
   - This is a Contradiction ⨳
-- Thus, by the well ordering principle, there set of counter-examples must be empty
+- The set of counter-examples must be empty
 - Review the following 3 slides from lecture 2. How would we reword this into a proof using the well-ordering principle template?
 ---
 .left-column[
@@ -157,16 +157,16 @@ Caveat: Only works if the contradiction arrived at is through sound logic, not s
 - Suppose NOT any amount of money...
 - Let $m$ be the least counter-example.
 - Since is $m$ is the least number which cannot be made of 3¢ and 5¢ coins, any number smaller than it can.
-- $m \neq 0$, because $8¢ = 3¢ + 5¢$
-- $m \neq 1$, because $9¢ = 3¢ + 3¢ + 3¢$
-- $m \neq 2$, because $10¢ = 5¢ + 5¢$
-- Hence, $m \geq 3$.
+- $m \neq 8$, because $8¢ = 3¢ + 5¢$
+- $m \neq 9$, because $9¢ = 3¢ + 3¢ + 3¢$
+- $m \neq 10$, because $10¢ = 5¢ + 5¢$
+- Hence, $m \geq 11$.
 
 ---
 ## Proof - Sum of Cents - Well Ordering Principle
 
-- Hence, $m \geq 3$.
-- i.e. $(m-3)$ is not a counter-example
+- Hence, $m \geq 11$.
+- For $m \geq 11, (m-3)$ is not a counter-example
 - but then $m$ is also not a counter-example, since $(m-3)+3¢ = m$
 - We have reached a contradiction. ⨳
 - Thus, {counter-examples} is empty. 
@@ -177,17 +177,16 @@ Caveat: Only works if the contradiction arrived at is through sound logic, not s
 ## Proof - Sum of Cents - Strong Induction
 
 Theorem: Any amount of money of least 8¢ can be made using 3¢ and 5¢ coins.
- 
+
 Proof: By strong induction
+
+Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 2 \in \mathbb{N}$.
+
 - Base Cases:
   - $P(0): 8¢ = 3¢ + 5¢. \checkmark$
   - $P(1): 9¢ = 3¢ + 3¢ + 3¢. \checkmark$
   - $P(2): 10¢ = 5¢ + 5¢. \checkmark$
-
-Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 2 \in \mathbb{N}$.
-
 ---
-
 ## Proof - Sum of Cents - Strong Induction
 
 Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 2 \in \mathbb{N}$.
@@ -239,7 +238,7 @@ $1 + r + r^2 + r^3 + ... + r^n = \dfrac{r^{n+1}-1}{r-1}$
 - $1 + r + r^2 + r^3 + ... + r^{m-1} = \dfrac{r^m-1}{r-1}$
 - Lets add $r^m$ to both sides.
 - LHS: $1 + r + r^2 + r^3 + ... + r^{m-1} + r^m$
-- RHS: $\dfrac{r^m}{r-1} + r^m = \dfrac{r^m}{r-1} + \dfrac{r^{m+1} - r}{r-1} =\dfrac{r^{m+1}-1}{r-1} $
+- RHS: $\dfrac{r^m-1}{r-1} + r^m = \dfrac{r^m-1}{r-1} + \dfrac{r^{{m+1}} - r^m}{r-1} =\dfrac{r^{m+1}-1}{r-1} $
 - This is the identity we claimed did not hold. ⨳
 - Thus the set of counterexamples must be empty.  $\square$
 ---
