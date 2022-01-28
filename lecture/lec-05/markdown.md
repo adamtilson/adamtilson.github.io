@@ -180,7 +180,7 @@ Theorem: Any amount of money of least 8¢ can be made using 3¢ and 5¢ coins.
 
 Proof: By strong induction
 
-Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 2 \in \mathbb{N}$.
+Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 0 \in \mathbb{N}$.
 
 - Base Cases:
   - $P(0): 8¢ = 3¢ + 5¢. \checkmark$
@@ -194,6 +194,7 @@ Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins.
 Induction Step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
 
 - $\forall n > 2,$ we can make $P(n+1)$ with $P(n-2) + 3¢$.
+- $\forall n > 0,$ we can 8 + n¢$.
 - $\therefore P(n)$ is true by strong induction. $\square$
 
 ---
@@ -229,7 +230,7 @@ $1 + r + r^2 + r^3 + ... + r^n = \dfrac{r^{n+1}-1}{r-1}$
 - Let $m$ be smallest $n$ where this equality does not hold.
 - $n=0$? 
 - $\sum_{i=0}^0 r^i=r^0=1$
-- $\dfrac{r^{n+0}-1}{r-1}=1$
+- $\dfrac{r^{0+1}-1}{r-1}=1$
 - $1=1$ Holds.
   - so $m>0$
   

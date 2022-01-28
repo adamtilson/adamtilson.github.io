@@ -108,7 +108,7 @@ Theorem: Any amount of money of least 8¢ can be made using 3¢ and 5¢ coins.
 
 Proof: By strong induction
 
-Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 2 \in \mathbb{N}$.
+Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 0 \in \mathbb{N}$.
 
 - Base Cases:
   - $P(0): 8¢ = 3¢ + 5¢. \checkmark$
@@ -122,9 +122,11 @@ Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins.
 Induction Step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
 
 - $\forall n > 2,$ we can make $P(n+1)$ with $P(n-2) + 3¢$.
+- $\forall n > 0,$ we can 8 + n¢$.
 - $\therefore P(n)$ is true by strong induction. $\square$
 
 ---
+
 ## Review: Invariant
 - The invariant is some property of the system which is true in the start state of the system, and true in every legal move. 
 - We can use this to prove if the system is in a winnable state, or an unwinnable state.
@@ -147,7 +149,11 @@ e.g. $2 \mid 6$
 - $6 = 3 \cdot 2$
 - $0 = 3 \cdot 0$
 - $0 = n \cdot 0$ 
-  - $0$ divides all numbers
+  ~~~$0$ divides all numbers~~~
+  - all numbers divide $0$ !
+  - A pizza with 0 slices can be divided by an number of people, but they all get 0 slices. Sad times.
+???
+I knew I was going to have a typo here. I think I corrected it back and forth both ways a bunch of times.
 ]
 ---
 layout: false
@@ -199,7 +205,7 @@ layout: false
 ### Division Theorem
 ]
 .right-column[
-Let $n$ and $d$ be integers such that $g \gt 0$. There there exists a unique pair of integers, $p, q$, such that $n = q \ \cdot d + r \wedge 0 \leq r \leq d$
+Let $n$ and $d$ be integers such that $d \gt 0$. There there exists a unique pair of integers, $p, q$, such that $n = q \ \cdot d + r, 0 \leq r \lt d$
 - $n := $numerator
 - $d := $denominator
 - $q := $quotient
