@@ -149,9 +149,9 @@ e.g. $2 \mid 6$
 - $6 = 3 \cdot 2$
 - $0 = 3 \cdot 0$
 - $0 = n \cdot 0$ 
-  ~~~$0$ divides all numbers~~~
-  - all numbers divide $0$ !
-  - A pizza with 0 slices can be divided by an number of people, but they all get 0 slices. Sad times.
+~~~$0$ divides all numbers~~~
+- all numbers divide $0$ !
+- A pizza with 0 slices can be divided by an number of people, but they all get 0 slices. Sad times.
 ???
 I knew I was going to have a typo here. I think I corrected it back and forth both ways a bunch of times.
 ]
