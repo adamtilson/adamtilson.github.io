@@ -201,7 +201,7 @@ layout: false
 ### Division Theorem
 ]
 .right-column[
-Let $n$ and $d$ be integers such that $d \gt 0$. There there exists a unique pair of integers, $p, q$, such that $n = q \ \cdot d + r, 0 \leq r \lt d$
+Let $n$ and $d$ be integers such that $d \gt 0$. There there exists a unique pair of integers, $q, r$, such that $n = q \ \cdot d + r, 0 \leq r \lt d$
 - $n := $numerator
 - $d := $denominator
 - $q := $quotient
