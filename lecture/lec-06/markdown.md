@@ -21,16 +21,125 @@ layout: false
 5. Euclidean Algorithm
 6. Die Hard Problem
 7. Extended Euclidean
-8. Prime Numbers
 ]
 ---
-Todo: Review Lec 5
+### Strong Induction Comparison
+
+Ordinary Induction:
+
+$\dfrac{P(0), \forall n \in \mathbb{N}, P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
+
+Strong Induction:
+
+$\dfrac{P(0), \forall n \in \mathbb{N}, P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
+
 ---
+
+### When to use Strong Induction
+
+- When there is no obvious connection between $P(n)$ and $P(n+1)$
+
+- i.e. we can't use $P(n)$ directly to prove $P(n+1)$
+
+- However, we may be able to use some combination of $P(0), P(1), P(2) ... P(n)$
+
+---
+## Well-Ordering Principle
+The well-ordering principle states that:
+
+- every non-empty set 
+- of non-negative integers 
+- has a smallest element
+ 
+This seems very obvious, but can actually be used to formulate some powerful proofs.
+
+---
+## Well-Ordering Principle - Common Formulation
+- Goal: prove some $P(n)$ is true, ie. $\forall n, P(n)$
+- Define the set $S$, of counter-examples for which $P(n)$ is false, i.e. $\exists n, \neg P(n)$
+- By the well-ordering principle, define $s$ as the lowest element in $S$
+- Do a proof by contradiction (open ended)
+  - e.g. show that a value smaller than $s$ satisfies $\neg P(n)$
+  - Thus that value is also in $S$
+  - Thus $s$ was not the lowest value in $S$
+- Contradiction ⨳
+- By the well-ordering principle, $S$ must be empty. $P(n)$ must be true for all $n$.
+
+---
+## Well-Ordering Principle - Other Strategies
+
+Other ways to reach a contradiction:
+- Prove that $s$ is not in $S$
+  - i.e. that, for $s$, $P(n)$ was actually true
+  - i.e. your smallest counter-example was not a counter-example
+
+The same warning with Proof by Contradiction applies:
+  - The contradiction must be reached through sound logic and not a mathematical error!
+
+---
+
+## Proof - Sum of Cents - Well Ordering Principle
+
+- Theorem: Any amount of money of least 8¢ can be made using 3¢ and 5¢ coins.
+- Proof: By the well-ordering principle
+- Suppose NOT any amount of money...
+- Let $m$ be the least counter-example.
+- Since $m$ is the least number which cannot be made of 3¢ and 5¢ coins, any number smaller than it can.
+- $m \neq 8$, because $8¢ = 3¢ + 5¢$
+- $m \neq 9$, because $9¢ = 3¢ + 3¢ + 3¢$
+- $m \neq 10$, because $10¢ = 5¢ + 5¢$
+- Hence, $m \geq 11$.
+
+---
+## Proof - Sum of Cents - Well Ordering Principle
+
+- Hence, $m \geq 11$.
+- For $m \geq 11, (m-3)$ is not a counter-example
+- but then $m$ is also not a counter-example, since $(m-3)+3¢ = m$
+- We have reached a contradiction. ⨳
+- Thus, {counter-examples} is empty. 
+- $\therefore$ by the well ordering principle, $P(n)$ is true. $\square$
+
+---
+
+## Proof - Sum of Cents - Strong Induction
+
+Theorem: Any amount of money of least 8¢ can be made using 3¢ and 5¢ coins.
+
+Proof: By strong induction
+
+Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 2 \in \mathbb{N}$.
+
+- Base Cases:
+  - $P(0): 8¢ = 3¢ + 5¢. \checkmark$
+  - $P(1): 9¢ = 3¢ + 3¢ + 3¢. \checkmark$
+  - $P(2): 10¢ = 5¢ + 5¢. \checkmark$
+---
+## Proof - Sum of Cents - Strong Induction
+
+Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 2 \in \mathbb{N}$.
+
+Induction Step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
+
+- $\forall n > 2,$ we can make $P(n+1)$ with $P(n-2) + 3¢$.
+- $\therefore P(n)$ is true by strong induction. $\square$
+
+---
+## Review: Invariant
+- The invariant is some property of the system which is true in the start state of the system, and true in every legal move. 
+- We can use this to prove if the system is in a winnable state, or an unwinnable state.
+
+An example you may have already seen - A loop invariant (coding), a condition which is true at that start of every loop that a program runs. 
+
+---
+
 layout: false
 .left-column[
 ## Divisibility
 ]
 .right-column[
+For this lecture, unless otherwise specified, assume we are talking all integers $\mathbb{Z}$
+
 $a$ divides $b \iff a \cdot k = b$ for some $k$  
 $a \mid b \iff a \cdot k = b$ for some $k$  
 
@@ -57,6 +166,7 @@ layout: false
 - $b = k_1 \cdot a$
 - $c = k_2 \cdot b$
 - $c = k_1 \cdot k_2 \cdot a$
+- $c = k_3 \cdot a$
 - $\therefore a \mid c$
 
 ]
@@ -74,6 +184,7 @@ layout: false
 - $s\cdot b + t \cdot c = s \cdot k_1 \cdot a + t \cdot k_2 \cdot a$
 - $s\cdot b + t \cdot c = (s \cdot k_1 + t \cdot k_2) \cdot a$
 - since $ (s \cdot k_1 + t \cdot k_2)$ is an integer
+  - $s\cdot b + t \cdot c = k_3 \cdot a$
   - $a \mid s \cdot b + t \cdot c$
   
 4: For all $c \neq 0, a \mid b \iff c\cdot a \mid c \cdot b$
@@ -130,7 +241,7 @@ layout: false
 - $\text{gcd}(9, 3) = 3$
 - $\text{gcd}(11,0) = 11$
   - $11 \mid 11, 11 \mid 0$
-- $\text{gcd}(12, 0) = 12$
+- $\text{gcd}(n, 0) = n$
 - $\text{gcd}(6, 11) = 1$
   - these numbers are called "relatively prime"
 - $\text{gcd}(2 \cdot 7 \cdot 3, 2 \cdot 3 \cdot 5)$
@@ -153,11 +264,19 @@ e.g.: $\text{gcd}(4,8) = 4$
 - $-1 \cdot 4 + 1 \cdot 8 = 4$ (gcd)
 ]
 
+$F(n) \leq \$
+
 ---
 ## GCD and Integer Linear Combination
 Proof: By Well Ordering Principle
-- Let $m$ := the smallest positive linear combination,
-- We will show that $m \leq \text{gcd}(a,b)$ and $m \geq \text{gcd}(a,b)$
+- Let $m :=$ the smallest positive linear combination,
+  - $m = s'a+t'b$
+  - $s'$ and $t'$ are set such that $m$ is the smallest positive result.
+- Let $g := \text{gcd}(a,b)$
+- We will show that $m \leq g$ and $m \geq g$
+  - Thus $m=g$
+---
+## GCD and Integer Linear Combination
 - First, prove $\text{gcd}(a,b) \leq m$
 - Assume there is an integer $c$ such that $c \mid a$ and $c \mid b$, i.e. $c$ is a common divisor to $a,b$
 - Then $c \mid s \cdot a + t \cdot b$

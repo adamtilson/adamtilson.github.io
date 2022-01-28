@@ -44,7 +44,7 @@ $\dfrac{P(0), \forall n \in \mathbb{N}, P(0) \wedge P(1) \wedge P(2) \wedge ... 
 When to use strong induction
 - When there is no obvious connection between $P(n)$ and $P(n+1)$
 - i.e. we can't use $P(n)$ directly to prove $P(n+1)$
-- However, we may be able to use some combination of $P(0), P(1), P(2) ... P(N)$
+- However, we may be able to use some combination of $P(0), P(1), P(2) ... P(n)$
 
 ---
 
@@ -82,7 +82,7 @@ This seems very obvious, but can actually be used to formulate some powerful pro
 
 Other ways to reach a contradiction:
 - Prove that $s$ is not in $S$
-  - i.e. that, for s, $P(n)$ was actually true
+  - i.e. that, for $s$, $P(n)$ was actually true
   - i.e. your smallest counter-example was not a counter-example
 
 The same warning with Proof by Contradiction applies:
@@ -96,7 +96,7 @@ We already used the Well-Ordering principle when we proved $\sqrt{2}$ is not rat
 - Recall we defined rational numbers as the fraction of two integers, $n$ and $d$ in smallest terms
   - Because all rational numbers can be expressed in lowest terms
 - We then showed that each of these numbers was even
-  - this meant there exists a smaller fraction which satisfies the same conditions
+  - this means that our counter-example was not a counter-example!
   - This is a Contradiction ⨳
 - The set of counter-examples must be empty
 - Review the following 3 slides from lecture 2. How would we reword this into a proof using the well-ordering principle template?
@@ -156,7 +156,7 @@ Caveat: Only works if the contradiction arrived at is through sound logic, not s
 - Proof: By the well-ordering principle
 - Suppose NOT any amount of money...
 - Let $m$ be the least counter-example.
-- Since is $m$ is the least number which cannot be made of 3¢ and 5¢ coins, any number smaller than it can.
+- Since $m$ is the least number which cannot be made of 3¢ and 5¢ coins, any number smaller than it can.
 - $m \neq 8$, because $8¢ = 3¢ + 5¢$
 - $m \neq 9$, because $9¢ = 3¢ + 3¢ + 3¢$
 - $m \neq 10$, because $10¢ = 5¢ + 5¢$

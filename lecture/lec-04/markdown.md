@@ -278,7 +278,7 @@ Which problem did we look at that would have been solved by strong induction?
 
 - i.e. we can't use $P(n)$ directly to prove $P(n+1)$
 
-- However, we may be able to use some combination of $P(0), P(1), P(2) ... P(N)$
+- However, we may be able to use some combination of $P(0), P(1), P(2) ... P(n)$
 
 ---
 
