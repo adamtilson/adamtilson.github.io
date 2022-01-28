@@ -16,30 +16,24 @@
   <script type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
   <script type="text/javascript">
-    fetch("markdown.md").then((response) => {
-      response.text().then((value) => {
-        document.getElementById("source").innerHTML = value
-        window.slideshow = remark.create({ ratio: "16:9"});
+    var slideshow = remark.create({ ratio: "16:9", sourceUrl: "markdown.md" });
 
+    // Setup MathJax
+    MathJax.Hub.Config({
+        tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
+        }  
+    });
+    
+    MathJax.Hub.Queue(function() {
+        $(MathJax.Hub.getAllJax()).map(function(index, elem) {
+            return(elem.SourceElement());
+        }).parent().addClass('has-jax');
+    });
 
-        // Setup MathJax
-        MathJax.Hub.Config({
-            tex2jax: {
-            inlineMath: [['$','$'], ['\\(','\\)']],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-
-            }  
-        });
-
-        MathJax.Hub.Queue(function() {
-            $(MathJax.Hub.getAllJax()).map(function(index, elem) {
-                return(elem.SourceElement());
-            }).parent().addClass('has-jax');
-        });
-        MathJax.Hub.Configured();
-              })
-            })
+    MathJax.Hub.Configured();
   </script>
 </body>
 </html>
