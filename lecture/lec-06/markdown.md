@@ -152,8 +152,6 @@ e.g. $2 \mid 6$
 ~~~$0$ divides all numbers~~~
 - all numbers divide $0$ !
 - A pizza with 0 slices can be divided by an number of people, but they all get 0 slices. Sad times.
-???
-I knew I was going to have a typo here. I think I corrected it back and forth both ways a bunch of times.
 ]
 ---
 layout: false
