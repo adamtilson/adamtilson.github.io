@@ -148,8 +148,7 @@ $a \mid b \iff a \cdot k = b$ for some $k$
 e.g. $2 \mid 6$ 
 - $6 = 3 \cdot 2$
 - $0 = 3 \cdot 0$
-- $0 = n \cdot 0$ 
-~~~$0$ divides all numbers~~~
+- $0 = n \cdot 0$  ~~0 divides all numbers~~
 - all numbers divide $0$ !
 - A pizza with 0 slices can be divided by any number of people, but they all get 0 slices. Sad times.
 ]
@@ -172,7 +171,6 @@ layout: false
 - $c = k_1 \cdot k_2 \cdot a$
 - $c = k_3 \cdot a$
 - $\therefore a \mid c$
-
 ]
 
 ---
