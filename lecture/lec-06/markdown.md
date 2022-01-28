@@ -117,7 +117,7 @@ Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins.
 ---
 ## Proof - Sum of Cents - Strong Induction
 
-Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 2 \in \mathbb{N}$.
+Induction Hypothesis: $P(n) := 8¢ + n$ can be made using $3$¢ and $5$¢ coins. $\forall n \gt 0 \in \mathbb{N}$.
 
 Induction Step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
 
