@@ -264,59 +264,46 @@ e.g.: $\text{gcd}(4,8) = 4$
 - $-1 \cdot 4 + 1 \cdot 8 = 4$ (gcd)
 ]
 
-$F(n) \leq \$
-
 ---
-## GCD and Integer Linear Combination
+## GCD and Integer Linear Combination (Bezout)
 Proof: By Well Ordering Principle
-- Let $m :=$ the smallest positive linear combination,
-  - $m = s'a+t'b$
-  - $s'$ and $t'$ are set such that $m$ is the smallest positive result.
-- Let $g := \text{gcd}(a,b)$
-- We will show that $m \leq g$ and $m \geq g$
-  - Thus $m=g$
+- Let $m :=$ the smallest positive linear combination
+  - $m = sa+tb$
+  - $s$ and $t$ are set such that $m$ is the smallest positive result.
+- We will show that $m \mid a, m \mid b$
+- We will then show, for any $c, c \mid a, c \mid b, c \leq m$
+- Thus $m = \text{gcd}(a,b)$
 ---
-## GCD and Integer Linear Combination
-- First, prove $\text{gcd}(a,b) \leq m$
-- Assume there is an integer $c$ such that $c \mid a$ and $c \mid b$, i.e. $c$ is a common divisor to $a,b$
-- Then $c \mid s \cdot a + t \cdot b$
-- $\text{gcd}(a,b) \mid s \cdot a + t \cdot b$.
-  - since $m$ is also a linear combination of $a,b$
-  - thus $\text{gcd}(a,b) \mid m$
-  - thus $\text{gcd}(a,b) \leq m \checkmark$ 
+## GCD and Integer Linear Combination (Bezout)
+Lemma: $m \mid a$
+- Dividing a by m with the division theorem yields:
+- $a = mq + r, 0 \leq r \lt m$
+- $r = a - qm$
+- $r = a - q(sa+tb)$
+- $r = a - qsa + qtb$
+- $r = a(1 - qs) + qtb$
+- $r = s'a + t'b$
+- Since $m$ is the smallest possible linear combination, $r$ must be zero. Thus $m \mid a. \square$
+- The same procedure may be followed to show $m \mid b$.
 ---
-## GCD and Integer Linear Combination
-Now we will show that $\text{gcd}(a,b) \geq m$. We will do this by proving that $m \mid a$ and $m \mid b$, which means that $m$ is a common divisor of $a, b$. This means $m \leq \text{gcd}(a,b)$.
-
-Now we must prove $m \mid a$ 
-
-For any integers $m$ and $a$ we can find $q$ and $r$ using the division theorem
-- $a = q \cdot m + r, 0 \leq r \lt m$
-- $m = $ a linear combination of a and b
-- $m = s_1 \cdot a + t_1 \cdot b$
-
+## GCD and Integer Linear Combination (Bezout)
+- Lemma: Common factor $c \leq m$
+- Assume common factor, $c \mid a$, $c \mid b$
+- $m = sa + tb$
+- $m = cua + cvb$
+- $m = c(ua + vb)$
+- $m = ck$
+- $c \mid m$.
+- Thus $c \leq m. \square$
 ---
-## GCD and Integer Linear Combination
-- $m = s_1 \cdot a + t_1 \cdot b$
-- $a = (s_1 \cdot a + t_1 \cdot b) \cdot q + r$ AND $0 \leq r \lt m$ 
-- = $(s_1 \cdot q \cdot a + t_1 \cdot q \cdot b) + r$ AND $0 \leq r \lt m$
-- $r = a - (s_1 \cdot q \cdot a + t_1 \cdot q \cdot b)$ AND $0 \leq r \lt m$
-- $r = a - s_1 \cdot q \cdot a - t_1 \cdot q \cdot b$ AND $0 \leq r \lt m$
-- $r = a - a(s_1 \cdot q) - b(t_1 \cdot q)$ AND $0 \leq r \lt m$
-- $r = a(1 - s_1 \cdot q) - b(t_1 \cdot q)$ AND $0 \leq r \lt m$
-- $r = as_2 - bt_2$ AND $0 \leq r \lt m$
-- Thus, we have shown $r$ is a linear combination of $a$ and $b$. $m$ is the smallest linear combination of $a$ and $b$, and $r$ is smaller than $m$.
-- $0 \leq r \lt m$
-
+## GCD and Integer Linear Combination (Bezout)
+Wrap up
+- We showed $m \mid a, m \mid b$
+  - translation: $m$ is a common divisor
+- We showed for any $c, c \mid a, c \mid b, c \leq m$
+  - translation: $m$ is the greatest common divisor
+- thus $m = \text{gcd}(a,b) \square$ 
 ---
-## GCD and Integer Linear Combination
-- $0 \leq r \lt m$
-- This is only possible if $r = 0$
-- Thus this division has no remainder
-- This implies $m \mid a$
-- Therefore $m$ is the smallest linear combination. $\square$
----
-
 
 .left-column[
 ## GCD
@@ -324,18 +311,9 @@ For any integers $m$ and $a$ we can find $q$ and $r$ using the division theorem
 ]
 .right-column[
 1: Every common divisor of $a$ and $b$ divides $\text{gcd}(a,b)$
-- $\text{gcd}(a,b) = s \cdot a + t \cdot b$
-- 
-i.e. We can write a gcd as a linear combination.  
-]
----
 
+- this was $c$ in our prior proof.
 
-.left-column[
-## GCD
-### Properties of the GCD
-]
-.right-column[
 2: $\text{gcd}(ka, kb) = k \cdot \text{gcd}(a,b)$ for all $k \gt 0$
 - $\text{gcd}(a,b) = sa + tb$
 - $\text{gcd}(ka,kb) = ksa + ktb$
@@ -368,6 +346,7 @@ i.e. We can write a gcd as a linear combination.
 .right-column[
 4: If $a \mid bc$ and $\text{gcd}(a, b) = 1$, then $a \mid c$
 - if $\text{gcd}(a,b) = 1$, $a$ and $b$ have no common factors besides $1$.
+  - $a$ and $b$ are relatively prime
 - thus, the only way $a$ could divide $bc$, is if $a$ divided $c$.
 ]
 ---
@@ -412,18 +391,25 @@ In Die Hard 3, John MacClane must disarm a bomb by placing exactly 4 gallons of 
 
 We can solve it by trial and error, but is there a systematic approach to solve it?
 ]
+???
+You thought with all my games I was JigSaw, but I was actually Simon from Die Hard 3
+
 ---
 
 ## The Die Hard Problem
 
 - Define our system as a state machine
-let $a$ be the size of the smaller jug
-let $b$ be the size of the larger jug
-let $x$ be the number of gallons in the smaller jug
-let $y$ be the number of gallons in the larger jug.
+  - let $a$ be the size of the smaller jug
+  - let $b$ be the size of the larger jug
+  - let $x$ be the number of gallons in the smaller jug
+  - let $y$ be the number of gallons in the larger jug.
 
 - State
 $(x,y)$
+
+---
+
+## The Die Hard Problem
 
 Operations:
 
@@ -431,19 +417,23 @@ Operations:
   - $(x,y) \rightarrow (0,y)$
   - $(x,y) \rightarrow (x,0)$
 
----
-
-## The Die Hard Problem
-
 - Filling
   - $(x,y) \rightarrow (a,y)$
   - $(x,y) \rightarrow (x,b)$
 
+---
+
+## The Die Hard Problem
+
+Operations:
+
 - Pouring:
-  - We can pour in either direction
-  - Two situations
-    - in one, we pour all the contents of one jug to the other
-    - in the other we pour some of the contents to the other jug and some remains
+- We can pour in either direction
+- Two outcomes per direction
+  - a: we pour all the contents of one jug to the other
+  - b: we pour some of the contents of one jug into the other, until it is full, and then we stop, with some water remaining in the first jug
+
+We cannot pour part of a jug from one to the other!
 
 ---
 ## The Die Hard Problem
@@ -493,11 +483,11 @@ Take away: as long as the GCD between two numbers is 1, any number can be made a
 It would be nice if there was a way to reliably calculate the s,t in the equations:
 $\text{gcd}(a,b) = sa+tb$
 - In particular, the lowest combination.
-- e.g. computer the gcd(220, 41)
+- e.g. compute $s$, $t$, such that $\text{gcd}(220, 41) = s \cdot 220 + t \cdot 41$
 
 ---
 ### Pulverizer Algorithm
-- Rewrite the GCD so the larger number is first, and call these $x, y, x > y$
+- Rewrite the terms of the GCD so the larger number is first, and call these $x, y. x > y$
 - compute $x / y$, keeping track of quotient, $q$, remainder, $r$
 - multiply through $y$ such that $x = q \cdot y + r$ 
 - rearrange into $r = s \cdot x + t \cdot q$
@@ -505,7 +495,7 @@ $\text{gcd}(a,b) = sa+tb$
   - Recurse, such that $x \leftarrow y$, $y \leftarrow r$ (This part is just Euclid's)
 
 Let's do an example!
-- e.g. compute s, t, such that $gcd(220, 41) = s \cdot 220 + t \cdot 41$
+- e.g. compute $s$, $t$, such that $\text{gcd}(220, 41) = s \cdot 220 + t \cdot 41$
 
 ---
 
@@ -531,6 +521,9 @@ Let's do an example!
 
 - Dr. Abdul Bais's ENSE 350 Slides
 - Tom Leighton, and Marten Dijk. 6.042J Mathematics for Computer Science. Fall 2010, Lecture 4. Massachusetts Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu. License: Creative Commons BY-NC-SA.
+
+???
+We're on week 3, how are they only on Lecture 4?!
 ---
 
 name: inverse
