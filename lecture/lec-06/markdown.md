@@ -485,15 +485,15 @@ Take away: as long as the GCD between two numbers is 1, any number can be made a
 It would be nice if there was a way to reliably calculate the s,t in the equations:
 $\text{gcd}(a,b) = sa+tb$
 - In particular, the lowest combination.
-- e.g. compute $s$, $t$, such that $\text{gcd}(220, 41) = s \cdot 220 + t \cdot 41$
+- e.g. compute $\text{gcd}(a,b)$, $s$, $t$, such that $\text{gcd}(220, 41) = s \cdot 220 + t \cdot 41$
 
 ---
 ### Pulverizer Algorithm
-- Rewrite the terms of the GCD so the larger number is first, and call these $x, y. x > y$
-- compute $x / y$, keeping track of quotient, $q$, remainder, $r$
-- multiply through $y$ such that $x = q \cdot y + r$ 
-- rearrange into $r = s \cdot x + t \cdot q$
-  - If needed, re-write this in terms of the original $x,y$ using previously computed values
+- Rewrite the terms of the GCD as $x, y$ such that $x > y$
+- compute $x / y$, in terms of quotient, $q$, remainder, $r$
+- Since we know $x = q \cdot y + r$ 
+  - Rewrite as $r = x - q \cdot y$
+  - Rewrite in terms of $a,b$ substituting computed values
   - Recurse, such that $x \leftarrow y$, $y \leftarrow r$ (This part is just Euclid's)
 
 Let's do an example!
@@ -501,21 +501,21 @@ Let's do an example!
 
 ---
 
-|$x$|$y$|$x/y$|$r=x-q \cdot y$|
-|---|---|---|---|
-|$220$|$41$|$5 r 15$ |$15 = 220 - 5 \cdot 41$|
-|$41$|$15$|$2 r 11$ |$11 = 41 - 2 \cdot 15$|
-|    |    | |$11 = 41 - 2 \cdot (220 - 5 \cdot 41)$|
-|    |    | |$11 = -2 \cdot 220 + 11 \cdot 41 $|
-|$15$|$11$|$1 r 4$ |$4 = 15 - 1 \cdot 11$|
-| |  || $4 = (220 - 5 \cdot 41) - 1 \cdot (-2 \cdot 220 + 11 \cdot 41)$|
-| |  || $4 = 3 \cdot 220 - 16 \cdot 41$|
-|$11$|$4$|$2 r 3$|$3 = 11 - 2 \cdot 4$|
-|||| $3 = (-2 \cdot 220 + 11 \cdot 41) - 2 \cdot (3 \cdot 220 - 16 \cdot 41)$|
-|||| $3 = -8 \cdot 220 + 43 \cdot 41$|
-|$4$|$3$ |$1 r 1$| $1 = 4 - 1 \cdot 3$|
-|||| $1 = (3 \cdot 220 - 16 \cdot 41) - 1 \cdot (-8 \cdot 220 + 43 \cdot 41)$|
-|||| $1 = 11 \cdot 220 - 59 \cdot 41$|
+|$x$|$y$|$x/y$|$r=x-q \cdot y$|$s$|$t$|
+|---|---|---|---|---|---|
+|$220$|$41$|$5 r 15$ |$15 = 220 - 5 \cdot 41$|$1$|$-5$|
+|$41$|$15$|$2 r 11$ |$11 = 41 - 2 \cdot 15$|||
+|    |    | |$11 = 41 - 2 \cdot (220 - 5 \cdot 41)$|||
+|    |    | |$11 = -2 \cdot 220 + 11 \cdot 41 $|$-2$|$11$|
+|$15$|$11$|$1 r 4$ |$4 = 15 - 1 \cdot 11$|||
+| |  || $4 = (220 - 5 \cdot 41) - 1 \cdot (-2 \cdot 220 + 11 \cdot 41)$|||
+| |  || $4 = 3 \cdot 220 - 16 \cdot 41$|$3$|$-16$|
+|$11$|$4$|$2 r 3$|$3 = 11 - 2 \cdot 4$|||
+|||| $3 = (-2 \cdot 220 + 11 \cdot 41) - 2 \cdot (3 \cdot 220 - 16 \cdot 41)$|||
+|||| $3 = -8 \cdot 220 + 43 \cdot 41$|$-8$|$43$|
+|$4$|$3$ |$1 r 1$| $1 = 4 - 1 \cdot 3$|||
+|||| $1 = (3 \cdot 220 - 16 \cdot 41) - 1 \cdot (-8 \cdot 220 + 43 \cdot 41)$|||
+|||| $1 = 11 \cdot 220 - 59 \cdot 41$|$11$|$-59$|
 
 
 ---
