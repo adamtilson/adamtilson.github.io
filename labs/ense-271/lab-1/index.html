@@ -123,13 +123,11 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="part1githubandportfolios"><button class="collapsible">Part 1: GitHub and Portfolios</button><div class="text-content"><div class="text-inner">
 
-      <ul>
-        <li>To stand out in the competitive software industry, as well as to engage potential contributors, a complete GitHub repository is an effective tool. In this lab we will introduce you to an overview of GitHub, how it works, and show you some examples for strong repositories. Finally, we will discuss using GitHub as a design and coding portfolio, which you can take with you to interviews. As a running assignment in this lab, you will add to your GitHub portfolio, which will be assessed in a live interview in the final lab of the semester.</li>
-      </ul>
+      <p>To stand out in the competitive software industry, as well as to engage potential contributors, a complete GitHub repository is an effective tool. In this lab we will introduce you to an overview of GitHub, how it works, and show you some examples of strong repositories. Finally, we will discuss using GitHub as a design and coding portfolio, which you can use to showcase your work and attract prospective employers. As a running assignment in this lab, you will add to your GitHub portfolio, which will be assessed in a live interview in the final lab of the semester.</p>
 
       <h3 id="version-control">Version Control</h3>
 
-      <p>Git is version control software responsible for backing up different version of your source code over time, and letting you to restore or jump between different versions. Git aids in backup, branching, and collaboration. A Git Repository (repo) is the name for the database in which source files are stored. GitHub is a cloud service, owned by Microsoft, which can host our repositories remotely. VS Code is an open-source text editor which can easily synchronize.</p>
+      <p>Git is version control software responsible for backing up different version of your source code over time, and letting you restore or jump between different versions. Git aids in backup, branching, and collaboration. A Git Repository (repo) is the name for the database in which source files are stored. GitHub is a cloud service, owned by Microsoft, which can host our repositories remotely. VS Code is an open-source text editor which can easily synchronize local files to GitHub repositories.</p>
 
       <h3 id="our-setup">Our Setup</h3>
 
@@ -148,12 +146,12 @@
       <p><img src="res/vs-code-overview.png" alt="" /></p>
 
       <ol>
-        <li>Left panel - explorer, search, extensions</li>
+        <li>Left panel - explorer, search, extensions, git</li>
         <li>This area changes depending on what is selected in (1).</li>
         <li>Tabbed interface lets you have multiple files open at once.</li>
         <li>Centre stage is where you will edit your code</li>
         <li>The minimap is a zoomed out view of your code, and helps you navigate quickly.</li>
-        <li>Terminal, debugging and output appear down here.</li>
+        <li>Terminal, debugging and output appear down here. Sometimes this area is hidden.</li>
         <li>See which modes the editor is in, like language, line endings, tab size, etc.</li>
       </ol>
 
@@ -171,7 +169,7 @@
 
       <h3 id="configure-git">Configure Git</h3>
 
-      <p>We need to do some initial setup stuff for git</p>
+      <p>We need to do some initial setup for git.</p>
 
       <p>From the command line, configure git:</p>
 
@@ -186,7 +184,7 @@
 
       <h3 id="create-a-github-account">Create a GitHub Account…</h3>
 
-      <p>Pretty easy to do, just follow along.</p>
+      <p>Pretty easy to do, just follow along with the provided instructions. Recommended to use your real name and a professional email.</p>
 
       <p><img src="res/github-account.png" alt="" /></p>
 
@@ -208,7 +206,7 @@
 
       <p><img src="res/publish-to-github.png" alt="" /></p>
 
-      <p>Oh, but we need to authorize VS code to use our GitHub account:</p>
+      <p>Oh, but we need to authorize VS code to use our GitHub account with O-Auth:</p>
 
       <p><img src="res/authorize-in-your-browser.png" alt="" /></p>
 
@@ -230,9 +228,9 @@
 
       <p><img src="res/checking-out-the-repo.png" alt="" /></p>
 
-      <h3 id="stages">Stages</h3>
+      <h3 id="staging">Staging</h3>
 
-      <p>So VS Code has abstracted a lot of the Git process. Let’s look at it in depth.</p>
+      <p>So VS Code has abstracted a lot of the Git process. Let’s examine it in depth.</p>
 
       <p>Your files can exist in 4 states:</p>
 
@@ -240,26 +238,28 @@
 
       <p><img src="res/how-git-actually-works.png" alt="" /></p>
 
-      <p>By default, files are in the working (<code class="language-plaintext highlighter-rouge">U</code>) in VS Code state.</p>
+      <p>By default, files are in the working (<code class="language-plaintext highlighter-rouge">U</code> in VS Code) state.</p>
 
       <ul>
         <li>
-          <p>When you run the <code class="language-plaintext highlighter-rouge">add</code> command (<code class="language-plaintext highlighter-rouge">+</code>), a file is moved from working to staged. This means git knows to include it next time work is checked in.</p>
+          <p>When you run the <code class="language-plaintext highlighter-rouge">add</code> command (<code class="language-plaintext highlighter-rouge">+</code>), a file is moved from working to staged. This means git knows to include it next time work is checked in with a commit.</p>
         </li>
         <li>When you run a <code class="language-plaintext highlighter-rouge">commit</code> command (<code class="language-plaintext highlighter-rouge">✓</code>), all of the staged files are backed up into the local repository, and the local files are returned to the working state.
           <ul>
-            <li>This means, if you want to do another backup, you will need to <code class="language-plaintext highlighter-rouge">add</code> them again.</li>
-            <li>Commits neat a brief message to explain the reason for the commit, usually phrased as “verb nouns”, e.g. “add readme md”</li>
+            <li>This means, if you want to do another check-in, you will need to <code class="language-plaintext highlighter-rouge">add</code> them again.</li>
+            <li>Commits need a brief message to explain the reason for the commit, usually phrased as “verb-nouns”, e.g. “add readme md”</li>
           </ul>
         </li>
         <li>Finally, when you wish to synchronize the local repo with the remote repo, you will use a <code class="language-plaintext highlighter-rouge">push</code> command.</li>
       </ul>
 
-      <p>So let’s add another file:</p>
+      <p>Let’s see how this is done in VS Code.</p>
+
+      <p>Let’s add another file:</p>
 
       <p><img src="res/second-file.png" alt="" /></p>
 
-      <p>Add it, commit it:</p>
+      <p>Add it and commit it:</p>
 
       <p><img src="res/add-commit-push.png" alt="" /></p>
 
@@ -267,7 +267,7 @@
 
       <p><img src="res/actually-push.png" alt="" /></p>
 
-      <p>Check it:</p>
+      <p>Check it on the website:</p>
 
       <p><img src="res/it-made-it.png" alt="" /></p>
 
@@ -275,6 +275,8 @@
 
     </div></div></section>
 <section id="githubportfolios"><button class="collapsible">GitHub Portfolios</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s look at some good GitHub Repos, Profiles and GitHub Pages to see what can be done with GitHub.</p>
 
       <h3 id="good-repos">Good Repos</h3>
 
@@ -290,9 +292,13 @@
 
       <h3 id="good-profiles">Good Profiles</h3>
 
+      <p>You may use a <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme">profile readme markdown file</a> for yourself to let people know who you are. Examples:</p>
+
       <p><a href="https://github.com/abhisheknaiidu/awesome-github-profile-readme">List of Profile Readmes</a></p>
 
       <h3 id="github-pages">GitHub Pages</h3>
+
+      <p>GitHub pages allow hosting static websites for free. Examples:</p>
 
       <p><a href="https://webdesignledger.com/best-github-project-pages/">Best GitHub Project Pages</a></p>
 
@@ -303,26 +309,26 @@
       <p>Good Commit Messages - Brief, accurate. Verb-Nouns. A focus on “why” over “what” when it’s not obvious.</p>
       <ul>
         <li>e.g. “add lab 1”</li>
-        <li>e.g. “add dodge mechanic in player class”</li>
+        <li>e.g. “add dodge mechanic in player class to help with boss battles”</li>
         <li>e.g. “fix death-cam bug in undead parish to prevent sen’s gate skip”</li>
         <li>e.g. “refactor controller class for future proofing”</li>
       </ul>
 
       <p>Don’t Add Junk Files</p>
       <ul>
-        <li>Some IDEs add extra stuff that doesn’t matter for your source file, e.g. compiled binaries, thumbnail cache’s, editor settings</li>
-        <li>You can find common “.gitignore” files which will prevent these from being pushed</li>
+        <li>Some IDEs add extra stuff that doesn’t matter for your source code, e.g. compiled binaries, cached thumbnails, editor settings</li>
+        <li>You can find common <a href="https://git-scm.com/docs/gitignore">“.gitignore” files</a> which will automatically prevent these from being pushed</li>
         <li>If you want binaries, <a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository">use releases</a></li>
       </ul>
 
       <p>Appropriate Branches</p>
       <ul>
-        <li>Branches allow users to work on features independently, and then merge into main when all bugs are fixed</li>
+        <li>Branches allow developers to work on features independently, and then merge into main when all bugs are fixed</li>
       </ul>
 
       <p>Dependencies / Compilation Instructions</p>
       <ul>
-        <li>Having a few sentences on how to compile your application ensure potential collaborators can start using your software right away!</li>
+        <li>Having a few sentences on how to compile your application ensures potential users and collaborators can start using your software right away!</li>
       </ul>
 
       <p>Issue Tracking</p>
@@ -337,7 +343,7 @@
 
       <p>Open Source Licensing</p>
       <ul>
-        <li>If you wish to release your project to the world, source include, use an open source license, such as <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons</a>, <a href="https://opensource.org/licenses/MIT">MIT</a> or <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL</a>. Creative commons tends to be used for creative works, the MIT license gives derivative projects the most rights, whereas the GPL forces derivative projects to also remain open source.</li>
+        <li>If you wish to release your project to the world, source included, use an open source license, such as <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons</a>, <a href="https://opensource.org/licenses/MIT">MIT</a> or <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL</a>. Creative commons should only be used for creative works rather than source code, the MIT license gives derivative projects the most rights, whereas the GPL forces derivative projects to also remain open source.</li>
         <li>This is not required to use GitHub, and you can even keep your repositories private.</li>
         <li>If anything is not covered by the license, let the users know explicitly (e.g. Trademarks)</li>
       </ul>
@@ -495,6 +501,8 @@
               <p>We’ve gone from playing Monopoly to Twister!</p>
             </li>
           </ul>
+
+          <p><img src="res/1-cards.png" alt="Laying out cards" title="Laying out cards" /></p>
         </li>
         <li>
           <p>Note Logical breaks in Workflow</p>
@@ -507,7 +515,7 @@
               <p>Draw in vertical dashed lines at these points to divide into business processes.</p>
             </li>
             <li>
-              <p>If you are having difficulty finding these divides, discuss why.</p>
+              <p>If you are having difficulty finding these divides, discuss why, which may lead to important new insights about the project.</p>
             </li>
           </ul>
         </li>
@@ -551,6 +559,8 @@
           <ul>
             <li>Have the business people decide which features need to be in each successive release, by drawing additional horizontal jagged lines across the remainder of the poster.</li>
           </ul>
+
+          <p><img src="res/3-successive-builds.png" alt="Drawing lines for iterative releases" title="Drawing lines for iterative releases" /></p>
         </li>
       </ol>
 
@@ -567,10 +577,10 @@
 
       <ul>
         <li>
-          <p>Useful processes rarely remain static. This one naturally evolved with contributions frin the original author and other contributors.</p>
+          <p>Useful processes rarely remain static. This one naturally evolved with contributions from the original author and other contributors.</p>
         </li>
         <li>
-          <p>The biggest limitation is “Granularity”.</p>
+          <p>The biggest limitation of the original model was “Granularity”.</p>
           <ul>
             <li>All of the current tasks are framed as small tasks.</li>
             <li>We need to extract the big picture to contextualize the tasks.</li>
@@ -598,8 +608,8 @@
           <ul>
             <li>You should be able to walk through the tasks in this row and feel everything fits together logically
               <ul>
-                <li>There should be no missing steps</li>
-                <li>It can be useful to do this process with the client. This is what you want to build first.</li>
+                <li>There should be no missing steps, no gaps in logic</li>
+                <li>It can be useful to do this process with the client. This will help you identify what to build first.</li>
               </ul>
             </li>
             <li>Some groups use a different card color for this row.</li>
@@ -608,35 +618,25 @@
         <li>Everything underneath are <code class="language-plaintext highlighter-rouge">Tasks</code>, or <code class="language-plaintext highlighter-rouge">Details</code> in decreasing frequency of use.
           <ul>
             <li>These are our skeletal <code class="language-plaintext highlighter-rouge">ribs.</code></li>
+            <li>Typically a third color is used, though tasks may use a variety of colors as needed</li>
           </ul>
         </li>
+      </ul>
+
+      <p><img src="res/2-areas-labeled.png" alt="Mapping the terminology of the map" title="Mapping the terminology of the map" /></p>
+
+      <ul>
         <li>Some sources use minor differences in terminology for different levels of granuarity</li>
       </ul>
 
       <p>In the real world, Software developers rarely stick to rigidly defined rules, and modify these techniques as needed.</p>
       <ul>
+        <li>You’re a problem solver, you should be using whatever tool best solves the problem, not trying to fit the problem to a rigid tool!</li>
         <li>Some people want more levels of granularity, some want fewer.</li>
-        <li>You may see two colours of cards used, one for the backbone and one for tasks, or three colours, for the backbone, walking skeleton and tasks.</li>
+        <li>You may see two colours of cards used, one for the backbone and one for tasks, or three colours, for the backbone, walking skeleton and tasks, or more.</li>
       </ul>
 
       <p>Finally, software has made this process completely virtual, which we will demonstrate using Stories on Board.</p>
-
-    </div></div></section>
-<section id="modernvisualexample"><button class="collapsible">Modern Visual Example:</button><div class="text-content"><div class="text-inner">
-
-      <p>Here’s a more complete example using 2 colors…</p>
-
-      <p>Laying out cards and arranging into lanes</p>
-
-      <p><img src="res/1-cards.png" alt="Laying out cards" title="Laying out cards" /></p>
-
-      <p>Explaining the terminology of the map</p>
-
-      <p><img src="res/2-areas-labeled.png" alt="Mapping the terminology of the map" title="Mapping the terminology of the map" /></p>
-
-      <p>Drawing lines for iterative releases</p>
-
-      <p><img src="res/3-successive-builds.png" alt="Drawing lines for iterative releases" title="Drawing lines for iterative releases" /></p>
 
     </div></div></section>
 <section id="storiesonboard"><button class="collapsible">StoriesOnBoard</button><div class="text-content"><div class="text-inner">
@@ -740,6 +740,7 @@
         <li>You can investigate GitHub Pages if you want them to be totally on the web</li>
         <li>Use GitHub best practices to create a high quality repo</li>
         <li>You will add to this repo all semester!</li>
+        <li>For this lab, you only need to have a <code class="language-plaintext highlighter-rouge">readme.md</code> uploaded</li>
       </ul>
 
     </div></div></section>
@@ -753,7 +754,8 @@
           </ul>
         </li>
         <li>Your three detailed tasks</li>
-        <li>Include a readme.txt explaining which extra feature you experimented with</li>
+        <li>Include a readme.txt explaining which extra feature you tried</li>
+        <li>Include a screen capture of your GitHub repo so far, which should still be private</li>
       </ul>
 
       <p>Please submit to URCourses by the deadline.</p>
