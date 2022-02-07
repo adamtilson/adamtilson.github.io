@@ -33,7 +33,7 @@ layout: false
   - $V$ is a non-empty set of vertices (nodes)
   - $E$ is a set of two item subsets of $V$ called edges
 - e.g. $V = ${$x_1, x_2, x_3, x_4, x_5, x_6, ..., x_n$}
-- $E = ${{$x_1, x_2$}, {$x_2, x_3$}, {$x_1, x_4$}, ...}
+- $E = $ { { $x_1, x_2$ }, { $x_2, x_3$ }, { $x_1, x_4$ }, ... }
 
 ---
 ## Graph Definitions
