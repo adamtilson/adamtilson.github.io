@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ENSE 271 Lab 5 </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+
+              <div class="row">
+                <header>ENSE 271</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-271/">Schedule</a></li>
+                  <li><a href="/labs/ense-271/lab-1">Lab 1</a></li>
+                  <!-- <li><a href="/labs/ense-271/lab-2">Lab 2</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-3">Lab 3</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-4">Lab 4</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-5">Lab 5</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-6">Lab 6</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-7">Lab 7</a></li> -->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
+                  <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
+                  <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
+                  <li><a href="/labs/ense-374/lab-9">Lab 9</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-472/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-472/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-472/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-5-wordpress-environment-setup-with-local">Lab 5: Wordpress Environment Setup with Local</h1>
+
+<p>ENSE 271 - People-Centred Design - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="10introduction"><button class="collapsible">1.0 Introduction</button><div class="text-content"><div class="text-inner">
+
+      <p>Wordpress is a free open source (FOSS) content management system (CMS) for the web, used historically to create blogs, but has since found wider use, including static and e-commerce sites. It can be extended with plugins and themes, either created by others or customized yourself.</p>
+
+      <p>Typically Wordpress is installed on a remote server running a LAMP stack: Linux, Apache, MySQL and PHP, though some components may be interchanged, such as Windows for Linux or NGINX for Apache. If you have already taken ENSE 353 you have created such a stack, where a completed wordpress installation could be deployed.</p>
+
+      <p>For this course we will use an application called “Local” by Flywheel to install a local wordpress development site, which can be used for single-user prototyping and testing on your local machine without a server. Historically, one would use a streamlined LAMP installation, such as XAMPP, which has some advantages and disadvantages over our approach. Flywheel is a web-hosting service, and has released this tool to help people learn, hoping you will later host your site with them, but there is no obligation to do so. Local encapsulates the server and database applications needed by Wordpress, allowing you to quickly start the needed services on demand.</p>
+
+      <p><img src="res/wordpress-stack.png" alt="wordpress-stack" />
+<img src="res/local-stack.png" alt="local-stack" /></p>
+
+    </div></div></section>
+<section id="20installinglocalbyflywheel"><button class="collapsible">2.0 Installing "Local by Flywheel"</button><div class="text-content"><div class="text-inner">
+
+      <p><a href="https://localwp.com/">Download Local by Flywheel</a></p>
+
+      <p><img src="res/download.png" alt="Download" /></p>
+
+      <p>You do not need to provide a real email if you do not want to be contacted by Flywheel.</p>
+
+      <p>Follow the installer. If you are on mac, you may need to move the executable to your Applications folder. See the video in references for more information.</p>
+
+    </div></div></section>
+<section id="30creatinganewsite"><button class="collapsible">3.0 Creating a new site</button><div class="text-content"><div class="text-inner">
+
+      <p><img src="res/site-name.png" alt="Site name" /></p>
+
+      <p>Local invokes multiple services / daemons. You may need to grant admin privileges.</p>
+
+      <p>You don’t need to change any advanced settings yet, but later may wish to make use of the “blueprints” feature. This allows you to set up a site the way that you like it once, including adjusting settings and installing and configuring plugins and themes, and then make a copy of this which can later be reused, called blueprints.</p>
+
+      <p><img src="res/blueprints.png" alt="Blueprint" /></p>
+
+      <p>If you know the specific configuration of software needed for your server, you may configure the environment, but for our purposes the preferred configuration is fine for development.</p>
+
+      <p><img src="res/environment.png" alt="Environment" /></p>
+
+      <p>Wordpress has two web interfaces, one for the public which is available to all to see, and one for the admin used to perform administration, such as adding new content. The admin account can be accessed from any computer around the world, so naturally must be secured behind a username and password. Set these on the next screen. Make sure you remember these: if you forget them you will need to manually edit your database to reset this. The email you enter will occasionally get messages from Wordpress, letting you know if themes or plugins have been updated.</p>
+
+      <p><img src="res/username.png" alt="Username" /></p>
+
+      <p>The advanced option allows mutli-site instances, which allow wordpress to host multiple sites on a single server. This can be useful to host several personal websites, like personal CVs and portfolios, for managing costs. However, it does reuse the same database for all sites, making migration later on a hassle.</p>
+
+      <p>Finally, click on Add Site. You may need to give Administrator privileges to start up web hosting daemons. It may take a while for your site to initialize, and then show the dashboard:</p>
+
+      <p><img src="res/dashboard.png" alt="Dashboard" /></p>
+
+      <ol>
+        <li>Here you can see if the site is running. You can stop or reload your server here. If you stop development and want to resume later, make sure you start up your local server.</li>
+        <li>
+          <p>You can open links to your site here, either the pubic facing site or the admin portal. By default, the admin portal is found at the subdirectory:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;your site&gt;/wp-admin/
+</code></pre></div>          </div>
+        </li>
+        <li>Here you can click through to see different aspects of the site system, including database and utilities.</li>
+      </ol>
+
+    </div></div></section>
+<section id="40abrieftourofwordpress"><button class="collapsible">4.0 A brief tour of Wordpress</button><div class="text-content"><div class="text-inner">
+
+      <p>First, click on the Open Site button to see the site as it exists.</p>
+
+      <p>This minimalist, placeholder site appears when you start up a new site, updated each year to demonstrate the current wordpress theme.</p>
+
+      <p><img src="res/placeholder.png" alt="Placeholder" /></p>
+
+      <p>A Wordpress theme is a basic site design. It groups together elements like page templates, colors and other CSS styles, and modules coded in PHP. The guiding principle of a theme is to make your wordpress page look good out of the box, so that the developer can focus on generating content rather than fine tuning visual design, though a certain amount of broad customization is possible, and strongly required to give your site a unique visual identity.</p>
+
+      <p>Each year wordpress updates the default theme to echo some contemporary web-design paradigms and popular techniques. A prominant paradigm today is the “site-builder” appraoch, modular sites which the user builds by selecting components and dropping them in place. This is the paradigm they are embracing with the “twenty-twenty-one” theme - you can modify your site layout by adding “blocks”. Other plugins have existed to this historically, which are Elementor, WPBakery and BeaverBuilder. Generally speaking, these tools are very powerful, but take practice to use. Most of these tools have a free demo version with reduced capabilities, and a subscription based professional version, with more features.</p>
+
+      <p>Wordpress themes are typically responsive by design, that is, the content reflows automatically for mobile devices. To see what the site looks like on a mobile, you can use mobile view in firefox: Ctrl+Shift+M</p>
+
+      <p><img src="res/mobile-view-firefox.png" alt="mobile-view-firefox" /></p>
+
+      <p>Let’s check out the Admin portal next…</p>
+
+      <p><img src="res/admin.png" alt="admin" /></p>
+
+      <p>Log in with the password you set earlier.</p>
+
+      <p><img src="res/wp-dashboard.png" alt="wp-dashboard" /></p>
+
+      <p>Our first step should be heading through settings, and configuring things as we like…</p>
+
+      <p><img src="res/wp-settings.png" alt="wp-settings" /></p>
+
+      <p>After this, if you reload the page, you should see some simple changes.</p>
+
+      <p><img src="res/post-settings-update.png" alt="post-settings-update" /></p>
+
+    </div></div></section>
+<section id="50designfinetuningorstartingfresh"><button class="collapsible">5.0 Design: Fine Tuning or Starting Fresh?</button><div class="text-content"><div class="text-inner">
+
+      <p>From here we have two main approaches to begin to make our wordpress site our own. The cleanest way to start over is to choose a new theme. However, let’s see what we can do to customize this theme first…</p>
+
+      <p><img src="res/customize.png" alt="customize" /></p>
+
+      <p>Click through the different pages to see what you can edit.</p>
+
+      <p>You can also see what it will look like on a mobile device using the controls in the bottom right…</p>
+
+      <p><img src="res/mobile-customize.png" alt="mobile-customize" /></p>
+
+      <p>Let’s try adding some content…</p>
+
+    </div></div></section>
+<section id="60addingcontent"><button class="collapsible">6.0 Adding Content</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="static-pages">Static Pages</h3>
+
+      <p>You can add static pages from this menu</p>
+
+      <p><img src="res/static-pages.png" alt="static-pages" /></p>
+
+      <p>Add a few pages here. You can also delete some of the automatic pages if you don’t need them anymore.</p>
+
+      <h3 id="dynamic-blogs">Dynamic Blogs</h3>
+
+      <p>Blogs posts - You can add dynamic blog posts from this menu:</p>
+
+      <p><img src="res/add-blag-posts.png" alt="add-blag-posts" /></p>
+
+      <p>These by default will appear on the blog page, but could be moved to be on the main page.</p>
+
+      <h3 id="menus">Menus</h3>
+
+      <p>You may wish to have different menus in different places, for example in the top header menu and the footer menu. The menu section lets you tailor these to your liking:</p>
+
+      <p><img src="res/add-menu.png" alt="add-menu" /></p>
+
+      <p>To create a new menu…</p>
+      <ul>
+        <li>Add a new menu</li>
+        <li>Name it</li>
+        <li>Save it</li>
+        <li>Select pages to add</li>
+        <li>Add the pages</li>
+        <li>Save the menu</li>
+      </ul>
+
+      <h3 id="images">Images</h3>
+
+      <p>Images in wordpress are uploaded and stored in the local site files.</p>
+
+    </div></div></section>
+<section id="70editingstaticpagesandsitebuildingwithblocks"><button class="collapsible"> 7.0 Editing Static Pages and Site Building with Blocks</button><div class="text-content"><div class="text-inner">
+
+      <p>We’ll look at dedicated plugins for this in next weeks lab, but for now let’s take a peek and see how blocks work in the twenty-twenty-one theme…</p>
+
+      <p><img src="res/add-static.png" alt="add-static" /></p>
+
+      <p>You can change the title and the paragraph. You can add new blocks using the top bar…</p>
+
+      <p><img src="res/new-page.png" alt="new-page" /></p>
+
+      <p>You can add blocks, which are like individual components, and patterns, which put smaller components together to make something useful. Always publish your pages when done to save changes.</p>
+
+      <p><img src="res/publish.png" alt="publish" /></p>
+
+      <p>This should be enough of a tour to get you started. Next week we will continue to look at further customizing your wordpress sites.</p>
+
+    </div></div></section>
+<section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>Phase 1:</p>
+      <ul>
+        <li>Make three static pages
+          <ul>
+            <li>Add two or three site builder blocks to each page</li>
+          </ul>
+        </li>
+        <li>Make a blog page with three entries</li>
+        <li>Take some screenshots after finishing phase 1.</li>
+      </ul>
+
+      <p>Phase 2:</p>
+      <ul>
+        <li>Find and install a theme you like, and activate it.</li>
+        <li>Take a tour of your site. How have pages changed?</li>
+        <li>Document these changes using screenshots</li>
+      </ul>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>For this lab, please submit screenshots of your work, rather than your complete installation.
+          <ul>
+            <li>include the screenshots in folders phase-1 and phase-2</li>
+          </ul>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>WPLearningLab. <a href="https://www.youtube.com/watch?v=GeDAUU4zciI">How To Install WordPress Locally - Make A WordPress Local Development Environment</a>. Updated 2021.</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

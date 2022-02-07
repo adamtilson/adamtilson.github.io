@@ -44,7 +44,7 @@ layout: false
 - Encryption - the sender encrypts the message, $m$ by computing
 $$m' = m \cdot k$$
 - Decryption: the receiver decrypts $m'$ by computing
-$$ \dfrac{m'}{k} = \dfrac{m \cdot k}{k} = m $$
+$$ \dfrac{m'}{k} = \dfrac{m' \cdot k}{k} = m $$
 ---
 ## How can we break turing V1
 - To defeat this system, all we need to do is collect two messages...
@@ -228,8 +228,6 @@ $ak \equiv bk  (\text{mod }p) \Rightarrow a \equiv b  (\text{mod }p)$
 - $akk^{-1} \equiv bkk^{-1}  (\text{mod }p)$
 - $a \equiv b (\text{mod }p)$
 
-If k is a multiple of p, $k \equiv 0 (mod p)$, $0$ has no multiplicative inverse!
-
 ---
 ## Fermat's Little Theorem
 Theorem: If $p$ is prime and $k$ is not a multiple of $p$, then $k^{p-1} \equiv 1 (\text{mod }p)$
@@ -251,7 +249,7 @@ Theorem: If $p$ is prime and $k$ is not a multiple of $p$, then $k^{p-1} \equiv 
 - $13 = 13 (\text{mod }17)$
 - $13^2 = 169 \equiv \text{ rem}(169, 17) \equiv 16$
   - $13^2 = 16 (\text{mod }17)$
-- $16^2 = 256 \equiv \text{ rem}(256, 17) \equiv 1$
+- $16^4 = 256 \equiv \text{ rem}(256, 17) \equiv 1$
   - $13^4 = 1 (\text{mod }17)$
 - $13^8 = 1 (\text{mod }17)$
 - $15 = 8 + 4 + 2 + 1$  
