@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ENSE 271 Lab 3 </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+
+              <div class="row">
+                <header>ENSE 271</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-271/">Schedule</a></li>
+                  <li><a href="/labs/ense-271/lab-1">Lab 1</a></li>
+                  <!-- <li><a href="/labs/ense-271/lab-2">Lab 2</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-3">Lab 3</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-4">Lab 4</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-5">Lab 5</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-6">Lab 6</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-7">Lab 7</a></li> -->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
+                  <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
+                  <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
+                  <li><a href="/labs/ense-374/lab-9">Lab 9</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-472/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-472/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-472/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-3-medium-fi-wireframes-with-adobe-xd">Lab 3: Medium-Fi Wireframes with Adobe XD</h1>
+
+<p>ENSE 271 - People-Centred Design - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="10introduction"><button class="collapsible">1.0 Introduction</button><div class="text-content"><div class="text-inner">
+
+      <p>In this lab we will:</p>
+      <ul>
+        <li>Get familiar with the UI and design tools available in Adobe XD</li>
+        <li>Investigate how to create low fidelity prototypes</li>
+        <li>Do a complete example of a medium fidelity (med-fi) prototype of a website</li>
+      </ul>
+
+    </div></div></section>
+<section id="20adobexdoverview"><button class="collapsible">2.0 Adobe XD Overview</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s start with a more in-depth overview of the UI from the previous lab.</p>
+
+      <p><img src="res/xd-ui.png" alt="XDUI" title="XD User Interface" /></p>
+
+      <ol>
+        <li>Filename - Set your filename here
+          <ul>
+            <li>The cloud icon means the file is saved on Adobe’s Creative Cloud servers</li>
+            <li>To save it locally, instead do a <code class="language-plaintext highlighter-rouge">Hamburger</code> -&gt; <code class="language-plaintext highlighter-rouge">Save As Local Document...</code></li>
+          </ul>
+        </li>
+        <li>The <code class="language-plaintext highlighter-rouge">Hamburger</code> replaces the <code class="language-plaintext highlighter-rouge">File</code> menu in other apps. On Mac, these options are instead in the menu bar.
+          <ul>
+            <li>It includes standard operations like save, open, import, export, etc.</li>
+            <li>Importantly you can add libraries, plugins and ui kits here</li>
+            <li>The <code class="language-plaintext highlighter-rouge">Home</code> menu goes to the welcome splash screen for opening projects</li>
+            <li><code class="language-plaintext highlighter-rouge">Design</code> is where we’ll work in this lab, creating static 2D wireframes</li>
+            <li><code class="language-plaintext highlighter-rouge">Prototype</code> allows you to add interactivity to your designs - we’ll look at this next lab</li>
+            <li>Share lets you share and collaborate using creative cloud.</li>
+          </ul>
+        </li>
+        <li>The toolbar on the left contains standard design tools
+          <ul>
+            <li>The arrow cursor shaped tool at the top is the <code class="language-plaintext highlighter-rouge">Select</code> tool, used for selecting, moving, resizing, copying, pasting, etc.
+              <ul>
+                <li>After selecting an object, gizmo’s will appear to allow further manipulation
+<img src="res/gizmos.png" alt="gizmos" title="Gizmos for resizing" />
+                  <ul>
+                    <li>You can also right click objects for contextual options</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>The next three down are drawing primitives, <code class="language-plaintext highlighter-rouge">Rectangle</code>, <code class="language-plaintext highlighter-rouge">Ellipse</code>, <code class="language-plaintext highlighter-rouge">Polygon</code></li>
+            <li>You can make lines with the <code class="language-plaintext highlighter-rouge">Line</code> or <code class="language-plaintext highlighter-rouge">Pen</code> tools</li>
+            <li>You can add text with the <code class="language-plaintext highlighter-rouge">Text</code> tool</li>
+            <li><code class="language-plaintext highlighter-rouge">Artboard</code> lets you add more artboards to represent additional screens in your prototype</li>
+            <li>Finally, there are some <code class="language-plaintext highlighter-rouge">Zoom</code> tools</li>
+            <li>The best way to add images to your prototype is to draw the shape of the image using shape primitives (e.g. <code class="language-plaintext highlighter-rouge">Rectangle</code>, <code class="language-plaintext highlighter-rouge">Circle</code>), and then drag and drop an image on to this primitive from your operating system’s file browser. This creates a masked image, which is like a window looking through your prototype to your image. If the image is not cropped or sized as desired, double clicked on the masked primative, and modify the image behind the mask as desired. When you return to your view, only the masked portion will be displayed.</li>
+          </ul>
+        </li>
+        <li>The menu in the lower left allows you to change what appears in left sidebar (5)
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">Libraries</code> let you use Creative Cloud libraries to group commonly used assets. We won’t do this for this lab.</li>
+            <li><code class="language-plaintext highlighter-rouge">Layers</code> let you quickly overview your project by seeing the objects in the artboard nested as a hierarchy. This is a very useful view for finding hard to see things, and by changing the listed order by dragging and dropping elements in the list, you can also set the depth of objects (higher on the list means closer to the screen, lower means further away).</li>
+            <li><code class="language-plaintext highlighter-rouge">Plugins</code> add more functionality to XD. e.g. <code class="language-plaintext highlighter-rouge">auto-icon</code></li>
+          </ul>
+        </li>
+        <li>Here you can use the tool you have selected in (4).
+          <ul>
+            <li>For example, if you have selected libraries in (4), you will find assets here you can drag and drop into your project.</li>
+          </ul>
+        </li>
+        <li>Center stage is where you can work on your artboards
+          <ul>
+            <li>Artboards are like screens, or pages. It acts as an interactive collage where you can drag and drop things around.</li>
+            <li>Artboards have a name, height, width.</li>
+            <li>Resize and rename an artboard by clicking on it’s name in the upper left</li>
+            <li>If the artboards height or width is greater than the space available on one screen, scrollbars will be added. The blue dashed-line gizmo can also control how much space should appear on a screen at one time</li>
+            <li>You can have multiple artboards in one project.</li>
+            <li>You can add, arrange, and delete them as needed.
+<img src="res/artboard-gizmos.png" alt="Artboard" title="Artboard gizmos" /></li>
+          </ul>
+        </li>
+        <li>Share, preview and zoom tools are here.
+          <ul>
+            <li>Preview lets you view your design in a new window
+              <ul>
+                <li>We will use this more next lab where we add interactivity</li>
+              </ul>
+            </li>
+            <li>If you have the Adobe XD app installed on your phone, you can upload previews to it to see how it will work on that device.</li>
+            <li>We’ll explore interactivity in the next lab</li>
+          </ul>
+        </li>
+        <li>The properties inspector here allows you to modify the selected element based on its type. This includes things like:
+          <ul>
+            <li>Border and fill colors of primitives</li>
+            <li>Font styles for text</li>
+            <li>Visual effects, like blurring, shadow and gradients</li>
+            <li>Some advanced tools, like <code class="language-plaintext highlighter-rouge">Repeat Grid</code></li>
+            <li>If you want to fine tune a property of an element, and don’t know where to look, check either here, or the right-click context menu.</li>
+          </ul>
+        </li>
+      </ol>
+
+    </div></div></section>
+<section id="30lofiprototyping"><button class="collapsible">3.0 Lo-Fi Prototyping</button><div class="text-content"><div class="text-inner">
+
+      <p>Adobe XD can be used for Low Fidelity (lo-fi) prototyping.</p>
+
+      <p>Lo-fi prototyping, (creating wireframes, or mockups) is the simplest way to roughly lay out the visual elements of your design. These mock-ups are purposefully rough and devoid of detail or color so that one is forced to focus on the structure, and remain uncomitted to the design thus remaining open to change.</p>
+
+      <p>Dedicated tools exist for this, like Balsamiq, but we can also easily simulate this in Adobe XD.</p>
+
+      <p>Baslamiq has a good explanation of <a href="https://balsamiq.com/learn/articles/what-are-wireframes/">Wireframes here</a>.</p>
+
+      <p>You can get started <a href="http://handdrawngoods.com/store/jolly-ui-free-hand-drawn-ui-kit/">with a UI kit</a>, or make some simple objects yourself.</p>
+
+      <p>Example:</p>
+
+      <p><img src="res/lofi.png" alt="Lo-fi" title="Lo-fi" /></p>
+
+      <p>Let’s make some of these elements quickly, and attempt to quickly <a href="https://balsamiq.com/learn/articles/what-are-wireframes/">prototype one of the pages here</a>.</p>
+
+    </div></div></section>
+<section id="40mediumfiprototyping"><button class="collapsible">4.0. Medium-Fi Prototyping</button><div class="text-content"><div class="text-inner">
+
+      <p>In Adobe XD, it’s often not much harder to create medium-fidelity prototypes, which involve colors, actual images, and content. We can create our layouts using primitive shapes with color,</p>
+
+      <p>But first we might want to add some things to our project…</p>
+
+      <p>Adding UI Kits:</p>
+
+      <p>Hamburger -&gt; Get UI Kits -&gt; Apple iOS or Material Design or Windows or whatever</p>
+
+      <p>Finding Images:</p>
+
+      <p>Licensing: Always make sure that you have the rights to use the images that you use on your website!</p>
+
+      <p>The easiest way to ensure that you can use assets for any purpose is to use Creative Commons CC0 assets - this is a very permissive license which effectively puts the assets in the public domain, allowing anyone to use them for any purpose without even needing to credit their source.</p>
+
+    </div></div></section>
+<section id="50mediumfiexample"><button class="collapsible">5.0 Medium-Fi Example</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s work through a medium fidelity example. We will try to replicate a website from <a href="https://www.frontendmentor.io/">Frontend Mentor</a>. I have already compiled assets you may want, which you can find in the example files.</p>
+
+      <p>Some notes on advanced things we’ll look at:</p>
+
+      <ul>
+        <li>
+          <p>Repeat Grid</p>
+
+          <ul>
+            <li>When you find you need multiple copies of the same or similar elements, adding them can be time consuming</li>
+            <li>Repeat Grid is a workflow for creating repetition
+              <ul>
+                <li>Example: Gallery, Blog Posts, Cards</li>
+              </ul>
+            </li>
+            <li>Start by designing one element which will be repeated
+              <ul>
+                <li>You can group the elements together to keep yourself organized</li>
+              </ul>
+            </li>
+            <li>With the object(s) selected, click the repeat grid button in the inspector
+              <ul>
+                <li>Green grabbers appear on the top and side</li>
+                <li>You can stretch these out and drag in the x or y directions</li>
+                <li>Multiple copies will appear</li>
+              </ul>
+            </li>
+            <li>You can adjust the spacing by changing the pink spacing gizmo between copies
+              <ul>
+                <li>You can update elements of individual grid elements by clicking and modifying</li>
+              </ul>
+            </li>
+            <li>You can update images by selecting a copy, and dragging and dropping onto the target one or mutliple images from your file browser. Cool!
+              <ul>
+                <li>Images will be automatically masked – you can double click to fine tune alignment if the auto masking was way off</li>
+                <li>You can also drag in text files to auto-populate titles and text components, with one line in the text file corresponding to one instance of the object</li>
+              </ul>
+            </li>
+            <li>Finally, if you need to fine tune elements after populating, you can break the repeat grid. After this, all of your elements are just like normal objects. Cool!</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><img src="res/repeat-grid-gizmos.png" alt="repeat-grid-gizmos" title="Repeat grid gizmos" /></p>
+
+      <ul>
+        <li>
+          <p>Gradients</p>
+
+          <ul>
+            <li>A simple color effect which is popular online is a gradient. This is a fill effect where a color gradually blends into another color linearly
+              <ul>
+                <li>In order to use a gradient, in the property inspector change the fill type from Solid to linear gradient</li>
+                <li>You can choose the color at each end</li>
+                <li>You can also choose opacity at each end</li>
+                <li>You can move the gradient line gizmo in the object to change the direction of the blend</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>Head to the website <a href="https://www.frontendmentor.io/challenges">Frontend Mentor</a>, which includes a number of front end design challenges. Find a free challenge which looks interesting to you, in the difficulty range Junior or above, and attempt to create a medium fidelity prototype of it in Adobe XD.</p>
+
+      <ul>
+        <li>
+          <p>You may optionally link your GitHub account to download images, but it’s not strictly necessary, you could instead look for appropriate CC0 stock images and use them in place. Some designs use only primitives.</p>
+        </li>
+        <li>
+          <p>For this lab, focus on desktop designs. You don’t need to worry about mobile layouts.</p>
+        </li>
+        <li>
+          <p>When submitting, provide a link to the challenge you are trying to complete</p>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>Please submit your Adobe XD file to URCourses by the due date. Please also include a text document with a link to the design you attempted to recreate.</p>
+
+      <hr />
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>P. Guilizzoni, <a href="https://balsamiq.com/learn/articles/what-are-wireframes/">What Are Wireframes</a>, Balsamiq Wireframing Academy, Balsamiq Studios, LLC</p>
+
+      <p>E. Key, <a href="https://www.lynda.com/Web-tutorials/Prototyping-WordPress-Project-Adobe-XD/2809592-2.html">Prototyping a WordPress Project in Adobe XD</a>, Linda from LinkedIn, 2019</p>
+
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

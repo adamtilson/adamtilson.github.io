@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ENSE 271 Lab 6 </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+
+              <div class="row">
+                <header>ENSE 271</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-271/">Schedule</a></li>
+                  <li><a href="/labs/ense-271/lab-1">Lab 1</a></li>
+                  <!-- <li><a href="/labs/ense-271/lab-2">Lab 2</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-3">Lab 3</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-4">Lab 4</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-5">Lab 5</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-6">Lab 6</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-7">Lab 7</a></li> -->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
+                  <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
+                  <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
+                  <li><a href="/labs/ense-374/lab-9">Lab 9</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-472/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-472/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-472/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-6-wordpress-themes-and-site-building">Lab 6: Wordpress Themes and Site-building</h1>
+
+<p>ENSE 271 - People-Centred Design - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="10introduction"><button class="collapsible">1.0 Introduction</button><div class="text-content"><div class="text-inner">
+
+      <p>From a design perspective, Content management systems necessarily trade-off some power and performance in favour of ease of use. This means that, as a designer, you will be able to largely match the general design envisioned, but will likely not be able to perfectly replicate it out-of-the box without either installing third-party plugins, some of which are paid, or coding them yourself using a combination of CSS, JavaScript and PHP. As a software engineering student, this should not deter you from using the software. The ultimate goal is that you will be able to design a website which largely matches your envisioned idea, and still be easily transferable to a client, who will be able to further edit it and add content without extensive technical knowledge.</p>
+
+      <p>To achieve this goal, we will work today with templates and page builders to quickly get a site up and running and iterate towards our desired design.</p>
+
+      <p>We will attempt to implement several pages from the TRAVEL Hyrule site, which we looked at in Prototyping in XD, in wordpress using Gutenberg blocks. We will necessarily observe some of the limitations of the software.</p>
+
+      <h4 id="set-up">Set-up</h4>
+
+      <ul>
+        <li>Start from a fresh site with Local for this week’s lab
+          <ul>
+            <li>We will start our site from a template which will install dummy content</li>
+          </ul>
+        </li>
+        <li>Reminder: In settings: Set title, tagline, and time zone</li>
+        <li>You will also want to set perma-links type to “post name”, which will make the URL subdirectory structure human-readable</li>
+      </ul>
+
+    </div></div></section>
+<section id="20templates"><button class="collapsible">2.0 Templates</button><div class="text-content"><div class="text-inner">
+
+      <p>In this section we are going to use a plugin called <code class="language-plaintext highlighter-rouge">Starter Templates</code> to give us a working site to iterate on. However, first it is useful to understand how a wordpress page is composed.</p>
+
+      <p>Pages are visually composed of themes and content (blocks)</p>
+
+      <p><img src="res/blank-theme-blocks.png" alt="" /></p>
+
+      <p>The website’s theme defines the colors, fonts and layouts.</p>
+      <ul>
+        <li>Themes have some styling out-of-the-box and can then be further customized using the customize option.</li>
+        <li>The theme implments a consistent visual framework across pages, i.e., header and footer that appear on all or most pages,
+          <ul>
+            <li>Today, it is popular to find a lightweight theme which implements this and little more</li>
+          </ul>
+        </li>
+        <li>Suggestions:
+          <ul>
+            <li>Astra</li>
+            <li>GeneratePress</li>
+            <li>WPOcean</li>
+          </ul>
+        </li>
+        <li>A major benefit of a theme is when new pages are added by the client, they will automatically have these styles added</li>
+        <li>You can also turn off elements for certain pages, such as the Landing page</li>
+      </ul>
+
+      <p>We will automatically get the Astra theme when we use <code class="language-plaintext highlighter-rouge">Starter Templates</code>.</p>
+
+      <p>Let’s install the <code class="language-plaintext highlighter-rouge">Starter Templates</code> plugin. This plugin attempts to create several sample pages in your block editor of choice, between Elementor, Beaver Builder and Gutenberg. We’re going to use Gutenberg, this is the default block editor for wordpress, and seems to be the best performing.</p>
+
+      <p>Starter Templates</p>
+
+      <p>Let’s install and activate the <code class="language-plaintext highlighter-rouge">starter templates</code> plugin…</p>
+
+      <p><img src="res/starter-templates.png" alt="" /></p>
+
+      <p>Browser the library…</p>
+
+      <p><img src="res/starter-templates-library.png" alt="" /></p>
+
+      <p>The templates have been created using a number of page builders. We will work with the Gutenberg editor.</p>
+
+      <p><img src="res/gutenberg-templates.png" alt="" /></p>
+
+      <p>Let’s use the mountain template. It will give us a rough starting point for our site, and is much easier than starting from a blank canvas.</p>
+
+      <p><img src="res/import-mountain.png" alt="" /></p>
+
+      <p>Let’s import the complete site, to give us several starting pages, as well as sample content. The plugin will automatically download some plugins to ensure the site looks and acts as intended.</p>
+
+      <p><img src="res/install-extras.png" alt="" /></p>
+
+      <p><img src="res/skip.png" alt="" /></p>
+
+      <p>To actually fill our page, we need some content</p>
+
+      <p>There are three types of content in wordpress: Post, Pages and Media</p>
+      <ul>
+        <li>Posts are dynamic - update with more blog entries, typically newest at the top</li>
+        <li>Pages are static - set it and forget it</li>
+        <li>Media - saved separately in a database, but typically also embedded on to pages. Can be uploaded once and reused multiple times.</li>
+      </ul>
+
+      <p>Unfortunately our selected theme does not include a blog page by default, but we can create one.</p>
+
+    </div></div></section>
+<section id="30pagebuilders"><button class="collapsible">3.0 Page Builders</button><div class="text-content"><div class="text-inner">
+
+      <p>Page Builders are applications built on top of Wordpress which allow users to generate pages by composing them of a number of nested blocks. The Wordpress Gutenberg Blocks editor is an example of this, but there are also commercially available open source editors such as Elementor and Beaver Builder. Generally the more powerful, flexible and easy to use the editor, the more bloated the output reducing performance. For these reasons, we will use the best performing Gutenberg editor, even if some things are slightly more tedious to us as users, and even impossible without custom code.</p>
+
+    </div></div></section>
+<section id="40homepage"><button class="collapsible">4.0 Home Page</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s edit the homepage with Gutenberg.</p>
+
+      <p>First we will implement the home page. Let’s break down a set of Gutenberg blocks which could comprise this layout…</p>
+
+      <p><img src="res/mockup-to-blocks.png" alt="" /></p>
+
+      <p>Steps</p>
+
+      <ol>
+        <li>Change the Cover background to the Hyrule image</li>
+      </ol>
+
+      <p><img src="res/cover.png" alt="" /></p>
+
+      <p>Pop up tools appear…</p>
+
+      <p><img src="res/pop-up-tools.png" alt="" /></p>
+
+      <p>These will vary depend on context of the block which is selected.</p>
+
+      <p>Click on the kebab menu and <code class="language-plaintext highlighter-rouge">Remove Block</code>.</p>
+
+      <p>You can change the image with</p>
+
+      <p>Pop-up -&gt; Replace -&gt; Upload</p>
+
+      <p>The inspector on the right will change depending on the context of the selected block. Here you can set properties</p>
+
+      <p>Inspector -&gt; Block</p>
+
+      <p><img src="res/inspector.png" alt="" /></p>
+
+      <p>Let’s squish down the image in</p>
+
+      <p>Inspector -&gt; Block -&gt; Dimensions -&gt; 400 px</p>
+
+      <p>Note, you can also set properties for the Page for this menu as well, which is how you can constrain content and turn on or off headers or footers.</p>
+
+      <p><img src="res/page-settings.png" alt="" /></p>
+
+      <p>We may need to come back to this one in a bit, but for now this should be good for our page.</p>
+
+      <p>Remember to frequently save with update, and preview your page in a new tab.</p>
+
+      <p><img src="res/update-and-preview.png" alt="" /></p>
+
+      <p><img src="res/first-change.png" alt="" /></p>
+
+      <ol>
+        <li>Lets add a text and image block…</li>
+      </ol>
+
+      <p><img src="res/add-block.png" alt="" /></p>
+
+      <p><img src="res/browse-all.png" alt="" /></p>
+
+      <p><img src="res/add-blocks.png" alt="" /></p>
+
+      <p>Let’s add a column</p>
+
+      <p><img src="res/add-columns.png" alt="" /></p>
+
+      <p><img src="res/cols.png" alt="" /></p>
+
+      <p>This will allow two areas to drag and drop items.</p>
+
+      <p>On the left, we will drag in an icon, on the right some paragraphs. Copy the text from XD</p>
+
+      <p>To make the bow icon reasonably sized…
+Inspector -&gt; Block -&gt; Image Dimensions -&gt; 50 x 50</p>
+
+      <p>Also, center it by selecting the image
+Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
+
+      <p>And in the column</p>
+
+      <p>Pop-up tools -&gt; Change Vertical Alignment -&gt; Align Middle</p>
+
+      <p>You can also scale up the title of the text in</p>
+
+      <p>Text -&gt; Inspector -&gt; Typography -&gt; Medium</p>
+
+      <p>Save and inspect</p>
+
+      <p><img src="res/image-and-text.png" alt="" /></p>
+
+      <p>In your preview, see how this looks on mobile…</p>
+
+      <p><img src="res/mobile-preview.png" alt="" /></p>
+
+      <p>Let’s take a break from the block editor and hop into the Astra editor to set up our header and footer.</p>
+
+      <ol>
+        <li>Changing our header logo and menu</li>
+      </ol>
+
+      <p><img src="res/customize-theme.png" alt="" /></p>
+
+      <p><img src="res/change-header-logo.png" alt="" /></p>
+
+      <ol>
+        <li>Changing our footer using the Astra footer builder</li>
+      </ol>
+
+      <p>Changing our footer is a little bit more complicated. We need to use the theme’s footer customizer. We likely won’t get quite to the point we want to, but that’s okay…</p>
+
+      <p>You can see the actual footer, as well as the blocks which make it below</p>
+
+      <p><img src="res/footer-builder.png" alt="" /></p>
+
+      <p><img src="res/footer-builder-widgets.png" alt="" /></p>
+
+      <p>We have three tasks: update the copyright, add the ‘social media’ icons, and update some colors…</p>
+
+      <p>First, we’ll clean up the second row. Remove all widgets and collapse to one column</p>
+
+      <p><img src="res/cols-footer.png" alt="" /></p>
+
+      <p><img src="res/footer-bg.png" alt="" /></p>
+
+      <p>Do the same for the bottom with color: #206A5D</p>
+
+      <p>Fix our copyright, editing the text and setting the color to white and center it</p>
+
+      <p><img src="res/change-copyright-text.png" alt="" /></p>
+
+      <p><img src="res/text-color.png" alt="" /></p>
+
+      <p>We’ll add an HTML element in the second row, and update the image</p>
+
+      <p><img src="res/footer-html.png" alt="" /></p>
+
+      <p><img src="res/footer-social.png" alt="" /></p>
+
+      <p>By editing the HTML, we could easily add some links to the images, but we won’t worry about this for now.</p>
+
+      <p>Reminder - <a href="https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_link_image">add link to image.</a></p>
+
+      <p>** Hit publish to update! **</p>
+
+      <p><img src="res/publish-footer.png" alt="" /></p>
+
+      <ol>
+        <li>Contact form</li>
+      </ol>
+
+      <p>Let’s finish the landing page off with a contact form:</p>
+
+      <p>Go back to editing the page, and remove the remaining gallery stuff from our template page.</p>
+
+      <p>Start with a <code class="language-plaintext highlighter-rouge">group</code> block which allows us to add a background color</p>
+
+      <p>Group -&gt; Inspector -&gt; Block -&gt; Background Color -&gt; #F1F1E8</p>
+
+      <p>Inside the group add a WPForms,</p>
+
+      <p>We’ll use a WPForms plugin, which was downloaded with the starter template. Set it to the contact form. We’ll add some text above, and then edit the form from another area.</p>
+
+      <p><img src="res/wpforms-contact.png" alt="" /></p>
+
+      <p><img src="res/edit-contact-form.png" alt="" /></p>
+
+      <p>There’s lots of cool things we can do here, but for now we’ll simply set the form as we like.</p>
+
+      <p><img src="res/check-box-1.png" alt="" /></p>
+
+      <p><img src="res/check-box-2.png" alt="" /></p>
+
+      <p>Finally, ensure the email is set up properly.</p>
+
+      <p><img src="res/admin-email.png" alt="" />)</p>
+
+      <p>We have a complete functional page.</p>
+
+      <p><img src="res/mobile-homepage.png" alt="" /></p>
+
+      <p>In the next section we’ll add a blog page.</p>
+
+    </div></div></section>
+<section id="50blogpage"><button class="collapsible">5.0 Blog Page</button><div class="text-content"><div class="text-inner">
+
+      <p>We will use the blog feature to implement the locations page, with a post for each location. Let’s set up the posts first…</p>
+
+      <p><img src="res/new-post.png" alt="" /></p>
+
+      <p>For each post add a title, text and a featured image.</p>
+
+      <p><img src="res/blog-post.png" alt="" /></p>
+
+      <p>Be sure to publish!</p>
+
+      <p>You can repeat this for a few locations…</p>
+
+      <p>Now to create the blog page which links to the others…</p>
+
+      <p>Create a new page, and set up a cover like before.</p>
+
+      <p>Set some Page settings, including:</p>
+      <ul>
+        <li>Hide Title</li>
+        <li>No Sidebar</li>
+        <li>Full Width / Stretched</li>
+        <li>Transparent header Enabled</li>
+      </ul>
+
+      <p>Publish. Everything look good?</p>
+
+      <p>We should fix that menu, what is with that “Take action” button?</p>
+
+      <p>We can edit our menu here…</p>
+
+      <p><img src="res/menu.png" alt="" /></p>
+
+      <p>Be sure to save menu!</p>
+
+      <p>We can also get rid of the “Take Action” Button in the header</p>
+
+      <p>Theme -&gt; Customize -&gt; Header Builder -&gt; Remove the Button</p>
+
+      <p><img src="res/remove-button.png" alt="" /></p>
+
+      <p>And</p>
+
+      <p><img src="res/remove-mobile-button.png" alt="" /></p>
+
+      <p><em>** Publish when done !!! **</em></p>
+
+      <p>Preview. Are the menus fixed?</p>
+
+      <p>To format our blog posts, we’ll use a plugin. Grab it here…</p>
+
+      <p><img src="res/add-plugin.png" alt="" /></p>
+
+      <p><img src="res/gutenberg-blocks.png" alt="" /></p>
+
+      <p>Install and activate</p>
+
+      <p>This is a hefty plugin … we want to turn most of it off…</p>
+
+      <p><img src="res/deactivate-all.png" alt="" /></p>
+
+      <p><img src="res/activate-post-grid.png" alt="" /></p>
+
+      <p>Let’s head back to the <code class="language-plaintext highlighter-rouge">locations</code> page, and add in our new “Post Grid” block</p>
+
+      <p><img src="res/posts-grid.png" alt="" /></p>
+
+      <p>Let’s edit the block a bit…</p>
+
+      <p><img src="res/format-posts.png" alt="" /></p>
+
+      <p>Publish our changes.</p>
+
+      <p>Time to test - how does it look on both the mobile and desktop?</p>
+
+      <p>Hopefully this lab has helped you see how we can get a website that looks good, close to our vision (though usually not perfect without significant futzing), and still being able for other users to add to later on.</p>
+
+      <p><img src="res/desktop-complete.png" alt="" />
+<img src="res/mobile-complete.png" alt="" />
+<img src="res/mobile-blogpost.png" alt="" /></p>
+
+      <p>We didn’t fix the non-transparent header which shows up on the blog posts - I’ll leave that up to you.</p>
+
+    </div></div></section>
+<section id="60assignment"><button class="collapsible">6.0 Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>Your assignment is to get into the head of a prospective user by creating a 2-page blog site for a fictional persona, similar in scope to the pre-lab. Create a persona (no need to fill in all the details - major details only), or use one you have previously created, and include a site and blog snippets in keeping with their style.</p>
+
+      <p>Your site should include</p>
+      <ul>
+        <li>A consistent header across pages</li>
+        <li>A consistent footer across pages</li>
+        <li>Appropriate menu linking the pages, with both mobile and desktop variants</li>
+        <li>A landing page with at least 3 sections
+          <ul>
+            <li>Each section should communicate an aspect of the persona’s personality or interests</li>
+            <li>Example ideas: book quotes, song lyrics, recipes, photo galleries, pets, etc.</li>
+            <li>Each section should experiment with a different type of Gutenberg block</li>
+          </ul>
+        </li>
+        <li>A blog page with at least 3 entries
+          <ul>
+            <li>Each entry should be both summarized on the blog posts page, and be given their own individual page</li>
+          </ul>
+        </li>
+        <li>
+          <p>A contact form</p>
+        </li>
+        <li>I’d recommend quickly prototyping in XD first, but don’t get too frustrated when you can’t exactly replicate your XD Design</li>
+        <li>You may include elements and styling from templates, but obviously cannot simply submit a template! Use it is a starting point to add, modify or adapt, like we did in the lab.</li>
+        <li>You can experiment with a different Page Builder if you would like, like Elementor or Beaver Builder, but expect a performance hit!</li>
+        <li>You can grab some cc0 stock photos from: https://www.pexels.com/creative-commons-images/</li>
+      </ul>
+
+    </div></div></section>
+<section id="70submission"><button class="collapsible">7.0 Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>Please submit a backup of your site from local.</p>
+
+      <p><a href="https://localwp.com/help-docs/advanced/how-to-backup-a-local-site/">See this link for information:</a></p>
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>M. Rand-Hendriksen, <a href="https://www.lynda.com/WordPress-tutorials/WordPress-5-Essential-Training/651229-2.html?org=reginalibrary">WordPress 5 Essential Training</a>, Lynda from LinkedIn Learning, 2020</p>
+
+      <p>M. Rand-Hendriksen, <a href="https://www.lynda.com/WordPress-tutorials/WordPress-5-Essential-Training-Site-Administration/782148-2.html?org=reginalibrary">WordPress 5 Essential Training: Site Administration</a>, Lynda from LinkedIn Learning, 2019</p>
+
+    </div></div></section>
+<section id="wordpressadamsrant"><button class="collapsible">WordPress - Adam's Rant</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>Freemium + Software As a Service on top of GPL software is a bizarre business model.</li>
+      </ul>
+
+      <details>
+<summary>Warning, rant inside</summary>
+
+  - Increasingly predatory pricing structures for free software
+  - Trivial things are often gated behind 'pro licenses'
+    - Plugins may contain DRM.
+  - Affiliate programs means there are tons of thinly veiled adverts masquerading as tutorials, reviews, and comparisons
+    - Often these are published by the companies which created the plugin.
+  - Good actual free themes and plugins are hidden behind 'free' (freemium) ones.
+  - The 'Software as a Service' (SAAS) business model forces users to subscribe rather than buy outright
+  - Overall if feels like Freemium is contrary to the FOSS share-alike mindset of wordpress 
+    - GPL derivative works are required inherit the GPL license, premium plugins do so only in name not spirit
+  - Technically they are only selling updates and support by subscription, once you buy it once you own it forever, sorta?!
+    - And could even give it away free of charge ?!
+  - I'm definitely _not_ saying developers don't deserve to get paid, they do, it just seems like too much contradictions.
+    - Basically, SAAS and FOSS feel like they must always be at odds.
+
+</details>
+
+      <ul>
+        <li>Minor gripe: the overhead of wordpress can make it very slow compared to an equivalent static site.
+          <ul>
+            <li>Optimizing a wordpress site is a worthwhile undertaking.</li>
+            <li>In other courses you will learn how to create a site without Wordpress, using HTML, CSS and JavaScript</li>
+          </ul>
+        </li>
+      </ul>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ENSE 271 Lab 1 </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+
+              <div class="row">
+                <header>ENSE 271</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-271/">Schedule</a></li>
+                  <li><a href="/labs/ense-271/lab-1">Lab 1</a></li>
+                  <!-- <li><a href="/labs/ense-271/lab-2">Lab 2</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-3">Lab 3</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-4">Lab 4</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-5">Lab 5</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-6">Lab 6</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-7">Lab 7</a></li> -->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
+                  <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
+                  <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
+                  <li><a href="/labs/ense-374/lab-9">Lab 9</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-472/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-472/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-472/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-1-github-portfolios-and-user-story-mapping">Lab 1: Github Portfolios and User Story Mapping</h1>
+
+<p>ENSE 271 - People-Centred Design - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="part1githubandportfolios"><button class="collapsible">Part 1: GitHub and Portfolios</button><div class="text-content"><div class="text-inner">
+
+      <p>To stand out in the competitive software industry, as well as to engage potential contributors, a complete GitHub repository is an effective tool. In this lab we will introduce you to an overview of GitHub, how it works, and show you some examples of strong repositories. Finally, we will discuss using GitHub as a design and coding portfolio, which you can use to showcase your work and attract prospective employers. As a running assignment in this lab, you will add to your GitHub portfolio, which will be assessed in a live interview in the final lab of the semester.</p>
+
+      <h3 id="version-control">Version Control</h3>
+
+      <p>Git is version control software responsible for backing up different version of your source code over time, and letting you restore or jump between different versions. Git aids in backup, branching, and collaboration. A Git Repository (repo) is the name for the database in which source files are stored. GitHub is a cloud service, owned by Microsoft, which can host our repositories remotely. VS Code is an open-source text editor which can easily synchronize local files to GitHub repositories.</p>
+
+      <h3 id="our-setup">Our Setup</h3>
+
+      <p>What we’re going to be setting up:</p>
+
+      <p><img src="res/how-system-works.png" alt="" /></p>
+
+      <h3 id="install-vs-code">Install VS Code…</h3>
+
+      <p><a href="https://code.visualstudio.com/">Download and install VS Code.</a> The default settings are typically fine.</p>
+
+      <p><img src="res/dl-vs-code.png" alt="" /></p>
+
+      <p>Overview</p>
+
+      <p><img src="res/vs-code-overview.png" alt="" /></p>
+
+      <ol>
+        <li>Left panel - explorer, search, extensions, git</li>
+        <li>This area changes depending on what is selected in (1).</li>
+        <li>Tabbed interface lets you have multiple files open at once.</li>
+        <li>Centre stage is where you will edit your code</li>
+        <li>The minimap is a zoomed out view of your code, and helps you navigate quickly.</li>
+        <li>Terminal, debugging and output appear down here. Sometimes this area is hidden.</li>
+        <li>See which modes the editor is in, like language, line endings, tab size, etc.</li>
+      </ol>
+
+      <h3 id="install-git">Install Git</h3>
+
+      <p><a href="https://git-scm.com/">Download and run the installer for your system</a>. (e.g. 64-bit windows setup).</p>
+
+      <p><img src="res/download-git.png" alt="" /></p>
+
+      <p>Most of the installation defaults are fine, but watch out for these ones:</p>
+
+      <p><img src="res/vs-code-default.png" alt="" /></p>
+
+      <p><img src="res/rename-to-main.png" alt="" /></p>
+
+      <h3 id="configure-git">Configure Git</h3>
+
+      <p>We need to do some initial setup for git.</p>
+
+      <p>From the command line, configure git:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "FIRST_NAME LAST_NAME"
+</code></pre></div>      </div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.email "MY_NAME@example.com"
+</code></pre></div>      </div>
+
+      <p>Use your own name, and the email you plan to use for registering a GitHub account.</p>
+
+      <p>Spelling must be perfect, or it will silently fail, leading to later frustrations!</p>
+
+      <h3 id="create-a-github-account">Create a GitHub Account…</h3>
+
+      <p>Pretty easy to do, just follow along with the provided instructions. Recommended to use your real name and a professional email.</p>
+
+      <p><img src="res/github-account.png" alt="" /></p>
+
+      <h3 id="creating-and-linking-a-repo-through-vs-code">Creating and Linking a Repo through VS Code</h3>
+
+      <p>Creating a Repo through VS code is easy. First we need to create a folder:</p>
+
+      <p><img src="res/vs-code-create-repo.png" alt="" /></p>
+
+      <p>And trust it:</p>
+
+      <p><img src="res/trust-is-earned.png" alt="" /></p>
+
+      <p>Then add a file:</p>
+
+      <p><img src="res/your-first-file.png" alt="" /></p>
+
+      <p>And publish to github:</p>
+
+      <p><img src="res/publish-to-github.png" alt="" /></p>
+
+      <p>Oh, but we need to authorize VS code to use our GitHub account with O-Auth:</p>
+
+      <p><img src="res/authorize-in-your-browser.png" alt="" /></p>
+
+      <p><img src="res/o-authorize.png" alt="" /></p>
+
+      <p>So, now we need to create a remote repo on GitHub:</p>
+
+      <p><img src="res/creating-a-repo.png" alt="" /></p>
+
+      <p>And show which files we are going to send up to the remote:</p>
+
+      <p><img src="res/what-to-include.png" alt="" /></p>
+
+      <p>And push it!</p>
+
+      <p><img src="res/first-push.png" alt="" /></p>
+
+      <p>Check it out, we have some files on GitHub:</p>
+
+      <p><img src="res/checking-out-the-repo.png" alt="" /></p>
+
+      <h3 id="staging">Staging</h3>
+
+      <p>So VS Code has abstracted a lot of the Git process. Let’s examine it in depth.</p>
+
+      <p>Your files can exist in 4 states:</p>
+
+      <p>“Working”, “Staging”, “Local Repo” and “Remote Repo”</p>
+
+      <p><img src="res/how-git-actually-works.png" alt="" /></p>
+
+      <p>By default, files are in the working (<code class="language-plaintext highlighter-rouge">U</code> in VS Code) state.</p>
+
+      <ul>
+        <li>
+          <p>When you run the <code class="language-plaintext highlighter-rouge">add</code> command (<code class="language-plaintext highlighter-rouge">+</code>), a file is moved from working to staged. This means git knows to include it next time work is checked in with a commit.</p>
+        </li>
+        <li>When you run a <code class="language-plaintext highlighter-rouge">commit</code> command (<code class="language-plaintext highlighter-rouge">✓</code>), all of the staged files are backed up into the local repository, and the local files are returned to the working state.
+          <ul>
+            <li>This means, if you want to do another check-in, you will need to <code class="language-plaintext highlighter-rouge">add</code> them again.</li>
+            <li>Commits need a brief message to explain the reason for the commit, usually phrased as “verb-nouns”, e.g. “add readme md”</li>
+          </ul>
+        </li>
+        <li>Finally, when you wish to synchronize the local repo with the remote repo, you will use a <code class="language-plaintext highlighter-rouge">push</code> command.</li>
+      </ul>
+
+      <p>Let’s see how this is done in VS Code.</p>
+
+      <p>Let’s add another file:</p>
+
+      <p><img src="res/second-file.png" alt="" /></p>
+
+      <p>Add it and commit it:</p>
+
+      <p><img src="res/add-commit-push.png" alt="" /></p>
+
+      <p>Push it:</p>
+
+      <p><img src="res/actually-push.png" alt="" /></p>
+
+      <p>Check it on the website:</p>
+
+      <p><img src="res/it-made-it.png" alt="" /></p>
+
+      <p>There’s waaaay more to Git and version control than this, but that is for another course. This should be enough to get you uploading files for your portfolio.</p>
+
+    </div></div></section>
+<section id="githubportfolios"><button class="collapsible">GitHub Portfolios</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s look at some good GitHub Repos, Profiles and GitHub Pages to see what can be done with GitHub.</p>
+
+      <h3 id="good-repos">Good Repos</h3>
+
+      <p><a href="https://github.com/godotengine/godot">GODOT Game Engine</a></p>
+
+      <p><a href="https://github.com/microsoft/vscode">VS Code</a></p>
+
+      <p><a href="https://github.com/tensorflow/tensorflow">TensorFlow</a></p>
+
+      <p><a href="https://github.com/twbs/bootstrap">BootStrap</a></p>
+
+      <p><a href="https://github.com/getify/You-Dont-Know-JS">You Don’t Know JS</a></p>
+
+      <h3 id="good-profiles">Good Profiles</h3>
+
+      <p>You may use a <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme">profile readme markdown file</a> for yourself to let people know who you are. Examples:</p>
+
+      <p><a href="https://github.com/abhisheknaiidu/awesome-github-profile-readme">List of Profile Readmes</a></p>
+
+      <h3 id="github-pages">GitHub Pages</h3>
+
+      <p>GitHub pages allow hosting static websites for free. Examples:</p>
+
+      <p><a href="https://webdesignledger.com/best-github-project-pages/">Best GitHub Project Pages</a></p>
+
+      <h3 id="github-best-practice">GitHub Best Practice</h3>
+
+      <p>We won’t discuss the how’s of all of these in this lab, but it’s good to keep in mind for the future!</p>
+
+      <p>Good Commit Messages - Brief, accurate. Verb-Nouns. A focus on “why” over “what” when it’s not obvious.</p>
+      <ul>
+        <li>e.g. “add lab 1”</li>
+        <li>e.g. “add dodge mechanic in player class to help with boss battles”</li>
+        <li>e.g. “fix death-cam bug in undead parish to prevent sen’s gate skip”</li>
+        <li>e.g. “refactor controller class for future proofing”</li>
+      </ul>
+
+      <p>Don’t Add Junk Files</p>
+      <ul>
+        <li>Some IDEs add extra stuff that doesn’t matter for your source code, e.g. compiled binaries, cached thumbnails, editor settings</li>
+        <li>You can find common <a href="https://git-scm.com/docs/gitignore">“.gitignore” files</a> which will automatically prevent these from being pushed</li>
+        <li>If you want binaries, <a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository">use releases</a></li>
+      </ul>
+
+      <p>Appropriate Branches</p>
+      <ul>
+        <li>Branches allow developers to work on features independently, and then merge into main when all bugs are fixed</li>
+      </ul>
+
+      <p>Dependencies / Compilation Instructions</p>
+      <ul>
+        <li>Having a few sentences on how to compile your application ensures potential users and collaborators can start using your software right away!</li>
+      </ul>
+
+      <p>Issue Tracking</p>
+      <ul>
+        <li>Let your users know how they can report bugs, and if you plan to maintain the repository</li>
+      </ul>
+
+      <p>Pull Requests</p>
+      <ul>
+        <li>To foster community collaboration, state if/how you will handle <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">pull requests</a></li>
+      </ul>
+
+      <p>Open Source Licensing</p>
+      <ul>
+        <li>If you wish to release your project to the world, source included, use an open source license, such as <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons</a>, <a href="https://opensource.org/licenses/MIT">MIT</a> or <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL</a>. Creative commons should only be used for creative works rather than source code, the MIT license gives derivative projects the most rights, whereas the GPL forces derivative projects to also remain open source.</li>
+        <li>This is not required to use GitHub, and you can even keep your repositories private.</li>
+        <li>If anything is not covered by the license, let the users know explicitly (e.g. Trademarks)</li>
+      </ul>
+
+    </div></div></section>
+<section id="part2userstorymapping"><button class="collapsible">Part 2: User Story Mapping?</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>A UX exercise credited to Jeff Patton originally documented in his article “It’s All in How You Slice It (2005)” and later a book published by O’Reilly.</li>
+        <li>Has grown iteratively over time by various developers.</li>
+        <li>An exercise which produces a card-based planning model.</li>
+      </ul>
+
+      <h3 id="guiding-principle">Guiding Principle</h3>
+
+      <ul>
+        <li>Challenge the old Software Engineering adage: “If you build the highest value feature first, users will love your release”.
+          <ul>
+            <li>This adage is false when lacking required low-value (secondary) features.</li>
+            <li>e.g. If you are designing a photoshop clone, a high demand feature might be cool new AI tech for context aware fills.
+              <ul>
+                <li>But if you are missing the basics (crop, resize, etc.) then your tool will not get much long term use.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>We hope to use this tool to discover a set of core features, primary and secondary, which should be prioritized in a Minimum Viable Product (MVP) to make a product people will actually want to use!</li>
+      </ul>
+
+      <h3 id="who-should-participate-in-user-story-mapping">Who should participate in User Story Mapping:</h3>
+
+      <ul>
+        <li>Never one person!</li>
+        <li>A team of four to eight stakeholders from different roles</li>
+        <li>Domain experts, testers, UI designers, business people</li>
+      </ul>
+
+    </div></div></section>
+<section id="originalmethodineightsteps"><button class="collapsible">Original Method in Eight Steps</button><div class="text-content"><div class="text-inner">
+
+      <p>Originally, eight steps were given to describe user-story mapping. These need not be followed rigidly, but provide a nice narrative to the process.</p>
+
+      <ol>
+        <li>Collect Features</li>
+        <li>Add Details</li>
+        <li>Place Cards in Sequential Order</li>
+        <li>Group by Frequency</li>
+        <li>Note Logical Breaks in Workflow</li>
+        <li>Mark the First System Span</li>
+        <li>Fill in Build Estimates</li>
+        <li>Slice and Serve</li>
+      </ol>
+
+      <p>In detail:</p>
+
+      <ol>
+        <li>
+          <p>Collect Features</p>
+
+          <ul>
+            <li>Answer “What does our software do?”, from a user perspective.</li>
+            <li>Write these on business cards or index cards</li>
+          </ul>
+        </li>
+        <li>
+          <p>Add Details</p>
+
+          <ul>
+            <li>What kind of user uses the feature, (role, persona, etc.)</li>
+            <li>How often, (daily, weekly, monthly, hourly?)</li>
+            <li>How valuable is the feature? (high, medium, low)</li>
+          </ul>
+
+          <p>Original Proposed Example Card:</p>
+
+          <hr />
+
+          <p><strong>create po for vendor</strong></p>
+
+          <p>(merchandise buyer)</p>
+
+          <p>frequency: weekly</p>
+
+          <p>value: medium</p>
+
+          <hr />
+
+          <ul>
+            <li>
+              <p>With all these cards this might feel like Monopoly.</p>
+            </li>
+            <li>
+              <p>Note that this style has later been standardized by Mike Cohn to the User Story approach:</p>
+
+              <ul>
+                <li>As a <em>type of user</em> I want <em>some goal</em> so that <em>some reason</em>.</li>
+              </ul>
+            </li>
+            <li>
+              <p>This method is preferred in this course where appropriate.</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Place Cards in Sequential Order</p>
+
+          <ul>
+            <li>On a poster board:
+              <ul>
+                <li>label the X-axis “Usage Sequence”
+                  <ul>
+                    <li>We use the western convention that left happens earlier, right happens later, though this can be modified for working in other cultures with different conventions.</li>
+                  </ul>
+                </li>
+                <li>label the Y-axis “Criticality”
+                  <ul>
+                    <li>Features at the top are always used, features at the bottom are rarely used
+                      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                      Usage Sequence
+  Used Earlier                                       Used Later
+  &lt;------------------------------------------------------------&gt;
+  (Always Used)
+  ^
+  | 
+  | Criticality
+  v
+  (Never Used)
+</code></pre></div>                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Usage sequence refers to tasks that have to happen in order,
+              <ul>
+                <li>e.g. collect ingredients before starting cooking</li>
+              </ul>
+            </li>
+            <li>If events happen simultaneously, arrange them logically.
+              <ul>
+                <li>e.g. If I asked you: “List everything your system does”, what order would you list the features?</li>
+                <li>That should be the order you place them.</li>
+              </ul>
+            </li>
+            <li>As a group, place the cards in just one row across the top.</li>
+          </ul>
+        </li>
+        <li>
+          <p>Group by Frequency</p>
+
+          <ul>
+            <li>
+              <p>As a group, adjust the vertical position of each card based on how critical they are to the system success…</p>
+            </li>
+            <li>
+              <p>We’ve gone from playing Monopoly to Twister!</p>
+            </li>
+          </ul>
+
+          <p><img src="res/1-cards.png" alt="Laying out cards" title="Laying out cards" /></p>
+        </li>
+        <li>
+          <p>Note Logical breaks in Workflow</p>
+
+          <ul>
+            <li>
+              <p>As you go left to right through the model, you’ll find breaks, typically where tasks shift from one person performing the task to another.</p>
+            </li>
+            <li>
+              <p>Draw in vertical dashed lines at these points to divide into business processes.</p>
+            </li>
+            <li>
+              <p>If you are having difficulty finding these divides, discuss why, which may lead to important new insights about the project.</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Mark the First System Span</p>
+
+          <ul>
+            <li>
+              <p>Identify the smallest set of features to be minimally useful in a business context.</p>
+            </li>
+            <li>
+              <p>Draw a horizontal line under the row which makes up the first span</p>
+            </li>
+            <li>
+              <p>The line does not need to be straight across - weave up or down to grab the features you want or exclude features you don’t want.</p>
+            </li>
+            <li>
+              <p>These are the highest priority features in each business process</p>
+            </li>
+            <li>
+              <p>Some vertical lanes might be empty.</p>
+            </li>
+            <li>
+              <p>This top row represents the bare minimum of features which must be in your first release, even if this is only an internal release, so that you can start testing.</p>
+              <ul>
+                <li>This initial system span is called a Minimum Viable Product, MVP</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Fill in Build Estimates</p>
+
+          <ul>
+            <li>Have devs write implementation time estimates directly on the cards.  Add up the values across the top line – this is time to the MVP</li>
+          </ul>
+        </li>
+        <li>
+          <p>Slice and Serve</p>
+
+          <ul>
+            <li>Have the business people decide which features need to be in each successive release, by drawing additional horizontal jagged lines across the remainder of the poster.</li>
+          </ul>
+
+          <p><img src="res/3-successive-builds.png" alt="Drawing lines for iterative releases" title="Drawing lines for iterative releases" /></p>
+        </li>
+      </ol>
+
+    </div></div></section>
+<section id="artifact"><button class="collapsible">Artifact</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>We’ve found dependencies. We’ve found criticality.</li>
+        <li>We know the features set to get your system up and running.</li>
+        <li>We can also see functionality needed for a single person or role</li>
+      </ul>
+
+      <h3 id="limitations">Limitations</h3>
+
+      <ul>
+        <li>
+          <p>Useful processes rarely remain static. This one naturally evolved with contributions from the original author and other contributors.</p>
+        </li>
+        <li>
+          <p>The biggest limitation of the original model was “Granularity”.</p>
+          <ul>
+            <li>All of the current tasks are framed as small tasks.</li>
+            <li>We need to extract the big picture to contextualize the tasks.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="advances">Advances</h3>
+
+      <p>In the aim of addressing the granularity problem, the following adjustments were adopted:</p>
+
+      <ul>
+        <li>In the top tier is the “Big Stories”, a.k.a. <code class="language-plaintext highlighter-rouge">User Activities</code> (Norman)
+          <ul>
+            <li>Commonly called <code class="language-plaintext highlighter-rouge">Epics</code>, they are more like “chapters” in a story</li>
+            <li>This row is called the <code class="language-plaintext highlighter-rouge">Backbone</code></li>
+            <li>Provide context to the tasks, so we don’t lose the big picture
+              <ul>
+                <li>If a unit of work is too big to be used to make meaningful estimations, it should be further decomposed</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>The second row down are the <code class="language-plaintext highlighter-rouge">Steps</code>. together making the <code class="language-plaintext highlighter-rouge">Walking Skeleton</code> (Cockburn).
+          <ul>
+            <li>You should be able to walk through the tasks in this row and feel everything fits together logically
+              <ul>
+                <li>There should be no missing steps, no gaps in logic</li>
+                <li>It can be useful to do this process with the client. This will help you identify what to build first.</li>
+              </ul>
+            </li>
+            <li>Some groups use a different card color for this row.</li>
+          </ul>
+        </li>
+        <li>Everything underneath are <code class="language-plaintext highlighter-rouge">Tasks</code>, or <code class="language-plaintext highlighter-rouge">Details</code> in decreasing frequency of use.
+          <ul>
+            <li>These are our skeletal <code class="language-plaintext highlighter-rouge">ribs.</code></li>
+            <li>Typically a third color is used, though tasks may use a variety of colors as needed</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><img src="res/2-areas-labeled.png" alt="Mapping the terminology of the map" title="Mapping the terminology of the map" /></p>
+
+      <ul>
+        <li>Some sources use minor differences in terminology for different levels of granuarity</li>
+      </ul>
+
+      <p>In the real world, Software developers rarely stick to rigidly defined rules, and modify these techniques as needed.</p>
+      <ul>
+        <li>You’re a problem solver, you should be using whatever tool best solves the problem, not trying to fit the problem to a rigid tool!</li>
+        <li>Some people want more levels of granularity, some want fewer.</li>
+        <li>You may see two colours of cards used, one for the backbone and one for tasks, or three colours, for the backbone, walking skeleton and tasks, or more.</li>
+      </ul>
+
+      <p>Finally, software has made this process completely virtual, which we will demonstrate using Stories on Board.</p>
+
+    </div></div></section>
+<section id="storiesonboard"><button class="collapsible">StoriesOnBoard</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s head over to <a href="https://app.storiesonboard.com/login">storiesonboard</a>. Tim should have set you up with accounts.</p>
+
+      <p>In order to quickly see the capabilities of the software, you should create a new board, and instead of starting from scratch, start from the Guide Map:</p>
+
+      <p><img src="res/4-new-map.png" alt="New Map" title="New Map" /></p>
+
+      <p><img src="res/5-new-example-map.png" alt="New Example Map" title="New Example Map" /></p>
+
+      <p>You should see a new board:</p>
+
+      <p><img src="res/6-guide-map.PNG" alt="Guide Map" title="Guide Map" /></p>
+
+      <p>It is somewhat intimidating. Let’s take a look around, moving clockwise from top-right…</p>
+
+      <p><img src="res/7-guide-map-annotated.png" alt="Guide Map Annotated" title="Guide Map Annotated" /></p>
+      <ol>
+        <li>Here we can navigate between this and other maps</li>
+        <li>In this section we can add collaborators, zoom our map, filter which cards are displayed, and change what appears in the sidebar.</li>
+        <li>This is the sidebar, in this area you can perform various task depending on what you have selected from section 2, such as view board conventions, edit personas, and discuss the board.</li>
+        <li>Center stage - this is where you will spend most of your time working, adding cards, organizing them, adding time estimates, and moving them through the various stages.</li>
+      </ol>
+
+      <p>Let’s zoom in on the upper left of center stage:</p>
+
+      <p><img src="res/8-center-stage-zoom.png" alt="Center Stage Zoom" title="Center Stage Zoom" /></p>
+
+      <ol>
+        <li>As the vertical lanes tend to correspond to different people or roles, it may make sense to assign personas to these tasks.</li>
+        <li>Time estimates for our larger stories are derived from the sum of the time estimates of the smaller tasks below them.</li>
+        <li>We can create releases and assign cards into each. Some feedback is given for the release, including how many cards and hours remain, and how many cards are not yet estimated.</li>
+        <li>We can set the status of a given card, from the options of <code class="language-plaintext highlighter-rouge">TODO</code>, <code class="language-plaintext highlighter-rouge">READY</code>, <code class="language-plaintext highlighter-rouge">DOING</code> and <code class="language-plaintext highlighter-rouge">DONE</code>.</li>
+        <li>We can set a time estimate for each task, which is used for computing the total time for a given lane, as well as the time remaining for a given release.</li>
+        <li>Cards can be annotated with a number of symbols explained in the “About This Board” legend.</li>
+      </ol>
+
+      <p>We can also see an overview of our progress by clicking on the progress part of the release, e.g. <code class="language-plaintext highlighter-rouge">14 CARDS, 76 LEFT OF 91 HOURS</code></p>
+
+      <p><img src="res/9-release-progress.PNG" alt="Release Progress" title="Release Progress" /></p>
+
+      <p>Simple card modifications such as renaming and adding can be accessed from the menu in the bottom right of a card</p>
+
+      <p><img src="res/10-card-detail-zoom.png" alt="Simple Card Details" title="Simple Card Details" /></p>
+
+      <p>Let’s Interact with a card in detail…</p>
+      <ul>
+        <li>Right Click to change color</li>
+        <li>Double Click to edit in detail…</li>
+      </ul>
+
+      <p><img src="res/11-card-details.png" alt="Card Details" title="Card Details" /></p>
+
+      <ol>
+        <li>Here we can see the title of the card</li>
+        <li>The user story, as well as some details about the card go here. You can use <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">MarkDown</a> to make this look better, add images, links, etc.</li>
+        <li>Comments for other members of the team</li>
+        <li>Modify the card</li>
+        <li>Details about the card such as status and estimate. You can add your time estimate here.</li>
+      </ol>
+
+      <p>This is a good overview of the software. Before you leave the Guide Map and head into your own map, check out the cards in this region:</p>
+
+      <p><img src="res/12-examples.png" alt="Examples" title="Examples" /></p>
+
+      <p>And if you want more help, check out the documentation here: <a href="http://docs.storiesonboard.com/en/">Read Some Docs!</a></p>
+
+    </div></div></section>
+<section id="workedexample"><button class="collapsible">Worked Example:</button><div class="text-content"><div class="text-inner">
+
+      <p>Imagine you are tasked with building an application for a food delivery service. Use User Story Mapping to plan building such an app.</p>
+
+      <p>In accomplishing this, think in terms of: Who are the users? What are the user’s goals(Activities), and what smaller operations must they do (Steps, Tasks) in order to accomplish this goal?</p>
+
+    </div></div></section>
+<section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>Planning your semester:</p>
+
+      <p>Using StoriesOnBoard, create a new board which represents part of your study schedule for the current semester. Using User Story Mapping principles, try to plan out some of the tasks you need to do, such as attending lectures or completing labs. Note that User Story Maps are not exactly designed for this type of planning, so it may not work perfectly for all the tasks, which is fine. It also does not need not be totally realistic or accurate, if you wish you can make stuff up, the purpose is simply to get some experience using the software. In accomplishing this, include:</p>
+
+      <ul>
+        <li>At least three epics in the backbone</li>
+        <li>At least six steps in the walking skeleton</li>
+        <li>At least 18 total tasks
+          <ul>
+            <li>All tasks need to have a name, status and time estimate</li>
+            <li>Edit the details for at least three tasks and try out different <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a> features</li>
+          </ul>
+        </li>
+        <li>At least 2 releases</li>
+        <li>Experiment at least one extra feature, such as additional card colors, annotations or personas</li>
+      </ul>
+
+      <p>Running Assignment - Development Portfolio</p>
+      <ul>
+        <li>Start a new (private for now) GitHub Repo which will be your portfolio for the course</li>
+        <li>Upon completing assignments, take screenshots and push them to the repo</li>
+        <li>You can investigate GitHub Pages if you want them to be totally on the web</li>
+        <li>Use GitHub best practices to create a high quality repo</li>
+        <li>You will add to this repo all semester!</li>
+        <li>For this lab, you only need to have a <code class="language-plaintext highlighter-rouge">readme.md</code> uploaded</li>
+      </ul>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>To facilitate marking, please submit screen captures of the following:</p>
+      <ul>
+        <li>An overview of the map
+          <ul>
+            <li>Expand your username (Upper Right) in the screen capture so that your identity can be verified.</li>
+          </ul>
+        </li>
+        <li>Your three detailed tasks</li>
+        <li>Include a readme.txt explaining which extra feature you tried</li>
+        <li>Include a screen capture of your GitHub repo so far, which should still be private</li>
+      </ul>
+
+      <p>Please submit to URCourses by the deadline.</p>
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>J. Patton, <a href="https://www.jpattonassociates.com/wp-content/uploads/2015/01/how_you_slice_it.pdf">It’s All in How You Slice It</a>, Better Software, 2005.</p>
+
+      <p>J. Patton, User Story Mapping: Discover the Whole Story, Build the Right Product, O’Reilly Media, 2014.</p>
+
+      <p>J. Patton, <a href="https://www.jpattonassociates.com/the-new-backlog/">The New User Story Backlog is a Map</a>, Jeff Patton &amp; Associates, Accessed 2021</p>
+
+      <p>M. Cohn, <a href="https://www.mountaingoatsoftware.com/agile/user-stories">User Stories</a>, Mountain Goat Software, Accessed 2021</p>
+
+      <p>A. Holub, <a href="https://app.pluralsight.com/library/courses/picturing-architecture-uml/table-of-contents">Picturing Architecture: UML (The Good Bits)</a>, Pluralsight, 2016</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

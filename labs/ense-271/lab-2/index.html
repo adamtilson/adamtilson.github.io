@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ENSE 271 Lab 2 </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+
+              <div class="row">
+                <header>ENSE 271</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-271/">Schedule</a></li>
+                  <li><a href="/labs/ense-271/lab-1">Lab 1</a></li>
+                  <!-- <li><a href="/labs/ense-271/lab-2">Lab 2</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-3">Lab 3</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-4">Lab 4</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-5">Lab 5</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-6">Lab 6</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-7">Lab 7</a></li> -->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
+                  <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
+                  <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
+                  <li><a href="/labs/ense-374/lab-9">Lab 9</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-472/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-472/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-472/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-2-asset-inventories-and-site-maps">Lab 2: Asset Inventories and Site-Maps</h1>
+
+<p>ENSE 271 - People-Centred Design - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="introduction"><button class="collapsible">Introduction</button><div class="text-content"><div class="text-inner">
+
+      <p>In this lab, we are going to look at ways of documenting a high level view of a web application, including mapping out the pages that you need using SiteMaps, and mapping out the content needed and completed using a spreadsheet application. These activities broadly fall under the UX category of Information Architecture, which has roots in Library science (organizing and prioritizing content), and Cognitive Psychology (making it quick to learn, easy to understand and navigate).</p>
+
+    </div></div></section>
+<section id="sitemap"><button class="collapsible">Site Map</button><div class="text-content"><div class="text-inner">
+
+      <p>The highest level view of a website is often expressed as a sitemap.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">Visual Sitemap</code> - A hierarchical diagram which you create prior to website implementation which lists all of the pages on your site, nesting child pages under parent pages. This should be done as soon as you have mapped your user journey, e.g. from User Story Mapping, and after (or in parallel) with collecting and categorizing your content, e.g. in an asset inventory.</p>
+
+      <p>Reasons for creating a sitemap</p>
+      <ul>
+        <li>Consider User Experience (UX) from the beginning, including:
+          <ul>
+            <li>How will the content be structured?</li>
+            <li>How will the user navigate it?</li>
+          </ul>
+        </li>
+        <li>Additionally, this can help you…
+          <ul>
+            <li>Understand the site’s goals and purposes</li>
+            <li>Understand how to arrange content
+              <ul>
+                <li>Similar content should be grouped together, e.g. through Card Sorting</li>
+                <li>Helps you eliminate redundancies</li>
+              </ul>
+            </li>
+            <li>Keep team members on the same page about design
+              <ul>
+                <li>The sitemap becomes a development roadmap</li>
+              </ul>
+            </li>
+            <li>Confirm all business goals are met
+              <ul>
+                <li>You can walk through the sitemap with stakeholders</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Try to answer:</p>
+      <ul>
+        <li>What is the user’s need for information?
+          <ul>
+            <li>Are they looking for something they know is here?</li>
+            <li>Are they browsing content to see what is here?</li>
+            <li>Do they want as much detail as possible on a specific topic?</li>
+            <li>Are they looking to find something again which they previously found?</li>
+          </ul>
+        </li>
+        <li>How will they find this information?
+          <ul>
+            <li>Only ~50% of users arrive from the home page
+              <ul>
+                <li>Many users start on a sub page, e.g. from a web search</li>
+              </ul>
+            </li>
+            <li>What clear path can they take to get to their goal?
+              <ul>
+                <li>More important than the “3-click-rule”</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>From the answers, you can decide between a flat / wide sitemap, or a deep one.</p>
+
+      <p>Card Sorting</p>
+      <ul>
+        <li>A great activity to figure out how content is logically sorted is Card Sorting
+          <ul>
+            <li>Write page or content titles on cards</li>
+            <li>Shuffle them</li>
+            <li>Have a client or user then sort these cards into piles</li>
+            <li>The piles show how the user logically groups the content
+              <ul>
+                <li>Informs which pages should be nested together</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Example Sitemap:</p>
+
+      <p><img src="res/sitemap.png" alt="Example Sitemap" title="Example Sitemap" /></p>
+
+      <p>Note on Hierarchies:</p>
+
+      <p>The following diagram shows several ways you can draw out wide hierarchies, but just one way to communicate a deep hierarchy. Students occasionally confuse a vertical display of a wide hierarchy for a deep hierarchy, and while it can be confusing, it’s important to understand the difference to interpret others’ maps.</p>
+
+      <p><img src="res/hierarchy.png" alt="Hierarchy" title="Wide vs. Deep Hierarchy" /></p>
+
+      <p><code class="language-plaintext highlighter-rouge">XML Sitemap</code> - Once your website is complete, you should include your sitemap formatted in an XML file. This is for robots, such as search engine webcrawlers, and may help them quickly index your webstie based on how the pages link together.</p>
+
+    </div></div></section>
+<section id="assetinventory"><button class="collapsible">Asset Inventory</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>Assets refer to the contents of your web app
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">text</code> - broadly refers to all text assets
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">copy</code> - refers to text assets, written by a <code class="language-plaintext highlighter-rouge">copywriter</code>. Copy typically lies somewhere between informational and marketing, in that you are typically trying to persuade the reader to do something, a <code class="language-plaintext highlighter-rouge">call to action</code>.</li>
+                <li>All text assets should be shared in a Text Document, e.g. Word, so that writers who are not web experts can easily update this.</li>
+              </ul>
+            </li>
+            <li><code class="language-plaintext highlighter-rouge">images</code> - pictures for your website, which may be supplied from an artist or taken from stock photos. Typically separated between <code class="language-plaintext highlighter-rouge">graphics</code> and <code class="language-plaintext highlighter-rouge">photographs</code>
+              <ul>
+                <li>Typically images are modified (cropped) and exported as compressed variants for the web. It can be useful to keep the originals in case further changes need to be done later, e.g. photoshop files.</li>
+                <li>Some lossless types are used in the web, e.g. <code class="language-plaintext highlighter-rouge">.png</code> and <code class="language-plaintext highlighter-rouge">.svg</code>, but these are not appropriate for photographs</li>
+              </ul>
+            </li>
+            <li>other asset types may include <code class="language-plaintext highlighter-rouge">videos</code>, <code class="language-plaintext highlighter-rouge">icons</code>, <code class="language-plaintext highlighter-rouge">ui elements</code> (<code class="language-plaintext highlighter-rouge">buttons</code>), <code class="language-plaintext highlighter-rouge">audio</code>, <code class="language-plaintext highlighter-rouge">fonts</code>, <code class="language-plaintext highlighter-rouge">palettes</code> and <code class="language-plaintext highlighter-rouge">databases</code>.</li>
+            <li>It is increasingly popular to use assets hosted by third party services, such as icons and fonts, with trade-offs to this approach</li>
+          </ul>
+        </li>
+        <li>
+          <p>During design the asset inventory should be created before or in parallel the sitemap. This way, you are ensuring that your site structure matches your content, and not the other way around. This is called <code class="language-plaintext highlighter-rouge">content first</code> design.</p>
+        </li>
+        <li>
+          <p>It is important to track these assets so that, at a glance, one can easily see which assets are found, and which ones are still needed. Highlighting is great for this. It can also be useful to see when assets were last updated, to quickly catch ones that might need an update.</p>
+        </li>
+        <li>
+          <p>There are a number of ways in which we can track the assets we have and need. A spreadsheet is a good idea, which can be shared among the team, either by tracking through github, or using a collaborative office software, like Google Docs.</p>
+        </li>
+        <li>This is a living document, which should be updated as you go through your creation process</li>
+      </ul>
+
+      <p>Example:</p>
+
+      <p>Asset Inventory: Pages</p>
+
+      <p><img src="res/asset-inventory-pages.png" alt="Asset Inventory Pages" title="Asset Inventory Pages" /></p>
+
+      <p>Asset Inventory: Assets</p>
+
+      <p><img src="res/asset-inventory-assets.png" alt="Asset Inventory Assets" title="Asset Inventory Assets" /></p>
+
+      <p>You can grab my template from the example files from URCourses.</p>
+
+    </div></div></section>
+<section id="creatingasitemapinadobexd"><button class="collapsible">Creating a Sitemap in Adobe XD:</button><div class="text-content"><div class="text-inner">
+
+      <p>Installing XD:</p>
+
+      <p>You can grab adobe XD from here: <a href="https://www.adobe.com/products/xd/pricing/starter-plan.html">Adobe XD</a></p>
+
+      <p>Note, they will try to funnel you towards a paid plan - resist and grab the free edition here!</p>
+
+      <p><img src="res/dl-xd-starter.png" alt="" /></p>
+
+      <p>You will need to make an account and install Creative Cloud in the process.</p>
+
+      <p>Optional - Turn off telemetry by going to the website and the settings:</p>
+
+      <p><img src="res/xd-no-telemetry.png" alt="Disable Telemetry" title="Disable Telemetry" /></p>
+
+      <p>You don’t need to use Adobe XD to create your map, but it’s a nice gentle introduction to the application and the user interface, which we will use in future labs.</p>
+
+      <p><img src="res/xd-ui-sitemap.png" alt="XD UI Overview" title="XD UI Overview" /></p>
+
+      <p>Quickly sketch up a sitemap:</p>
+      <ul>
+        <li>Start by drawing a Rectangle
+          <ul>
+            <li>Select the rectangle tool, at (1)</li>
+            <li>Draw a rectangle in center stage (2) by dragging</li>
+          </ul>
+        </li>
+        <li>Add some text to the middle of the rectangle
+          <ul>
+            <li>Select the text tool at (3)</li>
+            <li>Create a text object on center stage (2)</li>
+            <li>Type to add some text</li>
+            <li>Drag the text to where you want it</li>
+            <li>Guides appear as you drag things around to help you center and match existing spaces</li>
+          </ul>
+        </li>
+        <li>Once you like the way this looks, copy and paste rectangles and text together as needed
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">ctrl+d</code> is a shortcut for duplicating what is selected</li>
+            <li>Then start dragging to move it around</li>
+          </ul>
+        </li>
+        <li>Connect pages with lines to represent links
+          <ul>
+            <li>click on the line tool at (5)</li>
+            <li>Drag from one box boundary to the other</li>
+            <li>You can fine-tune positioning by selecting the edge of a line after being placed</li>
+            <li>You can also creates lines use the more powerful Pen Tool (6), which can allow you to later bend or add curves to your lines</li>
+          </ul>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="fullexample"><button class="collapsible">Full Example</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s work together to perform a content audit on an existing website, generating an Asset Inventory and also a Sitemap</p>
+
+    </div></div></section>
+<section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>Competitor Analysis and Content Audit</p>
+
+      <p>For this assignment, you are to find a SMALL (I can’t stress this enough!) website, in the range of 5 to 10 pages. Assume you have been tasked to redesign this website - but you must first analyze the existing content.</p>
+
+      <p>You are to create a sitemap and an asset inventory for this site.</p>
+
+      <p>Be sure to click around. Look for pages which are not listed in the main navigation. When hunting for assets, don’t forget things like icons, text and images. If you see a carousel as a <code class="language-plaintext highlighter-rouge">hero</code> banner, list out the images.</p>
+      <ul>
+        <li>You may, but do not need to, find the actual filename for an image, but could instead choose something appropriate. It is strongly recommented to name your files in the Linux standard format, as linux is the standard for servers on the web:
+          <ul>
+            <li>lowercase</li>
+            <li>seperate words with dashes</li>
+            <li>brief but descriptive names</li>
+            <li>eg. <code class="language-plaintext highlighter-rouge">coffee-with-cream.png</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>These analysis methods are more suited to static websites. If you find <code class="language-plaintext highlighter-rouge">dynamic content</code>, like forums, blog posts or galleries, these do not need to be exhaustively documented in the asset inventory, instead, simply document all of the content for one entry, eg. one blog post, one forum post, etc., and include a <code class="language-plaintext highlighter-rouge">database</code> asset.</p>
+
+      <p>Include a text file which includes the name of the site which you are documenting</p>
+
+      <p>Good types of websites to analyze: Personal CVs, small organization pages, single product websites</p>
+
+      <p>*** Look through a website first to get a rough idea of the amount of work before commiting to document it - I’m not trying to take up too much of your time with this assignment, just give you some practice using the techniques and tools discussed.</p>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>Please submit your files on URCourses by the due date, in one <code class="language-plaintext highlighter-rouge">.zip</code> file. Include a <code class="language-plaintext highlighter-rouge">readme.md</code> file which includes the name of the site which you are documenting, your sitemap as a <code class="language-plaintext highlighter-rouge">.png</code>, and your spreadsheet as a <code class="language-plaintext highlighter-rouge">.xlsx</code> or <code class="language-plaintext highlighter-rouge">.ods</code>.</p>
+
+      <p>Example directory (zipped):</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a-tilson-sid-ense271-l2.zip
+├── readme.md
+├── sitemap.png
+└── asset-inventory.ods
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>N. Babich, <a href="https://xd.adobe.com/ideas/process/information-architecture/sitemap-and-information-architecture/">Sitemaps &amp; Information Architecture (IA)</a>, XD Ideas, Adobe, 2019</p>
+
+      <p>P. Klancar, <a href="https://careerfoundry.com/en/blog/ux-design/a-beginners-guide-to-information-architecture/">An Excellent Beginner’s Guide To Information Architecture</a>, Career Foundry, 2020</p>
+
+      <p>E. Key, <a href="https://www.lynda.com/Web-tutorials/Prototyping-WordPress-Project-Adobe-XD/2809592-2.html">Prototyping a WordPress Project in Adobe XD</a>, Linda from LinkedIn, 2019</p>
+
+      <p>J. Jhang <a href="https://uxdesign.cc/how-to-create-a-ux-sitemap-a-simple-guideline-8786c16f85c1">How to create a UX Sitemap: a simple guideline</a></p>
+
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ENSE 271 Lab 4 </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+
+              <div class="row">
+                <header>ENSE 271</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-271/">Schedule</a></li>
+                  <li><a href="/labs/ense-271/lab-1">Lab 1</a></li>
+                  <!-- <li><a href="/labs/ense-271/lab-2">Lab 2</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-3">Lab 3</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-4">Lab 4</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-5">Lab 5</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-6">Lab 6</a></li> -->
+                  <!-- <li><a href="/labs/ense-271/lab-7">Lab 7</a></li> -->
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
+                  <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
+                  <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
+                  <li><a href="/labs/ense-374/lab-9">Lab 9</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-472/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-472/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-472/lab-5">Lab 5</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="lab-4-hi-fi-prototypes-with-adobe-xd">Lab 4: Hi-Fi Prototypes with Adobe XD</h1>
+
+<p>ENSE 271 - People-Centred Design - Laboratory</p>
+
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="introduction"><button class="collapsible">Introduction</button><div class="text-content"><div class="text-inner">
+
+      <p>In the previous lab we looked at using Adobe XD to make medium fidelity prototypes. However, these were only static sites with no interactivity. We will now look at using the Adobe XD Prototyping workflow to add some interactivity to our website mockups, which we can demonstrate using the <code class="language-plaintext highlighter-rouge">preview</code> function.</p>
+
+      <p>Download the starting files from URCourses, and open up <code class="language-plaintext highlighter-rouge">travel-hyrule-starting.xd</code>, a mobile tourism site for a fictional land.</p>
+
+      <p>We will work together through:</p>
+      <ul>
+        <li>Setting a home page and previewing</li>
+        <li>Connecting the hamburger menu to each of the pages</li>
+        <li>Add an automatic carousel to the first page</li>
+        <li>Have a unique interaction on each of the strange
+          <ul>
+            <li>A slow fade on the <code class="language-plaintext highlighter-rouge">shrines</code> page</li>
+            <li>A draggable gallery on the <code class="language-plaintext highlighter-rouge">divine beasts</code> page</li>
+            <li>A carousel with buttons on the <code class="language-plaintext highlighter-rouge">towers</code> page</li>
+          </ul>
+        </li>
+        <li>Add some lightboxes to the <code class="language-plaintext highlighter-rouge">locations</code> page</li>
+      </ul>
+
+    </div></div></section>
+<section id="prototypinghomepageandpreviewing"><button class="collapsible">Prototyping, Home Page and Previewing</button><div class="text-content"><div class="text-inner">
+
+      <p>To add intereactivity to our design, we need to be in prototyping mode. Switch to prototyping mode using the top menu…</p>
+
+      <p><img src="res/1-prototype.png" alt="Prototype mode" /></p>
+
+      <p>Set the home page by selecting the page and clicking the home icon…</p>
+
+      <p><img src="res/2-home.png" alt="Home" /></p>
+
+      <p>You can preview your page by clicking on the preview icon.</p>
+
+      <p><img src="res/3-preview.png" alt="Preview" /></p>
+
+      <p><img src="res/4-preview-1.png" alt="Preview" /></p>
+
+      <p>This will open up your view. You can scroll around and click on things, but not much will happen yet. Let’s try to fix that.</p>
+
+    </div></div></section>
+<section id="wiringupthehomemenu"><button class="collapsible">Wiring up the home menu</button><div class="text-content"><div class="text-inner">
+
+      <p>Click on your <code class="language-plaintext highlighter-rouge">hamburger menu</code> icon on the main. New gizmos will appear. Click on the arrow and drag it to the menu screen to the left.</p>
+
+      <p><img src="res/5-our-first-wire.png" alt="First Wire" /></p>
+
+      <p>You will see that it is wired correct if a curved blue line connects the screens.</p>
+
+      <p><img src="res/7-wired.png" alt="Wired" /></p>
+
+      <p>In the inspector, set the animation type to tap, overlay and slide down</p>
+
+      <p><img src="res/6-animation-settings.png" alt="Animation Settings" /></p>
+
+      <p>Once an animation is set, if you wire up another link, it will copy the same animation settings. Use this to link up the hamburger menus on the other pages…</p>
+
+      <p><img src="res/8-wired-to-hamburger.png" alt="Wired to hamburger" /></p>
+
+      <p>You also need to wire up the hamburger menu of links back to the appropriate pages. Let’s start with the home page.</p>
+
+      <p><img src="res/9-wired-back-up.png" alt="Wired back up" /></p>
+
+      <p>And then set the other pages too…</p>
+
+      <p><img src="res/10-hamburger-menu-complete.png" alt="Hamburger complete" /></p>
+
+      <p>Getting pretty crazy.</p>
+
+      <p>Run your preview again, and confirm that all of the links are working correctly.</p>
+
+      <p>This is the complete workflow to link pages together. In the next sections we will work on animations to bring the pages to life.</p>
+
+      <p>While we’re linking pages, notice that the <code class="language-plaintext highlighter-rouge">Weird Stuff</code> page should link to three sub pages…</p>
+
+      <p><img src="res/10.1-weird-stuff.png" alt="Weird stuff lints" /></p>
+
+      <p>This time, use these animation settings:</p>
+
+      <p><img src="res/10.3-transition-settings.png" alt="Transition Settings" /></p>
+
+      <p>We don’t typically see these kind of animations on the web, but they may be used in a mobile app.</p>
+
+      <p>Each of these pages has a back button, which we can wire back to the weird stuff page. We should also choose an animation that mirrors the one which arrives at this page:</p>
+
+      <p><img src="res/10.2-back.png" alt="Back" /></p>
+
+      <p>Test it out, does it go forward and backward as expected? You can try different animations for the three pages, forward and back, to see what you like.</p>
+
+    </div></div></section>
+<section id="automaticcarousel"><button class="collapsible">Automatic carousel </button><div class="text-content"><div class="text-inner">
+
+      <p>On the top of the home page, in the image bar, I have placed three images offset slightly to the left. We want to make an animation which automatically transitions through these three images at regular intervals.</p>
+
+      <p>To create animations, we need to create a few keyframes. Our animations will be automatically animated between keyframes using interpolation, in a process known as <code class="language-plaintext highlighter-rouge">inbetweening</code>, or simply <code class="language-plaintext highlighter-rouge">tweening</code>. Each keyframe is a complete copy of an artboard, with only one or two small adjustments between keyframes. While still in <code class="language-plaintext highlighter-rouge">Prototype</code>, drag the home page down into some open space so it easier to work with. Next make two copies of the home page, using ctrl+d. If you make these copies in <code class="language-plaintext highlighter-rouge">Prototype</code>, existing links will be copied too, which will save us some time. Delete and reposition the images in the top bar so that one and only one unique image exists in the same place in each of the three artboards:</p>
+
+      <p><img src="res/11-keyframes.png" alt="Keyframes" /></p>
+
+      <p>Connect the first artboard to the second with the following settings:</p>
+
+      <p><img src="res/12-carousel-transition.png" alt="Carousel transition" /></p>
+
+      <p>Wire up the second to the third screen, and the third screen back to the first.</p>
+
+      <p><img src="res/13-tangled-up.png" alt="Tangled up" /></p>
+
+      <p>Preview the page. The image should swap automatically every few seconds.</p>
+
+    </div></div></section>
+<section id="autofadeanimationonshrinepage"><button class="collapsible">Auto-fade Animation on Shrine page</button><div class="text-content"><div class="text-inner">
+
+      <p>In this section we’ll make a slow transition on the shrine page. Duplicate the shrine page, and center one of the two shrine images in each page. Finally, add effects back and forth with the following settings.</p>
+
+      <p><img src="res/14-shrine-fade.png" alt="Shrine Fade" /></p>
+
+      <p>Preview the page. This effect looks pretty neat. However, notice that page scrolling is disabled when an animation is playing. When one animation is playing, others are blocked, and in XD, scrolling counts as an animation. For this reason, these types of animations should be used sparingly, for example, on splash screen pages and single-page views without scroll.</p>
+
+    </div></div></section>
+<section id="draggablegallerypagetheoldway"><button class="collapsible">Draggable Gallery Page - The Old Way</button><div class="text-content"><div class="text-inner">
+
+      <p>Since Jan 2021, This method is deprecated. However, you will see that it provides some extra functionality compared to the new way.</p>
+
+      <p>On the Divine Beasts page we will simulate a draggable scrolling gallery effect.</p>
+
+      <p>For this effect we will need six total keyframes, but we will make four to start.</p>
+
+      <p>Duplicate the page, and move the image slider so that one of the four images is in the middle of the frame, in order from left to right:</p>
+
+      <p><img src="res/15-divine-beasts-first-four-keyframes.png" alt="First four keyframes" /></p>
+
+      <p>To make this effect even more interesting, we will zoom in on the selected beast in each frame. Switch to design, double click on the image to get into the group, then double click again to get the original masked image. Scale it up a bit so that the creature is more pronounced in frame. Do this for each of the four beasts in their appropriate artboard.</p>
+
+      <p><img src="res/16-divine-beasts-zoomed.png" alt="Divine Beasts Zoomed" /></p>
+
+      <p>We need two more keyframes to complete this animation. Duplicated the third artboard as the fifth, and the second artboard as the sixth.</p>
+
+      <p><img src="res/17-all-keyframes.png" alt="Divine Beasts Zoomed" /></p>
+
+      <p>Now we’ll add our animations. Remember to add one animation first, adjust the settings, and then add more. Select the image banner on the first keyframe, and connect it to the second, with the following settings:</p>
+
+      <p><img src="res/18-drag.png" alt="Drag" /></p>
+
+      <p>It may be tricky to find the connector on the banner, look to the right side of it, which will be different in each of the images, due to the positioning.</p>
+
+      <p>Once you have the animation settings correct, connect each images to their keyframe to theie right, and connect the final image back to the first artboard.</p>
+
+      <p>Test the page. Drag through your images all the way to the right, and then all the way back to the left. The limitation to this animation is that you can only drag in this specific order, but it still creates a neat animation with the subtle zooming effect.</p>
+
+    </div></div></section>
+<section id="draggablegallerythenewway"><button class="collapsible">Draggable Gallery - The new Way</button><div class="text-content"><div class="text-inner">
+
+      <p>Since scrolling areas is a high demand feature, it was made into a native feature.</p>
+
+      <p>Switch back to design mode, and then click on the gallery. In the right pane, click on the horizontal scroll group</p>
+
+      <p><img src="res/drag-new-1.png" alt="Drag-New-1" /></p>
+
+      <p>Next, move the blue bar to be flush with the right side of the image</p>
+
+      <p><img src="res/drag-new-2.png" alt="Drag-New-2" /></p>
+
+      <p>Now preview this screen. You should be able to scroll. Cool. We gain the ability to smoothly scroll in any direction. However, we have lost the ability to do the zooming animation. You will need to choose the method that is more appropriate for your given task.</p>
+
+    </div></div></section>
+<section id="fiveimagecarouselwitharrowsandprogressbuttons"><button class="collapsible">Five image carousel with arrows and progress buttons</button><div class="text-content"><div class="text-inner">
+
+      <p>The final “Weird Stuff” page will have a five image carousel.</p>
+
+      <p>As always, drag it down somewhere you can work, and duplicate it into five keyframes. Have a different image from the set of five images in each keyframe. Also, change the fill on the little circles so that they match up with their keyframe.</p>
+
+      <p><img src="res/19-slides.png" alt="Slides" /></p>
+
+      <p>Wiring this pattern is very logical. You simply need to wire up the triangles to the next or previous artboard (and don’t forget to wrap around from the last to the first, and vice versa.) Don’t forget to set the animation style after drawing the first wire! Also wire up the circles to the corresponding image. These settings work well:</p>
+
+      <p><img src="res/20-wiring.png" alt="Wiring" /></p>
+
+      <p>Each page should have six exists (two arrows and four circles) to make the gallery work. When it’s all wired up, it will be quite a mess!</p>
+
+      <p><img src="res/21-rats-nest.png" alt="rat's nest" /></p>
+
+      <p>Test it out. The arrows are easy test, the bubbles slightly less so, as you would need to test all four exists from each page! I test first page to the remaining four and back, second page to the remaining three and back, third page to the remaining two and back, etc.</p>
+
+    </div></div></section>
+<section id="lightboxesforthelocationpage"><button class="collapsible">Lightboxes for the location page</button><div class="text-content"><div class="text-inner">
+
+      <p>The last thing we are going to do is add some Lightboxes to the location page. Lightboxes dim the screen and show some content highlighted in a popup. We will allow the user to click on the text at various points in the page, and have a pop-up appear with more information.</p>
+
+      <p>Move the location page near the four lightboxes, and wire the links together with the following settings…</p>
+
+      <p><img src="res/22-lightboxes.png" alt="light boxes" /></p>
+
+      <p>Test it out. You may click anywhere on the lightbox to close it, but a close icon was included in the image in case that isn’t obvious. The dimming effect is caused by a slightly transparent dark filled rectangle placed under the info box in the lightbox.</p>
+
+      <p>And that’s it. The full website is accessible, with several interesting effects. Test it out to see if anything is broken. Are all the hamburger icons leading to the menu page? You can verify by clicking on the menu and tracing all of the dashed lines.</p>
+
+      <hr />
+
+    </div></div></section>
+<section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>Due to the pandemic, many public places are closed to the public, such as museums, art galleries, aquariums and zoos. Due to this, many have attempted to do <code class="language-plaintext highlighter-rouge">virtual museums</code>. Your assignment is to choose a real-world location and create a virtual tour in Adobe XD. Your tour should include:</p>
+      <ul>
+        <li>A home page</li>
+        <li>Some type of menu</li>
+        <li>Three exhibits, with a page for each
+          <ul>
+            <li>Each exhibit should have a name, a set of images and text description</li>
+            <li>The images should be stored in some type of interactive container
+              <ul>
+                <li>You can use ones from the prelab, or create your own</li>
+              </ul>
+            </li>
+            <li>Use a different type of interaction for each page</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Please include some images from the exhibits. Many museums license their images in the creative commons, but even if not, it is okay to use them in this project as it is for educational / non-commercial purposes.</p>
+
+      <hr />
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>Please submit your <code class="language-plaintext highlighter-rouge">.xd</code> files to UR Courses by the due date.</p>
+
+      <hr />
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>W. Everhart, <a href="https://www.pluralsight.com/courses/adobe-xd-cc-fundamentals">Abode XD CC Fundamentals</a>, Pluralsight, 2018</p>
+
+      <p>E. Key, <a href="https://www.lynda.com/Web-tutorials/Prototyping-WordPress-Project-Adobe-XD/2809592-2.html">Prototyping a WordPress Project in Adobe XD</a>, Linda from LinkedIn, 2019</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2021 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
