@@ -260,26 +260,23 @@ Theorem: If $p$ is prime and $k$ is not a multiple of $p$, then $k^{p-1} \equiv 
 ---
 ## Pulverizer
 
-Pulverizer (17, 13)
+Pulverizer ($17, 13$). ($a$ is the mod, $b$ is the coefficient)
 
 |$x$|$y$|$x/y$|$r=x-q \cdot y$|
 |---|---|---|---|
 |$17$|$13$|$1 r 4$ |$4 = 17 - 1 \cdot 13$|
 |$13$|$4$|$3 r 1$ |$1 = 13 - 3 \cdot 4$|
 | | | |$1 = -3 \times 17 + 4 \times 13$|
-
-From the second term, we can see...
-$ 4 \times 13 \equiv 1 (\text{mod }17) $
-
-$ k^{-1} = 4 (\text{mod }17) $
-
-You will always arrive at such a term, but it might be more work than the repeated squaring
+- The $s \times a$ term becomes $-3 \times 17 \equiv 0 (\text{mod }17) $
+- We're left with $ 4 \times 13 \equiv 1 (\text{mod }17) $
+- $ 13^{-1} = 4 (\text{mod }17) $
+- You will always arrive at such a term, but it might be more work than repeated squaring, and may need to add multiples of $17$ to make the second term positive
 
 ---
 ## Cryptography: Turing V2
 Beforehand: The sender and receiver agree on a large prime, $p$, which may be made public. (This will be the modulus for all our arithmetic.) They also agree on a secret key $k \in 1, 2, ..., p-1$ with no common factor
 
-Encryption: The message $m$ can be any integer in the set $0,1,2,...,p-1$; in particular, the message is no longer required to be a prime. The sender encrypts the message, $m$ to produce $m'$ by computing: $m' = \text{rem}(mk,p)$
+Encryption: The message $m$ can be any integer in the set $0,1,2,...,p-1$; in particular, the message is no longer required to be a prime. The sender encrypts the message, $m$ to produce $m'$ by computing: $m' = \text{rem}(m \cdot k,p) \equiv m \cdot k (\text{mod }p)$
 
 Decryption: $m' k^{-1} \equiv m (\text{mod }p)$
 - $mk k^{-1} \equiv m (\text{mod }p)$
@@ -303,7 +300,7 @@ If we had both an encrypted and decrypted version of a word, we could solve for 
 ---
 ## Defn: Relatively Prime
 
-$a$ and $b$ are relatively prime if $\text{gcd}(a,b) = 1$ 
+$a$ and $b$ are relatively prime iff $\text{gcd}(a,b) = 1$ 
 - e.g. $\text{gcd}(5,16) = 1$
 - e.g. $\text{gcd}(4,9) = 1$
 - NOT an e.g. $\text{gcd}(3,9) = 3$
@@ -313,12 +310,11 @@ Let $n$ be a positive integer. If $k$ is relatively prime to $n$ then there exis
 
 $k \cdot k^{-1} \equiv 1 (\text{mod }n)$
 
-An integer has inverse mod another integer if it is relatively prime to that integer.
+I believe we've already covered this, just not formally like this.
 
----
-Suppose we are working mod 16:
-Numbers relatively prime to 16: 1,3,5,7,9,11,13,15
-- 8 numbers. We can compute this.
+Suppose we are working $(\text{mod }16)$:
+Numbers relatively prime to $16: 1,3,5,7,9,11,13,15$
+- $8$ numbers. We can compute this.
 
 ---
 ## Euler's Totient Function
@@ -365,10 +361,11 @@ $$ k^{\phi (n)} \equiv 1(\text {mod } n) $$
   - $= pq (1 - \dfrac{1}{p}) (1 - \dfrac{1}{q})$
   - $= pq (\dfrac{p-1}{p}) (\dfrac{q-1}{q})$
   - $= (p-1)(q-1)$
+
 e.g.
-$p = 13$
-$q = 31$
-$\phi (pq) = 12 \cdot 30 = 360$
+- $p = 13$
+- $q = 31$
+- $\phi (pq) = 12 \cdot 30 = 360$
 ---
 ## RSA Cryptosystem
 
@@ -411,7 +408,7 @@ Decoding:
 - $\phi(n) = 30 \cdot 70 = 2100$
 
 2 Public Key Generation:
-- Let $e = 17$, (if e is prime, it must be relatively prime to $\phi(n)$)
+- Let $e = 17$, (Any number relatively prime to $\phi(n)$)
 - public key = $(17, 2201)$
 ---
 ## RSA Example
@@ -419,14 +416,14 @@ Decoding:
 - $e \cdot d \equiv 1 (\text{mod }\phi(n))$
 - $17d \equiv 1 (\text{mod }\phi(n))$
 - $17d \equiv 1 (\text{mod } 2100)$
-- $17^{\phi(2100)} \equiv 1 (\text{mod }2100)$
-- $17 \cdot 17^{\phi(2100)-1} \equiv 1 (\text{mod }2100)$
-- $d = 17^{\phi(2100)-1}$
-
+- $17^{2100} \equiv 1 (\text{mod }2100)$
+- $17 \cdot 17^{2099} \equiv 1 (\text{mod }2100)$
+- $d = 17^{2099}$
+- We could use repeated squaring, or the pulverizer, to find $d$
+- Let's use the pulverizer.
 ---
 ## RSA Example
-- $d = 17^{\phi(2100)-1}$
-- Pulverizer $(2100, 17)$
+- Pulverizer $(2100, 17)$ (Recall, $a$ is the mod, $b$ is the coefficient)
 
 |$x$|$y$|$x/y$|$r=x-q \cdot y$|
 |---|---|---|---|
@@ -436,20 +433,21 @@ Decoding:
 |$9$|$8$|$1 r 1$|$1 = 9 - 1 \cdot 8$|
 ||||$1 = 2 \cdot 2100 - 247 \cdot 17$|
 
-$-247$ is our inverse. But we want our inverse to be positive!
+$17^{2099} = -247 (\text{mod }2100)$ is our inverse. 
+- But we want our inverse to be positive!
 
 ---
 ## RSA Example
-- $1 = 2 \cdot 2100 - 247 \cdot 17$
+Effectively we are just adding multiples of $2100$ to make it positive.
+- How does this work in terms of our linear combination?
 
-$-247$ is our inverse. But we want our inverse to be positive!
 - $1 = sa + tb$
-- $1 = (sa + tb) + k(ba - ab), k \in \mathbb{Z}, k \geq = 1$
+- $1 = (sa + tb) + k(ba - ab), k \in \mathbb{Z}, k \geq 1$
 - $1 = 2 \cdot 2100 - 247 \cdot 17$
 - $   + -17 \cdot 2100 + 2100 \cdot 17$
 - $1 = -15 \cdot 2100 + 1853 \cdot 17$
 
-1853 is our inverse, the private key is $d=(1853, 2201)$
+$1853$ is our inverse, the private key is $d=(1853, 2201)$
 ---
 ## RSA Example
 4 Encryption, $m=3$
@@ -460,7 +458,7 @@ $-247$ is our inverse. But we want our inverse to be positive!
 - $3^4 \equiv 81 (\text{mod }2201)$
 - $3^8 \equiv 2159 (\text{mod }2201)$
 - $3^{16} \equiv 1764 (\text{mod }2201)$
-- $3^{17} = 3 \cdot 3^{16} = 3 \cdot 1764 \equiv 890 (\text{mod }2201)$
+- $3^{17} = 3 \cdot 3^{16} \equiv 3 \cdot 1764 (\text{mod }2201) \equiv 890 (\text{mod }2201)$
 - Our encrypted message is $m' = 890$
 
 ---
@@ -485,8 +483,10 @@ $-247$ is our inverse. But we want our inverse to be positive!
 - $890^{1024} \equiv 1012 (\text{mod }2201)$
 
 $890^{1853} = 890^{1024}\cdot 890^{512}\cdot 890^{256}\cdot 890^{32}\cdot 890^{16}\cdot 890^{8}\cdot 890^{4}\cdot 890^{1}$
-$\equiv 1012 \cdot 391 \cdot 1497 \cdot 484 \cdot 2179 \cdot 1981 \cdot 1570 \cdot 890$
+$\equiv 1012 \cdot 391 \cdot 1497 \cdot 484 \cdot 2179 \cdot 1981 \cdot 1570 \cdot 890 (\text{mod } 2201)$
 $\equiv 3 (\text{mod } 2201)$
+
+* Watch out for overflow! Take the mod after each multiplication to keep the numbers small!
 
 ---
 ### References
