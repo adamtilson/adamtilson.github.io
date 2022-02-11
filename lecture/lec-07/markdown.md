@@ -380,7 +380,7 @@ Why it works:
 ---
 ### Two line proof
 
-$ed \equiv 1 \equiv 1 + k\phi(n) (\text {mod } \phi(n)), k \in \mathbb{Z}$
+$ed \equiv 1 (\text {mod } \phi(n)) = 1 + k\phi(n), k \in \mathbb{Z}$
 $m^{ed} = m^{1 + k\phi(n)} \equiv m(m^{k\phi(n)}) \equiv m(1)^k \equiv m(1) \equiv m (\text {mod } n)$
 
 ---
