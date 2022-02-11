@@ -368,6 +368,23 @@ e.g.
 - $\phi (pq) = 12 \cdot 30 = 360$
 ---
 ## RSA Cryptosystem
+- Developed in 1977, By Rivest, Shamir and Adleman
+- Turing V1: $m' = m \cdot k$
+- Turing V2: $m' \equiv m \cdot k (\text {mod }  p)$
+- RSA: $m' \equiv m^{e} (\text {mod }  n)$
+- $m \equiv m'^{d} (\text {mod }  n)$
+
+Why it works:
+- $(m^{e})^{d} \equiv m (\text {mod }  n)$
+  - if $de \equiv 1 (\text {mod }  \phi(n))$
+---
+### Two line proof
+
+$ed \equiv 1 \equiv 1 + k\phi(n) (\text {mod } \phi(n)), k \in \mathbb{Z}$
+$m^{ed} = m^{1 + k\phi(n)} \equiv m(m^{k\phi(n)}) \equiv m(1)^k \equiv m(1) \equiv m (\text {mod } n)$
+
+---
+## RSA Cryptosystem
 
 Beforehand
 
@@ -378,7 +395,7 @@ Beforehand
     - The public key pair $(e,n)$ should be widely distributed
   4. Compute $d$ such that $de \equiv 1 (\text{mod } \phi(n))$
     - This can be done using the pulverizer
-    - The privatet key pair $(d,n)$ must be kept secret!
+    - The private key pair $(d,n)$ must be kept secret!
 
 ---
 ## RSA Cryptosystem
@@ -473,7 +490,6 @@ $1853$ is our inverse, the private key is $d=(1853, 2201)$
 - $890^{16} \equiv 2179 (\text{mod }2201)$
 - $890^{32} \equiv 484 (\text{mod }2201)$
 
-
 ---
 ## RSA Example
 - $890^{64} \equiv 950 (\text{mod }2201)$
@@ -487,6 +503,27 @@ $\equiv 1012 \cdot 391 \cdot 1497 \cdot 484 \cdot 2179 \cdot 1981 \cdot 1570 \cd
 $\equiv 3 (\text{mod } 2201)$
 
 * Watch out for overflow! Take the mod after each multiplication to keep the numbers small!
+
+---
+## RSA Footnotes
+
+### Signing Messages
+
+By using the keys in reverse (encrypt with the private key, decrypt with the public key), this can used so that any person can verify the identity of the private key holder.
+- This is called signing messages
+
+---
+## RSA Footnotes
+
+### Why is it good
+
+- It's trivial to go from $p,q$ to $n, \phi(n)$
+- It's very difficult go from $n$ to $p,q$
+
+### Why it's bad
+
+- It's slow, even for fast computers
+- However, it can be used to securely transmit keys for a quicker encryption method
 
 ---
 ### References
