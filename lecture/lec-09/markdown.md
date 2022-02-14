@@ -56,10 +56,25 @@ layout: false
 ## k-Connected Graph
 Def: Two vertices in a graph are `k-edge connected` if they remain connected in every subgraph obtained by deleting $k-1$ edges. 
 
-- A graph with at least two vertices is `k-edge connected` if every two of its vertices are `k-edge connected`
+- The graph remains connected if you remove less than k-edges!
+
+- All 3-connected graphs are also 2-connected, but not vice versa!
 
 ---
+## k-Connected Examples
+
+![](k-connected-1.png)
+
+
+---
+## k-Connected Examples
+
+![](k-connected-2.png)
+
+---
+
 ## Complete Graph
+
 - A `graph is complete` if every pair of vertices share an edge
 
 ![](complete-graph.png)
@@ -100,7 +115,42 @@ $
 - For a weighted graph
   - The weight is represented in place of a 1
 
+
+
 ---
+class: even-split
+### Adjacency Matrix
+
+.column[
+![](adj-matrix.png)
+
+]
+.column[
+
+$\begin{bmatrix} 
+0 & 1 & 0 & 1 & 1 & 0 & 0 & 0 \\\\ 
+1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\\\ 
+0 & 1 & 0 & 1 & 0 & 0 & 1 & 0 \\\\ 
+1 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\\\ 
+1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\\\ 
+0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 \\\\ 
+0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 \\\\ 
+0 & 0 & 0 & 1 & 1 & 0 & 1 & 0
+\end{bmatrix}$
+]
+
+---
+### Adjacency Matrix
+
+![](adj-one.png)
+
+---
+### Adjacency Matrix
+
+![](adj-two.png)
+
+---
+
 
 ### Example: Exam Scheduling
 - Students are enrolled in multiple courses at once
@@ -283,14 +333,14 @@ Any connected subgraphs of trees are also trees.
 - Since it is a subgraph of the larger graph, if it has a cycle the larger graph must have a cycle
    - But the whole graph is a tree! ⨳
 ---
-### Another Lemma
+### Lemma - Tree vertices and edges
 - Lemma: A tree with n vertices has n-1 edges.
 - Proof (by ordinary induction)
 - Induction of Hypothesis: $P(n)$ in any tree of n vertices, there are $n-1$ edges.
 - Base case
   - $P(1)$ - 1 vertex. No edges. $\checkmark$
 ---
-### Another Lemma
+### Lemma - Tree vertices and edges
 - Inductive step.
   - Assume $P(n)$ to prove $P(n+1)$
   - Let $T$ be a tree with $n+1$ vertices
