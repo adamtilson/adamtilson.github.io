@@ -96,6 +96,8 @@ A graph $G_1 = (V,E)$ is a subgraph of $G_2 = (V_2, E_2)$ if $V_1 \subseteq V_2$
 
 ($\subseteq$ means "is a subset of")
 
+![](subgraph.png)
+
 ---
 ## Adjacency Matrix
 As alternate way to draw a graph is is in an `adjacency matrix`
@@ -154,7 +156,7 @@ $\begin{bmatrix}
 
 ### Example: Exam Scheduling
 - Students are enrolled in multiple courses at once
-- Any two courses which a student would be expected to be enrolled in simultaneously must not have the same time schedule
+- Any two courses which a student could be expected to be enrolled in simultaneously must not have the same time schedule
 - e.g. We can model this problem using graph theory
 
 ---
@@ -165,9 +167,9 @@ $\begin{bmatrix}
 
 ---
 ### Example: Exam Scheduling
-Graph Coloring Problem: Given a graph $G$, and $K$ colors, assign a color to each node so adjacent notes all have different colors
+`Graph Coloring Problem`: Given a graph $G$, and $K$ colors, assign a color to each node so adjacent notes all have different colors
 
-Def: Chromatic Number: The minimum value of $k$ for which such a coloring exists. $\mathcal{X} (G)$
+Def: `Chromatic Number`: The minimum value of $k$ for which such a coloring exists. $\mathcal{X} (G)$ "Chi (G)"
 
 ---
 ### Example: Exam Scheduling
@@ -178,27 +180,35 @@ Def: Chromatic Number: The minimum value of $k$ for which such a coloring exists
 There is no easy way to find the chromatic number.
 - Trivial to do for complete graphs, where all vertices are connected
   - e.g for three nodes, a triangle of edges
-  - e.g. for four nodes, a box of edges with a diagonal
+  - e.g. for four nodes, a box of edges with diagonals
   - A starting point is to find the largest complete subgraph
-- e.g. The Three Coloring Problem - can we color it with only 3?
-- This problem is NP hard - It's easy to verify a solution, but exponentially harder to solve
-  - Solving NP-complete problems is a central problems in CS!
+- A graph that can be colored with $k$ colors is `k-colorable`.
+- e.g. `The Three-Coloring Problem` - can we color it with only 3?
+- This problem is `NP hard` - It's easy to verify a solution, but exponentially harder to solve
+  - Solving `NP` problems is a central challenge to CS!
+???
+In hardness
+P - Polynomial Time. 2-Colorable
+NP - Nondeterministic Polynomial Time - Can be verified in P time
+NP-Complete - Every NP-Complete problem can be reduced to the SATisfiability problem
+NP-Hard - The Halting Problem - Will program P, with input I, ever halt?
+
 ---
-### Basic Graph Coloring Algorithm
+### Greedy Graph Coloring Algorithm
 - For $G = (V,E)$
 1. Order the nodes $v_1, v_2, ..., v_n$
 2. Order the colors $c_1, c_2, ..., c_n$
 3. For $i=1,2...n$, assign the lowest legal color to $v_i$
   
-Naturally this will be highly dependant on the number of nodes.
+Naturally this will be highly dependant on the order of nodes.
 - On average, you use fewer colors, when you sort the nodes by the highest degree descending
-- This is a "greedy algorithm" - take the first solution that works, never go back and try to do better.
+- This is a `greedy algorithm` - take the first solution that works, never go back and try to do better.
 ---
 ### Basic Graph Coloring Example
 ![](coloring-algorithm-example.png)
 ---
 ## Maximum Colors Proof
-- Theorem: If every node in $G(V,E)$ has degree $\leq d$, the basic algorithm uses at most $d+1$ colors
+- Theorem: If every node in $G(V,E)$ has degree $\leq d$, the greedy coloring algorithm uses at most $d+1$ colors
 - Proof: By induction
 - Induction Hypothesis: 
   - $P(n) :=$ If every node in $n$-node $G(V,E)$ has degree $\leq d$, the basic algorithm uses at most $d+1$ colors
@@ -211,10 +221,10 @@ Naturally this will be highly dependant on the number of nodes.
 Induction Step.
 - Let $G(V, E)$ be an $(n+1)$ vertex graph with maximum degree $d$.
 - Remove vertex $v_i$ and all edges incident to it.
-  - This leaves an $n$ vertex subgraph, $H$
-  - The maximum degree of $H$ must be $d$
-  - Thus $H$ is $(d+1)$ colorable (by the Inductive Hypothesis). 
-- Add back in $v_i$ 
+  - This leaves an $n$-vertex subgraph, $H$
+  - The maximum degree of $H$ must be $d\_h$
+  - Thus $H$ is $(d\_h+1)$ colorable (by the Inductive Hypothesis). 
+- Add back in $v_i$ and incident edges
   - $v_i$ will be assigned a color different than all adjacent vertices
   - $v_i$ will have at most $d$ vertices
   - at least one of the $(d+1)$ colors will be available
@@ -253,11 +263,13 @@ How does the greedy algorithm work on the following graphs?
 ---
 ## Bipartite Graphs
 
-Def: A graph $G(V, E)$ is said to be `bipartite` if $V$ can be split into $V_L, V_R$ so that every edge in $E$ connects a node in $V_L$ to a node in $V_R$
+Def: A graph $G(V, E)$ is said to be `bipartite` if $V$ can be split into $V_L, V_R$ so that every edge in $E$ connects a node in $V_L$ to a node in $V_R$. These graphs are `2-colorable`.
+
+![](bipartites.png)
 
 ---
 
-## Real World Applications
+## Real World Applications of Coloring
 
 - Server maintenance (the cloud)
 - Transferring Variables to Registers
@@ -281,10 +293,10 @@ Def: A `path` is a walk where all $v_i$'s are different.
 
 ### Lemma - Walks vs Paths
 
-If $\exists$ a walk from $u$ to $v$, $\exists$ a path from $u$ to $v$.
+Lemma: If $\exists$ a walk from $u$ to $v$, $\exists$ a path from $u$ to $v$.
 - Proof (By the well ordering principle): 
 - Assume $\exists$ a walk from $u$ to $v$ which is the minimal length. 
-- $u = v_0 - v_1, - ... v_k = v$
+- $u = v_0 - v_1 - ... v_k = v$
 
 ---
 ### Lemma - Walks vs Paths
@@ -293,16 +305,19 @@ If $\exists$ a walk from $u$ to $v$, $\exists$ a path from $u$ to $v$.
   - $k=0. \checkmark$ 
   - $k=1.$  $u - v \checkmark$
   - $k \geq 2$ 
-    - Suppose walk is not a path. $\exists i \neq j, v_i = v_j$  
-    - $u = v_0 - ... - v_i = v_j - ... -v_k = v$
-    - This is a shorter walk ⨳
+    - Suppose walk is not a path. $\exists i \neq j, v_i = v_j$ 
+      - i.e. the same vertex is reached twice 
+    - $u = v_0 - ... - v_i - ... - v_j - ... -v_k = v$
+    - We could remove this loop:
+    - $u = v_0 - ... - v_i -... -v_k = v$
+    - This is a shorter walk. Our walk was not minimum length. ⨳
 - $\therefore$ by the well ordering principle, if there is a walk from $u$ to $v$, there is also  a path from $u$ to $v$.
 
 ---
 
 ## Cycles and Closed Walks
 Def: A `closed walk` is a walk in which the starting and ending vertex are the same.
-- $v_0 - ... - v_i = v_j - ... -v_k = v_k$
+- $v_0 - ... - v_i - ... -v_k = v_0$
 
 Def: If $k \geq 3$, and each visited vertex is different, we have a `cycle`
 
@@ -336,7 +351,7 @@ Any connected subgraphs of trees are also trees.
 ### Lemma - Tree vertices and edges
 - Lemma: A tree with n vertices has n-1 edges.
 - Proof (by ordinary induction)
-- Induction of Hypothesis: $P(n)$ in any tree of n vertices, there are $n-1$ edges.
+- Induction of Hypothesis: $P(n)$ in any tree of $n$-vertices, there are $n-1$ edges.
 - Base case
   - $P(1)$ - 1 vertex. No edges. $\checkmark$
 ---
@@ -374,8 +389,12 @@ Lemma: Removing an edge from a cycle does not change the connectivity of a graph
 ---
 ### Weighted Graphs
 - Graphs can have weights assigned to the edges
-- These weights can represent a number of things
-  - Typically lower weights are preferred!
+- These weights have a number of real-world applications
+  - e.g. Network parameters
+  - e.g. Airline routes
+  - e.g. Street routes with different types of streets, roads
+  - e.g. Search Engine PageRank (directed)
+- Typically lower weights are preferred!
 ---
 ### Weighted Graphs
 ![](weighted-graph.png)
@@ -403,7 +422,7 @@ Algorithm: Grow a subgraph one edge at a time
 ![](mst-algorithm.png)
 
 ---
-### Sample Question Topics:
+### Graph Theory Sample Question Topics:
 
 - Graph Theory Proofs (grrr)
 - Creating graphs from adjacency matrices and vice versa
