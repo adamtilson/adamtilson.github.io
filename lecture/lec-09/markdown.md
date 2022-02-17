@@ -424,6 +424,7 @@ Algorithm: Grow a subgraph one edge at a time
 ---
 ### Graph Theory Sample Question Topics:
 
+- General application of concepts
 - Graph Theory Proofs (grrr)
 - Creating graphs from adjacency matrices and vice versa
 - Using the greedy algorithm for graph coloring
