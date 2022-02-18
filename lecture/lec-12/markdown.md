@@ -38,15 +38,15 @@ $$\sum_{i=1}^n i^2 = 1^2 + 2^2 + ... + n^2 = \frac{2(2n+1)(n+1)}{6}$$
 ---
 ## Closed Form solutions
 
-$$\sum_{i=1}^n r^i = r^0 + r^1 + r^2 ... + r^n = \frac{r^{n+1}-1}{r-1}$$
+$$\sum_{i=0}^n r^i = r^0 + r^1 + r^2 ... + r^n = \frac{r^{n+1}-1}{r-1}$$
 
 $$n! = 1 \cdot 2  \cdot 3  \cdot ... \cdot n \ = \prod_{i=1}^n i$$
 
-*When $n = 0$, sums are $0$ by definition!*
+*When $n = 0$, sums are only the zero'th term. Sometimes this is zero, e.g. $3n$, sometimes this is 1, e.g. $3^n$. If a term is out of the bounds, it is 0 by definition, e.g. the 0th term if we are starting from i=1*
 
 ---
 ## Perturbation
-- A method for finding the closed form solution of sums
+- `Perturbation` is a method for finding the closed form solution of sums
 
 - e.g. $\sum_{i=1}^n i = 1 + 2 + ... + n = S$
 
@@ -58,10 +58,10 @@ $+ S = n + (n-1) + ... + 2 + 1$
 
 $S + S = (n+1) + (n+1) ... (n+1) + (n+1)$
 
-$2S = n(n+1)$
-
 ---
 ## Perturbation Examples
+
+$S + S = (n+1) + (n+1) ... (n+1) + (n+1)$
 
 $2S = n(n+1)$
 
@@ -129,7 +129,7 @@ $$= m \frac {1- \frac{1}{(1+p)^n}}{1- \frac{1}{1+p}}$$
 
 $$= m \frac {1- \frac{1}{(1+p)^n}}{1- \frac{1}{1+p}}$$
 
-$$= m \frac {1+p-\frac{1}{(1+p)^n-1}}{p}$$
+$$= m \frac {1+p-\frac{1}{(1+p)^{n-1}}}{p}$$
 
 m = 50,000. n = 20. p = 0.06
 V = $607,906
@@ -180,9 +180,9 @@ $ S = r + 2r^2 + 3r^3 + .. + nr^n $
 
 $ rS = r^2 + 2r^3 + 3r^4 + .. + (n-1)r^n + nr^{n+1} $
 
-$ (1-r)S = r + r^2 + r^3 + ... + r^n - nr^{n+1} $  
+$ S-rS = r + r^2 + r^3 + ... + r^n - nr^{n+1} $  
 
-$ (1-r)S = \frac{1-r^n}{1-r} - 1 -nr^{n+1} $
+$ S(1-r) = \frac{1-r^n}{1-r} - 1 -nr^{n+1} $
 
 $ S = \frac{r-(n+1)r^{n+1}+{nr^{n+2}}}{(1-r)^2} $
 

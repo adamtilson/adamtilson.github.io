@@ -433,9 +433,10 @@ Decoding:
 - $e \cdot d \equiv 1 (\text{mod }\phi(n))$
 - $17d \equiv 1 (\text{mod }\phi(n))$
 - $17d \equiv 1 (\text{mod } 2100)$
-- $17^{2100} \equiv 1 (\text{mod }2100)$
-- $17 \cdot 17^{2099} \equiv 1 (\text{mod }2100)$
-- $d = 17^{2099}$
+- $17^{\phi(2100)} \equiv 1 (\text{mod }2100)$
+- - $17^{480} \equiv 1 (\text{mod }2100)$
+- $17 \cdot 17^{479} \equiv 1 (\text{mod }2100)$
+- $d = 17^{479}$
 - We could use repeated squaring, or the pulverizer, to find $d$
 - Let's use the pulverizer.
 ---
@@ -450,7 +451,7 @@ Decoding:
 |$9$|$8$|$1 r 1$|$1 = 9 - 1 \cdot 8$|
 ||||$1 = 2 \cdot 2100 - 247 \cdot 17$|
 
-$17^{2099} = -247 (\text{mod }2100)$ is our inverse. 
+$17^{479} = -247 (\text{mod }2100)$ is our inverse. 
 - But we want our inverse to be positive!
 
 ---
