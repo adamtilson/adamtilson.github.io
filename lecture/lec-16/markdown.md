@@ -17,9 +17,11 @@ layout: false
   ## Agenda
 ]
 .right-column[
-1. Gauss-Jordan Elimination
-2. Gauss-Jordan Elimination with Partial Pivoting and Matrix Inversion
-3. LU Decomposition
+1. Exact vs Approximate Solutions
+2. True Error
+3. Approximation Error
+4. Taylor's Theorem
+5. Topics to Cover
 ]
 ---
 ## Mathematical Modeling of Engineering Problems
