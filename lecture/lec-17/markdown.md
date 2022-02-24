@@ -214,7 +214,7 @@ The Bisection Method attempts to find a root through a process akin to binary se
 
 - Always converges
 - Always makes consistent progress towards a root
-- Typically slower than other methods discussed
+- Typically slower than other methods discussed (linear instead of quadratic)
 - Better performance when our guesses our approximately equal distanced from the root - the more skewed to one side, the slower the convergence, particularly bad if one of the guesses is very close.
 - Unable to find roots that do not cross the x-axis
 - Can be fooled by asymptotes on the x-axis
