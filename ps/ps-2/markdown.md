@@ -73,7 +73,7 @@ Q10. Using the keys generated in Q9, encrypt the number $89$ using repeated squa
 
 ???
 
-Q9 - d: 263
+Q9 - d: 233
 Q10 - encrypted: 46
 
 ---
