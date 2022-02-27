@@ -49,7 +49,7 @@ c) Let $m = 12340, n = 0$
 ---
 ## Part 2: Number Theory Proofs
 
-Q5. Prove the Theorem: If $a \mid b$ and $b \mid a$ then $a = b$
+Q5. Prove the Theorem: If $a \mid b$ and $b \mid a$ then $a = b, a,b \in \mathbb{Z}^+$
 
 Q6. Prove the Theorem: If $a \neq 0$, gcd$(a,0) = a$ 
 
