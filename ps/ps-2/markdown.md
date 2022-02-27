@@ -114,7 +114,7 @@ Q10 - encrypted: 46
 ![](018.png)
 ---
 ![](019.png)
-
+---
 ### References
 
 These problems from:
