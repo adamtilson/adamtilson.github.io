@@ -14,7 +14,7 @@ layout: false
 
 Q1. a) Use the Pulverizer to find integers $s$ and $t$ such that $135s + 59t = gcd(135,59)$
 
-b) Use the previous result to find the inverse of $59$ (mod $35$) in the range {$1, ..., 134$}
+b) Use the previous result to find the inverse of $59$ (mod $135$) in the range {$1, ..., 134$}
 
 c) Use Euler's Theorem to find the inverse of $17$ modulo $31$ in the range {$1, ..., 30$}
 
