@@ -307,7 +307,7 @@ $\sum_{i=1}^{n}\sqrt{i}$
 
 $f(x) = \sqrt{i}$
 
-$= \int_1^n \sqrt{i} \text{dx}$
+$= \int_1^n \sqrt{i} \text{di}$
 
 $=\frac{x^{\frac{3}{2}}}{\frac{3}{2}} \rvert_{i=1}^{i=n}$
 
@@ -503,7 +503,7 @@ $=\frac{(0) - 30000(0) + 10^{10}(0)}{1 - (0) + 2(0) - 3(0)} = 0$
 
 For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
 - with $f(x), g(x)$ non-negative
-- $f(x) \in O (g(x))$ means $\limsup\limits_{n\to \infty} \frac{f(x)}{g(x)}<\infty$
+- $f(x) \in O (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}<\infty$
 - i.e. for some constants $c, x\_0$
   - $0 \leq f(x) \leq c \cdot g(x)$ for all $x \gt x\_0$
 - This means $g(x)$ may be a *tight* upper bound of $f(x)$
@@ -528,9 +528,9 @@ $T(n) \in O(n^3)$
 
 Is $4^x \in O (2^x)$?
 
-$\limsup\limits_{n\to \infty} \frac{4^x}{2^x}$
+$\lim\limits_{n\to \infty} \frac{4^x}{2^x}$
 
-= $\limsup\limits_{n\to \infty} 2^x$
+= $\lim\limits_{n\to \infty} 2^x$
 
 = $\infty$
 no!
@@ -558,7 +558,7 @@ e.g.
 
 For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
 - with $f(x), g(x)$ non-negative
-- $f(x) \in \Omega (g(x))$ means $\limsup\limits_{n\to \infty} \frac{f(x)}{g(x)}>0$
+- $f(x) \in \Omega (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}>0$
 - i.e. for some constants $c, x\_0$
   - $0 \leq c \cdot g(x) \leq f(x)$ for all $x \gt x\_0$
 - This means $g(x)$ may be a *tight* lower bound of $f(x)$
