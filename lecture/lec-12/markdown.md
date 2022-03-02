@@ -33,7 +33,7 @@ layout: false
 
 $$\sum_{i=1}^n i = 1 + 2 + ... + n = \frac{n(n+1)}{2}$$
 
-$$\sum_{i=1}^n i^2 = 1^2 + 2^2 + ... + n^2 = \frac{2(2n+1)(n+1)}{6}$$
+$$\sum_{i=1}^n i^2 = 1^2 + 2^2 + ... + n^2 = \frac{n(2n+1)(n+1)}{6}$$
 
 ---
 ## Closed Form solutions
@@ -232,7 +232,7 @@ If we use the following value:
 ---
 ## Linear Combination Method
 
-$$\sum_{i=1}^n i^2 = 1^2 + 2^2 + ... + n^2 = \frac{2(2n+1)(n+1)}{6}$$
+$$\sum_{i=1}^n i^2 = 1^2 + 2^2 + ... + n^2 = \frac{n(2n+1)(n+1)}{6}$$
 
 To derive this, we might suspect the formula is some third order polynomial, of the form...
 
