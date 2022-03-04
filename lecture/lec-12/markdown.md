@@ -610,7 +610,6 @@ Up to constant factors...
 | $o$ | means | $f(x) \lt g(x)$|
 | $\omega$ | means | $f(x) \gt g(x)$|
 
-
 ---
 
 ## Not an Equality!

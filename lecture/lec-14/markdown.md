@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 14: Iterative Methods: Solving Systems of Linear Equations
+### Lecture 14: Algorithms for Solving Systems of Linear Equations
 
 Adam Tilson, M.A.Sc., Engineer-in-Training
 
@@ -341,7 +341,7 @@ $
 
 $k\_1 \vec{v_1} + k\_2 \vec{v_2} + k\_3 \vec{v_3} = 0$ 
 
-$\vec{v_3} = 5 \vec{v_2} -5 \vec{v_2}$.
+$\vec{v_3} = 5 \vec{v_1} -5 \vec{v_2}$.
 
 $k\_1 = 5, k\_2 = -5, k\_3 = 1$ 
 
@@ -609,11 +609,11 @@ $A\vec{x}=\vec{b}=\begin{bmatrix}
 
 The `augmented matrix`, $A.B$ appends the `right-hand-side vector`, $B$, to the right of the `coefficient matrix`, $A$.
 
-$A.B = \begin{bmatrix}
+$A.B = \begin{bmatrix}\begin{array}{ccc|c}
     2 & 3 & 1 & 2\\\\
     1 & -2 & 4 & 4\\\\
     0 & 1 & -1 & 1
-  \end{bmatrix} $
+  \end{array}\end{bmatrix}$
 
 ---
 ## Possible Solutions:
@@ -631,22 +631,22 @@ $A.B = \begin{bmatrix}
 
 ---
 ### Example: One unique solution
-$A.B = \begin{bmatrix}
+$A.B = \begin{bmatrix}\begin{array}{ccc|c}
     1 & 1 & 0 & 2\\\\
     0 & 1 & 1 & 4\\\\
     0 & 0 & 1 & 7
-  \end{bmatrix} $
+  \end{array}\end{bmatrix} $
 
 $\text{Rank}(A) = \text{Rank}(A.B) = 3$
 
 $x_3 = 7, x_2 = -3, x_1 = 5$
 ---
 ### Example: Infinitely many solutions
-$A.B = \begin{bmatrix}
+$A.B = \begin{bmatrix}\begin{array}{ccc|c}
     1 & 1 & 0 & 2\\\\
     0 & 1 & 1 & 4\\\\
     0 & 2 & 2 & 8
-  \end{bmatrix} $
+  \end{array}\end{bmatrix} $
 
 $\text{Rank}(A) = 2$
 
@@ -658,11 +658,11 @@ $x_1 + x_2 = 2, x_2 + x_3 = 4$
 
 ---
 ### Example: No solutions
-$A.B = \begin{bmatrix}
+$A.B = \begin{bmatrix}\begin{array}{ccc|c}
     0 & 0 & 1 & 2\\\\
     1 & 1 & 1 & 4\\\\
     2 & 2 & 2 & 7
-  \end{bmatrix} $
+  \end{array}\end{bmatrix} $
 
 Rows 2, 3 are inconsistent!
 2 (Row 2) - Row 3 => 0 = 1
@@ -711,7 +711,7 @@ If we compute $A^{-1}$ once, we could re-use it to rapidly get different $\vec{x
 ### Matrix Inversion Woes
 
 The formally defined inversion process is prohibitively slow!
-- For every term in the co-factor matrix, you need to compute the `Minor`, i.e. the Matrix with the row and column removed.
+- For every term in the co-factor matrix, you need to compute the `Minor`, i.e. the determinant of the Matrix with the row and column removed.
 - Since the process is recursive, this grows very fast as the matrices gets larger
 
 In the next lecture we'll look at some methods for solving systems of linear equations!
