@@ -182,18 +182,18 @@ $ rS = r^2 + 2r^3 + 3r^4 + .. + (n-1)r^n + nr^{n+1} $
 
 $ S-rS = r + r^2 + r^3 + ... + r^n - nr^{n+1} $  
 
-$ S(1-r) = \frac{1-r^n}{1-r} - 1 -nr^{n+1} $
+$ S(1-r) = \frac{1-r^{n+1}}{1-r} - 1 -nr^{n+1} $
 
 $ S = \frac{r-(n+1)r^{n+1}+{nr^{n+2}}}{(1-r)^2} $
 
 ---
 ## Derivative Method
 
-For $r \neq 1, \sum_{i=0}^n r^i = \frac{1-r^n}{1-r}$
+For $r \neq 1, \sum_{i=0}^n r^i = \frac{1-r^{n+1}}{1-r}$
 
 Take the derivative of each side...
 
-$\sum_{i=0}^n ir^{i-1} = \frac{-(1-r)(n+1)r^n-(-1)(1-r)^{n+1}}{(1-r)^2}$
+$\sum_{i=1}^n ir^{i-1} = \frac{-(1-r)(n+1)r^n-(-1)(1-r)^{n+1}}{(1-r)^2}$
 
 $= \frac{1-(n+1)r^n+nr^{n+1}}{(1-r)^2}$
 
@@ -202,7 +202,7 @@ $= \frac{1-(n+1)r^n+nr^{n+1}}{(1-r)^2}$
 
 What do we need to do to get what we want? Multiply by r.
 
-$\sum_{i=0}^n ir^i = \frac{r-(n+1)r^{n+1}+nr^{n+2}}{(1-r)^2}$
+$\sum_{i=1}^n ir^i = \frac{r-(n+1)r^{n+1}+nr^{n+2}}{(1-r)^2}$
 
 Which is what we found earlier.
 

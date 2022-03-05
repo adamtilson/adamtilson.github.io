@@ -717,7 +717,6 @@ The formally defined inversion process is prohibitively slow!
 In the next lecture we'll look at some methods for solving systems of linear equations!
 
 ---
-
 ### References
 
 - Dr. Abdul Bais's ENSE 350 Slides
