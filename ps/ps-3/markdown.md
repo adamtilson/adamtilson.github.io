@@ -59,7 +59,7 @@ Hint:  $\sum\_{i=0}^{\infty}\frac{1}{2^i}=2$. How could you use this?
 
 Q6. Use integral bounds to approximate the sum:
    
-$$ \sum_{i=1}^{n} \frac{1}{n^2}$$
+$$ \sum_{i=1}^{n} \frac{1}{i^2}$$
 
 ---
 
