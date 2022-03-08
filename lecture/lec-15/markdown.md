@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 15: Iterative Methods: Solving Systems of Linear Equations 2
+### Lecture 15: Solving Systems of Linear Equations 2
 
 Adam Tilson, M.A.Sc., Engineer-in-Training
 
