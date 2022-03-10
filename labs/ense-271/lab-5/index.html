@@ -143,6 +143,12 @@
 
       <p>Follow the installer. If you are on mac, you may need to move the executable to your Applications folder. See the video in references for more information.</p>
 
+      <h3 id="configuration-for-the-lab-machines">Configuration for the Lab Machines</h3>
+
+      <p>By default, Local updates the hosts file to simulate local domains, however, this requires admin privileges, which you will not have in the lab. To get around this, we can instead run our sites on localhost, by changing the following setting:</p>
+
+      <p><img src="res/set-local-host.png" alt="Set local host" /></p>
+
     </div></div></section>
 <section id="30creatinganewsite"><button class="collapsible">3.0 Creating a new site</button><div class="text-content"><div class="text-inner">
 
@@ -156,7 +162,7 @@
 
       <p>If you know the specific configuration of software needed for your server, you may configure the environment, but for our purposes the preferred configuration is fine for development.</p>
 
-      <p><img src="res/environment.png" alt="Environment" /></p>
+      <p><img src="res/environment.png" alt="environment" /></p>
 
       <p>Wordpress has two web interfaces, one for the public which is available to all to see, and one for the admin used to perform administration, such as adding new content. The admin account can be accessed from any computer around the world, so naturally must be secured behind a username and password. Set these on the next screen. Make sure you remember these: if you forget them you will need to manually edit your database to reset this. The email you enter will occasionally get messages from Wordpress, letting you know if themes or plugins have been updated.</p>
 
@@ -303,6 +309,8 @@
         <li>Take a tour of your site. How have pages changed?</li>
         <li>Document these changes using screenshots</li>
       </ul>
+
+      <p>Note: This lab deliverable has some overlap with the result of Lab 6 o see the deliverables of that lab, to attempt to minimize redoing work!</p>
 
     </div></div></section>
 <section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
