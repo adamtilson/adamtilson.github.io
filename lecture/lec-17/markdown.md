@@ -27,7 +27,7 @@ layout: false
 
 The purpose of this chapter is to explore iterative numerical methods for finding roots to non-linear equations
 - Recall, with linear and polynomial functions, we can find roots by solving for $f(x) = 0$.
-- $x^3-8x^2-35x+150$
+- $x^3-8x^2-35x+150=0$
 - $(x-3)(x+5)(x-10)=0$
 - $x=3, x=-5, x=10$
 
@@ -123,7 +123,7 @@ The Newton-Raphson method attempts to find the root by:
 ## Secant Method
 The Newton-Raphson method depended on computing the tangent of the function, using the first derivative.
 
-But what if we are unable to compute it?
+But what if we are unable to symbolically compute it?
 
 We may instead approximate the derivative as such:
 
@@ -157,7 +157,7 @@ The Secant method attempts to find the root by:
       - Division by Zero
       - Oscillation
       - Root Jumping
-- Basically should only be used when determining the symbolic derivative is not feasible
+- Generally only preferable to Newton Raphson when finding the symbolic derivative is not feasible
 ---
 ## Bisection Method
 
@@ -215,7 +215,7 @@ The Bisection Method attempts to find a root through a process akin to binary se
 - Always converges
 - Always makes consistent progress towards a root
 - Typically slower than other methods discussed (linear instead of quadratic)
-- Better performance when our guesses our approximately equal distanced from the root - the more skewed to one side, the slower the convergence, particularly bad if one of the guesses is very close.
+- Better performance when our guesses are approximately equal distance from the root - the more skewed to one side, the slower the convergence, and particularly bad if one of the guesses is very close.
 - Unable to find roots that do not cross the x-axis
 - Can be fooled by asymptotes on the x-axis
 

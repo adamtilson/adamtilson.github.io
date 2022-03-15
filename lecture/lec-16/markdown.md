@@ -25,7 +25,7 @@ layout: false
 ]
 ---
 ## Mathematical Modeling of Engineering Problems
-- In all fields of Engineering, some problems which we are trying to be solved can be modelled mathematically
+- Common to all fields of Engineering, some problems can be modelled mathematically
   - The model is an equation or set of equations
   - The solution to the problem is to solve the equation(s)
 
@@ -34,37 +34,43 @@ layout: false
 - Symbolic calculations
   - Most of the math we have done so far has been symbolic
   - Express our quantities in terms of variables
+    - Algebra
     - Integration
     - Differentiation (Ordinary, Partial)
-  - Generally speaking, these are easy for humans, but hard for computers.
+  - Generally speaking, these operations are easy for humans, but hard for computers.
 
 ---
 ## Numerical Solution
 - We wish to leverage computer power to solve our model
-  - We don't necessarily need to figure out exact solution first
+  - We don't necessarily need to figure out the symbolic solution first
     - Maybe it is too hard, maybe impossible
-    - We don't necessarily need the exact (closed-form solution) to get enough information to solve our engineering problem.
+    - We may not need the exact (closed-form solution) to get enough information to solve our engineering problem.
 
 ---
-## Goal
+## Goal for this section
 
 To develop and learn of algorithms for accomplishing these tasks for us.
 - We previously saw this with systems of linear equations. 
-- Gauss-Jordan Elimination
-- LU Decomposition
-  - In the real world, we might have systems with hundreds or thousands of unknowns
+  - Gauss-Jordan Elimination
+  - LU Decomposition
+    - In the real world, we may apply these same procedures to systems with hundreds or thousands of unknowns
 - In the lab, we will be implementing, using and comparing some of these algorithms
 
 ---
 ## Approximation Error
 - Because we are not using exact solutions, there will necessarily be some error
 - Sources of error:
-  - Modelling error - selecting the wrong model
-    - Typically Large
-  - Rounding Error - Computers truncate to a certain level of precision
-    - Numerical stability!
+  - Modelling error - selecting the wrong model (wrong types of equation(s))
+      - Typically Large
+  - Rounding Error - Computers round off after a certain level of precision
+      - Rounding Errors Propagate - Numerical stability
+      - e.g. in solving systems of linear equations, if we made a rounding error in creating a Pivot, it would affect every row that follows.
+
+---
+## Approximation Error
+- Sources of error:
   - Truncation Error - Purposefully selecting a simplified version of an equation
-    - e.g. rather than computing the closed form of a converging summation, we could instead sum up the first $n$ elements and stop early, naturally introducing some error.
+      - e.g. rather than computing the closed form of a converging summation, we could instead sum up the first $n$ elements and stop early, naturally introducing some error.
 
 ---
 ## Example - Approximating a Derivative with a Slope
@@ -99,7 +105,7 @@ Approximated, $h=1$:
 
 - $E_t = \text{True Value} - \text{Approximate Value} = 8 - 10 = -2$
 
-Not particularly useful, because it doesn't communicate scale. 
+This error term is not particularly useful, because it doesn't communicate scale. 
 - How good or bad is -2 error? 
 - What does the - mean?
 
@@ -107,7 +113,7 @@ Not particularly useful, because it doesn't communicate scale.
 
 ## Relative True Error
 - $\epsilon_t = \frac{E_t}{\text{True Value}}$
-- $\epsilon_t = \frac{-2}{8} = -{1}{4} = -0.25$
+- $\epsilon_t = -\frac{2}{8} = -\frac{1}{4} = -0.25$
 
 Better. This is a percentage. What does the negative mean?
 
@@ -172,9 +178,11 @@ For iterative methods, we can use several approaches for stopping:
 ---
 ## Taylor's Theorem
 
+A method for approximating functions
+
 If all higher derivatives exist, and are continuous between $x$ and $x+h$:
 
-$f(h)+\frac {f'(h)}{1!} (x-h)+ \frac{f''(h)}{2!} (x-h)^2+\frac{f'''(h)}{3!}(x-h)^3+ \cdots$
+$f(x) \approx f(h)+\frac {f'(h)}{1!} (x-h)+ \frac{f''(h)}{2!} (x-h)^2+\frac{f'''(h)}{3!}(x-h)^3+ \cdots$
 
 - The more terms we use, the more accurate our approximation!
 - When $h=0$, this is called the Maclaurin series.
@@ -182,14 +190,14 @@ $f(h)+\frac {f'(h)}{1!} (x-h)+ \frac{f''(h)}{2!} (x-h)^2+\frac{f'''(h)}{3!}(x-h)
 ---
 ## Taylor's Theorem
 
-$f(h)+\frac {f'(h)}{1!} (x-h)+ \frac{f''(h)}{2!} (x-h)^2+\frac{f'''(h)}{3!}(x-h)^3+ \cdots$
+$f(x) \approx f(h)+\frac {f'(h)}{1!} (x-h)+ \frac{f''(h)}{2!} (x-h)^2+\frac{f'''(h)}{3!}(x-h)^3+ \cdots$
 
 ![](continuous-function.png)
 
 ---
 ## Taylor's Theorem Example
 
-$f(h)+\frac {f'(h)}{1!} (x-h)+ \frac{f''(h)}{2!} (x-h)^2+\frac{f'''(h)}{3!}(x-h)^3+ \cdots$
+$f(x) \approx f(h)+\frac {f'(h)}{1!} (x-h)+ \frac{f''(h)}{2!} (x-h)^2+\frac{f'''(h)}{3!}(x-h)^3+ \cdots$
 
 - $h=0$
 - $f(h) = e^h$
@@ -198,12 +206,13 @@ $f(h)+\frac {f'(h)}{1!} (x-h)+ \frac{f''(h)}{2!} (x-h)^2+\frac{f'''(h)}{3!}(x-h)
 - $f'(0) = 1$
 - $f''(0) = 1$...
 
-$e^x = f(x) = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + ...$
+$e^x \approx f(x) = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + ...$
 
 ---
 ## Example Evaluation
 
-- $e^2, n = 2$
+Let's use Taylor's Theorem to compute:
+- $f(x) = e^x$ for $x=2$. i.e. $e^2, n = 2$
 - $e^2 = f(2) = 1 + 2 + \frac{2^2}{2}$
 - $e^2 = f(2) = 5$
 
