@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 17: Solutions to Non-Linear Equations
+### Lecture 17: Iterative Methods for Root Finding
 
 Adam Tilson, M.A.Sc., Engineer-in-Training
 
