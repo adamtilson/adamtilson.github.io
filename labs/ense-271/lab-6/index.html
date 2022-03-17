@@ -127,7 +127,7 @@
 
       <p>To achieve this goal, we will work today with templates and page builders to quickly get a site up and running and iterate towards our desired design.</p>
 
-      <p>We will attempt to implement several pages from the TRAVEL Hyrule site, which we looked at in Prototyping in XD, in wordpress using Gutenberg blocks. We will necessarily observe some of the limitations of the software.</p>
+      <p>We will attempt to implement several pages from the TRAVEL Hyrule site, which we looked at in Prototyping in XD, in wordpress using Wordpress Blocks. We will necessarily observe some of the limitations of the software.</p>
 
       <h4 id="set-up">Set-up</h4>
 
@@ -161,7 +161,7 @@
 
       <p><img src="res/starter-templates-library.png" alt="" /></p>
 
-      <p>The templates have been created using a number of page builders. We will work with the Gutenberg editor.</p>
+      <p>The templates have been created using a number of page builders. We will work with the Wordpress Block editor.</p>
 
       <p><img src="res/gutenberg-templates.png" alt="" /></p>
 
@@ -172,8 +172,6 @@
       <p>Let’s import the complete site, to give us several starting pages, as well as sample content. The plugin will automatically download some plugins to ensure the site looks and acts as intended.</p>
 
       <p><img src="res/install-extras.png" alt="" /></p>
-
-      <p><img src="res/skip.png" alt="" /></p>
 
       <p>To actually fill our page, we need some content</p>
 
@@ -189,22 +187,20 @@
     </div></div></section>
 <section id="30pagebuilders"><button class="collapsible">3.0 Page Builders</button><div class="text-content"><div class="text-inner">
 
-      <p>Page Builders are applications built on top of Wordpress which allow users to generate pages by composing them of a number of nested blocks. The Wordpress Gutenberg Blocks editor is an example of this, but there are also commercially available open source editors such as Elementor and Beaver Builder. Generally the more powerful, flexible and easy to use the editor, the more bloated the output reducing performance. For these reasons, we will use the best performing Gutenberg editor, even if some things are slightly more tedious to us as users, and even impossible without custom code.</p>
+      <p>Page Builders are applications built on top of Wordpress which allow users to generate pages by composing them of a number of nested blocks. The Wordpress Blocks editor is an example of this, but there are also commercially available open source editors such as Elementor and Beaver Builder. Generally the more powerful, flexible and easy to use the editor, the more bloated the output reducing performance. For these reasons, we will use the best performing Wordpress editor, even if some things are slightly more tedious to us as users, and even impossible without custom code.</p>
 
     </div></div></section>
 <section id="40homepage"><button class="collapsible">4.0 Home Page</button><div class="text-content"><div class="text-inner">
 
-      <p>Let’s edit the homepage with Gutenberg.</p>
+      <p>Let’s edit the homepage with Wordpress Blocks.</p>
 
-      <p>First we will implement the home page. Let’s break down a set of Gutenberg blocks which could comprise this layout…</p>
+      <p>First we will implement the home page. Let’s break down a set of Wordpress blocks which could comprise this layout…</p>
 
       <p><img src="res/mockup-to-blocks.png" alt="" /></p>
 
       <p>Steps</p>
 
-      <ol>
-        <li>Change the Cover background to the Hyrule image</li>
-      </ol>
+      <h3 id="change-the-cover-background-to-the-hyrule-image">1. Change the Cover background to the Hyrule image</h3>
 
       <p><img src="res/cover.png" alt="" /></p>
 
@@ -230,11 +226,11 @@
 
       <p>Inspector -&gt; Block -&gt; Dimensions -&gt; 400 px</p>
 
-      <p>Note, you can also set properties for the Page for this menu as well, which is how you can constrain content and turn on or off headers or footers.</p>
+      <p>Note, you can also set properties for the Theme for this page as well, which is how you can constrain content and turn on or off headers or footers.</p>
 
       <p><img src="res/page-settings.png" alt="" /></p>
 
-      <p>We may need to come back to this one in a bit, but for now this should be good for our page.</p>
+      <p>We may need to come back to this one in a bit, but for now the defaults should be good for our page.</p>
 
       <p>Remember to frequently save with update, and preview your page in a new tab.</p>
 
@@ -242,9 +238,7 @@
 
       <p><img src="res/first-change.png" alt="" /></p>
 
-      <ol>
-        <li>Lets add a text and image block…</li>
-      </ol>
+      <h3 id="lets-add-a-text-and-image-block">2. Lets add a text and image block…</h3>
 
       <p><img src="res/add-block.png" alt="" /></p>
 
@@ -286,17 +280,13 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
 
       <p>Let’s take a break from the block editor and hop into the Astra editor to set up our header and footer.</p>
 
-      <ol>
-        <li>Changing our header logo and menu</li>
-      </ol>
+      <h3 id="changing-our-header-logo-and-menu">3. Changing our header logo and menu</h3>
 
       <p><img src="res/customize-theme.png" alt="" /></p>
 
       <p><img src="res/change-header-logo.png" alt="" /></p>
 
-      <ol>
-        <li>Changing our footer using the Astra footer builder</li>
-      </ol>
+      <h3 id="changing-our-footer-using-the-astra-footer-builder">4. Changing our footer using the Astra footer builder</h3>
 
       <p>Changing our footer is a little bit more complicated. We need to use the theme’s footer customizer. We likely won’t get quite to the point we want to, but that’s okay…</p>
 
@@ -336,9 +326,93 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
 
       <p><img src="res/publish-footer.png" alt="" /></p>
 
-      <ol>
-        <li>Contact form</li>
-      </ol>
+      <h3 id="appointment-booking">5. Appointment Booking</h3>
+
+      <p>In previous years we did a contact form, which matches our design, (this info will be left after this section, for your info). This year, instead, we will use a booking system to book tours, to explore installing and using plugins.</p>
+
+      <ul>
+        <li>Install a new plugin:</li>
+      </ul>
+
+      <p><img src="res/install-new-plugin.png" alt="" /></p>
+
+      <ul>
+        <li>Install and activate Easy Appointments</li>
+      </ul>
+
+      <p><img src="res/easy-appointments.png" alt="" /></p>
+
+      <p>This is a plugin created for taking bookings. It <a href="https://en-ca.wordpress.org/plugins/easy-appointments/">can be found here</a>, with  <a href="https://easy-appointments.net/documentation/">documentation here</a>.</p>
+
+      <ul>
+        <li>Plugins typically have their own interfaces for editing. You can get to its settings through the admin dashboard:</li>
+      </ul>
+
+      <p><img src="res/plugin-interface.png" alt="" /></p>
+
+      <p>Often, with plugins, you need to read the docs to figure out they work. This plugin allows places, like Salons, to book appointments. The data model for an appointment includes:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Location</code> (Where is the service offered?)</li>
+        <li><code class="language-plaintext highlighter-rouge">Employee</code> (Who is doing the service?)</li>
+        <li><code class="language-plaintext highlighter-rouge">Service</code> (What is being offered?)
+          <ul>
+            <li>An appointment slot combines a <code class="language-plaintext highlighter-rouge">Connection</code> between each of these three, as well as the times they occur.</li>
+          </ul>
+        </li>
+        <li>So, first we must set this up, for our appointment to work.</li>
+      </ul>
+
+      <p><img src="res/location.png" alt="" /></p>
+
+      <p><img src="res/services.png" alt="" /></p>
+
+      <p><img src="res/employees.png" alt="" /></p>
+
+      <p><img src="res/connections.png" alt="" /></p>
+
+      <p><img src="res/connection.png" alt="" /></p>
+
+      <ul>
+        <li>
+          <p>Finally, we may want to adjust some settings:</p>
+        </li>
+        <li>
+          <p>In particular, I want to auto-confirm appointments</p>
+        </li>
+      </ul>
+
+      <p><img src="res/settings.png" alt="" /></p>
+
+      <ul>
+        <li>
+          <p>Newer plugins typically provide a Wordpress Block to add directly to your site, however, older once might only be accessible through a <code class="language-plaintext highlighter-rouge">shortcode</code>, which will customize the appearance of the plugin on the page.</p>
+        </li>
+        <li>
+          <p>I found these settings which I like:</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ea_bootstrap width="800px" scroll_off="true" layout_cols="2" worker="1" location="1" service="1"]
+</code></pre></div>          </div>
+        </li>
+      </ul>
+
+      <p>We can add it to the page with a <code class="language-plaintext highlighter-rouge">shortcode</code> block</p>
+
+      <p><img src="res/shortcode-block.png" alt="" /></p>
+
+      <p>Unfortunately changes are not “What you see is what you get” (WYSIWYG), so we need to preview our page to see the changes.</p>
+
+      <p><img src="res/booking-an-appointment.png" alt="" /></p>
+
+      <p>When we refresh we can see the slot is gone:</p>
+
+      <p><img src="res/slot-is-gone.png" alt="" /></p>
+
+      <p>Finally, we can view our appointments from the Wordpress admin:</p>
+
+      <p><img src="res/dash-board.png" alt="" /></p>
+
+      <p>This is likely not the best booking plugin, but this gives you an idea of how to find and install a plugin, learn how to use it, and get going with it!</p>
+
+      <h3 id="contact-form">6. Contact form</h3>
 
       <p>Let’s finish the landing page off with a contact form:</p>
 
@@ -471,7 +545,7 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
           <ul>
             <li>Each section should communicate an aspect of the persona’s personality or interests</li>
             <li>Example ideas: book quotes, song lyrics, recipes, photo galleries, pets, etc.</li>
-            <li>Each section should experiment with a different type of Gutenberg block</li>
+            <li>Each section should experiment with a different type of Wordpress block</li>
           </ul>
         </li>
         <li>A blog page with at least 3 entries
@@ -494,6 +568,13 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
       <p>Please submit a backup of your site from local.</p>
 
       <p><a href="https://localwp.com/help-docs/advanced/how-to-backup-a-local-site/">See this link for information:</a></p>
+
+    </div></div></section>
+<section id="nextweekthegithubreview"><button class="collapsible">Next Week - the GitHub Review</button><div class="text-content"><div class="text-inner">
+
+      <p>In next weeks lab we will meet either in person or in zoom and do a ~10 minute tour through your GitHub to see how you have showcased your work for the year, and what you might do to improve!</p>
+
+      <p>Our hope is you keep building your GitHub skills so that by Capstone you can both properly document your design projects, as well as showcase your work to prospective employers!</p>
 
     </div></div></section>
 <section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
