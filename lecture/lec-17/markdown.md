@@ -39,7 +39,6 @@ However, with non-linear equations, this process may not be so trivial
 
 ![](derivation-1.png)
 
-
 ---
 ## Newton-Raphson
 
@@ -87,7 +86,6 @@ The Newton-Raphson method attempts to find the root by:
 
 - If able to converge, it typically converges quickly (quadratic rather than linear)!
 - Only requires one guess
-- Doesn't need to bracket the solution
 
 ---
 ### Newton-Raphson Disadvantages
@@ -110,6 +108,9 @@ The Newton-Raphson method attempts to find the root by:
 ---
 ## Newton-Raphson - Oscillation
 ![](oscillation-3.png)
+---
+## Newton-Raphson - Divide by zero
+![](divide-by-zero.png)
 ---
 ## Newton-Raphson - Jumping a Root
 ![](jump-root-1.png)
