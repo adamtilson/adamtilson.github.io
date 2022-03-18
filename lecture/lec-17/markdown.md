@@ -145,7 +145,7 @@ The Secant method attempts to find the root by:
 - Create two initial guesses, $x_0, x_1$.
 - Iteratively...
   - Let the newer guess become the older guess
-  - Find a better value for the newer guesses using the $x\_{i+1}=x\_i - \frac{f(x\_i)(f(x\_i) - f(x\_{i-1}))}{x\_i - x\_{i-1}}$
+  - Find a better value for the newer guesses using the $x\_{i+1}=x\_i - \frac{f(x\_i)(x\_i - x\_{i-1})}{(f(x\_i) - f(x\_{i-1}))}$
   - Compute the Absolute Relative Approximate Error $\epsilon_a$ and if it is below a certain threshold, $\epsilon_s$, stop. Otherwise, keep iterating!
 
 ---
