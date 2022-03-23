@@ -196,9 +196,9 @@ $ \text{Area} = (b-a) \times f(a) + \frac{(b-a) \times (f(b) - f(a))}{2} $
 
 Doing some algebra:
 
-$ \text{Area} = (b-a) \times f(a) + \frac{(b-a) * f(b)}{2} - \frac{(b-a) \times f(a))}{2} $
+$ \text{Area} = (b-a) \times f(a) + \frac{(b-a) \times f(b)}{2} - \frac{(b-a) \times f(a)}{2} $
 
-$ \text{Area} = \frac{(b-a) \times f(b)}{2} + \frac{(b-a) \times f(a))}{2} = (b-a) \times \frac{ f(b) + f(a)}{2} $
+$ \text{Area} = \frac{(b-a) \times f(b)}{2} + \frac{(b-a) \times f(a)}{2} = (b-a) \times \frac{ f(b) + f(a)}{2} $
 
 ---
 ## Trapezoid Formula Derivation
