@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 18: Iterative Methods for Root Finding
+### Lecture 20: Numerical Integration Problems
 
 Adam Tilson, M.A.Sc., Engineer-in-Training
 
@@ -22,51 +22,93 @@ layout: false
 ---
 Let's work through some practice problems!
 
-Q1. Find a non-zero solution to the equation:
+Q1. Consider the following integral:
 
-$$\sin x = x^2$$
-
----
-Q2. Use the bisection method to find where the polynomial
-
-$$2x^3-4x^2+3x$$
-
-crosses the line
-
-$$y=2$$
-
-Perform 7 iterations, but keep track of midpoints and give the best approximation you found.
+$\int_0^4 1-e^{-x}\text{d}x$
+- Evaluate the integral analytically
+- Evaluate with Midpoint $n=4$ segments
+- Evaluate with Trapezoid $n=4$ segments
+- Evaluate with 1/3 Simpsons $n=4$ segments
+- Compare the geometry of each method with the graph, is the behavior as expected? 
 
 ---
-Q3. Use the Newton-Raphson method to provide compute the root of the function
+Q2. Consider the following integral:
 
-$$f(x)=e^{-0.5x}(4-x)-2$$
+$\int_0^1 xe^{2x}\text{d}x$
 
-Compare guesses of 2, 6, 8. Explain the algorithm behavior.
-
----
-Q4. Find the lowest positive root of the function:
-
-$$f(x)=\frac{7 \sin(x)}{e^x}-1$$
-
-By conducting graphical analysis, determine which method(s) would be inappropriate and use an appropriate method.
+Using the trapezoid rule, compare $n=3$, $n=4$ and $n=5$ segments and compute the percent absolute relative approximate error between successive splits.
 
 ---
-Q5. An iterative method for computing an inverse is based on the function:
-$$f(x) = a - \frac{1}{x} = 0$$, where x is the inverse of a.
+Q3. A transportation engineering study requires calculating the number of cars through an intersection travelling during morning rush hour. The following table provides the number of cars that pass every 4 minutes during that period:
 
-a) Using the Newton-Raphson method, and simplifying, show why this formulation may be beneficial for computers.
 
-b) Find the inverse of 2.5, using an initial guess of 0.1. Perform four iterations and compute the per. abs. rel. true error.
+|time|7:30|7:45|8:00|8:15|8:30|8:45|9:00|9:15|
+|---|---|---|---|---|---|---|---|---|
+|cars / 4 minutes|18|23|14|24|-|20|-|9|
 
-c) Using the Secant method, and simplifying, determine if this method would have the same benefits as Newton-Raphson.
+Using an appropriate method (or combination of methods), estimate the number total number of cars through the intersection from 7:30 to 9:15.
+
+---
+Q4. The amount of mass transported via a pipe over a periodd of time can be computed as:
+
+$\int_{t_1}^{t_2}Q(t)c(t)\text{d}t$
+
+Where:
+- $M$ is the mass in $mg$
+- $t_1$ is the initial time, in $min$
+- $t_2$ is the final time in $min$
+- $Q(t)$ is the flow rate, in $\frac{m^3}{min}$
+- $c(t)$ is the concentration in $\frac{mg}{min}$
+
+(ctd.)
+
 ---
 
-Q6. A start-up company is manufacturing boutique hand-held gaming computers. The company estimates that the total profit versus number of units sold is given by the function:
+The following functions represent temporal variations in flow and concentration:
 
-$$f(n) = 40n^{1.5}-875n+35000$$
+$Q(t) = 9+5\left(\cos\left(0.4t\right)\right)^{2}$
 
-Find the minimum number of units the company must sell to make a profit.
+$c(t) = 5e^{-0.5t}+2e^{0.15t}$
+
+Estimate the mass transported from $t_1=2$ and $t_2=8$ minutes. Compare results of using 1/3 Simpsons Rule with 3 segments, and trapezoid rule with 6 segments.
+
+(ctd.)
+
+???
+
+Note: Actual, per Wolfram Alpha is 335.963
+
+---
+
+![](what-is-this-thing.png)
+
+---
+
+Q5. In statistics, the Gaussian functioned is defined as:
+
+$g(x) = \frac{1}{\sigma\sqrt{2\pi}} e^ { - \frac{(x - \mu)^2}{2\sigma^2}}$
+
+Where $\mu$ is the mean, and $\sigma$ is the standard deviation.
+
+Taking the definite integral under this curve gives a percentage.
+
+The mean of a course is $\mu=67\\%$ with a standard deviation of $\sigma=17\\%$. 
+
+(ctd.)
+
+---
+
+![](grade-distribution.png)
+
+---
+
+Assuming the students grades can be approximated using the gaussian distribution, predict how many people in the course of 95 people failed. Use 1/3 simpsons rule and 1 segment.
+
+Hint: Plug in known quantities and integrate the Gaussian from $x=0$ to $x=50$.
+
+
+???
+Note: The true percent value of failures is 0.158161 
 
 ---
 
