@@ -431,8 +431,8 @@ Way better than Euler for n=1.
 Runge-Kutta 4th for different N's:
 
 - n = 1: $y_1 = 65.4$
-- n = 2: $y_2 - 117.9$
-- n = 10: $y_10 = 148.2$
+- n = 2: $y_2 = 117.9$
+- n = 10: $y_{10} = 148.2$
 
 Much quicker than the Euler Method!
 ---
