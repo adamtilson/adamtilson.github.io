@@ -150,7 +150,7 @@ $x(t)=t-\sin(t)+30$
 - We know the function of the first derivative, which corresponds to the instantaneous slope at any given point
 - Starting at $t=0$
   - We can determine the slope at that point, $x'(0)$
-  - And take a small step in that direction, $\Delta_x$-units
+  - And take a small step in that direction, $\Delta_t$-units
   - We can iterate
 - Thus, we can take small steps along the slope and arrive at the goal
 ---
@@ -290,30 +290,30 @@ Find $y_2$
 
 ### Math...
 
-$y\_{0.2} = 1 + 0.2 (1 + 0*1) = 1.2$
+$y(0.2) = 1 + 0.2 (1 + 0*1) = 1.2$
 
-$y\_{0.4} = 1.2 + 0.2 (1.2 + 0.2 * 1.2) = 1.488$
+$y(0.4) = 1.2 + 0.2 (1.2 + 0.2 * 1.2) = 1.488$
 
-$y\_{0.6} = 1.488 + 0.2 (1.488 + 0.4 * 1.488) = 1.905$
+$y(0.6) = 1.488 + 0.2 (1.488 + 0.4 * 1.488) = 1.905$
 
-$y\_{0.8} = 1.905 + 0.2 (1.905 + 0.6 * 1.905) = 2.514$
+$y(0.8) = 1.905 + 0.2 (1.905 + 0.6 * 1.905) = 2.514$
 
-$y\_{1} = 2.514 + 0.2 (2.514 + 0.8 * 2.514) = 3.419$
+$y(1) = 2.514 + 0.2 (2.514 + 0.8 * 2.514) = 3.419$
 
 ---
 
 ### More Math...
 
 
-$y\_{1.2} = 3.419 + 0.2 (3.419 + 1.0 * 3.419) = 4.787$
+$y(1.2) = 3.419 + 0.2 (3.419 + 1.0 * 3.419) = 4.787$
 
-$y\_{1.4} = 4.787 + 0.2 (4.787 + 1.2 * 4.787) = 6.893$
+$y(1.4) = 4.787 + 0.2 (4.787 + 1.2 * 4.787) = 6.893$
 
-$y\_{1.6} = 6.893 + 0.2 (6.893 + 1.4 * 6.893) = 10.202$
+$y(1.6) = 6.893 + 0.2 (6.893 + 1.4 * 6.893) = 10.202$
 
-$y\_{1.8} = 10.202 + 0.2 (10.202 + 1.6 * 10.202) = 15.507$
+$y(1.8) = 10.202 + 0.2 (10.202 + 1.6 * 10.202) = 15.507$
 
-$y\_{2} = 15.507 + 0.2 (15.507 + 1.8 * 15.507) = 24.191$
+$y(2) = 15.507 + 0.2 (15.507 + 1.8 * 15.507) = 24.191$
 
 ---
 
@@ -393,18 +393,18 @@ $\frac{dy}{dx} = f(x, y)$
 
 $y(x_0) = y_0$
 
-- $x\_{n+1} = x\_n + h$
+- $x\_{n+1} = x\_n + \Delta_x$
 - $y\_{n+1} = y_n + \frac{1}{6}h\left(k\_1 + 2k\_2 + 2k\_3 + k\_4 \right)$
 
 ---
 ## Runge-Kutta 4th
 
-- $y\_{n+1} = y_n + \frac{1}{6}h\left(k\_1 + 2k\_2 + 2k\_3 + k\_4 \right)$
+- $y\_{n+1} = y_n + \frac{1}{6}\Delta_x\left(k\_1 + 2k\_2 + 2k\_3 + k\_4 \right)$
 - $k\_1 = \ f(x\_n, y\_n)$
-- $k\_2 = \ f\left(x\_n + \frac{h}{2}, y\_n + h\frac{k\_1}{2}\right)$
-- $k\_3 = \ f\left(x\_n + \frac{h}{2}, y\_n + h\frac{k\_2}{2}\right)$
-- $k\_4 = \ f\left(x\_n + h, y\_n + hk\_3\right)$
+- $k\_2 = \ f\left(x\_n + \frac{\Delta_x}{2}, y\_n + \Delta_x\frac{k\_1}{2}\right)$
+- $k\_3 = \ f\left(x\_n + \frac{\Delta_x}{2}, y\_n + \Delta_x\frac{k\_2}{2}\right)$
 
+- $k\_4 = \ f\left(x\_n + \Delta_x, y\_n + \Delta_x k\_3\right)$
 Intuitively, our four terms are: 
 - the slope at the beginning of the line,
 - the slope at the end of the line, 
