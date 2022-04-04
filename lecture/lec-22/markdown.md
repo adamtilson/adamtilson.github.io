@@ -54,6 +54,7 @@ $\frac{\text{d}}{\text{d}t} x(t) = 37.5 - 3.5x(t)$
 At the initial time, $t=0$ , the salt concentration in the tank is $50 \frac{g}{L}$. Using Euler's Method, perform $8$ iterations to determine salt concentration after $3$ minutes?
 
 ---
+
 Q4. A polluted lake has an initial concentration of a bacteria of $10^7 \frac{\text{parts}}{m^3}$ , while the acceptable level is only $5 \times 10^6 \frac{\text{parts}}{m^3}$. The concentration of the bacteria will reduce as fresh water enters the lake. The differential equation that governs the concentration $C$ of the pollutant as a function of time (in weeks) is given by:
 
 $\frac{\text{d}}{\text{d}t}C(t) + 0.06C(t) = 0, C(0)=10^7$
@@ -68,7 +69,7 @@ $Q'(t)=-kQ(t)$
 
 Where the mass present at time $t=t_0$ is $Q_0$, and $k$ is the decay constant. 
 
-The radioactive decay constant, $k$, of a substance is $2.28 {s^-1}$ If the mass is currently $4g$, approximately how long until less than $1g$ remain? Use the Euler Method with a step size of $0.1 s$ Approximate to the nearest $0.1 s$. Use Euler's Method.
+The radioactive decay constant, $k$, of a substance is $2.28 s^{-1}$ If the mass is currently $4g$, approximately how long until less than $1g$ remain? Use the Euler Method with a step size of $0.1 s$ Approximate to the nearest $0.1 s$.
 
 ---
 
