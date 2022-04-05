@@ -389,7 +389,7 @@ However, if:
 
 An alternative method to solving ODE IVP's is the Runge-Kutta 4th Order approximation. It is a formulation of Simpsons's Rule from approximating integrals, and may be derived using the Taylor series.
 
-$\frac{dy}{dx} = f(x, y)$
+$\frac{dy}{dx} = y'(x, y(x))$
 
 $y(x_0) = y_0$
 
@@ -400,11 +400,11 @@ $y(x_0) = y_0$
 ## Runge-Kutta 4th
 
 - $y\_{n+1} = y_n + \frac{1}{6}\Delta_x\left(k\_1 + 2k\_2 + 2k\_3 + k\_4 \right)$
-- $k\_1 = \ f(x\_n, y\_n)$
-- $k\_2 = \ f\left(x\_n + \frac{\Delta_x}{2}, y\_n + \Delta_x\frac{k\_1}{2}\right)$
-- $k\_3 = \ f\left(x\_n + \frac{\Delta_x}{2}, y\_n + \Delta_x\frac{k\_2}{2}\right)$
+- $k\_1 = \ y'(x\_n, y\_n)$
+- $k\_2 = \ y'\left(x\_n + \frac{\Delta_x}{2}, y\_n + \Delta_x\frac{k\_1}{2}\right)$
+- $k\_3 = \ y'\left(x\_n + \frac{\Delta_x}{2}, y\_n + \Delta_x\frac{k\_2}{2}\right)$
 
-- $k\_4 = \ f\left(x\_n + \Delta_x, y\_n + \Delta_x k\_3\right)$
+- $k\_4 = \ y'\left(x\_n + \Delta_x, y\_n + \Delta_x k\_3\right)$
 Intuitively, our four terms are: 
 - the slope at the beginning of the line,
 - the slope at the end of the line, 
