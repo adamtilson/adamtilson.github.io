@@ -517,7 +517,7 @@ $= 74$
 ---
 ## Rank of a Matrix
 
-The rank of a matrix is defined as the order of the largest square sub-matrix whose determinant is zero.
+The rank of a matrix is defined as the order of the largest square sub-matrix whose determinant is non-zero.
 
 e.g. Rank is 3
 
