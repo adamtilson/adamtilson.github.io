@@ -419,6 +419,35 @@ In windows you can check by…</p>
         <li>Create a name, description, and you can omit the rest for now</li>
       </ul>
 
+      <h3 id="new-creating-a-key-pair-for-secure-communication">NEW: Creating a Key Pair for secure communication</h3>
+
+      <p>In some system configurations, you will need to generate a cryptographic key pair for securely uploading files to github.</p>
+
+      <p>This section comes from the following github documentation: <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></p>
+
+      <p>To do this, run the following from git bash, being sure to change the email in the second line to your email:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eval "$(ssh-agent -s)"
+ssh-keygen -t ed25519 -C "your-email@uregina.ca"
+</code></pre></div>      </div>
+
+      <p>Press enter to safe the key in the default location (~/.ssh/id_ed25519.pub), and enter a secure passphrase. You’ll use this whenever you check in code to GitHub, so don’t forget it!</p>
+
+      <p>Next, you are going to need to copy the public key and upload it to github. You can copy the key using the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clip &lt; ~/.ssh/id_ed25519.pub
+</code></pre></div>      </div>
+
+      <p>This will copy the key to your clipboard, just like if you had selected some text and pressed ctrl+c.</p>
+
+      <p>Now, you need to browse to github and upload this:</p>
+
+      <p><img src="res/uploading-a-key.png" alt="" /></p>
+
+      <p>With this, GitHub will recognize this computer and accept your contributions.</p>
+
+      <p>Note: In other configurations, a separate window will pop up allowing authentication through the browser. If this happens for you, you may use this instead. I am investigating what causes this to appear.</p>
+
       <h3 id="link-and-push-to-remote">Link and push to remote</h3>
 
       <p>We’ve already started our Git local, so we link and need to push to it…</p>
