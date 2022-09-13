@@ -147,6 +147,8 @@
 
       <p>Hopefully by continuing to refer to this diagram, it will be clear how the different components of the system are functioning together. (This was a point students struggled with last year.)</p>
 
+      <p><strong>Important: While these technologies are the key players in this version MVC, the MVC abstraction is not tied to any technology. That means you could implement an MVC using only HTML + JavaScript as long as you properly separate the view (html) from the model (JavaScript JSON Objects). We’ll disucss the MVC in more depth later!</strong></p>
+
     </div></div></section>
 <section id="part2theview"><button class="collapsible">Part 2: The View</button><div class="text-content"><div class="text-inner">
 
@@ -170,7 +172,7 @@
       <ul>
         <li>styling elements through HTML tags</li>
         <li>adding web elements using the JavaScript through the DOM
-As much as possible, we want to avoid using these components for unintended purposes! It makes code harder to read, understand and change.</li>
+As much as possible, we want to avoid using these modules for unintended purposes! It makes code harder to read, understand and change.</li>
       </ul>
 
     </div></div></section>
@@ -256,7 +258,7 @@ JONATHAN HARKER’S JOURNAL
 
       <h3 id="boilerplate-html">Boilerplate HTML</h3>
 
-      <p>Boilerplate refers to standard, preprinted text, as might be stampled on a boiler. In programming languages, this is the minimum code needed to make the language run and be compliant. You’ve likely already seen the c++ boilerplate…</p>
+      <p>Boilerplate refers to standard, preprinted text, as might be stamped on a boiler. In programming languages, this is the minimum code needed to make the language run and be compliant. You’ve likely already seen the c++ boilerplate…</p>
 
       <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
@@ -380,6 +382,7 @@ JONATHAN HARKER’S JOURNAL
       <p>There are other attributes which we will need to use which do not change style, but change other functionality, such as link destination and image source.</p>
 
       <h3 id="where-can-learn-about-tags">Where can learn about tags?</h3>
+
       <ul>
         <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Mozilla Developer Network</a></li>
         <li><a href="https://www.w3schools.com/tags/default.asp">W3Schools</a></li>
@@ -603,50 +606,670 @@ JONATHAN HARKER’S JOURNAL
       <p>If you want to see which tag a site is using for a specific object, in Chrome or FireFox you can right click the object and go to Inspect.</p>
 
       <h3 id="which-types-of-tags-should-i-use">Which types of tags should I use?</h3>
+
       <p>You always want to use the tag which best conveys the meaning of your marked up text. So, for emphasizing text which is rendered in italics, <code class="language-plaintext highlighter-rouge">&lt;em&gt;</code> is better than <code class="language-plaintext highlighter-rouge">&lt;i&gt;</code>.</p>
+
+    </div></div></section>
+<section id="part5cssoverview"><button class="collapsible">Part 5: CSS Overview</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="why-we-use-css">Why we use CSS</h3>
+
+      <p>CSS is used to apply styles to our elements. This changes the way that they are rendered on the page, so they they no longer take on the default HTML which is reminiscent of the 90s.</p>
+
+      <ul>
+        <li>Before CSS, we could only style elements with HTML attributes
+          <ul>
+            <li>This is slow and not very flexible
+              <ul>
+                <li>What if we want to reuse the same styles across elements? Across pages?</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="where-to-add-css-code">Where to add CSS code?</h3>
+
+      <p>CSS code can be applied inline, internal, external</p>
+      <ul>
+        <li>If a style conflict arises, these are the places you need to check!</li>
+      </ul>
+
+      <p>Inline</p>
+      <ul>
+        <li>Embeds CSS code in an HTML tag using the <code class="language-plaintext highlighter-rouge">style</code> attribute.</li>
+        <li>e.g. <code class="language-plaintext highlighter-rouge">&lt;hr style="width:50%;text-align:left;margin-left:0"&gt;</code>
+          <ul>
+            <li>Tedious and repetitive - need to apply style on a per element basis</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Internal</p>
+      <ul>
+        <li>Write CSS code inside of the <code class="language-plaintext highlighter-rouge">&lt;style&gt;</code> tags in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of the HTML document.</li>
+        <li>Applies styles on a page-by-page basis
+          <ul>
+            <li>this is rarely optimal, we typically want site-wide styles</li>
+          </ul>
+        </li>
+        <li>e.g.</li>
+      </ul>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+    <span class="nt">a</span><span class="nd">:link</span><span class="o">,</span> <span class="nt">a</span><span class="nd">:visited</span> <span class="p">{</span> 
+    <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+    <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> 
+    <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">underline</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span> Go back to the top!<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>External</p>
+      <ul>
+        <li>All of your CSS is stored in a separate file called, e.g. <code class="language-plaintext highlighter-rouge">css/style.css</code></li>
+        <li>We add a link to this style sheet in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of the HTML:</li>
+      </ul>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/style.css"</span><span class="nt">&gt;</span>
+</code></pre></div>      </div>
+
+      <ul>
+        <li>We can add this link to all pages site-wide</li>
+      </ul>
+
+      <h3 id="what-does-a-rule-look-like">What does a rule look like?</h3>
+
+      <p>The basic CSS syntax is:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">selector</span> <span class="p">{</span> <span class="py">property</span> <span class="p">:</span> <span class="n">value</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nt">who</span>        <span class="nt">what</span>       <span class="nt">how</span>
+</code></pre></div>      </div>
+      <ul>
+        <li>who do we want this to apply to, what do we want to change, how do we want to change it</li>
+      </ul>
+
+      <h3 id="how-are-rules-applied-cascading">How are rules applied? Cascading</h3>
+
+      <p>Cascading means styles inherit from other styles, i.e. “cascading down”.</p>
+      <ul>
+        <li>Often rules will conflict, so we need to determine which style will apply, based on factors:
+          <ul>
+            <li>Importance: you can specify important tags with <code class="language-plaintext highlighter-rouge">!important</code></li>
+            <li>Specificity: more specific rules (e.g. id’s) overrule less specific (e.g. classes, elements, or inherited)
+              <ul>
+                <li>Calculated with a complex scoring system.</li>
+                <li>generally:
+                  <ul>
+                    <li>id &gt; class &gt; tag &gt; inherited</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Source order: later rules overrule earlier ones
+              <ul>
+                <li>If you are linking multiple style sheets, more general ones should come first, more specific ones later</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>It is sometimes tough to compute precedence in our head!
+          <ul>
+            <li>General heuristic: more specific rules will override less specific rules</li>
+            <li>When learning and debugging: Use browser debug tools to see which styles are applying</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance">Here’s a good source for info on cascading</a></p>
+
+      <h3 id="cascading-example">Cascading example</h3>
+
+      <p>Copy the following code into index.html:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"style.css"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+    <span class="nt">hr</span> <span class="p">{</span>
+      <span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Welcome<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Welcome to my website!<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;hr&gt;</span>
+  <span class="nt">&lt;p&gt;</span>This is my homepage on the world wide web<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"paragraphs"</span><span class="nt">&gt;</span>I can't figure out these CSS rules!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"paragraphs"</span> <span class="na">id=</span><span class="s">"paragraph3"</span><span class="nt">&gt;</span> Why is this so complicated?!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">style=</span><span class="s">"color:blue;"</span><span class="nt">&gt;</span> What color will this be?!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>And the following code into style.css</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="n">grey</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.paragraphs</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#paragraph3</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">magenta</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">hr</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">h1</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>This shows how rules can be placed in three different places, and how they apply, both through inheritance (body inherits through to paragraph), by order (the internal style sections comes after the linked, so it will overrule it), and specificity (id overrules class overrules inherited). Fire up the debugger (F12), use the inspector, and trace how the CSS rules are overruled!</p>
+
+      <h3 id="debugger">Debugger</h3>
+
+      <p>In FireFox, you can open up the debugger with <code class="language-plaintext highlighter-rouge">F12</code>. You can use this to select elements and see which styles are applying:</p>
+
+      <p><img src="res/css-debugger.png" alt="" /></p>
+
+      <h3 id="default-style-sheet">Default Style Sheet</h3>
+
+      <p>Every page has styles, unless you specify changes they uses the default style
+This is what causes default styled HTML to look like it’s from the 90’s
+It can be useful to understand these default styles to know which changes to make:</p>
+      <ul>
+        <li><a href="https://www.w3schools.com/cssref/css_default_values.asp">Here is a link to descriptions of the default values for a CSS</a></li>
+        <li><a href="res/default.css">Here is a link to the CSS in a style sheet file.</a></li>
+      </ul>
+
+      <h3 id="syntax-checking">Syntax Checking</h3>
+
+      <p>VS Code checks your syntax as you type, look for common errors (bottom left)</p>
+
+      <h3 id="organization">Organization</h3>
+
+      <p>It’s best practice to Alphabetize Selectors and Properties 
+    - it will make yours or your colleagues life easier at some point
+Alternately, you may wish to group selectors by type, e.g. Tag, Class, ID</p>
+
+      <h3 id="comments">Comments</h3>
+
+      <p>CSS uses C-style comments:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">h1</span> <span class="p">{</span> 
+    <span class="c">/* Make h1's red. */</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div>      </div>
+      <h3 id="where-to-get-help">Where to get help?</h3>
+
+      <p>This is a great tutorial, which acknowledges how wonky CSS can be sometimes:</p>
+
+      <p><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS">Mozilla’s MDN Docs</a></p>
+
+    </div></div></section>
+<section id="part6cssselectorspropertiesandvalues"><button class="collapsible">Part 6: CSS Selectors, Properties and Values</button><div class="text-content"><div class="text-inner">
+
+      <p>Next let’s examine some of the details which make CSS so powerful (and also so tricky!)</p>
+
+      <h3 id="selectors">Selectors</h3>
+
+      <p>Elements can be selected by a number of rules. Some rules select individual elements, others select groups. Further, some inheritance rules apply which will propagate through to children elements.</p>
+
+      <h3 id="tag-selectors">Tag Selectors</h3>
+
+      <p>Also known as element selectors. Applies style to all tags of that type. Very broad strokes.</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">h1</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+      <p>This code will apply to all <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> tags.</p>
+
+      <h3 id="class-selector">Class Selector</h3>
+
+      <p>Selects all elements of a given class.</p>
+      <ul>
+        <li>You can assign elements to a class in the HTML code using the HTML attribute <code class="language-plaintext highlighter-rouge">class="&lt;class_name&gt;"</code></li>
+        <li>Multiple classes may be applied to a single object, separated by a space.
+          <ul>
+            <li>it’s best practice to only use one custom class, and attach others as needed by frameworks such as Bootstrap, e.g. <code class="language-plaintext highlighter-rouge">class="&lt;custom_class&gt; &lt;bootstrap_class&gt;</code></li>
+          </ul>
+        </li>
+        <li>target them in CSS with the selector: <code class="language-plaintext highlighter-rouge">.&lt;class_name&gt;</code></li>
+      </ul>
+
+      <p>e.g.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"headers"</span><span class="nt">&gt;</span> Lab 3 <span class="nt">&lt;/h1&gt;</span>
+...
+</code></pre></div>      </div>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.headers</span> <span class="p">{</span> 
+  <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>This will apply to all tags that have the <code class="language-plaintext highlighter-rouge">headers</code> class assigned to the class list.</p>
+
+      <h3 id="id-selector">Id Selector</h3>
+
+      <p>Selects the single element identified with a particular ID.</p>
+      <ul>
+        <li>You can assign elements an ID in the HTML code using the HTML attribute <code class="language-plaintext highlighter-rouge">id="&lt;name&gt;"</code>.</li>
+        <li>ID’s need to be unique, that is, only one element in a page may have a given ID.</li>
+        <li>Target this element in CSS with the selector <code class="language-plaintext highlighter-rouge">#&lt;id&gt;</code></li>
+      </ul>
+
+      <p>e.g.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">"my-heading"</span><span class="nt">&gt;</span> Lab 3 <span class="nt">&lt;/h1&gt;</span>
+...
+</code></pre></div>      </div>
+
+      <p>only ever one id selector per object</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#my-heading</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h3 id="pseudo-classes">Pseudo Classes</h3>
+
+      <p>Some elements have pseudo-classes that are active only during interaction, e.g. link hover
+e.g.</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> 
+  <span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Read more on MDN</a></p>
+
+      <h3 id="combining-rules">Combining Rules</h3>
+
+      <p>We can very specifically target an element by combining rules</p>
+
+      <ul>
+        <li>If we want to combine multiple selectors to select for a single element or set of elements, combine them without spaces</li>
+      </ul>
+
+      <p>e.g. apply this style to target all h1’s that have the header class:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">h1</span><span class="nc">.header</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+      <p>We can also find elements which are descendants of an element:</p>
+
+      <p>e.g. select all <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> elements that are children of a <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> tag:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">section</span> <span class="nt">p</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>There are other rules, for example selecting a particular child or sibling. <a href="https://www.w3schools.com/css/css_combinators.asp">Check out this reference for more info.</a></p>
+
+      <p>Simple is better - Before you commit to complicated combinational logic, decide if a custom class or ID would be better! Make your life easier and your code more traceable wherever possible!</p>
+
+      <h3 id="common-properties-and-values">Common Properties and Values:</h3>
+
+      <p>Color:</p>
+      <ul>
+        <li>the <code class="language-plaintext highlighter-rouge">color</code> and <code class="language-plaintext highlighter-rouge">background-color</code> properties specify the foreground and background colors respectively</li>
+        <li>color values can be given by keyword, or hex of the style: <code class="language-plaintext highlighter-rouge">#RRGGBB</code>
+          <ul>
+            <li>e.g. red is <code class="language-plaintext highlighter-rouge">#FF0000</code>, but will be very hard on the eyes, as we’ve seen!</li>
+            <li>When starting, it’s strongly recommended not to find colors by experimentation, instead look at a palette app:
+              <ul>
+                <li><a href="https://colorhunt.co/">ColorHunt</a></li>
+                <li><a href="https://material.io/resources/color/#!/?view.left=0&amp;view.right=0">Google Material Design</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value">MDN Reference on color</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>If you can’t tell if your styles are applying, start by applying something radical, like <code class="language-plaintext highlighter-rouge">background-color: magenta</code>.
+          <ul>
+            <li>Thus you know the sheet is linked properly!</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Borders:</p>
+      <ul>
+        <li>the <code class="language-plaintext highlighter-rouge">border</code> property
+          <ul>
+            <li>generalized properties apply to the whole border</li>
+            <li>specialized properties for individual sides,</li>
+            <li>A shorthand style that defines many properties and values in one line</li>
+            <li>general properties:
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">border-style: solid;</code> - Overall style. values are keywords - dotted, dashed, solid, double, groove, ridge, inset, outset, none, hidden</li>
+                <li><code class="language-plaintext highlighter-rouge">border-width: 5px;</code> - values are in px, e.g. 5px, 15px. You can also define the top, right, bottom and left widths in one statement. (clockwise from 12 o’clock)</li>
+                <li><code class="language-plaintext highlighter-rouge">border-color: red;</code> - values are colors</li>
+                <li><code class="language-plaintext highlighter-rouge">border-radius: 10px;</code> - curves the edges. value in px, e.g. 5px</li>
+              </ul>
+            </li>
+            <li>specific properties:
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">border-top-style: dashed;</code> - changes the style of the top side</li>
+                <li><code class="language-plaintext highlighter-rouge">border-left-color: blue;</code> - changes the color of the left side</li>
+                <li>Many other combinations are available</li>
+              </ul>
+            </li>
+            <li>shorthand style
+              <ul>
+                <li>defines the width, style and color properties in one shot
+                  <ul>
+                    <li><code class="language-plaintext highlighter-rouge">border: width style color</code></li>
+                    <li><code class="language-plaintext highlighter-rouge">border: 5px solid black;</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>e.g.</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* awful, awful style, but effective for seeing changes! */</span>
+<span class="nt">p</span> <span class="p">{</span>
+  <span class="nl">border-style</span><span class="p">:</span> <span class="nb">dotted</span> <span class="nb">dashed</span> <span class="nb">solid</span> <span class="nb">double</span><span class="p">;</span>
+  <span class="nl">border-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+  <span class="nl">border-top-width</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+      <p><a href="https://www.w3schools.com/css/css_border.asp">Border Tutorial</a></p>
+
+      <p>Sizing:</p>
+      <ul>
+        <li>instead of relying on an objects content to dictate size, set it manually.
+          <ul>
+            <li>May not always work for all elements depending on Display settings.</li>
+            <li><code class="language-plaintext highlighter-rouge">width</code></li>
+            <li><code class="language-plaintext highlighter-rouge">max-width</code></li>
+            <li><code class="language-plaintext highlighter-rouge">height</code></li>
+            <li><code class="language-plaintext highlighter-rouge">max-height</code>
+              <ul>
+                <li>the units can be in px, percent, mm. <code class="language-plaintext highlighter-rouge">0</code> doesn’t need units.
+<a href="https://www.w3schools.com/cssref/css_units.asp">Learn more about the many units here</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Text:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">font-family</code>: values are strings, with later values being fallbacks</li>
+        <li><code class="language-plaintext highlighter-rouge">font-size</code>: can use many units, rem is probably safest, where one REM is the size of an <code class="language-plaintext highlighter-rouge">M</code> at the root scaling. 1 rem = 16px</li>
+        <li><code class="language-plaintext highlighter-rouge">font-weight</code>: numeric, where thinner to thicker ranges from 100 to 900</li>
+        <li><code class="language-plaintext highlighter-rouge">text-decoration</code>: underline, line-through, overline, etc.
+e.g.</li>
+      </ul>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@import</span> <span class="sx">url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap')</span><span class="p">;</span>
+<span class="nt">p</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s2">'Poppins'</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">1.2rem</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="m">300</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part7spacingandpositioningwithcss"><button class="collapsible">Part 7: Spacing and Positioning with CSS</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="div-and-span">Div and Span</h3>
+
+      <p>Div and Span are HTML elements that exists only as a container for containing other elements</p>
+      <ul>
+        <li>can be used to apply CSS to elements</li>
+        <li><code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> a vertical container, blocking</li>
+        <li><code class="language-plaintext highlighter-rouge">&lt;span&gt;</code> is a horizontal container, non-blocking (inline)</li>
+      </ul>
+
+      <h3 id="box-model">Box Model</h3>
+
+      <p>The total space that an object takes is more than you might think, based on the CSS Box Model:</p>
+
+      <p><img src="res/box-model.svg" alt="box model" /></p>
+
+      <ul>
+        <li>Individual objects have a required size, (implicit or defined <code class="language-plaintext highlighter-rouge">width</code> and <code class="language-plaintext highlighter-rouge">height</code>), and as they expand objects around them are pushed out of the way.</li>
+        <li>But the total sizes of the element add the margin, padding, border and content to give the total dimensions of the element.
+          <ul>
+            <li>Margin and padding are buffer zones around the border.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Addition example:</p>
+      <ul>
+        <li>
+          <p>10px border + 20px padding + 20px margin = 50px * 2 sides = 100px + content</p>
+        </li>
+        <li>
+          <p>When setting margins, padding and border, the same four-sided shorthand can be used as we saw in borders, clockwise from the top:</p>
+          <ul>
+            <li>top, right, bottom, left</li>
+            <li>remember: clockwise from 12 o’clock</li>
+            <li>if only 1 value is given, it expands as (top=1, right=1, bottom=1, left=1)</li>
+            <li>if 2 values are given, they expand as (top=1, right=2, bottom=1, left=2)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>This box model even applies to the body tag, which has a default non-zero margin.</p>
+      <ul>
+        <li>This is why by default elements aren’t positioned in the upper left  of the page</li>
+        <li>
+          <p>you will need to set this to 0 if you need something in the corner, like a header!</p>
+        </li>
+        <li>Padding will stretch the background color, whereas margin will add white around it</li>
+      </ul>
+
+      <h3 id="flow-and-the-css-display-property">Flow and the CSS Display Property</h3>
+
+      <p>The Display property dictates how elements flow around this element:</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">display: block;</code> - push the next content to the next line. e.g. the default behaviour of <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">display: inline;</code> - let info come beside it. e.g. the default behaviour of <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;em&gt;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">display:inline-block;</code> - A hybrid. It’s like inline, but it can block a bit of height too. e.g. the default behaviour of <code class="language-plaintext highlighter-rouge">&lt;image&gt;</code>
+          <ul>
+            <li><a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_inline-block_span1">This w3schools example helps you learn the different</a></li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">display:none;</code> - don’t display it. It’s gone. Not just hidden. Items will not flow around it either, just take up it’s place.
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">visibility: hidden;</code> will instead allow items to flow around it.</li>
+          </ul>
+        </li>
+        <li>There’s also a new flexbox model, designed to act as an alternative to this, but I think Bootstrap (which we’ll discuss later) accomplishes this better.</li>
+      </ul>
+
+      <h3 id="css-positioning">CSS Positioning</h3>
+
+      <p>Positioning is derived from HTML and CSS</p>
+
+      <ul>
+        <li>HTML should govern hierarchy and order
+          <ul>
+            <li>order means later elements are added to the flow after earlier elements</li>
+            <li>Hierarchy means child elements appear “inside” of parents
+              <ul>
+                <li>Flow still applies</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>CSS positioning beings after HTML rules are complete
+          <ul>
+            <li>Positioning rules exist</li>
+            <li>Depending on display properties, sometimes elements overlap
+              <ul>
+                <li>Z-index refers to the “depth” of objects, with higher numbers appearing on top, and lower or negative numbers behind.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div&gt; &lt;h1&gt; &lt;span&gt; Hello &lt;/span &gt; More text&lt;/h1&gt; &lt;/div&gt;
+</code></pre></div>      </div>
+
+      <h3 id="positioning-rules">Positioning Rules</h3>
+
+      <p>Positioning can be derived from the HTML, or overridden, using the <code class="language-plaintext highlighter-rouge">position</code> property, with values:</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">position: static;</code> - use the HTML rules for positioning</li>
+        <li><code class="language-plaintext highlighter-rouge">position: relative;</code> - from the static position, offset the element by a specified x,y coordinate value, eg. (3, 5).
+          <ul>
+            <li>does not disrupt flow</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">position: absolute;</code> - position the element by absolute coordinates relative to its parent
+          <ul>
+            <li>does disrupt document flow</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">position: fixed;</code> - always in the same place as we scroll, e.g. a fixed header bar</li>
+      </ul>
+
+      <h3 id="centering-elements">Centering Elements</h3>
+
+      <p>A common operation which can be harder than you might think!</p>
+
+      <p>For non-blocking elements</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">text-align</span> <span class="o">:</span> <span class="nt">center</span><span class="o">;</span>   
+</code></pre></div>      </div>
+      <p>For blocking elements:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">max-width</span> <span class="o">:</span> <span class="err">1000</span> <span class="nt">px</span><span class="o">;</span> <span class="c">/* or whatever is appropriate*/</span>
+    <span class="nt">margin</span> <span class="o">:</span> <span class="err">0</span> <span class="nt">auto</span> <span class="err">0</span> <span class="nt">auto</span><span class="o">;</span> <span class="o">/*</span> <span class="nt">automatic</span> <span class="nt">centering</span> <span class="nt">left</span> <span class="nt">and</span> <span class="nt">right</span> <span class="o">*</span>
+</code></pre></div>      </div>
+      <p>You could also have instead done:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">margin</span><span class="o">:</span> <span class="err">0</span> <span class="nt">auto</span><span class="o">;</span>
+</code></pre></div>      </div>
+      <p>Which will apply the 0 to both top and bottom, and auto to both left and right.</p>
+
+      <h3 id="floating-and-clearing">Floating and Clearing</h3>
+
+      <p>Floating allows images to “float” around text.</p>
+      <ul>
+        <li>values: none, left, right are common</li>
+      </ul>
+
+      <p>If something floats by default, you can remove float with the “clear” property.
+eg:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">float: left;</code>
+<code class="language-plaintext highlighter-rouge">clear: left;</code></p>
+
+      <p>Floating can be overused, easy to abuse. Be careful.
+<a href="https://www.w3schools.com/css/css_float.asp">Some help with Float</a></p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
       <p>For the lab project, we are going to be making a multi-user to-do list application. The final version of it will look similar to this:</p>
 
-      <p><img src="res/login-styled.png" alt="" /></p>
+      <p><img src="res/final-version.png" alt="" /></p>
 
-      <p><img src="res/register-styled.png" alt="" /></p>
+      <p>However, this version incorporates the bootstrap library, which we will look at next week.</p>
 
-      <p><img src="res/todo-page-styled.png" alt="" /></p>
+      <p>Without it, we instead have the somewhat more humble:</p>
 
-      <p>However, if you take away the styling, it looks much more humble:</p>
+      <p><img src="res/login-page-html-css.png" alt="" /></p>
+
+      <p><img src="res/todo-page-css.png" alt="" /></p>
+
+      <p>Your assignment this week is to create this version of the application. With CSS and HTML.</p>
+
+      <p>Note: if we take away all of the styling and leave only the HTML, we get:</p>
 
       <p><img src="res/login-page-just-html.png" alt="" /></p>
 
       <p><img src="res/todo-page-just-html.png" alt="" /></p>
 
-      <p>For this lab you are to implement the HTML for these two states.</p>
-
       <p>Recommended approach</p>
       <ul>
-        <li>Look at the pictures and identify potential HTML elements</li>
-        <li>Is there one form? Multiple forms?</li>
-        <li>It does not need to be perfect at this stage, because as you learn more with CSS next week, you may need to make some further adjustments to the HTML</li>
+        <li>Start by implementing the HTML only version
+          <ul>
+            <li>How many pages are there? What are their names?</li>
+            <li>Look at the pictures and identify potential HTML elements</li>
+            <li>Is there one form? Multiple forms?</li>
+          </ul>
+        </li>
+        <li>Next implement the custom CSS
+          <ul>
+            <li>Which elements have changed due to custom CSS?</li>
+            <li>How might you implement this change?</li>
+          </ul>
+        </li>
       </ul>
 
       <p>Submission:</p>
       <ul>
-        <li>This lab will be demoed by interview either in the week of 9/13 or 9/20.</li>
+        <li>This lab will be demoed by interview either in the week of 9/14 or 9/21.</li>
       </ul>
 
       <p>Frequently asked questions:</p>
 
       <p>How do I add default text to the text inputs?</p>
       <ul>
-        <li>Try the “Placeholder” attribute</li>
+        <li>Try the “Placeholder” HTML attribute</li>
       </ul>
 
       <p>Does the form need any functionality?</p>
       <ul>
-        <li>Not yet. We just need the layout for now. (Remember, single responsibility.)</li>
+        <li>Not yet. We just need the layout and basic styling for now.</li>
       </ul>
+
+      <p>Where’s the gear icon from?</p>
+      <ul>
+        <li>Here: <a href="https://icons.getbootstrap.com/icons/gear-fill/">Bootstrap gear icon</a></li>
+        <li>Copy and paste the SVG code into your HTML as if it were an element</li>
+      </ul>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+  <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+</svg>
 
     </div></div></section>
 <section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
