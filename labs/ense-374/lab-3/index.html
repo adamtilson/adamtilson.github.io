@@ -112,7 +112,7 @@
 
     <main id="content" class="main-content" role="main">
         <p></p>
-        <h1 id="lab-3-css-and-bootstrap">Lab 3: CSS and Bootstrap</h1>
+        <h1 id="lab-3-bootstrap-css">Lab 3: Bootstrap CSS</h1>
 
 <p>ENSE 374 - Software Engineering Management - Laboratory</p>
 
@@ -149,9 +149,9 @@
 
       <h3 id="how-to-install-it">How to install it?</h3>
 
-      <p>Rather than manually installing it and serving it from our server, we can have the user’s browser fetch it from a Content Delivery Network (CDN). A CDN distributes common resources on distributed servers around the world, ideally one nearby the user, and the may even have a cached copy on their own computers. (Similar to DNS) Typically employ proprietary load balancing algorithms that detect where things are in-demand and ensures local copies exist nearby!</p>
+      <p>Rather than manually installing it and serving it from our server, we can have the user’s browser fetch it from a Content Delivery Network (CDN). A CDN distributes common resources on distributed servers around the world, ideally one nearby the user, and they may even have a cached copy on their own computers. (The distributed server scheme is similar to how DNS works). Typically CDNs employ proprietary load balancing algorithms that detect where things are in-demand and ensures local copies exist nearby!</p>
 
-      <p>This is useful for two reasons: it reduces bandwidth for our server, and if the user has previously downloaded it for any other website, it will be cached on their computer, and load instantly. The only problem is, if the CDN ever goes down, our styles will not load. But then again, if the CDN goes down, the internet likely has bigger problems than just your web page.</p>
+      <p>This is useful for two reasons: it reduces bandwidth for our server, and if the user has previously downloaded it for any other website, it will be cached on their computer, and load instantly. The only problem is, if the CDN ever goes down, our styles will not load. But then again, if the CDN goes down, the internet likely has bigger problems than just your web page, based on how many sites rely on it.</p>
 
       <p>Grab a link to it from the CDN, and add the code for it into your HTML file:</p>
 
@@ -159,25 +159,31 @@
 
       <p>As with our spreadsheets, the link goes in the head, <em>before</em> our custom styles. (This will allow our custom styles to override theirs as needed.)</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
 </code></pre></div>      </div>
       <p>You will also need to paste a JavaScript library into your HTML. This script tag is added in the last line of the body of the document.</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div>      </div>
+      <p>We’ll investigate more about the placement of JavaScript scripts next lab.</p>
+
       <h3 id="what-can-it-do">What can it do?</h3>
 
       <p>Check out the Examples on Bootstrap’s website which includes pages styled using Bootstrap elements</p>
 
-      <p><a href="https://getbootstrap.com/docs/5.0/examples/">Examples</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.2/examples/">Examples</a></p>
 
       <p>You can also see many examples in the Bootstrap cheat sheet:</p>
 
-      <p><a href="https://getbootstrap.com/docs/5.0/examples/cheatsheet/">Bootstrap Cheat Sheet</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.2/examples/cheatsheet/">Bootstrap Cheat Sheet</a></p>
 
       <h3 id="where-to-get-help">Where to get help?</h3>
 
-      <p><a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">The official docs are excellent</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.2/getting-started/introduction/">The official docs are excellent</a></p>
+
+      <h3 id="basic-bootstrap-usage">Basic Bootstrap Usage</h3>
+
+      <p>The simplest way to use bootstrap would be to create your HTML elements as usual, and add the Bootstrap class(es) to the HTML element class lists, which will cause the styles to apply. However, this is not always reliable, as sometimes the HTML components will need multiple components to function correctly, which is not always obvious. For this reason, it is often better to look at the examples to see the HTML and CSS requirements. Sometimes you may also need to add custom CSS to further fine-tune the styles. It is important to note that the final visual style will be a combination of the Bootstrap CSS, as well as your custom CSS.</p>
 
       <h3 id="responsive-design">Responsive Design</h3>
 
@@ -187,16 +193,16 @@
       <ol>
         <li>Do nothing and suffer the consequences.</li>
         <li>Create a Dedicated mobile site.</li>
-        <li>Responsive Design,.</li>
+        <li>Responsive Design.</li>
       </ol>
 
       <p>Consequences of doing nothing: higher bounce rate. Google PageRank suffers.</p>
 
       <p>Dedicated mobile site is a lot of work and maintenance. Responsive design is better.</p>
 
-      <p>Bootstrap encourages Mobile First design, and their classes are all automatically responsive!</p>
+      <p>Bootstrap encourages Mobile First design, and their classes are all automatically responsive! This means that your elements will automatically reflow to smaller screen sizes.</p>
 
-      <p>Some elements:</p>
+      <p>Some Bootstrap Elements:</p>
 
       <h3 id="bootstrap-containers">Bootstrap Containers</h3>
 
@@ -234,7 +240,7 @@
 
       <p>Even with Bootstrap they are still kind of boring.</p>
 
-      <p>We need to attach the appropriate Bootstrap classes. <a href="https://getbootstrap.com/docs/5.0/components/buttons/">Looking at the Bootstrap documentation…</a></p>
+      <p>We need to attach the appropriate Bootstrap classes. <a href="https://getbootstrap.com/docs/5.2/components/buttons/">Looking at the Bootstrap documentation…</a></p>
 
       <p>We can see primary buttons, outline buttons. Let’s try outline buttons…</p>
 
@@ -353,7 +359,7 @@
 <span class="nt">&lt;/div&gt;</span>
 
 Each of the attached elements and classes serves a purpose. We've seen some of these classes before, but not all. If you want to figure out what one does, let's say `py-5`, we can look it up in the Bootstrap Docs.
-(Or google `Bootstrap 5 py-5`, [which takes you to spacing...](https://getbootstrap.com/docs/5.0/utilities/spacing/))
+(Or google `Bootstrap 5 py-5`, [which takes you to spacing...](https://getbootstrap.com/docs/5.2/utilities/spacing/))
 
 Here we can see that this is setting padding in the y direction to 3 spacer units. (Where the spacer size is defined in SASS, something we don't look at in this lab.)
 
@@ -390,7 +396,7 @@ Here we can see that this is setting padding in the y direction to 3 spacer unit
       <h3 id="carousel">Carousel</h3>
       <p>A container which automatically cycles content over time, typically used for displaying images like a slideshow</p>
 
-      <p><a href="https://getbootstrap.com/docs/5.1/components/carousel/">Bootstrap Carousel</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.2/components/carousel/">Bootstrap Carousel</a></p>
 
       <h3 id="bootstrap-cards">Bootstrap Cards</h3>
 
@@ -402,13 +408,13 @@ Here we can see that this is setting padding in the y direction to 3 spacer unit
         <li>Less flexible than Bootstrap grid for responsive design</li>
       </ul>
 
-      <p><a href="https://getbootstrap.com/docs/5.0/components/card/">Bootstrap Cards</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.2/components/card/">Bootstrap Cards</a></p>
 
       <h3 id="input-groups">Input Groups</h3>
 
       <p>Sometimes certain inputs logically go together - you will certainly see this in our lab exercise! Check out input groups for some examples of how you might be able to put them together</p>
 
-      <p><a href="https://getbootstrap.com/docs/5.0/forms/input-group/">Input Groups</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.2/forms/input-group/">Input Groups</a></p>
 
       <h4 id="responsive-breakpoints-with-css-media-queries">Responsive Breakpoints with CSS Media Queries</h4>
 
@@ -515,7 +521,7 @@ Here we can see that this is setting padding in the y direction to 3 spacer unit
 
       <p><img src="res/todo-style-logout.png" alt="" /></p>
 
-      <p>Your task is to add Bootstrap and Custom CSS to your HTML files from last lab to match this style. You may need to add to or change your HTML for this to work.</p>
+      <p>Your task is to add Bootstrap and Custom CSS to your HTML files from last lab to match this style. You may need to add to or change your HTML and/or custom CSS to make it look exactly correct.</p>
 
       <p>Recommended approach</p>
 
@@ -524,7 +530,7 @@ Here we can see that this is setting padding in the y direction to 3 spacer unit
         <li>Use the Bootstrap documentation to find appropriate elements</li>
         <li>Add the required Bootstrap libraries from the CDN links</li>
         <li>Combine the appropriate Bootstrap HTML to make it look right (containers, classes, samples, etc.) with your HTML elements from last week, making changes as needed</li>
-        <li>Add custom CSS to account for anything that does not look right. You can also attry attaching the Bootstrap styles for adding padding</li>
+        <li>Add custom CSS to account for anything that does not look right. You can also try attaching the Bootstrap classes for adding padding.</li>
       </ul>
 
       <h3 id="faq">FAQ:</h3>
@@ -559,7 +565,7 @@ Some things the TA will look for include</p>
 <section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
 
       <ul>
-        <li>This lab will be submitted via URCourses.</li>
+        <li>This lab will be submitted via URCourses, not by interview.</li>
         <li>Please submit any HTML files and CSS files.
           <ul>
             <li>You do not need submit the Bootstrap library or any dependencies which can be fetched from the CDN.</li>
