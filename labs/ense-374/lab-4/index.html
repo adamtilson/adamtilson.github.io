@@ -580,7 +580,7 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
         <li>Can use <code class="language-plaintext highlighter-rouge">||</code> to fill in a default, eg. <code class="language-plaintext highlighter-rouge">personName.firstName || "Adam"</code></li>
         <li>If you need to retrieve from a nested obj, make sure it exists first:
           <ul>
-            <li><code class="language-plaintext highlighter-rouge">adam.schedule</code> &amp;&amp; <code class="language-plaintext highlighter-rouge">adam.schedule.morning</code></li>
+            <li><code class="language-plaintext highlighter-rouge">adam.schedule &amp;&amp; adam.schedule.morning</code></li>
           </ul>
         </li>
         <li>if you want to see all of the contents of an object in the console use: <code class="language-plaintext highlighter-rouge">console.dir(myObject)</code></li>
@@ -1248,38 +1248,20 @@ This is passed as the first arg of the callback, typically given the variable �
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>We’re going to take a break from our main project for now - we’ll get back to that in the next lab. But this lab should help.</p>
+      <p>We’re going to have two parts for today’s lab. The first part takes a break from our main project for now - we’ll get back to that in the next lab, however this lab will help in this.</p>
 
-      <p>For this lab, we’re going to implement a sorted list form. Original, I know!</p>
+      <h3 id="part-1-sorting-a-list">Part 1: Sorting a list</h3>
+
+      <p>For the first part of this lab, we’re going to implement a sorted list form.</p>
 
       <p>The purpose is to get you used to finding and modifying DOM elements with JavaScript.</p>
 
-      <p>Depending on your comfort with JavaScript, there are three version you may attempt:</p>
-
-      <h3 id="version-1">Version 1</h3>
-
-      <p>There are five fixed text boxes, a text box and a button used to add elements, and a textbox used to sort</p>
+      <p>Consider a list of textboxes of any length, with an extra text box at the bottom</p>
       <ul>
-        <li>I’m using a style similar to the previous assignment. You should have completed this and get this style basically for free:</li>
-      </ul>
-
-      <p><img src="res/sorta-easy-1.png" alt="" /></p>
-
-      <p>In version 1 you can add elements to the list.</p>
-      <ul>
-        <li>There is a static length of the list, 5,</li>
-        <li>when more than 5 items are added, start back at the top overwriting elements.</li>
-        <li>You can also sort the elements</li>
-      </ul>
-
-      <p>Adding words:</p>
-
-      <p><img src="res/sorta-easy-1-filling-in.png" alt="" /></p>
-
-      <h3 id="version-2">Version 2</h3>
-
-      <p>In V2, there is no length to the list. You can add as many elements as you like and sort them.</p>
-      <ul>
+        <li>I’m using a style similar to the previous assignment. You should have completed this and get this style basically for free:-</li>
+        <li>
+          <p>You can add as many elements as you like and sort them.</p>
+        </li>
         <li>The list will start empty</li>
       </ul>
 
@@ -1301,16 +1283,22 @@ This is passed as the first arg of the callback, typically given the variable �
         <li>adding more elements just pushes them to the bottom of the list</li>
       </ul>
 
-      <h3 id="version-3">Version 3</h3>
+      <h3 id="part-2-to-do-list-model-as-json">Part 2: To-Do list Model as JSON</h3>
 
+      <p>Recall in an MVC, the purpose is to separate the data for our application (model) from the presentation (view).</p>
+
+      <p>In the second part of the lab, you are to create a JSON object to represent the model for the first version of our To-Do list.</p>
+
+      <p>This object should include:</p>
       <ul>
-        <li>The final version work as in V2, but when you sort the list items, the text boxes should fade out for 1 second, and then move in an animated way to show them being reordered.</li>
-        <li>You may want to look into: The Set Interval CallBack
-          <ul>
-            <li>The CSS Transition Property, as well as modifying Opacity through JavaScript</li>
-          </ul>
-        </li>
+        <li>A unique identifier for the task (numerical)</li>
+        <li>Task creator, text</li>
+        <li>Task claimer, text</li>
+        <li>The text of the task</li>
+        <li>The state of the task, which can be between <code class="language-plaintext highlighter-rouge">claimed</code>, <code class="language-plaintext highlighter-rouge">unifinished</code> and <code class="language-plaintext highlighter-rouge">finished</code>.</li>
       </ul>
+
+      <p>Create 3 samples of tasks in the model for the to-do list. Note that we will NOT display this in the view in this lab, it will only appear in the</p>
 
       <h3 id="submission">Submission</h3>
 
