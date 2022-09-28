@@ -573,33 +573,33 @@ exit
       <p>For this lab, you are to implement a model of home network which is connected to servers on internet through an ISP.</p>
 
       <p>To complete this lab, perform the following tasks:</p>
+
       <ol>
-        <li>Find a house image on the internete and use it as a background (You can set a background from the tools in the upper right.)</li>
+        <li>Find a house image on the internet and use it as a background (You can set a background from the tools in the upper right.)</li>
         <li>Place on top of it the following end devices:
           <ul>
             <li>Desktop</li>
             <li>Smartphone</li>
             <li>Laptop</li>
             <li>Smart Door</li>
-            <li>Smart Thermostat</li>
           </ul>
         </li>
-        <li>Connect each of these to a Home Gateway. The Desktop should be connected with ethernet, and the laptop and smartphone with wifi. The IoT appliances can connect with Wifi.
+        <li>Connect each of these to a <code class="language-plaintext highlighter-rouge">Home Router</code>. The Desktop should be connected with ethernet, and the laptop and smartphone with wifi. The IoT appliances can connect with Wifi. The SSID for <code class="language-plaintext highlighter-rouge">Home Router</code> is <code class="language-plaintext highlighter-rouge">Default</code>.
           <ul>
-            <li>The Home Gateway should assign IP addresses using DHCP.</li>
+            <li>The Home Router should assign IP addresses automatically using DHCP in the 192.168.0.x range.</li>
           </ul>
         </li>
-        <li>The home gateway should connect to the ISP with a cable modem</li>
-        <li>Represent the ISP with a PT Cloud and a Router, and connect the Cable modem</li>
+        <li>The Home Router should connect to the ISP with a cable modem. Assign an appropriate static IP address to the home router on the ISP (internet) side. Hint: this must be different than the LAN address (192.168.0.x/24). You could use, for example (172.16.x.x/16), or (192.16.1.x/24)</li>
+        <li>Represent the ISP with a PT-Cloud and a Router, and connect the Cable modem</li>
         <li>Represent servers on the internet with a series of servers connected to a switch, with statically assigned IPs on the same network.</li>
         <li>Create one server which hosts a website, <code class="language-plaintext highlighter-rouge">uregina.ca</code></li>
         <li>Create a server which provides remote IoT registration, identified by <code class="language-plaintext highlighter-rouge">myiot.com</code></li>
         <li>Create a DNS server which properly resolves <code class="language-plaintext highlighter-rouge">uregina.ca</code> and <code class="language-plaintext highlighter-rouge">myiot.com</code>
           <ul>
-            <li>Ensure the appropriate devices know about the DNS server address! (The Home Gateway)</li>
+            <li>Ensure all devices know about the DNS server, whether static or through DHCP!</li>
           </ul>
         </li>
-        <li>Connect the switch to the ISP</li>
+        <li>Connect the switch to the ISP Router</li>
         <li>Ensure traffic flows over the ISP. You will need to further configure the router.
           <ul>
             <li>Ensure the appropriate devices know about the gateway address(es)!</li>
@@ -608,7 +608,6 @@ exit
         <li>When you believe the network is connected properly, ensure you can:
           <ul>
             <li>Access the server’s website from the desktop, by URL (not IP address)</li>
-            <li>Access the Thermostat from the local IoT gateway</li>
             <li>Access the Door from the remote server</li>
           </ul>
         </li>
@@ -624,10 +623,9 @@ exit
 
       <h3 id="packet-tracer-quirks--help">Packet Tracer Quirks / Help</h3>
 
-      <p>Warning - sometimes Home Gateway does not automatically pass the DNS server to the over DHCP. Frustrating!</p>
+      <p>How many total networks are needed</p>
       <ul>
-        <li>You can fix this by “turning wifi on and off” by going to the home gateway, and toggling DHCP off and then On again.</li>
-        <li>Maybe just restarting it will work too? You can try.</li>
+        <li>There will be 3, one in the home (assigned through DHCP), one in the ISP (assigned manually), and one for the servers (assigned manually).</li>
       </ul>
 
       <p>On Mac, after saving files, sometimes swapping modules breaks</p>
@@ -636,23 +634,6 @@ exit
         <li>From terminal, navigate to the Cisco Packet Tracer 8 Directory</li>
         <li><code class="language-plaintext highlighter-rouge">umask 011</code></li>
         <li><code class="language-plaintext highlighter-rouge">umask -S</code></li>
-      </ul>
-
-      <p>How do I configure IP on the HomeGateway?</p>
-      <ul>
-        <li>The HomeGateway assigns all connected devices IPs over DHCP by default</li>
-        <li>However, it needs to have an IP statically assigned
-          <ul>
-            <li>In config-&gt;internet, set IP to static</li>
-            <li>This will include the ability to specify an Address, Subnet Mask, Gateway Address and DNS Server</li>
-          </ul>
-        </li>
-        <li>Determine the appropriate addresses for your ISP Network (The HomeGateway Address and the actual Gateway Address which will go on the router)
-          <ul>
-            <li>Assign these statically</li>
-            <li>When devices connect to the HomeGateway, the DNS server will automatically be passed to them along with the IP address</li>
-          </ul>
-        </li>
       </ul>
     </div></div></section>
 
