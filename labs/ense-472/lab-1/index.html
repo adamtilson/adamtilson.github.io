@@ -461,47 +461,54 @@ Gateway: 10.0.0.1</p>
 
       <p>Now switch to administration mode:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">enable</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enable
+</code></pre></div>      </div>
 
       <p>Now switch to configuration mode:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">configure terminal</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>configure terminal
+</code></pre></div>      </div>
 
       <p>We want to assign a gateway IP to each of the interfaces.</p>
 
       <p>Enter configure mode for the first interface. This should be the interface connected to the home network.</p>
 
-      <p><code class="language-plaintext highlighter-rouge">interface gigabitEthernet 0/0/0</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface gigabitEthernet 0/0/0
+</code></pre></div>      </div>
 
       <p>Assign an IP address:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">ip address 192.168.0.1 255.255.255.0</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip address 192.168.0.1 255.255.255.0
+</code></pre></div>      </div>
 
       <p>Bring the interface online:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">no shutdown</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>no shutdown
+</code></pre></div>      </div>
 
       <p>And stop configuring this interface</p>
 
-      <p><code class="language-plaintext highlighter-rouge">exit</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+</code></pre></div>      </div>
 
       <p>Next we wish to configure the second interface, this time the server side:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">interface gigabitEthernet 0/0/1</code></p>
-
-      <p><code class="language-plaintext highlighter-rouge">ip address 10.0.0.1 255.0.0.0</code></p>
-
-      <p><code class="language-plaintext highlighter-rouge">no shutdown</code></p>
-
-      <p><code class="language-plaintext highlighter-rouge">exit</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface gigabitEthernet 0/0/1
+ip address 10.0.0.1 255.0.0.0
+no shutdown
+exit
+</code></pre></div>      </div>
 
       <p>Leave configuration mode</p>
 
-      <p><code class="language-plaintext highlighter-rouge">exit</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+</code></pre></div>      </div>
 
       <p>save this as the starting configuration</p>
 
-      <p><code class="language-plaintext highlighter-rouge">copy running-config startup-config</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>copy running-config startup-config
+
+</code></pre></div>      </div>
 
       <p><code class="language-plaintext highlighter-rouge">&lt;enter&gt;</code></p>
 
