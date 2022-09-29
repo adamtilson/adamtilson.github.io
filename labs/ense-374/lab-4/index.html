@@ -756,7 +756,7 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">c is not defined</span><span class="dl">"</span><span class="p">);</span>
-        <span class="kd">var</span> <span class="nx">inner</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">inner</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
         <span class="c1">// At this point, a is 3, b is 7, and c is 11</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
@@ -767,7 +767,7 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
-     <span class="p">};</span>
+    <span class="p">};</span>
     <span class="nx">inner</span> <span class="p">();</span>
     <span class="c1">// At this point, a is 21, b is 5, and c is not defined</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
@@ -878,7 +878,7 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
       <p>We can attach event listeners, which wait for a user to do an action, and then call a function when a user does that action</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">btnObj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">mouseover</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-<span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">hi</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">hi</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
@@ -943,7 +943,7 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">)</span>
 <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">input</span> <span class="k">of</span> <span class="nx">inputs</span><span class="p">)</span> <span class="p">{</span> 
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
@@ -1219,7 +1219,7 @@ This is passed as the first arg of the callback, typically given the variable â€
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">log</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">log</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">keypress</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">log</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">+=</span> <span class="s2">` </span><span class="p">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">code</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="nx">log</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">+=</span> <span class="s2">` </span><span class="p">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">code</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
@@ -1258,7 +1258,7 @@ This is passed as the first arg of the callback, typically given the variable â€
 
       <p>Consider a list of textboxes of any length, with an extra text box at the bottom</p>
       <ul>
-        <li>Iâ€™m using a style similar to the previous assignment. You should have completed this and get this style basically for free:-</li>
+        <li>Iâ€™m using a style similar to the previous assignment. You should have completed this and get this style basically for free</li>
         <li>
           <p>You can add as many elements as you like and sort them.</p>
         </li>
@@ -1287,7 +1287,7 @@ This is passed as the first arg of the callback, typically given the variable â€
 
       <p>Recall in an MVC, the purpose is to separate the data for our application (model) from the presentation (view).</p>
 
-      <p>In the second part of the lab, you are to create a JSON object to represent the model for the first version of our To-Do list.</p>
+      <p>In the second part of the lab, you are to create a JavaScript Object to represent the model for the first version of our To-Do list. This type of syntax is called JavaScript Object Notation (JSON), and when saved in a separate file, is a popular way to store database-like data.</p>
 
       <p>This object should include:</p>
       <ul>
