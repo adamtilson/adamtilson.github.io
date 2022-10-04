@@ -156,13 +156,15 @@
         </li>
       </ul>
 
-      <h3 id="is-it-worth-learning-in-2021">Is it Worth Learning in 2021</h3>
+      <h3 id="is-it-worth-learning-today">Is it Worth Learning Today?</h3>
 
       <ul>
         <li>Debatable.</li>
         <li>For small projects, it may be better to exclude it for performance</li>
-        <li>For bigger projects, it may be better to use something like a FrameWork (Vue, React or Angular)</li>
-        <li>Just this year BootStrap dropped it as a dependency in favour of vanilla JavaScript</li>
+        <li>For bigger projects, it may be better to use a FrameWork like Vue, React or Angular</li>
+        <li>Recently BootStrap dropped it as a dependency in favour of vanilla JavaScript</li>
+        <li>Most of the advantages of using it are now native in JavaScript, or CSS (animations)</li>
+        <li>It is still useful to learn to support legacy projects using it, like ~77% of the web (2022).</li>
       </ul>
 
       <h3 id="how-do-we-get-it">How do we get it</h3>
@@ -175,9 +177,11 @@
 
       <h3 id="where-to-add-the-link">Where to add the link:</h3>
 
-      <p>jQuery, like other JavaScript, is bottom of the HTML
-    - Add it before the closing <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> tag, before your custom JavaScript.
-    - Your browser reads HTML top to bottom, so we want to know about jQuery functionality before running our own scripts</p>
+      <p>jQuery, like other JavaScript, is bottom of the HTML</p>
+      <ul>
+        <li>Add it before the closing <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> tag, before your custom JavaScript.</li>
+        <li>Your browser reads HTML top to bottom, so we want to know about jQuery functionality before running our own scripts</li>
+      </ul>
 
       <h3 id="where-can-i-get-help">Where can I get help?</h3>
 
@@ -255,8 +259,8 @@
       <h3 id="cascading">Cascading</h3>
 
       <p>Recall from last week we can cascade function calls. This is the intended usage of jQuery, rather than storing things in variables where possible:</p>
-      <pre><code class="language-jQuery">$( "#my-div" ).text( "Some new text" );
-</code></pre>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#my-div</span><span class="dl">"</span> <span class="p">).</span><span class="nx">text</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Some new text</span><span class="dl">"</span> <span class="p">);</span>
+</code></pre></div>      </div>
 
     </div></div></section>
 <section id="part3addingandremovingelements"><button class="collapsible">Part 3: Adding and Removing elements</button><div class="text-content"><div class="text-inner">
@@ -286,7 +290,7 @@ before   prepend      append     after
       <ul>
         <li>uses strings so it avoids all the awful kebab-case to camelCase nonsense we saw last week</li>
         <li>If a single argument is used, it is acts as a getter.</li>
-        <li>If two arguments are used, it acts as a setting</li>
+        <li>If two arguments are used, it acts as a setter.</li>
       </ul>
 
       <p>Finding a variable and setting css:</p>
@@ -406,12 +410,137 @@ before   prepend      append     after
         <li>animations will play in order, left to right</li>
       </ul>
 
-      <!-- Next year, do a full example of adding a task. In particular show the students how to:
-- register functions on new DOM elements (and deregister if needed, using jQuery `on` and `off`)
-- traverse and remove adjacent elements using .parent(), .children()
-- using function syntax and the `this` keyword
-  - Or adding code using template literals would also be good!
-- even consider bringing in the model now! -->
+    </div></div></section>
+<section id="exercise"><button class="collapsible">Exercise</button><div class="text-content"><div class="text-inner">
+
+      <p>To see how this works together, we are going to create an application which tracks students and their favourite colors.</p>
+      <ul>
+        <li>We will allow adding new people</li>
+        <li>We will allow updating their favourite color via buttons</li>
+        <li>We will display the persons name background in their favourite color</li>
+        <li>We will separate the Model from the View</li>
+      </ul>
+
+      <p><img src="res/fave-colors.png" alt="" /></p>
+
+      <h3 id="html-and-css-setup">HTML and CSS Setup</h3>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"style.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-center"</span> <span class="na">id=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"insertion-point"</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">""</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"new-person-name"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"add-button"</span><span class="nt">&gt;</span>Add New Person<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.red</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.blue</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.green</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#container</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">light-blue</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">500px</span><span class="p">;</span>
+    <span class="nl">margin-top</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">margin-right</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#container</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#container</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="o">&gt;</span> <span class="nt">span</span> <span class="p">{</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div>      </div>
+
+      <h3 id="setting-up-the-model">Setting up the Model</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">personList</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="kd">function</span> <span class="nx">Person</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// todo: set our id, name and color!</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h3 id="adding-new-names-by-building-the-model">Adding new names by building the model</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#add-button</span><span class="dl">"</span> <span class="p">).</span><span class="nx">click</span> <span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">//todo: create a new person with appropriate ID, name and default color </span>
+        <span class="c1">// get currentID, name and set a default color here!</span>
+        <span class="c1">// use the array index as the id, e.g. 0,1,2... etc.</span>
+        <span class="c1">// find the textbox, and use the jQuery .val() function to get its value</span>
+        <span class="c1">// use the default color of "black"</span>
+        <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+        <span class="nx">personList</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>
+        <span class="nx">buildList</span><span class="p">();</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <h3 id="updating-colors-in-the-model">Updating Colors in the Model</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">setColor</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// todo: find the person matching the ID and update the color </span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h3 id="building-our-list">Building our list</h3>
+
+      <p>Complete the following function to actually build the list:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">buildList</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// remove all contents from the insertion point</span>
+    <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#insertion-point</span><span class="dl">"</span> <span class="p">).</span><span class="nx">empty</span><span class="p">();</span>
+    <span class="c1">// loop over list of people...</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">person</span> <span class="k">of</span> <span class="nx">personList</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="c1">// append the persons name, in a &lt;span&gt;. Add the persons color to the span's class list.</span>
+        <span class="c1">// hint, use template literals!</span>
+
+        <span class="c1">// Create the RED button</span>
+        <span class="c1">// Register a callback function so that, if it is pressed, we will update the model</span>
+        <span class="c1">// so that the persons' favourite color is stored in the model, then rebuild the list.</span>
+
+        <span class="c1">// Don't forget to add the RED button to the DOM!</span>
+
+        <span class="c1">// Ditto GREEN</span>
+        
+        <span class="c1">// Ditto BLUE</span>
+        
+        <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#insertion-point</span><span class="dl">"</span> <span class="p">).</span><span class="nx">append</span><span class="p">(</span> <span class="s2">`&lt;br&gt;`</span> <span class="p">);</span>
+        
+    <span class="p">}</span>
+    
+<span class="p">}</span>
+</code></pre></div>      </div>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
@@ -459,7 +588,19 @@ before   prepend      append     after
         <li>
           <p>When the user clicks remove complete (c), all of the completed tasks (state 4) are removed</p>
         </li>
-        <li>Note: You may now remove the old template tasks from the previous labs, but make sure you have a backup of the code for a future lab! *</li>
+        <li>Note: You may now remove the old template tasks from the previous labs, but keep a backup of the code for a future lab! *</li>
+      </ul>
+
+      <p>IMPORTANT: Remember to separate the Model from the View.</p>
+      <ul>
+        <li>This means you have some data structure (e.g. JavaScript Objects) which represents the tasks</li>
+        <li>When you do any interaction which updates the system…
+          <ul>
+            <li>First update the model (change something in the JavaScript Objects)</li>
+            <li>Use the updated model to update the view</li>
+            <li>The easiest way to do this is remove all tasks, and recreate from the model from scratch</li>
+          </ul>
+        </li>
       </ul>
 
       <h3 id="submission">Submission</h3>
