@@ -543,6 +543,8 @@ no shutdown
 
       <p><em>Always do this before leaving packet tracer so your configuration work is saved!</em></p>
 
+      <p>Most of the security commands we looked at in this section applies to routers as well, so we can follow the same processes to connect to and secure routers as we did with our switches. However, we will not demonstrate this in this lab.</p>
+
     </div></div></section>
 <section id="part3staticrouting"><button class="collapsible">Part 3: Static Routing</button><div class="text-content"><div class="text-inner">
 
@@ -559,20 +561,18 @@ no shutdown
 
       <p>How do we get traffic from the 172.16.x.x/16 network to the 192.16.10.x/24 network and back?</p>
 
-      <p>Note that most of these same commands apply to routers as well, so we can follow the same processes to connect to and secure routers as we did with our switches.</p>
-
       <p>Syntax:</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route &lt;destination&gt; &lt;subnet&gt; &lt;next hop&gt;
 </code></pre></div>      </div>
 
-      <p>example, if the next hop to get to 192.168.10.x / 24, is 10.0.0.1</p>
+      <p>example, if the next hop to get to 192.168.10.x/24, is 10.1.1.1</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 192.168.10.0 255.255.255.0 10.0.0.1
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 192.168.10.0 255.255.255.0 10.1.1.1
 </code></pre></div>      </div>
 
       <p>Keep in mind, this only goes one way. We also need to do this the other way on the other router.</p>
 
-      <p>Placing a <code class="language-plaintext highlighter-rouge">0</code> is the destination address in the fourth octet, matches any value for this octet. This will route all packets with the destination address 192.168.10.x to the next hops destination 10.0.0.100. This is a known as a wildcard match, and is very powerful.</p>
+      <p>Placing a <code class="language-plaintext highlighter-rouge">0</code> is the destination address in the fourth octet, matches any value for this octet. This will route all packets with the destination address 192.168.10.x to the next hops destination 10.1.1.1. This is a known as a wildcard match, and is very powerful.</p>
 
       <p>We can also have an exit interface, e.g.</p>
 
@@ -593,7 +593,7 @@ no shutdown
 
       <p>e.g.</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 0.0.0.0 0.0.0.0 10.0.0.2
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route 0.0.0.0 0.0.0.0 10.2.2.2
 </code></pre></div>      </div>
 
       <p>Recall, 0’s are wildcards, so this means match any IP and any subnet mask, and send the results to the destination.</p>
@@ -601,7 +601,7 @@ no shutdown
     </div></div></section>
 <section id="part4virtuallans"><button class="collapsible">Part 4: Virtual LANs</button><div class="text-content"><div class="text-inner">
 
-      <p>When computers connect to a switch, by default they are all on the same Virtual LAN (VLAN). This means that packets may be shared freely among these computers using broadcast. Additionally, all these computers are in the same collision domain, though most of the limitations of this are mitigated by using a Switch rather than a hub once it has populated the mac address table. Overall, this configuration is inefficient and insecure if computers have no need to communicate directly across networks, e.g. if the network was shared by different departments or companies which would not communicate directly.</p>
+      <p>When computers connect to a switch, by default they are all on the same Virtual LAN (VLAN). This means that packets may be shared freely among these computers using broadcast. Additionally, all these computers are in the same collision domain, though most of the limitations of  is are mitigated by using a Switch rather than a hub once it has populated the mac address table. Overall, this configuration is inefficient and insecure if computers have no need to communicate directly across networks, e.g. if the network was shared by different departments or companies which would not communicate directly.</p>
 
       <p>We could fix this by:</p>
 
@@ -649,8 +649,8 @@ name lab-30
 exit
 exit
 copy running-config startup-config
-&lt;enter&gt;
 </code></pre></div>      </div>
+      <p>Then hit enter to confirm.</p>
 
       <p>Next, we need to assign some interfaces to each of these vlans:</p>
 
@@ -852,6 +852,7 @@ exit
             <li>They have created an indie fighting game</li>
             <li>As the game is currently in a closed beta, they need to host downloads, which is ~1 GB download</li>
             <li>They will also need to host a web server for online matches</li>
+            <li>You do not need to simulate the server services, but do consider needs when assigning resources</li>
           </ul>
         </li>
         <li>A Progressive Web App Developer
@@ -859,6 +860,7 @@ exit
             <li>Three team members, on Floor 1</li>
             <li>Their app allows schools to host interactive video content and quizzes</li>
             <li>They too will host local servers</li>
+            <li>You do not need to simulate the server services</li>
           </ul>
         </li>
         <li>An algorithm developer
@@ -869,6 +871,13 @@ exit
             <li>Furthermore, for secrecy, they would prefer computers be not connected to the internet.</li>
           </ul>
         </li>
+      </ul>
+
+      <p>Finally, add a service user located somewhere in the city.</p>
+      <ul>
+        <li>For simplicity this user can also be a test user for the PWA and the Fighting Game</li>
+        <li>Ensure the home user can connect to all businesses as appropriate</li>
+        <li>There should be two routers between the user and the businesses</li>
       </ul>
 
       <p>You will need to:</p>
@@ -885,11 +894,6 @@ exit
             <li>Each floor should have a wiring closet in it</li>
           </ul>
         </li>
-        <li>Add a location for a user. For simplicity this user can also be a test user for the PWA and the Fighting Game
-          <ul>
-            <li>Ensure the home user can connect to all businesses as appropriate</li>
-          </ul>
-        </li>
         <li>Employ all of the best security principles as discussed in the course
           <ul>
             <li>This should include a management LAN and machine</li>
@@ -899,10 +903,10 @@ exit
         <li>
           <p>Employ VLANs for each company</p>
         </li>
-        <li>Assume you only have access to two 2960 Switches, and a 4321 Routers.
+        <li>Assume the incubator will only have access to a 2960 Switch, and a 4321 Routers.
           <ul>
             <li>For this lab, you may represent the internet by at least one additional 4321 router,</li>
-            <li>represent the user as an external PC connected to this external router (what type of cable?).</li>
+            <li>Represent the user as an external PC connected to this external router (what type of cable?).</li>
             <li>Don’t forget to set up static routes</li>
           </ul>
         </li>
