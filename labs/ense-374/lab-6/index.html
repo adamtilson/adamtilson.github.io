@@ -145,7 +145,9 @@
 
       <p>In VS Code, you can open the integrate terminal with:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">Ctrl + shift + \</code>` (backtick), or you can use the Command Palette</p>
+      <p>Ctrl + Shift + `</p>
+
+      <p>(backtick character, same key as ~), or you can use the Command Palette</p>
 
       <p><a href="https://files.fosswire.com/2007/08/fwunixref.pdf">Unix terminal cheat sheet</a></p>
 
@@ -282,6 +284,8 @@
 
       <p>We can try some common operations like <code class="language-plaintext highlighter-rouge">console.log("...")</code></p>
 
+      <p>You can exit with <code class="language-plaintext highlighter-rouge">Ctrl + c</code></p>
+
       <h3 id="running-node-scripts">Running Node Scripts</h3>
 
       <p>As with JavaScript it is much more powerful to write many lines of code and save it in a script.</p>
@@ -322,7 +326,7 @@
       <h3 id="a-simple-http-server">A Simple HTTP Server</h3>
 
       <ul>
-        <li>You do not need to memorize this, we’ll use the Express module instead in the next lab!</li>
+        <li>You do not need to memorize this, we’ll use the Express module instead in a few sections!</li>
       </ul>
 
       <p><a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Node_server_without_framework">Tutorial from the MDN</a></p>
@@ -365,18 +369,40 @@
 
 <span class="kd">var</span> <span class="nx">myObj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Adam</span><span class="dl">"</span> <span class="p">};</span>
 
-<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span> <span class="p">(</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/object.json</span><span class="dl">"</span><span class="p">,</span> 
+<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span> <span class="p">(</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/object.json</span><span class="dl">"</span><span class="p">,</span> 
                    <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span> <span class="nx">myObj</span> <span class="p">),</span> 
                    <span class="dl">"</span><span class="s2">utf8</span><span class="dl">"</span><span class="p">,</span> 
                    <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">err</span> <span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error writingthe file:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">err</span> <span class="p">);</span>
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
-<span class="p">}</span> <span class="p">);</span>
+<span class="p">});</span>
 </code></pre></div>      </div>
 
       <p>Try using our more complicated JSON object we included earlier!</p>
+
+      <h3 id="reading-from-a-json-file">Reading from a JSON file</h3>
+
+      <p>Similar to writing a file, yhou can read from a file:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span> <span class="p">);</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="p">(</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/object.json</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">utf8</span><span class="dl">"</span><span class="p">,</span> 
+            <span class="p">(</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">jsonString</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error reading file from disk:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">object</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">User's name is:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">object</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// Adam</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error parsing JSON:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+</code></pre></div>      </div>
 
       <h3 id="external-modules">External modules</h3>
 
@@ -474,7 +500,7 @@
 
       <h3 id="adding-express-to-your-app">Adding Express to your app</h3>
 
-      <p>In <code class="language-plaintext highlighter-rouge">app.js</code>, add the following imports and boilerplate</p>
+      <p>In <code class="language-plaintext highlighter-rouge">index.js</code>, add the following imports and boilerplate</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span> <span class="p">);</span>
 
@@ -503,9 +529,9 @@
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node index.js
 </code></pre></div>      </div>
 
-      <p>Note that this is a server. The running program will not complete, but instead take over the console and runs until you terminate it, typically with <code class="language-plaintext highlighter-rouge">ctrl+c</code>. Closing the terminal may kill this process, killing your server. You don’t want to do this unless you are done with your server!</p>
+      <p>Note that this is a server. The running program will not complete, but instead take over the console and runs until you terminate it, typically with <code class="language-plaintext highlighter-rouge">Ctrl + c</code>. Closing the terminal may kill this process, killing your server. You don’t want to do this unless you are done with your server!</p>
 
-      <p>However, if you make any changes to your file, the sever is not automatically restarted. You would need to restart it manually, unless…</p>
+      <p>However, if you make any changes to your file, the sever is not automatically restarted. You would need to restart it manually, unless we use a package called <code class="language-plaintext highlighter-rouge">nodemon</code>, which we’ll get to in a bit!</p>
 
       <h3 id="responding-to-get-requests">Responding to GET requests</h3>
 
@@ -584,12 +610,17 @@
 
       <p>Run it with</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nodemon
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx nodemon
 </code></pre></div>      </div>
 
-      <p>Note - it will watch ALL of the files for changes, if you want to ignore a particular type of files, e.g. JSON files, then use the following:</p>
+      <p>This will automatically host your server, assuming the main entry point is <code class="language-plaintext highlighter-rouge">index.js</code>. If your application was instead stored in <code class="language-plaintext highlighter-rouge">app.js</code>, you would run it like:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nodemon --ignore "*.json"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx nodemon app.js
+</code></pre></div>      </div>
+
+      <p>Note - it will watch ALL of the files for changes and restart on any changes, if you want to ignore a particular type of files, e.g. JSON files, then use the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx nodemon --ignore "*.json"
 </code></pre></div>      </div>
 
       <p>Note: If you are still saving a file using writeFileSync, this will be detected as a change in the directory, and restart nodemon. Either comment this out, or ignore changes to this type of file.</p>
@@ -684,7 +715,7 @@
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">message received</span><span class="dl">"</span><span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>      </div>
 
       <p>This will dump all of the submitted elements to the server’s console.</p>
@@ -703,14 +734,14 @@
 
       <p>The following code redirects them back to the root route:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>This will run whatever code you have in the root route handler.</p>
 
       <p>You may wish to further pass along the body data for further processing. If you need to forward the POST data to the new page as well, use the following:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="mi">307</span><span class="p">,</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="mi">307</span><span class="p">,</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <h3 id="gitignore">.gitignore</h3>
@@ -731,16 +762,17 @@
         <li>All of the files developed so far should get sent.
           <ul>
             <li>This includes the <code class="language-plaintext highlighter-rouge">.css</code>, <code class="language-plaintext highlighter-rouge">.js</code>, and one HTML page per request</li>
-            <li>The “/” route should give the user the login page</li>
+            <li>The <code class="language-plaintext highlighter-rouge">/</code> route should present the user with the login page</li>
           </ul>
         </li>
-        <li>If the user attempts to log in to the login page using the username <code class="language-plaintext highlighter-rouge">username</code> and the password <code class="language-plaintext highlighter-rouge">password</code>, admit them to the todo list.
+        <li>Create a JSON file with an object with a <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> field.</li>
+        <li>If the user attempts to log in to the login page using the username and password stored in the JSON object, admit them to the todo list.
           <ul>
             <li>In other words, when the user submits the form, submit it to a new route, e.g. <code class="language-plaintext highlighter-rouge">/todo</code>
               <ul>
                 <li>In the code for <code class="language-plaintext highlighter-rouge">/todo</code>, check username and password
                   <ul>
-                    <li>Only grant access to the page if correct allow them in</li>
+                    <li>Only grant access to the page if username and password are both correct</li>
                     <li>If the username and password is not correct, send them back to the login page.</li>
                   </ul>
                 </li>
@@ -751,7 +783,20 @@
         </li>
       </ul>
 
-      <p><em>Warning - storing passwords in plain text is a very bad practice! We are only doing to learn. We will replace it with more secure methods in the future!</em></p>
+      <p>Hint: This is likely your first time nesting callbacks. It get’s tough to follow! Your code is like a Matryoshka.</p>
+      <ul>
+        <li>Inside the server callback, app.post(…
+          <ul>
+            <li>You will need the reading JSON callback, fs.readFile(…
+              <ul>
+                <li>And handle comparison outcomes inside here! Redirect or send files as needed</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><em>Warning - storing passwords in plain text / JSON is a very bad practice! We are only doing to learn. We will replace it with more secure methods in the future!</em></p>
 
       <h3 id="submission">Submission</h3>
 
