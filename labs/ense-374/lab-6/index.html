@@ -500,7 +500,7 @@
 
       <h3 id="adding-express-to-your-app">Adding Express to your app</h3>
 
-      <p>In <code class="language-plaintext highlighter-rouge">index.js</code>, add the following imports and boilerplate</p>
+      <p>In <code class="language-plaintext highlighter-rouge">app.js</code>, add the following imports and boilerplate</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span> <span class="p">);</span>
 
@@ -526,7 +526,7 @@
 
       <h3 id="running-your-server">Running your server</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node index.js
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node app.js
 </code></pre></div>      </div>
 
       <p>Note that this is a server. The running program will not complete, but instead take over the console and runs until you terminate it, typically with <code class="language-plaintext highlighter-rouge">Ctrl + c</code>. Closing the terminal may kill this process, killing your server. You don’t want to do this unless you are done with your server!</p>
@@ -613,7 +613,9 @@
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx nodemon
 </code></pre></div>      </div>
 
-      <p>This will automatically host your server, assuming the main entry point is <code class="language-plaintext highlighter-rouge">index.js</code>. If your application was instead stored in <code class="language-plaintext highlighter-rouge">app.js</code>, you would run it like:</p>
+      <p>Note: This will look for the main entry point for your applicaiton in your <code class="language-plaintext highlighter-rouge">package.json</code> file created when you ran <code class="language-plaintext highlighter-rouge">npm init</code>. This will automatically host your server, assuming the main entry point is <code class="language-plaintext highlighter-rouge">app.js</code>.</p>
+
+      <p>If your package file does not match application was instead stored in <code class="language-plaintext highlighter-rouge">app.js</code>, you can either update the <code class="language-plaintext highlighter-rouge">package.json</code>, or manually run it like:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx nodemon app.js
 </code></pre></div>      </div>
