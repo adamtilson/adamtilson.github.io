@@ -250,7 +250,7 @@
 
       <p>or</p>
 
-      <p><code class="language-plaintext highlighter-rouge">nodemon</code></p>
+      <p><code class="language-plaintext highlighter-rouge">npx nodemon</code></p>
 
       <p>and then visit your webpage by opening your browser and navigating to:</p>
 
@@ -276,7 +276,7 @@
 
       <h3 id="creating-an-ejs-templated-html-file">Creating an ejs templated HTML file</h3>
 
-      <p>You EJS files need to be put in a special directory:</p>
+      <p>Your EJS files need to be put in a special directory:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/views
 </code></pre></div>      </div>
@@ -357,7 +357,7 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
         <li><code class="language-plaintext highlighter-rouge">Adam</code> is what we wish to write there</li>
       </ul>
 
-      <p>And when we preview our page, now we our username will be displayed!</p>
+      <p>And when we preview our page, now our username will be displayed!</p>
 
       <p>We can pass over any sort of JavaScript object, and access the variables inside using the appropriate properties!</p>
 
@@ -440,7 +440,7 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
 </code></pre></div>      </div>
 
       <p>and in <code class="language-plaintext highlighter-rouge">/views/layouts/footer.ejs</code></p>
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>2021 BY-NC-SA<span class="nt">&lt;/p&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>2022 BY-NC-SA<span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div>      </div>
@@ -523,7 +523,7 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
     </div></div></section>
 <section id="part5themodel"><button class="collapsible">Part 5: The Model</button><div class="text-content"><div class="text-inner">
 
-      <p>In lab 5, you likely struggled with your understanding of what a task is, conceptually.</p>
+      <p>In lab 5, if you did not successfully separate your model from your view, you likely struggled with your understanding of what a task is, conceptually.</p>
       <ul>
         <li>Is it a DOM element? The text inside an input box?</li>
         <li>How do I tell what state the task is in?
@@ -572,11 +572,11 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>In this lab you will implement the remaining functionality of the application, but without the added security and database operations which we will discuss in the following weeks. Consider this lab a learning exercise on using node and passing data with the controller: not everything we do will be best practices and should not be followed in production environments!</p>
+      <p>In this lab you will implement the remaining functionality of the application, but without the added security and database operations which we will discuss in the following weeks. In place of this, we will simply read from and write to JSON files. Consider this lab a learning exercise on using node and passing data with the controller: not everything we do will be best practices and should not be followed in production environments!</p>
 
       <p><img src="res/jquery.svg" alt="" /></p>
 
-      <p>Note that this application forks from lab 3, most of the JQuery JavaScript (Front End functionality) will be removed from the application in favour of back end functionality.</p>
+      <p>Note that this application forks from lab 3, most of the JQuery JavaScript (Front End functionality) will be removed from the application in favour of back end functionality. However, the logic may be similar, depending on you implemented it.</p>
 
       <h3 id="data-setup---the-model">Data setup - The Model</h3>
 
@@ -621,10 +621,12 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
       <ul>
         <li>Save them once, them comment out the function call
           <ul>
-            <li>Only save again if the something changes in the lists</li>
+            <li>Only save again if something changes in the lists</li>
           </ul>
         </li>
-        <li>On future runs, load the existing lists!</li>
+        <li>On future runs, load the existing lists (the saved ones) rather than the ones in your code!</li>
+        <li>Whenever you perform an operation which would read from the Model, load the JSON first.</li>
+        <li>Whenever you perform an operation which updates the Model, write to the JSON file. This way they remain synchroized!</li>
       </ul>
 
       <p>** Note: It is extremely insecure to save user passwords in plain text objects. Do not use any realistic passwords for any accounts! We will make this more secure in Lab 4! **</p>
@@ -644,7 +646,7 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
 
       <h3 id="user-registration-and-login">User registration and login</h3>
 
-      <p>Render the login page on the “/” route.</p>
+      <p>Render the login page on the <code class="language-plaintext highlighter-rouge">/</code> route.</p>
 
       <p>Give the following functionality to the login page:</p>
 
@@ -657,7 +659,7 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
 
       <p>Link the register form to the “/register” route. In this route perform the following:</p>
       <ul>
-        <li>ensure that the sign up <code class="language-plaintext highlighter-rouge">authorization</code> field matches a constant value of <code class="language-plaintext highlighter-rouge">todo2021</code></li>
+        <li>ensure that the sign up <code class="language-plaintext highlighter-rouge">authorization</code> field matches a constant value of <code class="language-plaintext highlighter-rouge">todo2022</code></li>
         <li>check that no users exists with the username entered</li>
         <li>If no users with that name exist, create a new user with the username and password supplied</li>
         <li>finally, redirect with the POST variables to the “/todo” route.</li>
@@ -720,17 +722,34 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
       <p>Hints:</p>
 
       <ul>
-        <li>Use EJS scriptlet control flow to loop over all of the tasks
+        <li>Think about the total flow of the data, from the Model to the View
           <ul>
-            <li>using EJS scriptlet control flow, task properties and username, decide how to display each task</li>
+            <li>Loading in the data from the JSON</li>
+            <li>Passing it to an EJS file through Express</li>
+            <li>Loop through the array using an appropriate control structure</li>
+            <li>For each task…
+              <ul>
+                <li>(optional) pass it in to an appropriate partial</li>
+                <li>Use that partial to render the task correctly, modified from code you created earlier
+                  <ul>
+                    <li>You may need to look at task properties, and the username, and compare it to the logged in user</li>
+                  </ul>
+                </li>
+                <li>Wrap the code in a form which can be submitted to an appropriate route</li>
+              </ul>
+            </li>
+            <li>In the submission route, unpack the data submitted</li>
+            <li>Use the data submitted to update the model appropriate</li>
           </ul>
         </li>
-        <li>when adding a task to the page, use a <code class="language-plaintext highlighter-rouge">hidden</code> input element to contain the task’s _id to uniquely identify it</li>
-        <li>Make a unique form for each Task that has interactivity with a unique route, which will be explained in the next section
-          <ul>
-            <li>You can submit a form when a checkbox is clicked using <code class="language-plaintext highlighter-rouge">&lt;input onChange="this.form.submit()" ... /&gt;</code></li>
-          </ul>
-        </li>
+      </ul>
+
+      <p>More Hints:</p>
+
+      <ul>
+        <li>when adding a task to the page, use a <code class="language-plaintext highlighter-rouge">hidden</code> HTML input element to contain the task’s _id to uniquely identify it</li>
+        <li>You can submit a form when a checkbox is clicked using <code class="language-plaintext highlighter-rouge">&lt;input onChange="this.form.submit()" ... 
+  /&gt;</code></li>
         <li>You can use a <code class="language-plaintext highlighter-rouge">hidden</code> input type to store the username of the currently logged in user.
           <ul>
             <li>This will automatically pass it back to Node.js when you submit as a POST parameter</li>
@@ -738,7 +757,7 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
         </li>
       </ul>
 
-      <p>** Note: Storing the current user in POST and passing it around via redirects works, but it’s not best practice. In lab 4 we’ll replace this functionality with sessions**</p>
+      <p>** Note: Storing the current user in POST and passing it around via redirects works, but it’s not best practice. In Lab 9 we’ll replace this functionality with sessions**</p>
 
       <h3 id="to-do-list-functionality">To-do list functionality</h3>
 
