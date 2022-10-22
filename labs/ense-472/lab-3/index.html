@@ -690,9 +690,9 @@ sudo sh ./VBoxLinuxAdditions.run --nox11
 <span class="nc">TicTocEthernet</span><span class="o">.</span><span class="na">toc</span><span class="o">.</span><span class="na">app</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">localPort</span> <span class="o">=</span> <span class="mi">1000</span> <span class="err">#</span> <span class="no">TCP</span> <span class="n">server</span> <span class="n">listen</span> <span class="n">port</span>
 </code></pre></div>      </div>
 
-      <p>This code tells <code class="language-plaintext highlighter-rouge">tic</code> to run one app, named <code class="language-plaintext highlighter-rouge">TcpSessionApp</code> <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.tcpapp.TcpSessionApp.html">Docs</a>, to attempt to connect to a server named <code class="language-plaintext highlighter-rouge">toc</code>, on port <code class="language-plaintext highlighter-rouge">1000</code>, and to send <code class="language-plaintext highlighter-rouge">1MB</code> of data.</p>
+      <p>This code tells <code class="language-plaintext highlighter-rouge">tic</code> to run one app, named <code class="language-plaintext highlighter-rouge">TcpSessionApp</code> <a href="https://doc.omnetpp.org/inet/api-4.3.0/neddoc/inet.applications.tcpapp.TcpSessionApp.html">Docs</a>, to attempt to connect to a server named <code class="language-plaintext highlighter-rouge">toc</code>, on port <code class="language-plaintext highlighter-rouge">1000</code>, and to send <code class="language-plaintext highlighter-rouge">1MB</code> of data.</p>
 
-      <p><code class="language-plaintext highlighter-rouge">toc</code> is also going to run one app, which is the <code class="language-plaintext highlighter-rouge">TcpEchoApp</code> <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.tcpapp.TcpEchoApp.html">Docs</a>, which will echo back the same data to <code class="language-plaintext highlighter-rouge">tic</code>.</p>
+      <p><code class="language-plaintext highlighter-rouge">toc</code> is also going to run one app, which is the <code class="language-plaintext highlighter-rouge">TcpEchoApp</code> <a href="https://doc.omnetpp.org/inet/api-4.3.0/neddoc/inet.applications.tcpapp.TcpEchoApp.html">Docs</a>, which will echo back the same data to <code class="language-plaintext highlighter-rouge">tic</code>.</p>
 
       <p>Once the entire process is complete, the simulation will end.</p>
 
@@ -731,7 +731,7 @@ sudo sh ./VBoxLinuxAdditions.run --nox11
         <li>UDP is a connectionless protocol</li>
       </ul>
 
-      <p>We will this time use the <code class="language-plaintext highlighter-rouge">UdpBasicApp</code> <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.udpapp.UdpBasicApp.html">Docs</a> and <code class="language-plaintext highlighter-rouge">UdpEchoApp</code> <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.udpapp.UdpEchoApp.html">Docs</a></p>
+      <p>We will this time use the <code class="language-plaintext highlighter-rouge">UdpBasicApp</code> <a href="https://doc.omnetpp.org/inet/api-4.3.0/neddoc/inet.applications.udpapp.UdpBasicApp.html">Docs</a> and <code class="language-plaintext highlighter-rouge">UdpEchoApp</code> <a href="https://doc.omnetpp.org/inet/api-4.3.0/neddoc/inet.applications.udpapp.UdpEchoApp.html">Docs</a></p>
 
       <p>update your <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> to:</p>
 
@@ -858,7 +858,7 @@ sudo sh ./VBoxLinuxAdditions.run --nox11
             <li>This topology has all of the devices connected to a Ethernet Switch</li>
             <li>You will also need the server connected, through a router</li>
             <li>You can leave the simulation settings in <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> the same, or modify them if needed</li>
-            <li>You may want to look at the <a href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.node.ethernet.EtherSwitch.html">EtherSwitch</a>
+            <li>You may want to look at the <a href="https://doc.omnetpp.org/inet/api-4.3.0/neddoc/inet.node.ethernet.EtherSwitch.html">EtherSwitch</a>
               <ul>
                 <li>For example, does this node use the <code class="language-plaintext highlighter-rouge">positions</code> parameter?</li>
               </ul>
@@ -890,13 +890,13 @@ sudo sh ./VBoxLinuxAdditions.run --nox11
           <p>Rerun the Simulation for each topology, and browse the data.</p>
         </li>
         <li>
-          <p>Finally, write a 1 to 2-page report which attempts to answer three (3) research questions either within or between the topologies we studied</p>
+          <p>Finally, write a 1 to 2-page report which attempts to answer one (1) research question either within or between the topologies we studied</p>
           <ul>
             <li>You must formulate the hypothesis / research questions</li>
             <li>You must create and run a simulation to verify your hypothesis</li>
             <li>Provide answers based on your observations
               <ul>
-                <li>Back up your observations with data and graphs as appropriate!</li>
+                <li>Back up your observations with data and/or graphs as appropriate!</li>
                 <li>e.g. If I switch from a bus to a switch topology, I believe my throughput will…</li>
               </ul>
             </li>
