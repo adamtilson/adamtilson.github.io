@@ -379,7 +379,9 @@
 
       <p><img src="res/download.png" alt="" /></p>
 
-      <p>Download the MSI. (276 MB)</p>
+      <p><img src="res/download-2.png" alt="" /></p>
+
+      <p>Download the MSI. (420 MB)</p>
       <ul>
         <li>Run it…
           <ul>
@@ -401,6 +403,12 @@
 
       <p><img src="res/no-compass.png" alt="" /></p>
 
+      <p>Starting in V6, we will need a second utility to access the database through the command line, which is called <code class="language-plaintext highlighter-rouge">mongosh</code>, the mongo db shell</p>
+
+      <p><a href="https://www.mongodb.com/try/download/shell">Download mongosh here</a></p>
+
+      <p>I recommend unzipping this and copying the files in the <code class="language-plaintext highlighter-rouge">bin</code> folder into <code class="language-plaintext highlighter-rouge">C:\Program Files\MongoDB\Server\6.0\bin</code></p>
+
       <p>Make an Alias file:</p>
 
       <p>Open powershell and open your powershell profile:</p>
@@ -419,8 +427,8 @@
 
       <p>(Note, your directories may be different than mine! Keep track in the previous section!)</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-Alias mongod "C:\Program Files\MongoDB\Server\5.0\bin\mongod.exe"
-Set-Alias mongo "C:\Program Files\MongoDB\Server\5.0\bin\mongo.exe"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-Alias mongod "C:\Program Files\MongoDB\Server\6.0\bin\mongod.exe"
+Set-Alias mongosh "C:\Program Files\MongoDB\Server\6.0\bin\mongosh.exe"
 </code></pre></div>      </div>
 
       <p>Save, close, and restart powershell.</p>
@@ -437,26 +445,32 @@ Set-Alias mongo "C:\Program Files\MongoDB\Server\5.0\bin\mongo.exe"
         </li>
       </ul>
 
-      <p>Create a data directory</p>
+      <p>Alternatively, in the lab, from the powershell you could instead run:</p>
 
-      <p>create the folders:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&amp; 'C:\Program Files\MongoDB\Server\6.0\bin\mongosh.exe'
+</code></pre></div>      </div>
 
-      <p><code class="language-plaintext highlighter-rouge">c:/data</code></p>
+      <!-- Create a data directory -->
 
-      <p>and</p>
+      <!-- create the folders: -->
 
-      <p><code class="language-plaintext highlighter-rouge">c:/data/db</code></p>
+      <!-- `c:/data` -->
 
-      <!-- I learned when you just run mongo, it loads up the default, unless it can find mongo.conf-->
+      <!-- and -->
 
-      <p>This is where your databases will be stored.</p>
+      <!-- `c:/data/db` -->
+
+      <!-- This is where your databases will be stored. -->
 
       <p>Check it is working with:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongo --version
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongosh --version
 </code></pre></div>      </div>
 
       <p><img src="res/working-on-windows.png" alt="" /></p>
+
+      <p><em>** Important **</em>
+In the lab, note that anything you put in the database will be accessible to other users who sign on to the computer. Please cleanup your databases when done!</p>
 
       <h3 id="installation-guides">Installation guides</h3>
 
@@ -465,18 +479,19 @@ Set-Alias mongo "C:\Program Files\MongoDB\Server\5.0\bin\mongo.exe"
 <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x">Mac</a>
 <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/">Windows</a></p>
 
-      <ul>
-        <li>in Linux in particular, you need both the <code class="language-plaintext highlighter-rouge">server</code> and the <code class="language-plaintext highlighter-rouge">shell</code></li>
-      </ul>
-
       <h3 id="mongod">mongod</h3>
 
       <ul>
         <li><code class="language-plaintext highlighter-rouge">mongod</code> is the mongo demon</li>
-        <li>It runs the database as a service, and allows you to connect 
-to it from a client</li>
-        <li>Needs to run as sudo in linux.</li>
-        <li>To connect to the database, open a second terminal, and run <code class="language-plaintext highlighter-rouge">mongo</code>, the Mongo shell</li>
+        <li>If you installed as a Service in windows, you won’t need to manually run this
+          <ul>
+            <li>In the lab it will be running automatically</li>
+          </ul>
+        </li>
+        <li>When run manually, the default data directory is <code class="language-plaintext highlighter-rouge">c:\data\db</code>. If this directory doesn’t exist, it will exit.</li>
+        <li>As long as the mongo service is running, it will allow connections from a client on 27017</li>
+        <li>On linux, you typically need to run it as <code class="language-plaintext highlighter-rouge">sudo</code></li>
+        <li>To connect to the database, open a second terminal, and run <code class="language-plaintext highlighter-rouge">mongosh</code>, the Mongo shell</li>
       </ul>
 
       <h3 id="help">Help</h3>
@@ -488,7 +503,7 @@ to it from a client</li>
 
       <h3 id="mongo-shell">Mongo shell</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongo
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongosh
 </code></pre></div>      </div>
 
       <ul>
@@ -716,17 +731,17 @@ to it from a client</li>
 
       <p>There are several types of relationships:</p>
 
-      <p>One to One</p>
+      <p>One-to-One</p>
       <ul>
         <li>If each user has exactly one unique game, you could use an embedded approach</li>
       </ul>
 
-      <p>One to Many</p>
+      <p>One-to-Many</p>
       <ul>
         <li>If one game has many reviews, it may make sense to use the embedded document approach.</li>
       </ul>
 
-      <p>Many to Many</p>
+      <p>Many-to-Many</p>
       <ul>
         <li>If many users have many games, and vice versa
           <ul>
@@ -746,12 +761,12 @@ to it from a client</li>
         <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span>
         <span class="na">reviews</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-                <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Adam</span><span class="dl">"</span><span class="p">,</span>
-                <span class="na">rating</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bug in the first screen</span><span class="dl">"</span>
+                <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Games</span><span class="dl">"</span><span class="p">,</span>
+                <span class="na">rating</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Cute mascott</span><span class="dl">"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-                <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">HorrorFan</span><span class="dl">"</span><span class="p">,</span>
+                <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Robin Speedruns</span><span class="dl">"</span><span class="p">,</span>
                 <span class="na">rating</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
                 <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Classic</span><span class="dl">"</span>
             <span class="p">}</span>
@@ -784,8 +799,8 @@ to it from a client</li>
         <span class="na">reviews</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
                 <span class="na">user_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="na">rating</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bug in the first screen</span><span class="dl">"</span>
+                <span class="na">rating</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Cute mascott</span><span class="dl">"</span>
             <span class="p">},</span>
             <span class="p">{</span>
                 <span class="na">user_id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -812,7 +827,7 @@ to it from a client</li>
         <li>list dataTypes for those fields</li>
         <li>list of those fields are required</li>
         <li>list default values for them</li>
-        <li>You can do this in Mongo, we’ll do this in Mongoose in just a bit!</li>
+        <li>You can do this in Mongo, but instead we’ll look at this in Mongoose in just a bit!</li>
       </ul>
 
     </div></div></section>
@@ -820,7 +835,7 @@ to it from a client</li>
 
       <p>Mongoose is a Node.js library for connecting to your database, and performing database operations. It can be triggered by any code in your Node.js script, but you will most likely want to use it on your routes.</p>
 
-      <p><em>Always make sure <code class="language-plaintext highlighter-rouge">mongod</code> is running!</em></p>
+      <p><em>If you aren’t running Mongo as a service on startup, make sure <code class="language-plaintext highlighter-rouge">mongod</code> is running!</em></p>
 
       <h3 id="what-is-it">What is it?</h3>
 
