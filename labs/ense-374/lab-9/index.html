@@ -258,22 +258,30 @@ DB_USER=root
         </li>
       </ul>
 
-      <p>We know going forward function call produces consistent results
-    - At registration time, we can ask for a password, 
-      - hash it, 
-      - and store the hashed value in our database. 
-    - At login time, the user enters the password
-      - the entered password is hashed 
-      - and if the hashed value matches what’s in the database,
-      - the password must be correct!
-    - Unfortunately hash functions can have multiple inputs map to the same output, but it’s incredibly rare</p>
+      <p>We know going forward function call produces consistent results</p>
+      <ul>
+        <li>At registration time, we can ask for a password,
+          <ul>
+            <li>hash it,</li>
+            <li>and store the hashed value in our database.</li>
+          </ul>
+        </li>
+        <li>At login time, the user enters the password
+          <ul>
+            <li>the entered password is hashed</li>
+            <li>and if the hashed value matches what’s in the database,</li>
+            <li>the password must be correct!</li>
+          </ul>
+        </li>
+        <li>Unfortunately hash functions can have multiple inputs map to the same output, but it’s incredibly rare</li>
+      </ul>
 
       <p>Example: <a href="http://www.md5.cz/">MD5 application</a></p>
 
       <p>How can we beat this?</p>
       <ul>
         <li>Make a hash table of common passwords, and compare.</li>
-        <li>Modern GPUs can do 20Bill Hashes per Second!</li>
+        <li>Modern GPUs can do 20 Bill Hashes per Second!</li>
       </ul>
 
       <p>How else can we improve security?</p>
@@ -293,7 +301,7 @@ DB_USER=root
       <p>(This is what we’ll do, but we’ll have Passport do it for us!)</p>
 
       <ul>
-        <li>generate a random string, called a Salt
+        <li>generate a string (random, but consistent), called a Salt
           <ul>
             <li>concatenate it to the password</li>
             <li>hash the whole thing!
@@ -336,14 +344,18 @@ DB_USER=root
     </div></div></section>
 <section id="part2authentication"><button class="collapsible">Part 2: Authentication</button><div class="text-content"><div class="text-inner">
 
+      <p>Once the user is logged in, how do we track which user they are?</p>
+      <ul>
+        <li>This is done through cookies and sessions</li>
+        <li>We saw how painful it was to track a user without this last week!</li>
+        <li>We’ll generate an <em>Access Token</em>, and store in on the user’s computer</li>
+      </ul>
+
       <h3 id="cookies">Cookies</h3>
 
-      <p>Once the user is logged in, how do we track which user they are?
-    - This is done through cookies and sessions</p>
-
-      <p>Cookies are delicious delicacies - Mozilla, 1999</p>
+      <p><em>Cookies are delicious delicacies - Mozilla, 1999</em></p>
       <ul>
-        <li>a piece of persistent data that is stored on the users browser
+        <li>A piece of persistent data that is stored on the users browser
           <ul>
             <li>It can be used to authorize a user by means of an “access token”
               <ul>
@@ -366,7 +378,7 @@ DB_USER=root
             <li>When the user presents the cookie with the key, if it unlocks, we let them in</li>
             <li>The sessions ends when the server changes the lock (typically after a certain amount of time),
               <ul>
-                <li>the user discards the key (when closing the browser)</li>
+                <li>or the user discards the key (e.g. by closing the browser)</li>
                 <li>or ideally both (logging out)</li>
               </ul>
             </li>
@@ -754,6 +766,8 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span>
 </code></pre></div>      </div>
 
+      <p>And conveniently, we can use this in all of the pages we are accessing without storing this username in forms! Handy!</p>
+
       <h3 id="log-in-users">Log-in Users:</h3>
 
       <p>Logging in users is similar to registering users…</p>
@@ -890,12 +904,9 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
       <p>Use EJS to render the to-do list on the <code class="language-plaintext highlighter-rouge">/todo</code> route</p>
 
       <ul>
-        <li>
-          <p>Modify your code from Lab 7 to instead read from the database.</p>
-        </li>
-        <li>
-          <p>Reuse as much code as possible! The front-end should have minimal to no changes.</p>
-        </li>
+        <li>Modify your code from Lab 7 to instead read from the database for building lists of tasks.</li>
+        <li>Modify any usernames which were saved in hidden inputs to instead directly use the username in <code class="language-plaintext highlighter-rouge">req.user.username</code></li>
+        <li>Reuse as much code as possible! The front-end should have minimal changes.</li>
       </ul>
 
       <h3 id="to-do-list-functionality">To-do list functionality</h3>
@@ -919,13 +930,13 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
 
       <ul>
         <li>
-          <p>A modern View engine, such as <a href="https://reactjs.org/">React</a>, <a href="https://angular.io/">Angular</a> or <a href="https://vuejs.org/">Vue.js</a></p>
+          <p>(1) A modern View engine, such as <a href="https://reactjs.org/">React</a>, <a href="https://angular.io/">Angular</a> or <a href="https://vuejs.org/">Vue.js</a></p>
         </li>
         <li>
-          <p>Better JavaScript with <a href="https://www.typescriptlang.org/">TypeScript</a></p>
+          <p>(2) Better JavaScript with <a href="https://www.typescriptlang.org/">TypeScript</a></p>
         </li>
         <li>
-          <p>Having your Browser-side JavaScript talk directly to the Server-side Node.js, e.g. with AJAX, or with the Fetch API</p>
+          <p>(3) Having your Browser-side JavaScript talk directly to the Server-side Node.js, e.g. with AJAX, or with the Fetch API</p>
           <ul>
             <li>With this you could link up Labs 5 and 9 to create a site which updates on demand without refreshing the page!</li>
             <li>With this, if our to-do list app was live, we could periodically check if other users had added new data, and if so automatically update our site using the DOM</li>
@@ -957,7 +968,7 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
 </code></pre></div>      </div>
 
       <ul>
-        <li>Level up our MVC / Model with a <a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api">REST API</a></li>
+        <li>(4) Level up our MVC / Model with a <a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api">REST API</a></li>
       </ul>
     </div></div></section>
 
