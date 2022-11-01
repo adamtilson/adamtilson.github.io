@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Step 2. Pinging after RIP convergence &#8212; INET 4.3.0 documentation</title>
+
+  </head>
+<body>
+<h1>Step 2. Pinging after RIP convergence</h1>
+<div class="section" id="goals">
+<h2>Goals</h2>
+<p>We show how RIP is used for progressively building up the routing tables of the
+routers. In order to keep the discussion easy to digest, in this step, we do not
+introduce any changes in the network while the simulation is running, and we do
+not use the advanced RIP features.</p>
+<p>If you would like to brush up your RIP knowledge, you can find a good discussion
+of the distance-vector algorithm and RIP in <a class="reference external" href="https://book.systemsapproach.org/internetworking/routing.html#distance-vector-rip">this section</a>
+of L. Peterson and B. Davie’s superb book <em>Computer Networks: A Systems
+Approach</em>, now freely available <a class="reference external" href="https://book.systemsapproach.org">online</a>.</p>
+</div>
+<div class="section" id="network-configuration">
+<h2>Network Configuration</h2>
+<p>We use the same network configuration as the previous one, except that we start
+the simulation with empty routing tables.  The experiment is set up in
+<code class="docutils literal notranslate"><span class="pre">omnetpp.ini</span></code>, in section <code class="docutils literal notranslate"><span class="pre">Step2</span></code>:</p>
+<p>The configuration in <code class="docutils literal notranslate"><span class="pre">omnetpp.ini</span></code> is the following:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Config Step2]</span>
+<span class="na">description</span> <span class="o">=</span> <span class="s">&quot;Pinging after RIP convergence&quot;</span>
+<span class="na">network</span> <span class="o">=</span> <span class="s">RipNetworkA</span>
+
+<span class="c1"># adding default routes in all hosts</span>
+<span class="na">*.configurator.config</span> <span class="o">=</span> <span class="s">xml(&quot;&lt;config&gt; \</span>
+<span class="s">                                &lt;interface hosts=&#39;**&#39; address=&#39;10.x.x.x&#39; netmask=&#39;255.x.x.x&#39;/&gt; \</span>
+<span class="s">                                &lt;autoroute sourceHosts=&#39;host*&#39;/&gt; \</span>
+<span class="s">                             &lt;/config&gt;&quot;)</span>
+
+<span class="na">*.configurator.addStaticRoutes</span> <span class="o">=</span> <span class="s">true</span>
+
+<span class="c1"># RIP parameters on routers</span>
+<span class="na">*.router*.hasRip</span> <span class="o">=</span> <span class="s">true</span>
+<span class="na">*.router*.rip.startupTime</span> <span class="o">=</span> <span class="s">uniform(0s,1s)</span>
+<span class="c1"># disable advanced features for now!</span>
+<span class="na">*.router*.rip.ripConfig</span> <span class="o">=</span> <span class="s">xml(&quot;&lt;config&gt; \</span>
+<span class="s">                                  &lt;interface hosts=&#39;router*&#39; mode=&#39;NoSplitHorizon&#39; /&gt; \</span>
+<span class="s">                               &lt;/config&gt;&quot;)</span>
+<span class="na">*.router*.rip.triggeredUpdate</span> <span class="o">=</span> <span class="s">false</span>
+
+<span class="c1"># Application parameters</span>
+<span class="na">*.host0.numApps</span> <span class="o">=</span> <span class="s">1</span>
+<span class="na">*.host0.app[0].typename</span> <span class="o">=</span> <span class="s">&quot;PingApp&quot;</span>
+<span class="na">*.host0.app[0].destAddr</span> <span class="o">=</span> <span class="s">&quot;host6&quot;</span>
+<span class="na">*.host0.app[0].startTime</span> <span class="o">=</span> <span class="s">50s</span>
+
+<span class="c1"># turning on global ARP to focus on the RIP messages</span>
+<span class="na">*.*.ipv4.arp.typename</span> <span class="o">=</span> <span class="s">&quot;GlobalArp&quot;  </span><span class="c1"># TODO: for some reasons GlobalArp does not work -&gt; it seems to work now</span>
+
+<span class="c1"># Visualizer settings</span>
+<span class="na">*.visualizer.interfaceTableVisualizer[0].displayInterfaceTables</span> <span class="o">=</span> <span class="s">true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="experiment">
+<h2>Experiment</h2>
+<p>Observe in the following video how routers inform their neighbours and
+progressively build their routing tables (as indicated by the appearance of blue
+and red arrows linking the routers). At the end of a few iterations, we see the
+same routing configuration as Step 1.</p>
+<video autoplay loop controls onclick="this.paused ? this.play() : this.pause();"     src="media/step2_3.mp4" width="100%" height="" class="align-center"></video>
+</div>
+</div>
+
+
+        
+        </main>
+    </div>
+  </body>
+</html>

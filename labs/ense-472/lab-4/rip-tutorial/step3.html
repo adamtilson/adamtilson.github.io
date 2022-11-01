@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Step 3. Link Breakage and Routing Table Updates &#8212; INET 4.3.0 documentation</title>
+
+  </head>
+<body>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="step-3-link-breakage-and-routing-table-updates">
+<h1>Step 3. Link Breakage and Routing Table Updates</h1>
+<div class="section" id="goals">
+<h2>Goals</h2>
+<p>We demonstrate how RIP updates the routing tables after changes occur in a
+network topology.</p>
+</div>
+<div class="section" id="network-configuration">
+<h2>Network Configuration</h2>
+<p>We keep the network configuration same as the previous step, except that we will
+schedule a break with the help of <a class="reference-ned reference external" href="https://doc.omnetpp.org/inet/api-current/neddoc/inet.common.scenario.ScenarioManager.html">ScenarioManager</a>. RIP should update the routing
+information in the routing tables of routers to eliminate the references to the
+broken link. Here, for the reliable convergence of routing tables, we need to
+enable SplitHorizon though (we will postpone discussion of this issue until
+Step 6 of the tutorial).</p>
+<p>The configuration in <code class="docutils literal notranslate"><span class="pre">omnetpp.ini</span></code> is the following:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Config Step3]</span>
+<span class="na">description</span> <span class="o">=</span> <span class="s">&quot;Link breakage&quot;</span>
+<span class="na">extends</span> <span class="o">=</span> <span class="s">Step2</span>
+
+<span class="c1"># Enable split horizon in order for the scenario to work properly</span>
+<span class="na">*.router*.rip.ripConfig</span> <span class="o">=</span> <span class="s">xml(&quot;&lt;config&gt; \</span>
+<span class="s">                                  &lt;interface hosts=&#39;router*&#39; mode=&#39;SplitHorizon&#39; /&gt; \</span>
+<span class="s">                               &lt;/config&gt;&quot;)</span>
+<span class="c1"># Disable ping application</span>
+<span class="na">*.host0.numApps</span> <span class="o">=</span> <span class="s">0</span>
+
+<span class="na">*.scenarioManager.script</span> <span class="o">=</span> <span class="s">xml(&quot;&lt;scenario&gt; \</span>
+<span class="s">                                    &lt;disconnect t=&#39;50&#39; src-module=&#39;router2&#39; dest-module=&#39;switch2&#39; /&gt; \</span>
+<span class="s">                                &lt;/scenario&gt;&quot;)</span>
+</pre></div>
+</div>
+<p>The last key in the above figure is for scheduling a break.</p>
+</div>
+<div class="section" id="experiment">
+<h2>Experiment</h2>
+<p>In the video below observe that at t=50 seconds, as directed by the scenario manager script,
+the link connecting <code class="docutils literal notranslate"><span class="pre">router2</span></code> and <code class="docutils literal notranslate"><span class="pre">switch2</span></code> breaks (note that the video starts
+approximately at t=30, after the routing tables stabilize).</p>
+<video autoplay loop controls onclick="this.paused ? this.play() : this.pause();"     src="media/step3_linkbreak.mp4" width="100%" height="" class="align-center"></video>
+</div>
+</div>
+
+        </main>
+    </div>
+  </body>
+</html>

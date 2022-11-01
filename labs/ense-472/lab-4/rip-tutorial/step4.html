@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+   
+    <title>Step 4. Timeout Timer and Garbage Collection Timer &#8212; INET 4.3.0 documentation</title>
+  </head>
+<body>
+  
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="step-4-timeout-timer-and-garbage-collection-timer">
+<h1>Step 4. Timeout Timer and Garbage Collection Timer</h1>
+<div class="section" id="goals">
+<h2>Goals</h2>
+<p>In this step, we will demonstrate the operation of timeout and
+garbage-collection timers.</p>
+<p>Routers talk to their neighbours regularly to update them about the changes in
+their routing tables. Every time a router receives one of these messages from
+one of its neighbours, it resets a timeout timer associated with this route. If
+these messages stop coming, the timer expires (its default value is 180
+seconds), and the router marks this route as unreachable. However, it keeps the
+route in its routing table, and starts a garbage-collection timer. It
+deletes the route when the garbage-collection timer expires (its default value
+is 120 seconds).</p>
+</div>
+<div class="section" id="network-configuration">
+<h2>Network Configuration</h2>
+<p>Our network configuration is the same as the one we used in the earlier steps.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">omnetpp.ini</span></code> configuration is listed here:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Config Step4A]</span>
+<span class="na">description</span> <span class="o">=</span> <span class="s">&quot;RIP timers: Link comes back online before the timeout timer expires&quot;</span>
+<span class="na">extends</span> <span class="o">=</span> <span class="s">Step2</span>
+
+<span class="c1"># Enable split horizon in order for the scenario to work properly</span>
+<span class="na">*.router*.rip.ripConfig</span> <span class="o">=</span> <span class="s">xml(&quot;&lt;config&gt; \</span>
+<span class="s">                                  &lt;interface hosts=&#39;router*&#39; mode=&#39;SplitHorizon&#39; /&gt; \</span>
+<span class="s">                               &lt;/config&gt;&quot;)</span>
+<span class="c1"># disable ping application</span>
+<span class="na">*.host0.numApps</span> <span class="o">=</span> <span class="s">0</span>
+
+<span class="c1"># Break the router2 &lt;--&gt; switch1 link at t=50 s. and reconnect at t=150 s.</span>
+<span class="na">*.scenarioManager.script</span> <span class="o">=</span> <span class="s">xmldoc(&quot;scenario5.xml&quot;)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="experiments">
+<h2>Experiments</h2>
+<p>To observe how RIP behaves, we introduce a breakdown by disconnecting the link
+between <code class="docutils literal notranslate"><span class="pre">router2</span></code> and <code class="docutils literal notranslate"><span class="pre">switch1</span></code> at t = 50s, and simulate three
+possible scenarios in which the link becomes operational again:</p>
+<ul class="simple">
+<li><ol class="upperalpha simple">
+<li><p>Before the timeout timer associated with its routing table entry expires,</p></li>
+</ol>
+</li>
+<li><ol class="upperalpha simple" start="2">
+<li><p>After the timeout timer expires but before the garbage-collection timer expires, and</p></li>
+</ol>
+</li>
+<li><ol class="upperalpha simple" start="3">
+<li><p>After both timers expire, and the link is purged from the routing table.</p></li>
+</ol>
+</li>
+</ul>
+<p>We run these cases one by one. Their <code class="docutils literal notranslate"><span class="pre">omnetpp.ini</span></code> configuration sections are
+<code class="docutils literal notranslate"><span class="pre">Step4A</span></code>, <code class="docutils literal notranslate"><span class="pre">Step4B</span></code> and <code class="docutils literal notranslate"><span class="pre">Step4C</span></code>, respectively. These configurations are
+identical apart from the scenario script they refer to.</p>
+<div class="section" id="a-link-becomes-operational-before-the-timeout-timer-expires">
+<h3>A: Link becomes operational before the timeout timer expires</h3>
+<p>We break the link connecting <code class="docutils literal notranslate"><span class="pre">router2</span></code> to <code class="docutils literal notranslate"><span class="pre">switch1</span></code> at t = 50s, and
+reconnect at t = 150s. This is written in the <code class="docutils literal notranslate"><span class="pre">scenario5.xml</span></code> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="c">&lt;!-- scenario5.xml --&gt;</span>
+<span class="nt">&lt;scenario&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;disconnect</span> <span class="na">src-module=</span><span class="s">&quot;router2&quot;</span> <span class="na">dest-module=</span><span class="s">&quot;switch1&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">&quot;150&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">&quot;router2&quot;</span> <span class="na">src-gate=</span><span class="s">&quot;ethg$o[0]&quot;</span> <span class="na">dest-module=</span><span class="s">&quot;switch1&quot;</span> <span class="na">dest-gate=</span><span class="s">&quot;ethg$i[3]&quot;</span> <span class="na">channel-type=</span><span class="s">&quot;inet.node.ethernet.Eth10M&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">&quot;switch1&quot;</span> <span class="na">src-gate=</span><span class="s">&quot;ethg$o[3]&quot;</span> <span class="na">dest-module=</span><span class="s">&quot;router2&quot;</span> <span class="na">dest-gate=</span><span class="s">&quot;ethg$i[0]&quot;</span> <span class="na">channel-type=</span><span class="s">&quot;inet.node.ethernet.Eth10M&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+<span class="nt">&lt;/scenario&gt;</span>
+</pre></div>
+</div>
+<p>After the <code class="docutils literal notranslate"><span class="pre">switch1</span></code> connection is lost, the timeout timer associated with the
+routing table entry related to this link is not reset any more, and after 180
+seconds (default value) the router marks the associated entry as “unreachable”.
+But here we re-activate the link before it expires.</p>
+</div>
+<div class="section" id="b-link-becomes-operational-after-the-timeout-timer-expires">
+<h3>B: Link becomes operational after the timeout timer expires</h3>
+<p>Here, we use <code class="docutils literal notranslate"><span class="pre">scenario6.xml</span></code>, in which we make the link reactivation to occur
+at t = 300s. This time:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="c">&lt;!-- scenario6.xml --&gt;</span>
+<span class="nt">&lt;scenario&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;disconnect</span> <span class="na">src-module=</span><span class="s">&quot;router2&quot;</span> <span class="na">dest-module=</span><span class="s">&quot;switch1&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">&quot;300&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">&quot;router2&quot;</span> <span class="na">src-gate=</span><span class="s">&quot;ethg$o[0]&quot;</span> <span class="na">dest-module=</span><span class="s">&quot;switch1&quot;</span> <span class="na">dest-gate=</span><span class="s">&quot;ethg$i[3]&quot;</span> <span class="na">channel-type=</span><span class="s">&quot;inet.node.ethernet.Eth10M&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">&quot;switch1&quot;</span> <span class="na">src-gate=</span><span class="s">&quot;ethg$o[3]&quot;</span> <span class="na">dest-module=</span><span class="s">&quot;router2&quot;</span> <span class="na">dest-gate=</span><span class="s">&quot;ethg$i[0]&quot;</span> <span class="na">channel-type=</span><span class="s">&quot;inet.node.ethernet.Eth10M&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+<span class="nt">&lt;/scenario&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="c-link-becomes-operational-after-the-garbage-collection-timer-expires">
+<h3>C: Link becomes operational after the garbage-collection timer expires</h3>
+<p>In this scenario, we wait until after the garbage-collection timer expires to
+observe the changes to the routing tables. The corresponding <code class="docutils literal notranslate"><span class="pre">scenario7.xml</span></code> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="c">&lt;!-- scenario7.xml --&gt;</span>
+<span class="nt">&lt;scenario&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;disconnect</span> <span class="na">src-module=</span><span class="s">&quot;router2&quot;</span> <span class="na">dest-module=</span><span class="s">&quot;switch1&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">&quot;602&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">&quot;router2&quot;</span> <span class="na">src-gate=</span><span class="s">&quot;ethg$o[0]&quot;</span> <span class="na">dest-module=</span><span class="s">&quot;switch1&quot;</span> <span class="na">dest-gate=</span><span class="s">&quot;ethg$i[3]&quot;</span> <span class="na">channel-type=</span><span class="s">&quot;inet.node.ethernet.Eth10M&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">&quot;switch1&quot;</span> <span class="na">src-gate=</span><span class="s">&quot;ethg$o[3]&quot;</span> <span class="na">dest-module=</span><span class="s">&quot;router2&quot;</span> <span class="na">dest-gate=</span><span class="s">&quot;ethg$i[0]&quot;</span> <span class="na">channel-type=</span><span class="s">&quot;inet.node.ethernet.Eth10M&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/at&gt;</span>
+<span class="nt">&lt;/scenario&gt;</span>
+</pre></div>
+</div>
+<p>The link breaks at t = 50s, and <code class="docutils literal notranslate"><span class="pre">router1</span></code> stops receiving any updates on the
+route to the 10.0.0.24/29 network from <code class="docutils literal notranslate"><span class="pre">router2</span></code>. As shown in the highlighted
+line of the image below, the last update to the route was approximately at t =
+30.5929s, the moment the timeout timer was last reset.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="media/step4_3.png"><img alt="media/step4_3.png" src="media/step4_3.png" style="width: 80%;" /></a>
+</div>
+<p>The timeout timer expires at t = 210s. At that time, the route’s metric is set
+to 16, and the garbage-collection timer is started.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="media/step4_4.png"><img alt="media/step4_4.png" src="media/step4_4.png" style="width: 80%;" /></a>
+</div>
+</div>
+</div>
+</div>
+
+
+       
+        </main>
+    </div>
+  </body>
+</html>

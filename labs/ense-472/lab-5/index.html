@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> ENSE 472 Lab 5 </title>
+  <title> ENSE 472 Lab 4 </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
   <link rel="stylesheet" href="/assets/css/style.css?v=">
   <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
@@ -112,7 +112,7 @@
 
     <main id="content" class="main-content" role="main">
         <p></p>
-        <h1 id="lab-5-routing-information-protocol-in-omnet--inet">Lab 5: Routing Information Protocol in OMNeT++ / INET</h1>
+        <h1 id="lab-4-network-application-programming---godot-multiplayer">Lab 4: Network Application Programming - Godot Multiplayer</h1>
 
 <p>ENSE 472 - Digital Networks - Laboratory</p>
 
@@ -125,365 +125,708 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>The purpose of this lab is to study the Routing Information Protocol (RIP), an early distance-vector routing protocol which relies on hop count. In particular, this lab looks at implementing RIP using the INET framework,and looks at analyzing the performance of the network.</p>
+      <p>The purpose of this lab is to see how to code a the network interactivity for an application. In particular, we will create a multiplayer game using the Godot Game Engine, a MIT-licensed, cross-platform free and open-source game engine great for rapid prototyping due to user friendly features such as the python-like GDScript, built in patterns and features such as singletons (AutoLoads), observers (signals), groups and a high-level network interface. We will examine a simple battle game ready for multiplayer integration.</p>
 
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
 
-      <p>A Windows, Mac or Linux computer with OMNeT++ / INET installed. You may either install this yourself, or instead use the provided VirtualBox image which includes these applications installed in a light-weight Ubuntu environment. Please see Lab 3 for details on setting up the VirtualBox, especially if you experience a black screen on boot.</p>
+      <p>A Windows, Mac or Linux computer. The Godot game engine runs as a standalone executable on any operating system, and integrates the engine and IDE in a single application.</p>
 
     </div></div></section>
-<section id="part1routinginformationprotocol"><button class="collapsible">Part 1: Routing Information Protocol</button><div class="text-content"><div class="text-inner">
+<section id="part1godotoverview"><button class="collapsible">Part 1: Godot Overview</button><div class="text-content"><div class="text-inner">
 
-      <p>The Routing Information Protocol (RIP) is one of the oldest routing algorithms</p>
+      <p>To get started, download the version of Godot needed for your</p>
+
+      <p><img src="res/dl-godot-1.png" alt="" />
+<img src="res/dl-godot-2.png" alt="" />
+<img src="res/new-project.png" alt="" />
+<img src="res/create-folder.png" alt="" /></p>
+
+      <p>Unzip, run the executable, and this is the entire game engine, IDE, everything. Cool!</p>
       <ul>
-        <li>Unlikely to see much use today, but great to learn about routing</li>
-        <li>In part popularized due to its inclusion in BSD Unix.</li>
-        <li>Implementing Bellman-Ford and related algorithms, distance-vector routing protocols were used in precursors to the internet, and seek to find the best path to a destination network by minimizing hop count.
+        <li>On MAC you may need to give Godot permissions to run in your system settings</li>
+        <li>Leave the console window open, if you close it godot will close!</li>
+      </ul>
+
+      <p><img src="res/ui.png" alt="" /></p>
+
+      <p>The UI of Godot is surprisingly dense, which every area being very useful, though it may not be apparent for what right away.</p>
+      <ol>
+        <li>The File Menu
           <ul>
-            <li>This strategy ignores other important statistics such as time to reach the destination.</li>
+            <li>Standard things like saving, exporting, setting preferences</li>
+            <li><code class="language-plaintext highlighter-rouge">Project</code> -&gt; <code class="language-plaintext highlighter-rouge">Export</code> is useful for making binaries (but you need to download export templates first!)</li>
+            <li>In particular, <code class="language-plaintext highlighter-rouge">Project</code> -&gt; <code class="language-plaintext highlighter-rouge">Project Settings</code> is very important for setting the main scene, setting up AutoLoads, setting controls, etc.</li>
           </ul>
         </li>
-        <li>Each router is responsible for keeping track of its routing table, connected networks, and the number of hops to each network.
+        <li>The Scene Tree
           <ul>
-            <li>For example, a router A directly connected to network N would be zero hops away.</li>
-            <li>Router B, connected to Router A, would be one hop away from N, and the next hop towards N would be Router A.</li>
+            <li>This is where you compose the current scene of nodes</li>
           </ul>
         </li>
-        <li>These routing tables are broadcast to connected routers at regular intervals over UDP.</li>
-        <li>Using these tables, each router can update its best path to each destination network by checking if the newly given path, plus one hop, is shorter than what’s currently in the routing table.</li>
-        <li>After a number of iterations, the network will converge on optimal paths in terms of the least number of hops.</li>
-        <li>The algorithm also adapts to networks as routers going down and come back online.</li>
-      </ul>
-
-      <p><a href="https://book.systemsapproach.org/internetworking/routing.html#distance-vector-rip">Background: An excellent overview of Distance Vector</a></p>
-
-      <p><img src="res/hop-count.png" alt="" /></p>
-
-      <p>On the upper path we can see 3 hops to reach our destination, on the lower path 4.</p>
-
-      <h3 id="real-world-example">Real world example</h3>
-
-      <p>On Windows, can we see how many hops it takes to get to a given server? Run <code class="language-plaintext highlighter-rouge">tracert google.com</code></p>
-      <ul>
-        <li>Three packets are sent, and the time for each is displayed</li>
-      </ul>
-
-      <h3 id="problems-with-rip">Problems with RIP</h3>
-
-      <p>Why is hop count no longer the best metric?</p>
-      <ul>
-        <li>Congestion</li>
-      </ul>
-
-      <p><img src="res/congestion.png" alt="" /></p>
-
-      <ul>
-        <li>Bandwidth</li>
-      </ul>
-
-      <h3 id="benefits-to-rip">Benefits to RIP</h3>
-
-      <ul>
-        <li>Easies to set up than Static Routing, and more adaptive</li>
-        <li>Great for small networks, labs</li>
-      </ul>
-
-      <h3 id="technical-details--limitations">Technical Details / Limitations</h3>
-
-      <ul>
-        <li>Updates are sent every 30 seconds over broadcast, which can lead to congestion
+        <li>FileSystem
           <ul>
-            <li>Particularly bad if routers send at the same time, better if updates are staggered</li>
+            <li>This is where you can see the assets imported into the current project</li>
           </ul>
         </li>
-        <li>If a router goes down, we wait 180 seconds (3 minutes) for the update, it is then marked invalid (unreachable)
+        <li>Switch between 2D/3D/Code/Asset Library
           <ul>
-            <li>However, these entries are left in the table, and only removed at garbage collection (Flush) intervals, e.g. 120 or 240 seconds (2-4 minutes).</li>
+            <li>The 2D view is used for 2D games and UI</li>
+            <li>The 3D view for 3D games</li>
+            <li>Script for writing GDScript</li>
+            <li>AssetLib for downloading community creations</li>
           </ul>
         </li>
-        <li>Maximum hop count of 15 has rendered it impractical in the modern internet</li>
-        <li>Older versions do not support Variable Length Subnet Masks (VLSM), e.g. /23, /22, /19, only the older Class-based (Class A, Class B, Class C, etc.)</li>
+        <li>Center Stage - Drag around elements, or Code
+          <ul>
+            <li>This is where you arrange elements, or code</li>
+          </ul>
+        </li>
+        <li>Output, Debugger, Audio and Animation
+          <ul>
+            <li>When debugging code, you’ll see important stuff down here</li>
+            <li>Also useful when animating</li>
+          </ul>
+        </li>
+        <li>Play and Switch GL Mode
+          <ul>
+            <li>This is where you can demo your project or scene</li>
+          </ul>
+        </li>
+        <li>Inspector and Node
+          <ul>
+            <li>This is where you can set properties of the selected node</li>
+            <li>You can also attach and modify resources here</li>
+            <li>Additionally, you can attach signals in the <code class="language-plaintext highlighter-rouge">Node</code> menu</li>
+          </ul>
+        </li>
+      </ol>
+
+      <p>Once you switch into script mode, the codding interface replaces center stage:</p>
+
+      <p><img src="res/coding.png" alt="" /></p>
+
+      <h3 id="overview-and-help">Overview and Help</h3>
+
+      <ul>
+        <li>An overview of the Godot Engine</li>
       </ul>
 
-    </div></div></section>
-<section id="part2staticroutinginomnetinet"><button class="collapsible">Part 2: Static Routing in OMNeT++ / INET</button><div class="text-content"><div class="text-inner">
+      <p><a href="https://docs.godotengine.org/en/stable/index.html">The official godot docs</a></p>
 
-      <p>This section is based on the <a href="https://inet.omnetpp.org/docs/tutorials/rip/doc/index.html">OMNeT++ RIP Tutorial</a></p>
+      <h3 id="scenes-and-nodes">Scenes and Nodes</h3>
 
-      <p>Head to Part 1 <a href="https://inet.omnetpp.org/docs/tutorials/rip/doc/step1.html">here</a>, download <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> and the <code class="language-plaintext highlighter-rouge">RipNetworkA.ned</code></p>
+      <p>The fundamental building blocks of the Godot engine are Nodes</p>
       <ul>
-        <li>Start a new Omnet++ Project, <code class="language-plaintext highlighter-rouge">rip-tutorial</code></li>
-        <li>Reference in INET</li>
-        <li>Open the File Manager (PCManFM-Qt) and navigate to <code class="language-plaintext highlighter-rouge">~/workspace/rip-tutorial/src</code></li>
-        <li>Drag and drop the <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> and <code class="language-plaintext highlighter-rouge">RipNetworkA.ned</code> into your <code class="language-plaintext highlighter-rouge">src</code> folder.
+        <li>Equivalent to classes</li>
+        <li>The engine has many of these already created for you
           <ul>
-            <li>If it is not working, you could instead download the files right from the terminal…
+            <li>e.g. <code class="language-plaintext highlighter-rouge">Node2D</code> is a simple container which exists in 2D space
               <ul>
-                <li>open <code class="language-plaintext highlighter-rouge">QTerminal</code> from the Applications menu -&gt; System Tools</li>
-                <li>
-                  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/workspace/rip-tutorial/src
-</code></pre></div>                  </div>
+                <li><code class="language-plaintext highlighter-rouge">Node2D</code> has a number of properties you can set, either from the Inspector or Code, such as Position (Vector2D)</li>
+                <li>All 2D classes will be subclassed from Node2D, inheriting it’s properties and methods
+                  <ul>
+                    <li>A Sprite is a subclass of Node2D, meaning, it will inherit the position property, but will also have its own</li>
+                  </ul>
                 </li>
-                <li>
-                  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://inet.omnetpp.org/docs/_downloads/577859d0f9c9cfa45fcac193fae42e26/omnetpp.ini
-wget https://inet.omnetpp.org/docs/_downloads/6885266c9632f739e9242f9b68ef449c/RipNetworkA.ned
-</code></pre></div>                  </div>
+                <li><code class="language-plaintext highlighter-rouge">Node2D</code> has an array of <code class="language-plaintext highlighter-rouge">children</code> which are of type <code class="language-plaintext highlighter-rouge">Node2D</code>, allowing of any type
+                  <ul>
+                    <li>Because all nodes inherit from Node2D, all nodes support composition</li>
+                  </ul>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
-        <li>To see the newly added source files, in OMNeT++, right click on the <code class="language-plaintext highlighter-rouge">src</code> folder and click <code class="language-plaintext highlighter-rouge">Refresh</code></li>
-        <li>Update the the <code class="language-plaintext highlighter-rouge">RipNetworkA.ned</code> source to have the package name match the package in <code class="language-plaintext highlighter-rouge">package.ned</code>,
+        <li>
+          <p>Some nodes need resources to be created and attached to have complete functionality, such as Sprites or Materials</p>
+        </li>
+        <li>You can search for the predefined types by attempting to add one to the game tree
           <ul>
-            <li><code class="language-plaintext highlighter-rouge">package rip_tutorial;</code></li>
+            <li>You can read more about the types in docs</li>
           </ul>
         </li>
-        <li>Run the application by clicking on <code class="language-plaintext highlighter-rouge">omnetpp.ini</code>, then run
+        <li>You can subclass nodes to create your own nodes by adding a script
           <ul>
-            <li>Do not switch to release unless you built the release binaries in lab 3!</li>
+            <li>This allows you to extend the functionality through code</li>
+          </ul>
+        </li>
+        <li>Your custom node trees can be saved as a Scene (tscn) and re-used
+          <ul>
+            <li>This is similar to prototyping in other languages</li>
           </ul>
         </li>
       </ul>
 
-      <p>See the parameters in <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> in the <code class="language-plaintext highlighter-rouge">[Config Step1]</code> section</p>
+      <p>Example: A simple physics example</p>
+      <ul>
+        <li>Ensure you are in 2D mode</li>
+        <li>Add a root <code class="language-plaintext highlighter-rouge">Node2D</code> by selecting 2D scene</li>
+      </ul>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step1</span><span class="p">]</span>
-<span class="n">description</span> <span class="o">=</span> <span class="s">"Static routing"</span>
-<span class="n">network</span> <span class="o">=</span> <span class="n">RipNetworkA</span>
-
-<span class="c1"># do not add direct routes
-</span><span class="o">*</span><span class="p">.</span><span class="n">configurator</span><span class="p">.</span><span class="n">addDirectRoutes</span> <span class="o">=</span> <span class="n">false</span>
-
-<span class="c1"># Application parameters
-</span><span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">numApps</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"PingApp"</span>
-<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">destAddr</span> <span class="o">=</span> <span class="s">"host6"</span>
-
-<span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">arp</span><span class="p">.</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"GlobalArp"</span>
-
-<span class="c1"># Visualizer settings
-</span><span class="o">*</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">interfaceTableVisualizer</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">displayInterfaceTables</span> <span class="o">=</span> <span class="n">true</span>
-</code></pre></div>      </div>
-
-      <p>In this version, we are simply allowing the configurator to pre-compute static routes to each of the connected devices, which is significantly less painful than doing it ourselves, as we experienced in Lab 2 (Packet Tracer). We are also using the PingApp on host0, and attempting to ping host6.</p>
-
-      <p><img src="res/static-routing.png" alt="" /></p>
-
-      <p>Note that static routes are displayed only on the routers, not the switches. Why is this?</p>
-
-    </div></div></section>
-<section id="part3simplerip"><button class="collapsible">Part 3: Simple RIP</button><div class="text-content"><div class="text-inner">
-
-      <p>Let’s look at the first iteration of <a href="https://inet.omnetpp.org/docs/tutorials/rip/doc/step2.html">RIP</a></p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="p">[</span><span class="n">Config</span> <span class="n">Step2</span><span class="p">]</span>
-<span class="n">description</span> <span class="o">=</span> <span class="s">"Pinging after RIP convergence"</span>
-<span class="n">network</span> <span class="o">=</span> <span class="n">RipNetworkA</span>
-
-<span class="c1"># adding default routes in all hosts
-</span><span class="o">*</span><span class="p">.</span><span class="n">configurator</span><span class="p">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;config&gt; </span><span class="se">\
-</span><span class="s">                                &lt;interface hosts='**' address='10.x.x.x' netmask='255.x.x.x'/&gt; </span><span class="se">\
-</span><span class="s">                                &lt;autoroute sourceHosts='host*'/&gt; </span><span class="se">\
-</span><span class="s">                             &lt;/config&gt;"</span><span class="p">)</span>
-
-<span class="o">*</span><span class="p">.</span><span class="n">configurator</span><span class="p">.</span><span class="n">addStaticRoutes</span> <span class="o">=</span> <span class="n">true</span>
-
-<span class="c1"># RIP parameters on routers
-</span><span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">hasRip</span> <span class="o">=</span> <span class="n">true</span>
-<span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">startupTime</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="n">s</span><span class="p">)</span>
-<span class="c1"># disable advanced features for now!
-</span><span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">ripConfig</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;config&gt; </span><span class="se">\
-</span><span class="s">                                  &lt;interface hosts='router*' mode='NoSplitHorizon' /&gt; </span><span class="se">\
-</span><span class="s">                               &lt;/config&gt;"</span><span class="p">)</span>
-<span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">triggeredUpdate</span> <span class="o">=</span> <span class="n">false</span>
-
-<span class="c1"># Application parameters
-</span><span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">numApps</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"PingApp"</span>
-<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">destAddr</span> <span class="o">=</span> <span class="s">"host6"</span>
-<span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">startTime</span> <span class="o">=</span> <span class="mi">50</span><span class="n">s</span>
-
-<span class="c1"># turning on global ARP to focus on the RIP messages
-</span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">arp</span><span class="p">.</span><span class="n">typename</span> <span class="o">=</span> <span class="s">"GlobalArp"</span>
-
-<span class="c1"># Visualizer settings
-</span><span class="o">*</span><span class="p">.</span><span class="n">visualizer</span><span class="p">.</span><span class="n">interfaceTableVisualizer</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">displayInterfaceTables</span> <span class="o">=</span> <span class="n">true</span>
-</code></pre></div>      </div>
-      <p>We can see that Static Routes are configured via XML. Recall how this was done in Packet Tracer from the command line.</p>
-
-      <p>We also see RIP is configured via XML. In particular, we see <code class="language-plaintext highlighter-rouge">NoSplitHorizon</code> is set. This is an advanced feature of RIP. Without it, when a router receives new tables from an adjacent router, if these new tables cause an update in its own tables, it will echo that new route back to the node which caused the update. This can decrease network stability if a link goes down, and neither of the communicating routers knows has a route back to the router which went down. This is called the <em>count to infinity</em> problem.</p>
-
-      <p>When we demo this, we can see RIP updates propagating, and once a new path is found, arrows are drawn to visualize.</p>
-
-      <p><img src="res/RIP-request.png" alt="" /></p>
-
-      <p>You may see visualizations of function calls. These are the function calls which update RIP. If you want to not visualize them, right click on the canvas and go to <code class="language-plaintext highlighter-rouge">Animation Settings</code> -&gt; Uncheck <code class="language-plaintext highlighter-rouge">Animate method calls</code></p>
-
-    </div></div></section>
-<section id="part4linkbreakageandrecovery"><button class="collapsible">Part 4: Link Breakage and Recovery</button><div class="text-content"><div class="text-inner">
-
-      <p>In this section, we are going to see what happens when a link goes down. In particular, the connection to host6 will be severed at 50 seconds.</p>
-
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step3</span><span class="p">]</span>
-<span class="n">description</span> <span class="o">=</span> <span class="s">"Link breakage"</span>
-<span class="n">extends</span> <span class="o">=</span> <span class="n">Step2</span>
-
-<span class="c1"># Enable split horizon in order for the scenario to work properly
-</span><span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">ripConfig</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;config&gt; </span><span class="se">\
-</span><span class="s">                                  &lt;interface hosts='router*' mode='SplitHorizon' /&gt; </span><span class="se">\
-</span><span class="s">                               &lt;/config&gt;"</span><span class="p">)</span>
-<span class="c1"># Disable ping application
-</span><span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">numApps</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="o">*</span><span class="p">.</span><span class="n">scenarioManager</span><span class="p">.</span><span class="n">script</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;scenario&gt; </span><span class="se">\
-</span><span class="s">                                    &lt;disconnect t='50' src-module='router2' dest-module='switch2' /&gt; </span><span class="se">\
-</span><span class="s">                                &lt;/scenario&gt;"</span><span class="p">)</span>
-</code></pre></div>      </div>
-
-      <p>When we simulate this one, we see the link go down between the 30s and 60s updates:</p>
-
-      <p><img src="res/link-down.png" alt="" /></p>
-
-      <h3 id="link-recovery---3-scenarios">Link Recovery - 3 Scenarios</h3>
-
-      <p>Next we’ll look at three scenarios for the link coming back online,</p>
+      <p><img src="res/root-node.png" alt="" /></p>
 
       <ul>
-        <li>Before the link is invalidated</li>
-        <li>After the link is invalidated</li>
-        <li>After the link is flushed</li>
+        <li>Add a StaticBody2D</li>
       </ul>
 
-      <p>In these scenarios, we’ll instead break the connection between</p>
+      <p><img src="res/add-static-body.png" alt="" /></p>
 
-      <p>You will need to add the following to <code class="language-plaintext highlighter-rouge">src/scenario5.xml</code>, <code class="language-plaintext highlighter-rouge">src/scenario6.xml</code> and <code class="language-plaintext highlighter-rouge">src/scenario7.xml</code>, respectively</p>
+      <ul>
+        <li>Attach a Sprite to the StaticBody2D</li>
+      </ul>
 
-      <p>In <code class="language-plaintext highlighter-rouge">src/scenario5.xml</code>:</p>
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;scenario&gt;</span>
-    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"50"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;disconnect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/at&gt;</span>
-    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"150"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[0]"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[3]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"switch1"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[3]"</span> <span class="na">dest-module=</span><span class="s">"router2"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[0]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/at&gt;</span>
-<span class="nt">&lt;/scenario&gt;</span>
-</code></pre></div>      </div>
-      <p>In <code class="language-plaintext highlighter-rouge">src/scenario6.xml</code>:</p>
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- scenario6.xml --&gt;</span>
-<span class="nt">&lt;scenario&gt;</span>
-    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"50"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;disconnect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/at&gt;</span>
-    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"300"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[0]"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[3]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"switch1"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[3]"</span> <span class="na">dest-module=</span><span class="s">"router2"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[0]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/at&gt;</span>
-<span class="nt">&lt;/scenario&gt;</span>
-</code></pre></div>      </div>
-      <p>In <code class="language-plaintext highlighter-rouge">src/scenario7.xml</code>:</p>
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- scenario7.xml --&gt;</span>
-<span class="nt">&lt;scenario&gt;</span>
-    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"50"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;disconnect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/at&gt;</span>
-    <span class="nt">&lt;at</span> <span class="na">t=</span><span class="s">"602"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"router2"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[0]"</span> <span class="na">dest-module=</span><span class="s">"switch1"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[3]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;connect</span> <span class="na">src-module=</span><span class="s">"switch1"</span> <span class="na">src-gate=</span><span class="s">"ethg$o[3]"</span> <span class="na">dest-module=</span><span class="s">"router2"</span> <span class="na">dest-gate=</span><span class="s">"ethg$i[0]"</span> <span class="na">channel-type=</span><span class="s">"inet.node.ethernet.Eth10M"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/at&gt;</span>
-<span class="nt">&lt;/scenario&gt;</span>
+      <p><img src="res/add-sprite.png" alt="" /></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Some nodes need resources ro function properly. 
+- Load in a sprite resource, using the default PNG
+
+![](res/add-sprite-png.png)
 </code></pre></div>      </div>
 
-      <p>These scenarios are loaded in each of the 4X configs:</p>
+      <ul>
+        <li>
+          <p>Attach it a CollisionShape2D to the StaticBody2D</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step4A</span><span class="p">]</span>
-<span class="n">description</span> <span class="o">=</span> <span class="s">"RIP timers: Link comes back online before the timeout timer expires"</span>
-<span class="n">extends</span> <span class="o">=</span> <span class="n">Step2</span>
+          <p><img src="res/add-collision-shape.png" alt="" /></p>
 
-<span class="c1"># Enable split horizon in order for the scenario to work properly
-</span><span class="o">*</span><span class="p">.</span><span class="n">router</span><span class="o">*</span><span class="p">.</span><span class="n">rip</span><span class="p">.</span><span class="n">ripConfig</span> <span class="o">=</span> <span class="n">xml</span><span class="p">(</span><span class="s">"&lt;config&gt; </span><span class="se">\
-</span><span class="s">                                  &lt;interface hosts='router*' mode='SplitHorizon' /&gt; </span><span class="se">\
-</span><span class="s">                               &lt;/config&gt;"</span><span class="p">)</span>
-<span class="c1"># disable ping application
-</span><span class="o">*</span><span class="p">.</span><span class="n">host0</span><span class="p">.</span><span class="n">numApps</span> <span class="o">=</span> <span class="mi">0</span>
+          <ul>
+            <li>Give it a collision shape resource</li>
+            <li>This will be the boundaries for collisions</li>
+          </ul>
 
-<span class="c1"># Break the router2 &lt;--&gt; switch1 link at t=50 s. and reconnect at t=150 s.
-</span><span class="o">*</span><span class="p">.</span><span class="n">scenarioManager</span><span class="p">.</span><span class="n">script</span> <span class="o">=</span> <span class="n">xmldoc</span><span class="p">(</span><span class="s">"scenario5.xml"</span><span class="p">)</span>
+          <p><img src="res/shape-resource.png" alt="" /></p>
+
+          <ul>
+            <li>
+              <p>Resize the collision shape extents to match the sprite</p>
+
+              <p><img src="res/resize-collision.png" alt="" /></p>
+            </li>
+          </ul>
+        </li>
+        <li>Follow the same process with a RigidBody2D
+          <ul>
+            <li>Attach a Sprite
+              <ul>
+                <li>Load in a sprite resource, using the default PNG</li>
+              </ul>
+            </li>
+            <li>Attach it a CollisionShape2D
+              <ul>
+                <li>Give it a collision shape resource
+                  <ul>
+                    <li>Resize the collision shape extents to match the sprite</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Group together the StaticBody and it’s children so they move together
+          <ul>
+            <li>
+              <p>Do the same with the RigidBody</p>
+
+              <p><img src="res/group-together.png" alt="" /></p>
+            </li>
+          </ul>
+        </li>
+        <li>Move the RigidBody2D on top of the StaticBody2D
+          <ul>
+            <li>Play (Save scene as <code class="language-plaintext highlighter-rouge">demo.tscn</code>!)</li>
+            <li>
+              <p>You may wish to set it as the default scene too!</p>
+
+              <p><img src="res/preview.png" alt="" /></p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>If it is falling too slowly, you can increase the mass of the object in <code class="language-plaintext highlighter-rouge">Scene</code> -&gt; <code class="language-plaintext highlighter-rouge">RigidBody2D</code> -&gt; <code class="language-plaintext highlighter-rouge">Inspector</code> -&gt; <code class="language-plaintext highlighter-rouge">RigidBody2D</code> -&gt; <code class="language-plaintext highlighter-rouge">Gravity Scale</code>. Maybe 3 or 4 is okay?</p>
+        </li>
+        <li>Duplicate a few of the RigidBody2Ds and move them around and rotate
+          <ul>
+            <li>Ctrl D, and use these tools for positioning</li>
+          </ul>
+        </li>
+        <li>Make the static body bigger to catch them
+          <ul>
+            <li>
+              <p>Play again! Neat</p>
+
+              <p><img src="res/rearranged.png" alt="" /></p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/scenes_and_nodes.html">Getting started with nodes</a></p>
+
+      <h3 id="gd-script">GD Script</h3>
+
+      <p>The default scripting language used in Godot is GDScript.</p>
+      <ul>
+        <li>The syntax of this language is very similar to python</li>
+        <li>Let’s use code to “jump” one of our RigidBodies when “Space” is pressed.</li>
+      </ul>
+
+      <p>First attach a script to the RigidBody</p>
+
+      <p><img src="res/attach-script.png" alt="" /></p>
+
+      <p>Attached scripts are akin to classes, so we should give it an appropriate name:</p>
+
+      <p><img src="res/jumping-box.png" alt="" /></p>
+
+      <p>This is GDSCript. It is similar to Python.</p>
+
+      <p>Note that our class extends RigidBody2D. This is because we attached it to a RigidBody2D. Through inheritance, we can use any of the properties and methods available in that class.</p>
+
+      <p>The two main entry points are the _ready, and _process functions, which are automatically invoked by the engine when the object is created (<code class="language-plaintext highlighter-rouge">_ready</code>) and every frame the object lives (<code class="language-plaintext highlighter-rouge">_process(delta)</code>). We are going to add another function called <code class="language-plaintext highlighter-rouge">_physics_process(delta)</code>. This is similar to process, but is called each time the physics engine updates.</p>
+
+      <p>To see which parts of the RigidBody we can access, <a href="https://docs.godotengine.org/en/stable/classes/class_rigidbody2d.html">check out the docs</a></p>
+
+      <p>We’ll directly apply a</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extends</span> <span class="n">RigidBody2D</span>
+
+<span class="n">func</span> <span class="n">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_just_pressed</span><span class="p">(</span><span class="s">"ui_accept"</span><span class="p">):</span>
+		<span class="n">linear_velocity</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">)</span>
 </code></pre></div>      </div>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step4B</span><span class="p">]</span>
-<span class="n">description</span> <span class="o">=</span> <span class="s">"RIP timers: Link comes back online before the garbage-collection timer expires"</span>
-<span class="n">extends</span> <span class="o">=</span> <span class="n">Step2</span>
-<span class="c1"># (garbage-collection timer is also called hold-down timer)
-</span>
-<span class="c1"># Break the router2 &lt;--&gt; switch1 link at t=50 s. and reconnect at t=300 s.
-</span><span class="o">*</span><span class="p">.</span><span class="n">scenarioManager</span><span class="p">.</span><span class="n">script</span> <span class="o">=</span> <span class="n">xmldoc</span><span class="p">(</span><span class="s">"scenario6.xml"</span><span class="p">)</span>
+      <p>Note, these controller buttons can be customized from <code class="language-plaintext highlighter-rouge">Project</code> -&gt; <code class="language-plaintext highlighter-rouge">Project Settings</code> -&gt; <code class="language-plaintext highlighter-rouge">Input Map</code>
+Also note that Vector2’s are coordinate pairs corresponding to x,y pairs, where the origin is in the top left of the screen.</p>
+
+      <p><a href="https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html">GDScript Basics</a></p>
+
+      <h3 id="signals">Signals</h3>
+
+      <p>In Godot, Signals implement the observer pattern</p>
+
+      <ul>
+        <li>You can find signals attached to certain objects, which are observable states</li>
+        <li>You can wire them up to scripts so that, when that signal is called, you can handle that event</li>
+        <li>This is also similar to event systems with callback
+          <ul>
+            <li>These are found in <code class="language-plaintext highlighter-rouge">Node Pane</code> -&gt; <code class="language-plaintext highlighter-rouge">Signals</code></li>
+            <li>Let’s wire the <code class="language-plaintext highlighter-rouge">body_entered</code> signal on the RigidBody2D to itself:</li>
+          </ul>
+        </li>
+        <li>Let’s use a signal to detect when the RigidBody collides with the floor, and when it does, bounce it back up:</li>
+      </ul>
+
+      <p><img src="res/wiring-signal.png" alt="" /></p>
+
+      <p>Let’s add some code too:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">_on_RigidBody2D4_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">body</span> <span class="ow">is</span> <span class="n">StaticBody2D</span><span class="p">:</span>
+		<span class="n">apply_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">))</span>
 </code></pre></div>      </div>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Config</span> <span class="n">Step4C</span><span class="p">]</span>
-<span class="n">description</span> <span class="o">=</span> <span class="s">"RIP timers: Link comes back online after the garbage-collection timer expires"</span>
-<span class="n">extends</span> <span class="o">=</span> <span class="n">Step2</span>
+      <p>Finally, we need to configure the RigidBody2D to report collisions, since it does not by default:</p>
 
-<span class="c1"># Break the router2 &lt;--&gt; switch1 link at t=50 s. and reconnect at t=400 s.
-</span><span class="o">*</span><span class="p">.</span><span class="n">scenarioManager</span><span class="p">.</span><span class="n">script</span> <span class="o">=</span> <span class="n">xmldoc</span><span class="p">(</span><span class="s">"scenario7.xml"</span><span class="p">)</span>
+      <p><img src="res/contacts-report.png" alt="" /></p>
+
+      <p><a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html">Signals</a></p>
+
+      <h3 id="custom-scenes">Custom Scenes</h3>
+
+      <p>We’ve done a lot of configuration work on the RigidBody2D. We should break it into it’s own scene for reuse:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">Right Click</code> -&gt; <code class="language-plaintext highlighter-rouge">Save Branch as Scene</code></p>
+      <ul>
+        <li>Save it as <code class="language-plaintext highlighter-rouge">JumpingBox.tscn</code></li>
+        <li>Remove the other instances of RigidBody2Ds, and replace them with JumpingBoxes</li>
+      </ul>
+
+      <p>With the combination of the scene and the script, this now acts as a self-contained class!</p>
+
+      <p><img src="res/adding-custom-scenes.png" alt="" /></p>
+
+      <p>Cool, now all of our boxes are jumping!</p>
+
+      <h3 id="groups">Groups</h3>
+
+      <p>What if we had several different static bodies, and we wanted to bounce on them all?
+We could put them in a group to easily find them:</p>
+
+      <p><img src="res/add-to-group.png" alt="" /></p>
+
+      <p>Now we can modify our code to only work for the group.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">_on_RigidBody2D4_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+	<span class="n">var</span> <span class="n">floors</span> <span class="o">=</span> <span class="n">get_tree</span><span class="p">().</span><span class="n">get_nodes_in_group</span><span class="p">(</span><span class="s">"floors"</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">floors</span><span class="p">:</span>
+		<span class="n">apply_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">))</span>
 </code></pre></div>      </div>
 
-      <p>There are still some additional features of RIP that are worth investigating, such as triggered updates (when a device receives an update from a neighbor, which causes it to update its routes, it immediately sends those updates out to its neighbors, so that they can stay up to date. However, this has problems too, such as the count to infinity problem, addressed with Split Horizon or Split Horizon with Poisoning. For now we will keep it simple and stick to this phase for the assignment.</p>
+      <p>This would be useful if we had other StaticBodies, for example, walls</p>
+
+      <p><a href="https://docs.godotengine.org/en/latest/tutorials/scripting/groups.html">Groups</a></p>
+
+      <h3 id="autoloads">AutoLoads</h3>
+
+      <p><code class="language-plaintext highlighter-rouge">AutoLoads</code> are scripts which are loaded at the time the game is instantiated. There is thus one globally accessible reference. This is an implementation of the Singleton design pattern.</p>
+
+      <p>We can access the AutoLoads from the menu <code class="language-plaintext highlighter-rouge">Project</code> -&gt; <code class="language-plaintext highlighter-rouge">Project Settings</code> -&gt; <code class="language-plaintext highlighter-rouge">AutoLoad</code></p>
+
+      <p>Let’s create an AutoLoad script for spawning blocks at regular intervals:</p>
+
+      <p>Create a new GDScript <code class="language-plaintext highlighter-rouge">Spawner.gd</code>, and add in:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extends</span> <span class="n">Node</span>
+
+<span class="n">var</span> <span class="n">timer</span>
+<span class="n">var</span> <span class="n">spawn_interval</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">var</span> <span class="n">jumping_box_scene</span> <span class="o">=</span> <span class="n">preload</span><span class="p">(</span><span class="s">"res://JumpingBox.tscn"</span><span class="p">)</span>
+
+<span class="n">func</span> <span class="n">_ready</span><span class="p">():</span>
+	<span class="n">timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">.</span><span class="n">new</span><span class="p">()</span>
+	<span class="n">timer</span><span class="p">.</span><span class="n">set_wait_time</span><span class="p">(</span><span class="n">spawn_interval</span><span class="p">)</span>
+	<span class="n">timer</span><span class="p">.</span><span class="n">set_one_shot</span><span class="p">(</span><span class="n">false</span><span class="p">)</span>
+	<span class="n">timer</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"timeout"</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="s">"_on_timer_timeout"</span><span class="p">)</span>
+	<span class="n">timer</span><span class="p">.</span><span class="n">set_autostart</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
+	<span class="n">add_child</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span>
+
+<span class="n">func</span> <span class="n">_on_timer_timeout</span><span class="p">():</span>
+	<span class="n">var</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">)</span>
+	<span class="n">var</span> <span class="n">x</span> <span class="o">=</span> <span class="n">rand_range</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
+	<span class="n">var</span> <span class="n">new_block</span> <span class="o">=</span> <span class="n">jumping_box_scene</span><span class="p">.</span><span class="n">instance</span><span class="p">()</span>
+	<span class="n">new_block</span><span class="p">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+	<span class="n">get_tree</span><span class="p">().</span><span class="n">get_root</span><span class="p">().</span><span class="n">add_child</span><span class="p">(</span><span class="n">new_block</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>And attach the script like</p>
+
+      <p><img src="res/add-autoload.png" alt="" /></p>
+
+      <p>You could stop the time from any script like:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var Spawner = get_node("/root/Spawner")
+Spawner.timer.stop()
+</code></pre></div>      </div>
+
+      <p>Of if you prefer, you can add PlayerVariables directly to the local namespace by <code class="language-plaintext highlighter-rouge">Enabling</code> the singleton.</p>
+
+      <p><a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html">Singletons (AutoLoad)</a></p>
+
+    </div></div></section>
+<section id="part2thegameofflinephase1"><button class="collapsible">Part 2: The Game Offline (Phase 1)...</button><div class="text-content"><div class="text-inner">
+
+      <p>The Game we are going to add network multiplayer to is as follows:</p>
+
+      <p>Goal: 
+    - Stomp on other players to gain a point
+      - When you stomp on a player they respawn
+    - If you fall off the stage you lose a point</p>
+
+      <p>Controls:
+    - Arrow Keys or WASD to move
+    - Jump (Up when on the ground)
+    - Ground Pound (Down when in air)
+    - Air Dash (Double tap right or left when in air)
+    - Drop though floors (Double tap down when on a drop-through floor)
+    - Wall Jumps (Up while pressing into a wall)</p>
+
+      <p>Find the starter code on URCourses…</p>
+      <ul>
+        <li>Note that it is in 3 phases, before multiplayer, with Lobby support but no extras, and with completed.</li>
+      </ul>
+
+      <p>A brief walk through the classes:</p>
+
+      <p>GameLogic (<code class="language-plaintext highlighter-rouge">GameLogic.gd</code>)</p>
+      <ul>
+        <li>Instantiates players in the <code class="language-plaintext highlighter-rouge">_ready</code> function</li>
+        <li>Handles scoring</li>
+        <li>Awards points</li>
+      </ul>
+
+      <p>Spawner (<code class="language-plaintext highlighter-rouge">Spawner.gd</code>, <code class="language-plaintext highlighter-rouge">Spawner.tscn</code>)</p>
+      <ul>
+        <li>Locations in the game where players will score</li>
+        <li>Spawners have a cool-down which prevents respawning a player in an area too quickly</li>
+        <li>Additionally, spawners all added to the group <code class="language-plaintext highlighter-rouge">spawners</code>.</li>
+      </ul>
+
+      <p>Player (<code class="language-plaintext highlighter-rouge">Player.gd</code>, <code class="language-plaintext highlighter-rouge">Player.tscn</code>)</p>
+      <ul>
+        <li>A monster class</li>
+        <li>Handles player movement</li>
+        <li>Also handles respawning players</li>
+        <li>Also handles score</li>
+      </ul>
+
+      <p>OneWayWall (<code class="language-plaintext highlighter-rouge">OneWalWall.gd</code>, <code class="language-plaintext highlighter-rouge">OneWayWall.tscn</code>)</p>
+
+      <ul>
+        <li>Identifies walls which the player can drop through</li>
+      </ul>
+
+      <p>BattleField (<code class="language-plaintext highlighter-rouge">BattleField.tscn</code>)</p>
+
+      <ul>
+        <li>The default arena for the game, composed of other objects</li>
+      </ul>
+
+      <p>Based on this, what do you believe you would need to send over the network to make this game run?</p>
+
+    </div></div></section>
+<section id="part3lowlevelmultiplayer"><button class="collapsible">Part 3: Low-Level Multiplayer</button><div class="text-content"><div class="text-inner">
+
+      <p>Godot supports low-level multiplayer</p>
+      <ul>
+        <li>This basically allows one to establish a connection over TCP
+          <ul>
+            <li>And then send packets</li>
+          </ul>
+        </li>
+        <li>You can also send packets over UDP</li>
+        <li>These are raw data - you can send whatever you want
+          <ul>
+            <li>That means the server listening on the other end can be in any language, e.g. Python</li>
+            <li>The server can perform error checking, and ensure no data tampering has occurred</li>
+          </ul>
+        </li>
+        <li>
+          <p>However this is much harder that what we’ll work with</p>
+        </li>
+        <li>Recall in last lab’s Ethernet-TicToc we saw how TCP had a significant amount of overhead when a connection was first established. This is unnecessarily slow for games
+          <ul>
+            <li>Also, recall how UDP packets were faster, but delivery was not guaranteed.
+              <ul>
+                <li>This too can be not great for games</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Instead, we need something a hybrid - we need the speed of UDP and the reliability of TCP
+          <ul>
+            <li>Developers would typically code their own protocol, on top of UDP, for guaranteeing delivery, e.g. with custom ACKs.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>For this course, we will instead look at the high level multiplayer, which is such a system built into the Godot engine.</p>
+
+    </div></div></section>
+<section id="part4highlevelmultiplayer"><button class="collapsible">Part 4: High-Level Multiplayer</button><div class="text-content"><div class="text-inner">
+
+      <p>High level multiplayer concepts</p>
+
+      <h3 id="lets-all-go-to-the-lobby-phase-2">(Let’s all go to) The Lobby (Phase 2)</h3>
+
+      <p>The first part of most multiplayer games is a lobby where we manage connections</p>
+      <ul>
+        <li>If you are a client, you need to specify which IP to connect to</li>
+        <li>Recall <code class="language-plaintext highlighter-rouge">127.0.0.1</code> is the loopback address, also known as localhost, meaning connect to the local device</li>
+      </ul>
+
+      <p>My lobby has been borrowed from the <a href="https://godotengine.org/asset-library/asset/139">Bomberman-style Multiplayer Example</a></p>
+
+      <ul>
+        <li>Modifications from Phase 1:
+          <ul>
+            <li>Added <code class="language-plaintext highlighter-rouge">lobby.gd</code>
+              <ul>
+                <li>This make heavy use of UI and signals</li>
+              </ul>
+            </li>
+            <li>Added <code class="language-plaintext highlighter-rouge">lobby.tscn</code></li>
+            <li>Added <code class="language-plaintext highlighter-rouge">gamestate.gd</code> (AutoLoad)
+              <ul>
+                <li>Migrated all of the spawning code from <code class="language-plaintext highlighter-rouge">GameLogic.gd</code> into <code class="language-plaintext highlighter-rouge">gamestate.gd</code></li>
+              </ul>
+            </li>
+            <li>Change <code class="language-plaintext highlighter-rouge">lobby.tscn</code> to the main scene to load
+              <ul>
+                <li>This is done in <code class="language-plaintext highlighter-rouge">Project</code> -&gt; <code class="language-plaintext highlighter-rouge">Project Settings</code> -&gt; <code class="language-plaintext highlighter-rouge">General</code> -&gt; <code class="language-plaintext highlighter-rouge">Application</code> -&gt; <code class="language-plaintext highlighter-rouge">Run</code> -&gt; <code class="language-plaintext highlighter-rouge">Main Scene</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>You can open two instances of godot and open two instances of the project, run them each, and have them to connect with each other. You will get warnings if you modify anything while both are open though.</p>
+
+      <p>Important - when players are created, they are given unique network id’s in the <code class="language-plaintext highlighter-rouge">gamestate.gd</code></p>
+      <ul>
+        <li>It might be worth looking at <code class="language-plaintext highlighter-rouge">gamestate</code> -&gt; <code class="language-plaintext highlighter-rouge">pre_start_game</code> where players are instantiated and added to the tree.</li>
+        <li>In particular, the Host always gets <code class="language-plaintext highlighter-rouge">p_id = 1</code>. Every other player gets a large random int.</li>
+      </ul>
+
+      <p>Right now we have two unique instances of the game which have the ability to to communicate between them, but they are not sharing all of the data needed to synchronize gameplay. We need to figure out how to make that communication such that each instance can only control their player, and the game state gets updated appropriately.</p>
+
+      <h3 id="design-for-network-application">Design for Network Application</h3>
+
+      <p><a href="https://docs.godotengine.org/en/stable/tutorials/networking/high_level_multiplayer.html">Godot High Level Multiplayer</a></p>
+
+      <p>The purpose of our application is to have the Game State synchronized between the players</p>
+      <ul>
+        <li>Most importantly is the score, as this determines the winner</li>
+        <li>But also, in order for players to see where the other players are, and dodge them, their position needs to be updated too
+          <ul>
+            <li>What happens if we only sync position?</li>
+            <li>What happens if we synchronize both position and velocity?
+              <ul>
+                <li>This leads to an important concept - <code class="language-plaintext highlighter-rouge">prediction</code>
+                  <ul>
+                    <li>If we are given gaps in information, can we fill in the bits we don’t know with the physics engine?</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Finally, how should we handle movement?</p>
+        </li>
+        <li>What should each player be in charge of?
+          <ul>
+            <li>Players should be in charge of their movement.
+              <ul>
+                <li>I am the one true source of knowledge on my location
+                  <ul>
+                    <li>Everyone else is just observing</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Players could also be in charge of when they are defeated
+              <ul>
+                <li>This leads to another important concept - security and tampering - what if this were disabled.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Together these considerations point to three important concepts to consider are: performance, reliability and security.</p>
+
+      <h3 id="technical-implementation-details-in-godot">Technical implementation details in Godot:</h3>
+
+      <p>In our app, <code class="language-plaintext highlighter-rouge">Lobby</code> runs first and manages connections
+Next, gamestate creates the <code class="language-plaintext highlighter-rouge">Player</code> class, one per connected peer per game</p>
+      <ul>
+        <li>So if two players are playing, each player game has two copies of the Player class
+          <ul>
+            <li>Four total Player classes across two games!</li>
+          </ul>
+        </li>
+        <li>GameA is in control of PlayerA, GameB is in control of PlayerB
+          <ul>
+            <li>The copy of PlayerB in GameA is just a puppet, observing the state of PlayerB in GameB</li>
+            <li>Ditto for PlayerA in GameB</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><code class="language-plaintext highlighter-rouge">rpc</code> functions are Remote Procedure Calls. They call a function on other devices, assuming those devices have permission.</p>
+      <ul>
+        <li>Permission are given by keywords before the function:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">remote</code> - the function is only called from a remote peer</li>
+            <li><code class="language-plaintext highlighter-rouge">remotesync</code> - the function is called remotely and locally</li>
+            <li><code class="language-plaintext highlighter-rouge">master</code> - a delegated network master has the ability to call this function</li>
+            <li><code class="language-plaintext highlighter-rouge">puppet</code> - non-network masters will instead use this function</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">rpc</code>s have reliable and unreliable variants</li>
+      </ul>
+
+      <p><code class="language-plaintext highlighter-rouge">rset</code> is how to remotely synchronize a variable</p>
+      <ul>
+        <li>as with <code class="language-plaintext highlighter-rouge">rpc</code>, there are reliable and unreliable versions</li>
+        <li><code class="language-plaintext highlighter-rouge">master</code> / <code class="language-plaintext highlighter-rouge">puppet</code> make sense in this context, for example, as a player you are the <code class="language-plaintext highlighter-rouge">master</code> of your location. The copy of your player appearing in everyone else’s game is merely a <code class="language-plaintext highlighter-rouge">puppet</code>.</li>
+      </ul>
+
+    </div></div></section>
+<section id="part5peertopeerapplication"><button class="collapsible">Part 5:Peer-to-peer Application</button><div class="text-content"><div class="text-inner">
+
+      <p>To add network functionality to our application, we must make the following changes:</p>
+
+      <ol>
+        <li>Modify <code class="language-plaintext highlighter-rouge">is_controllable</code> bool to <code class="language-plaintext highlighter-rouge">is_network_master()</code>
+          <ul>
+            <li>You need to also remove setting controllable from in <code class="language-plaintext highlighter-rouge">gamestate.gd</code></li>
+          </ul>
+        </li>
+        <li>Modify position to be a synchronized variable
+          <ul>
+            <li>In particular, you will want to create a puppet position and puppet velocity in addition to the true ones</li>
+            <li>And update them using the <code class="language-plaintext highlighter-rouge">rset</code> or <code class="language-plaintext highlighter-rouge">rset_unreliable</code> functions</li>
+          </ul>
+        </li>
+        <li>
+          <p>Instead, we could modify both position and velocity. What are the benefits to this approach?</p>
+        </li>
+        <li>Ensure that award_point is a synchronized function
+          <ul>
+            <li>This ensures that it gets called on all clients</li>
+          </ul>
+        </li>
+        <li>In the go_to_timeout() function, ensure that it only runs if you are the network master
+          <ul>
+            <li>All others will simply do nothing.</li>
+            <li>Position will thus be handled by it being a synchronized variable</li>
+            <li>We should also make sure the score decrements as an RPC!</li>
+          </ul>
+        </li>
+      </ol>
+
+      <p>The stage three code, included has this functionality implemented. I also did some other things to make your life easier with the assignment that were not originally covered in stage 2, such as allowing any player to start the game rather than just the host.</p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
+      <p>There are two parts to this lab assignment.</p>
+
+      <p>In part 1, you are to modify the game so that, rather than being implemented as peer-to-peer application, it is instead a dedicated client-server architecture</p>
       <ul>
-        <li>Your goal is to create sequence charts to visualize the network behavior in terms of packets location at the destination in each of the three scenarios described in the previous section</li>
-        <li>Perform the following tasks:
+        <li>This means that the server could be deployed to the cloud and run without any human interaction</li>
+        <li>In other words, the server, aka the hosts, does not have a character in the game.
           <ul>
-            <li>Replace the Application on host0 with the UDPBasicApp</li>
-            <li>Replace the application on host6 with the UDPEchoApp</li>
-            <li>Configure the application to send packets approximately every 15 seconds, starting at t=5 seconds, from host0 to host6</li>
+            <li>Instead it merely acts as an intermediary between the clients.</li>
           </ul>
         </li>
-        <li>Run the simulation for 12 minutes simulated time.
+        <li>Maintain all other aspects of functionality - do not change any data structures.
           <ul>
-            <li>Track the locations of the packets over time in a sequence graph
-              <ul>
-                <li>Review lab 3 for more information if you are stuck</li>
-                <li>Reminder - you need to turn on event logging</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li>In a 1-2 page report, add your graphs, and make some comments on what is happening in the system at each of the times of the drops.
-          <ul>
-            <li>In particular, comment on when paths are changing and why</li>
-            <li>Comment also on when the network is down</li>
-            <li>You may wish to zoom in on graphs at different times to highlight particular behaviour</li>
-            <li>Important: Do not include your entire graphs! Just take snippets of important areas: when things change!</li>
+            <li>It should work with clients from Phase 3 with minimal changes (simple not spawning a player with network id 1)</li>
           </ul>
         </li>
       </ul>
 
-      <p>Hints: 
-When setting up your apps, look at the inheritance of the scenarios in <code class="language-plaintext highlighter-rouge">omnetpp.ini</code> and ensure your apps are getting run!</p>
+      <p>Procedure:
+    - Make two copies of the code from Phase 3
+      - Even if you followed along with the network examples, please start from the Phase 3 provided
+        - I added some extra stuff to reduce some headaches
+    - Rename one into <code class="language-plaintext highlighter-rouge">client</code>
+    - Rename the other into <code class="language-plaintext highlighter-rouge">server</code>
+    - Modify the client and server code such that there is no player assigned to the host.
+      - The host should automatically be in the waiting for players mode when no game is playing, and return there when a game ends
+        - You may wish to see how the <code class="language-plaintext highlighter-rouge">lobby</code> works, and skip the first screen
+      - Thus, no interactivity should be required by the server.
+        - However, the client will still show the game in progress visually
+      - The client should no longer be able to host
+    - Don’t overthink this - there changes are on the order of 10 lines of code!</p>
+
+      <p>In part 2, make a third version of code called <code class="language-plaintext highlighter-rouge">cheat-client</code>, which is a version of the client which cheats in some way.</p>
       <ul>
-        <li>Are they being inherited by the inheriting scenario?</li>
-        <li>Are they getting turned off in in the inheriting state?</li>
+        <li>The cheats should work with the server logic, i.e. not cause a crash</li>
+        <li>As we are not validating legal data, these should go undetected by the server, and give some advantage in the game.</li>
       </ul>
 
-      <p>Use the event log filters to only show important nodes, as well as only the messages you care about! 
-<code class="language-plaintext highlighter-rouge">Module Filter -&gt; by name -&gt; host* / router* -&gt; Eth* -&gt; mac</code>
-<code class="language-plaintext highlighter-rouge">Message Filter -&gt; by name -&gt; UdpBasicAppData*</code>
-<img src="filter-example.png" alt="" /></p>
+      <p>For marking this lab, we will do a live demo next week. You will meet me in a breakout room, connect to my server, and use your modified client to demonstrate your changes.</p>
 
-      <p>Chart Example: Sending packets before RIP completes:
-<img src="Example.png" alt="" /></p>
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
 
-      <h3 id="references">References</h3>
+      <p>J. Linietsky, A. Manzur, Godot Community, <a href="https://docs.godotengine.org/en/stable/index.html">The Godot Docs!</a>, [Online]</p>
 
-      <p>L. Peterson and B. Davie, <a href="https://book.systemsapproach.org/internetworking/routing.html#distance-vector-rip">3.4 Routing</a>, Computer Networks: A Systems Approach, 2019. [<a href="https://book.systemsapproach.org/">Online</a>]</p>
-
-      <p>OMNeT++ / Inet. <a href="https://inet.omnetpp.org/docs/tutorials/rip/doc/index.html">RIP Routing Tutorial</a>, INET Framework. [Online].</p>
+      <p>BornCG, <a href="https://www.youtube.com/watch?v=HvPTSZl2WCc">Let’s Build a 2D Platformer!: Part 1</a>. YouTube.com. Apr 6 2020. [Online]</p>
     </div></div></section>
 
     </main>
