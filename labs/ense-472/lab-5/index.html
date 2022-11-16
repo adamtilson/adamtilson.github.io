@@ -794,11 +794,11 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
       </ol>
 
       <p>On line 26:</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var is_master            = false
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span> <span class="n">is_master</span>            <span class="o">=</span> <span class="n">false</span>
 </code></pre></div>      </div>
 
       <p>On line 32, inside the _ready function:</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	is_master = is_network_master()
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">is_master</span> <span class="o">=</span> <span class="n">is_network_master</span><span class="p">()</span>
 </code></pre></div>      </div>
 
       <ol>
@@ -812,18 +812,18 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
 
       <p>In the class variables, at the top:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>puppet var puppet_position = Vector2()
-puppet var puppet_velocity = Vector2()
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">puppet</span> <span class="n">var</span> <span class="n">puppet_position</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">()</span>
+<span class="n">puppet</span> <span class="n">var</span> <span class="n">puppet_velocity</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">()</span>
 </code></pre></div>      </div>
 
       <p>And, when controlling the player, update these variables and add an <code class="language-plaintext highlighter-rouge">else</code> case to the player movement, on line 80:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		rset_unreliable("puppet_position", position)
-		rset_unreliable("puppet_velocity", velocity)
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		<span class="n">rset_unreliable</span><span class="p">(</span><span class="s">"puppet_position"</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+		<span class="n">rset_unreliable</span><span class="p">(</span><span class="s">"puppet_velocity"</span><span class="p">,</span> <span class="n">velocity</span><span class="p">)</span>
 	
-	else:
-		position = puppet_position
-		velocity = puppet_velocity
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">position</span> <span class="o">=</span> <span class="n">puppet_position</span>
+		<span class="n">velocity</span> <span class="o">=</span> <span class="n">puppet_velocity</span>
 </code></pre></div>      </div>
 
       <p>What would happen if we only tracked <code class="language-plaintext highlighter-rouge">position</code> instead of both <code class="language-plaintext highlighter-rouge">position</code> and <code class="language-plaintext highlighter-rouge">velocity</code>?</p>
@@ -838,22 +838,22 @@ puppet var puppet_velocity = Vector2()
 
       <p>change the function from:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func award_point (winner, loser):
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">award_point</span> <span class="p">(</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">):</span>
 </code></pre></div>      </div>
 
       <p>to</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>remotesync func award_point (winner, loser):
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">remotesync</span> <span class="n">func</span> <span class="n">award_point</span> <span class="p">(</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">):</span>
 </code></pre></div>      </div>
 
       <p>And make sure it is called correctly, around line 198, update the following call:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			award_point(body.name, self.name)
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			<span class="n">award_point</span><span class="p">(</span><span class="n">body</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>to</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			rpc("award_point", body.name, self.name)
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			<span class="n">rpc</span><span class="p">(</span><span class="s">"award_point"</span><span class="p">,</span> <span class="n">body</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <ol>
