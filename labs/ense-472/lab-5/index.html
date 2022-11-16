@@ -430,7 +430,7 @@ Also note that Vector2’s are coordinate pairs corresponding to x,y pairs, wher
 
       <p>Let’s add some code too:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># make sure the name matches what the node wiring did!
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># make sure the name matches the name generated when connecting the signal!
 </span><span class="n">func</span> <span class="n">_on_RigidBody2D4_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">body</span> <span class="ow">is</span> <span class="n">StaticBody2D</span><span class="p">:</span>
 		<span class="n">apply_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">))</span>
@@ -653,12 +653,15 @@ Spawner.timer.stop()
             <li>Added <code class="language-plaintext highlighter-rouge">lobby.gd</code>
               <ul>
                 <li>This make heavy use of UI and signals</li>
+                <li>In particular, the <code class="language-plaintext highlighter-rouge">$</code> is a shortcut to find nodes</li>
+                <li>e.g. <code class="language-plaintext highlighter-rouge">$Connect.hide()</code> is finding the part of the UI named connect, and hiding it.</li>
               </ul>
             </li>
             <li>Added <code class="language-plaintext highlighter-rouge">lobby.tscn</code></li>
             <li>Added <code class="language-plaintext highlighter-rouge">gamestate.gd</code> (AutoLoad)
               <ul>
                 <li>Migrated all of the spawning code from <code class="language-plaintext highlighter-rouge">GameLogic.gd</code> into <code class="language-plaintext highlighter-rouge">gamestate.gd</code></li>
+                <li>This was to stay consistent with the Tutorial</li>
               </ul>
             </li>
             <li>Change <code class="language-plaintext highlighter-rouge">lobby.tscn</code> to the main scene to load
@@ -920,6 +923,18 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
         </li>
         <li>Don’t overthink this - the changes are on the order of 10 lines of code!</li>
       </ul>
+
+      <p>Server (right) is waiting for the clients to join (left):
+<img src="res/server-waiting.png" alt="" /></p>
+
+      <p>Players join and server awaiting start:
+<img src="res/server-await-start.png" alt="" /></p>
+
+      <p>Server (right) displays the game world, but does not have a player in the game:
+<img src="res/server-observes.png" alt="" /></p>
+
+      <p>When a player disconnects, the server returns to waiting for new players. Other players are kicked out too:
+<img src="res/back-to-waiting.png" alt="" /></p>
 
       <p>In part 2, make a third version of the project called <code class="language-plaintext highlighter-rouge">cheat-client</code>, which is a version of the client which cheats in some way.</p>
       <ul>
