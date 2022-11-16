@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> ENSE 472 Lab 4 </title>
+  <title> ENSE 472 Lab 5 </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
   <link rel="stylesheet" href="/assets/css/style.css?v=">
   <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
@@ -125,7 +125,15 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>The purpose of this lab is to see how to code a the network interactivity for an application. In particular, we will create a multiplayer game using the Godot Game Engine, a MIT-licensed, cross-platform free and open-source game engine great for rapid prototyping due to user friendly features such as the python-like GDScript, built in patterns and features such as singletons (AutoLoads), observers (signals), groups and a high-level network interface. We will examine a simple battle game ready for multiplayer integration.</p>
+      <p>The purpose of this lab is to see how to code a the network interactivity for an application. This will introduce important concepts in network application such as:</p>
+      <ul>
+        <li>Network application architectures, such as peer-to-peer and client/server</li>
+        <li>Remote procedure calls</li>
+        <li>Reliable vs. unreliable data transmission, and the pros and cons of each</li>
+        <li>And sending unexpected data</li>
+      </ul>
+
+      <p>In particular, we will create a multiplayer game using the Godot Game Engine, a MIT-licensed, cross-platform free and open-source game engine great for rapid prototyping due to user friendly features such as the python-like GDScript, built in patterns and features such as singletons (AutoLoads), observers (signals), groups and a high-level network interface. We will look at a simple 2D battle game ready for multiplayer integration.</p>
 
     </div></div></section>
 <section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
@@ -135,14 +143,14 @@
     </div></div></section>
 <section id="part1godotoverview"><button class="collapsible">Part 1: Godot Overview</button><div class="text-content"><div class="text-inner">
 
-      <p>To get started, download the version of Godot needed for your</p>
+      <p>To get started, download the latest version of Godot. We are currently on version 3.5.1 (Nov 2022.)</p>
 
       <p><img src="res/dl-godot-1.png" alt="" />
 <img src="res/dl-godot-2.png" alt="" />
 <img src="res/new-project.png" alt="" />
 <img src="res/create-folder.png" alt="" /></p>
 
-      <p>Unzip, run the executable, and this is the entire game engine, IDE, everything. Cool!</p>
+      <p>Unzip, and run the executable. This is the entire game engine, IDE, everything in a single program. Cool!</p>
       <ul>
         <li>On MAC you may need to give Godot permissions to run in your system settings</li>
         <li>Leave the console window open, if you close it godot will close!</li>
@@ -179,7 +187,7 @@
         </li>
         <li>Center Stage - Drag around elements, or Code
           <ul>
-            <li>This is where you arrange elements, or code</li>
+            <li>This is where you arrange elements, or code,</li>
           </ul>
         </li>
         <li>Output, Debugger, Audio and Animation
@@ -202,7 +210,7 @@
         </li>
       </ol>
 
-      <p>Once you switch into script mode, the codding interface replaces center stage:</p>
+      <p>Once you switch into script mode, the coding interface replaces center stage:</p>
 
       <p><img src="res/coding.png" alt="" /></p>
 
@@ -224,7 +232,7 @@
             <li>e.g. <code class="language-plaintext highlighter-rouge">Node2D</code> is a simple container which exists in 2D space
               <ul>
                 <li><code class="language-plaintext highlighter-rouge">Node2D</code> has a number of properties you can set, either from the Inspector or Code, such as Position (Vector2D)</li>
-                <li>All 2D classes will be subclassed from Node2D, inheriting it’s properties and methods
+                <li>All 2D classes will be subclassed from Node2D, inheriting properties and methods
                   <ul>
                     <li>A Sprite is a subclass of Node2D, meaning, it will inherit the position property, but will also have its own</li>
                   </ul>
@@ -251,7 +259,7 @@
             <li>This allows you to extend the functionality through code</li>
           </ul>
         </li>
-        <li>Your custom node trees can be saved as a Scene (tscn) and re-used
+        <li>Your custom node trees can be saved as a Scene (<code class="language-plaintext highlighter-rouge">.tscn</code> file) and re-used
           <ul>
             <li>This is similar to prototyping in other languages</li>
           </ul>
@@ -278,11 +286,12 @@
 
       <p><img src="res/add-sprite.png" alt="" /></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Some nodes need resources ro function properly. 
-- Load in a sprite resource, using the default PNG
+      <ul>
+        <li>Some nodes need resources ro function properly.</li>
+        <li>Load in a sprite resource, using the default Godot icon PNG</li>
+      </ul>
 
-![](res/add-sprite-png.png)
-</code></pre></div>      </div>
+      <p><img src="res/add-sprite-png.png" alt="" /></p>
 
       <ul>
         <li>
@@ -323,7 +332,7 @@
             </li>
           </ul>
         </li>
-        <li>Group together the StaticBody and it’s children so they move together
+        <li>Group together the StaticBody and its children so they move together
           <ul>
             <li>
               <p>Do the same with the RigidBody</p>
@@ -421,7 +430,8 @@ Also note that Vector2’s are coordinate pairs corresponding to x,y pairs, wher
 
       <p>Let’s add some code too:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">_on_RigidBody2D4_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># make sure the name matches what the node wiring did!
+</span><span class="n">func</span> <span class="n">_on_RigidBody2D4_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">body</span> <span class="ow">is</span> <span class="n">StaticBody2D</span><span class="p">:</span>
 		<span class="n">apply_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">))</span>
 </code></pre></div>      </div>
@@ -514,22 +524,31 @@ Spawner.timer.stop()
       <p><a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html">Singletons (AutoLoad)</a></p>
 
     </div></div></section>
-<section id="part2thegameofflinephase1"><button class="collapsible">Part 2: The Game Offline (Phase 1)...</button><div class="text-content"><div class="text-inner">
+<section id="part2projectsetup"><button class="collapsible">Part 2: Project Setup</button><div class="text-content"><div class="text-inner">
+
+      <h3 id="the-game-offline-phase-1">The Game Offline (Phase 1)</h3>
 
       <p>The Game we are going to add network multiplayer to is as follows:</p>
 
-      <p>Goal: 
-    - Stomp on other players to gain a point
-      - When you stomp on a player they respawn
-    - If you fall off the stage you lose a point</p>
+      <p>Goal:</p>
+      <ul>
+        <li>Stomp on other players to gain a point
+          <ul>
+            <li>When you stomp on a player they respawn</li>
+          </ul>
+        </li>
+        <li>If you fall off the stage you lose a point</li>
+      </ul>
 
-      <p>Controls:
-    - Arrow Keys or WASD to move
-    - Jump (Up when on the ground)
-    - Ground Pound (Down when in air)
-    - Air Dash (Double tap right or left when in air)
-    - Drop though floors (Double tap down when on a drop-through floor)
-    - Wall Jumps (Up while pressing into a wall)</p>
+      <p>Controls:</p>
+      <ul>
+        <li>Arrow Keys or WASD to move</li>
+        <li>Jump (Up when on the ground)</li>
+        <li>Ground Pound (Down when in air)</li>
+        <li>Air Dash (Double tap right or left when in air)</li>
+        <li>Drop though floors (Double tap down when on a drop-through floor)</li>
+        <li>Wall Jumps (Up while pressing into a wall)</li>
+      </ul>
 
       <p>Find the starter code on URCourses…</p>
       <ul>
@@ -543,11 +562,12 @@ Spawner.timer.stop()
         <li>Instantiates players in the <code class="language-plaintext highlighter-rouge">_ready</code> function</li>
         <li>Handles scoring</li>
         <li>Awards points</li>
+        <li><em>Important</em> we are manually creating our players right now. We’re going to be having the Network API do it for us later on!</li>
       </ul>
 
       <p>Spawner (<code class="language-plaintext highlighter-rouge">Spawner.gd</code>, <code class="language-plaintext highlighter-rouge">Spawner.tscn</code>)</p>
       <ul>
-        <li>Locations in the game where players will score</li>
+        <li>Locations in the game where players will spawn</li>
         <li>Spawners have a cool-down which prevents respawning a player in an area too quickly</li>
         <li>Additionally, spawners all added to the group <code class="language-plaintext highlighter-rouge">spawners</code>.</li>
       </ul>
@@ -594,7 +614,7 @@ Spawner.timer.stop()
         <li>
           <p>However this is much harder that what we’ll work with</p>
         </li>
-        <li>Recall in last lab’s Ethernet-TicToc we saw how TCP had a significant amount of overhead when a connection was first established. This is unnecessarily slow for games
+        <li>Recall in lab 3’s Ethernet-TicToc we saw how TCP had a significant amount of overhead when a connection was first established. This can be too slow in some games
           <ul>
             <li>Also, recall how UDP packets were faster, but delivery was not guaranteed.
               <ul>
@@ -605,7 +625,7 @@ Spawner.timer.stop()
         </li>
         <li>Instead, we need something a hybrid - we need the speed of UDP and the reliability of TCP
           <ul>
-            <li>Developers would typically code their own protocol, on top of UDP, for guaranteeing delivery, e.g. with custom ACKs.</li>
+            <li>For example, developers might code their own protocol, on top of UDP, for guaranteeing delivery, e.g. with custom ACKs.</li>
           </ul>
         </li>
       </ul>
@@ -650,15 +670,17 @@ Spawner.timer.stop()
         </li>
       </ul>
 
-      <p>You can open two instances of godot and open two instances of the project, run them each, and have them to connect with each other. You will get warnings if you modify anything while both are open though.</p>
-
       <p>Important - when players are created, they are given unique network id’s in the <code class="language-plaintext highlighter-rouge">gamestate.gd</code></p>
       <ul>
-        <li>It might be worth looking at <code class="language-plaintext highlighter-rouge">gamestate</code> -&gt; <code class="language-plaintext highlighter-rouge">pre_start_game</code> where players are instantiated and added to the tree.</li>
-        <li>In particular, the Host always gets <code class="language-plaintext highlighter-rouge">p_id = 1</code>. Every other player gets a large random int.</li>
+        <li>It is most important that you look through: <code class="language-plaintext highlighter-rouge">gamestate</code> -&gt; <code class="language-plaintext highlighter-rouge">pre_start_game</code> so you can understand how players are instantiated and added to the tree.</li>
+        <li>Each player gets a unique player ID. In particular, the Host always gets <code class="language-plaintext highlighter-rouge">p_id = 1</code>. Every other player gets a large random int.</li>
       </ul>
 
       <p>Right now we have two unique instances of the game which have the ability to to communicate between them, but they are not sharing all of the data needed to synchronize gameplay. We need to figure out how to make that communication such that each instance can only control their player, and the game state gets updated appropriately.</p>
+
+      <h4 id="testing-multiple-instances">Testing Multiple Instances</h4>
+
+      <p>During testing, if you need to run a second instance of the game, you can copy the Godot Engine (.exe) into the project directory, and then run it from there, which will autoload the game. Efficient!</p>
 
       <h3 id="design-for-network-application">Design for Network Application</h3>
 
@@ -669,12 +691,12 @@ Spawner.timer.stop()
         <li>Most importantly is the score, as this determines the winner</li>
         <li>But also, in order for players to see where the other players are, and dodge them, their position needs to be updated too
           <ul>
-            <li>What happens if we only sync position?</li>
-            <li>What happens if we synchronize both position and velocity?
+            <li>Consider if we only synchronize position?</li>
+            <li>Consider if we synchronize both position and velocity?
               <ul>
                 <li>This leads to an important concept - <code class="language-plaintext highlighter-rouge">prediction</code>
                   <ul>
-                    <li>If we are given gaps in information, can we fill in the bits we don’t know with the physics engine?</li>
+                    <li>If we are given gaps in information, can we fill in the bits we don’t using the physics engine?</li>
                   </ul>
                 </li>
               </ul>
@@ -682,11 +704,11 @@ Spawner.timer.stop()
           </ul>
         </li>
         <li>
-          <p>Finally, how should we handle movement?</p>
+          <p>Finally, we also need to handle movement?</p>
         </li>
-        <li>What should each player be in charge of?
+        <li>Which game instance should be in charge of which players?
           <ul>
-            <li>Players should be in charge of their movement.
+            <li>We will implement it such that each game instance is in charge of it’s own player’s movement.
               <ul>
                 <li>I am the one true source of knowledge on my location
                   <ul>
@@ -697,11 +719,12 @@ Spawner.timer.stop()
             </li>
             <li>Players could also be in charge of when they are defeated
               <ul>
-                <li>This leads to another important concept - security and tampering - what if this were disabled.</li>
+                <li>This leads to another important concept - security and tampering - which we’ll investigate in the assignment</li>
               </ul>
             </li>
           </ul>
         </li>
+        <li>Each time a game state is synchronized, a message is passed getween game instances. Which ones are the most important? Which ones can we occasionally miss?</li>
       </ul>
 
       <p>Together these considerations point to three important concepts to consider are: performance, reliability and security.</p>
@@ -724,6 +747,8 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
         </li>
       </ul>
 
+      <p><img src="res/master-of-puppets.png" alt="" /></p>
+
       <p><code class="language-plaintext highlighter-rouge">rpc</code> functions are Remote Procedure Calls. They call a function on other devices, assuming those devices have permission.</p>
       <ul>
         <li>Permission are given by keywords before the function:
@@ -734,7 +759,11 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
             <li><code class="language-plaintext highlighter-rouge">puppet</code> - non-network masters will instead use this function</li>
           </ul>
         </li>
-        <li><code class="language-plaintext highlighter-rouge">rpc</code>s have reliable and unreliable variants</li>
+        <li><code class="language-plaintext highlighter-rouge">rpc</code>s have <code class="language-plaintext highlighter-rouge">reliable</code> (default) and <code class="language-plaintext highlighter-rouge">unreliable</code> variants
+          <ul>
+            <li>We can call an RCP on just one instance with <code class="language-plaintext highlighter-rouge">rpc_id</code>. The default <code class="language-plaintext highlighter-rouge">rpc</code> calls it on all instances.</li>
+          </ul>
+        </li>
       </ul>
 
       <p><code class="language-plaintext highlighter-rouge">rset</code> is how to remotely synchronize a variable</p>
@@ -749,26 +778,90 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
       <p>To add network functionality to our application, we must make the following changes:</p>
 
       <ol>
-        <li>Modify <code class="language-plaintext highlighter-rouge">is_controllable</code> bool to <code class="language-plaintext highlighter-rouge">is_network_master()</code>
+        <li>Make sure each player controls their character, and only their character
+          <ul>
+            <li>In the player script, modify the value of the <code class="language-plaintext highlighter-rouge">is_controllable</code> bool to <code class="language-plaintext highlighter-rouge">is_network_master()</code>
+              <ul>
+                <li>This will automatically make a player controllable only if they are the player associated with that game instance</li>
+                <li>e.g. PlayerA in GameA, PlayerB in GameB</li>
+              </ul>
+            </li>
+          </ul>
           <ul>
             <li>You need to also remove setting controllable from in <code class="language-plaintext highlighter-rouge">gamestate.gd</code></li>
           </ul>
         </li>
-        <li>Modify position to be a synchronized variable
+      </ol>
+
+      <p>On line 26:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var is_master            = false
+</code></pre></div>      </div>
+
+      <p>On line 32, inside the _ready function:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	is_master = is_network_master()
+</code></pre></div>      </div>
+
+      <ol>
+        <li>Modify player position and velocity to be a synchronized variable
           <ul>
             <li>In particular, you will want to create a puppet position and puppet velocity in addition to the true ones</li>
             <li>And update them using the <code class="language-plaintext highlighter-rouge">rset</code> or <code class="language-plaintext highlighter-rouge">rset_unreliable</code> functions</li>
           </ul>
         </li>
-        <li>
-          <p>Instead, we could modify both position and velocity. What are the benefits to this approach?</p>
-        </li>
-        <li>Ensure that award_point is a synchronized function
+      </ol>
+
+      <p>In the class variables, at the top:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>puppet var puppet_position = Vector2()
+puppet var puppet_velocity = Vector2()
+</code></pre></div>      </div>
+
+      <p>And, when controlling the player, update these variables and add an <code class="language-plaintext highlighter-rouge">else</code> case to the player movement, on line 80:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		rset_unreliable("puppet_position", position)
+		rset_unreliable("puppet_velocity", velocity)
+	
+	else:
+		position = puppet_position
+		velocity = puppet_velocity
+</code></pre></div>      </div>
+
+      <p>What would happen if we only tracked <code class="language-plaintext highlighter-rouge">position</code> instead of both <code class="language-plaintext highlighter-rouge">position</code> and <code class="language-plaintext highlighter-rouge">velocity</code>?</p>
+
+      <ol>
+        <li>Ensure that award_point is a synchronized function. Ditto with decrement score.
           <ul>
             <li>This ensures that it gets called on all clients</li>
           </ul>
         </li>
-        <li>In the go_to_timeout() function, ensure that it only runs if you are the network master
+      </ol>
+
+      <p>change the function from:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func award_point (winner, loser):
+</code></pre></div>      </div>
+
+      <p>to</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>remotesync func award_point (winner, loser):
+</code></pre></div>      </div>
+
+      <p>And make sure it is called correctly, around line 198, update the following call:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			award_point(body.name, self.name)
+</code></pre></div>      </div>
+
+      <p>to</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			rpc("award_point", body.name, self.name)
+</code></pre></div>      </div>
+
+      <ol>
+        <li>
+          <p>Perform similar updates for decrementing score. The function is defined around 144, and called on 212. Can you figure out how to update it? Do we need to pass any arguments?</p>
+        </li>
+        <li>
+          <p>In the go_to_timeout() function, ensure that it only runs if you are the network master</p>
           <ul>
             <li>All others will simply do nothing.</li>
             <li>Position will thus be handled by it being a synchronized variable</li>
@@ -777,7 +870,7 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
         </li>
       </ol>
 
-      <p>The stage three code, included has this functionality implemented. I also did some other things to make your life easier with the assignment that were not originally covered in stage 2, such as allowing any player to start the game rather than just the host.</p>
+      <p>The stage three code, included has this functionality implemented. You may start your assignment from Stage 3.</p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
@@ -786,40 +879,57 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
 
       <p>In part 1, you are to modify the game so that, rather than being implemented as peer-to-peer application, it is instead a dedicated client-server architecture</p>
       <ul>
-        <li>This means that the server could be deployed to the cloud and run without any human interaction</li>
-        <li>In other words, the server, aka the hosts, does not have a character in the game.
+        <li>This means that the server could be deployed to the cloud and run without any human interaction
           <ul>
-            <li>Instead it merely acts as an intermediary between the clients.</li>
-          </ul>
-        </li>
-        <li>Maintain all other aspects of functionality - do not change any data structures.
-          <ul>
-            <li>It should work with clients from Phase 3 with minimal changes (simple not spawning a player with network id 1)</li>
+            <li>In other words, the server, aka the host, does not have a character in the game.
+              <ul>
+                <li>Instead it merely acts as an intermediary lobby between the clients.</li>
+              </ul>
+            </li>
+            <li>Maintain all other aspects of functionality - do not change any data structures.
+              <ul>
+                <li>It should work with clients from Phase 3 with minimal changes (simple not spawning a player with network id 1)</li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
 
-      <p>Procedure:
-    - Make two copies of the code from Phase 3
-      - Even if you followed along with the network examples, please start from the Phase 3 provided
-        - I added some extra stuff to reduce some headaches
-    - Rename one into <code class="language-plaintext highlighter-rouge">client</code>
-    - Rename the other into <code class="language-plaintext highlighter-rouge">server</code>
-    - Modify the client and server code such that there is no player assigned to the host.
-      - The host should automatically be in the waiting for players mode when no game is playing, and return there when a game ends
-        - You may wish to see how the <code class="language-plaintext highlighter-rouge">lobby</code> works, and skip the first screen
-      - Thus, no interactivity should be required by the server.
-        - However, the client will still show the game in progress visually
-      - The client should no longer be able to host
-    - Don’t overthink this - there changes are on the order of 10 lines of code!</p>
+      <p>Procedure:</p>
 
-      <p>In part 2, make a third version of code called <code class="language-plaintext highlighter-rouge">cheat-client</code>, which is a version of the client which cheats in some way.</p>
+      <ul>
+        <li>Make two copies of the code from Phase 3</li>
+        <li>Rename one into <code class="language-plaintext highlighter-rouge">client</code></li>
+        <li>Rename the other into <code class="language-plaintext highlighter-rouge">server</code></li>
+        <li>Modify the client and server code such that there is no player assigned to the host.
+          <ul>
+            <li>Hint: Where are the players instanced? Which id is assigned to the host?</li>
+            <li>The host should automatically be waiting for players mode when no game is playing, and return there when a game ends</li>
+            <li>You may wish to see how the <code class="language-plaintext highlighter-rouge">lobby</code> works, and skip the first screen altogether
+              <ul>
+                <li>Once all of the players have joined, a player will need to manually start the game</li>
+              </ul>
+            </li>
+            <li>No person should not need to interact with the server instance directly, it could theoretically run on a headless system.
+              <ul>
+                <li>However, the client will still show the game in progress visually</li>
+              </ul>
+            </li>
+            <li>The client should no longer be able to host, and should instead just connect to the server.</li>
+          </ul>
+        </li>
+        <li>Don’t overthink this - the changes are on the order of 10 lines of code!</li>
+      </ul>
+
+      <p>In part 2, make a third version of the project called <code class="language-plaintext highlighter-rouge">cheat-client</code>, which is a version of the client which cheats in some way.</p>
       <ul>
         <li>The cheats should work with the server logic, i.e. not cause a crash</li>
+        <li>Think about what the player is in control of, vs. what the server is in control of.</li>
         <li>As we are not validating legal data, these should go undetected by the server, and give some advantage in the game.</li>
+        <li>Your cheat client should not crash the server!</li>
       </ul>
 
-      <p>For marking this lab, we will do a live demo next week. You will meet me in a breakout room, connect to my server, and use your modified client to demonstrate your changes.</p>
+      <p>I was planning to mark this lab through a live demo, where you connect to my server and demonstrate your application. However, as this is our last scheduled lab session, we will instead do submission via URCourses. Please zip up your project for all three phases (<code class="language-plaintext highlighter-rouge">server</code>, <code class="language-plaintext highlighter-rouge">client</code> and <code class="language-plaintext highlighter-rouge">cheat-client</code>).</p>
 
     </div></div></section>
 <section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
