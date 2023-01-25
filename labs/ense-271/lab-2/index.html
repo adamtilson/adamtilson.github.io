@@ -126,7 +126,7 @@
       <p>In this lab, we are going to look at ways of documenting a high level view of a web application, including mapping out the pages that you need using SiteMaps, and mapping out the content needed and completed using a spreadsheet application. These activities broadly fall under the UX category of Information Architecture, which has roots in Library science (organizing and prioritizing content), and Cognitive Psychology (making it quick to learn, easy to understand and navigate).</p>
 
     </div></div></section>
-<section id="sitemap"><button class="collapsible">Site Map</button><div class="text-content"><div class="text-inner">
+<section id="10sitemap"><button class="collapsible">1.0 Site Map</button><div class="text-content"><div class="text-inner">
 
       <p>The highest level view of a website is often expressed as a sitemap.</p>
 
@@ -222,7 +222,7 @@
       <p><code class="language-plaintext highlighter-rouge">XML Sitemap</code> - Once your website is complete, you should include your sitemap formatted in an XML file. This is for robots, such as search engine webcrawlers, and may help them quickly index your website based on how the pages link together.</p>
 
     </div></div></section>
-<section id="assetinventory"><button class="collapsible">Asset Inventory</button><div class="text-content"><div class="text-inner">
+<section id="20assetinventory"><button class="collapsible">2.0 Asset Inventory</button><div class="text-content"><div class="text-inner">
 
       <ul>
         <li>Assets refer to the contents of your web app
@@ -268,38 +268,137 @@
       <p>You can grab my template from the example files from URCourses.</p>
 
     </div></div></section>
-<section id="creatingasitemapinadobexd"><button class="collapsible">Creating a Sitemap in Adobe XD:</button><div class="text-content"><div class="text-inner">
+<section id="30signingupforfigma"><button class="collapsible">3.0 Signing Up for Figma</button><div class="text-content"><div class="text-inner">
 
-      <p>Installing XD:</p>
+      <p>Figma is a cloud service which you can use through your browser. I will be using Firefox, but according the <a href="https://help.figma.com/hc/en-us/articles/360039827194-Figma-browser-requirements">help documents here</a>, the following browsers are supported, if properly updated:</p>
 
-      <p>You can grab adobe XD from here: <a href="https://www.adobe.com/products/xd/pricing/starter-plan.html">Adobe XD</a></p>
+      <ul>
+        <li>Chrome</li>
+        <li>Firefox</li>
+        <li>Safari</li>
+        <li>Microsoft Edge</li>
+      </ul>
 
-      <p>Note, they will try to funnel you towards a paid plan - resist and grab the free edition here!</p>
+      <p>(Sorry Internet Explorer fans, time for an upgrade!)</p>
 
-      <p><img src="res/dl-xd-starter.png" alt="" /></p>
+      <p>Figma provides free pro features for education purposes, as shown here:</p>
 
-      <p>You will need to make an account and install Creative Cloud in the process.</p>
+      <p><a href="https://www.figma.com/education/">Figma for education</a></p>
 
-      <p>Optional - Turn off telemetry by going to the website and the settings:</p>
+      <p>Follow the process here:</p>
 
-      <p><img src="res/xd-no-telemetry.png" alt="Disable Telemetry" title="Disable Telemetry" /></p>
+      <p><img src="res/get-verified.png" alt="" /></p>
 
-      <p>You don’t need to use Adobe XD to create your map, but it’s a nice gentle introduction to the application and the user interface, which we will use in future labs.</p>
+      <p>Create an account using your school email.</p>
 
-      <p><img src="res/xd-ui-sitemap.png" alt="XD UI Overview" title="XD UI Overview" /></p>
+      <p>Here are some sample settings which may help with validation, but you should tailor these as needed for you:</p>
+
+      <p><img src="res/sign-up.png" alt="" /></p>
+
+      <p><img src="res/get-validated-info.png" alt="" /></p>
+
+      <p>Let me know if you have any problems signing up, though I am not sure there is anything I’ll be able to do, but hopefully!</p>
+
+    </div></div></section>
+<section id="40figmaoverview"><button class="collapsible">4.0 Figma Overview</button><div class="text-content"><div class="text-inner">
+
+      <p>Figma has the ability to create both design files and FigJam files. Design are for creating UI mockups, wheras FigJam are for use as Whiteboards and diagramming. We’ll be using design files for this lab:</p>
+
+      <p><img src="res/new-design-file.png" alt="" /></p>
+
+      <p>Let’s learn the UI of a design file</p>
+
+      <p><img src="res/ui-overview.png" alt="" /></p>
+
+      <ol>
+        <li>The file menu and design tools are up here
+          <ul>
+            <li>The Figma Icon acts like the top bar menu you would see in typical desktop appliactions
+              <ul>
+                <li>e.g. <code class="language-plaintext highlighter-rouge">File</code>, <code class="language-plaintext highlighter-rouge">Edit</code>, <code class="language-plaintext highlighter-rouge">View</code>, etc.</li>
+              </ul>
+            </li>
+            <li>Left to right, we have:
+              <ul>
+                <li>Selection Tools (<code class="language-plaintext highlighter-rouge">Select</code>, <code class="language-plaintext highlighter-rouge">Move</code> <code class="language-plaintext highlighter-rouge">V</code>, <code class="language-plaintext highlighter-rouge">Scale</code> <code class="language-plaintext highlighter-rouge">K</code>)</li>
+                <li>Frame Tools, which we can use to creates our pages or views (<code class="language-plaintext highlighter-rouge">Frame</code> <code class="language-plaintext highlighter-rouge">F</code>, <code class="language-plaintext highlighter-rouge">Slice</code> <code class="language-plaintext highlighter-rouge">S</code>)
+                  <ul>
+                    <li>Frames can both represent complete pages, as well as individual components</li>
+                  </ul>
+                </li>
+                <li>Shape tools, for drawing geometric primitives (<code class="language-plaintext highlighter-rouge">Rectangle</code> <code class="language-plaintext highlighter-rouge">R</code>, <code class="language-plaintext highlighter-rouge">Line</code> <code class="language-plaintext highlighter-rouge">L</code>, <code class="language-plaintext highlighter-rouge">Arrow</code>, <code class="language-plaintext highlighter-rouge">Ellipse</code> <code class="language-plaintext highlighter-rouge">O</code>, <code class="language-plaintext highlighter-rouge">Polygon</code>, <code class="language-plaintext highlighter-rouge">Star</code>, <code class="language-plaintext highlighter-rouge">Image</code>)
+                  <ul>
+                    <li><a href="https://www.youtube.com/watch?v=YGBIc6oJCos">This video explains the primitive shapes</a></li>
+                  </ul>
+                </li>
+                <li>Drawing tools for creating Bézier curves or freehand (<code class="language-plaintext highlighter-rouge">Pen</code> <code class="language-plaintext highlighter-rouge">P</code>, <code class="language-plaintext highlighter-rouge">Pencil</code>)</li>
+                <li><code class="language-plaintext highlighter-rouge">Text</code> <code class="language-plaintext highlighter-rouge">T</code></li>
+                <li><code class="language-plaintext highlighter-rouge">Hand</code> <code class="language-plaintext highlighter-rouge">H</code> (pan)</li>
+                <li><code class="language-plaintext highlighter-rouge">Comment</code> <code class="language-plaintext highlighter-rouge">C</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Filename - Set your filename here
+          <ul>
+            <li>Your files will automatically get saved in the cloud on Figma’s servers</li>
+            <li>To save it locally, instead do a <code class="language-plaintext highlighter-rouge">Figma</code> -&gt; <code class="language-plaintext highlighter-rouge">File</code> -&gt; <code class="language-plaintext highlighter-rouge">Save local copy...</code></li>
+            <li>Note: When modifying some objects, this area will also change to have more operations, like masking and boolean operations
+<img src="res/filename-changes-to-options.png" alt="" /></li>
+          </ul>
+        </li>
+        <li>This region has sharing tools, preview tools, and zoom tools</li>
+        <li>This region has layers, assets and pages
+          <ul>
+            <li>Layers
+              <ul>
+                <li>You can think of placing elements on the page like a paper collage.</li>
+                <li>Things placed earlier fall below other things.</li>
+                <li>You can use this menu to manually adjust the depth of elements by dragging them up and down.</li>
+                <li>You can also group elements together to move them together, toggle visibility, and lock them to prevent accidentally moving them
+<img src="res/layers-example.png" alt="" /></li>
+              </ul>
+            </li>
+            <li>Assets - The assets tab houses libraries of reusable components to add to your project.</li>
+            <li>You can create these yourself or import other libraries</li>
+            <li>Pages
+              <ul>
+                <li>Pages allow you to have multiple pages in one file. This is akin to the multiple sheets in a spreadsheet we saw last week.</li>
+              </ul>
+            </li>
+            <li>The area directly below will change depending on the tab you have selected above</li>
+          </ul>
+        </li>
+        <li>This area switch modes between
+          <ul>
+            <li>Design - where we arrange objects in our screen.</li>
+            <li>Prototype - where we add interactions to our prototypes. We’ll look at this next week.</li>
+            <li>Inspect - get detailed info about your objects, like specific position or colors.</li>
+          </ul>
+        </li>
+        <li>In this region to you can modify some details about your selected objects. This will update depending on the context of the object selected. e.g. if we have selected text, we will see options like for fonts and text aligning. If we have selected a rectangle, we can modify properties such as the outline color, thickness, and fill color and opacity.
+<img src="res/text-example.png" alt="" /></li>
+      </ol>
+
+      <p>Of course, center stage is where we’ll actually do all of our designing!</p>
+
+    </div></div></section>
+<section id="50creatingasitemapinfigma"><button class="collapsible">5.0 Creating a Sitemap in Figma:</button><div class="text-content"><div class="text-inner">
+
+      <p>Note, Figma has a mode specially designed for doing quick diagrams like SiteMaps, which is called the FigJam. However, I want you to build your skills using the Design workflow, so we will work there for this portion of the lab!</p>
 
       <p>Quickly sketch up a sitemap:</p>
       <ul>
         <li>Start by drawing a Rectangle
           <ul>
-            <li>Select the rectangle tool, at (1)</li>
-            <li>Draw a rectangle in center stage (2) by dragging</li>
+            <li>Select the rectangle tool</li>
+            <li>Draw a rectangle in center stage by dragging</li>
           </ul>
         </li>
         <li>Add some text to the middle of the rectangle
           <ul>
-            <li>Select the text tool at (3)</li>
-            <li>Create a text object on center stage (2)</li>
+            <li>Select the text tool</li>
+            <li>Create a text object on center stage</li>
             <li>Type to add some text</li>
             <li>Drag the text to where you want it</li>
             <li>Guides appear as you drag things around to help you center and match existing spaces</li>
@@ -313,10 +412,10 @@
         </li>
         <li>Connect pages with lines to represent links
           <ul>
-            <li>click on the line tool at (5)</li>
+            <li>click on the line tool</li>
             <li>Drag from one box boundary to the other</li>
             <li>You can fine-tune positioning by selecting the edge of a line after being placed</li>
-            <li>You can also creates lines use the more powerful Pen Tool (6), which can allow you to later bend or add curves to your lines</li>
+            <li>You can also creates lines use the more powerful Pen Tool, which can allow you to later bend or add curves to your lines</li>
           </ul>
         </li>
       </ul>
