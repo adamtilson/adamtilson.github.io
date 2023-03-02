@@ -112,7 +112,7 @@
 
     <main id="content" class="main-content" role="main">
         <p></p>
-        <h1 id="lab-5-wordpress-environment-setup-with-local">Lab 5: Wordpress Environment Setup with Local</h1>
+        <h1 id="lab-5-wordpress-environment-setup-with-local-wp">Lab 5: Wordpress Environment Setup with Local WP</h1>
 
 <p>ENSE 271 - People-Centred Design - Laboratory</p>
 
@@ -127,19 +127,19 @@
 
       <p>Typically Wordpress is installed on a remote server running a LAMP stack: Linux, Apache, MySQL and PHP, though some components may be interchanged, such as Windows for Linux or NGINX for Apache. If you have already taken ENSE 353 you have created such a stack, where a completed wordpress installation could be deployed.</p>
 
-      <p>For this course we will use an application called “Local” by Flywheel to install a local wordpress development site, which can be used for single-user prototyping and testing on your local machine without a server. Historically, one would use a streamlined LAMP installation, such as XAMPP, which has some advantages and disadvantages over our approach. Flywheel is a web-hosting service, and has released this tool to help people learn, hoping you will later host your site with them, but there is no obligation to do so. Local encapsulates the server and database applications needed by Wordpress, allowing you to quickly start the needed services on demand.</p>
+      <p>For this course we will use an application called “Local WP” to install a local wordpress development site, which can be used for single-user prototyping and testing on your local machine without a server. Historically, one would use a streamlined LAMP installation, such as XAMPP, which has some advantages and disadvantages over our approach. Local was developed by Flywheel, a web-hosting service, and has released this tool to help people learn, hoping you will later host your site with them, but there is no obligation to do so. Local encapsulates the server and database applications needed by Wordpress, allowing you to quickly start the needed services on demand.</p>
 
       <p><img src="res/wordpress-stack.png" alt="wordpress-stack" />
 <img src="res/local-stack.png" alt="local-stack" /></p>
 
     </div></div></section>
-<section id="20installinglocalbyflywheel"><button class="collapsible">2.0 Installing "Local by Flywheel"</button><div class="text-content"><div class="text-inner">
+<section id="20installinglocalwp"><button class="collapsible">2.0 Installing Local WP</button><div class="text-content"><div class="text-inner">
 
-      <p><a href="https://localwp.com/">Download Local by Flywheel</a></p>
+      <p><a href="https://localwp.com/">Download Local WP</a></p>
 
       <p><img src="res/download.png" alt="Download" /></p>
 
-      <p>You do not need to provide a real email if you do not want to be contacted by Flywheel.</p>
+      <p>You do not need to provide a real email if you do not want to be contacted by the developers!</p>
 
       <p>Follow the installer. If you are on mac, you may need to move the executable to your Applications folder. See the video in references for more information.</p>
 
@@ -154,7 +154,7 @@
 
       <p><img src="res/site-name.png" alt="Site name" /></p>
 
-      <p>Local invokes multiple services / daemons. You may need to grant admin privileges.</p>
+      <p>Local invokes multiple services / daemons. You may wish to grant admin privileges.</p>
 
       <p>You don’t need to change any advanced settings yet, but later may wish to make use of the “blueprints” feature. This allows you to set up a site the way that you like it once, including adjusting settings and installing and configuring plugins and themes, and then make a copy of this which can later be reused, called blueprints.</p>
 
@@ -182,6 +182,16 @@
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;your site&gt;/wp-admin/
 </code></pre></div>          </div>
         </li>
+      </ol>
+
+      <p>Or, if you are using localhost:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```
+localhost/wp-admin/
+```
+</code></pre></div>      </div>
+
+      <ol>
         <li>Here you can click through to see different aspects of the site system, including database and utilities.</li>
       </ol>
 
@@ -190,7 +200,7 @@
 
       <p>First, click on the Open Site button to see the site as it exists.</p>
 
-      <p>This minimalist, placeholder site appears when you start up a new site, updated each year to demonstrate the current wordpress theme.</p>
+      <p>This minimalist, placeholder site appears when you start up a new site, updated each year to demonstrate the current wordpress theme. Your theme will likely be newer than the following:</p>
 
       <p><img src="res/placeholder.png" alt="Placeholder" /></p>
 
@@ -319,7 +329,7 @@
 
       <p>We will automatically get the Astra theme when we use <code class="language-plaintext highlighter-rouge">Starter Templates</code>.</p>
 
-      <p>Let’s install the <code class="language-plaintext highlighter-rouge">Starter Templates</code> plugin. This plugin attempts to create several sample pages in your block editor of choice, between Elementor, Beaver Builder and Gutenberg. We’re going to use Gutenberg, this is the default block editor for wordpress, and seems to be the best performing.</p>
+      <p>Let’s install the <code class="language-plaintext highlighter-rouge">Starter Templates</code> plugin. This plugin attempts to create several sample pages in your block editor of choice, between Elementor, Beaver Builder and WP Blocks (formerly Gutenberg). We’re going to use WP Blocks, as this is the default block editor for wordpress, and so far seems to be the best performing.</p>
 
       <h3 id="starter-templates">Starter Templates</h3>
 
@@ -355,21 +365,51 @@
       <p>Our selected theme does not include a blog page by default, but we can create one.</p>
 
     </div></div></section>
+<section id="90personas"><button class="collapsible">9.0 Personas</button><div class="text-content"><div class="text-inner">
+
+      <p>For this lab, we are going to create a personal website for a fictional Persona.</p>
+
+      <p>A persona is a UX exercise in which we create a fictional, yet realistic, description of a target user. This is an archetype of a user, but we describe them as if they were a real person.</p>
+
+      <p>The description should focus on needs, concerns, goals, as well as demographic information such as gender, age, occupation. We wish to foster empathy for the users for which we are designing. The persona should focus on the attributes of life which influence our design.</p>
+
+      <p>The psychology behind personas is that humans design better for other other humans, (e.g. you neighbor) rather than broad profiles or statistical information (e.g. women aged 35-65).</p>
+
+      <p>Personas can be presented in a number of ways, but are typically represented in a single page dashboard or infographic style. Common sections include a (stock) photo, name, age, location, occupation, tag line, about, goals, tasks, and pain points. Avoid extraneous details which will have no impact on design.</p>
+
+      <p><img src="res/persona-details.png" alt="" /></p>
+
+      <p>Personas should be based on User Research, ideally reflecting real-world data which you have captured, through field studies and interviews.</p>
+
+    </div></div></section>
 <section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
 
+      <p>Building a website for a Persona created for a Job Hunting Application:</p>
+
       <ul>
-        <li>Create a new wordpress site</li>
-        <li>Install a different starter template than the one we looked at</li>
-        <li>Create three new static pages
+        <li>Complete the Figma persona template provided (or make your own!)
           <ul>
-            <li>Add two or three site builder blocks to each page</li>
+            <li>This Persona is being developed for a Job Hunting website, so consider their goals, tasks, needs and frustrations using these types of websites!</li>
           </ul>
         </li>
-        <li>Make a blog page with three entries (you may use placeholder content)</li>
+        <li>Create a new wordpress site in Local</li>
+        <li>(optional) Install a different starter template than the one we looked at
+          <ul>
+            <li>This is optional as you may need to configure a lot of the template to work with your persona, and we won’t look at this in too much depth until next lab!</li>
+          </ul>
+        </li>
+        <li>Create three new static pages
+          <ul>
+            <li>Use two to three site builder blocks to convey a goal or task of the about the persona</li>
+          </ul>
+        </li>
+        <li>Make a blog page with three entries
+          <ul>
+            <li>In each one, comment on a specific need or pain point of the user.</li>
+          </ul>
+        </li>
         <li>Document your site with screen-shots, one for each static page and/or blog page</li>
       </ul>
-
-      <p>Note: This lab deliverable has some overlap with the result of Lab 6, so it may be worth checking out the deliverables of that lab if you wish to attempt to minimize redoing work!</p>
 
     </div></div></section>
 <section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
@@ -381,6 +421,8 @@
 
     </div></div></section>
 <section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>Aurora Harley. <a href="https://www.nngroup.com/articles/persona/">Personas Make Users Memorable for Product Team Members</a>. Nielsen Norman Group. February 16, 2015.</p>
 
       <p>WPLearningLab. <a href="https://www.youtube.com/watch?v=GeDAUU4zciI">How To Install WordPress Locally - Make A WordPress Local Development Environment</a>. Updated 2021.</p>
     </div></div></section>
