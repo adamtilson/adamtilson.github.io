@@ -379,7 +379,7 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
 
       <p>Preview. Are the menus fixed?</p>
 
-      <p>To format our blog posts, we’ll use a plugin. Grab it here…</p>
+      <p>To format our blog posts, we’ll use one of the blocks in the Spectra plugin. You will automatically have it since you started with the Starter Template. If you started from scrach, you may need to grab it from plugins:</p>
 
       <p><img src="res/add-plugin.png" alt="" /></p>
 
@@ -389,9 +389,7 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
 
       <p>This is a hefty plugin … we want to turn most of it off…</p>
 
-      <p><img src="res/deactivate-all.png" alt="" /></p>
-
-      <p><img src="res/activate-post-grid.png" alt="" /></p>
+      <p><img src="res/deactivate-all-and-activate.png" alt="" /></p>
 
       <p>Let’s head back to the <code class="language-plaintext highlighter-rouge">locations</code> page, and add in our new “Post Grid” block</p>
 
@@ -412,6 +410,54 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
 <img src="res/mobile-blogpost.png" alt="" /></p>
 
       <p>We didn’t fix the non-transparent header which shows up on the blog posts - I’ll leave that up to you.</p>
+
+      <h3 id="search-and-filter">Search and Filter</h3>
+
+      <p>It can also be nice to be able to search and filter through our Posts. I believe Tim will be providing you with the Pro version of this plugin, which is quite powerful, but we will look at the free version, as it is a bit easier to get working in Local. Let’s grab it from the plugins menu.</p>
+
+      <p><img src="res/grab-search-filter-free.png" alt="" /></p>
+
+      <p>In order for this plugin to work, you need to do two things:</p>
+      <ol>
+        <li>Tag your posts in a correct way, e.g. using Tags, or Categories, or both.</li>
+      </ol>
+
+      <p><img src="res/properly-organizing-posts.png" alt="" /></p>
+
+      <p>Recall - this falls under our heading of Information Architecture!</p>
+
+      <ol>
+        <li>Display the type of search using a “Shortcode” block</li>
+      </ol>
+
+      <p>You can see a list of available search formats and shortcodes on this page:</p>
+
+      <p><a href="https://free.searchandfilter.com/">Search and Filter Free Edition</a></p>
+
+      <p>Note: Customization and Live Search (e.g. AJAX) is not available in the free edition. However, we can still see the basic operation of the plugins. The styling of the plugin will be dictated instead by your theme.</p>
+
+      <p><img src="res/putting-it-all-together.png" alt="" /></p>
+
+      <p>Let’s grab the associated shortcode…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[searchandfilter fields="search,category,post_tag,post_format,taxonomyone,taxonomytwo" types=",radio,checkbox,select,radio,select" hierarchical=",1" headings=",Categories,Tags,Post Format,Taxonomy One,Taxonomy Two" submit_label="Filter"]
+</code></pre></div>      </div>
+
+      <p>And add it to our home page:</p>
+
+      <p><img src="res/add-a-shortcode.png" alt="" /></p>
+
+      <p>Paste it in:</p>
+
+      <p><img src="res/pasting-shortcode.png" alt="" /></p>
+
+      <p>Update the page, and let’s test it out!</p>
+
+      <p><img src="res/search.png" alt="" /></p>
+
+      <p>And let’s check out the results:</p>
+
+      <p><img src="res/results.png" alt="" /></p>
 
     </div></div></section>
 <section id="60assignment"><button class="collapsible">6.0 Assignment</button><div class="text-content"><div class="text-inner">
