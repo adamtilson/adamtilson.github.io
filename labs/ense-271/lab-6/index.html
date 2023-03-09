@@ -127,7 +127,7 @@
 
       <p>To achieve this goal, we will work today with templates and page builders to quickly get a site up and running and iterate towards our desired design.</p>
 
-      <p>We will attempt to implement several pages from the TRAVEL Hyrule site, which we looked at in Prototyping in XD, in wordpress using Wordpress Blocks. We will necessarily observe some of the limitations of the software.</p>
+      <p>We will attempt to implement several pages from the TRAVEL Hyrule site, which we looked at in Prototyping in Figma, in wordpress using Wordpress Blocks. We will necessarily observe some of the limitations of the software.</p>
 
       <h4 id="set-up">Set-up</h4>
 
@@ -202,6 +202,8 @@
 
       <h3 id="change-the-cover-background-to-the-hyrule-image">1. Change the Cover background to the Hyrule image</h3>
 
+      <p>Note: Since 2023, the company which makes Starter Templates (Brainstorm Force) has updated their plugin to use all their own blocks, which are available in their plugin package, Spectra. For this reason, many of these interfaces may have changed. I will do my best to update them! This is troubling, as they are trying to lock you into their ecosystem.</p>
+
       <p><img src="res/cover.png" alt="" /></p>
 
       <p>Pop up tools appear…</p>
@@ -212,19 +214,19 @@
 
       <p>Click on the kebab menu and <code class="language-plaintext highlighter-rouge">Remove Block</code>.</p>
 
-      <p>You can change the image with</p>
+      <p>You can change the image by using the side-bar.</p>
 
-      <p>Pop-up -&gt; Replace -&gt; Upload</p>
+      <p><img src="res/update-with-sidebar.png" alt="" /></p>
 
       <p>The inspector on the right will change depending on the context of the selected block. Here you can set properties</p>
 
-      <p>Inspector -&gt; Block</p>
+      <p>Inspector -&gt; Block -&gt; General</p>
 
-      <p><img src="res/inspector.png" alt="" /></p>
+      <p><img src="res/spectra-block.png" alt="" /></p>
 
       <p>Let’s squish down the image in</p>
 
-      <p>Inspector -&gt; Block -&gt; Dimensions -&gt; 400 px</p>
+      <p>Minimum height -&gt; 600 px</p>
 
       <p>Note, you can also set properties for the Theme for this page as well, which is how you can constrain content and turn on or off headers or footers.</p>
 
@@ -326,126 +328,6 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
 
       <p><img src="res/publish-footer.png" alt="" /></p>
 
-      <h3 id="appointment-booking">5. Appointment Booking</h3>
-
-      <p>In previous years we did a contact form, which matches our design, (this info will be left after this section, for your info). This year, instead, we will use a booking system to book tours, to explore installing and using plugins.</p>
-
-      <ul>
-        <li>Install a new plugin:</li>
-      </ul>
-
-      <p><img src="res/install-new-plugin.png" alt="" /></p>
-
-      <ul>
-        <li>Install and activate Easy Appointments</li>
-      </ul>
-
-      <p><img src="res/easy-appointments.png" alt="" /></p>
-
-      <p>This is a plugin created for taking bookings. It <a href="https://en-ca.wordpress.org/plugins/easy-appointments/">can be found here</a>, with  <a href="https://easy-appointments.net/documentation/">documentation here</a>.</p>
-
-      <ul>
-        <li>Plugins typically have their own interfaces for editing. You can get to its settings through the admin dashboard:</li>
-      </ul>
-
-      <p><img src="res/plugin-interface.png" alt="" /></p>
-
-      <p>Often, with plugins, you need to read the docs to figure out they work. This plugin allows places, like Salons, to book appointments. The data model for an appointment includes:</p>
-      <ul>
-        <li><code class="language-plaintext highlighter-rouge">Location</code> (Where is the service offered?)</li>
-        <li><code class="language-plaintext highlighter-rouge">Employee</code> (Who is doing the service?)</li>
-        <li><code class="language-plaintext highlighter-rouge">Service</code> (What is being offered?)
-          <ul>
-            <li>An appointment slot combines a <code class="language-plaintext highlighter-rouge">Connection</code> between each of these three, as well as the times they occur.</li>
-          </ul>
-        </li>
-        <li>So, first we must set this up, for our appointment to work.</li>
-      </ul>
-
-      <p><img src="res/location.png" alt="" /></p>
-
-      <p><img src="res/services.png" alt="" /></p>
-
-      <p><img src="res/employees.png" alt="" /></p>
-
-      <p><img src="res/connections.png" alt="" /></p>
-
-      <p><img src="res/connection.png" alt="" /></p>
-
-      <ul>
-        <li>
-          <p>Finally, we may want to adjust some settings:</p>
-        </li>
-        <li>
-          <p>In particular, I want to auto-confirm appointments</p>
-        </li>
-      </ul>
-
-      <p><img src="res/settings.png" alt="" /></p>
-
-      <ul>
-        <li>
-          <p>Newer plugins typically provide a Wordpress Block to add directly to your site, however, older once might only be accessible through a <code class="language-plaintext highlighter-rouge">shortcode</code>, which will customize the appearance of the plugin on the page.</p>
-        </li>
-        <li>
-          <p>I found these settings which I like:</p>
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ea_bootstrap width="800px" scroll_off="true" layout_cols="2" worker="1" location="1" service="1"]
-</code></pre></div>          </div>
-        </li>
-      </ul>
-
-      <p>We can add it to the page with a <code class="language-plaintext highlighter-rouge">shortcode</code> block</p>
-
-      <p><img src="res/shortcode-block.png" alt="" /></p>
-
-      <p>Unfortunately changes are not “What you see is what you get” (WYSIWYG), so we need to preview our page to see the changes.</p>
-
-      <p><img src="res/booking-an-appointment.png" alt="" /></p>
-
-      <p>When we refresh we can see the slot is gone:</p>
-
-      <p><img src="res/slot-is-gone.png" alt="" /></p>
-
-      <p>Finally, we can view our appointments from the Wordpress admin:</p>
-
-      <p><img src="res/dash-board.png" alt="" /></p>
-
-      <p>This is likely not the best booking plugin, but this gives you an idea of how to find and install a plugin, learn how to use it, and get going with it!</p>
-
-      <h3 id="contact-form">6. Contact form</h3>
-
-      <p>Let’s finish the landing page off with a contact form:</p>
-
-      <p>Go back to editing the page, and remove the remaining gallery stuff from our template page.</p>
-
-      <p>Start with a <code class="language-plaintext highlighter-rouge">group</code> block which allows us to add a background color</p>
-
-      <p>Group -&gt; Inspector -&gt; Block -&gt; Background Color -&gt; #F1F1E8</p>
-
-      <p>Inside the group add a WPForms,</p>
-
-      <p>We’ll use a WPForms plugin, which was downloaded with the starter template. Set it to the contact form. We’ll add some text above, and then edit the form from another area.</p>
-
-      <p><img src="res/wpforms-contact.png" alt="" /></p>
-
-      <p><img src="res/edit-contact-form.png" alt="" /></p>
-
-      <p>There’s lots of cool things we can do here, but for now we’ll simply set the form as we like.</p>
-
-      <p><img src="res/check-box-1.png" alt="" /></p>
-
-      <p><img src="res/check-box-2.png" alt="" /></p>
-
-      <p>Finally, ensure the email is set up properly.</p>
-
-      <p><img src="res/admin-email.png" alt="" />)</p>
-
-      <p>We have a complete functional page.</p>
-
-      <p><img src="res/mobile-homepage.png" alt="" /></p>
-
-      <p>In the next section we’ll add a blog page.</p>
-
     </div></div></section>
 <section id="50blogpage"><button class="collapsible">5.0 Blog Page</button><div class="text-content"><div class="text-inner">
 
@@ -534,7 +416,7 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
     </div></div></section>
 <section id="60assignment"><button class="collapsible">6.0 Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>Your assignment is to get into the head of a prospective user by creating a 2-page blog site for a fictional persona, similar in scope to the pre-lab. Create a persona (no need to fill in all the details - major details only), or use one you have previously created, and include a site and blog snippets in keeping with their style.</p>
+      <p>Your assignment is to build a wordpress site with 2 static pages and 3 blog pages, similar in scope to our pre-lab, for an volunteer organization or a web store. This organization should offer at least 3 products or services about which you can make blog pages.</p>
 
       <p>Your site should include:</p>
       <ul>
@@ -543,14 +425,14 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
         <li>Appropriate menu linking the pages, with both mobile and desktop variants</li>
         <li>A landing page with at least 3 sections
           <ul>
-            <li>Each section should communicate an aspect of the persona’s personality or interests</li>
-            <li>Example ideas: book quotes, song lyrics, recipes, photo galleries, pets, etc.</li>
+            <li>Each section should highlight something about store, e.g. an aspect of their location, staff or culture</li>
             <li>Each section should experiment with a different type of Wordpress block</li>
           </ul>
         </li>
         <li>A blog page with at least 3 entries
           <ul>
-            <li>Each entry should be both summarized on the blog posts page, and be given their own individual page</li>
+            <li>Each entry should represent a product or service offered by the company</li>
+            <li>Be sure to aggregate all of the blog posts in some type of a container</li>
           </ul>
         </li>
         <li>I’d recommend quickly prototyping in Figma first, but don’t get too frustrated when you can’t exactly replicate your Figma Design</li>
@@ -572,6 +454,131 @@ Pop-up tools -&gt; Change Alignment -&gt; Align center</p>
       <p>In next weeks lab we will meet either in person or in zoom and do a ~10 minute tour through your GitHub to see how you have showcased your work for the year, and what you might do to improve!</p>
 
       <p>Our hope is you keep building your GitHub skills so that by Capstone you can both properly document your design projects, as well as showcase your work to prospective employers!</p>
+
+    </div></div></section>
+<section id="otherpluginsforreference"><button class="collapsible">Other Plugins for Reference</button><div class="text-content"><div class="text-inner">
+
+      <p>In previous years we looked at some other plugins. For your referece, these are included here. Keep in mind, publishers may update their interfaces over time, so these may change over time:</p>
+
+      <h3 id="appointment-booking">Appointment Booking</h3>
+
+      <p>In previous years we did a contact form, which matches our design, (this info will be left after this section, for your info). This year, instead, we will use a booking system to book tours, to explore installing and using plugins.</p>
+
+      <ul>
+        <li>Install a new plugin:</li>
+      </ul>
+
+      <p><img src="res/install-new-plugin.png" alt="" /></p>
+
+      <ul>
+        <li>Install and activate Easy Appointments</li>
+      </ul>
+
+      <p><img src="res/easy-appointments.png" alt="" /></p>
+
+      <p>This is a plugin created for taking bookings. It <a href="https://en-ca.wordpress.org/plugins/easy-appointments/">can be found here</a>, with  <a href="https://easy-appointments.net/documentation/">documentation here</a>.</p>
+
+      <ul>
+        <li>Plugins typically have their own interfaces for editing. You can get to its settings through the admin dashboard:</li>
+      </ul>
+
+      <p><img src="res/plugin-interface.png" alt="" /></p>
+
+      <p>Often, with plugins, you need to read the docs to figure out they work. This plugin allows places, like Salons, to book appointments. The data model for an appointment includes:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Location</code> (Where is the service offered?)</li>
+        <li><code class="language-plaintext highlighter-rouge">Employee</code> (Who is doing the service?)</li>
+        <li><code class="language-plaintext highlighter-rouge">Service</code> (What is being offered?)
+          <ul>
+            <li>An appointment slot combines a <code class="language-plaintext highlighter-rouge">Connection</code> between each of these three, as well as the times they occur.</li>
+          </ul>
+        </li>
+        <li>So, first we must set this up, for our appointment to work.</li>
+      </ul>
+
+      <p><img src="res/location.png" alt="" /></p>
+
+      <p><img src="res/services.png" alt="" /></p>
+
+      <p><img src="res/employees.png" alt="" /></p>
+
+      <p><img src="res/connections.png" alt="" /></p>
+
+      <p><img src="res/connection.png" alt="" /></p>
+
+      <ul>
+        <li>
+          <p>Finally, we may want to adjust some settings:</p>
+        </li>
+        <li>
+          <p>In particular, I want to auto-confirm appointments</p>
+        </li>
+      </ul>
+
+      <p><img src="res/settings.png" alt="" /></p>
+
+      <ul>
+        <li>
+          <p>Newer plugins typically provide a Wordpress Block to add directly to your site, however, older once might only be accessible through a <code class="language-plaintext highlighter-rouge">shortcode</code>, which will customize the appearance of the plugin on the page.</p>
+        </li>
+        <li>
+          <p>I found these settings which I like:</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ea_bootstrap width="800px" scroll_off="true" layout_cols="2" worker="1" location="1" service="1"]
+</code></pre></div>          </div>
+        </li>
+      </ul>
+
+      <p>We can add it to the page with a <code class="language-plaintext highlighter-rouge">shortcode</code> block</p>
+
+      <p><img src="res/shortcode-block.png" alt="" /></p>
+
+      <p>Unfortunately changes are not “What you see is what you get” (WYSIWYG), so we need to preview our page to see the changes.</p>
+
+      <p><img src="res/booking-an-appointment.png" alt="" /></p>
+
+      <p>When we refresh we can see the slot is gone:</p>
+
+      <p><img src="res/slot-is-gone.png" alt="" /></p>
+
+      <p>Finally, we can view our appointments from the Wordpress admin:</p>
+
+      <p><img src="res/dash-board.png" alt="" /></p>
+
+      <p>This is likely not the best booking plugin, but this gives you an idea of how to find and install a plugin, learn how to use it, and get going with it!</p>
+
+      <h3 id="contact-form">Contact form</h3>
+
+      <p>Let’s finish the landing page off with a contact form:</p>
+
+      <p>Go back to editing the page, and remove the remaining gallery stuff from our template page.</p>
+
+      <p>Start with a <code class="language-plaintext highlighter-rouge">group</code> block which allows us to add a background color</p>
+
+      <p>Group -&gt; Inspector -&gt; Block -&gt; Background Color -&gt; #F1F1E8</p>
+
+      <p>Inside the group add a WPForms,</p>
+
+      <p>We’ll use a WPForms plugin, which was downloaded with the starter template. Set it to the contact form. We’ll add some text above, and then edit the form from another area.</p>
+
+      <p><img src="res/wpforms-contact.png" alt="" /></p>
+
+      <p><img src="res/edit-contact-form.png" alt="" /></p>
+
+      <p>There’s lots of cool things we can do here, but for now we’ll simply set the form as we like.</p>
+
+      <p><img src="res/check-box-1.png" alt="" /></p>
+
+      <p><img src="res/check-box-2.png" alt="" /></p>
+
+      <p>Finally, ensure the email is set up properly.</p>
+
+      <p><img src="res/admin-email.png" alt="" />)</p>
+
+      <p>We have a complete functional page.</p>
+
+      <p><img src="res/mobile-homepage.png" alt="" /></p>
+
+      <p>In the next section we’ll add a blog page.</p>
 
     </div></div></section>
 <section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
