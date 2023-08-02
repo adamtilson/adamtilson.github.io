@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> EYES SSE Activity </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <!-- <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li> -->
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+
+              <div class="row">
+                <header>ENSE 271</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-271/">Schedule</a></li>
+                  <li><a href="/labs/ense-271/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-271/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-271/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-271/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-271/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-271/lab-6">Lab 6</a></li>
+                  <!-- <li><a href="/labs/ense-271/lab-7">Lab 7</a></li> -->
+                </ul>
+              </div>
+
+              <!-- <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
+                  <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
+                  <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
+                  <li><a href="/labs/ense-374/lab-9">Lab 9</a></li>
+                </ul>
+              </div> -->
+
+              <!-- <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div> -->
+
+              <!-- <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-472/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-472/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-472/lab-5">Lab 5</a></li>
+                </ul>
+              </div> -->
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="eyes---software-systems-engineering---exercise">EYES - Software Systems Engineering - Exercise</h1>
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="introsoftwaresystemsengineering"><button class="collapsible">Intro - Software Systems Engineering</button><div class="text-content"><div class="text-inner">
+
+      <p>Software Systems Engineering is the branch of Engineering which is concerned with the development of Software Systems and their life-cycles. A Software System can be comprised of Software (e.g. programs, code), Hardware (e.g. computers, smart phones), and development artifacts (e.g. diagrams, documentation). While most students primarily focus on developing software, you will get exposure to math, natural sciences, computer science, and electronics. Essentially you will learn to solve engineering problems by developing software as the primary component (but not only component) of the solution. Example areas of study include networks, artificial intelligence and machine learning, embedded systems, desktop and web applications, and game development. Software Development Life-cycles include the requirements, planning, design, development, testing, deployment, maintenance and decommissioning of these systems.</p>
+
+      <p>When most students think of Software Engineering they think of writing code. And while that is a key aspect of the role, there are other significant activities which exist outside of the code-writing scope. One of these activities is prototyping applications. Prototyping is an activity in which desginers and engineers create simple objects which represent a finished program, which could be a whiteboard sketch, a paper sketch, or a file produced using prototyping software, like Figma. In this activity we will investigate the prototyping Software Figma, then working together develop some new prototype apps.</p>
+
+    </div></div></section>
+<section id="agenda"><button class="collapsible">Agenda</button><div class="text-content"><div class="text-inner">
+      <ul>
+        <li>Exploring <code class="language-plaintext highlighter-rouge">Design</code> and <code class="language-plaintext highlighter-rouge">Prototyping</code> in Figma (1.5h)</li>
+        <li>Brainstorming (.5h)</li>
+        <li>App development (1h)</li>
+      </ul>
+
+    </div></div></section>
+<section id="signingupforfigma"><button class="collapsible">Signing Up for Figma</button><div class="text-content"><div class="text-inner">
+
+      <p>Figma is a cloud service which you can use through your browser. I will be using Firefox, but according the <a href="https://help.figma.com/hc/en-us/articles/360039827194-Figma-browser-requirements">help documents here</a>, the following browsers are supported, if properly updated:</p>
+
+      <ul>
+        <li>Chrome</li>
+        <li>Firefox</li>
+        <li>Safari</li>
+        <li>Microsoft Edge</li>
+      </ul>
+
+      <p>(Sorry Internet Explorer fans, time for an upgrade! You can always keep the Windows XP background, no judgement)</p>
+
+      <p>Figma provides free pro features for education purposes, as shown here:</p>
+
+      <p><a href="https://www.figma.com/education/">Figma for education</a></p>
+
+      <p>Follow the process here:</p>
+
+      <p><img src="res/get-verified.png" alt="" /></p>
+
+      <p>Create an account using your school email.</p>
+
+      <p>Here are some sample settings which may help with validation, but you should tailor these as needed for you:</p>
+
+      <p><img src="res/sign-up.png" alt="" /></p>
+
+      <p><img src="res/get-validated-info.png" alt="" /></p>
+
+      <p>Let me know if you have any problems signing up, though I am not sure there is anything I’ll be able to do, but hopefully!</p>
+
+    </div></div></section>
+<section id="figmaoverview"><button class="collapsible">Figma Overview</button><div class="text-content"><div class="text-inner">
+
+      <p>Figma has the ability to create both design files and FigJam files. Design are for creating UI mockups, wheras FigJam are for use as Whiteboards and diagramming. We’ll be using design files for this lab:</p>
+
+      <p><img src="res/new-design-file.png" alt="" /></p>
+
+      <p>Let’s learn the UI of a design file</p>
+
+      <p><img src="res/ui-overview.png" alt="" /></p>
+
+      <ol>
+        <li>The file menu and design tools are up here
+          <ul>
+            <li>The Figma Icon acts like the top bar menu you would see in typical desktop appliactions
+              <ul>
+                <li>e.g. <code class="language-plaintext highlighter-rouge">File</code>, <code class="language-plaintext highlighter-rouge">Edit</code>, <code class="language-plaintext highlighter-rouge">View</code>, etc.</li>
+              </ul>
+            </li>
+            <li>Left to right, we have:
+              <ul>
+                <li>Selection Tools (<code class="language-plaintext highlighter-rouge">Select</code>, <code class="language-plaintext highlighter-rouge">Move</code> <code class="language-plaintext highlighter-rouge">V</code>, <code class="language-plaintext highlighter-rouge">Scale</code> <code class="language-plaintext highlighter-rouge">K</code>)</li>
+                <li>Frame Tools, which we can use to creates our pages or views (<code class="language-plaintext highlighter-rouge">Frame</code> <code class="language-plaintext highlighter-rouge">F</code>, <code class="language-plaintext highlighter-rouge">Slice</code> <code class="language-plaintext highlighter-rouge">S</code>)
+                  <ul>
+                    <li>Frames can both represent complete pages, as well as individual components</li>
+                  </ul>
+                </li>
+                <li>Shape tools, for drawing geometric primitives (<code class="language-plaintext highlighter-rouge">Rectangle</code> <code class="language-plaintext highlighter-rouge">R</code>, <code class="language-plaintext highlighter-rouge">Line</code> <code class="language-plaintext highlighter-rouge">L</code>, <code class="language-plaintext highlighter-rouge">Arrow</code>, <code class="language-plaintext highlighter-rouge">Ellipse</code> <code class="language-plaintext highlighter-rouge">O</code>, <code class="language-plaintext highlighter-rouge">Polygon</code>, <code class="language-plaintext highlighter-rouge">Star</code>, <code class="language-plaintext highlighter-rouge">Image</code>)
+                  <ul>
+                    <li><a href="https://www.youtube.com/watch?v=YGBIc6oJCos">This video explains the primitive shapes</a></li>
+                  </ul>
+                </li>
+                <li>Drawing tools for creating Bézier curves or freehand (<code class="language-plaintext highlighter-rouge">Pen</code> <code class="language-plaintext highlighter-rouge">P</code>, <code class="language-plaintext highlighter-rouge">Pencil</code>)</li>
+                <li><code class="language-plaintext highlighter-rouge">Text</code> <code class="language-plaintext highlighter-rouge">T</code></li>
+                <li><code class="language-plaintext highlighter-rouge">Hand</code> <code class="language-plaintext highlighter-rouge">H</code> (pan)</li>
+                <li><code class="language-plaintext highlighter-rouge">Comment</code> <code class="language-plaintext highlighter-rouge">C</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Filename - Set your filename here
+          <ul>
+            <li>Your files will automatically get saved in the cloud on Figma’s servers</li>
+            <li>To save it locally, instead do a <code class="language-plaintext highlighter-rouge">Figma</code> -&gt; <code class="language-plaintext highlighter-rouge">File</code> -&gt; <code class="language-plaintext highlighter-rouge">Save local copy...</code></li>
+            <li>Note: When modifying some objects, this area will also change to have more operations, like masking and boolean operations
+<img src="res/filename-changes-to-options.png" alt="" /></li>
+          </ul>
+        </li>
+        <li>This region has sharing tools, preview tools, and zoom tools</li>
+        <li>This region has layers, assets and pages
+          <ul>
+            <li>Layers
+              <ul>
+                <li>You can think of placing elements on the page like a paper collage.</li>
+                <li>Things placed earlier fall below other things.</li>
+                <li>You can use this menu to manually adjust the depth of elements by dragging them up and down.</li>
+                <li>You can also group elements together to move them together, toggle visibility, and lock them to prevent accidentally moving them
+<img src="res/layers-example.png" alt="" /></li>
+              </ul>
+            </li>
+            <li>Assets - The assets tab houses libraries of reusable components to add to your project.</li>
+            <li>You can create these yourself or import other libraries</li>
+            <li>Pages
+              <ul>
+                <li>Pages allow you to have multiple pages in one file. This is akin to the multiple sheets in a spreadsheet we saw last week.</li>
+              </ul>
+            </li>
+            <li>The area directly below will change depending on the tab you have selected above</li>
+          </ul>
+        </li>
+        <li>This area switch modes between
+          <ul>
+            <li>Design - where we arrange objects in our screen.</li>
+            <li>Prototype - where we add interactions to our prototypes. We’ll look at this next week.</li>
+            <li>Inspect - get detailed info about your objects, like specific position or colors.</li>
+          </ul>
+        </li>
+        <li>In this region to you can modify some details about your selected objects. This will update depending on the context of the object selected. e.g. if we have selected text, we will see options like for fonts and text aligning. If we have selected a rectangle, we can modify properties such as the outline color, thickness, and fill color and opacity.
+<img src="res/text-example.png" alt="" /></li>
+      </ol>
+
+      <p>Of course, center stage is where we’ll actually do all of our designing!</p>
+
+    </div></div></section>
+<section id="usageexamplewithcommonoperations"><button class="collapsible">Usage Example with Common Operations</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s look a few common usage examples that are less trivial:</p>
+
+      <h3 id="start-with-frames">Start with Frames</h3>
+      <ul>
+        <li>Since we are mocking up user interfaces, we need to start with a screen view</li>
+        <li>In Figma, these are called <code class="language-plaintext highlighter-rouge">Frames</code></li>
+        <li>Use the frame tool and draw a box</li>
+        <li>If you need to, you can manually set a size in the right sidebar for pixel perfect views</li>
+        <li>You can select frames by clicking on their name in the upper left</li>
+      </ul>
+
+      <h3 id="fine-tuning-shapes">Fine tuning shapes</h3>
+      <ul>
+        <li>Once you place a rectangle, you may want to fine tune. Typically these changes will be made from:
+          <ul>
+            <li>The right-click context menu</li>
+            <li>The widgets which appear when the object is selected</li>
+            <li>The properties panel to the right of the application
+<img src="res/modify-rectangle-properties.png" alt="" /></li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="gradients">Gradients</h3>
+      <p><img src="res/gradients.png" alt="" /></p>
+      <ul>
+        <li>To create a fill which is a gradient, perform the following steps
+          <ol>
+            <li>Click on the fill color</li>
+            <li>Change the fill type from solid to linear</li>
+            <li>You can set the individual points in the gradient in this area</li>
+            <li>You can fine tune the gradient, e.g. change the rotation, here.
+Experiment with some of the other gradient types!</li>
+          </ol>
+        </li>
+      </ul>
+
+      <h3 id="groups">Groups</h3>
+      <ul>
+        <li>lets make our user icon slightly better with an outline.</li>
+        <li>First, lets draw a circle slightly bigger than our icon</li>
+        <li>Make sure it is behind the icon either through layers, or right-click -&gt; <code class="language-plaintext highlighter-rouge">Send to back</code></li>
+        <li>Make sure it has a Stroke, and remove its fill</li>
+        <li>Finally, select both objects and right-click -&gt; <code class="language-plaintext highlighter-rouge">Group</code></li>
+        <li>These objects will now move together, and can be clones (<code class="language-plaintext highlighter-rouge">ctrl+d</code>) and manipulated together.</li>
+        <li>Note: because outlines do not change their thickness when scaling, this may not look exactly right at other sizes!</li>
+      </ul>
+
+      <p><a href="https://www.figma.com/best-practices/groups-versus-frames/">Learn more about groups versus frames here</a></p>
+
+      <h3 id="masked-images">Masked Images</h3>
+      <ul>
+        <li>Sometimes we want images to be masked by another shape
+          <ul>
+            <li>i.e. an image inside of a circle</li>
+            <li>We can think of this like a window which is looking through to an image behind it.</li>
+            <li>we can do this by
+              <ul>
+                <li>uploading an image using the image tool, under the rectangle (or dragging and dropping in an image from the filesystem)</li>
+                <li>adding a shape on top</li>
+                <li>select the shape and click on the mask button</li>
+                <li>in the layer pane, drag the image <em>above</em> the mask</li>
+                <li>the image can by fine tunes by double clicking it and them manipulating it
+<img src="res/image-being-masked-by-circle.png" alt="" /></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>An alternative approach to this is to use images as fills
+          <ul>
+            <li>If you want to modify the image after, change the fill type to crop (or <code class="language-plaintext highlighter-rouge">alt+double-click</code>)</li>
+            <li>If you choose to upload multiple images, you can fill them one after another rapidly</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><a href="https://help.figma.com/hc/en-us/articles/360040450253-Masks">More info about masks in the docs</a></p>
+
+      <p><a href="https://www.figma.com/best-practices/components-styles-and-shared-libraries/">You can level up your figma usage with this guide on best practices</a></p>
+
+      <h3 id="learn-by-doing">Learn by Doing!</h3>
+
+      <p>In this activity, we are going to learn the entire process of prototyping an application by doing it! Imagine that you have been tasked by a local Pet Resuce Shelter which wishes to have an Adoption App, to run on Android and iOS, to display pets available for adoption. We will prototype an application for this by creating:</p>
+      <ul>
+        <li>A low-fidelity wireframe</li>
+        <li>A high-fidelity Wireframe</li>
+        <li>A fully interactive prototype
+We will make use of some designs and figma</li>
+      </ul>
+
+      <h3 id="low-fidelity-lo-fi-wireframes">Low-Fidelity (lo-fi) Wireframes</h3>
+
+      <p>Figma can be used for <code class="language-plaintext highlighter-rouge">Low Fidelity</code> (lo-fi) wireframing.</p>
+
+      <p>Lo-fi wireframing, (creating wireframes, or mockups) is the simplest way to roughly lay out the visual elements of your design. These mock-ups are purposefully rough and devoid of detail or color so that one is forced to focus on the structure, and remain uncommitted to the design thus remaining open to change.</p>
+
+      <p>Dedicated tools exist for this, like Balsamiq, but we can also easily simulate this in Figma.</p>
+
+      <p>Baslamiq has a good explanation of <a href="https://balsamiq.com/learn/articles/what-are-wireframes/">Wireframes here</a>.</p>
+
+      <p>In Figma there are two approaches to this: you could make the individual components yourself, which is not particularly hard, and will give your mockup a more personalized feel. Or you could start with a kit designed specifically for this purpose:</p>
+
+      <p><a href="https://www.figma.com/community/file/887892609124245416">Figma lo-fi kit</a></p>
+
+      <p>Here’s an example low fi page.</p>
+
+      <p><img src="res/lo-fi-example.png" alt="" /></p>
+
+      <p>Instead of using scribbles, you can use <a href="https://www.lipsum.com/">placeholder text</a>, but be sure to use an appropriate font like <a href="https://fonts.google.com/specimen/Comic+Neue">comic neue</a> or <a href="https://fonts.google.com/specimen/Allison">allison</a>, or even <a href="https://fonts.google.com/specimen/Redacted+Script#standard-styles">redacted script</a>! One benefit to this is that there will be more reflow options.</p>
+
+      <ul>
+        <li>In creating the low-fi, it is important to see that you capture all of the required features for the system, and decided on how these should be graphically laid out on the page</li>
+        <li>Here is the example low-fi that I came up with for this project:</li>
+      </ul>
+
+      <p><img src="res/pet-app-lo-fi.png" alt="" /></p>
+
+      <p>Implementation hints:</p>
+      <ul>
+        <li>Pictures can be represented with rectanges with an X through them
+          <ul>
+            <li>This can be created using the rectangle and line tools</li>
+            <li>You can create this one, and then copy and pase</li>
+          </ul>
+        </li>
+        <li>Rounded rectanges are commonly used to represent buttons</li>
+        <li>The magnifying lens was made with a circle and a few line segments
+          <ul>
+            <li>In this sense, Figma can be used as a lightweight vector graphics editor</li>
+            <li><img src="res/magnifying-glass.png" alt="" /></li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="high-fidelity-hi-fi-wireframes">High-Fidelity (hi-fi) Wireframes</h3>
+
+      <p>In contrast to a lo-fi wireframes, <code class="language-plaintext highlighter-rouge">High Fidelity</code>, or hi-fi wireframes incorporate some design elements of the final product, such as images, colors, fonts and real copy which will appear in the final product. For this lab, we will use the term <code class="language-plaintext highlighter-rouge">Wireframes</code> to refer to mock-ups without interactivity, and <code class="language-plaintext highlighter-rouge">Prototypes</code> to refer to mockups with interactivity, though keep in mind in industry you may see the terms used interchangeably.</p>
+
+      <p>In Figma, it’s often not much harder technically to create hi-fi wireframes than lo-fi, which involve colors, actual images, and content, as long as these assets are available. We can create our layouts using primitive shapes with color, images, text and UI icons.</p>
+
+      <p>Similarly, we can also extend Figma’s functionality with high fidelity UI kits, for example, something like <a href="https://www.figma.com/community/plugin/1060213973572396708/Figit---A-massive-library-of-UI-Elements">Figit</a>, however tradeoffs will exist - what you gain in speed you may lose in flexibility and creativity.</p>
+
+      <p>To assist you in developing the high fidelity prototype, I has collected a number of images and icons from pexels and flaticon. These images are free to use as long as they are properly attributed. You may download these here:</p>
+
+      <p><a href="eyes-starter-assets.zip">eyes-starter-assets.zip</a></p>
+
+      <p>Our application is going to have two main views:</p>
+      <ul>
+        <li>One which is visible before the user selects a pet category, and in this view we will use a large header image</li>
+        <li>The second only appears after selecting a category, and will allow the user to swipe through to see different pets which are available.</li>
+      </ul>
+
+      <p>Note: At this point we are attempting to create something which will have styles which are similar to the best. If you are interested in seeing what some of the world class designers can do in this regard, check out: <a href="www.dribbble.com">dribbble</a> and click on the <code class="language-plaintext highlighter-rouge">mobile</code> tab.</p>
+
+      <p>To accomplish this, we will create two screens:</p>
+
+      <p><img src="res/home-screen.png" alt="" /></p>
+
+      <p><img src="res/second-view.png" alt="" /></p>
+
+      <p>Note, the second view will need to replicated 3 times, once for each cats, dogs and others.</p>
+
+      <p>Implementation hints:</p>
+      <ul>
+        <li>Using image masks is strongly recommended to get the header image positioned correctly</li>
+        <li>The font I am using is <code class="language-plaintext highlighter-rouge">Poppins</code>. I changed the font color to white and added a <code class="language-plaintext highlighter-rouge">stroke</code> around it to make it more readable, but I will admit, this style does not look very contemporary!</li>
+        <li>I added icons for the dog, cat and other buttons, as well as the magnifying lens - check inside your assets folder to find them!</li>
+        <li>The draggable section needs to be made about three times as long as what actually fits on the screen. This will enable us to scroll a little bit later.
+          <ul>
+            <li>You can do this by creating one card, copy and pasting it two times, nudging the new card to the right each time, and then grouping them together.</li>
+            <li><img src="res/second-view-expanded.png" alt="" /></li>
+          </ul>
+        </li>
+        <li>Here is what I did for the dogs and others:
+<img src="res/second-view-dogs.png" alt="" />
+<img src="res/second-view-others.png" alt="" /></li>
+      </ul>
+
+      <h3 id="interactive-prototypes">Interactive Prototypes</h3>
+
+      <p>So far, we have been looking only at static prototypes, also called <code class="language-plaintext highlighter-rouge">wireframes</code>. However, Figma is much more powerful. We can actually connect together our screens so that, as users click on different elements, they navigate between the different areas. In addition, we can create simple animation effects to simulate real world components. We are going to complete three steps to make an interactive <code class="language-plaintext highlighter-rouge">prototype</code>:</p>
+      <ol>
+        <li>Create a pet carousel on the main page to display three different animals</li>
+        <li>Link the pet buttons to take us to different pages for different types of pets</li>
+        <li>Create a draggable gallery in each of the pets</li>
+      </ol>
+
+      <h4 id="pet-carousel">Pet Carousel</h4>
+
+      <p>The first interaction we will create is a simple animation. Every 5 seconds, the images fades from the first to the second, then the second to the third, then the third back to the first. To do this, we first create 3 total instances of the first frame, with minor changes between them. If you have done any experience with animation, this is equivalent to keyframes.</p>
+
+      <p>To create the pet carousel, select the first Frame which you have created and make two copies of it. (click on the Frame name, and press <code class="language-plaintext highlighter-rouge">ctrl+d</code>)</p>
+      <ul>
+        <li>Change the masked image to be a different pet
+          <ul>
+            <li>You can drag and drop an image directly over top of a fill to instantly update the image</li>
+            <li>In your assets folder, all header images are labeled as <code class="language-plaintext highlighter-rouge">header-x.png</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><img src="res/cute-pets.png" alt="" /></p>
+
+      <p>Next we need to switch Figma into Prototyping mode. In this mode, we will wire sections of our wireframe to seperate wireframes, so that when the users perform the linked interaction, the player will transition to the new page.</p>
+
+      <p><img src="res/switch-to-prototype.png" alt="" /></p>
+
+      <p>Now in prototype mode, select the first frame of the three frame animation by clicking on the frame name</p>
+
+      <p><img src="res/select-name.png" alt="" /></p>
+
+      <p>This will cause a small circle with a plus (+) to appear to the right of the frame if you move your cursor to the middle-right of the Frame. Select this circle and drag it to the frame to the right</p>
+
+      <p><img src="res/first-connect.png" alt="" /></p>
+
+      <p>This will cause a small window to pop up with some options. Set them as selected in the following image:</p>
+
+      <p><img src="res/first-connection-settings.png" alt="" /></p>
+
+      <p>This tells figma that, after a delay of 5000ms (or 5 seconds) to dissolve this page into the next one. As the only thing that is different between this page and the next one is the header image, it will appear as though the header dissolves over time.</p>
+
+      <p>Continue this process for the second frame to the third, and the third back to the first. Use the same settings.</p>
+
+      <h3 id="previewing-your-work">Previewing your work</h3>
+
+      <p>When you are ready to check out the fruits of your labour, click on the preivew button in the upper right:</p>
+
+      <p><img src="res/preview-prototype.png" alt="" /></p>
+
+      <p>And preview the results of your awesome preview:</p>
+
+      <p><img src="res/awesome-preview.png" alt="" /></p>
+
+      <h3 id="linking-the-main-page-to-the-secondary-pages">Linking the main page to the secondary pages</h3>
+
+      <p>The next task we need to accomplish to make our app function as intended is to link the three buttons (cats, dogs, and others) to their appropriate pages.</p>
+
+      <p>To do this, simply ensure you are in prototype mode, click on the cat button, and drag it down to the cat page. You will see a wire showing that the two are connected.</p>
+
+      <p><img src="res/linking-cats.png" alt="" /></p>
+
+      <p>Don’t forget to link this for all of the three cat images for the heading.</p>
+
+      <p>Use the following settings:</p>
+
+      <p><img src="res/first-smart-animate.png" alt="" /></p>
+
+      <p>This animation uses the <code class="language-plaintext highlighter-rouge">smart animate</code> feature. This is one of hte most powerful animation settings in Figma, it attempts to figure out how elements have changed between screens, and <code class="language-plaintext highlighter-rouge">interpolate</code> between them. In animation, this is known as <code class="language-plaintext highlighter-rouge">in-betweening</code>, or simply <code class="language-plaintext highlighter-rouge">tweening</code>.</p>
+
+      <p>In addition, you will need to link the dog and other page back to the cat page as well. However, the Smart Animate feature may have unexpected consequences in this state, so instant may be a better choice here. You need not link pages back to themselves, e.g. if you are on the cat page, the cat button does not require an interaction.</p>
+
+      <p>If you shift click on each of the frames, you can see all of the connections, both exiting and entering pages. There’s a bit of symetric beauty in this, but don’t worry, it’s going to get much messier from here!</p>
+
+      <p><img src="res/rats-nest.png" alt="" /></p>
+
+      <h3 id="draggable-galleries">Draggable Galleries</h3>
+
+      <p>The final animation task we are going to do is to create draggable galleries</p>
+      <ul>
+        <li>This means, if the user taps and drags the image card part of the screen, it will swipe to the next image.</li>
+        <li>Due to a limitation in the Figma software, we will be required to Swipe all the way to the right, then all the way back to the left for the interaction to work properly</li>
+      </ul>
+
+      <p>To begin this animation, it is recommended that you set up your frames as follows:</p>
+
+      <p><img src="res/tall-stack.png" alt="" /></p>
+
+      <p>You can do this by clicking on the name of the Frame, and dragging it around.</p>
+
+      <p>For each of the three sub pages, you will need to make three total copies, for a total of four keyframes:</p>
+
+      <p><img src="res/tall-and-wide-stack.png" alt="" /></p>
+
+      <p>Recall, you can do this with <code class="language-plaintext highlighter-rouge">ctrl+d</code></p>
+
+      <p>The next part is a bit tricky. In each of the adjacent frames, you want to reposition the card group so that it is focusing on another pet. All of the frames in the second column should focus on the second pet, and all of the frames in the third column should focus on the third pet. The fourth column is essentially a copy of the second column (and it may be easier to simply duplicate the second column after adjustingm the third colun)</p>
+
+      <p><img src="res/columns-nudged.png" alt="" /></p>
+
+      <p>Finally, the trickiest part. You need to link an event from the draggable group to the adjacent frame for the first three, and then back to the first for the fourth!</p>
+      <ul>
+        <li>first click on the group so that it is selected</li>
+        <li>look for the little circle on any of the four sides. Note - it may be out of frame!</li>
+        <li>drag the circle to next frame</li>
+      </ul>
+
+      <p><img src="res/draggable-is-tricky.png" alt="" /></p>
+
+      <ul>
+        <li>use the following settings</li>
+      </ul>
+
+      <p><img src="res/draggable-settings.png" alt="" /></p>
+
+      <p>Hint: If you want to try something different, try setting <code class="language-plaintext highlighter-rouge">Ease out</code> to <code class="language-plaintext highlighter-rouge">Bouncy</code></p>
+
+      <p>Now you just need to do this like… 11 more times!</p>
+
+      <p>Don’t forget to test it out!</p>
+
+      <p>And with this, you should have everything working.</p>
+
+      <h3 id="your-turn">Your Turn!</h3>
+
+      <p>We only created a one page application. However, we skipped an important step - what happens after you click on the “Meet me Today” button? Pick one of the pets, and design the page you might arrive with after clicking this button!</p>
+      <ul>
+        <li>What info would you like to include?</li>
+        <li>What info might you need from the user?</li>
+        <li>We are going to form into groups, and you can brainstorm info you might want on that page
+          <ul>
+            <li>It is a good idea to quickly sketch out a low-fi on paper so that you can see your plan</li>
+          </ul>
+        </li>
+        <li>Then come back and try to implement it
+          <ul>
+            <li>How will you link it to work with the existing site</li>
+          </ul>
+        </li>
+        <li>Are there any animations you would like to attempt?</li>
+      </ul>
+
+      <p>Note: you don’t need to do every animal! Pick your favourite and go from there.</p>
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2022 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
