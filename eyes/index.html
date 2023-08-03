@@ -130,7 +130,7 @@
 
       <p><img src="res/adam-150-150.jpg" alt="" /></p>
 
-      <p>My name is Adam Tilson, M.A.Sc., P.Eng., I am a Lab Instructor in Software Systems Engineering. My teaching portfolio currently consists of Software Management Lab, Networks Lab, Artificial Intelligence Lab, Machine Learning Lab, People Centered Design Lab, and Math Programming Lab. In addition to teaching in the lab, I mentor students in their capstone project, and I serve on a number of committees and organizations, internal and external</p>
+      <p>My name is Adam Tilson, M.A.Sc., P.Eng., I am a Lab Instructor in Software Systems Engineering. My teaching portfolio currently consists of Software Management Lab, Networks Lab, Artificial Intelligence Lab, Machine Learning Lab, People Centered Design Lab, and Math Programming Lab. In addition to teaching in the lab, I mentor students in their capstone project, and I serve on a number of committees and organizations, internal and external.</p>
 
     </div></div></section>
 <section id="agenda"><button class="collapsible">Agenda</button><div class="text-content"><div class="text-inner">
@@ -161,18 +161,6 @@
       <p>However, Figma provides free pro features for education purposes, as shown here:</p>
 
       <p><a href="https://www.figma.com/education/">Figma for education</a></p>
-
-      <p>Follow the process here:</p>
-
-      <p><img src="res/get-verified.png" alt="" /></p>
-
-      <p>Create an account using your school email.</p>
-
-      <p>Here are some sample settings which may help with validation, but you should tailor these as needed for you:</p>
-
-      <p><img src="res/sign-up.png" alt="" /></p>
-
-      <p><img src="res/get-validated-info.png" alt="" /></p>
 
       <p>Let me know if you have any problems signing up, though I am not sure there is anything I’ll be able to do, but hopefully!</p>
 
@@ -230,20 +218,17 @@
             <li>Layers
               <ul>
                 <li>You can think of placing elements on the page like a paper collage.</li>
-                <li>Things placed earlier fall below other things.</li>
+                <li>Things placed earlier fall below other things.
+                  <ul>
+                    <li>These will appear lower in the hierarchy</li>
+                  </ul>
+                </li>
                 <li>You can use this menu to manually adjust the depth of elements by dragging them up and down.</li>
                 <li>You can also group elements together to move them together, toggle visibility, and lock them to prevent accidentally moving them
-<img src="res/layers-example.png" alt="" /></li>
+<img src="res/layers-example.png" alt="" />
+     - There are some other tabs in this section, but we do not need them for this activity</li>
               </ul>
             </li>
-            <li>Assets - The assets tab houses libraries of reusable components to add to your project.</li>
-            <li>You can create these yourself or import other libraries</li>
-            <li>Pages
-              <ul>
-                <li>Pages allow you to have multiple pages in one file. This is akin to the multiple sheets in a spreadsheet we saw last week.</li>
-              </ul>
-            </li>
-            <li>The area directly below will change depending on the tab you have selected above</li>
           </ul>
         </li>
         <li>This area switch modes between
@@ -264,7 +249,7 @@
         <li>Select the tool</li>
         <li>Drag to draw it into the center stage</li>
         <li>Make any major adjustments in the center stage</li>
-        <li>Make any fine adjustments in the inspector on the right</li>
+        <li>Make any fine adjustments in the section to the right</li>
       </ul>
 
     </div></div></section>
@@ -278,7 +263,8 @@
         <li>In Figma, these are called <code class="language-plaintext highlighter-rouge">Frames</code></li>
         <li>Use the frame tool and draw a box</li>
         <li>If you need to, you can manually set a size in the right sidebar for pixel perfect views</li>
-        <li>You can select frames by clicking on their name in the upper left</li>
+        <li>You can also use pre-sized frames from the menu on the right</li>
+        <li>You can select and move frames by clicking on their name in the upper left</li>
       </ul>
 
       <h3 id="fine-tuning-shapes">Fine tuning shapes</h3>
@@ -388,10 +374,14 @@ We will make use of some designs and figma</li>
         <li>Pictures can be represented with rectanges with an X through them
           <ul>
             <li>This can be created using the rectangle and line tools</li>
-            <li>You can create this one, and then copy and pase</li>
+            <li>You can create this one, and then copy and paste as you need more imagesw</li>
           </ul>
         </li>
-        <li>Rounded rectanges are commonly used to represent buttons</li>
+        <li>Rounded rectanges are commonly used to represent buttons
+          <ul>
+            <li>You can round a rectangle using the wigdet that appears when you move your mouse inside the corner of a rectangle</li>
+          </ul>
+        </li>
         <li>The magnifying lens was made with a circle and a few line segments
           <ul>
             <li>In this sense, Figma can be used as a lightweight vector graphics editor</li>
@@ -399,6 +389,8 @@ We will make use of some designs and figma</li>
           </ul>
         </li>
       </ul>
+
+      <p>If you fall behind, here is a partially complete version: <a href="res/pet-app-low-fi.fig">pet-app-low-fi.fig</a></p>
 
     </div></div></section>
 <section id="highfidelityhifiwireframes"><button class="collapsible">High-Fidelity (hi-fi) Wireframes</button><div class="text-content"><div class="text-inner">
@@ -442,6 +434,8 @@ We will make use of some designs and figma</li>
 <img src="res/second-view-dogs.png" alt="" />
 <img src="res/second-view-others.png" alt="" /></li>
       </ul>
+
+      <p>If you fall behind, here is a partially complete version: <a href="res/pet-app-high-fi-static.fig">pet-app-high-fi-static.fig</a></p>
 
     </div></div></section>
 <section id="interactiveprototypes"><button class="collapsible">Interactive Prototypes</button><div class="text-content"><div class="text-inner">
@@ -499,27 +493,31 @@ We will make use of some designs and figma</li>
 
       <p><img src="res/awesome-preview.png" alt="" /></p>
 
+      <p>If you fall behind, here is a partially complete version: <a href="res/pet-app-high-fi-carousel.fig">pet-app-high-fi-carousel.fig</a></p>
+
       <h3 id="linking-the-main-page-to-the-secondary-pages">Linking the main page to the secondary pages</h3>
 
       <p>The next task we need to accomplish to make our app function as intended is to link the three buttons (cats, dogs, and others) to their appropriate pages.</p>
 
-      <p>To do this, simply ensure you are in prototype mode, click on the cat button, and drag it down to the cat page. You will see a wire showing that the two are connected.</p>
+      <p>To do this, simply ensure you are in prototype mode, and in each the header page, click on the cat button, click on the circle which appears near any side, and drag it down to the cat page. You will see a wire showing that the two are connected.</p>
 
       <p><img src="res/linking-cats.png" alt="" /></p>
 
-      <p>Don’t forget to link this for all of the three cat images for the heading.</p>
+      <p>Don’t forget to do this for the other “carousel” frames you created.</p>
 
       <p>Use the following settings:</p>
 
       <p><img src="res/first-smart-animate.png" alt="" /></p>
 
-      <p>This animation uses the <code class="language-plaintext highlighter-rouge">smart animate</code> feature. This is one of hte most powerful animation settings in Figma, it attempts to figure out how elements have changed between screens, and <code class="language-plaintext highlighter-rouge">interpolate</code> between them. In animation, this is known as <code class="language-plaintext highlighter-rouge">in-betweening</code>, or simply <code class="language-plaintext highlighter-rouge">tweening</code>.</p>
+      <p>This animation uses the <code class="language-plaintext highlighter-rouge">smart animate</code> feature. This is one of the most powerful animation settings in Figma, it attempts to figure out how elements have changed between screens, and <code class="language-plaintext highlighter-rouge">interpolate</code> between them. In animation, this is known as <code class="language-plaintext highlighter-rouge">in-betweening</code>, or simply <code class="language-plaintext highlighter-rouge">tweening</code>.</p>
 
       <p>In addition, you will need to link the dog and other page back to the cat page as well. However, the Smart Animate feature may have unexpected consequences in this state, so instant may be a better choice here. You need not link pages back to themselves, e.g. if you are on the cat page, the cat button does not require an interaction.</p>
 
       <p>If you shift click on each of the frames, you can see all of the connections, both exiting and entering pages. There’s a bit of symetric beauty in this, but don’t worry, it’s going to get much messier from here!</p>
 
       <p><img src="res/rats-nest.png" alt="" /></p>
+
+      <p>If you fall behind, here is a partially complete version: <a href="res/pet-app-high-fi-carousel-and-links.fig">pet-app-high-fi-carousel-and-links.fig</a></p>
 
       <h3 id="draggable-galleries">Draggable Galleries</h3>
 
@@ -567,6 +565,8 @@ We will make use of some designs and figma</li>
       <p>Don’t forget to test it out!</p>
 
       <p>And with this, you should have everything working.</p>
+
+      <p>If you fall behind, here is a complete version: <a href="res/pet-app-high-fi-complete.fig">pet-app-high-fi-complete.fig</a></p>
 
     </div></div></section>
 <section id="yourturn"><button class="collapsible">Your Turn!</button><div class="text-content"><div class="text-inner">
