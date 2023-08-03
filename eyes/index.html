@@ -403,6 +403,21 @@ We will make use of some designs and figma</li>
 
       <p><a href="eyes-starter-assets.zip">eyes-starter-assets.zip</a></p>
 
+      <p>In addition, here is a list of colors which are used in the application:</p>
+
+      <p><img src="res/pet-app-colors.png" alt="" /></p>
+
+      <ul>
+        <li>#F5E48A</li>
+        <li>#D4A054</li>
+        <li>#B1D5FB</li>
+        <li>#306382</li>
+        <li>#A9C3A0</li>
+        <li>#627B52</li>
+      </ul>
+
+      <p>And the font being used is <code class="language-plaintext highlighter-rouge">Poppins</code>.</p>
+
       <p>Our application is going to have two main views:</p>
       <ul>
         <li>One which is visible before the user selects a pet category, and in this view we will use a large header image</li>
@@ -421,12 +436,26 @@ We will make use of some designs and figma</li>
 
       <p>Implementation hints:</p>
       <ul>
-        <li>Using image masks is strongly recommended to get the header image positioned correctly</li>
-        <li>The font I am using is <code class="language-plaintext highlighter-rouge">Poppins</code>. I changed the font color to white and added a <code class="language-plaintext highlighter-rouge">stroke</code> around it to make it more readable, but I will admit, this style does not look very contemporary!</li>
+        <li>Using image masks is strongly recommended to get the header image positioned correctly
+          <ul>
+            <li>After succesfully masking the image, you can double click to select the image, and then fine tune it through the mask
+              <ul>
+                <li>You can use this to put the pet into the frame</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>The font I am using is <code class="language-plaintext highlighter-rouge">Poppins</code>. For the header, I changed the font color to white and added a <code class="language-plaintext highlighter-rouge">stroke</code> around it to make it more readable, but I will admit, this style does not look very contemporary!</li>
         <li>I added icons for the dog, cat and other buttons, as well as the magnifying lens - check inside your assets folder to find them!</li>
         <li>The draggable section needs to be made about three times as long as what actually fits on the screen. This will enable us to scroll a little bit later.
           <ul>
             <li>You can do this by creating one card, copy and pasting it two times, nudging the new card to the right each time, and then grouping them together.</li>
+            <li>You can also do this on a separate frame, and then bring it into the desired frame by dragging it in the hierarchy in the left pane
+              <ul>
+                <li>As long as an object is nested under a frame, it will be displayed in the frame</li>
+                <li>If it is not nested in the frame, (i.e. at the top level of the application), it will not be part of the frame in the preview</li>
+              </ul>
+            </li>
             <li><img src="res/second-view-expanded.png" alt="" /></li>
           </ul>
         </li>
