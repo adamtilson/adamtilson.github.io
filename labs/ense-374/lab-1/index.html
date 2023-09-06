@@ -139,43 +139,55 @@
     </div></div></section>
 <section id="part1visualstudiocode"><button class="collapsible">Part 1: Visual Studio Code</button><div class="text-content"><div class="text-inner">
 
-      <p>Visual Studio Code is a lightweight code editor with many extensions.</p>
+      <p>Visual Studio Code (VS Code) is a lightweight code editor with many extensions.</p>
 
       <h3 id="ide-vs-editor">IDE Vs. Editor</h3>
 
       <p>IDE - Integrated Development Environment</p>
+
       <ul>
         <li>Tend to have a larger install, slower to run, have more tools, and may be dedicated to a single language.</li>
         <li>Examples: Visual Studio, JetBrains, Eclipse</li>
       </ul>
 
       <p>Code Editors - tend to be more lightweight, faster, fewer tools, universal across coding languages.</p>
+
       <ul>
         <li>Examples: Sublime Text, Atom, VS Code</li>
       </ul>
 
       <h3 id="ide--editor-spectrum">IDE / Editor Spectrum</h3>
 
-      <p>Subjective, on a scale of Visual Studio to Notepad…</p>
+      <p>Subjective, on a scale of Visual Studio to Notepad:</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                     Eclipse                               Notepad++
 Visual Studio ----------|--------------------|------|--------|---------- Notepad
                                           VS Code  Atom
 </code></pre></div>      </div>
       <p><em>** Visual Studio Code is NOT Visual Studio **</em></p>
+      <ul>
+        <li>Visual Studio is a very large (bloated) IDE whereas VS Code is a light-weight code editor.</li>
+      </ul>
 
       <p>The further you progress as a developer, the more likely you gain a preference for one tool or another.</p>
 
       <h3 id="installation">Installation</h3>
 
-      <p><a href="https://code.visualstudio.com/">Download Visual Studio code here…</a></p>
+      <p><a href="https://code.visualstudio.com/">Download VS Code</a></p>
 
-      <p>Do I have a 64 bit processor? Probably. 
-In windows you can check by…</p>
+      <p>Do I have a 64 bit processor? Probably! 
+In windows you can check by:</p>
       <ul>
         <li>Start -&gt; Search -&gt; about your PC</li>
       </ul>
 
       <p><img src="res/about-windows.png" alt="" /></p>
+
+    </div></div></section>
+<section id="alternatives"><button class="collapsible">Alternatives</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>If you would like a build of VS Code without any of Microsoft’s telemetry (tracking), check out <a href="https://vscodium.com/">VS Codium</a>. However note that you will lose access to the awesome extensions marketplace and some debugging tools. This is what I use on my personal computer.</li>
+      </ul>
 
       <h3 id="major-features">Major Features</h3>
 
@@ -190,7 +202,7 @@ In windows you can check by…</p>
           </ul>
         </li>
         <li>Built in Debugging - Break points, call stacks, interactive console</li>
-        <li>Built in Git - However, we’ll stick to the command line…</li>
+        <li>Built in Git - You likely used this in ENSE 271. In this course we will instead focus on the command line.</li>
         <li>Extensions - So many good ones!</li>
       </ul>
 
@@ -198,7 +210,6 @@ In windows you can check by…</p>
 
       <ul>
         <li>binaries are not MIT as they contain telemetry, and not all MarketPlace extensions are not necessarilly FLOSS.</li>
-        <li>If ever they Microsoft it up, there’s always the FLOSS fork VS Codium.</li>
       </ul>
 
       <h3 id="layout">Layout</h3>
@@ -220,24 +231,28 @@ In windows you can check by…</p>
       <ul>
         <li>Emmet: HTML 5 autocomplete.</li>
         <li>Autosave (File -&gt; Autosave)</li>
-        <li>Multi code views (ctrl+1, ctrl+2 … etc)</li>
+        <li>Multi code views (ctrl+1, ctrl+2, etc.)</li>
       </ul>
 
       <p><img src="res/multi-view.png" alt="" /></p>
 
       <h3 id="command-palette">Command Palette</h3>
 
-      <p>` Ctrl + Shift + P`, type in what you are looking for</p>
+      <p><code class="language-plaintext highlighter-rouge">ctrl + shift + p</code>, type in what you are looking for</p>
 
       <p><img src="res/command-palette.png" alt="" /></p>
 
       <h3 id="terminal">Terminal</h3>
 
-      <p><code class="language-plaintext highlighter-rouge">ctrl + shift + </code> ` (backtick)</p>
+      <p><code class="language-plaintext highlighter-rouge">ctrl + shift + `</code> (backtick character, to the left of <code class="language-plaintext highlighter-rouge">1</code> on most QWERTY keyboards)</p>
       <ul>
         <li>If that shortcut is cumbersome, you can always use the command palette!</li>
         <li>Starts at the root of your workspace</li>
-        <li>You can have multiple terminals at once, e.g. one running a server and one a client. This is useful if a running service ‘consumes’ a terminal</li>
+        <li>You can have multiple terminals at once, e.g. one running a server and one a client.
+          <ul>
+            <li>This is useful if a running service that ‘consumes’ a terminal</li>
+          </ul>
+        </li>
       </ul>
 
       <h3 id="themes">Themes</h3>
@@ -250,6 +265,8 @@ In windows you can check by…</p>
 
       <h3 id="extensions">Extensions</h3>
 
+      <p>There are many excellent extensions, here’s some that are worth investigating:</p>
+
       <p><code class="language-plaintext highlighter-rouge">Prettier</code> (Code formatter)</p>
 
       <p><code class="language-plaintext highlighter-rouge">Snippets</code> (Like Emmet, but for different languages)</p>
@@ -258,7 +275,7 @@ In windows you can check by…</p>
 
       <p><code class="language-plaintext highlighter-rouge">Bracket Pair Colorizer</code> (To visually spot mismatched brackets)</p>
 
-      <p><code class="language-plaintext highlighter-rouge">AI Autocomplete</code> (A couple different ones exist… are robots going to take your job?!)</p>
+      <p><code class="language-plaintext highlighter-rouge">Github Copilot</code> (AI autocomplete - are we living in a dystopia where computers code computers?!)</p>
 
       <h3 id="where-to-get-help">Where to get help</h3>
 
@@ -284,7 +301,7 @@ In windows you can check by…</p>
 
       <p>Git allows branching. You can have multiple versions of your source existing simultaneously, e.g. different members can work on individual features in isolation, and then you can combine your work together at the end, often pain free.</p>
 
-      <h3 id="locations">Locations</h3>
+      <h3 id="local-or-remote">Local or Remote</h3>
 
       <p>Your code can be stored on a local repository (repo) or a remote repo.</p>
       <ul>
@@ -303,7 +320,7 @@ In windows you can check by…</p>
 
       <ul>
         <li>
-          <p>When you run the <code class="language-plaintext highlighter-rouge">add</code> command, a file is moved from working to staged. This means git knows to include it next time work is checked in.</p>
+          <p>When you run the <code class="language-plaintext highlighter-rouge">add</code> command, a file is moved from working to staged. This means git knows to include it next time work is checked in with <code class="language-plaintext highlighter-rouge">commit</code>.</p>
         </li>
         <li>When you run a <code class="language-plaintext highlighter-rouge">commit</code> command, all of the staged files are backed up into the local repository, and the local files are returned to the working state.
           <ul>
@@ -355,7 +372,7 @@ In windows you can check by…</p>
 
       <h3 id="git-add">git add</h3>
 
-      <p>There are many ways to add…</p>
+      <p>There are many ways to add:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git add &lt;list of files&gt;
 &gt; git add --all
@@ -363,6 +380,7 @@ In windows you can check by…</p>
 &gt; git add docs/*.txt      txt files in docs directory
 &gt; git add docs/           all files in docs directory
 &gt; git add "*.txt"         txt files in whole project
+&gt; git add *               everything
 </code></pre></div>      </div>
 
       <h3 id="git-commit">git commit</h3>
@@ -370,7 +388,7 @@ In windows you can check by…</p>
       <p>Commit your files with a message explaining your changes</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git commit -m "create initial files"
 </code></pre></div>      </div>
-      <p>And files are now committed. You can check with <code class="language-plaintext highlighter-rouge">git status</code>…</p>
+      <p>And files are now committed. You can check with <code class="language-plaintext highlighter-rouge">git status</code></p>
 
       <h3 id="git-directory">.git directory</h3>
 
@@ -431,7 +449,7 @@ In windows you can check by…</p>
 ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 </code></pre></div>      </div>
 
-      <p>Press enter to safe the key in the default location (~/.ssh/id_ed25519.pub), and enter a secure passphrase. You’ll use this whenever you check in code to GitHub, so don’t forget it!</p>
+      <p>Press enter to save the key in the default location (~/.ssh/id_ed25519.pub), and enter a secure passphrase. You’ll use this whenever you check in code to GitHub, so don’t forget it!</p>
 
       <p>Next, you are going to need to copy the public key and upload it to github. You can copy the key using the following:</p>
 
@@ -450,9 +468,9 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <h3 id="link-and-push-to-remote">Link and push to remote</h3>
 
-      <p>We’ve already started our Git local, so we link and need to push to it…</p>
+      <p>We’ve already started our Git local, so we link and need to push to it:</p>
 
-      <p>Your commands will be different than this, but along these lines…</p>
+      <p>Your commands will be different than this, but along these lines:</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git remote add origin git@github.com:adamtilson/374test1.git
 &gt; git branch -M main
 &gt; git push -u origin main
@@ -502,7 +520,7 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <h3 id="branching">Branching</h3>
 
-      <p>To create a new branch, run…</p>
+      <p>To create a new branch, run:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch &lt;branch-name&gt;
 </code></pre></div>      </div>
@@ -526,7 +544,7 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <h3 id="merging">Merging</h3>
 
-      <p>to merge back into main, make sure you are in main, and then merge in the cat branch…</p>
+      <p>to merge back into main, make sure you are in main, and then merge in the cat branch:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout main
 </code></pre></div>      </div>
@@ -589,7 +607,7 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <h3 id="git-pull">Git Pull</h3>
 
-      <p>If others added files to the remote repo which you do not have on your local machine, you can fetch them with…</p>
+      <p>If others added files to the remote repo which you do not have on your local machine, you can fetch them with:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull
 </code></pre></div>      </div>
@@ -650,13 +668,13 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <h3 id="embrace-clean-code">Embrace Clean Code</h3>
 
-      <p>Tim will be teaching you all about this throughout the semester. Follow the principles taught and your portfolio will be in excellent shape!</p>
+      <p>You will learn about this in the course throughout the semester. Follow the principles taught and your portfolio will be in excellent shape!</p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
       <ol>
-        <li>Download and install Visual Studio Code.</li>
+        <li>Download and install VS Code.</li>
         <li>Download and install Git.</li>
         <li>Create an account on GitHub using your own name (or a variation as required).</li>
         <li>Create a Local Repo.</li>
@@ -666,7 +684,7 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
           <ul>
             <li>In your favorite programming language, create a “Hello World” file. This is the simplest program you can create in that language which prints out the phrase “Hello World” to the screen.</li>
             <li>Create a second “readme.md” file. Add some Markdown code. Add at least 3 different types of elements.</li>
-            <li>Create a “music.txt” file. Type some music you like into the file, e.g. a song, artist or album.</li>
+            <li>Create a “music.txt” file. Type the name of some music you like into the file, e.g. a song, artist or album.</li>
             <li>Create a new branch called “alternate”.</li>
             <li>Still in main, create a “timeline.txt” file. Add the text “best timeline”.</li>
             <li>Create a “onlyone.txt” file. Add whatever text you would like to the file.</li>
