@@ -525,14 +525,14 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch &lt;branch-name&gt;
 </code></pre></div>      </div>
 
-      <p>e.g. to create a branch called “cat”, do</p>
+      <p>e.g. to create a branch called “alternative”, do</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch cat
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch alternative
 </code></pre></div>      </div>
 
-      <p>The branch is created, but we haven’t switched to it. We can hop between branches with checkout, e.g. switch to cat</p>
+      <p>The branch is created, but we haven’t switched to it. We can hop between branches with checkout, e.g. switch to alternative</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git checkout cat
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git checkout alternative
 </code></pre></div>      </div>
 
       <p>Switch back to main</p>
@@ -544,11 +544,11 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <h3 id="merging">Merging</h3>
 
-      <p>to merge back into main, make sure you are in main, and then merge in the cat branch:</p>
+      <p>to merge back into main, make sure you are in main, and then merge in the alternative branch:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout main
 </code></pre></div>      </div>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge cat
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge alternative
 </code></pre></div>      </div>
 
       <p>If no changes were made in the main, this is a fast forward.</p>
@@ -574,23 +574,32 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <h3 id="walkthrough">Walkthrough</h3>
 
-      <p>Let’s see it in action</p>
+      <p>Let’s do a full demonstration of merging in action</p>
 
-      <p><code class="language-plaintext highlighter-rouge">echo text &gt;&gt; new.txt</code>, add, commit, push, status</p>
-
-      <p>create “r” branch</p>
-
-      <p>switch to “r” branch</p>
-
-      <p><code class="language-plaintext highlighter-rouge">echo red &gt;&gt; color.txt</code>, add, commit, push</p>
-
-      <p>revert to main</p>
-
-      <p><code class="language-plaintext highlighter-rouge">echo blue &gt;&gt; color.txt</code>, add, commit, push</p>
-
-      <p>merge in “r” branch</p>
-
-      <p>In VS Code, you can just click on the top what you want to do.</p>
+      <ol>
+        <li>
+          <p>Create a <code class="language-plaintext highlighter-rouge">new.txt</code> file which includes the text <code class="language-plaintext highlighter-rouge">text</code>
+<code class="language-plaintext highlighter-rouge">echo text &gt;&gt; new.txt</code>, add, commit, status, log</p>
+        </li>
+        <li>Create and switch to a new branch called <code class="language-plaintext highlighter-rouge">r</code>
+          <ul>
+            <li>create “r” branch</li>
+            <li>switch to “r” branch</li>
+          </ul>
+        </li>
+        <li>
+          <p>In the <code class="language-plaintext highlighter-rouge">r</code> branch, create a file called color text, with the color <code class="language-plaintext highlighter-rouge">red</code> in it
+<code class="language-plaintext highlighter-rouge">echo red &gt;&gt; color.txt</code>, add, commit, status, log</p>
+        </li>
+        <li>
+          <p>revert to main, and do a similar process, this time with color <code class="language-plaintext highlighter-rouge">blue</code> in color.txt
+<code class="language-plaintext highlighter-rouge">echo blue &gt;&gt; color.txt</code>, add, commit, status, log</p>
+        </li>
+        <li>
+          <p>Merge in “r” branch</p>
+        </li>
+        <li>Solve the merge conflict. VS Code makes this easy - check the top!</li>
+      </ol>
 
       <h3 id="faq">FAQ</h3>
 
