@@ -346,27 +346,27 @@ In windows you can check by:</p>
       <h3 id="git-config">git config</h3>
 
       <p>First we set up our name and credentials</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git config --global user.name "Your Name"
-&gt; git config --global user.email you@yourdomain.ca
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "Your Name"
+git config --global user.email you@yourdomain.ca
 </code></pre></div>      </div>
 
       <h3 id="git-init">git init</h3>
 
       <p>Navigate to a directory we want to become a repo, and run the command:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git init -b main
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init -b main
 </code></pre></div>      </div>
 
       <p>Note: This command may not be available unless you are on the newest version of git, otherwise, you can do:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git init
-&gt; git checkout -b main
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init
+git checkout -b main
 </code></pre></div>      </div>
 
       <h3 id="git-status">git status</h3>
 
       <p>See what’s happened, if anything:</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git status
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
 </code></pre></div>      </div>
 
       <h3 id="git-add">git add</h3>
@@ -385,7 +385,7 @@ In windows you can check by:</p>
       <h3 id="git-commit">git commit</h3>
 
       <p>Commit your files with a message explaining your changes</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git commit -m "create initial files"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit -m "create initial files"
 </code></pre></div>      </div>
       <p>And files are now committed. You can check with <code class="language-plaintext highlighter-rouge">git status</code></p>
 
@@ -401,7 +401,7 @@ In windows you can check by:</p>
 
       <h3 id="where-to-get-help-1">Where to get help?</h3>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git help
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git help
 </code></pre></div>      </div>
 
       <p><a href="https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet">Atlassian has a pretty good Cheat Sheet</a></p>
@@ -492,24 +492,24 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <p>Revert from staged to working</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git reset
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset
 </code></pre></div>      </div>
 
       <p>See the history of the repo with</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git log
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log
 </code></pre></div>      </div>
 
       <p>Note the commit hashes.</p>
 
       <p>Undo a commit:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git revert &lt;commit-hash&gt;
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git revert &lt;commit-hash&gt;
 </code></pre></div>      </div>
 
       <p>Go back in time to a previous commit</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git checkout &lt;commit-hash&gt;
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout &lt;commit-hash&gt;
 </code></pre></div>      </div>
 
       <p>However, this puts us in “detached head” mode, basically we are only an observer.</p>
@@ -521,17 +521,17 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <p>To create a new branch, run:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch &lt;branch-name&gt;
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch &lt;branch-name&gt;
 </code></pre></div>      </div>
 
       <p>e.g. to create a branch called “alternative”, do</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch alternative
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch alternative
 </code></pre></div>      </div>
 
       <p>The branch is created, but we haven’t switched to it. We can hop between branches with checkout, e.g. switch to alternative</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git checkout alternative
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout alternative
 </code></pre></div>      </div>
 
       <p>Switch back to main</p>

@@ -125,7 +125,7 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="introduction"><button class="collapsible">Introduction</button><div class="text-content"><div class="text-inner">
 
-      <p>The labs for this class assume you use Python 3.9.0.</p>
+      <p>The labs for this class assume you use Python 3.10.0.</p>
 
       <p>Lab 0 will cover the following:</p>
       <ul>
@@ -264,27 +264,27 @@ shopTest.py
     </div></div></section>
 <section id="pythoninstallation"><button class="collapsible">Python Installation</button><div class="text-content"><div class="text-inner">
 
-      <p>Many of you will not have Python 3.9 already installed on your computers. <a href="https://docs.conda.io/en/latest/">Conda</a> is an easy way to manage many different environments, each with its own Python versions and dependencies. This allows us to avoid conflicts between our preferred Python version and that of other classes. We’ll walk through how to set up and use a conda environment.</p>
+      <p>Many of you will not have Python 3.10 already installed on your computers. <a href="https://docs.conda.io/en/latest/">Conda</a> is an easy way to manage many different environments, each with its own Python versions and dependencies. This allows us to avoid conflicts between our preferred Python version and that of other classes. We’ll walk through how to set up and use a conda environment.</p>
 
       <p>Prerequisite: <a href="https://www.anaconda.com/">Anaconda</a>. Install from the link. Once installed, if on Windows, access conda through the Anaconda Prompt. If on macOS or Linux, conda can be used from the terminal.</p>
 
       <h3 id="creating-a-conda-environment">Creating a Conda Environment</h3>
 
-      <p>The command for creating a conda environment with Python 3.9 is:</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ conda create --name &lt;env-name&gt; python=3.9
+      <p>The command for creating a conda environment with Python 3.10 is:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ conda create --name &lt;env-name&gt; python=3.10
 </code></pre></div>      </div>
       <p>For example, name the environment “ai” with the following command. Press y to confirm installing any missing packages:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ conda create --name ai python=3.9
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ conda create --name ai python=3.10
 </code></pre></div>      </div>
 
       <h3 id="entering-the-environment">Entering the Environment</h3>
 
-      <p>To enter the conda environment that we just created, do the following. Note that the Python version within the environment is 3.9, just what we want.</p>
+      <p>To enter the conda environment that we just created, do the following. Note that the Python version within the environment is 3.10, just what we want.</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate ai
 python -V
-Python 3.9.0 :: Anaconda, Inc.
+Python 3.10.0 :: Anaconda, Inc.
 </code></pre></div>      </div>
 
       <p>Note: once conda is installed, the tag <code class="language-plaintext highlighter-rouge">(&lt;env-name&gt;)</code> will appear at the far left of the terminal. It shows you the name of the conda environment that is active. In our case, we’ll have <code class="language-plaintext highlighter-rouge">(ai)</code>.</p>
@@ -295,7 +295,7 @@ Python 3.9.0 :: Anaconda, Inc.
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda deactivate
 python -V
-Python 3.9.0 :: Anaconda custom (x86_64)
+Python 3.10.0 :: Anaconda custom (x86_64)
 </code></pre></div>      </div>
 
       <p>Our python version has now returned to whatever the system default is!</p>
@@ -336,7 +336,7 @@ Python 3.9.0 :: Anaconda custom (x86_64)
       <p>Note: you may have to type a python version, or <code class="language-plaintext highlighter-rouge">py</code>, rather than python, depending on your machine.</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kcyow@snoopy:~$ python
-Python 3.9.0 (default, Jul 20 2020, 19:50:14)
+Python 3.10.0 (default, Jul 20 2020, 19:50:14)
 [GCC 5.4.0 20160609] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 &gt;&gt;&gt;

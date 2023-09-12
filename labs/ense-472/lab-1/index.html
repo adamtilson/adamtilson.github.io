@@ -123,9 +123,85 @@
 <hr />
 
 <p><button class="expandall">Collapse All</button></p>
-<section id="underconstruction"><button class="collapsible">Under construction</button><div class="text-content"><div class="text-inner">
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>These labs are getting redesigned for Fall 2023!</p>
+      <p>The purpose of this lab is to:</p>
+
+      <ul>
+        <li>Have a quick primer on creating and running python scripts</li>
+        <li>Understand inter-process communication</li>
+        <li>Understand client-server architecture</li>
+        <li>Understand protocols</li>
+        <li>Low level vs. high level APIs</li>
+        <li>Understand sockets</li>
+        <li>Understanding asynchronous servers</li>
+      </ul>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>Computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges</p>
+      <ul>
+        <li>In this lab we will be working in Python 3. You will need it installed, which it already is on the lab machines.</li>
+      </ul>
+
+    </div></div></section>
+<section id="introduction"><button class="collapsible">Introduction</button><div class="text-content"><div class="text-inner">
+
+      <p>In this lab, we will investigate network programming by creating some simple chat applications in Python. We will begin by looking at low level APIs, which is more similar to c or c++ interfaces on Unix, though much easier to work with. We will examine how network communication works from a top-down approach, starting with the programs, and then moving through the different layers of the network stack, as is necessary to understand the problem. A common problem with network programming is that when there are bugs, it is difficult to assess if it is a programming error or a network error, and for these reasons a thorough understanding of the entire network stack is required for Software Systems Engineers.</p>
+
+    </div></div></section>
+<section id="part1quickprimeronpython"><button class="collapsible">Part 1: Quick Primer on Python</button><div class="text-content"><div class="text-inner">
+
+      <p>This lab requires a quick overview of the Python programming language. We will work through the exercises included in <code class="language-plaintext highlighter-rouge">ense-472-lab-1-warmup.py</code> to give you a quick overview of the programming language. To run the script, ensure you have Python 3 installed, open a terminal into the corresponding window, then type one of the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>py ense-472-lab-1-warmup.py
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>py3 ense-472-lab-1-warmup.py
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python ense-472-lab-1-warmup.py
+</code></pre></div>      </div>
+
+      <p>Depending on your installation settings, which command you will need to run will differ. Ensure the first line prints <code class="language-plaintext highlighter-rouge">python 3</code>. You can also ensure you are on python 3 by using <code class="language-plaintext highlighter-rouge">python --version</code> which should list 3.X.X</p>
+
+    </div></div></section>
+<section id="part2networkingbasicsreview"><button class="collapsible">Part 2: Networking Basics Review</button><div class="text-content"><div class="text-inner">
+
+      <p>?? Questions I still need to answer - anyone not know python yet? These would be people who intend to take 350 in final Winter ??
+?? What do I do for python on-boarding in 350? ??</p>
+
+      <ul>
+        <li>Understand the server-client model
+          <ul>
+            <li>example is a game</li>
+            <li>Why can you not connect directly to other clients?
+              <ul>
+                <li>For one thing, there would need to be a lot of connections - 1-to-1 for every pair of devices</li>
+                <li>Vs a server, where there is one hub and many spokes</li>
+                <li>It’s also useful to note that the server can handle all of the error checking stuff</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>In this lab, we are going to</p>
+
+    </div></div></section>
+<section id="part3lowlevelnetworkinginpython"><button class="collapsible">Part 3: Low-level Networking in Python</button><div class="text-content"><div class="text-inner">
+
+      <p>In case this is your first time working in python,</p>
+
+    </div></div></section>
+<section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
+
+    </div></div></section>
+<section id="referencesandresources"><button class="collapsible">References and Resources</button><div class="text-content"><div class="text-inner">
+
+      <p><a href="https://stackoverflow.com/questions/1873214/easiest-daytime-service-client-in-python">Easiest “daytime” service client in Python? - StackOverflow</a>, [Online]</p>
+
     </div></div></section>
 
     </main>
