@@ -156,7 +156,7 @@
 
       <h3 id="html">HTML</h3>
 
-      <p>In modern web dev, HTML is used only to specify which components will appear on the page, and define order and hierarchy (parent-child relationship, akin to a tree data-structure). If we think of front-end web dev as building a house, HTML is the blueprint and bricks. You can build a web site using only HTML, though it will probably look like a <a href="http://www.oocities.org/">90’s geocites website</a>.</p>
+      <p>In modern web dev, HTML is used only to specify which components will appear on the page, and define order and hierarchy (parent-child relationship, akin to a tree data-structure). If we think of front-end web dev as building a house, HTML is the blueprint and bricks. You can build a web site using only HTML, though it will probably look like a 90’s geocites website, or a <a href="https://www-cs-faculty.stanford.edu/~knuth/">professors personal homepage</a>.</p>
 
       <h3 id="css">CSS</h3>
 
@@ -171,9 +171,11 @@
       <p>In Software Engineering, Single Responsibility principle is the idea that each module should only perform one task. We will broadly follow this concept in this course. In other words, HTML should only handle object instantiation, CSS should only handle styling, etc. However, we will see several way we can violate this, such as:</p>
       <ul>
         <li>styling elements through HTML tags</li>
-        <li>adding web elements using the JavaScript through the DOM
-As much as possible, we want to avoid using these modules for unintended purposes! It makes code harder to read, understand and change.</li>
+        <li>adding web elements using the JavaScript through the DOM</li>
+        <li>adding styles to elements using JavaScript</li>
       </ul>
+
+      <p>As much as possible, we want to avoid using these modules for unintended purposes! It makes code harder to read, understand and change. Imagine a colleague hands you a completed website, and you need to update a style - how will you know where to find that style, if they are changing styles in the html, css and JS?</p>
 
     </div></div></section>
 <section id="part3markuptohtml"><button class="collapsible">Part 3: Markup to HTML</button><div class="text-content"><div class="text-inner">
@@ -207,7 +209,7 @@ JONATHAN HARKER’S JOURNAL
 
       <p><img src="res/dracula-formatted.png" alt="" /></p>
 
-      <p>Can we do this? Let’s start by pasting this into a new file in vs code…</p>
+      <p>Can we do this? Let’s start by pasting this into a new file in vs code:</p>
 
       <h3 id="main-entry-point-indexhtml">Main entry point: <code class="language-plaintext highlighter-rouge">index.html</code></h3>
 
@@ -215,11 +217,11 @@ JONATHAN HARKER’S JOURNAL
 
       <p><img src="res/untouched-manuscript.png" alt="" /></p>
 
-      <p>We can preview this file in a browser by double-clicking the HTML file in our file browser…</p>
+      <p>We can preview this file in a browser by double-clicking the HTML file in our file browser:</p>
 
       <p><img src="res/wall-of-text.png" alt="" /></p>
 
-      <p>Beautiful. Let’s start annotating it with HTML tags. The chapter section is a title, let’s embed it in a heading tag, h1.</p>
+      <p>Beautiful - A wall of text! Let’s start annotating it with HTML tags. The chapter section is a title, let’s embed it in a heading tag, h1.</p>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>CHAPTER I<span class="nt">&lt;/h1&gt;</span>
 
@@ -234,9 +236,9 @@ JONATHAN HARKER’S JOURNAL
 
       <p><img src="res/h1-preview.png" alt="" /></p>
 
-      <p>Not exactly the way that we want, but we have achieved our goal of “marking up” the text - we have successfully described that the purpose of this text is to act as a heading. While there are methods for changing the appearance in HTML, we’ll leave this for CSS next week. Recall - single responsibility!</p>
+      <p>We can see that encapsulating text in a tag changes its appearance, however not exactly the way that we would like. We have achieved our goal of “marking up” the text - we have successfully described that the purpose of this text is to act as a heading, which is being communicated visually by the text being larger. While there are methods for changing the appearance in HTML, we’ll leave this for CSS in a later section. Recall - single responsibility!</p>
 
-      <p>Let’s add some more tags…</p>
+      <p>Let’s add some more tags:</p>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;hr&gt;</span>
 <span class="nt">&lt;h1&gt;</span>CHAPTER I<span class="nt">&lt;/h1&gt;</span>
@@ -258,7 +260,7 @@ JONATHAN HARKER’S JOURNAL
 
       <h3 id="boilerplate-html">Boilerplate HTML</h3>
 
-      <p>Boilerplate refers to standard, preprinted text, as might be stamped on a boiler. In programming languages, this is the minimum code needed to make the language run and be compliant. You’ve likely already seen the c++ boilerplate…</p>
+      <p>Boilerplate refers to standard, preprinted text, as might be stamped on a boiler. In programming languages, this is the minimum code needed to make the language run and be compliant. You’ve likely already seen the c++ boilerplate:</p>
 
       <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
@@ -284,7 +286,7 @@ JONATHAN HARKER’S JOURNAL
 <span class="nt">&lt;/html</span>
 </code></pre></div>      </div>
 
-      <p>But where does our text go? It needs to go into the body tags of the boilerplate. While we’re at it, let’s change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> tags inner HTML as well:</p>
+      <p>But where does our book text go? It needs to go into the body tags of the boilerplate. While we’re at it, let’s change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> tags inner HTML as well:</p>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
@@ -337,14 +339,28 @@ JONATHAN HARKER’S JOURNAL
           </ul>
         </li>
         <li>Tags can surround other tags, this forms the tree of the page. Adjacent elements are siblings, while nested elements have a parent-child relationship.</li>
-        <li>The standard boilerplate tags make the tree:
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>html
+        <li>The standard boilerplate tags make the tree:</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>html
  |--- head
  |     `--- title
  |
  `--- body
-</code></pre></div>          </div>
-        </li>
+</code></pre></div>      </div>
+
+      <p>Which can be represented, in a simplified manner, as:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <ul>
         <li>We typically want this tree to expressed in our HTML source document through indentation, but this can be done automatically with Code Formatters.</li>
         <li>Some are self-closing, which mean they don’t surround text, e.g.<code class="language-plaintext highlighter-rouge">&lt;hr&gt;</code></li>
         <li>Some tags require attributes to give them further functionality</li>
@@ -352,7 +368,7 @@ JONATHAN HARKER’S JOURNAL
 
       <h3 id="position-block-and-inline">Position, Block and Inline</h3>
 
-      <p>Nearly everything about how HTML elements can be displayed can be overwritten with CSS, which we will look at next week, however for now there are a few important concepts to help understand how elements will be displayed:</p>
+      <p>Nearly everything about how HTML elements can be displayed can be fine tuned with CSS, however for now there are a few important concepts to help understand how elements will be displayed:</p>
 
       <ul>
         <li>In general, elements will be placed into the page in the order in which they are defined in the document</li>
@@ -448,7 +464,7 @@ JONATHAN HARKER’S JOURNAL
 
       <h3 id="container-tags">Container tags</h3>
 
-      <p>Some HTML tags exist to give functionality to the enclosing text, but others simply contain text to describe the text’s purpose, and/or be styled later with CSS. Use of these tags is highly recommended by the HTML5 Standard…</p>
+      <p>Some HTML tags exist to give functionality to the enclosing text, but others simply contain text to describe the text’s purpose, and/or be styled later with CSS. Use of these tags is highly recommended by the HTML5 Standard:</p>
 
       <table>
         <thead>
@@ -497,7 +513,7 @@ JONATHAN HARKER’S JOURNAL
 
       <h3 id="tables">Tables</h3>
 
-      <p>You may be tempted to use tables for arrange content… don’t do it! We’ll look at a much better method next week. For now, use tables only for tabular data. Tables provide an example of a component which requires nested tags in a particular order. Example table:</p>
+      <p>You may be tempted to use tables for arrange content - don’t do it! We’ll look at a much better methods for this using CSS. For now, use tables only for tabular data. Tables provide an example of a component which requires nested tags in a particular order. Example table:</p>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;table&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
@@ -523,7 +539,7 @@ JONATHAN HARKER’S JOURNAL
 <span class="nt">&lt;/table&gt;</span> 
 </code></pre></div>      </div>
 
-      <p>Which renders as…</p>
+      <p>Which renders as:</p>
 
       <p><img src="res/table.png" alt="" /></p>
 
@@ -614,7 +630,7 @@ JONATHAN HARKER’S JOURNAL
 
       <h3 id="why-we-use-css">Why we use CSS</h3>
 
-      <p>CSS is used to apply styles to our elements. This changes the way that they are rendered on the page, so they they no longer take on the default HTML which is reminiscent of the 90s.</p>
+      <p>CSS is used to apply styles to our elements. This changes the way that they are rendered on the page, so they they no longer take on the default HTML look, which is reminiscent of the 90s internet.</p>
 
       <ul>
         <li>Before CSS, we could only style elements with HTML attributes
@@ -720,7 +736,7 @@ JONATHAN HARKER’S JOURNAL
                 </li>
               </ul>
             </li>
-            <li>Source order: later rules overrule earlier ones
+            <li>Source order: rules later in the code will overrule earlier ones
               <ul>
                 <li>If you are linking multiple style sheets, more general ones should come first, more specific ones later</li>
               </ul>
@@ -801,9 +817,7 @@ JONATHAN HARKER’S JOURNAL
 
       <h3 id="default-style-sheet">Default Style Sheet</h3>
 
-      <p>Every page has styles, unless you specify changes they uses the default style
-This is what causes default styled HTML to look like it’s from the 90’s
-It can be useful to understand these default styles to know which changes to make:</p>
+      <p>Every page has styles, unless you specify changes they uses the default style. This is what causes default styled HTML to look like it’s from the 90’s. It can be useful to understand these default styles to know which changes to make:</p>
       <ul>
         <li><a href="https://www.w3schools.com/cssref/css_default_values.asp">Here is a link to descriptions of the default values for a CSS</a></li>
         <li><a href="res/default.css">Here is a link to the CSS in a style sheet file.</a></li>
@@ -821,7 +835,7 @@ Alternately, you may wish to group selectors by type, e.g. Tag, Class, ID</p>
 
       <h3 id="comments">Comments</h3>
 
-      <p>CSS uses C-style comments:</p>
+      <p>CSS uses C-style line comments:</p>
 
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">h1</span> <span class="p">{</span> 
     <span class="c">/* Make h1's red. */</span>
