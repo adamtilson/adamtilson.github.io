@@ -120,6 +120,8 @@
 
 <p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
 
+<!-- For next reivision - this lab is too long. Would it possible to move all of the border and box model stuff to the next lab, before we get to Bootstrap? -->
+
 <hr />
 
 <p><button class="expandall">Collapse All</button></p>
@@ -1188,7 +1190,7 @@ e.g.</li>
 
       <p>A common operation which can be harder than you might think!</p>
 
-      <p>For non-blocking elements</p>
+      <p>For non-blocking elements, the following may work:</p>
 
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">text-align</span> <span class="o">:</span> <span class="nt">center</span><span class="o">;</span>   
 </code></pre></div>      </div>
@@ -1202,6 +1204,15 @@ e.g.</li>
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">margin</span><span class="o">:</span> <span class="err">0</span> <span class="nt">auto</span><span class="o">;</span>
 </code></pre></div>      </div>
       <p>Which will apply the 0 to both top and bottom, and auto to both left and right.</p>
+
+      <p>Centering an image as particularly tricky. The easiest way is to set display to block type, and then center it:</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">img</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
+  <span class="nl">margin</span> <span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
 
       <h3 id="floating-and-clearing">Floating and Clearing</h3>
 

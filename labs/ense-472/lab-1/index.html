@@ -160,41 +160,497 @@
 
       <p>Depending on your installation settings, which command you will need to run will differ, (e.g. <code class="language-plaintext highlighter-rouge">py</code>, <code class="language-plaintext highlighter-rouge">py3</code>). Ensure the first line prints <code class="language-plaintext highlighter-rouge">python 3</code>. You can also ensure you are on python 3 by using <code class="language-plaintext highlighter-rouge">python --version</code> which should list 3.X.X. I will be doing these exercises on python 3.10.X.</p>
 
+      <p>Note: if you have already taken ENSE 350, you will recall we used Jupyter Notebook for running python. That will not be approapraite for our network programming, as we will often be running servers which will need to run continuously in a single terminal window.</p>
+
     </div></div></section>
 <section id="part2networkingbasicsreview"><button class="collapsible">Part 2: Networking Basics Review</button><div class="text-content"><div class="text-inner">
 
+      <p>Network programming is essentially inter-process communication, where one program that you create interacts with another program you (or someone else) created. This program may be running on the same device, or may be running across the world. This is a complex challenge, and the solution is one of the most complete and complex software systems in the world.</p>
+
+      <p>There are a number of concepts that are worth reviewing to help with this lab:</p>
+
+      <h3 id="client">Client</h3>
+
+      <p>The client is the device (or application) which initiates the request, which will be handled by a server. These are typically (but not always) initiated directly by a user issuing a command.</p>
+
+      <p>e.g. a web browser, a time-lookup client (ntp), a dns-lookup client</p>
+
+      <h3 id="server">Server</h3>
+
+      <p>The server is the device (or application) which responds to requests made by clients. It is typically running all the time, and may run as a service in the background (i.e. a daemon). A client will initiate communication with server, and based on the selected protocol, send and/or recieve data from the server.</p>
+
+      <p>e.g. a web server, a dns server (bind), a time server, a game server</p>
+
+      <p>As single client may connect to a single server:</p>
+
+      <p><img src="res/one-client-one-server.png" alt="" /></p>
+
+      <p>Or, multiple clients may connect to a single server:</p>
+
+      <p><img src="res/one-server-mutliple-clients.png" alt="" /></p>
+
+      <p>Additionally, the server and client applications may be running on the save server, though this is not required:</p>
+
+      <p><img src="res/server-client-same-device.png" alt="" /></p>
+
+      <p>Finally, note that a single application may act as a server, or a client, or both, however a single thread will typically only be acting as one or the other!</p>
+
+      <p>One of the reasons that a client server model is useful is that it minimizes the number of connections. Consider a first person shooter game with 100 people. In a client-server model, we would only need 100 connections - each client to the server. However, if instead we wanted every player to connect to every other player, we would need 99 connections for the first player + 98 more connections for the second player + 97 more connections for the third player, etc… This would be a much more complex system.</p>
+
+      <p><img src="res/client-server-vs-clients-only.png" alt="" /></p>
+
+      <h3 id="address">Address</h3>
+
+      <p>An address is a way to uniquely identify which device is initiating a request. There are several types of addresses: public ipv4, private ipv4, ipv6, MAC, with different benefits and drawbacks depending on their usage. The simplest configuration of this is two devices on a Local Area Network (LAN), with each having a different IP address. Packets will be sent along ethernet, and accepted only by the host with the matching IP address</p>
+
+      <p><img src="res/two-devices-on-a-local-network.png" alt="" /></p>
+
+      <p>However, there are also more complex setups, such as a Wide Area Network (WAN) such as the internet, in which a connected series of routers will eventually deliver the packet to its destination.</p>
+
+      <p><img src="res/two-devices-on-a-wan.png" alt="" /></p>
+
+      <p>Regardless of the complexity of the network, proper addressing ensures that packets get to their destination.</p>
+
+      <p>We can also access the device we are on using the localhost or loopback address <code class="language-plaintext highlighter-rouge">127.0.0.1</code>.</p>
+
+      <h3 id="port">Port</h3>
+
+      <p>A port is a number which represents a connection on a device which may be used by a single application. A device has 65,535 total ports. By convention, some of these ports are allocated to particular services, e.g. 80 HTTP, 22 SSH, and 443 HTTPS. However, there are other ports which do not have associated services, and are safe to use for your applications. Typically these start above 1024. Because a port uniquely identifies an application, once a packet is recieved, the computer will then be able to know which program in particular is looking for that information.</p>
+
+      <p>e.g. on a server, an HTTPS web server will operate on port 443
+e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 52199, 52200, 52205.</p>
       <ul>
-        <li>Understand the server-client model
+        <li>When the first tab requests a web page, it will query the server (e.g. 142.196.3.7:443), and the returned address will be delivered back to the correct tab (e.g. 123.4.50.67:55657).
           <ul>
-            <li>example is a game</li>
-            <li>Why can you not connect directly to other clients?
-              <ul>
-                <li>For one thing, there would need to be a lot of connections - 1-to-1 for every pair of devices</li>
-                <li>Vs a server, where there is one hub and many spokes</li>
-                <li>It’s also useful to note that the server can handle all of the error checking stuff</li>
-              </ul>
-            </li>
+            <li>This is important, otherwise, the returned information (a recipe for cookies) may get delived to the wrong tab (your youtube video on network programming) and thus interrupt your stream!</li>
           </ul>
         </li>
       </ul>
 
-      <p>In this lab, we are going to</p>
+      <p><img src="res/client-talking-to-server-over-port.png" alt="" /></p>
+
+      <p>You may think of addresses like a street adress for an apartment, and a port like a suite number. Together we both learn which device we wish to reach, as well as which application.</p>
+
+      <p><img src="res/client-talking-to-server-with-host-ips.png" alt="" /></p>
+
+      <h3 id="protocols">Protocols</h3>
+
+      <p>Protocols are the set of rules that dictate how devices on a network will interact with each other. For example, the TCP protocol favours reliability, wheras the UDP protocol favours speed. Depending on the protocol, a single transmitted message (“Hello World”), represented as bytes, may be broken up into a number of different packets, and even include some packets which are purely control information such as confirmations.</p>
+
+      <p>e.g. a very simple protocol in which we tell the server the length of the message, followed by delivering the actual message:</p>
+
+      <p><img src="res/message-length-message-protocol.png" alt="" /></p>
+
+      <h3 id="socket">Socket</h3>
+
+      <p>A socket is a bi-directional communication endpoint. Each of the two applications which wish to connect will create a socket, and connect to the other application’s socket. To create the socket we will need an IP Address, a Port and a Protocol. Once the socket has been established, the two devices may send data back and forth between the appliations.</p>
+
+      <p>Here is an example of different socket operations in python:</p>
+
+      <p><img src="res/socket-operations-in-python.png" alt="" /></p>
+
+      <h3 id="packet">Packet</h3>
+
+      <p>To make network communication more efficient, data may be split into smaller chunks, called packets. We will investigate this further in following labs.</p>
+
+      <h3 id="thread">Thread</h3>
+
+      <p>A thread is the smallest part of a program which can run independantly. We can think of this as a single function which will be created and run independantly until it is completed. The advantage of threads is that their execution and scheduling is handled by the operating system to ensure that the system remains responsive, and so that other threads can finish in a timely manner. It is very advantageous to run server applications as threads, so that each request may be handled by an independant thread.</p>
+
+      <p>The trickiest part of threads is when data is shared between threads - as we cannot ensure the order in which lines of code execute in threads, this can lead to a race condition in some situations, with unpredictable results.</p>
+
+      <p>Consider a simple variable <code class="language-plaintext highlighter-rouge">num_clients</code> which counts the total number of connected clients, and the following two sequences of operation.</p>
+
+      <p>e.g. variable <code class="language-plaintext highlighter-rouge">num_clients</code> is shared by two threads <code class="language-plaintext highlighter-rouge">client_a_handler</code> and <code class="language-plaintext highlighter-rouge">client_b_handler</code>.</p>
+
+      <p>Happy case:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 0</code>
+<code class="language-plaintext highlighter-rouge">client_a_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0)
+<code class="language-plaintext highlighter-rouge">client_a_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
+<code class="language-plaintext highlighter-rouge">client_a_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
+<code class="language-plaintext highlighter-rouge">num_clients = 1</code>
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (2)
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (2)
+<code class="language-plaintext highlighter-rouge">num_clients = 2</code></p>
+
+      <p>Race condition:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 0</code>
+<code class="language-plaintext highlighter-rouge">client_a_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0)
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0)
+<code class="language-plaintext highlighter-rouge">client_a_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
+<code class="language-plaintext highlighter-rouge">client_a_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
+<code class="language-plaintext highlighter-rouge">num_clients = 1</code></p>
+
+      <p>We can avoid this using <code class="language-plaintext highlighter-rouge">semaphores</code> (locks), essentially, this will prevent the second thread from reading the variable until the first thread is done with it.</p>
+
+      <p>With semaphores:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 0</code>
+<code class="language-plaintext highlighter-rouge">client_a_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0) and locks it
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> can’t, it’s locked, try again later.
+<code class="language-plaintext highlighter-rouge">client_a_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> can’t, it’s locked, try again later.
+<code class="language-plaintext highlighter-rouge">client_a_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1) and unlocks it.
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (1) and locks it.
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (2)
+<code class="language-plaintext highlighter-rouge">client_b_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (2) and unlocks it.
+<code class="language-plaintext highlighter-rouge">num_clients = 2</code></p>
+
+      <p>Finally, it is sometimes important for your main thread to broadcast a message to each of your sub-threads. We can accomplish this using signals.</p>
+
+      <h3 id="encoding">Encoding</h3>
+
+      <p>Encoding and Decoding is the process of turning a string into a series of bytes. There are a number of different methods for this, such as ASCII or Unicode. ASCII uses only one byte per character, which is very efficient, whereas Unicode (UTF-8) requires one to four bytes per character, which python uses by default.</p>
 
     </div></div></section>
 <section id="part3lowlevelnetworkinginpython"><button class="collapsible">Part 3: Low-level Networking in Python</button><div class="text-content"><div class="text-inner">
 
-      <p>In case this is your first time working in python,</p>
+      <p>In this section of the lab, we will look at some examples of low level networking using the <code class="language-plaintext highlighter-rouge">socket</code> library. In low-level networking, you have complete control over every byte sent and recieved over the network.</p>
+
+      <p>Let’s first look at an example of a client-only application which recieves time data from a centeral server:</p>
+
+      <p>time_client.py</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># the socket library contains low-level network operations
+</span><span class="kn">import</span> <span class="nn">socket</span>
+<span class="c1"># when creating a socket class (from the socket library), we need to describe the address type (AF_INET is IPv4), and the socket type. 
+</span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="c1"># Where we want to connect and on what port
+</span><span class="n">host</span> <span class="o">=</span> <span class="s">"time.nist.gov"</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">13</span> <span class="c1">#default port for daytime service
+# open the connection
+</span><span class="n">sock</span><span class="p">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span><span class="n">port</span><span class="p">))</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># recieve up to 1024 bytes of data
+</span>    <span class="n">data</span> <span class="o">=</span> <span class="n">sock</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+        <span class="c1"># daytime service uses ascii
+</span>        <span class="n">data_as_string</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'ascii'</span><span class="p">)</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">data_as_string</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="c1"># when finished with your sockets, it is important to close them
+</span><span class="n">sock</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <p>What if, on the other hand, we wanted to be the time-server? That’s a bit more complicated.</p>
+
+      <p>Let’s first create a simple python program which prints the current time to the screen.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">now_formatted</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%A, %B %d %Y, %H:%M:%S"</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">now_formatted</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Not exactly the same format as the remote timeserver, but this is compliant with <a href="https://datatracker.ietf.org/doc/html/rfc867">RFC867</a></p>
+
+      <p>Okay, now we just need to take this code, and host it inside a server:</p>
+
+      <p>time_server.py</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="c1"># create a socket object
+</span><span class="n">serversocket</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> 
+
+<span class="c1"># get local machine name
+</span><span class="n">host</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">gethostname</span><span class="p">()</span>                           
+
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8000</span>
+
+<span class="c1"># bind to the port
+</span><span class="n">serversocket</span><span class="p">.</span><span class="n">bind</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+
+<span class="n">serversocket</span><span class="p">.</span><span class="n">listen</span><span class="p">()</span>                                  
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># establish a connection
+</span>    <span class="n">clientsocket</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">serversocket</span><span class="p">.</span><span class="n">accept</span><span class="p">()</span>      
+
+    <span class="k">print</span><span class="p">(</span><span class="s">"Got a connection from %s"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">addr</span><span class="p">))</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">now_formatted</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%A, %B %d %Y, %H:%M:%S"</span><span class="p">)</span>
+    <span class="n">now_bytes</span> <span class="o">=</span> <span class="n">now_formatted</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'ascii'</span><span class="p">)</span>
+    <span class="n">clientsocket</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">now_bytes</span><span class="p">)</span>
+    <span class="n">clientsocket</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <p>Try running this code - nothing happens. But a server is running. Let’s try to connect to it, by modifying our time client such that:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># the socket library contains low-level network operations
+</span><span class="kn">import</span> <span class="nn">socket</span>
+<span class="c1"># when creating a socket class (from the socket library), we need to describe the address type (AF_INET is IPv4), and the socket type. 
+</span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="c1"># Now we want to connect to our own computer!
+</span><span class="n">host</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">gethostname</span><span class="p">()</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8000</span>
+<span class="c1"># open the connection
+</span><span class="n">sock</span><span class="p">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span><span class="n">port</span><span class="p">))</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># recieve up to 1024 bytes of data
+</span>    <span class="n">data</span> <span class="o">=</span> <span class="n">sock</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">data_as_string</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'ascii'</span><span class="p">)</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">data_as_string</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="c1"># when finished with your sockets, it is important to close them
+</span><span class="n">sock</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <p>However, it is much better if we handle each connection in an individual thread:</p>
+
+      <p>Let’s look at how threading works in the next section, and then return to this problem.</p>
+
+    </div></div></section>
+<section id="part4threadingexampleinpython"><button class="collapsible">Part 4: Threading Example in Python</button><div class="text-content"><div class="text-inner">
+
+      <p>Recall threads are the mechanism in python that allows you to split a program into small, parallel components. These components then run in parallel, as handled by the CPU. Here is a very simple example of a thread:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">def</span> <span class="nf">print_cube</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+	<span class="k">print</span><span class="p">(</span><span class="s">"Cube: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span> <span class="o">*</span> <span class="n">num</span> <span class="o">*</span> <span class="n">num</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">print_square</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+	<span class="k">print</span><span class="p">(</span><span class="s">"Square:"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span> <span class="o">*</span> <span class="n">num</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span><span class="s">"__main__"</span><span class="p">:</span>
+	<span class="c1"># creating thread
+</span>	<span class="n">t1</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">print_square</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
+	<span class="n">t2</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">print_cube</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
+
+	<span class="c1"># starting thread 1
+</span>	<span class="n">t1</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+	<span class="c1"># starting thread 2
+</span>	<span class="n">t2</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+
+	<span class="c1"># wait until thread 1 is complete
+</span>	<span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+	<span class="c1"># wait until thread 2 is complete
+</span>	<span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+
+	<span class="c1"># both threads are done
+</span>	<span class="k">print</span><span class="p">(</span><span class="s">"Done!"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Try running this program several times and watch to the order. Do they always finish in the same order?</p>
+
+      <p>Let’s try this instead - instead of returning only the square or cube of the number, let’s count all the way up to the number:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">def</span> <span class="nf">print_cubes_up_to</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+		<span class="k">print</span><span class="p">(</span><span class="s">"Cube: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">print_squares_up_to</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+		<span class="k">print</span><span class="p">(</span><span class="s">"Square:"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">i</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span><span class="s">"__main__"</span><span class="p">:</span>
+	<span class="c1"># creating thread
+</span>	<span class="n">t1</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">print_squares_up_to</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,))</span>
+	<span class="n">t2</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">print_cubes_up_to</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,))</span>
+
+	<span class="c1"># starting thread 1
+</span>	<span class="n">t1</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+	<span class="c1"># starting thread 2
+</span>	<span class="n">t2</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+
+	<span class="c1"># wait until thread 1 is complete
+</span>	<span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+	<span class="c1"># wait until thread 2 is complete
+</span>	<span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+
+	<span class="c1"># both threads are done
+</span>	<span class="k">print</span><span class="p">(</span><span class="s">"Done!"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>On my machine, it occasionally finishes out of order:</p>
+
+      <p><img src="res/threads-order.png" alt="" /></p>
+
+      <p>Another example which is worth exploring is that of shared variables and race conditions. Look at the following code:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="c1"># global variable x
+</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">increment</span><span class="p">():</span>
+    <span class="s">"""
+    function to increment global variable x
+    """</span>
+    <span class="k">global</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">thread_task</span><span class="p">():</span>
+    <span class="s">"""
+    task for thread
+    calls increment function 100000 times.
+    """</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+        <span class="n">increment</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">main_task</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">x</span>
+    <span class="c1"># setting global variable x as 0
+</span>    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># creating threads
+</span>    <span class="n">t1</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">thread_task</span><span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">thread_task</span><span class="p">)</span>
+
+    <span class="c1"># start threads
+</span>    <span class="n">t1</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">t2</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="c1"># wait until threads finish their job
+</span>    <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">main_task</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Iteration </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s"> : x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Run this code a few times. You should see not all iterations always add up to 20000. This is because a race condition occured, as mentioned in the introduction.</p>
+
+      <p><img src="res/race.png" alt="" /></p>
+
+      <p>We can avoid this by creating a locking mechanism, which we will pass to each of the threads:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="c1"># global variable x
+</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">increment</span><span class="p">(</span><span class="n">lock</span><span class="p">):</span>
+    <span class="s">"""
+    function to increment global variable x
+    """</span>
+    <span class="c1"># thread must wait here for the lock to be open
+</span>    <span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
+        <span class="c1"># once in here, the lock is locked
+</span>        <span class="k">global</span> <span class="n">x</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># once we finish this block, we'll unlock the lock again
+</span>
+<span class="k">def</span> <span class="nf">thread_task</span><span class="p">(</span><span class="n">lock</span><span class="p">):</span>
+    <span class="s">"""
+    task for thread
+    calls increment function 100000 times.
+    """</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+        <span class="n">increment</span><span class="p">(</span><span class="n">lock</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main_task</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">x</span>
+    <span class="c1"># setting global variable x as 0
+</span>    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># create a lock
+</span>    <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Lock</span><span class="p">()</span>
+
+    <span class="c1"># creating threads
+</span>    <span class="n">t1</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">thread_task</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">lock</span><span class="p">,))</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">thread_task</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">lock</span><span class="p">,))</span>
+
+    <span class="c1"># start threads
+</span>    <span class="n">t1</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">t2</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="c1"># wait until threads finish their job
+</span>    <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">main_task</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Iteration {0}: x = {1}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+
+</code></pre></div>      </div>
+
+      <p>Try running it again - no more race conditions!</p>
+
+      <p><img src="res/no-more-race-condition.png" alt="" /></p>
+
+      <p>With servers, we will have code which spawns a new thread which runs in an infinite loo. We will need to be able to send that code a shutdown signal to stop. Let’s see an example of that:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">timed_output</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">server_active</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">server_active</span><span class="p">.</span><span class="n">is_set</span><span class="p">():</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">print</span> <span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: New Message!"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">server_active</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Event</span><span class="p">()</span>
+    <span class="n">server_active</span><span class="p">.</span><span class="nb">set</span><span class="p">()</span>
+
+    <span class="n">delay1</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">timed_output</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s">"bob"</span><span class="p">,</span> <span class="n">delay1</span><span class="p">,</span> <span class="n">server_active</span><span class="p">))</span>
+
+    <span class="n">delay2</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">timed_output</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s">"paul"</span><span class="p">,</span> <span class="n">delay2</span><span class="p">,</span> <span class="n">server_active</span><span class="p">))</span>
+
+    <span class="n">t1</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">t2</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(.</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">"attempting to close threads."</span><span class="p">)</span>
+        <span class="n">server_active</span><span class="p">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">"threads successfully closed"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part5asimplethreadedechoclient"><button class="collapsible">Part 5: A Simple Threaded Echo Client</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s see if we can use what we have learned to create a simple chatting application. This application will have both an client side and a server side. One server will run, and multiple clients will connect to it. The clients will send messages to the server, which will then be broadcast out to each of the other connected clients.</p>
+
+      <p>chat_client.py</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div>      </div>
+
+      <p>chat_server.py</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div>      </div>
 
     </div></div></section>
 <section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>So far, we have successfully made our chat application send information one way, from the user to the server. Now, we would like the server to be able to echo this information back to each of the clients. Recall that a socket is a bi-directional communication</p>
+      <p>So far, we have successfully made our chat application send information one way, from the user to the server. Now, we would like the server to be able to echo this information back to each of the clients.</p>
+
+      <p>Further, we would like to handle clean disconnects from the server, both with a Keyboard Interrupt as well as a</p>
+
+      <p>Recall that a socket is used for bi-directional communication. Your solutions should support</p>
 
     </div></div></section>
 <section id="referencesandresources"><button class="collapsible">References and Resources</button><div class="text-content"><div class="text-inner">
 
       <p><a href="https://stackoverflow.com/questions/1873214/easiest-daytime-service-client-in-python">Easiest “daytime” service client in Python? - StackOverflow</a>, [Online]</p>
 
+      <p><a href="https://www.bogotobogo.com/python/python_network_programming_server_client.php">Python Tutorial: Network Programming - Server &amp; Client A: Basics - 2020</a>, [Online]</p>
+
+      <p><a href="https://www.geeksforgeeks.org/multithreading-python-set-1/">Multithreading in Python</a>, [Online]</p>
+
+      <p><a href="https://stackoverflow.com/questions/11436502/closing-all-threads-with-a-keyboard-interrupt">CLosing all threads witha  keyboard interrupt</a> [Online]</p>
+
+      <p>Tech with Tim. <a href="https://www.youtube.com/watch?v=3QiPPX-KeSc">Python Socket Programming Tutorial</a> [Online]. (Note - I based my chat application off of this tutorial. There are some errors with him Network descriptions though!)</p>
     </div></div></section>
 
     </main>
