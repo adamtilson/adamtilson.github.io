@@ -265,41 +265,65 @@ e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 
 
       <p>Happy case:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">num_clients = 0</code>
-<code class="language-plaintext highlighter-rouge">client_a_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0)
-<code class="language-plaintext highlighter-rouge">client_a_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
-<code class="language-plaintext highlighter-rouge">client_a_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
-<code class="language-plaintext highlighter-rouge">num_clients = 1</code>
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (2)
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (2)
-<code class="language-plaintext highlighter-rouge">num_clients = 2</code></p>
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 0</code></p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_a_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_a_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_a_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 1</code></p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (1)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (2)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (2)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 2</code></p>
 
       <p>Race condition:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">num_clients = 0</code>
-<code class="language-plaintext highlighter-rouge">client_a_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0)
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0)
-<code class="language-plaintext highlighter-rouge">client_a_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
-<code class="language-plaintext highlighter-rouge">client_a_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
-<code class="language-plaintext highlighter-rouge">num_clients = 1</code></p>
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 0</code></p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_a_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_a_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_a_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 1</code></p>
 
       <p>We can avoid this using <code class="language-plaintext highlighter-rouge">semaphores</code> (locks), essentially, this will prevent the second thread from reading the variable until the first thread is done with it.</p>
 
       <p>With semaphores:</p>
 
-      <p><code class="language-plaintext highlighter-rouge">num_clients = 0</code>
-<code class="language-plaintext highlighter-rouge">client_a_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0) and locks it
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> can’t, it’s locked, try again later.
-<code class="language-plaintext highlighter-rouge">client_a_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> can’t, it’s locked, try again later.
-<code class="language-plaintext highlighter-rouge">client_a_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1) and unlocks it.
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (1) and locks it.
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (2)
-<code class="language-plaintext highlighter-rouge">client_b_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (2) and unlocks it.
-<code class="language-plaintext highlighter-rouge">num_clients = 2</code></p>
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 0</code></p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_a_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (0) and locks it</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> can’t, it’s locked, try again later.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_a_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (1)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> can’t, it’s locked, try again later.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_a_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (1) and unlocks it.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> reads <code class="language-plaintext highlighter-rouge">num_clients</code> (1) and locks it.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> increments <code class="language-plaintext highlighter-rouge">num_clients</code> (2)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">client_b_handler</code> writes <code class="language-plaintext highlighter-rouge">num_clients</code> (2) and unlocks it.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">num_clients = 2</code></p>
 
       <p>Finally, it is sometimes important for your main thread to broadcast a message to each of your sub-threads. We can accomplish this using signals.</p>
 
