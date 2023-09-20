@@ -1087,7 +1087,7 @@ e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 
 
       <p>Phase 1: Echo Service</p>
 
-      <p>An echo service simply collects any message, and returns it back to the user. Add this functionality to our application.</p>
+      <p>An echo service runs on a server, and simply collects any message sent to it, and returns it back to the client. Add this functionality to our application. Be sure to print it out on the client side!</p>
 
       <p>Hints:</p>
       <ul>
@@ -1104,11 +1104,11 @@ e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 
 
       <p>Phase 2: Chat Service</p>
 
-      <p>In phase 2, modify the application so that when a user sends a mesage, it is sent to every other connected client except the one who sent it. The sent message should also contain some identifying information, i.e. which client sent it.</p>
+      <p>In phase 2, modify the application so that when a client sends a message to the server, it is sent to every other connected client except the one who sent it. The sent message should also contain some identifying information, i.e. which client sent it (address and port).</p>
 
       <p>Hints:</p>
       <ul>
-        <li>Recall we have one thread handling receiving information from each client, but we need not use it to send the information back to that client - any thread can use any connection, as long as it knows about it.</li>
+        <li>Recall we have one thread handling receiving information from each client, but we do not need to use it to send the information back to that client - any thread can use any socket, as long as it knows about it.</li>
         <li>How might you wish to store all of the connections so that they can be accessed by all of the threads?
           <ul>
             <li>How can you prevent against race conditions for these threads?</li>
@@ -1123,7 +1123,7 @@ e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 
 
       <p>Phase 3: Better Chat</p>
 
-      <p>In the final part, we will polish up our chat application. Upon entry, a client should choose a username, which is sent to the server and properly stored. This should be used in chat in place of an address. Additionally, when a user enters or leaves the chat, each other connected client should recieve this information.</p>
+      <p>In the final part, we will polish up our chat application. Upon entry, a client should choose a username, which is sent to the server, and stored as needed. This should be used in chat in place of an address. Additionally, when a user enters or leaves the chat, each other connected client should recieve this information.</p>
 
       <p>Hint:</p>
       <ul>
@@ -1135,6 +1135,10 @@ e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 
       </ul>
 
       <p><img src="res/phase-3-examples.png" alt="" /></p>
+
+      <h3 id="submission">Submission</h3>
+
+      <p>You will submit your assignment to URCourses by the due date.</p>
 
     </div></div></section>
 <section id="referencesandresources"><button class="collapsible">References and Resources</button><div class="text-content"><div class="text-inner">
