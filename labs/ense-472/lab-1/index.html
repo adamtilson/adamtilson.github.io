@@ -1015,21 +1015,23 @@ e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 
     <span class="n">server</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">TCP_ADDR</span><span class="p">)</span>
     <span class="k">print</span> <span class="p">(</span><span class="s">"[STARTING] Server is starting..."</span><span class="p">)</span>
     <span class="n">server</span><span class="p">.</span><span class="n">listen</span><span class="p">()</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">print</span> <span class="p">(</span><span class="sa">f</span><span class="s">"[LISTENING] Server is listening on </span><span class="si">{</span><span class="n">SERVER_IP</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
     <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">server_active</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Event</span><span class="p">()</span>
     <span class="n">server_active</span><span class="p">.</span><span class="nb">set</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="c1"># this is a blocking command, it will wait for a new connection to the server
-</span>            <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">server</span><span class="p">.</span><span class="n">accept</span><span class="p">()</span>
-            <span class="n">conn</span><span class="p">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">handle_client</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">server_active</span><span class="p">))</span>
-            <span class="n">thread</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
-            <span class="n">threads</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
-            <span class="k">print</span> <span class="p">(</span><span class="sa">f</span><span class="s">"[ACTIVE CONNECTIONS] </span><span class="si">{</span><span class="n">threading</span><span class="p">.</span><span class="n">activeCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
-
-
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># this is a blocking command, it will wait for a new connection to the server
+</span>                <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">server</span><span class="p">.</span><span class="n">accept</span><span class="p">()</span>
+                <span class="n">conn</span><span class="p">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">handle_client</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">server_active</span><span class="p">))</span>
+                <span class="n">thread</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+                <span class="n">threads</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+                <span class="k">print</span> <span class="p">(</span><span class="sa">f</span><span class="s">"[ACTIVE CONNECTIONS] </span><span class="si">{</span><span class="n">threading</span><span class="p">.</span><span class="n">activeCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">socket</span><span class="p">.</span><span class="n">timeout</span><span class="p">:</span>
+                <span class="k">continue</span>
     <span class="k">except</span> <span class="nb">KeyboardInterrupt</span><span class="p">:</span>
         <span class="k">print</span> <span class="p">(</span><span class="s">"[SHUTTING DOWN] Attempting to close threads."</span><span class="p">)</span>
         <span class="n">server_active</span><span class="p">.</span><span class="n">clear</span><span class="p">()</span>
@@ -1055,7 +1057,7 @@ e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 
     <span class="n">message_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">message_encoded</span><span class="p">)</span>
     <span class="n">message_send_length</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">message_length</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="n">FORMAT</span><span class="p">)</span>
     <span class="n">padding_needed</span> <span class="o">=</span> <span class="n">HEADER_SIZE_IN_BYTES</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">message_send_length</span><span class="p">)</span>
-    <span class="c1"># this repeats the space byte by
+    <span class="c1"># this repeats the space byte by padding needed times
 </span>    <span class="n">padding</span> <span class="o">=</span> <span class="sa">b</span><span class="s">' '</span> <span class="o">*</span> <span class="n">padding_needed</span>
     <span class="n">padded_message_send_length</span> <span class="o">=</span> <span class="n">message_send_length</span> <span class="o">+</span> <span class="n">padding</span>
     <span class="n">sock</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">padded_message_send_length</span><span class="p">)</span>
@@ -1138,7 +1140,7 @@ e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 
 
       <h3 id="submission">Submission</h3>
 
-      <p>You will submit your assignment to URCourses by the due date.</p>
+      <p>You will submit your assignment to URCourses by the due date. Please make a copy of your project after each phase and zip and submit them all so that you may be given partial credit if you don’t make it to the end!</p>
 
     </div></div></section>
 <section id="referencesandresources"><button class="collapsible">References and Resources</button><div class="text-content"><div class="text-inner">
