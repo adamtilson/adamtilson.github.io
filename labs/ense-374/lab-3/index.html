@@ -144,7 +144,7 @@
       <ul>
         <li>At the simplest, it can be seen as an update to the “default style sheet” which will automatically make an unstyled paged look much more modern</li>
         <li>Additionally, there are a number of pre-defined classes which can be attached to our HTML elements to automatically give them modern styles</li>
-        <li>The Current Version, V5, was released September 2020, and is still the most recent major version, with the minor version being 5.2.1.</li>
+        <li>The Current Version, V5, was released September 2020, and is still the most recent major version, with the minor version being 5.3.1.</li>
       </ul>
 
       <h3 id="how-to-install-it">How to install it?</h3>
@@ -159,11 +159,11 @@
 
       <p>As with our spreadsheets, the link goes in the head, <em>before</em> our custom styles. (This will allow our custom styles to override theirs as needed.)</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
 </code></pre></div>      </div>
       <p>You will also need to paste a JavaScript library into your HTML. This script tag is added in the last line of the body of the document.</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div>      </div>
       <p>We’ll investigate more about the placement of JavaScript scripts next lab.</p>
 
@@ -171,15 +171,15 @@
 
       <p>Check out the Examples on Bootstrap’s website which includes pages styled using Bootstrap elements</p>
 
-      <p><a href="https://getbootstrap.com/docs/5.2/examples/">Examples</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.3/examples/">Examples</a></p>
 
       <p>You can also see many examples in the Bootstrap cheat sheet:</p>
 
-      <p><a href="https://getbootstrap.com/docs/5.2/examples/cheatsheet/">Bootstrap Cheat Sheet</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.3/examples/cheatsheet/">Bootstrap Cheat Sheet</a></p>
 
       <h3 id="where-to-get-help">Where to get help?</h3>
 
-      <p><a href="https://getbootstrap.com/docs/5.2/getting-started/introduction/">The official docs are excellent</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">The official docs are excellent</a></p>
 
       <h3 id="basic-bootstrap-usage">Basic Bootstrap Usage</h3>
 
@@ -225,7 +225,7 @@
 
       <p>We are not stuck with the styles Bootstrap gives us, we can also further customize with our own custom CSS:</p>
 
-      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container-fluid</span> <span class="p">{</span>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container</span> <span class="p">{</span>
   <span class="nl">padding</span><span class="p">:</span> <span class="m">30px</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
@@ -240,7 +240,7 @@
 
       <p>Even with Bootstrap they are still kind of boring.</p>
 
-      <p>We need to attach the appropriate Bootstrap classes. <a href="https://getbootstrap.com/docs/5.2/components/buttons/">Looking at the Bootstrap documentation…</a></p>
+      <p>We need to attach the appropriate Bootstrap classes. <a href="https://getbootstrap.com/docs/5.3/components/buttons/">Looking at the Bootstrap documentation…</a></p>
 
       <p>We can see primary buttons, outline buttons. Let’s try outline buttons…</p>
 
@@ -357,13 +357,12 @@
         <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-primary btn-lg"</span> <span class="na">type=</span><span class="s">"button"</span><span class="nt">&gt;</span>Example button<span class="nt">&lt;/button&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
-
-Each of the attached elements and classes serves a purpose. We've seen some of these classes before, but not all. If you want to figure out what one does, let's say `py-5`, we can look it up in the Bootstrap Docs.
-(Or google `Bootstrap 5 py-5`, [which takes you to spacing...](https://getbootstrap.com/docs/5.2/utilities/spacing/))
-
-Here we can see that this is setting padding in the y direction to 3 spacer units. (Where the spacer size is defined in SASS, something we don't look at in this lab.)
-
 </code></pre></div>      </div>
+      <p>Each of the attached elements and classes serves a purpose. We’ve seen some of these classes before, but not all. If you want to figure out what one does, let’s say <code class="language-plaintext highlighter-rouge">py-5</code>, we can look it up in the Bootstrap Docs.
+(Or google <code class="language-plaintext highlighter-rouge">Bootstrap 5 py-5</code>, <a href="https://getbootstrap.com/docs/5.3/utilities/spacing/">which takes you to spacing…</a>)</p>
+
+      <p>Here we can see that this is setting padding in the y direction to 3 spacer units. (Where the spacer size is defined in SASS, something we don’t look at in this lab.)</p>
+
       <h3 id="navbar">Navbar</h3>
 
       <p>A navigation element. At it’s core it’s an unordered list, wrapped in various div’s. This one is modified from the examples page:</p>
@@ -396,7 +395,7 @@ Here we can see that this is setting padding in the y direction to 3 spacer unit
       <h3 id="carousel">Carousel</h3>
       <p>A container which automatically cycles content over time, typically used for displaying images like a slideshow</p>
 
-      <p><a href="https://getbootstrap.com/docs/5.2/components/carousel/">Bootstrap Carousel</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.3/components/carousel/">Bootstrap Carousel</a></p>
 
       <h3 id="bootstrap-cards">Bootstrap Cards</h3>
 
@@ -408,13 +407,13 @@ Here we can see that this is setting padding in the y direction to 3 spacer unit
         <li>Less flexible than Bootstrap grid for responsive design</li>
       </ul>
 
-      <p><a href="https://getbootstrap.com/docs/5.2/components/card/">Bootstrap Cards</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.3/components/card/">Bootstrap Cards</a></p>
 
       <h3 id="input-groups">Input Groups</h3>
 
       <p>Sometimes certain inputs logically go together - you will certainly see this in our lab exercise! Check out input groups for some examples of how you might be able to put them together</p>
 
-      <p><a href="https://getbootstrap.com/docs/5.2/forms/input-group/">Input Groups</a></p>
+      <p><a href="https://getbootstrap.com/docs/5.3/forms/input-group/">Input Groups</a></p>
 
       <h4 id="responsive-breakpoints-with-css-media-queries">Responsive Breakpoints with CSS Media Queries</h4>
 
