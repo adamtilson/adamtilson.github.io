@@ -142,7 +142,7 @@
       <h3 id="what-is-javascript">What is JavaScript</h3>
 
       <ul>
-        <li>A language designed to give your browsers autonomy so they do not need to communicate with the server for trivial operations</li>
+        <li>A language designed to give your browsers autonomy so they do not need to communicate with the server for trivial operations, like addition</li>
         <li>Today a standard (ECMAscript) which browsers need to implement</li>
         <li>Interpreted, not compiled</li>
       </ul>
@@ -158,6 +158,8 @@
       </ul>
 
       <h3 id="locations-for-js-in-html">Locations for JS in HTML</h3>
+
+      <p>While JavaScript can run from many places, just like CSS, external is preferable to use an external script, so that it is easy to identify the location of the code and modify it appropriately.</p>
 
       <p>Inline (in a tag):</p>
 
@@ -178,13 +180,15 @@
 
       <h3 id="learning-and-mastering-javascript">Learning and Mastering Javascript</h3>
 
-      <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN - JavaScript</a>
-JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27reilly">Read for Free on O’Reilly Higher Education</a></p>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN - JavaScript</a></li>
+        <li>JavaScript The Good Parts <a href="https://library.uregina.ca/az.php?q=safari&amp;p=1">Read for Free on O’Reilly Higher Education</a></li>
+      </ul>
 
       <h3 id="white-space">White Space</h3>
 
       <ul>
-        <li>C-style, mostly optional, but recommended for readability</li>
+        <li>C-style, typically optional, but recommended for readability</li>
         <li><a href="https://github.com/rwaldron/idiomatic.js">Style Guide</a></li>
       </ul>
 
@@ -193,8 +197,7 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// line style</span>
 <span class="cm">/* block comments */</span>
 </code></pre></div>      </div>
-      <p><em>Wrong, obsolete and obvious comments are worse than none!</em>
-<strong>Strive for self-documenting code through good variable and method names and logical control structures</strong></p>
+      <p>Strive for self-documenting code through good variable and method names and logical control structures. <em>Wrong, obsolete and obvious comments are worse than none!</em></p>
 
       <h3 id="creating--assigning-variables">Creating / Assigning Variables</h3>
 
@@ -351,6 +354,10 @@ JavaScript The Good Parts <a href="https://uregina.libguides.com/az.php?q=o%27re
         <li>Testing equality: always use <code class="language-plaintext highlighter-rouge">===</code> (also tests type)</li>
         <li><code class="language-plaintext highlighter-rouge">!</code> toggles truthiness</li>
       </ul>
+
+      <p>For an explanation on why to always use <code class="language-plaintext highlighter-rouge">===</code> over <code class="language-plaintext highlighter-rouge">==</code>, see:</p>
+
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness</a></p>
 
       <h3 id="infix-operators">Infix Operators</h3>
       <p>By precedence:</p>
@@ -746,42 +753,44 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
 
       <h3 id="scope">Scope</h3>
 
-      <p>When we use the <code class="language-plaintext highlighter-rouge">var</code> keyword for variables, we have function scope, not block scope.</p>
-
-      <p>We should use the <code class="language-plaintext highlighter-rouge">let</code> keyword instead!</p>
+      <p>When we use the <code class="language-plaintext highlighter-rouge">var</code> keyword for variables, we have function scope, not block scope. If a function does know what a variable is, it will do a search up through blocks to try to find it.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">outer</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="c1">// At this point, a is 3, b is 5, and c is not defined</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">c is not defined</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="dl">"</span><span class="s2">(1) At this point, a is 3, b is 5, and c is not defined</span><span class="dl">"</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`a = </span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`b = </span><span class="p">${</span><span class="nx">b</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`c is not defined`</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">inner</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
-        <span class="c1">// At this point, a is 3, b is 7, and c is 11</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="dl">"</span><span class="s2">(2) At this point, a is 3, b is 7, and c is 11</span><span class="dl">"</span><span class="p">)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`a = </span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`b = </span><span class="p">${</span><span class="nx">b</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`c = </span><span class="p">${</span><span class="nx">c</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+
         <span class="nx">a</span> <span class="o">+=</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
-       <span class="c1">// At this point, a is 21, b is 7, and c is 11</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="dl">"</span><span class="s2">(3) At this point, a is 21, b is 7, and c is 11</span><span class="dl">"</span><span class="p">)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`a = </span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`b = </span><span class="p">${</span><span class="nx">b</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`c = </span><span class="p">${</span><span class="nx">c</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
     <span class="p">};</span>
     <span class="nx">inner</span> <span class="p">();</span>
-    <span class="c1">// At this point, a is 21, b is 5, and c is not defined</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">c is not defined</span><span class="dl">"</span><span class="p">);</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="dl">"</span><span class="s2">(4) At this point, a is 21, b is 5, and c is not defined</span><span class="dl">"</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`a = </span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`b = </span><span class="p">${</span><span class="nx">b</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`c is not defined`</span><span class="p">);</span>
+
 <span class="p">};</span>
 
 <span class="nx">outer</span><span class="p">();</span>
-<span class="p">};</span>
 </code></pre></div>      </div>
 
-      <p>This is basically awful, so we should instead use <code class="language-plaintext highlighter-rouge">let</code>!</p>
-
       <p>A scope search happens where JS looks for the variable in local scope first, if not it will fall back to parent block scope, e.g. in nested functions, then grandparent, etc.</p>
+
+      <p>This is very difficult to trace, and rarely matches the programmer’s intention. Instead we should use <code class="language-plaintext highlighter-rouge">let</code>!</p>
 
       <h3 id="high-order-functions-and-callbacks">High order functions and callbacks</h3>
 
@@ -919,9 +928,9 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
 
       <p>Some commands for selecting elements from the DOM are:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">hero-image</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//(returns an HTMLElement)</span>
-<span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//(returns HTMLCollection, like an Array)</span>
-<span class="nx">getElementsByClassName</span><span class="p">(</span><span class="dl">"</span><span class="s2">header</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//(Also returns HTMLCollection)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">hero-image</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//(returns an HTMLElement)</span>
+<span class="kd">let</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//(returns HTMLCollection, like an Array)</span>
+<span class="kd">let</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="dl">"</span><span class="s2">header</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//(Also returns HTMLCollection)</span>
 </code></pre></div>      </div>
 
       <ul>
@@ -968,6 +977,8 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
         <li>Like an HTML collection, but slightly different.</li>
         <li>has a <code class="language-plaintext highlighter-rouge">.length</code>, array access, <code class="language-plaintext highlighter-rouge">[]</code>, and <code class="language-plaintext highlighter-rouge">forEach</code>.</li>
       </ul>
+
+      <p>Exercise: See if you can figure out how many of the smaller titles are on this page using javascript</p>
 
       <h3 id="css-attribute-selector">CSS Attribute Selector</h3>
 
@@ -1030,7 +1041,9 @@ e.g. start at 2 element, delete 1, and splice the two sub arrays together:</li>
         <li><code class="language-plaintext highlighter-rouge">innerHTML</code> parses tags, vs. <code class="language-plaintext highlighter-rouge">innerText</code> would not parse them as tags.</li>
       </ul>
 
-      <h3 id="attributes-such-as-value-src-and-href">Attributes such as value, src and href</h3>
+      <p>Exercise: See if you can change the following title to <code class="language-plaintext highlighter-rouge">Changing Attributes</code></p>
+
+      <h3 id="element-attributes-such-as-value-src-and-href">Element Attributes such as value, src and href</h3>
 
       <p>We can access attributes as properties of the object
 e.g. <code class="language-plaintext highlighter-rouge">.value</code>, <code class="language-plaintext highlighter-rouge">.checked</code>, <code class="language-plaintext highlighter-rouge">.placeholder</code> 
@@ -1186,13 +1199,15 @@ or
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">onclick=</span><span class="s">"alert('hi')"</span><span class="nt">&gt;</span>Click Me<span class="nt">&lt;/a&gt;</span>
 </code></pre></div>      </div>
 
-      <p>Also not recommended, in JavaScript…</p>
+      <ul>
+        <li>also not recommended, in JavaScript, simply as this way is older</li>
+      </ul>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-button</span><span class="dl">"</span><span class="p">);</span>
 <span class="nx">button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>The good way to register:</p>
+      <p>The best way to register:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-button</span><span class="dl">"</span><span class="p">);</span>
 <span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span> <span class="p">);</span>
@@ -1244,6 +1259,10 @@ This is passed as the first arg of the callback, typically given the variable �
 </code></pre></div>      </div>
 
       <p>If you need to, you can use <code class="language-plaintext highlighter-rouge">event.stopPropagation()</code> to halt the bubbling process prematurely. Just be careful this doesn’t break other expected functionality - in other words, bubbling in JavaScript / DOM is an intended feature, not a bug, so you should have a good reason for disabling it!</p>
+
+      <p>exercise:</p>
+
+      <p>Create a page with a title and some text. Have a button that swaps between a dark theme and a light theme by attaching or removing pre-created CSS classes.</p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
