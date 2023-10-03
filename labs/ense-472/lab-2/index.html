@@ -112,7 +112,7 @@
 
     <main id="content" class="main-content" role="main">
         <p></p>
-        <h1 id="lab-2-business-network-with-packet-tracer">Lab 2: Business Network with Packet Tracer</h1>
+        <h1 id="lab-2-high-level-network-programming-in-python-packets-and-wireshark">Lab 2: High-Level Network Programming in Python, Packets and WireShark</h1>
 
 <p>ENSE 472 - Digital Networks - Laboratory</p>
 
@@ -123,9 +123,398 @@
 <hr />
 
 <p><button class="expandall">Collapse All</button></p>
-<section id="underconstruction"><button class="collapsible">Under construction</button><div class="text-content"><div class="text-inner">
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>These labs are getting redesigned for Fall 2023!</p>
+      <p>The purpose of this lab is to:</p>
+
+      <ul>
+        <li>Investigate Twisted Python, a high-level API for creating network application in Python</li>
+        <li>Understand the underlying structure of Network Protocols and Network Packets</li>
+        <li>Compare TCP, vs UDP, vs TLS</li>
+        <li>Learn to use WireShark to see some of the packets that are sent using these applications</li>
+        <li>Investigate sending plain-text vs. encrypted payloads in packets, and observe the limitations of each.</li>
+      </ul>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>A computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges</p>
+      <ul>
+        <li>In this lab we will be working in Python 3 and WireShark.
+          <ul>
+            <li>We will also be adding some packages to python using pip</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>OR (Recommended):</p>
+      <ul>
+        <li>A VirtualBox Image of ZorinOS Lite prepared by Adam, which has WireShark and Twisted already installed
+          <ul>
+            <li>You can find this on URCourses</li>
+            <li>Open VirtualBox, go to Tools -&gt; Import -&gt; Select the virtualbox image, start it up</li>
+          </ul>
+        </li>
+      </ul>
+
+    </div></div></section>
+<section id="introduction"><button class="collapsible">Introduction</button><div class="text-content"><div class="text-inner">
+
+      <p>Previously, we looked at low-level socket programming in Python. We observed this was very powerful, but also tedious - you needed to be aware of low-level concerns like creating threads, handling shared memory, and properly setting up sockets. Alternatively, one can use higher-level APIs to manage much of this for you. One example of this is using Twisted Python. We will use this to quickly prototype some simple application. We will also use WireShark in this lab to examine the packets which these applications generate to get more idea of what is happening on our network.</p>
+
+    </div></div></section>
+<section id="part1twistedpython"><button class="collapsible">Part 1: Twisted Python</button><div class="text-content"><div class="text-inner">
+
+      <p>Last week we saw sockets in python, a very low level interface for programming network applications. While this helps you to understand how the operating system handles these tasks, there were some significant challenges!</p>
+
+      <ul>
+        <li>It was very low level - you needed to manage your own sockets entirely</li>
+        <li>There was somewhat inconsistent behaviour between Windows and Linux environment, e.g. with catching Socket errors</li>
+        <li>Python still only supports Blocking Input, unless you create (or use a library) which performs some Socket redirection type stuff</li>
+        <li>In order to keep your application responsive, you needed to do multithreading, which also involved keeping your memory secure and preventing race conditions</li>
+      </ul>
+
+      <p>The Twisted Library in python aims to solve some of these problems. Why Twisted?</p>
+      <ul>
+        <li>A FOSS (MIT-licensed) project since 2001</li>
+        <li>Event-Driven - we are back to a single thread, however we can try to not block when we don’t need to so that the application remains responsive</li>
+        <li>Influential - the <code class="language-plaintext highlighter-rouge">deferred</code> system they popularized would go on to inspire similar methods, such as promises, which would be used jQuery, dojo, Node.js and JavaScript</li>
+        <li>Supports unit Testing supported with <code class="language-plaintext highlighter-rouge">twisted.trial</code></li>
+      </ul>
+
+      <h3 id="parts-of-twisted">Parts of Twisted</h3>
+
+      <ul>
+        <li>The Reactor
+          <ul>
+            <li>This is the event-driven loop</li>
+            <li>Wait for events, dispatch them to callbacks that are waiting for those events</li>
+            <li>Types of events - network events, filesystem events, timers, and these will be efficient implementations on top of OS-specific mechanisms</li>
+          </ul>
+        </li>
+        <li>Transport
+          <ul>
+            <li>The smallest connecting code between between two endpoints</li>
+            <li>Akin to sockets, but again, higher level abstraction (TCP, UDP, SSL)</li>
+            <li>Transport API functions - <code class="language-plaintext highlighter-rouge">write</code>, <code class="language-plaintext highlighter-rouge">writeSequence</code>, <code class="language-plaintext highlighter-rouge">loseConnection</code>, <code class="language-plaintext highlighter-rouge">getPeer</code>, <code class="language-plaintext highlighter-rouge">getHost</code></li>
+          </ul>
+        </li>
+        <li>Protocol
+          <ul>
+            <li>Describe how different network events work together asynchronously</li>
+            <li>HTTP, IMAP, IRC, DNS</li>
+            <li>Protocol callback functions - <code class="language-plaintext highlighter-rouge">makeConnection</code>, <code class="language-plaintext highlighter-rouge">connectionMade</code>, <code class="language-plaintext highlighter-rouge">dataRecieved</code>, <code class="language-plaintext highlighter-rouge">connectionLost</code></li>
+          </ul>
+        </li>
+        <li>Transports and protocols are decoupled.
+          <ul>
+            <li>This makes testing and code-reuse easier</li>
+            <li>We’ll see this in the next section where we swap out some protocols for different functionality</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="tcp-echo-server">TCP Echo Server</h3>
+
+      <p>Let’s create an echo server, as we did last lab. This is a server which simply sends back any data sent to it:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">echo_tcp.py</code></p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">endpoints</span>
+
+<span class="k">class</span> <span class="nc">Echo</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Protocol</span><span class="p">):</span> <span class="c1"># The brackets means we are extending their class
+</span>    <span class="k">def</span> <span class="nf">dataReceived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span> <span class="c1"># This callback will run when we recieve data
+</span>        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"received </span><span class="si">{</span><span class="n">data</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">"</span><span class="p">)</span> <span class="c1">#print it out!
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Write that data back to our transport!
+</span>
+<span class="k">class</span> <span class="nc">EchoFactory</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Factory</span><span class="p">):</span> <span class="c1"># Rather than use a constructor, we will use a Factory
+</span>    <span class="k">def</span> <span class="nf">buildProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Echo</span><span class="p">()</span>
+
+<span class="c1"># Registers callback function EchoFactory() to listen to new tcp connections on port 1234
+</span><span class="n">endpoints</span><span class="p">.</span><span class="n">serverFromString</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="s">"tcp:1234"</span><span class="p">).</span><span class="n">listen</span><span class="p">(</span><span class="n">EchoFactory</span><span class="p">())</span>
+<span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span> 
+</code></pre></div>      </div>
+
+      <p>Run your server with</p>
+
+      <p><code class="language-plaintext highlighter-rouge">python3 echo_tcp.py</code></p>
+
+      <p>This is server code, we will need a client to test it.</p>
+      <ul>
+        <li>Let’s use Telnet to send it a message, and you will get a message back!</li>
+      </ul>
+
+      <p><code class="language-plaintext highlighter-rouge">telnet localhost 1234</code></p>
+
+      <p>hint: Exit telnet with <code class="language-plaintext highlighter-rouge">Ctrl+]</code>, then <code class="language-plaintext highlighter-rouge">q&lt;enter&gt;</code></p>
+
+      <p>Note that when we were dealing with sockets, it was a significant challenge to make the server work for multiple clients at once. Try multiple clients with this server and see how it goes!</p>
+
+      <p><img src="res/echo-tcp-multiple-clients.png" alt="" /></p>
+
+      <p>TCP is a secure communications protocol, which means that a sophisticated set of handshakes will be performed to establish connection between the client and the server. After that messages will be sent and delivered reliably to and from the server and the client. Finally a set messages will be sent to close the connection to the server.</p>
+
+      <h3 id="udp-echo-serer">UDP Echo Serer</h3>
+
+      <p>In Twisted, tt is relatively easy to change the protocol. Here is an example of an equivalent server using UDP:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">echo_udp.py</code></p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">endpoints</span>
+
+<span class="c1"># We'll use the Datagram Protocol now
+</span><span class="k">class</span> <span class="nc">Echo</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">DatagramProtocol</span><span class="p">):</span>
+    <span class="c1"># datagram Protocols need to identify who we are!
+</span>    <span class="k">def</span> <span class="nf">datagramReceived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"received </span><span class="si">{</span><span class="n">data</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s"> from </span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+
+<span class="c1"># UDP does not use streams, instead we register callbacks to handle as they come in
+</span><span class="n">reactor</span><span class="p">.</span><span class="n">listenUDP</span><span class="p">(</span><span class="mi">1234</span><span class="p">,</span> <span class="n">Echo</span><span class="p">())</span>
+<span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <p>Again, you may run this with</p>
+
+      <p><code class="language-plaintext highlighter-rouge">python3 echo_udp.py</code></p>
+
+      <p>UDP cannot be connected through Telnet, but on linux, you can use Netcat utility</p>
+
+      <p><code class="language-plaintext highlighter-rouge">nc -u localhost 1234</code></p>
+
+      <p><img src="res/echo-udp.png" alt="" /></p>
+
+      <p>This protocol is optimized for speed rather than reliability, and will thus not send all of the extra control packets. However, if a packet is missed, there is no way to know based on the protocol, so the application must handle this.</p>
+
+      <h3 id="ssl-echo-server">SSL Echo Server</h3>
+
+      <p>So far we have had unencrypted traffic to our server. Let’s set up the same server using SSL.</p>
+
+      <p>We are going to need a private key as well as a self-signed certificate:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">openssl req -newkey rsa:2048 -keyout domain.key -x509 -days 365 -out domain.crt</code></p>
+
+      <p>Enter a passphrase for the PEM. Don’t forget it - you will need it every time you spin up the server when you use the key! You are going to be self-signing this certificate, so you may fill out the fields as follows.</p>
+
+      <p>Now we need to create our server:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">echo_ssl.py</code></p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">endpoints</span><span class="p">,</span> <span class="n">ssl</span>
+
+<span class="k">class</span> <span class="nc">Echo</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Protocol</span><span class="p">):</span> <span class="c1"># The brackets means we are extending their class
+</span>    <span class="k">def</span> <span class="nf">dataReceived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span> <span class="c1"># This callback will run when we recieve data
+</span>        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"received </span><span class="si">{</span><span class="n">data</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">"</span><span class="p">)</span> <span class="c1">#print it out!
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Write that data back to our transport!
+</span>
+<span class="k">class</span> <span class="nc">EchoFactory</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Factory</span><span class="p">):</span> <span class="c1"># Rather than use a constructor, we will use a Factory
+</span>    <span class="k">def</span> <span class="nf">buildProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Echo</span><span class="p">()</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">DefaultOpenSSLContextFactory</span><span class="p">(</span><span class="s">"domain.key"</span><span class="p">,</span> <span class="s">"domain.crt"</span><span class="p">)</span>
+<span class="n">reactor</span><span class="p">.</span><span class="n">listenSSL</span><span class="p">(</span><span class="mi">1234</span><span class="p">,</span> <span class="n">EchoFactory</span><span class="p">(),</span> <span class="n">context</span><span class="p">)</span>
+<span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span> 
+</code></pre></div>      </div>
+
+      <p>Connecting to an SSL server is beyond the powers of a Telnet client. Let’s try the OpenSSL client instead:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">openssl s_client -connect localhost:1234</code></p>
+
+      <p>You will find this is a very verbose application, displaying all of the data that was exchanged, including the certificate (which contains the public key) and the session ticket. However, from an end user perspective we will not be able to tell any difference!</p>
+
+      <p><img src="res/echo-ssl-much-info.png" alt="" /></p>
+
+      <p>This is an end-to-end encrypted protocol. We will</p>
+
+    </div></div></section>
+<section id="part2protocolsandpackets"><button class="collapsible">Part 2: Protocols and Packets</button><div class="text-content"><div class="text-inner">
+
+      <p>Recall that our model of a network has various physical configurations:</p>
+
+      <p><img src="res/physical-configurations.png" alt="" /></p>
+
+      <p>However, this is only half of the story. There is a complex sequence of layers and packets which are required to make this physical layer work with our applications:</p>
+
+      <p><img src="res/comms-over-crossover.svg" alt="" /></p>
+
+      <p><img src="res/comms-over-bridge.svg" alt="" /></p>
+
+      <p><img src="res/comms-over-router.svg" alt="" /></p>
+
+      <p>The data for our application exists in the upper-most layer (application). Everything below this is for transmission protocols and addressing.</p>
+
+      <p><img src="res/encapsulation-transparent.svg" alt="" /></p>
+
+      <p><img src="res/encapsulation-hidden.svg" alt="" /></p>
+
+      <p>There is quite a few fields inside each of these packets. Here is a simplified view with some of the contents which are of relevance to us.</p>
+
+      <p><img src="res/packet-contents-simplified.svg" alt="" /></p>
+
+      <p>For a more complete overview of the packet contents, one may refer to the packet standard.</p>
+
+      <p><img src="res/TCP-packet-info.png" alt="" /></p>
+
+      <p>This is an example of a TCP data packet. There are also TCP control packets, and other types of packets that don’t use TCP, but instead use some other protocol.</p>
+
+      <p>Additionally, we can look into the IP Packet Format:</p>
+
+      <p><img src="res/IP-packet-format.png" alt="" /></p>
+
+      <p>At the hardware level (ethernet), the only thing being sent are strings of bits, (1’s and 0’s). However, if we know these protocols, we could put back together the contents of the information being sent.</p>
+
+      <p>One way to do this would be to use some kind of hardware monitor, which would physically exist on the network, however these are very costly.</p>
+
+      <p>In the next section we will use WireShark to capture some of these packets to see what’s happening inside.</p>
+
+    </div></div></section>
+<section id="part3wireshark"><button class="collapsible">Part 3: WireShark</button><div class="text-content"><div class="text-inner">
+
+      <p>WireShark is a free and open-source packet analyzer. It has multiple uses, such as monitoring network traffic, network troubleshooting, and protocol development.</p>
+
+      <p>You can download wireshark from their downloads page:</p>
+
+      <p><a href="https://www.wireshark.org/download.html">Wireshark - downloads</a></p>
+
+      <p>On linux, you will need to run this as a superuser, and as an Admin on Windows. If you are in the lab I can help you get set up with this.</p>
+
+      <p>Once you pop into WireShark, you can see a list of the interfaces. We are going to get started using the loopback (localhost) interface</p>
+
+      <p><img src="res/wireshark-loopback.png" alt="" /></p>
+
+      <p>Double-click this to begin capturing packets on the loopback address.</p>
+
+      <p>Let’s try printing a simple dialogue using the TCP echo app:</p>
+
+      <p>As soon as you connect over TCP, you should see some packets be exchanged, even before a message is sent. These are control packets establishing a connection</p>
+
+      <p><img src="res/first-tcp-send.png" alt="" /></p>
+
+      <p>Send a hello message and observe that additional packets appear:</p>
+
+      <p><img src="res/send-over-tcp.png" alt="" /></p>
+
+      <p>Finally, we can close our connection on either side, and additional packets will be exchanged.</p>
+
+      <p><img src="res/closing-the-tcp-connection.png" alt="" /></p>
+
+      <p>Also, note if you let this run for a while, you will start to see a multitude of DNS packets. These are routine lookups. If you try this on an actual network adapter, you will see a flood of other packets, which will require filtering to work.</p>
+
+      <p>Let’s take a look inside and see what some of these packets are. To begin, click on the packet which has a [PSH, ACK] flag set beside it.</p>
+
+      <p><img src="res/hello-sent-to-server.png" alt="" /></p>
+
+      <p>In the lower left, expand the Internet Protocol v4 section, the Transmission Control Protocol Section, and the Data section. By looking through here we can see lots of useful information:</p>
+      <ul>
+        <li>The Source IP address (in this case, our local machine, 127.0.0.1)</li>
+        <li>The Destination IP address (in this case, our local machine, 127.0.0.1)</li>
+        <li>The Source Port - 35454 - This would be a port selected at random by our Client</li>
+        <li>The Destination Port - 1234 - This is the port we chose in our Twisted Python Server</li>
+        <li>The data, ‘hello’.</li>
+      </ul>
+
+      <p>As we know, there should be a corresponding message sent back in the other direction. See if you can find it. How will you know you have found the correct one?</p>
+
+    </div></div></section>
+<section id="part4twistedchat"><button class="collapsible">Part 4: Twisted Chat</button><div class="text-content"><div class="text-inner">
+
+      <p><code class="language-plaintext highlighter-rouge">tcp_server.py</code></p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">endpoints</span>
+
+<span class="k">class</span> <span class="nc">Server</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">users</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">users</span> <span class="o">=</span> <span class="n">users</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">connectionMade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">"New Connection"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">users</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">"A new connection has been made. Geting name..."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"Welcome to the Server, what is your name?"</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">dataReceived</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s">"!Q"</span><span class="p">:</span>
+                <span class="k">print</span> <span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt; left the chat."</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">users</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">user</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">:</span>
+                        <span class="n">user</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt; has left the chat!"</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+                <span class="n">users</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span> <span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt;: "</span> <span class="o">+</span> <span class="n">message</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">users</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">user</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">:</span>
+                        <span class="n">user</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt;: "</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span> <span class="o">+</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s">"!Q"</span><span class="p">:</span>
+                <span class="k">print</span> <span class="p">(</span><span class="s">"Unnamed user left"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">()</span>
+                <span class="k">print</span> <span class="p">(</span><span class="sa">f</span><span class="s">"A new connection is now known as &lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt;"</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">users</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">user</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">:</span>
+                        <span class="n">user</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt; has entered the chat"</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">user</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"Welcome to the chat &lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt;"</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">ServerFactory</span> <span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">ServerFactory</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">buildProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Server</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">users</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoints</span><span class="p">.</span><span class="n">TCP4ServerEndpoint</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">endpoint</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="n">ServerFactory</span><span class="p">())</span>
+    <span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <p><code class="language-plaintext highlighter-rouge">tcp_client.py</code></p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">endpoints</span>
+
+<span class="k">class</span> <span class="nc">Client</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="n">reactor</span><span class="p">.</span><span class="n">callInThread</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">send_data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">dataReceived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">send_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s">"!Q"</span><span class="p">:</span>
+                <span class="n">reactor</span><span class="p">.</span><span class="n">stop</span><span class="p">()</span>
+                <span class="k">break</span>
+            
+<span class="k">class</span> <span class="nc">ClientFactory</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">ClientFactory</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">buildProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Client</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoints</span><span class="p">.</span><span class="n">TCP4ClientEndpoint</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="s">"localhost"</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">endpoint</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ClientFactory</span><span class="p">())</span>
+    <span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>As with the previous assignment, this one will be completed in three phases. Please take a checkpoint after each phase of your code.</p>
+
+      <p>Phase 1: Using the Twisted Chat application we developed in Part 4 and WireShark, create a session with one server and three clients. Send a messages from the first client to eacho other client. Using WireShark, examine the packets. In a text document, using screen captures, show some annotated captures from these packets - in particular show which order . Flag anything which might identify source, content, or message.</p>
+
+      <p>Phase 2: Upgrade the Twisted Chat application to use end-to-end encryption with TLS.</p>
+
+      <p>Phase 3: Using the encrypted version you developed in Phase 2 and WireShark, repeat the process from Phase 1. Are you able to see the messages being sent?</p>
+
+      <p>Other things we could do - Try to do a packet intercept and see what message is being sent!</p>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>Please submit your lab to URCourses by the due date. If you are working with a partner, you need only submit one copy, but please include both partners names on all assignments.</p>
     </div></div></section>
 
     </main>
