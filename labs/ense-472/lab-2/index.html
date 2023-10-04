@@ -149,10 +149,13 @@
 
       <p>OR (Recommended):</p>
       <ul>
-        <li>A VirtualBox Image of ZorinOS Lite prepared by Adam, which has WireShark and Twisted already installed
+        <li>A VirtualBox Image of ZorinOS Lite prepared by Adam
           <ul>
-            <li>You can find this on URCourses</li>
+            <li>You can find a link to this on URCourses</li>
             <li>Open VirtualBox, go to Tools -&gt; Import -&gt; Select the virtualbox image, start it up</li>
+            <li>On boot, username is <code class="language-plaintext highlighter-rouge">zorin</code>, and password is <code class="language-plaintext highlighter-rouge">zorin</code></li>
+            <li>This is Zorin OS Lite, the lite version of my daily driver, responsive and great ui</li>
+            <li></li>
           </ul>
         </li>
       </ul>
@@ -214,6 +217,8 @@
         </li>
       </ul>
 
+      <p>In the next section we will look at several examples. These are based off the Twisted documentation examples, with some modifications made by me for consistency. These are Copyright Twisted Matrix, and licensed MIT.</p>
+
       <h3 id="tcp-echo-server">TCP Echo Server</h3>
 
       <p>Let’s create an echo server, as we did last lab. This is a server which simply sends back any data sent to it:</p>
@@ -223,15 +228,15 @@
 
 <span class="k">class</span> <span class="nc">Echo</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Protocol</span><span class="p">):</span> <span class="c1"># The brackets means we are extending their class
 </span>    <span class="k">def</span> <span class="nf">dataReceived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span> <span class="c1"># This callback will run when we recieve data
-</span>        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"received </span><span class="si">{</span><span class="n">data</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">"</span><span class="p">)</span> <span class="c1">#print it out!
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Write that data back to our transport!
+</span>        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"received </span><span class="si">{</span><span class="n">data</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">"</span><span class="p">)</span> <span class="c1">#print it out
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Write that data back to our transport
 </span>
 <span class="k">class</span> <span class="nc">EchoFactory</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Factory</span><span class="p">):</span> <span class="c1"># Rather than use a constructor, we will use a Factory
 </span>    <span class="k">def</span> <span class="nf">buildProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Echo</span><span class="p">()</span>
 
-<span class="c1"># Registers callback function EchoFactory() to listen to new tcp connections on port 1234
-</span><span class="n">endpoints</span><span class="p">.</span><span class="n">serverFromString</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="s">"tcp:1234"</span><span class="p">).</span><span class="n">listen</span><span class="p">(</span><span class="n">EchoFactory</span><span class="p">())</span>
+<span class="c1"># Creates a server endpoint. Starts the EchoFactory, listening to new tcp connections on port 1234
+</span><span class="n">reactor</span><span class="p">.</span><span class="n">listenTCP</span><span class="p">(</span><span class="mi">1234</span><span class="p">,</span> <span class="n">EchoFactory</span><span class="p">())</span>
 <span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span> 
 </code></pre></div>      </div>
 
@@ -252,9 +257,44 @@
 
       <p><img src="res/echo-tcp-multiple-clients.png" alt="" /></p>
 
-      <p>TCP is a secure communications protocol, which means that a sophisticated set of handshakes will be performed to establish connection between the client and the server. After that messages will be sent and delivered reliably to and from the server and the client. Finally a set messages will be sent to close the connection to the server.</p>
+      <p>TCP is a secure communications protocol, which means that a sophisticated set of handshakes will be performed to establish connection between the client and the server. After that messages will be sent and delivered reliably to and from the server and the client. Finally messages will be sent to close the connection to the server. In the next sections we will look at these protocols in more detail, and see these packets being exchanged using WireShark.</p>
 
-      <h3 id="udp-echo-serer">UDP Echo Serer</h3>
+      <p>Of course, maybe we don’t want to connect from a server, and would rather connect from a client. Let’s look at some code which can do that, and examine some of the callbacks within:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">echo_tcp_client.py</code></p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">protocol</span>
+
+<span class="k">class</span> <span class="nc">EchoClient</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Protocol</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">connectionMade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
+
+   <span class="k">def</span> <span class="nf">dataReceived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+       <span class="k">print</span> <span class="s">"Server said:"</span><span class="p">,</span> <span class="n">data</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">loseConnection</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">EchoFactory</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">ClientFactory</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">buildProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+       <span class="k">return</span> <span class="n">EchoClient</span><span class="p">()</span>
+
+   <span class="k">def</span> <span class="nf">clientConnectionFailed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connector</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+       <span class="k">print</span> <span class="s">"Connection failed."</span>
+       <span class="n">reactor</span><span class="p">.</span><span class="n">stop</span><span class="p">()</span>
+
+   <span class="k">def</span> <span class="nf">clientConnectionLost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connector</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+       <span class="k">print</span> <span class="s">"Connection lost."</span>
+       <span class="n">reactor</span><span class="p">.</span><span class="n">stop</span><span class="p">()</span> 
+
+<span class="n">reactor</span><span class="p">.</span><span class="n">connectTCP</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="n">EchoFactory</span><span class="p">())</span>
+<span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <p>This one is a bit more involved - in our EchoFactory we have a few callbacks that are overloaded to handle errors such as connections failed and connections lost. Our EchoClient is using a simple protocol to read and write from our transport. After receiving data it is cleanly closing the connection using the loseConnection function.</p>
+
+      <p>Note that we did not need to make threads to handle sending and recieving data. This is due to the event-driven nature of the application, which uses a single thread to schedule tasks in a manner that stays responsive. McKellar provides the following figure in her book Twisted Network Prorgramming Essentials, 2nd, which explains this model:</p>
+
+      <p><img src="res/event-driven-model.png" alt="" /></p>
+
+      <h3 id="udp-echo-server">UDP Echo Server</h3>
 
       <p>In Twisted, tt is relatively easy to change the protocol. Here is an example of an equivalent server using UDP:</p>
 
@@ -311,7 +351,7 @@
 
 <span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">DefaultOpenSSLContextFactory</span><span class="p">(</span><span class="s">"domain.key"</span><span class="p">,</span> <span class="s">"domain.crt"</span><span class="p">)</span>
 <span class="n">reactor</span><span class="p">.</span><span class="n">listenSSL</span><span class="p">(</span><span class="mi">1234</span><span class="p">,</span> <span class="n">EchoFactory</span><span class="p">(),</span> <span class="n">context</span><span class="p">)</span>
-<span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span> 
+<span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>      </div>
 
       <p>Connecting to an SSL server is beyond the powers of a Telnet client. Let’s try the OpenSSL client instead:</p>
@@ -322,7 +362,10 @@
 
       <p><img src="res/echo-ssl-much-info.png" alt="" /></p>
 
-      <p>This is an end-to-end encrypted protocol. We will</p>
+      <p>This is an end-to-end encrypted protocol. We will get to examine this protocol in more depth in section 3. Please note that in 2023 this protocol is deprecated in favour of TLS for performance and security concerns, however we will still be able to use it to investigate encryption.</p>
+
+      <p>Note: Modern versions of Twisted use a much more complicated TLS setup than our simple SSL. It might be worth checking out this version of the documentation for help with this:
+<a href="https://twisted.org/documents/12.3.0/core/howto/ssl.html">Twisted Documentation: Using SSL in Twisted</a></p>
 
     </div></div></section>
 <section id="part2protocolsandpackets"><button class="collapsible">Part 2: Protocols and Packets</button><div class="text-content"><div class="text-inner">
@@ -438,7 +481,7 @@
                 <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">users</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">user</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">:</span>
                         <span class="n">user</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt; has left the chat!"</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
-                <span class="n">users</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">users</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">print</span> <span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt;: "</span> <span class="o">+</span> <span class="n">message</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">users</span><span class="p">:</span>
@@ -454,7 +497,7 @@
                     <span class="k">if</span> <span class="n">user</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">:</span>
                         <span class="n">user</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt; has entered the chat"</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">user</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"Welcome to the chat &lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt;"</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+                        <span class="n">user</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"Welcome to the chat &lt;</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">&gt;. Please type !Q to quit."</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
 
 <span class="k">class</span> <span class="nc">ServerFactory</span> <span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">ServerFactory</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -464,8 +507,7 @@
         <span class="k">return</span> <span class="n">Server</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">users</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoints</span><span class="p">.</span><span class="n">TCP4ServerEndpoint</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
-    <span class="n">endpoint</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="n">ServerFactory</span><span class="p">())</span>
+    <span class="n">reactor</span><span class="p">.</span><span class="n">listenTCP</span><span class="p">(</span><span class="mi">1234</span><span class="p">,</span> <span class="n">ServerFactory</span><span class="p">())</span>
     <span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>      </div>
 
@@ -493,8 +535,7 @@
         <span class="k">return</span> <span class="n">Client</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoints</span><span class="p">.</span><span class="n">TCP4ClientEndpoint</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="s">"localhost"</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
-    <span class="n">endpoint</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ClientFactory</span><span class="p">())</span>
+    <span class="n">reactor</span><span class="p">.</span><span class="n">connectTCP</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="n">ClientFactory</span><span class="p">())</span>
     <span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>      </div>
 
@@ -503,18 +544,46 @@
 
       <p>As with the previous assignment, this one will be completed in three phases. Please take a checkpoint after each phase of your code.</p>
 
-      <p>Phase 1: Using the Twisted Chat application we developed in Part 4 and WireShark, create a session with one server and three clients. Send a messages from the first client to eacho other client. Using WireShark, examine the packets. In a text document, using screen captures, show some annotated captures from these packets - in particular show which order . Flag anything which might identify source, content, or message.</p>
+      <p>Phase 1: Using the Twisted Chat application we developed in Part 4 and WireShark, create a session with one server and two clients. Send a messages from the first client to the second client. Using WireShark, examine the packets. In a text document, using screen captures, show some annotated captures from these packets - in particular show which order the packets travelled. Flag anything which might identify source, content, or message. Are these messages secure? Why or why not?</p>
 
-      <p>Phase 2: Upgrade the Twisted Chat application to use end-to-end encryption with TLS.</p>
+      <p>Phase 2: Upgrade the Twisted Chat application to use end-to-end encryption with SSL.</p>
 
-      <p>Phase 3: Using the encrypted version you developed in Phase 2 and WireShark, repeat the process from Phase 1. Are you able to see the messages being sent?</p>
-
-      <p>Other things we could do - Try to do a packet intercept and see what message is being sent!</p>
+      <p>Phase 3: Using the encrypted version you developed in Phase 2 and WireShark, repeat the process from Phase 1. Which Protocol is being used now? Are you able to see the messages being sent? Has anything changed functionality from the users point of view?</p>
 
     </div></div></section>
 <section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
 
-      <p>Please submit your lab to URCourses by the due date. If you are working with a partner, you need only submit one copy, but please include both partners names on all assignments.</p>
+      <p>Please submit your lab documents and code to URCourses by the due date. If you are working with a partner, you need only submit one copy, but please include both partners names on all assignments.</p>
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>J. McKellar, Architecting an event-driven networking engine: Twisted Python, Philly ETE 2013, [<a href="https://www.youtube.com/watch?v=3R4gP6Egh5M">Online</a>]</p>
+
+      <table>
+        <tbody>
+          <tr>
+            <td>Baeldung, Creating a Self-Signed Certificate With OpenSSL</td>
+            <td>Baeldung, 2022, [<a href="https://www.baeldung.com/openssl-self-signed-cert">Online</a>]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Twisted Python, Home-page examples, [<a href="https://twisted.org/">Online</a>]</p>
+
+      <table>
+        <tbody>
+          <tr>
+            <td>A. Ivanov, Twisted Python Chat, TCP</td>
+            <td>Python, [<a href="https://www.youtube.com/watch?v=iKtH-SEWWv0">Online</a>]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>J. McKellar, Twisted Network Programming, 2nd Edition, 2013, O’Reilly Media. [(Available free with your SafariBooks Account)](https://learning.oreilly.com/library/view/twisted-network-programming/9781449326104/)</p>
+      <ul>
+        <li>I strongly recommend reading Chapter 2 of this textbook if you want to understand Twisted</li>
+      </ul>
     </div></div></section>
 
     </main>
