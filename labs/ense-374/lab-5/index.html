@@ -172,12 +172,14 @@
       <p>You can get JQuery from the CDN!</p>
       <ul>
         <li><a href="https://developers.google.com/speed/libraries">Google has a good one</a> that will likely be cached in many people’s browsers:
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script></li>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"&gt;&lt;/script&gt; 
+</code></pre></div>          </div>
+        </li>
       </ul>
 
       <h3 id="where-to-add-the-link">Where to add the link:</h3>
 
-      <p>jQuery, like other JavaScript, is bottom of the HTML</p>
+      <p>jQuery, like other JavaScript, should be added at the bottom of the HTML</p>
       <ul>
         <li>Add it before the closing <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> tag, before your custom JavaScript.</li>
         <li>Your browser reads HTML top to bottom, so we want to know about jQuery functionality before running our own scripts</li>
@@ -198,7 +200,7 @@
       <p>in <code class="language-plaintext highlighter-rouge">index.html</code>…</p>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- ... --&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
     <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
