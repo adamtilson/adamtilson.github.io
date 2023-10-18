@@ -112,7 +112,7 @@
 
     <main id="content" class="main-content" role="main">
         <p></p>
-        <h1 id="lab-3-intro-to-omnet--inet-and-ethernet-networks">Lab 3: Intro to OMNeT++ / INET and Ethernet Networks</h1>
+        <h1 id="lab-3-introduction-to-network-emulation-in-mininet">Lab 3: Introduction to Network Emulation in Mininet</h1>
 
 <p>ENSE 472 - Digital Networks - Laboratory</p>
 
@@ -123,9 +123,879 @@
 <hr />
 
 <p><button class="expandall">Collapse All</button></p>
-<section id="underconstruction"><button class="collapsible">Under construction</button><div class="text-content"><div class="text-inner">
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>These labs are getting redesigned for Fall 2023!</p>
+      <p>The purpose of this lab is to:</p>
+
+      <ul>
+        <li>Investigate Mininet, a network emulator</li>
+        <li>Understanding Software-Defined Networking (SDN) and the OpenFlow Protocol</li>
+        <li>Investigate common network topologies</li>
+        <li>Understand the difference between switches and hubs</li>
+        <li>Run your code on the emulated network and investigate security and performance concerns</li>
+      </ul>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>A computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges</p>
+
+      <p>And</p>
+
+      <p>A VirtualBox Image of ZorinOS Lite prepared by Adam (Updated for Lab 3)</p>
+      <ul>
+        <li>You can find a link to this on URCourses</li>
+        <li>Open VirtualBox, go to Tools -&gt; Import -&gt; Select the virtualbox image, start it up</li>
+        <li>On boot, username is <code class="language-plaintext highlighter-rouge">zorin</code>, and password is <code class="language-plaintext highlighter-rouge">zorin</code></li>
+        <li>This is Zorin OS Lite, the lite version of my daily driver, responsive and great ui</li>
+        <li>I updated this in lab 3 to install <code class="language-plaintext highlighter-rouge">mininet</code></li>
+        <li>Please backup your files from Lab 2 before migrating over!</li>
+        <li>Recall the username and password are <code class="language-plaintext highlighter-rouge">zorin</code> and <code class="language-plaintext highlighter-rouge">zorin</code>.</li>
+      </ul>
+
+    </div></div></section>
+<section id="part1overviewofmininet"><button class="collapsible">Part 1: Overview of Mininet</button><div class="text-content"><div class="text-inner">
+
+      <p>Mininet is a network emulator that can be used to construct a virtual network which runs real kernel, switch and application code, on a single Linux machine. Once these components are initialized, they can be interacted with through a command line interface or scripts. Furthermore, topologies may be created in Python Scripts. The routing in mininet is configured using OpenFlow, an important protocol in Software-Defined Networking (SDN). As with networks in general, there is quite a bit to learn, it’s best to start simple and work up from there!</p>
+
+      <p>To start using mininet, launch the updated VirtualBox images provided, open a terminal and run the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn
+</code></pre></div>      </div>
+
+      <p>Recall, the password for our virtual machine is <code class="language-plaintext highlighter-rouge">zorin</code>.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo mn
+[sudo] password for zorin:
+*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) 
+*** Configuring hosts
+h1 h2 
+*** Starting controller
+c0 
+*** Starting 1 switches
+s1 ...
+*** Starting CLI:
+mininet&gt; 
+</code></pre></div>      </div>
+
+      <p>The summary provides an overview of what mininet has constructed - we have build a virtual network architecture consisting of two hosts, h1 and h2, a controller, c0, and a switch, s1. Further, the hosts h1 and h2 are each connected to the switch.</p>
+
+      <p>A host represents an end user device, such as a PC. In mininet, these run standard linux network code, and will be able to make use of some networking utilities you have used in other classes. It will also let you run applications you have developed on the virtual network, as well as give access to the VirtualBox’s filesystem.</p>
+
+      <p>A switch represents a traffic routing device. The routing method will be configured from the controller using OpenFlow, which we will discuss in the next section. At its simplest, you may think of a switch as a device with many connections to other devices which relies on a routing table to determine where to send packets.</p>
+
+      <p>The following shows the topology:
+<img src="res/simple-topology.png" alt="" />
+ (Credit: David Mahler)</p>
+
+      <p>Finally, a command line interface was started. This uses mininet commands to allow us to issue commands to our network components, for example, to test connectivity and debug operations.</p>
+
+      <p>For now, let us attempt to run some commands on one of the hosts.</p>
+
+      <p>To see list of commands available, type:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; help
+</code></pre></div>      </div>
+
+      <p>Note that, going forward, whenever you see <code class="language-plaintext highlighter-rouge">mininet&gt;</code> at the beginning of a prompt, this is to be run on the mininet command line.</p>
+
+      <p>This will list some common operations you may wish to perform, such as:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Documented commands (type help &lt;topic&gt;):
+========================================
+EOF    gterm  iperfudp  nodes        pingpair      py      switch  xterm
+dpctl  help   link      noecho       pingpairfull  quit    time  
+dump   intfs  links     pingall      ports         sh      wait  
+exit   iperf  net       pingallfull  px            source  x     
+
+You may also send a command to a node using:
+  &lt;node&gt; command {args}
+For example:
+  mininet&gt; h1 ifconfig
+
+The interpreter automatically substitutes IP addresses
+for node names when a node is the first arg, so commands
+like
+  mininet&gt; h2 ping h3
+should work.
+
+Some character-oriented interactive commands require
+noecho:
+  mininet&gt; noecho h2 vi foo.py
+However, starting up an xterm/gterm is generally better:
+  mininet&gt; xterm h2
+</code></pre></div>      </div>
+
+      <p>You can also get help about a specific question:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; help nodes
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; help nodes
+List all nodes.
+</code></pre></div>      </div>
+
+      <p>Let’s check to see which nodes are available:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; nodes
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; nodes
+available nodes are: 
+c0 h1 h2 s1
+</code></pre></div>      </div>
+
+      <p>Next, let’s investigate which links are connected:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; net
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1 h1-eth0:s1-eth1
+h2 h2-eth0:s1-eth2
+s1 lo:  s1-eth1:h1-eth0 s1-eth2:h2-eth0
+c0
+</code></pre></div>      </div>
+
+      <p>So we can see that h1-eth0 port is connected to s1-eth1 port. We can envision this as a physical connection, with an ethernet cable connected to a physical switch device. However, at this point we don’t know if this is acting as a <code class="language-plaintext highlighter-rouge">hub</code> or a <code class="language-plaintext highlighter-rouge">smart switch</code>.</p>
+
+      <p>We can also collect some additional information about our network with the following command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; dump
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Host h1: h1-eth0:10.0.0.1 pid=1812&gt; 
+&lt;Host h2: h2-eth0:10.0.0.2 pid=1814&gt; 
+&lt;OVSSwitch s1: lo:127.0.0.1,s1-eth1:None,s1-eth2:None pid=1819&gt; 
+&lt;Controller c0: 127.0.0.1:6653 pid=1805&gt; 
+</code></pre></div>      </div>
+
+      <p>We can see the mininet classes being used (Host, OVSSwitch, Controller), IP-addresses assigned to our devices (10.0.0.1, 10.0.0.2), the port that our controller is running its router configuration service on (6653), and process id’s for this appliance in our virtual machine.</p>
+
+      <p>We will investigate the role of the controller in the next section, however it is important to note that it is a service which the OVSSwitch’s may talk to to learn how properly to route their packets.</p>
+
+      <p>We wish to run a command on a node. Let’s start by investigating the network interface of one of our hosts:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ifconfig
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1-eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 10.0.0.1  netmask 255.0.0.0  broadcast 10.255.255.255
+        inet6 fe80::8c74:3cff:feeb:7159  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 8e:74:3c:eb:71:59  txqueuelen 1000  (Ethernet)
+        RX packets 43  bytes 4488 (4.4 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 13  bytes 1006 (1.0 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+</code></pre></div>      </div>
+
+      <p>This confirms what we saw earlier, that we have an emulated ethernet device which is available on the network. It has the same ipv4 address we saw earlier (10.0.0.1).</p>
+
+      <p>Let’s have this host ping the other host:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ping h2
+</code></pre></div>      </div>
+
+      <p>This will start the ping operation, which will continue indefinitely. You may press <code class="language-plaintext highlighter-rouge">ctrl+c</code> to terminate this process.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=12.7 ms
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=0.637 ms
+64 bytes from 10.0.0.2: icmp_seq=3 ttl=64 time=0.149 ms
+64 bytes from 10.0.0.2: icmp_seq=4 ttl=64 time=0.153 ms
+^C
+--- 10.0.0.2 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3051ms
+rtt min/avg/max/mdev = 0.149/3.405/12.681/5.359 ms
+
+</code></pre></div>      </div>
+
+      <p>The ping succeeded - the network is successfully connected. You will notice the first ping required additional time. This is because the switch did not know where to send the packet, and needed to communicate with the controller server over the openflow protocol to learn where to send the packet. Once the switch knows, it will cache this address in it’s local routing table, so subsequent sends are quicker. After a set amount of time, a  timeout will occur, and the cached routing table is erased, and new rules are determined. Why might this be important?</p>
+
+      <details>
+<summary>Solution</summary>
+Because physical devices may change over time, and thus the most efficient path to the destination may change too. Imagine if your switch had 10 ports, and you unplugged your PC from port 4 and plugged it into port 5. The router would need to learn the new location of this device to successfully deliver its packets!
+</details>
+
+      <p>Sometimes, it may useful to spawn an extra terminal window which is running directly on each host. You may do this with the following command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; xterm h1
+</code></pre></div>      </div>
+
+      <p>This environment is inside the host, thus some shortcuts available for us in the mininet command line will not be present. For example, in order to perform a ping, we will require the full IP address of the second host:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping 10.0.0.2
+
+</code></pre></div>      </div>
+
+      <p><img src="res/xterm-ping.png" alt="" /></p>
+
+      <p>In previous labs we observing traffic coming to a device using WireShark. We will return to this in a later section. For now, a simpler way to see when packets arrive at a host is using a utility available on the device via the xterm window</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tcpdump
+</code></pre></div>      </div>
+
+      <p>Head back to the mininet window, and create some traffic to the PC:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h2 ping h1
+</code></pre></div>      </div>
+
+      <p><img src="res/tcpdump-results.png" alt="" /></p>
+
+      <p>When you wish to close the xterm terminal, simply type <code class="language-plaintext highlighter-rouge">exit</code>.</p>
+
+      <p>Another way to test connectivity in mininet is to use the pingall command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; pingall
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; pingall
+*** Ping: testing ping reachability
+h1 -&gt; h2 
+h2 -&gt; h1 
+*** Results: 0% dropped (2/2 received)
+</code></pre></div>      </div>
+
+      <p>This quickly shows us that all devices are successfully connected.</p>
+
+      <h3 id="running-a-simple-http-server-in-python">Running a simple HTTP server in python</h3>
+
+      <p>*note, in the new version of the virtualbox, I have updated the <code class="language-plaintext highlighter-rouge">python</code> variable to point to <code class="language-plaintext highlighter-rouge">python3</code>, so we may use this terminology going forward.</p>
+
+      <p>One of the best things about mininet is that we can run real application code on our hosts. Did you know python can host a simple webserver right from the commandline? Let’s try it out, in our local VirtualBox environment to start:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo python -m http.server 80 &amp;
+</code></pre></div>      </div>
+
+      <p>And then, using Firefox, we can access this</p>
+
+      <p><img src="res/directory-listing.png" alt="" /></p>
+
+      <p>This runs it in the background. We may bring it back to the foreground with <code class="language-plaintext highlighter-rouge">fg</code> and close it with <code class="language-plaintext highlighter-rouge">ctrl+c</code></p>
+
+      <p>Of course, this directory listeing is pretty boring. It would be better if served an actual webpage. Let’s create one in our home directory:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~
+codium .
+</code></pre></div>      </div>
+
+      <p>Create a new file called <code class="language-plaintext highlighter-rouge">index.html</code>, and use Emmet to get some boilerplate (<code class="language-plaintext highlighter-rouge">!</code>), and then fill in content!</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Hello World&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    My first webpage!
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>      </div>
+      <p>Let’s start our server again, and see if we can see our new page:</p>
+
+      <p><img src="res/webpage-in-firefox-better.png" alt="" /></p>
+
+      <p>So that’s neat. Let’s try this on our host in mininet:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 python -m http.server 80 &amp;
+</code></pre></div>      </div>
+
+      <p>However, this is not a graphic environment. On the second host, let’s use a built in linux utility to grab the page, wget, dumping the output (<code class="language-plaintext highlighter-rouge">-O</code>) to the console (<code class="language-plaintext highlighter-rouge">-</code> means stdout)</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h2 wget -O - h1
+</code></pre></div>      </div>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h2 wget -O - h1
+--2023-10-17 19:18:45--  http://10.0.0.1/
+Connecting to 10.0.0.1:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 225 [text/html]
+Saving to: ‘STDOUT’
+
+-                     0%[                    ]       0  --.-KB/s               <span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Hello World<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    My first webpage!
+<span class="nt">&lt;/body&gt;</span>
+-                   100%[===================&gt;]     225  --.-KB/s    in 0s      
+
+2023-10-17 19:18:45 (1.15 MB/s) - written to stdout [225/225]
+</code></pre></div>      </div>
+
+      <p>When we are finished, let’s exit our server:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1 kill %python
+</code></pre></div>      </div>
+
+      <p>When you are finished with mininet, you can close it with:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; exit
+</code></pre></div>      </div>
+
+      <p>However, occasionally mininet will not close gracefully and may leave zombie processes running. The ensure these resources and ports are free for your next emulation, run the cleanup step:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn -c
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part2introductiontosoftwaredefinednetworks"><button class="collapsible">Part 2: Introduction to Software Defined Networks</button><div class="text-content"><div class="text-inner">
+
+      <p>So far we have been looking at mininet only as a virtual representation of real devices, but it actually serves as an introduction to Software Defined Networks. In other words, the concept of emulating a network has real world applications which are employed in real systems today.</p>
+
+      <p>Why might one want to do this? As the internet becomes increasingly virtualized, i.e. appliances and applications existing on the cloud, decoupled from hardware, it becomes necessary to also have the networking solution decoupled from the real hardware. This provides significant performance, flexibility and security gains over physical hardware. For example, if a application running on a virtual machine is migrated to a different physical server, it is simply a matter of reconfiguring the Software Defined Network to redirect to it. Other desired features like load balancing and distrubted offerings are simplified.</p>
+
+      <p>Typically SDN architecture is comprised of:</p>
+
+      <p>Applications - Run application code, e.g. our hosts
+Networking Devices - Recieve packets from applications and forward it to other applications, e.g. our switches 
+Controllers - Applications which instruct the networking devices how to route our data</p>
+
+      <p>Note that the Network Devices are decoupled from the Controllers. Recall back to ENSE 374 where we discussed the benefits of separating responsibility for different components. One advantage of this is that mutiple networking devices can be configured from a single controller.</p>
+
+      <p>How might we do this?</p>
+
+      <p>There are several approaches to Software Defined Networking. We are utilizing OpenSDN, in which our controllers and network devices employ a protocol, in our case, OpenFlow, to decide where to route traffic. The OpenFlow protocol can be used on real world and virtual devices.</p>
+
+      <p>It is important to note that a software defined network is not necessarily isolated, like a sandbox, but may communicate with the wider web as well.</p>
+
+      <p>If you wish to learn more about software defined networks, you may check out this textbook (free with your O’Reilly account through U of R!) SDN: Software Defined Networks. https://www.oreilly.com/library/view/sdn-software-defined/9781449342425/</p>
+
+      <p>To better understand how mininet is working, see the following figure from SDN: Software Defined Networks (credit O’Reilly Media, Inc.)</p>
+
+      <p><img src="res/mininet-simple-architecture.png" alt="" /></p>
+
+      <p>We can see that, virtually speaking, the switch is connected to the controller over the loopback address. The controller is running a service, and acting as a server, on port 6633. (By convention, these services either run on port 6633 or 6653.) This service is accessed by the routers to determine where to send the packets. Meanwhile, other connections are represented with virtual devices, such as ethernet. We’ll be able to see the packets going through these in WireShark.</p>
+
+      <p>Let’s look at how specificially OpenFlow is used to tell the packets where to go. Consider our simple network, as shown in the previous figure.</p>
+
+      <p>If we were to type <code class="language-plaintext highlighter-rouge">h2 ping h4</code>, we know that h2 would need to send that traffic out it’s only port, h2-eth0 / s1-eth0. This packet would arrive at the OpenFlow switch. This switch would not know where to send the packet. It would need to send a message to the controller, on loopback <code class="language-plaintext highlighter-rouge">127.0.0.1</code>. The controller would have some algorithm programmed for deciding where to send it, which may require communications with other connected switches, which in turn may lead to communications with other hosts. The switch will rely on some addressing protocol to identify the target device, either the MAC address or IP address. Eventually, it will either determine a route, or be unable to, and inform the switch. Assuming a route has been found, the switch will store this route in it’s routing table, and forward the packet appropriately. Temporarily, when new packets arrive, the switch will not need to communicate with the controller to make decisions, and will just forward the packets directly as per the rules cached in its routing table. Eventually, the switch will timeout, clearing out the routing table entries for that device, and will then need to contact the controller again for updated routes. This is important as it will help the switch adapt to changes in the network, and can even support more complicated algorithms which change routes based on traffic.</p>
+
+    </div></div></section>
+<section id="part3wiresharkandmininet"><button class="collapsible">Part 3: WireShark and Mininet</button><div class="text-content"><div class="text-inner">
+
+      <p>We may wish to use WireShark and Mininet together to observe the flow of traffic.</p>
+
+      <p>First start a mininet emulation. Then, from a terminal in the Zorin VirtualBox, (not mininet), type:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo wireshark
+</code></pre></div>      </div>
+
+      <p>Depending on if the Mininet network is running, you may see different interfaces. All of the interfaces on switches are available on the Zorin’s Wireshark. The hosts may not be.</p>
+
+      <p>As shown in the previous figure, the OpenFlow packets are always sent on the loopback interface. If you are writing OpenFlow protocols and wish to debug them, , this is the interface you should monitor. However, for now we just wish to monitor traffic. Due to the way mininet operates, the switches share the network namespace with our Zorin instance, so we can monitor these as well from WireShark, though we may not monitor hosts’ interface directly, however it is safe to assume the outgoing traffic on the switch and the incomming traffic on the device will be the same.</p>
+
+      <p><img src="res/switch-interfaces-on-wireshark.png" alt="" /></p>
+
+      <p>If we check out one of the switch interfaces, and then perform a ping across hosts, we should see the packets transfer between them.</p>
+
+      <p><img src="res/wireshark-pings.png" alt="" /></p>
+
+      <p>We can make use of this to help us debug applications in settings similar to real world use.</p>
+
+    </div></div></section>
+<section id="part4runningyourowncodeinmininet"><button class="collapsible">Part 4: Running your own code in Mininet</button><div class="text-content"><div class="text-inner">
+
+      <p>So far we have primarily used built-in utilities on our hosts in Mininet. However, one advantage of the network emulator from a programming perspective is the ability to run your own code.</p>
+
+      <p>Each of the hosts have access to the same filesystem as the Zorin VirtualBox. While this may occasionally be problematic, e.g. when applications rely on config files, overall this convenience outweighs the drawbacks.</p>
+
+      <p>Copy the TCP Chat Application code from Lab 2 into the virtual machine, if it is not already there.</p>
+
+      <p>You may wish to open these in VSCodium, which has been installed in the newest version of the VirtualBox, and can be accessed from a terminal with:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codium .
+</code></pre></div>      </div>
+
+      <p>The server should not need to make any changes, however, the client will need to connect the the server by IP address. Let’s find out what this should be:</p>
+
+      <p>Since our chat works with one server and two or more clients, let’s start up mininet in a configuration with three hosts. Out of the box Mininet supports a number of topologies, and we can even create our own! Fore now, let’s run:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --topo=single,3
+</code></pre></div>      </div>
+      <p>Read the startup code and see that you understand the architecture of the network mininet has created.</p>
+
+      <p>Get the IP addresses of the connected machines with <code class="language-plaintext highlighter-rouge">dump</code>. Let’s use <code class="language-plaintext highlighter-rouge">h1</code> as the server.</p>
+
+      <p>You will need to change the code in line 24, which previously read as</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">reactor</span><span class="p">.</span><span class="n">connectTCP</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="n">ClientFactory</span><span class="p">())</span>
+</code></pre></div>      </div>
+
+      <p>To the correct IP address for h1. Then, in mininet, open an xterm for each host.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; xterm h1 h2 h3
+</code></pre></div>      </div>
+
+      <p>make sure you are in the same directory as your source files, and run the server script on <code class="language-plaintext highlighter-rouge">h1</code> and the client script on <code class="language-plaintext highlighter-rouge">h2</code> and <code class="language-plaintext highlighter-rouge">h3</code>. Try sending messages, does it work?</p>
+
+      <p><img src="res/clients-are-chatting.png" alt="" /></p>
+
+      <p>Let’s try again with the same topology, this time adding four hosts. Have hosts h2 and h3 join the chat and send messages via chat. Using wireshark, verify if host 4 is able to see the messages. Based on this, how is the Switch acting, as a hub or a smart switch?</p>
+
+      <details>
+<summary>Solution</summary>
+We are unable to see the packets. This means that the Switch is acting as a smart switch, rather than a simple hub. It learns where our hosts are connected, and only sends packets along those lines.
+</details>
+
+      <p>Traditional ethernet networks operates like a <code class="language-plaintext highlighter-rouge">hub</code>. A hub simply forwards all packets to all other hosts and trusts the appropriate hosts recieve those packets. When learning networks it can be useful to observe this behaviour first-hand, however Mininet does not support this out of the box.</p>
+
+    </div></div></section>
+<section id="part5poxframeworkandopenflowcontrollers"><button class="collapsible">Part 5: POX Framework and OpenFlow Controllers</button><div class="text-content"><div class="text-inner">
+
+      <p>Since mininet does not support simple packet forwarding, or flooding, out of the box, we will need to use an external controller to do this for us. Recall from our discussion in Part 2 that the controller is simply a service running on a server - if we can start one of these ourselves and tell mininet to connect to it, it should be able to perform the same operations. The good news is, we have a framework for developing OpenFlow controllers in python installed. It is called POX.</p>
+
+      <p>In a separe terminal window, start up POX as a simple flooding controller with the following command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python ~/pox/pox.py --verbose forwarding.hub
+</code></pre></div>      </div>
+
+      <p>POX is a framework for creating OpenFlow controllers. This hub profile tells it behave as a hub does - whenever you recieve a packet, send it out on every other port. Thus your packet is guaranteed to arrive at your destination, with the downside of a LOT of repeated traffic.</p>
+
+      <p>In a separate terminal window, restart your simulation with the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --topo=single,4 --controller=remote
+</code></pre></div>      </div>
+
+      <p>Now whenever mininet switches need to learn about routing information, they will simply contact POX as an external controller, running on port 6633.</p>
+
+      <p>With this controller connected try to perform a ping operation. Notice that there is now minimal delay in the first message being sent compared to the others. Why might this be?</p>
+
+      <p><img src="res/ping-results.png" alt="" /></p>
+
+      <details>
+<summary>Solution</summary>
+This is a very simple routing operation, it doesn't require any computation or planning at all! In fact POX may proactively tells switches just to flood, and not to bother it at all! Check ou the source code in:
+~/pox/pox/forwarding/hub.py
+</details>
+
+      <p>So let’s head back to our earlier example, of two PC’s trying to chat privately over TCP. If we examine h4’s connection on the switch, despite the messages only involving h1, h2 and h3:</p>
+
+      <p><img src="res/hosts-are-chatting-privately.png" alt="" /></p>
+
+      <p>The connection to h4 can still see it!</p>
+
+      <p><img src="res/wireshark-can-see-messages.png" alt="" /></p>
+
+      <p>While you might suspect this configuration to be rare, similar real world situations exist, such as connecting an ethernet hub, or connecting to an unencrypted public wifi. This is a case where TLS, which we looked at last week, comes in handy - if the medium does not protect us, we may always rely on end-to-end encryption!</p>
+
+      <p>Also note this Flooding strategy will only work on the simplest of architectures, i.e. those without loops. Anything more complex will result in a broadcast storm.</p>
+
+    </div></div></section>
+<section id="part6simpletopologiesinmininet"><button class="collapsible">Part 6: Simple Topologies in Mininet</button><div class="text-content"><div class="text-inner">
+
+      <p>Mininet has a number of topologies built in. We can access these directly from the command line by using the <code class="language-plaintext highlighter-rouge">--topo=</code> argument, as we saw earlier. For more info, check out the help file:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn -h
+</code></pre></div>      </div>
+
+      <p>Where we can see:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --topo=TOPO           linear|minimal|reversed|single|torus|tree[,param=value
+                        ...] minimal=MinimalTopo linear=LinearTopo
+                        reversed=SingleSwitchReversedTopo
+</code></pre></div>      </div>
+
+      <p>Let’s investigate a few of these and see if we can figure out the architecture of each from the statement:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --topo=linear,4
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --topo=linear,4
+*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 s2 s3 s4 
+*** Adding links:
+(h1, s1) (h2, s2) (h3, s3) (h4, s4) (s2, s1) (s3, s2) (s4, s3) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+c0 
+*** Starting 4 switches
+s1 s2 s3 s4 ...
+
+</code></pre></div>      </div>
+
+      <p>We can see that this gives us 4 hosts and 4 switches, with one host connected to each switch.</p>
+
+      <p><img src="res/linear-topology.png" alt="" />
+image credit: David Mahler</p>
+
+      <p>Some topologies can take multiple arguements, with different functionality depending on the topology. Let’s try the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --topo=linear,4,2
+</code></pre></div>      </div>
+
+      <p>Which gives us:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --topo=linear,4,2
+*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1s1 h1s2 h1s3 h1s4 h2s1 h2s2 h2s3 h2s4 
+*** Adding switches:
+s1 s2 s3 s4 
+*** Adding links:
+(h1s1, s1) (h1s2, s2) (h1s3, s3) (h1s4, s4) (h2s1, s1) (h2s2, s2) (h2s3, s3) (h2s4, s4) (s2, s1) (s3, s2) (s4, s3) 
+*** Configuring hosts
+h1s1 h1s2 h1s3 h1s4 h2s1 h2s2 h2s3 h2s4 
+*** Starting controller
+c0 
+*** Starting 4 switches
+s1 s2 s3 s4 ...
+*** Starting CLI:
+</code></pre></div>      </div>
+
+      <p>We now how have four switches with two hosts per switch.</p>
+
+      <p>We can also do:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --topo=tree,2,2
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 s2 s3 
+*** Adding links:
+(s1, s2) (s1, s3) (s2, h1) (s2, h2) (s3, h3) (s3, h4) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+c0 
+*** Starting 3 switches
+s1 s2 s3 ...
+</code></pre></div>      </div>
+
+      <p>In this case the arguments refer to the depth and fanout of the tree.</p>
+
+      <p>Here is an image representation of a tree, though ours has additional hosts in each leaf:</p>
+
+      <p><img src="res/tree-mahler.png" alt="" />
+image credit: David Mahler</p>
+
+      <p>This is an important point to notice that all of the switches are communicating with the same OpenFlow controller. Thus OpenFlow routing algorithms are typically centralized rather than decentralized.</p>
+
+      <p>The tree topology may appear more complex than previous topologies we looked at, but importantly, it involves no loops. The default controller built into mininet will handle it fine - it seems to fail only when loops are involved.</p>
+
+    </div></div></section>
+<section id="part7customtopologiesinmininet"><button class="collapsible">Part 7: Custom Topologies in Mininet</button><div class="text-content"><div class="text-inner">
+
+      <p>We can build our own topologies as well, using python code.</p>
+
+      <p>Custom topologies are stored in:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/home/zorin/mininet/custom/
+</code></pre></div>      </div>
+
+      <p>Recall, the shortcut for <code class="language-plaintext highlighter-rouge">/home/zorin</code> is <code class="language-plaintext highlighter-rouge">~</code></p>
+
+      <p>If you would like to see an example of how this works, use codium to open up</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codium ~/mininet/custom/topo-2sw-2host.py
+</code></pre></div>      </div>
+
+      <p>Where we can see:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""Custom topology example
+
+Two directly connected switches plus a host for each switch:
+
+   host --- switch --- switch --- host
+
+Adding the 'topos' dict with a key/value pair to generate our newly defined
+topology enables one to pass in '--topo=mytopo' from the command line.
+"""</span>
+
+<span class="kn">from</span> <span class="nn">mininet.topo</span> <span class="kn">import</span> <span class="n">Topo</span>
+
+<span class="k">class</span> <span class="nc">MyTopo</span><span class="p">(</span> <span class="n">Topo</span> <span class="p">):</span>
+    <span class="s">"Simple topology example."</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="s">"Create custom topo."</span>
+
+        <span class="c1"># Add hosts and switches
+</span>        <span class="n">leftHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h1'</span> <span class="p">)</span>
+        <span class="n">rightHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h2'</span> <span class="p">)</span>
+        <span class="n">leftSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s3'</span> <span class="p">)</span>
+        <span class="n">rightSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s4'</span> <span class="p">)</span>
+
+        <span class="c1"># Add links
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">leftHost</span><span class="p">,</span> <span class="n">leftSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">leftSwitch</span><span class="p">,</span> <span class="n">rightSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">rightSwitch</span><span class="p">,</span> <span class="n">rightHost</span> <span class="p">)</span>
+
+
+<span class="n">topos</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'mytopo'</span><span class="p">:</span> <span class="p">(</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">MyTopo</span><span class="p">()</span> <span class="p">)</span> <span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>In order to create a new topology, we just need to follow this template</p>
+      <ul>
+        <li>create a class which extends the Topo class</li>
+        <li>implement the <code class="language-plaintext highlighter-rouge">build( self )</code> class</li>
+        <li>use the function <code class="language-plaintext highlighter-rouge">self.addHost( ... )</code> to add hosts.
+          <ul>
+            <li>It’s a good idea to use the same naming conventions as mininet, e.g. <code class="language-plaintext highlighter-rouge">h1</code>, <code class="language-plaintext highlighter-rouge">h2</code> … etc.</li>
+          </ul>
+        </li>
+        <li>use the function <code class="language-plaintext highlighter-rouge">self.addSwitch( ... )</code> to add switches.</li>
+        <li>use the <code class="language-plaintext highlighter-rouge">addLink( ... )</code> function to add links.
+          <ul>
+            <li>You may use programming logic, e.g. loops, to make this easier!</li>
+          </ul>
+        </li>
+        <li>Finally, we need to give our class a name in the dictionary at the bottom, so that mininet will know which topology to build.</li>
+      </ul>
+
+      <p>You may run this file by running:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/mininet/custom
+sudo mn --custom topo-2sw-2host.py --topo mytopo
+</code></pre></div>      </div>
+
+      <p>Read this output. Does this match up with your expectations for the topology?</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 
+*** Adding switches:
+s3 s4 
+*** Adding links:
+(h1, s3) (s3, s4) (s4, h2) 
+*** Configuring hosts
+h1 h2 
+*** Starting controller
+c0 
+*** Starting 2 switches
+s3 s4 ...
+</code></pre></div>      </div>
+
+      <p>Let’s try creating our own. We’ll build a 2x2 grid of switches, with a gap, and connect a host on two of the corners:</p>
+
+      <p>copy <code class="language-plaintext highlighter-rouge">topo-2sw-2host.py</code> to <code class="language-plaintext highlighter-rouge">broken-square.py</code>:</p>
+
+      <p>And create the following:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""Custom topology example
+
+We will create a broken square topology as follows:
+
+            swith  --- switch --- host
+              |          
+   host --- switch --- switch
+
+"""</span>
+
+<span class="kn">from</span> <span class="nn">mininet.topo</span> <span class="kn">import</span> <span class="n">Topo</span>
+
+<span class="k">class</span> <span class="nc">MyTopo</span><span class="p">(</span> <span class="n">Topo</span> <span class="p">):</span>
+    <span class="s">"Simple topology example."</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="s">"Create custom topo."</span>
+
+        <span class="c1"># Add hosts and switches
+</span>        <span class="n">leftHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h1'</span> <span class="p">)</span>
+        <span class="n">rightHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h2'</span> <span class="p">)</span>
+        <span class="n">lowerLeftSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s1x1'</span> <span class="p">)</span>
+        <span class="n">lowerRightSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s1x2'</span> <span class="p">)</span>
+        <span class="n">upperLeftSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s2x1'</span> <span class="p">)</span>
+        <span class="n">upperRightSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s2x2'</span> <span class="p">)</span>
+
+
+        <span class="c1"># Add links
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">leftHost</span><span class="p">,</span> <span class="n">lowerLeftSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span><span class="n">rightHost</span><span class="p">,</span> <span class="n">upperRightSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lowerLeftSwitch</span><span class="p">,</span> <span class="n">lowerRightSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lowerLeftSwitch</span><span class="p">,</span> <span class="n">upperLeftSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">upperLeftSwitch</span><span class="p">,</span> <span class="n">upperRightSwitch</span> <span class="p">)</span>
+        <span class="c1">#self.addLink( lowerRightSwitch, upperRightSwitch )
+</span>
+<span class="n">topos</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'brokenSquare'</span><span class="p">:</span> <span class="p">(</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">MyTopo</span><span class="p">()</span> <span class="p">)</span> <span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>We are going to leave the last link unconnected. The default controller for mininet does not support switches with loops. Let’s confirm our topology works by running:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --custom=brokenSquare.py --topo=brokenSquare
+</code></pre></div>      </div>
+
+      <p>Ensure you can still ping across. Great it works!</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --custom=brokenSquare.py --topo=brokenSquare
+*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 
+*** Adding switches:
+s1x1 s1x2 s2x1 s2x2 
+*** Adding links:
+(h1, s1x1) (h2, s2x2) (s1x1, s1x2) (s1x1, s2x1) (s2x1, s2x2) 
+*** Configuring hosts
+h1 h2 
+*** Starting controller
+c0 
+*** Starting 4 switches
+s1x1 s1x2 s2x1 s2x2 ...
+*** Starting CLI:
+mininet&gt; h1 ping h2
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=6.46 ms
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=0.553 ms
+64 bytes from 10.0.0.2: icmp_seq=3 ttl=64 time=0.103 ms
+...
+</code></pre></div>      </div>
+
+      <p>Why did we leave that last link disconnected? This is because otherwise we would have a loop. Mininet’s default controller is not equipped to handle loops. Try reconnecting it and see what happens. Uncomment the line, save, and rerun the simulation, then try pinging across:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo mn --custom=broken-square.py --topo=brokenSquare
+*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 
+*** Adding switches:
+s1x1 s1x2 s2x1 s2x2 
+*** Adding links:
+(h1, s1x1) (h2, s2x2) (s1x1, s1x2) (s1x1, s2x1) (s1x2, s2x2) (s2x1, s2x2) 
+*** Configuring hosts
+h1 h2 
+*** Starting controller
+c0 
+*** Starting 4 switches
+s1x1 s1x2 s2x1 s2x2 ...
+*** Starting CLI:
+mininet&gt; h1 ping h2
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+From 10.0.0.1 icmp_seq=1 Destination Host Unreachable
+From 10.0.0.1 icmp_seq=2 Destination Host Unreachable
+From 10.0.0.1 icmp_seq=3 Destination Host Unreachable
+...
+</code></pre></div>      </div>
+
+      <p>This time it has completely failed.</p>
+
+      <p>Recall earlier, we used the POX simple flooding protocol. What this protocol does is, whenever a packet is recieved in one port, it is simply ejected out every other port. This should definitely get our packet to the destination. What could go wrong? Let’s see it in action in this topology:</p>
+
+      <p>In one terminal</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python ~/pox/pox.py --verbose forwarding.hub
+</code></pre></div>      </div>
+
+      <p>In a separate terminal run</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mn --custom=broken-square.py --topo=brokenSquare --controller=remote
+</code></pre></div>      </div>
+
+      <p>And then have h1 ping h2</p>
+
+      <p>We get flooded with:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=1658 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=1658 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=1658 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=1658 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=1658 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=687 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=687 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=687 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=687 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=687 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=687 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=687 ms (DUP!)
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=687 ms (DUP!)
+...
+</code></pre></div>      </div>
+
+      <p>The (DUP!) shows that this is a duplicated ping message. For some reason the packets are getting sent to use many many times. Why might this be?</p>
+
+      <p>Consider the behaviour in the lowerLeftSwitch and upperRightSwitch. Each of these has one entry and two exits. So every time they get a packet in, they sent two out, one goes to the destination, and the other gets caught in the loop forever. Worse, each time a packet arrives, another copy is made! This is called a “Broadcast Storm”.</p>
+
+      <p>With this simple forwarding strategy, loops are useless. However, in the real world, network architecture without loops are very fragile, as these can have a single point of failure. Loops create redundancy, alternate paths that traffic can take in the event of a failure. However, these also require more complex routing algorithms, such as spanning trees, which only uses a subset of physical connection resembling a tree.</p>
+
+      <p>In the next lab we will look at more complex algorithms for solving some of these problems, and investigate the OpenFlow protocol which is used by the controller to train the network.</p>
+
+      <p>If you would like to see some more examples of topologies, check out the source code in:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">~/mininet/mininet/topo.py</code></p>
+
+      <p>Starting around line 295.</p>
+
+      <p>This will also show you how to use arguments, as we did with our single and tree topologies.</p>
+
+      <p>and also</p>
+
+      <p><code class="language-plaintext highlighter-rouge">~/mininet/mininet/topolib.py</code></p>
+
+      <p>for the Tree and Torus topologies.</p>
+
+    </div></div></section>
+<section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>As with the previous assignment, in this one you will be submitting a report. Please collect figures and screenshot as you go!</p>
+
+      <p>In this assignment, you are to use mininet to build a custom tree structure as shown in the following figure:</p>
+
+      <p><img src="res/architecture.png" alt="" /></p>
+
+      <p>Create a mininet simulation and verify connectivity using the default mininet controller from h1 and h8.</p>
+
+      <p>Next, replace the controller with the flooding algorithm from POX. Does this still work as expected? Are there any broadcast storms? How can you tell? Can every computer see the traffic? How can you verify?</p>
+
+      <p>Next load up the TCP-based chat server from lab 2 with the server on h5, and clients on h1 and h8. Using the Flooding algorithm, see that the algorithm works. Next, verify that an eavesdropper on the network is able to see the contents of all the packets unencrypted. Capture this data as figures. Does this eavesdropping still occur with the Mininet controller?</p>
+
+      <p>Finally, using the TLS-based chat protocol from Part 2 of lab 2, using the flooding algorithm. Capture packets on an eavesdropping machine and see if any messages can be decrypted.</p>
+
+      <p>As with Lab 2, please summarize your findings in a report. Also submit source code for the mininet network. Please use screen capture figures to demonstrate your findings.</p>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>Please submit your lab documents and code to URCourses by the due date. If you are working with a partner, you need only submit one copy, but please include both partners names on all assignments.</p>
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>Mininet Walkthrough. http://mininet.org/walkthrough/</p>
+
+      <p>vvv This guy rocks! Watch all his videos! vvv</p>
+
+      <p>David Mahler. Mininet Custom Topologies. https://www.youtube.com/watch?v=jmlgXaocwiE</p>
+
+      <p>David Mahler. Introduction to Mininet. https://www.youtube.com/watch?v=yHUNeyaQKWY</p>
+
+      <p>David Mahler. Mininet and Remote SDN Controllers (Floodlight + Pox). https://www.youtube.com/watch?v=CPasnNg9Z4I</p>
+
+      <p>David Mahler. Introduction to OpenFlow. https://www.youtube.com/watch?v=l25Ukkmk6Sk</p>
+
+      <p>A nice overview of the SDN field, with a small section on mininet and POX</p>
+
+      <p>SDN: Software Defined Networks. https://www.oreilly.com/library/view/sdn-software-defined/9781449342425/ Free with your O’Reilly account, woooooo!</p>
     </div></div></section>
 
     </main>
