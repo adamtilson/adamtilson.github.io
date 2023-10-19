@@ -756,10 +756,123 @@
 
       <p>Add it to your directory as .gitignore</p>
 
+      <h3 id="complete-example">Complete Example</h3>
+
+      <p>We covered a lot here. The following puts together everything into a working example, slightly different than what we did in the lab:</p>
+
+      <p>index.html</p>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/style.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Welcome to my Website<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"my-text"</span> <span class="na">id=</span><span class="s">"my-text"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/index.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
+      <p>public/css/style.css</p>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/*slightly less offensive that setting the background to magenta*/</span>
+<span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">font-family</span><span class="p">:</span> <span class="nb">sans-serif</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>public/js/index.js</p>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// slightly less offensive than alert messages</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">javascript is working</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>app.js</p>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// const fs = require( "fs" );</span>
+
+<span class="c1">// var myObj = { name : "Adam" };</span>
+
+<span class="c1">// fs.writeFile ( __dirname + "/object.json", </span>
+<span class="c1">//                    JSON.stringify( myObj ), </span>
+<span class="c1">//                    "utf8", </span>
+<span class="c1">//                    ( err ) =&gt; {</span>
+<span class="c1">//     if ( err ) {</span>
+<span class="c1">//         console.log( "Error writingthe file:", err );</span>
+<span class="c1">//         return;</span>
+<span class="c1">//     }</span>
+<span class="c1">// });</span>
+
+<span class="c1">// fs.readFile ( __dirname + "/object.json",</span>
+<span class="c1">//             "utf8", </span>
+<span class="c1">//             ( err, jsonString ) =&gt; {</span>
+<span class="c1">//     if ( err ) {</span>
+<span class="c1">//         console.log("Error reading file from disk:", err);</span>
+<span class="c1">//         return;</span>
+<span class="c1">//     }</span>
+<span class="c1">//     try {</span>
+<span class="c1">//         const object = JSON.parse(jsonString);</span>
+<span class="c1">//         console.log("User's name is:", object.name); // Adam</span>
+<span class="c1">//     } catch ( err ) {</span>
+<span class="c1">//         console.log("Error parsing JSON:", err);</span>
+<span class="c1">//     }</span>
+<span class="c1">// });</span>
+
+<span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span> <span class="p">);</span>
+
+<span class="c1">// this is a canonical alias to make your life easier, like jQuery to $.</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span> 
+
+<span class="c1">// host static resources, like js and css</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kd">static</span><span class="p">(</span><span class="dl">"</span><span class="s2">public</span><span class="dl">"</span><span class="p">))</span>
+
+<span class="c1">// configure express to access variables in req.body object when submitting forms</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> 
+
+<span class="c1">// a common localhost test port</span>
+<span class="kd">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span> 
+
+<span class="c1">// Simple server operation</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span> <span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// template literal</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="s2">`Server is running on http://localhost:</span><span class="p">${</span><span class="nx">port</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// code you wish to run when the user get's the route must be in here!</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/index.html</span><span class="dl">"</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">A user requested the about page</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span> <span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// this code will run only if a user submits a form to the `/` route</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">[</span><span class="dl">"</span><span class="s2">my-text</span><span class="dl">"</span><span class="p">]</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">secret</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// send the user to the /secret route, and pass along the req.body object</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="mi">307</span><span class="p">,</span> <span class="dl">"</span><span class="s2">/secret</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">send</span> <span class="p">(</span><span class="dl">"</span><span class="s2">You can't access this page unless you know the `secret`</span><span class="dl">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/secret</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// confirm that they know the secret by inspecting the req.body</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">[</span><span class="dl">"</span><span class="s2">my-text</span><span class="dl">"</span><span class="p">]</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">secret</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">send</span> <span class="p">(</span><span class="dl">"</span><span class="s2">you know the secret. Good job!</span><span class="dl">"</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>      </div>
+
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>For this assignment, use <code class="language-plaintext highlighter-rouge">Node.js</code> and <code class="language-plaintext highlighter-rouge">express</code> to create a server which which hosts your site as it exists at the end of lab 5.</p>
+      <p>For this assignment, use <code class="language-plaintext highlighter-rouge">node.js</code> and <code class="language-plaintext highlighter-rouge">express</code> to create a server which which hosts your site as it exists at the end of lab 5.</p>
       <ul>
         <li>All of the files developed so far should get sent.
           <ul>
