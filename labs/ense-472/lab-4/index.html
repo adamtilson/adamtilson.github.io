@@ -474,13 +474,15 @@ h4 -&gt; X X h3
 sudo mn --mac --custom=subnets-mini.py --topo=subnets --controller=remote
 </code></pre></div>      </div>
 
-      <p>A special command we ran here, –mac, assigns our devices low level macs that are human readable, so instead of seeing things like:</p>
+      <p>We added a new command to our mininet here, <code class="language-plaintext highlighter-rouge">--mac</code>. This assigns our devices low level MACs that are human readable, so instead of seeing things like:</p>
 
       <p><code class="language-plaintext highlighter-rouge">ether f6:9d:5a:7f:41:42</code></p>
 
       <p>Instead we see:</p>
 
       <p><code class="language-plaintext highlighter-rouge">ether 00:00:00:00:00:01</code></p>
+
+      <p>Recall that MAC addresses are physical addresses which are typically assigned to a device from the device manufacturer, and are (theoretically) unique.</p>
 
       <p>You can verify with <code class="language-plaintext highlighter-rouge">h1 ifconfig</code></p>
 
@@ -634,7 +636,7 @@ h4 -&gt; h1 h2 h3
 
       <p>creating the following file at: 
 <code class="language-plaintext highlighter-rouge">/home/zorin/mininet/custom/mesh.py</code></p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"""Custom topology example
+      <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""Custom topology example
 
 We will try doing two different subnets
 
@@ -643,41 +645,41 @@ host --- switch --- switch --- host
            |     /\    |
 host --- switch --- switch --- host
 
-"""
+"""</span>
 
-from mininet.topo import Topo
+<span class="kn">from</span> <span class="nn">mininet.topo</span> <span class="kn">import</span> <span class="n">Topo</span>
 
-class MyTopo( Topo ):
-    "Simple topology example."
+<span class="k">class</span> <span class="nc">MyTopo</span><span class="p">(</span> <span class="n">Topo</span> <span class="p">):</span>
+    <span class="s">"Simple topology example."</span>
 
-    def build( self ):
-        "Create custom topo."
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="s">"Create custom topo."</span>
 
-        # Add hosts and switches
-        lLH = self.addHost( 'h1' )
-        lRH = self.addHost( 'h2' )
-        uLH = self.addHost( 'h3' )
-        uRH = self.addHost( 'h4' )
+        <span class="c1"># Add hosts and switches
+</span>        <span class="n">lLH</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h1'</span> <span class="p">)</span>
+        <span class="n">lRH</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h2'</span> <span class="p">)</span>
+        <span class="n">uLH</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h3'</span> <span class="p">)</span>
+        <span class="n">uRH</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h4'</span> <span class="p">)</span>
         
-        lLS = self.addSwitch( 's1' )
-        lRS = self.addSwitch( 's2' )
-        uLS = self.addSwitch( 's3' )
-        uRS = self.addSwitch( 's4' )
+        <span class="n">lLS</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s1'</span> <span class="p">)</span>
+        <span class="n">lRS</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s2'</span> <span class="p">)</span>
+        <span class="n">uLS</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s3'</span> <span class="p">)</span>
+        <span class="n">uRS</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s4'</span> <span class="p">)</span>
 
-        # Add links
-        self.addLink( lLH, lLS )
-        self.addLink( lRH, lRS )
-        self.addLink( uLH, uLS )
-        self.addLink( uRH, uRS )
+        <span class="c1"># Add links
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lLH</span><span class="p">,</span> <span class="n">lLS</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lRH</span><span class="p">,</span> <span class="n">lRS</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">uLH</span><span class="p">,</span> <span class="n">uLS</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">uRH</span><span class="p">,</span> <span class="n">uRS</span> <span class="p">)</span>
 
-        self.addLink( lLS, lRS )
-        self.addLink( lLS, uLS )
-        self.addLink( lLS, uRS )
-        self.addLink( lRS, uLS )
-        self.addLink( lRS, uRS )
-        self.addLink( uLS, uRS )
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lLS</span><span class="p">,</span> <span class="n">lRS</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lLS</span><span class="p">,</span> <span class="n">uLS</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lLS</span><span class="p">,</span> <span class="n">uRS</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lRS</span><span class="p">,</span> <span class="n">uLS</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lRS</span><span class="p">,</span> <span class="n">uRS</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">uLS</span><span class="p">,</span> <span class="n">uRS</span> <span class="p">)</span>
 
-topos = { 'mesh': ( lambda: MyTopo() ) }
+<span class="n">topos</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'mesh'</span><span class="p">:</span> <span class="p">(</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">MyTopo</span><span class="p">()</span> <span class="p">)</span> <span class="p">}</span>
 </code></pre></div>      </div>
 
       <p>We will used an advanced controller in the POX library for handling this flow:</p>
@@ -688,25 +690,25 @@ pox/pox.py openflow.spanning_tree --no-flood --hold-down openflow.discovery forw
 
       <p>Let’s look at each part of this:</p>
 
-      <p>forwarding.l2_learning - OpenFlow switches act like Ethernet switches, learning MAC addresses</p>
+      <p><code class="language-plaintext highlighter-rouge">forwarding.l2_learning</code> - OpenFlow switches act like Ethernet switches, learning MAC addresses</p>
       <ul>
         <li>Will automatically delete flow entries which timeout</li>
       </ul>
 
-      <p>openflow.spanning_tree ‐‐no-flood ‐‐hold-down</p>
+      <p><code class="language-plaintext highlighter-rouge">openflow.spanning_tree ‐‐no-flood ‐‐hold-down</code></p>
       <ul>
         <li>spanning_tree will cause POX to create a subset of the links with no loops</li>
         <li>this is responsive - if a link breaks we will route around it</li>
       </ul>
 
-      <p>host_tracker - keep track of hosts in the network.</p>
+      <p><code class="language-plaintext highlighter-rouge">host_tracker</code> - keep track of hosts in the network.</p>
       <ul>
         <li>examines messages to learn MAC and IP of hosts in the network</li>
       </ul>
 
-      <p>info.packet_dump - display info on the log console about packets recieved by POX</p>
+      <p><code class="language-plaintext highlighter-rouge">info.packet_dump</code> - display info on the log console about packets recieved by POX</p>
 
-      <p>log.level –DEBUG samples.pretty_log - Display only useful information about the controller</p>
+      <p><code class="language-plaintext highlighter-rouge">log.level --DEBUG samples.pretty_log</code> - Display only useful information about the controller</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/mininet/custom
 sudo mn --mac --custom=mesh.py --topo=mesh --controller=remote
@@ -792,25 +794,25 @@ lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
 
       <p><code class="language-plaintext highlighter-rouge">~/mininet/custom/external.py</code></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from mininet.topo import Topo
+      <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">mininet.topo</span> <span class="kn">import</span> <span class="n">Topo</span>
 
-class MyTopo( Topo ):
-    "Simple topology example."
+<span class="k">class</span> <span class="nc">MyTopo</span><span class="p">(</span> <span class="n">Topo</span> <span class="p">):</span>
+    <span class="s">"Simple topology example."</span>
 
-    def build( self ):
-        "Create custom topo."
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="s">"Create custom topo."</span>
 
-        # Add hosts and switches
-        switch = self.addSwitch('s1')
-        host1 = self.addHost('h1', ip='192.168.02.04/24')
-        host2 = self.addHost('h2', ip='192.168.02.05/24')
+        <span class="c1"># Add hosts and switches
+</span>        <span class="n">switch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span><span class="s">'s1'</span><span class="p">)</span>
+        <span class="n">host1</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span><span class="s">'h1'</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="s">'192.168.02.04/24'</span><span class="p">)</span>
+        <span class="n">host2</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span><span class="s">'h2'</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="s">'192.168.02.05/24'</span><span class="p">)</span>
 
-        # Add links
-        self.addLink(host1, switch)
-        self.addLink(host2, switch)
+        <span class="c1"># Add links
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span><span class="n">host1</span><span class="p">,</span> <span class="n">switch</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span><span class="n">host2</span><span class="p">,</span> <span class="n">switch</span><span class="p">)</span>
 
 
-topos = { 'external': ( lambda: MyTopo() ) }
+<span class="n">topos</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'external'</span><span class="p">:</span> <span class="p">(</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">MyTopo</span><span class="p">()</span> <span class="p">)</span> <span class="p">}</span>
 </code></pre></div>      </div>
 
       <p>Let’s run this topology:</p>
@@ -934,7 +936,7 @@ nano index.html
 
       <p><img src="res/server-in-virutalbox.png" alt="" /></p>
 
-      <p>In a similar fashion, you can run more complex application which rely on multiple parts which are spread across the virtual network.</p>
+      <p>In a similar fashion, you can run more complex application which rely on multiple parts which are spread across the virtual network. Uses for this range from prototyping functionality to deploying modular network applications.</p>
 
     </div></div></section>
 <section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
@@ -965,7 +967,7 @@ nano index.html
 
       <p><img src="res/assignment-4-q-2.png" alt="" /></p>
 
-      <p>Note that all switches and routers may be modelled the same way in your mininet. You may use any addressing scheme you beleive would work best for this configuration, considering the requirements and limitations of each method. Run the network using any appropriate controller, again keeping in mind the strengths and limitations of each controller.</p>
+      <p>Note that all switches and routers may be modelled the same way in your mininet. You may use any addressing scheme you believe would work best for this configuration, considering the requirements and limitations of each method. Run the network using any appropriate controller, again keeping in mind the strengths and limitations of each controller.</p>
 
       <p>Once the network is constructed, create host a web application server on the <code class="language-plaintext highlighter-rouge">virtual web server</code> and deploy the TCP-based chat server application on the <code class="language-plaintext highlighter-rouge">virtual chat server</code>.</p>
 
