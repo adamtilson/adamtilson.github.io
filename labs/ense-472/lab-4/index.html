@@ -112,7 +112,7 @@
 
     <main id="content" class="main-content" role="main">
         <p></p>
-        <h1 id="lab-4-routing-information-protocol-in-omnet--inet">Lab 4: Routing Information Protocol in OMNeT++ / INET</h1>
+        <h1 id="lab-4-real-world-internet-modelling-in-mininet">Lab 4: Real World Internet Modelling in Mininet</h1>
 
 <p>ENSE 472 - Digital Networks - Laboratory</p>
 
@@ -123,9 +123,866 @@
 <hr />
 
 <p><button class="expandall">Collapse All</button></p>
-<section id="underconstruction"><button class="collapsible">Under construction</button><div class="text-content"><div class="text-inner">
+<section id="objective"><button class="collapsible">Objective</button><div class="text-content"><div class="text-inner">
 
-      <p>These labs are getting redesigned for Fall 2023!</p>
+      <p>The purpose of this lab is to:</p>
+
+      <ul>
+        <li>Using Mininet, investigate architectures that simulate the real world</li>
+        <li>Using Software-Defined Network, write algorithms to route traffic over this simulated internet</li>
+      </ul>
+
+    </div></div></section>
+<section id="equipment"><button class="collapsible">Equipment</button><div class="text-content"><div class="text-inner">
+
+      <p>A computer running Windows, MacOS or Linux, with an Intel or AMD-based processor (x86 or x86-64) with administrator privileges</p>
+
+      <p>And</p>
+
+      <p>A VirtualBox Image of ZorinOS Lite prepared by Adam (Updated for Lab 3)</p>
+      <ul>
+        <li>You can find a link to this on URCourses</li>
+        <li>Open VirtualBox, go to Tools -&gt; Import -&gt; Select the virtualbox image, start it up</li>
+        <li>On boot, username is <code class="language-plaintext highlighter-rouge">zorin</code>, and password is <code class="language-plaintext highlighter-rouge">zorin</code></li>
+        <li>This is Zorin OS Lite, the lite version of my daily driver, responsive and great ui</li>
+        <li>I updated this in lab 3 to install <code class="language-plaintext highlighter-rouge">mininet</code></li>
+        <li>Please backup your files from Lab 2 before migrating over!</li>
+        <li>Recall the username and password are <code class="language-plaintext highlighter-rouge">zorin</code> and <code class="language-plaintext highlighter-rouge">zorin</code>.</li>
+      </ul>
+
+    </div></div></section>
+<section id="part1anoverviewoftheinternet"><button class="collapsible">Part 1: An overview of the Internet</button><div class="text-content"><div class="text-inner">
+
+      <p>As a Software Developer, you will be writing applications that run on the internet. This may include software running on a real hardware server, or virtualized “in the cloud”. For this reason, it is important to have an overview of the internet, and the various components which comprise is, so that you know the capabilities and drawbacks of this technology.</p>
+
+      <p><img src="res/model-of-the-internet.png" alt="" /></p>
+
+      <p>In the previous lab we were modeling these elements as hosts and switches. In the real world it’s important to differentiate between layer-2 switches, which only understand Physical (MAC) addresses vs. layer-3 switches which understand IP addresses. When using layer-3 devices, in order for traffic to be delivered, the hosts must be on the same subnet, otherwise a NAT is required to deliver traffic across subnets.</p>
+
+      <p>In this lab we will model chunks of this network, to get a better understanding of how the different pieces work together.</p>
+
+    </div></div></section>
+<section id="part2ipaddressesandsubnetmasks"><button class="collapsible">Part 2: IP Addresses and Subnet Masks</button><div class="text-content"><div class="text-inner">
+
+      <p>In order for two devices on the same physical network to connect with one another directly, they need to be on the same subnet, that is their addresses need to match in a specific way:</p>
+
+      <p>Consider the subnet address:</p>
+
+      <p>192.168.1.2/16</p>
+
+      <p>This address is comprised of an address:</p>
+
+      <p>192.168.1.2</p>
+
+      <p>And a subnet mask:</p>
+
+      <p>255.255.0.0</p>
+
+      <p>When you use the bitwise AND operation on these numbers, you get the portion of the address which identifies the network:</p>
+
+      <p>192.160.0.0</p>
+
+      <p>The remaining portion is the bits which defines the device:</p>
+
+      <p>0.0.1.2</p>
+
+      <p>So, the following devices would be considered to be on the same subnet:</p>
+
+      <p>192.168.1.2 / 16</p>
+
+      <p>and</p>
+
+      <p>192.168.0.3 / 16</p>
+
+      <p>But the following devices would not:</p>
+
+      <p>192.168.0.3 / 16</p>
+
+      <p>and</p>
+
+      <p>192.168.0.3 / 16</p>
+
+      <p>In particular, the 192.168.X.X/16 IP address is a private address, meaning any device can use this address. Let’s see how this works in the real world. Let’s create the simple mininet default network</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo mn
+mininet&gt; h1 ifconfig
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1-eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 10.0.0.1  netmask 255.0.0.0  broadcast 10.255.255.255
+        inet6 fe80::900c:f4ff:fe40:b342  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 92:0c:f4:40:b3:42  txqueuelen 1000  (Ethernet)
+        RX packets 31  bytes 3500 (3.5 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 9  bytes 726 (726.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre></div>      </div>
+
+      <p>We can see that, by deafult, our devices are given the 10.0.0.1 address on the 255.0.0.0 mask. This means that this device is on the 10.0.0.0 network. Let’s examine the other device:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h2 ifconfig
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h2-eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 10.0.0.2  netmask 255.0.0.0  broadcast 10.255.255.255
+        inet6 fe80::3418:2dff:fe5c:ba10  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 36:18:2d:5c:ba:10  txqueuelen 1000  (Ethernet)
+        RX packets 36  bytes 3924 (3.9 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 10  bytes 796 (796.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre></div>      </div>
+
+      <p>Confirm connectivity with the following command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ping h2
+</code></pre></div>      </div>
+
+      <p>Recall: Use <code class="language-plaintext highlighter-rouge">ctrl+c</code> to stop the ping</p>
+
+      <p>Let’s try changing the address of the second host, while remaining in the subnet, and see if connectivity remains. We will change it to 10.1.2.3/8, which is on the same subnet:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h2 ip addr flush dev h2-eth0
+mininet&gt; h2 ip addr add 10.1.2.3/8 dev h2-eth0
+mininet&gt; h1 ping h2
+PING 10.1.2.3 (10.1.2.3) 56(84) bytes of data.
+64 bytes from 10.1.2.3: icmp_seq=1 ttl=64 time=11.5 ms
+64 bytes from 10.1.2.3: icmp_seq=2 ttl=64 time=0.234 ms
+64 bytes from 10.1.2.3: icmp_seq=3 ttl=64 time=0.073 ms
+64 bytes from 10.1.2.3: icmp_seq=4 ttl=64 time=0.083 ms
+...
+</code></pre></div>      </div>
+
+      <p>Because these devices are on the same subnet, they may still communicate. On the other hand, if we change it to an address off the subnet:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h2 ip addr flush dev h2-eth0
+mininet&gt; h2 ip addr add 192.168.1.2/16 dev h2-eth0
+mininet&gt; h1 ping h2
+ping: connect: Network is unreachable
+mininet&gt; h2 ping h1
+ping: connect: Network is unreachable
+</code></pre></div>      </div>
+
+      <p>The devices no longer know how to reach the other. However, if we change h1 to be on the same subnet:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ip addr flush dev h1-eth0
+mininet&gt; h1 ip addr add 192.168.2.3/16 dev h1-eth0
+mininet&gt; h1 ping h2
+PING 192.168.1.2 (192.168.1.2) 56(84) bytes of data.
+64 bytes from 192.168.1.2: icmp_seq=1 ttl=64 time=2.45 ms
+64 bytes from 192.168.1.2: icmp_seq=2 ttl=64 time=0.312 ms
+64 bytes from 192.168.1.2: icmp_seq=3 ttl=64 time=0.075 ms
+64 bytes from 192.168.1.2: icmp_seq=4 ttl=64 time=0.074 ms
+...
+</code></pre></div>      </div>
+
+      <p>Now connectivity has been resumed.</p>
+
+      <p>However, we can easily envision scenarios where devices on separate subnets would need to communicate, such as the following:</p>
+
+      <p><img src="res/two-subnets.png" alt="" /></p>
+
+      <p>In a real world architecture, this could be achieved by using a gateway NAT router, a device which effectively straddles two (or more) networks, and sends data to the appropriate network based on the data recieved.  In Software Defined Networks, instead this is typically achieved using only routing tables.</p>
+
+      <p>Let’s build the following custom topology (refer back to the previous lab documents if you do not recall how to do this). Save this as <code class="language-plaintext highlighter-rouge">/home/zorin/mininet/custom/subnets.py</code>.</p>
+
+      <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""Custom topology example
+
+We will try doing two different subnets
+
+   host ---\                             /--- host
+            switch --- switch  --- switch           
+   host ---/                             \--- host
+
+"""</span>
+
+<span class="kn">from</span> <span class="nn">mininet.topo</span> <span class="kn">import</span> <span class="n">Topo</span>
+
+<span class="k">class</span> <span class="nc">MyTopo</span><span class="p">(</span> <span class="n">Topo</span> <span class="p">):</span>
+    <span class="s">"Simple topology example."</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="s">"Create custom topo."</span>
+
+        <span class="c1"># Add hosts and switches
+</span>        <span class="n">upperLeftHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h1'</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="s">'192.168.0.5/16'</span> <span class="p">)</span>
+        <span class="n">lowerLeftHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h2'</span><span class="p">,</span>  <span class="n">ip</span><span class="o">=</span><span class="s">'192.168.0.6/16'</span> <span class="p">)</span>
+        <span class="n">upperRightHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h3'</span><span class="p">,</span>  <span class="n">ip</span><span class="o">=</span><span class="s">'200.1.2.3/8'</span> <span class="p">)</span>
+        <span class="n">lowerRightHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h4'</span><span class="p">,</span>  <span class="n">ip</span><span class="o">=</span><span class="s">'200.3.4.5/8'</span> <span class="p">)</span>
+        
+        <span class="n">leftSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s1'</span> <span class="p">)</span>
+        <span class="n">centerSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s2'</span> <span class="p">)</span>
+        <span class="n">rightSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s3'</span> <span class="p">)</span>
+
+
+        <span class="c1"># Add links
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">upperLeftHost</span><span class="p">,</span> <span class="n">leftSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lowerLeftHost</span><span class="p">,</span> <span class="n">leftSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">upperRightHost</span><span class="p">,</span> <span class="n">rightSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lowerRightHost</span><span class="p">,</span> <span class="n">rightSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span> <span class="p">(</span> <span class="n">leftSwitch</span><span class="p">,</span> <span class="n">centerSwitch</span> <span class="p">)</span> 
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span> <span class="p">(</span> <span class="n">centerSwitch</span><span class="p">,</span> <span class="n">rightSwitch</span> <span class="p">)</span>
+
+<span class="n">topos</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'subnets'</span><span class="p">:</span> <span class="p">(</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">MyTopo</span><span class="p">()</span> <span class="p">)</span> <span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>And let’s demo it out:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd /home/zorin/mininet/custom/
+$ sudo mn --custom=subnets.py --topo=subnets
+*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 s2 s3 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s3) (h4, s3) (s1, s2) (s2, s3) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+c0 
+*** Starting 3 switches
+s1 s2 s3 ...
+*** Starting CLI:
+mininet&gt; h1 ping h2
+PING 192.168.0.6 (192.168.0.6) 56(84) bytes of data.
+64 bytes from 192.168.0.6: icmp_seq=1 ttl=64 time=1.37 ms
+64 bytes from 192.168.0.6: icmp_seq=2 ttl=64 time=0.280 ms
+64 bytes from 192.168.0.6: icmp_seq=3 ttl=64 time=0.073 ms
+^C
+--- 192.168.0.6 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2024ms
+rtt min/avg/max/mdev = 0.073/0.575/1.372/0.569 ms
+mininet&gt; h1 ping h3
+ping: connect: Network is unreachable
+mininet&gt; h3 ping h4
+PING 200.3.4.5 (200.3.4.5) 56(84) bytes of data.
+64 bytes from 200.3.4.5: icmp_seq=1 ttl=64 time=4.08 ms
+64 bytes from 200.3.4.5: icmp_seq=2 ttl=64 time=0.292 ms
+64 bytes from 200.3.4.5: icmp_seq=3 ttl=64 time=0.077 ms
+64 bytes from 200.3.4.5: icmp_seq=4 ttl=64 time=0.061 ms
+^C
+--- 200.3.4.5 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3048ms
+rtt min/avg/max/mdev = 0.061/1.128/4.082/1.707 ms
+
+</code></pre></div>      </div>
+
+      <p>As you can see, we can ping back and forth on the same subnets, but not across subnets.</p>
+
+      <p>So why is this failing? It is because the device does not know where to send packets that are not on the current network. We can tell them where to send packets on other networks using a default port, in other words - if we don’t know which network this is on, try sending it out this ethernet device:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1 ip route add default via 192.168.0.5
+h2 ip route add default via 192.168.0.6
+h3 ip route add default via 200.1.2.3
+h4 ip route add default via 200.3.4.5
+</code></pre></div>      </div>
+
+      <p>With this update made, the host knows to send data out of the same device as for the local network. Note that Mininet is still doing a lot of the heavy lifting for us, since the SDN algorithm is able to learn the location of the new hosts and forward accordingly.</p>
+
+    </div></div></section>
+<section id="part3simplegatewayroutersandstaticrouters"><button class="collapsible">Part 3: Simple Gateway Routers and Static Routers</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s simplify our network slightly to make it a bit easier to follow:</p>
+
+      <p><img src="res/slightly-simpler-subnet.png" alt="" /></p>
+
+      <p>This will be represented in the following code. Save this one as <code class="language-plaintext highlighter-rouge">/home/zorin/mininet/custom/subnets-mini.py</code>:</p>
+
+      <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""Custom topology example
+
+We will try doing two different subnets
+
+   host ---\                 /--- host
+            switch --- switch           
+   host ---/                 \--- host
+
+"""</span>
+
+<span class="kn">from</span> <span class="nn">mininet.topo</span> <span class="kn">import</span> <span class="n">Topo</span>
+
+<span class="k">class</span> <span class="nc">MyTopo</span><span class="p">(</span> <span class="n">Topo</span> <span class="p">):</span>
+    <span class="s">"Simple topology example."</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="s">"Create custom topo."</span>
+
+        <span class="c1"># Add hosts and switches
+</span>        <span class="n">upperLeftHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h1'</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="s">'192.168.0.3/24'</span> <span class="p">)</span>
+        <span class="n">lowerLeftHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h2'</span><span class="p">,</span>  <span class="n">ip</span><span class="o">=</span><span class="s">'192.168.0.2/24'</span> <span class="p">)</span>
+        <span class="n">upperRightHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h3'</span><span class="p">,</span>  <span class="n">ip</span><span class="o">=</span><span class="s">'192.168.1.3/24'</span> <span class="p">)</span>
+        <span class="n">lowerRightHost</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addHost</span><span class="p">(</span> <span class="s">'h4'</span><span class="p">,</span>  <span class="n">ip</span><span class="o">=</span><span class="s">'192.168.1.4/24'</span> <span class="p">)</span>
+        
+        <span class="n">leftSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s1'</span> <span class="p">)</span>
+        <span class="n">rightSwitch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">addSwitch</span><span class="p">(</span> <span class="s">'s2'</span> <span class="p">)</span>
+
+
+        <span class="c1"># Add links
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">upperLeftHost</span><span class="p">,</span> <span class="n">leftSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lowerLeftHost</span><span class="p">,</span> <span class="n">leftSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">upperRightHost</span><span class="p">,</span> <span class="n">rightSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span><span class="p">(</span> <span class="n">lowerRightHost</span><span class="p">,</span> <span class="n">rightSwitch</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addLink</span> <span class="p">(</span> <span class="n">leftSwitch</span><span class="p">,</span> <span class="n">rightSwitch</span> <span class="p">)</span>
+
+<span class="n">topos</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'subnets'</span><span class="p">:</span> <span class="p">(</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">MyTopo</span><span class="p">()</span> <span class="p">)</span> <span class="p">}</span>
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /home/zorin/mininet/custom/
+sudo mn --custom=subnets-mini.py --topo=subnets
+</code></pre></div>      </div>
+
+      <p>We can confirm our architcture is working as expected with pingall:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; pingall
+*** Ping: testing ping reachability
+h1 -&gt; h2 X X 
+h2 -&gt; h1 X X 
+h3 -&gt; X X h4 
+h4 -&gt; X X h3 
+*** Results: 66% dropped (4/12 received)
+
+</code></pre></div>      </div>
+
+      <p>Let’s close this simulation, and start another one:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /home/zorin/mininet/custom/
+sudo mn --mac --custom=subnets-mini.py --topo=subnets --controller=remote
+</code></pre></div>      </div>
+
+      <p>A special command we ran here, –mac, assigns our devices low level macs that are human readable, so instead of seeing things like:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">ether f6:9d:5a:7f:41:42</code></p>
+
+      <p>Instead we see:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">ether 00:00:00:00:00:01</code></p>
+
+      <p>You can verify with <code class="language-plaintext highlighter-rouge">h1 ifconfig</code></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ifconfig
+h1-eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 192.168.0.3  netmask 255.255.255.0  broadcast 192.168.0.255
+        inet6 fe80::200:ff:fe00:1  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 00:00:00:00:00:01  txqueuelen 1000  (Ethernet)
+        RX packets 35  bytes 3909 (3.9 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 16  bytes 1292 (1.2 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre></div>      </div>
+
+      <p>In the previous lab, we were able to simulate layer-2 devices using the POX framework. We will similarly use another framework for simulating layer-3 gateway routers, this one is called Ryu. You may add it to your VirtualBox with the following commands:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install ryu
+pip install eventlet==0.30.2
+</code></pre></div>      </div>
+
+      <p>Next, let’s do some setup for our devices. We will tell each host where to find it’s Gateway, as per the following figure</p>
+
+      <p><img src="res/small-network-addressed.png" alt="" /></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1 route add default gw 192.168.0.1
+h2 route add default gw 192.168.0.1
+h3 route add default gw 192.168.1.1
+h4 route add default gw 192.168.1.1
+</code></pre></div>      </div>
+
+      <p>This means that, whenever your machine has traffic that is due for outside the subnet, it will send it to the device with the address listed as the Gateway. So we are going to need to assign these addresses to some devices. Let’s try this using Ryu.</p>
+
+      <p>Let’s start up ryu using the REST router:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ryu-manager --verbose ryu.app.rest_router
+</code></pre></div>      </div>
+
+      <p>This router provides a REST api which allows you to issue commands to RYU using JSON for configuring your routers. We can use a web utility, such as CURL, to accomplish this. What we wish to do is assign the Switches as gateway routers - these typically have two connections, one for the local network side, and one for the internet side. Run these in a separate window apart from mininet and ryu</p>
+
+      <p>curl -X POST -d ‘{“address”:”192.168.0.1/24”}’ http://localhost:8080/router/0000000000000001
+curl -X POST -d ‘{“address”:”20.20.20.1/24”}’ http://localhost:8080/router/0000000000000001
+curl -X POST -d ‘{“address”:”192.168.1.1/24”}’ http://localhost:8080/router/0000000000000002
+curl -X POST -d ‘{“address”:”20.20.20.2/24”}’ http://localhost:8080/router/0000000000000002</p>
+
+      <p>If you try to test connectivity it still will not work. Let’s investigate to see why:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ping 192.168.0.1
+PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
+64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=1.76 ms
+64 bytes from 192.168.0.1: icmp_seq=2 ttl=64 time=2.01 ms
+64 bytes from 192.168.0.1: icmp_seq=3 ttl=64 time=2.11 ms
+64 bytes from 192.168.0.1: icmp_seq=4 ttl=64 time=1.87 ms
+...
+</code></pre></div>      </div>
+
+      <p>This succeeds, so our host can find our gateway.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ping 20.20.20.1
+PING 20.20.20.1 (20.20.20.1) 56(84) bytes of data.
+64 bytes from 20.20.20.1: icmp_seq=1 ttl=64 time=4.00 ms
+64 bytes from 20.20.20.1: icmp_seq=2 ttl=64 time=1.98 ms
+64 bytes from 20.20.20.1: icmp_seq=3 ttl=64 time=2.18 ms
+64 bytes from 20.20.20.1: icmp_seq=4 ttl=64 time=1.77 ms
+</code></pre></div>      </div>
+
+      <p>Our host can also reach the far side of the router.</p>
+
+      <p>Next, we can test:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ping 20.20.20.2
+PING 20.20.20.2 (20.20.20.2) 56(84) bytes of data.
+64 bytes from 20.20.20.2: icmp_seq=1 ttl=63 time=1.73 ms
+64 bytes from 20.20.20.2: icmp_seq=2 ttl=63 time=2.12 ms
+64 bytes from 20.20.20.2: icmp_seq=3 ttl=63 time=1.74 ms
+64 bytes from 20.20.20.2: icmp_seq=4 ttl=63 time=1.92 ms
+</code></pre></div>      </div>
+
+      <p>Our host can reach the second router on the far side. But can we reach the router on the far side acting on the second network?</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ping 192.168.1.1
+PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.
+</code></pre></div>      </div>
+
+      <p>Nope. But that’s weird, we were able to reach this exact same device on the other side. Ponder why this might be.</p>
+
+      <p>The reason we failed is because Router 1 does not know where to send traffic destined for the second network. Similarly to before, we need to tell our devices where to send packages that they do not otherwise recognize.</p>
+
+      <p>curl -X POST -d ‘{“gateway”:”20.20.20.2”}’ http://localhost:8080/router/0000000000000001
+curl -X POST -d ‘{“gateway”:”20.20.20.1”}’ http://localhost:8080/router/0000000000000002</p>
+
+      <p>So, when router 1 gets a packet it does not recognize, it will send it to router 2, and vice versa.</p>
+
+      <p>And with that, our Switches will be acting as L3 routers!</p>
+
+      <p>Let’s do our final tests:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ping 192.168.1.1
+PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.
+64 bytes from 192.168.1.1: icmp_seq=1 ttl=63 time=1.64 ms
+64 bytes from 192.168.1.1: icmp_seq=2 ttl=63 time=2.18 ms
+64 bytes from 192.168.1.1: icmp_seq=3 ttl=63 time=2.19 ms
+64 bytes from 192.168.1.1: icmp_seq=4 ttl=63 time=2.18 ms
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ping h3
+PING 192.168.1.3 (192.168.1.3) 56(84) bytes of data.
+64 bytes from 192.168.1.3: icmp_seq=1 ttl=62 time=0.606 ms
+64 bytes from 192.168.1.3: icmp_seq=2 ttl=62 time=0.071 ms
+64 bytes from 192.168.1.3: icmp_seq=3 ttl=62 time=0.067 ms
+64 bytes from 192.168.1.3: icmp_seq=4 ttl=62 time=0.079 ms
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; pingall
+*** Ping: testing ping reachability
+h1 -&gt; h2 h3 h4 
+h2 -&gt; h1 h3 h4 
+h3 -&gt; h1 h2 h4 
+h4 -&gt; h1 h2 h3 
+</code></pre></div>      </div>
+
+      <p>So this is a good simulation of how Layer 3 devices work in the real world. As previously mentioned, in SDN world, we actually don’t need to assign all router IP addresses, but in the real world this is required.</p>
+
+      <p>Finally, we can also set up static routes:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X POST -d '{"destination": "192.168.1.0/24", "gateway": "20.20.20.2"}' http://localhost:8080/router/0000000000000001
+</code></pre></div>      </div>
+
+      <p>This means that, if a package is destined for anywhere on the 192.168.1.0/24 network, we will send it through the gateway 20.20.20.2. This would be useful if there isn’t a single connection through which a router may dump all unknown traffic.</p>
+
+    </div></div></section>
+<section id="part4loopsandspanningtrees"><button class="collapsible">Part 4: Loops and Spanning Trees</button><div class="text-content"><div class="text-inner">
+
+      <p>In the previous lab, we saw that complex network topologies often included loops, for the purpose of redundancy. However, logically these create problems for sending our packets,  because there is no one clear path from the source to the destination.</p>
+
+      <p>The way to solve this is by creating a spanning tree - through flooding, the OpenFlow algorithms learns a subset of links which are required to reach our destination.</p>
+
+      <p>Let’s try it out!</p>
+
+      <p>Begin by creating the following network:</p>
+
+      <p>creating the following file at: 
+<code class="language-plaintext highlighter-rouge">/home/zorin/mininet/custom/mesh.py</code></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"""Custom topology example
+
+We will try doing two different subnets
+
+host --- switch --- switch --- host
+           |     \/    |
+           |     /\    |
+host --- switch --- switch --- host
+
+"""
+
+from mininet.topo import Topo
+
+class MyTopo( Topo ):
+    "Simple topology example."
+
+    def build( self ):
+        "Create custom topo."
+
+        # Add hosts and switches
+        lLH = self.addHost( 'h1' )
+        lRH = self.addHost( 'h2' )
+        uLH = self.addHost( 'h3' )
+        uRH = self.addHost( 'h4' )
+        
+        lLS = self.addSwitch( 's1' )
+        lRS = self.addSwitch( 's2' )
+        uLS = self.addSwitch( 's3' )
+        uRS = self.addSwitch( 's4' )
+
+        # Add links
+        self.addLink( lLH, lLS )
+        self.addLink( lRH, lRS )
+        self.addLink( uLH, uLS )
+        self.addLink( uRH, uRS )
+
+        self.addLink( lLS, lRS )
+        self.addLink( lLS, uLS )
+        self.addLink( lLS, uRS )
+        self.addLink( lRS, uLS )
+        self.addLink( lRS, uRS )
+        self.addLink( uLS, uRS )
+
+topos = { 'mesh': ( lambda: MyTopo() ) }
+</code></pre></div>      </div>
+
+      <p>We will used an advanced controller in the POX library for handling this flow:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~
+pox/pox.py openflow.spanning_tree --no-flood --hold-down openflow.discovery forwarding.l2_learning host_tracker info.packet_dump log.level --DEBUG samples.pretty_log
+</code></pre></div>      </div>
+
+      <p>Let’s look at each part of this:</p>
+
+      <p>forwarding.l2_learning - OpenFlow switches act like Ethernet switches, learning MAC addresses</p>
+      <ul>
+        <li>Will automatically delete flow entries which timeout</li>
+      </ul>
+
+      <p>openflow.spanning_tree ‐‐no-flood ‐‐hold-down</p>
+      <ul>
+        <li>spanning_tree will cause POX to create a subset of the links with no loops</li>
+        <li>this is responsive - if a link breaks we will route around it</li>
+      </ul>
+
+      <p>host_tracker - keep track of hosts in the network.</p>
+      <ul>
+        <li>examines messages to learn MAC and IP of hosts in the network</li>
+      </ul>
+
+      <p>info.packet_dump - display info on the log console about packets recieved by POX</p>
+
+      <p>log.level –DEBUG samples.pretty_log - Display only useful information about the controller</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/mininet/custom
+sudo mn --mac --custom=mesh.py --topo=mesh --controller=remote
+</code></pre></div>      </div>
+
+      <p>You may need to give the routers a few moments to propagate the routing information. Test out the network:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; pingall
+*** Ping: testing ping reachability
+h1 -&gt; h2 h3 h4 
+h2 -&gt; h1 h3 h4 
+h3 -&gt; h1 h2 h4 
+h4 -&gt; h1 h2 h3 
+*** Results: 0% dropped (12/12 received)
+</code></pre></div>      </div>
+
+      <p>Let’s try to sever a couple of the links. Let’s remove the 2 that go across and the one that goes along the bottom:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; link s2 s3 down
+mininet&gt; link s1 s4 down
+mininet&gt; link s1 s2 down
+</code></pre></div>      </div>
+
+      <p>When you first try this it may fail…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; link s2 s3 down
+mininet&gt; link s1 s4 down
+mininet&gt; link s1 s2 down
+mininet&gt; pingall
+*** Ping: testing ping reachability
+h1 -&gt; X h3 X 
+h2 -&gt; h1 h3 X 
+h3 -&gt; h1 h2 X 
+h4 -&gt; h1 h2 h3 
+*** Results: 33% dropped (8/12 received)
+</code></pre></div>      </div>
+
+      <p>However, once the network replairs, that is, finds new routes</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; pingall
+*** Ping: testing ping reachability
+h1 -&gt; h2 h3 h4 
+h2 -&gt; h1 h3 h4 
+h3 -&gt; h1 h2 h4 
+h4 -&gt; h1 h2 h3 
+*** Results: 0% dropped (12/12 received)
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part5accessingmininetfromremoteprocesses"><button class="collapsible">Part 5: Accessing Mininet from Remote Processes</button><div class="text-content"><div class="text-inner">
+
+      <p>In the final section of our Mininet lab, we will look at the situation where we wish to access applications running on our server from Mininet to test them. The advantage of this is that we can develop an entire Network application in Mininet which is hardware agnostic, and then migrate it to a different architecture later on. In other words, in the diagram we examined earlier:</p>
+
+      <p><img src="res/sdn-in-isolation.png" alt="" /></p>
+
+      <p>The following can be seen as a single component which can be migrated to any hardware and run independantly.</p>
+
+      <p>To begin, let’s investigate the state of our current. Running from the VirtualBox terminal:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zorin@zorin-VirtualBox:~/Desktop$ ifconfig
+enp0s3: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::ca8c:6395:5814:41a  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 08:00:27:e1:f1:cf  txqueuelen 1000  (Ethernet)
+        RX packets 13  bytes 1808 (1.8 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 65  bytes 7407 (7.4 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 169  bytes 12453 (12.4 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 169  bytes 12453 (12.4 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre></div>      </div>
+
+      <p>Without Mininet running, we have only one interface which can reach other networks, enp0s3.</p>
+
+      <p>Let’s create a small custom topology in:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">~/mininet/custom/external.py</code></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from mininet.topo import Topo
+
+class MyTopo( Topo ):
+    "Simple topology example."
+
+    def build( self ):
+        "Create custom topo."
+
+        # Add hosts and switches
+        switch = self.addSwitch('s1')
+        host1 = self.addHost('h1', ip='192.168.02.04/24')
+        host2 = self.addHost('h2', ip='192.168.02.05/24')
+
+        # Add links
+        self.addLink(host1, switch)
+        self.addLink(host2, switch)
+
+
+topos = { 'external': ( lambda: MyTopo() ) }
+</code></pre></div>      </div>
+
+      <p>Let’s run this topology:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/mininet/custom/
+sudo mn --custom external.py --topo external
+</code></pre></div>      </div>
+
+      <p>From our local machine we would like to be able to ping these hosts, however it fails:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zorin@zorin-VirtualBox:~/Desktop$ ping 192.168.02.04
+PING 192.168.02.04 (192.168.2.4) 56(84) bytes of data.
+^C
+--- 192.168.02.04 ping statistics ---
+4 packets transmitted, 0 received, 100% packet loss, time 3054ms
+
+</code></pre></div>      </div>
+
+      <p>Let’s add some default routes:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1 ip route add default via 192.168.02.01
+h2 ip route add default via 192.168.02.01
+</code></pre></div>      </div>
+
+      <p>Note that a device with this address does not exist yet, we will create it shortly!</p>
+
+      <p>We wish to assign this address to s1. We may investigate it’s current address state with:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; sh ip addr show s1
+4: s1: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 02:15:47:a6:f3:4c brd ff:ff:ff:ff:ff:ff
+</code></pre></div>      </div>
+
+      <p>We can see this interface has no address and is DOWN. Let’s fix these things:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh ip addr add 192.168.02.01/24 dev s1
+sh ip link set s1 up
+</code></pre></div>      </div>
+
+      <p>Running again we see:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; sh ip addr show s1
+4: s1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether 02:15:47:a6:f3:4c brd ff:ff:ff:ff:ff:ff
+    inet 192.168.2.1/24 scope global s1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::15:47ff:fea6:f34c/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+</code></pre></div>      </div>
+
+      <p>Let’s see if h1 and h2 can ping this gateway address:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h1 ping 192.168.02.01
+PING 192.168.02.01 (192.168.2.1) 56(84) bytes of data.
+64 bytes from 192.168.2.1: icmp_seq=1 ttl=64 time=0.042 ms
+64 bytes from 192.168.2.1: icmp_seq=2 ttl=64 time=0.050 ms
+64 bytes from 192.168.2.1: icmp_seq=3 ttl=64 time=0.048 ms
+64 bytes from 192.168.2.1: icmp_seq=4 ttl=64 time=0.055 ms
+^C
+--- 192.168.02.01 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3066ms
+rtt min/avg/max/mdev = 0.042/0.048/0.055/0.004 ms
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; h2 ping 192.168.02.01
+PING 192.168.02.01 (192.168.2.1) 56(84) bytes of data.
+64 bytes from 192.168.2.1: icmp_seq=1 ttl=64 time=6.32 ms
+64 bytes from 192.168.2.1: icmp_seq=2 ttl=64 time=0.287 ms
+64 bytes from 192.168.2.1: icmp_seq=3 ttl=64 time=0.088 ms
+64 bytes from 192.168.2.1: icmp_seq=4 ttl=64 time=0.073 ms
+^C
+--- 192.168.02.01 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3044ms
+rtt min/avg/max/mdev = 0.073/1.691/6.317/2.672 ms
+</code></pre></div>      </div>
+
+      <p>Good, so we can connect to the gateway from our internal hosts.</p>
+
+      <p>Further, if from inside the VirtualMachine we can see if we can access our router:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s1: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 192.168.2.1  netmask 255.255.255.0  broadcast 0.0.0.0
+        inet6 fe80::15:47ff:fea6:f34c  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 02:15:47:a6:f3:4c  txqueuelen 1000  (Ethernet)
+        RX packets 8  bytes 504 (504.0 B)
+        RX errors 0  dropped 6  overruns 0  frame 0
+        TX packets 56  bytes 6582 (6.5 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre></div>      </div>
+
+      <p>We can see that the switch is there, and it has been assigned an IP address. Let’s try to ping it:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zorin@zorin-VirtualBox:~/Desktop$ ping 192.168.02.04
+PING 192.168.02.04 (192.168.2.4) 56(84) bytes of data.
+64 bytes from 192.168.2.4: icmp_seq=1 ttl=64 time=5.56 ms
+64 bytes from 192.168.2.4: icmp_seq=2 ttl=64 time=0.078 ms
+64 bytes from 192.168.2.4: icmp_seq=3 ttl=64 time=0.074 ms
+64 bytes from 192.168.2.4: icmp_seq=4 ttl=64 time=0.064 ms
+</code></pre></div>      </div>
+
+      <p>Cool, we are now able to get to our computer. Let’s try running a simple server on our host:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xterm h1
+nano index.html
+</code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;head&gt;
+&lt;title&gt;Welcome to my Page&lt;/title&gt;
+&lt;body&gt;This is a very simple website&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>      </div>
+
+      <p>Save it, (ctrl+x, y, enter) then let’s run it using our simple python server</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -m http.server
+</code></pre></div>      </div>
+
+      <p>Now, from our VirtualBox instance:</p>
+
+      <p><img src="res/server-in-virutalbox.png" alt="" /></p>
+
+      <p>In a similar fashion, you can run more complex application which rely on multiple parts which are spread across the virtual network.</p>
+
+    </div></div></section>
+<section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
+
+      <p>This lab has two parts. These are seperate exercises, and do not rely on the other. As with Labs 2 and 3, a short report will be necessary to document information which may not be easily captured in source code.</p>
+
+      <p>Part 1: L3 Static Routes with Ryu</p>
+
+      <p>Consider the following network configuration:</p>
+
+      <p><img src="res/assignment-4-q-1.png" alt="" /></p>
+
+      <p>Using mininet and the Ryu REST router, configure this network for connectivity. Consider which parts of the network you can use default gateway routing and while parts you will need to use static routing.</p>
+
+      <p>Please include with this submissions all of the configuration commands you used to make this system work.</p>
+
+      <p>Part 2: Running a model of the Internet with a Web App</p>
+
+      <p>For the second part of the lab assignment, we are going to create a miniature working model of the internet, including:</p>
+      <ul>
+        <li>An ISP Part</li>
+        <li>An Internet Part</li>
+        <li>Two remote cloud server sections</li>
+        <li>The applications need to be accessible through your browser on your virtual box</li>
+      </ul>
+
+      <p>To begin, implement the topology listed below in mininet.</p>
+
+      <p><img src="res/assignment-4-q-2.png" alt="" /></p>
+
+      <p>Note that all switches and routers may be modelled the same way in your mininet. You may use any addressing scheme you beleive would work best for this configuration, considering the requirements and limitations of each method. Run the network using any appropriate controller, again keeping in mind the strengths and limitations of each controller.</p>
+
+      <p>Once the network is constructed, create host a web application server on the <code class="language-plaintext highlighter-rouge">virtual web server</code> and deploy the TCP-based chat server application on the <code class="language-plaintext highlighter-rouge">virtual chat server</code>.</p>
+
+      <p>Demonstrate that your system is functioning with the following:</p>
+      <ul>
+        <li>Confirm you have complete connectivity between all hosts</li>
+        <li>Demonstrate that the VirtualBox can access the web server</li>
+        <li>Demonstrate that the VirtualBox can chat with a virtual host using the TCP chat application</li>
+      </ul>
+
+      <p>Demonstrate everything is working with appropriate screenshots.</p>
+
+      <p>Submit both your topology, and any commands which were required to initialize it, either on the VirtualBox or inside the mininet.</p>
+
+    </div></div></section>
+<section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
+
+      <p>Please submit your lab documents and code to URCourses by the due date. If you are working with a partner, you need only submit one copy, but please include both partners names on all assignments.</p>
+
+    </div></div></section>
+<section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
+
+      <p>Oswald Coker, Siamak Azodolmolky, Software-Defined Networking with OpenFlow - Second Edition, Published by Packt Publishing. <a href="https://learning.oreilly.com/library/view/software-defined-networking-with/9781783984282/9f2ff255-93f9-46ab-a9c7-34c65464f6a1.xhtml">Online</a></p>
+
+      <p>Brian Linkletter, Open-Source Routing and Network Simulation, <a href="https://www.brianlinkletter.com/2015/09/using-pox-components-to-create-a-software-defined-networking-application/">Online</a></p>
     </div></div></section>
 
     </main>
