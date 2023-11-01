@@ -523,10 +523,11 @@ h4 route add default gw 192.168.1.1
 
       <p>This router provides a REST api which allows you to issue commands to RYU using JSON for configuring your routers. We can use a web utility, such as CURL, to accomplish this. What we wish to do is assign the Switches as gateway routers - these typically have two connections, one for the local network side, and one for the internet side. Run these in a separate window apart from mininet and ryu</p>
 
-      <p>curl -X POST -d ‘{“address”:”192.168.0.1/24”}’ http://localhost:8080/router/0000000000000001
-curl -X POST -d ‘{“address”:”20.20.20.1/24”}’ http://localhost:8080/router/0000000000000001
-curl -X POST -d ‘{“address”:”192.168.1.1/24”}’ http://localhost:8080/router/0000000000000002
-curl -X POST -d ‘{“address”:”20.20.20.2/24”}’ http://localhost:8080/router/0000000000000002</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X POST -d '{"address":"192.168.0.1/24"}' http://localhost:8080/router/0000000000000001
+curl -X POST -d '{"address":"20.20.20.1/24"}' http://localhost:8080/router/0000000000000001
+curl -X POST -d '{"address":"192.168.1.1/24"}' http://localhost:8080/router/0000000000000002
+curl -X POST -d '{"address":"20.20.20.2/24"}' http://localhost:8080/router/0000000000000002
+</code></pre></div>      </div>
 
       <p>If you try to test connectivity it still will not work. Let’s investigate to see why:</p>
 
@@ -571,8 +572,9 @@ PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.
 
       <p>The reason we failed is because Router 1 does not know where to send traffic destined for the second network. Similarly to before, we need to tell our devices where to send packages that they do not otherwise recognize.</p>
 
-      <p>curl -X POST -d ‘{“gateway”:”20.20.20.2”}’ http://localhost:8080/router/0000000000000001
-curl -X POST -d ‘{“gateway”:”20.20.20.1”}’ http://localhost:8080/router/0000000000000002</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X POST -d '{"gateway":"20.20.20.2"}' http://localhost:8080/router/0000000000000001
+curl -X POST -d '{"gateway":"20.20.20.1"}' http://localhost:8080/router/0000000000000002
+</code></pre></div>      </div>
 
       <p>So, when router 1 gets a packet it does not recognize, it will send it to router 2, and vice versa.</p>
 
