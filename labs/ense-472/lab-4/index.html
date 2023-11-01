@@ -168,41 +168,47 @@
 
       <p>Consider the subnet address:</p>
 
-      <p>192.168.1.2/16</p>
+      <p><code class="language-plaintext highlighter-rouge">192.168.1.2/16</code></p>
 
       <p>This address is comprised of an address:</p>
 
-      <p>192.168.1.2</p>
+      <p><code class="language-plaintext highlighter-rouge">192.168.1.2</code></p>
 
       <p>And a subnet mask:</p>
 
-      <p>255.255.0.0</p>
+      <p><code class="language-plaintext highlighter-rouge">255.255.0.0</code></p>
 
       <p>When you use the bitwise AND operation on these numbers, you get the portion of the address which identifies the network:</p>
 
-      <p>192.160.0.0</p>
+      <p><code class="language-plaintext highlighter-rouge">192.168.0.0</code></p>
 
       <p>The remaining portion is the bits which defines the device:</p>
 
-      <p>0.0.1.2</p>
+      <p><code class="language-plaintext highlighter-rouge">0.0.1.2</code></p>
 
       <p>So, the following devices would be considered to be on the same subnet:</p>
 
-      <p>192.168.1.2 / 16</p>
+      <p><code class="language-plaintext highlighter-rouge">192.168.1.2 / 16</code></p>
 
       <p>and</p>
 
-      <p>192.168.0.3 / 16</p>
+      <p><code class="language-plaintext highlighter-rouge">192.168.0.3 / 16</code></p>
 
-      <p>But the following devices would not:</p>
+      <p>As these would have the same network identifier:</p>
 
-      <p>192.168.0.3 / 16</p>
+      <p><code class="language-plaintext highlighter-rouge">192.168.0.0</code></p>
+
+      <p>However, the following devices would not:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">192.168.0.3 / 16</code></p>
 
       <p>and</p>
 
-      <p>192.168.0.3 / 16</p>
+      <p><code class="language-plaintext highlighter-rouge">192.170.0.3 / 16</code></p>
 
-      <p>In particular, the 192.168.X.X/16 IP address is a private address, meaning any device can use this address. Let’s see how this works in the real world. Let’s create the simple mininet default network</p>
+      <p>These devices are considered to be on two separate networks, and typically require a layer-3 routing device to transmit packets between them.</p>
+
+      <p>In particular, the 192.168.X.X/16 IP address is a private address, meaning any device can use this address, so multiple of these networks with the same addresses may exist. Let’s see how this works in the real world. Let’s create the simple mininet default network</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo mn
 mininet&gt; h1 ifconfig
@@ -389,7 +395,7 @@ rtt min/avg/max/mdev = 0.061/1.128/4.082/1.707 ms
 
       <p>As you can see, we can ping back and forth on the same subnets, but not across subnets.</p>
 
-      <p>So why is this failing? It is because the device does not know where to send packets that are not on the current network. We can tell them where to send packets on other networks using a default port, in other words - if we don’t know which network this is on, try sending it out this ethernet device:</p>
+      <p>So why is this failing? It is because the hosts do not know where to send packets that are not on the current network. We can tell them where to send packets on other networks using a default port, in other words - if we don’t know which network this is on, try sending it out this ethernet device:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1 ip route add default via 192.168.0.5
 h2 ip route add default via 192.168.0.6
