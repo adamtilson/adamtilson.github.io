@@ -852,6 +852,8 @@ h2 ip route add default via 192.168.02.01
 sh ip link set s1 up
 </code></pre></div>      </div>
 
+      <p>Please note - you may run these lines multiple times to add multiple addresses to a router. This will be useful if you want your router to span multiple networks!</p>
+
       <p>Running again we see:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mininet&gt; sh ip addr show s1
@@ -967,7 +969,7 @@ nano index.html
 
       <p><img src="res/assignment-4-q-2.png" alt="" /></p>
 
-      <p>Note that all switches and routers may be modelled the same way in your mininet. You may use any addressing scheme you believe would work best for this configuration, considering the requirements and limitations of each method. Run the network using any appropriate controller, again keeping in mind the strengths and limitations of each controller.</p>
+      <p>Note that all switches and routers may be modelled the same way in your mininet, as a switch device. You may use any addressing scheme you believe would work best for this configuration, but ensure the home network, and each cloud server are on different subnets. (Please see the hint in Section 5 if you are struggling with getting the VirtualBox to connect to the different Subnets). Run the network using any appropriate controller, again keeping in mind the strengths and limitations of each controller.</p>
 
       <p>Once the network is constructed, create host a web application server on the <code class="language-plaintext highlighter-rouge">virtual web server</code> and deploy the TCP-based chat server application on the <code class="language-plaintext highlighter-rouge">virtual chat server</code>.</p>
 
