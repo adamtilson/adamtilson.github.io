@@ -179,7 +179,7 @@
         <tbody>
           <tr>
             <td>1</td>
-            <td>Gone Golfing</td>
+            <td>Inscryption</td>
             <td>4.99</td>
           </tr>
         </tbody>
@@ -201,7 +201,7 @@
 
       <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">games</span> <span class="k">VALUES</span><span class="p">(</span>
     <span class="mi">1</span><span class="p">,</span>
-    <span class="nv">"Gone Golfing"</span><span class="p">,</span>
+    <span class="nv">"Inscryption"</span><span class="p">,</span>
     <span class="mi">4</span><span class="p">.</span><span class="mi">99</span>
 <span class="p">)</span>
 </code></pre></div>      </div>
@@ -269,7 +269,7 @@
         <tbody>
           <tr>
             <td>1</td>
-            <td>Gone Golfing</td>
+            <td>Inscryption</td>
             <td>4.99</td>
             <td>85</td>
           </tr>
@@ -314,7 +314,7 @@
       <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">ratings</span> <span class="k">VALUES</span> <span class="p">(</span>
     <span class="mi">1</span><span class="p">,</span>
     <span class="mi">1</span><span class="p">,</span>
-    <span class="nv">"An ordinary game about mini golf, nothing strange here"</span>
+    <span class="nv">"An ordinary card game, nothing strange happening here"</span>
 <span class="p">)</span>
 </code></pre></div>      </div>
 
@@ -612,7 +612,7 @@ In the lab, note that anything you put in the database will be accessible to oth
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="na">_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span><span class="p">,</span>
         <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span>
     <span class="p">}</span>
 <span class="p">)</span>
@@ -639,7 +639,7 @@ In the lab, note that anything you put in the database will be accessible to oth
 
       <p>Note the funky nested object syntax!</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">})</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span> <span class="p">})</span>
 </code></pre></div>      </div>
 
       <p>Note the following, which will return nothing:</p>
@@ -710,7 +710,7 @@ In the lab, note that anything you put in the database will be accessible to oth
 
       <p>We need to use syntax similar to Find to find the document we want to update, and then we can add a new record as needed</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">},</span> 
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span> <span class="p">},</span> 
                    <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">price</span><span class="p">:</span> <span class="mf">2.99</span> <span class="p">}</span> <span class="p">});</span>
 </code></pre></div>      </div>
 
@@ -757,13 +757,13 @@ In the lab, note that anything you put in the database will be accessible to oth
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="na">_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span><span class="p">,</span>
         <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span>
         <span class="na">reviews</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
                 <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Games</span><span class="dl">"</span><span class="p">,</span>
                 <span class="na">rating</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Cute mascott</span><span class="dl">"</span>
+                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Too short</span><span class="dl">"</span>
             <span class="p">},</span>
             <span class="p">{</span>
                 <span class="na">userName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Robin Speedruns</span><span class="dl">"</span><span class="p">,</span>
@@ -794,13 +794,13 @@ In the lab, note that anything you put in the database will be accessible to oth
 <span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="na">_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span><span class="p">,</span>
         <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span>
         <span class="na">reviews</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
                 <span class="na">user_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
                 <span class="na">rating</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Cute mascott</span><span class="dl">"</span>
+                <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Too short</span><span class="dl">"</span>
             <span class="p">},</span>
             <span class="p">{</span>
                 <span class="na">user_id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -914,7 +914,7 @@ In the lab, note that anything you put in the database will be accessible to oth
       <p>We want to add a new game document to our games collection</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Game</span><span class="p">({</span>
-    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">rating</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
     <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span>
     <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">classic</span><span class="dl">"</span>
@@ -944,7 +944,7 @@ db.games.find()
       <p>A few extra entries were added, but it’s basically what we expect:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">games</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
-<span class="p">{</span> <span class="dl">"</span><span class="s2">_id</span><span class="dl">"</span> <span class="p">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="dl">"</span><span class="s2">617747c24de34db695e58f96</span><span class="dl">"</span><span class="p">),</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">rating</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="dl">"</span><span class="s2">price</span><span class="dl">"</span> <span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span> <span class="dl">"</span><span class="s2">review</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">classic</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">__v</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">0</span> <span class="p">}</span>
+<span class="p">{</span> <span class="dl">"</span><span class="s2">_id</span><span class="dl">"</span> <span class="p">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="dl">"</span><span class="s2">617747c24de34db695e58f96</span><span class="dl">"</span><span class="p">),</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">rating</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="dl">"</span><span class="s2">price</span><span class="dl">"</span> <span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span> <span class="dl">"</span><span class="s2">review</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">classic</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">__v</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">0</span> <span class="p">}</span>
 
 </code></pre></div>      </div>
 
@@ -995,7 +995,7 @@ db.games.find()
 
       <p>Here’s doing a find operation using callback syntax:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">},</span> <span class="p">(</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">results</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span> <span class="p">},</span> <span class="p">(</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">results</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">error</span> <span class="p">);</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -1013,7 +1013,7 @@ db.games.find()
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">async</span> <span class="kd">function</span> <span class="nx">findInDatabase</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">});</span>
+        <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span> <span class="p">});</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
         <span class="k">if</span> <span class="p">(</span> <span class="nx">results</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">no results founds</span><span class="dl">"</span> <span class="p">);</span>
@@ -1060,10 +1060,10 @@ db.games.find()
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
-        <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span> <span class="p">{</span> <span class="na">gameName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Dead Space</span><span class="dl">"</span><span class="p">},</span> 
+        <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span> <span class="p">{</span> <span class="na">gameName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Resident Evil 4</span><span class="dl">"</span><span class="p">},</span> 
                               <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">rating</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">});</span>
-        <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span> <span class="p">{</span> <span class="na">gameName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Dead Space</span><span class="dl">"</span><span class="p">},</span> 
-                              <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Needs a remaster already!</span><span class="dl">"</span> <span class="p">}</span> <span class="p">});</span>
+        <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span> <span class="p">{</span> <span class="na">gameName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Resident Evil 4</span><span class="dl">"</span><span class="p">},</span> 
+                              <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I like the original more</span><span class="dl">"</span> <span class="p">}</span> <span class="p">});</span>
     <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
     <span class="p">}</span>
@@ -1076,7 +1076,7 @@ db.games.find()
 
       <p>Back to callback syntax:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">deleteOne</span> <span class="p">(</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gone Golfing</span><span class="dl">"</span> <span class="p">},</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">deleteOne</span> <span class="p">(</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span> <span class="p">},</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span>
     <span class="p">}</span>
