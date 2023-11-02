@@ -139,6 +139,8 @@
     </div></div></section>
 <section id="part1sql"><button class="collapsible">Part 1: SQL</button><div class="text-content"><div class="text-inner">
 
+      <p>In this lab we will be using MongoDB as our database. However, to understand MongoDB, it can help to first understand MySQL, a very popular database.</p>
+
       <p><a href="https://www.w3schools.com/sql/default.asp">Basic tutorial on W3Schools</a></p>
 
       <p>Trying out SQL:</p>
@@ -281,6 +283,12 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">games</span>
+<span class="k">SET</span> <span class="n">rating</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="nv">"Outlast"</span>
+
+</code></pre></div>      </div>
 
       <p><img src="res/rating-updates.png" alt="" /></p>
 
