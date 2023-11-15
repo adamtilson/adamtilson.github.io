@@ -614,7 +614,7 @@ Spawner.timer.stop()
         <li>
           <p>However this is much harder that what we’ll work with</p>
         </li>
-        <li>Recall in lab 3’s Ethernet-TicToc we saw how TCP had a significant amount of overhead when a connection was first established. This can be too slow in some games
+        <li>Recall from our investigation of TCP in earlier labs that TCP has significant overhead. This can lead to slower performance overall.
           <ul>
             <li>Also, recall how UDP packets were faster, but delivery was not guaranteed.
               <ul>
@@ -626,6 +626,7 @@ Spawner.timer.stop()
         <li>Instead, we need something a hybrid - we need the speed of UDP and the reliability of TCP
           <ul>
             <li>For example, developers might code their own protocol, on top of UDP, for guaranteeing delivery, e.g. with custom ACKs.</li>
+            <li>One example of this is to handle simple synchronizing operations with UDP, such as player movement, but more sophisticated operations which require reliable delivery with TCP</li>
           </ul>
         </li>
       </ul>
