@@ -787,85 +787,76 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
             <li>In the player script, modify the value of the <code class="language-plaintext highlighter-rouge">is_controllable</code> bool to <code class="language-plaintext highlighter-rouge">is_network_master()</code>
               <ul>
                 <li>This will automatically make a player controllable only if they are the player associated with that game instance</li>
-                <li>e.g. PlayerA in GameA, PlayerB in GameB</li>
+                <li>e.g. PlayerA in GameA, PlayerB in GameB
+                  <ul>
+                    <li>You need to also remove setting controllable from in <code class="language-plaintext highlighter-rouge">gamestate.gd</code></li>
+                  </ul>
+                </li>
               </ul>
             </li>
           </ul>
-          <ul>
-            <li>You need to also remove setting controllable from in <code class="language-plaintext highlighter-rouge">gamestate.gd</code></li>
-          </ul>
+
+          <p>On line 26:</p>
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span> <span class="n">is_master</span>            <span class="o">=</span> <span class="n">false</span>
+</code></pre></div>          </div>
+
+          <p>On line 32, inside the _ready function:</p>
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">is_master</span> <span class="o">=</span> <span class="n">is_network_master</span><span class="p">()</span>
+</code></pre></div>          </div>
         </li>
-      </ol>
-
-      <p>On line 26:</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span> <span class="n">is_master</span>            <span class="o">=</span> <span class="n">false</span>
-</code></pre></div>      </div>
-
-      <p>On line 32, inside the _ready function:</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">is_master</span> <span class="o">=</span> <span class="n">is_network_master</span><span class="p">()</span>
-</code></pre></div>      </div>
-
-      <ol>
         <li>Modify player position and velocity to be a synchronized variable
           <ul>
             <li>In particular, you will want to create a puppet position and puppet velocity in addition to the true ones</li>
             <li>And update them using the <code class="language-plaintext highlighter-rouge">rset</code> or <code class="language-plaintext highlighter-rouge">rset_unreliable</code> functions</li>
           </ul>
-        </li>
-      </ol>
 
-      <p>In the class variables, at the top:</p>
+          <p>In the class variables, at the top:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">puppet</span> <span class="n">var</span> <span class="n">puppet_position</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">()</span>
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">puppet</span> <span class="n">var</span> <span class="n">puppet_position</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">()</span>
 <span class="n">puppet</span> <span class="n">var</span> <span class="n">puppet_velocity</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">()</span>
-</code></pre></div>      </div>
+</code></pre></div>          </div>
 
-      <p>And, when controlling the player, update these variables and add an <code class="language-plaintext highlighter-rouge">else</code> case to the player movement, on line 80:</p>
+          <p>And, when controlling the player, update these variables and add an <code class="language-plaintext highlighter-rouge">else</code> case to the player movement, on line 80:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		<span class="n">rset_unreliable</span><span class="p">(</span><span class="s">"puppet_position"</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		<span class="n">rset_unreliable</span><span class="p">(</span><span class="s">"puppet_position"</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
 		<span class="n">rset_unreliable</span><span class="p">(</span><span class="s">"puppet_velocity"</span><span class="p">,</span> <span class="n">velocity</span><span class="p">)</span>
-	
+   	
 	<span class="k">else</span><span class="p">:</span>
 		<span class="n">position</span> <span class="o">=</span> <span class="n">puppet_position</span>
 		<span class="n">velocity</span> <span class="o">=</span> <span class="n">puppet_velocity</span>
-</code></pre></div>      </div>
+</code></pre></div>          </div>
 
-      <p>What would happen if we only tracked <code class="language-plaintext highlighter-rouge">position</code> instead of both <code class="language-plaintext highlighter-rouge">position</code> and <code class="language-plaintext highlighter-rouge">velocity</code>?</p>
-
-      <ol>
+          <p>What would happen if we only tracked <code class="language-plaintext highlighter-rouge">position</code> instead of both <code class="language-plaintext highlighter-rouge">position</code> and <code class="language-plaintext highlighter-rouge">velocity</code>?</p>
+        </li>
         <li>Ensure that award_point is a synchronized function. Ditto with decrement score.
           <ul>
             <li>This ensures that it gets called on all clients</li>
           </ul>
+
+          <p>change the function from:</p>
+
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">award_point</span> <span class="p">(</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">):</span>
+</code></pre></div>          </div>
+
+          <p>to</p>
+
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">remotesync</span> <span class="n">func</span> <span class="n">award_point</span> <span class="p">(</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">):</span>
+</code></pre></div>          </div>
+
+          <p>And make sure it is called correctly, around line 198, update the following call:</p>
+
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			<span class="n">award_point</span><span class="p">(</span><span class="n">body</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>          </div>
+
+          <p>to</p>
+
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			<span class="n">rpc</span><span class="p">(</span><span class="s">"award_point"</span><span class="p">,</span> <span class="n">body</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>          </div>
         </li>
-      </ol>
-
-      <p>change the function from:</p>
-
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">award_point</span> <span class="p">(</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">):</span>
-</code></pre></div>      </div>
-
-      <p>to</p>
-
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">remotesync</span> <span class="n">func</span> <span class="n">award_point</span> <span class="p">(</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">):</span>
-</code></pre></div>      </div>
-
-      <p>And make sure it is called correctly, around line 198, update the following call:</p>
-
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			<span class="n">award_point</span><span class="p">(</span><span class="n">body</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-</code></pre></div>      </div>
-
-      <p>to</p>
-
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			<span class="n">rpc</span><span class="p">(</span><span class="s">"award_point"</span><span class="p">,</span> <span class="n">body</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-</code></pre></div>      </div>
-
-      <ol>
         <li>
           <p>Perform similar updates for decrementing score. The function is defined around 144, and called on 212. Can you figure out how to update it? Do we need to pass any arguments?</p>
         </li>
-        <li>
-          <p>In the go_to_timeout() function, ensure that it only runs if you are the network master</p>
+        <li>In the go_to_timeout() function, ensure that it only runs if you are the network master
           <ul>
             <li>All others will simply do nothing.</li>
             <li>Position will thus be handled by it being a synchronized variable</li>
