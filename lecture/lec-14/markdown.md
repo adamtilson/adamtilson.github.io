@@ -8,7 +8,7 @@ class: center, middle, inverse
 
 ### Lecture 14: Algorithms for Solving Systems of Linear Equations
 
-Adam Tilson, M.A.Sc., Engineer-in-Training
+$\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 

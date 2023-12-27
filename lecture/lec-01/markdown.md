@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 ### Lecture 1: Introduction
 
-Adam Tilson, M.A.Sc., P.Eng$\cdot$
+$\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 layout: false

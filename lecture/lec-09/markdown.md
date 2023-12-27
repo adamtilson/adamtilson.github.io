@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 ### Lecture 9: Introduction to Graph Theory
 
-Adam Tilson, M.A.Sc., Engineer-in-Training
+$\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 layout: false

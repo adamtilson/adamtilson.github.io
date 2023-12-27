@@ -8,7 +8,7 @@ class: center, middle, inverse
 
 ### Lecture 21: Numerical Differentiation: Iterative Solutions to Initial Value Problems
 
-Adam Tilson, M.A.Sc., Engineer-in-Training
+$\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 

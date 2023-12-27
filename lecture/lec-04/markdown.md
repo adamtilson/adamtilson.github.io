@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 ### Lecture 4: Strong Induction, Well Ordering Principle
 
-Adam Tilson, M.A.Sc., Engineer-in-Training
+$\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 layout: false

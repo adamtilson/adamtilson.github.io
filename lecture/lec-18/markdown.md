@@ -8,7 +8,7 @@ class: center, middle, inverse
 
 ### Lecture 18: Iterative Methods for Root Finding
 
-Adam Tilson, M.A.Sc., Engineer-in-Training
+$\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 

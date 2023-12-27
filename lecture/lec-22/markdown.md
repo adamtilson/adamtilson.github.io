@@ -8,7 +8,7 @@ class: center, middle, inverse
 
 ### Lecture 22: Initial Value Problem Examples
 
-Adam Tilson, M.A.Sc., Engineer-in-Training
+$\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 

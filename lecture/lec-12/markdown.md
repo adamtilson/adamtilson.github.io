@@ -8,7 +8,7 @@ class: center, middle, inverse
 
 ### Lecture 12: Sums and Asymptotics
 
-Adam Tilson, M.A.Sc., Engineer-in-Training
+$\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 

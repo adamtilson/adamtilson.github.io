@@ -8,7 +8,7 @@ class: center, middle, inverse
 
 ### Lecture 16: Intro to Numerical Methods
 
-Adam Tilson, M.A.Sc., Engineer-in-Training
+$\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 
