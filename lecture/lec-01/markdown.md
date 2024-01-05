@@ -34,7 +34,7 @@ layout: false
 Please find the Syllabus posted on URCourses.
 
 Note:
-- Late starting date. 
+- Quiz Schedule.
 - Midterm and Final dates.
 - Lab and Seminar schedules.
 
