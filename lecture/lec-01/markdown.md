@@ -290,7 +290,6 @@ Examples (Are these implications T or F?):
 - If all dogs are good boys, then all chihuahuas are good boys.
   - If all dogs are good boys, but I have a naughty chihuahua, the implication must be false. As worded, it is true, since chihuahuas are a subset of dogs.
 - If $n > 7$, then $n > 3$. ( $n>7 \Rightarrow n>3$ )
-* We'll look at a trick for this later.
 ]
 
 ???
@@ -417,6 +416,8 @@ Universal $\forall$
 Existential $\exists$
 - There exists
 - Sometimes
+- At least one
+- One or more
 
 ---
 ## Ambiguity
