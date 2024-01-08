@@ -247,8 +247,22 @@ F | F | T
 - Confusing. P is the premise, Q is the conclusion.
 - Both parts are propositions, can be T or F
 - We're evaluating if the implication is true, not either part!
-- "Pigs can fly $\Rightarrow$ I'm the king of Moose Jaw"
 
+]
+---
+
+.left-column[
+  ## Compound Propositions
+  ### Implies
+]
+.right-column[
+
+Evaluating an implication, by example:
+- "If you get 100% in this class, then I'll buy you a pizza!"
+- The statement is true if I keep my promise, and false if I don't.
+- If you get 100% and I buy you a pizza, the statement is true.
+- If you get 100% and I don't buy you a pizza, the statement is false.
+- If you don't get 100%, the statement is true, whether or not I buy you a pizza.
 ]
 ---
 
@@ -274,6 +288,28 @@ else:
   return True
 ```
 ]
+
+---
+
+.left-column[
+  ## Compound Propositions
+  ### Implies in English
+]
+.right-column[
+
+Here are some ways to express implies in english:
+
+"if p, then q"
+"p is sufficient for q"
+"q when p"
+"a necessary condition for p is q"
+"p implies q"
+"p only if q"
+"a sufficient condition for q is p"
+"q follows from p"
+
+]
+
 ---
 
 .left-column[
@@ -465,13 +501,13 @@ $\exists x \in M, x = a \Rightarrow a \in R$
 ---
 ## Domains
 
-$\mathbb{N} = {0, 1, 2, ...}$
+$\mathbb{N} := {0, 1, 2, ...}$
 
-$\mathbb{Z} = {... -3, -2, -1, 0, 1, 2, ...}$
+$\mathbb{Z} := {... -3, -2, -1, 0, 1, 2, ...}$
 
-$\mathbb{Z}^+ = {1, 2, 3, ...}$
+$\mathbb{Z}^+ := {1, 2, 3, ...}$
 
-$\mathbb{Z}^- = {... -3, -2, -1}$
+$\mathbb{Z}^- := {... -3, -2, -1}$
 
 You can define subsets as needed:
 
