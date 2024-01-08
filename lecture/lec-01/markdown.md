@@ -310,7 +310,6 @@ Some wordings are trickier than others:
 
 - "p only if q"
 - "a necessary condition for p is q"
-
 ]
 
 ---
@@ -334,7 +333,7 @@ Examples (Are these implications T or F?):
 ???
 
 F
-T, assuming it can't rain without clouds
+T, assuming it can't rain without clouds. F in CCR Land.
 T
 
 ---
