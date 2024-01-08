@@ -299,14 +299,17 @@ else:
 
 Here are some ways to express implies in english:
 
-"if p, then q"
-"p is sufficient for q"
-"q when p"
-"a necessary condition for p is q"
-"p implies q"
-"p only if q"
-"a sufficient condition for q is p"
-"q follows from p"
+- "if p, then q"
+- "p is sufficient for q"
+- "q when p"
+- "p implies q"
+- "q follows from p"
+- "a sufficient condition for q is p"
+
+Some wordings are trickier than others:
+
+- "p only if q"
+- "a necessary condition for p is q"
 
 ]
 
