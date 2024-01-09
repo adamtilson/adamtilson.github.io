@@ -55,10 +55,10 @@ T | F | F
 F | T | T
 F | F | T
 
-- Confusing. P is the premise, Q is the conclusion.
+- Tricky. P is the premise, Q is the conclusion.
 - Both parts are propositions, can be T or F
 - We're evaluating if the implication is true, not either part!
-- "If all dogs are good boys, then all chihuahua's are good boys"
+- "If you get 100% in this course, I will buy you a pizza."
 ]
 
 ---
@@ -97,7 +97,7 @@ T|F|F|T|F|F|$\checkmark$
 T|T|F|F|T|T|$\checkmark$
 
 With implications, sometimes it's easier to prove the contrapositive!
-- If not all chihuahuas are good boys, then not all dogs are good boys
+- e.g. "If I don't buy you a pizza, you didn't get 100% in the course."
 ]
 
 ---
@@ -116,13 +116,29 @@ $H(a,d) :=$ American, $a$, has Dream, $d$
 
 $$ \forall a \in A, \exists d \in D, H(a,d). $$
 $$ \exists d \in D, \forall a \in A, H(a,d). $$
-$$ \exists d \in D, \exists a \in A, H(a,d). $$
-$$ \forall d \in D, \forall a \in A, H(a,d). $$
+$$ \exists a \in A, \exists d \in D, H(a,d). $$
+$$ \forall a \in A, \forall d \in D, H(a,d). $$
 
 ]
 
 ---
 
+## Proofs - Why do programmers care?
+- Proofs have various applications in the field of computer science
+    - Verifying programs are correct
+    - Ensuring security
+    - Ensuring specifications are consistent
+    - Advances in AI
+---
+## Formal vs Informal Proofs
+- With formal proofs, we don't skip ANY steps
+    - Explicitly lay out the rules for every decision made
+    - Include every axiom and inference rule
+    - These are complex, hard to follow
+- Informal proofs allow multiple rules to be combined
+    - Easier for humans to understand and follow
+    - Still, No massive leaps in logic allowed!
+---
 ## Axioms
 - Propositions we assume to be true
 - The base set of assumptions we make when doing math
@@ -137,7 +153,7 @@ $$ \forall d \in D, \forall a \in A, H(a,d). $$
 Consistent - an axiom cannot be proven to be both true and false
   - Absolutely required
 
-Complete - an atomic set of axioms which can be used to prove all other axioms
+Complete - an atomic set of axidioms which can be used to prove all other axioms
   - Unfortunately this doesn't exist
   - People have dedicated their careers to finding them
 
@@ -170,26 +186,59 @@ Complete - an atomic set of axioms which can be used to prove all other axioms
 ---
 ## Logical Deductions / Inference Rules
 - Logical Deductions or inference rules are used to prove new propositions using previously proved ones
+    - How we progress from axioms through the proof
 - The process of reasoning from one or more statements to reach a logically certain conclusion
 ---
 ## Writing Rules of Logic
-- Premises (Antecedents)
-- Conclusion (Consequent)
+$$ \frac{\text{Premises (Antecedents)}}{\text{Conclusion (Consequent)}}$$
 - Sound rules: A logical rule is sound if any assignment of truth values that make all the antecedents true must also make the consequent true
 - e.g. Modus Ponens
 $$ \frac{P, P\Rightarrow Q}{Q}$$
 - "if P is true, and P implies Q is true, then Q is true"
 ???
 In your mind it's like a big old truth table. Each step you add a column to it, and recompute the T's and F's. They can't ever change from the previous column!
+
 ---
 ## Modus Ponens
-$ P $ | $ Q $ | $ P \Rightarrow Q $  
+
+$$ \frac{P, P\Rightarrow Q}{Q}$$
+
+$ P $ | $ P \Rightarrow Q$ |  $ Q $ 
 ---|---|---
 **T** | **T** | **T**
 T | F | F
 F | T | T
-F | F | T
-This is an inference, based on an implication.
+F | T | F
+
+We care only about where P is true, and $ {P\Rightarrow Q} $ is true.
+
+- This is the axiomatic inference rule
+???
+You could do a proof using only this rule. However, it would suuuuck.
+
+---
+## Modus Ponens
+
+If used in a very verbose proof, this rule could be used as:
+
+$$ \frac{P, P\Rightarrow Q}{Q}$$
+
+1. $ {P} $
+2. $ {P\Rightarrow Q} $
+3. Therefore, $ {Q} $, by _modus ponens_ from 1 and 2.
+
+---
+## Inference vs. Implication
+
+Consider the implication:
+
+"If you get 100% in the class, then I will buy you a pizza"
+
+Inference, e.g. Modus ponens takes this one step further:
+
+"If you get 100% in the class, then I will buy you a pizza". "You got 100%".
+
+"Therefore, I will buy you a pizza"
 
 ---
 
@@ -204,12 +253,32 @@ T|F|F|T|T|F|$\times$
 ~~F~~|~~T~~|~~T~~|~~F~~|~~F~~|~~T~~|Don't care
 F|F|T|T|T|T|$\checkmark$
 
-This inference does not hold for all cases, thus is not valid.
+This inference does not hold for all cases, thus is not sound.
 - If you make use of this inference, your proof is incorrect!
+---
+
+## Example: A Wrong Inference
+
+$$ \dfrac{\neg P\Rightarrow \neg Q}{P \Rightarrow Q}$$
+
+In practice - remember: This is wrong!
+
+"If you don't get 100% in the class, then I will not buy you a pizza".
+
+Therefore: "If you get 100% in the class, I will buy you a pizza."
+
+That conclusion _does not follow_ from that premise!
+---
+
+## Patterns of Proof
+
+- Now that we understand the basics of proofs (axioms, inference rules), let's look at some common patterns and strategies we may wish to use in our proofs
+- You can think of these as templates, a starting place 
+
 ---
 .left-column[
 ## Methods of Proof
-### Cases
+### Proof by Cases
 ]
 .right-column[
 Breaking a complicated proof into cases and proving each case separately.
@@ -220,7 +289,7 @@ Breaking a complicated proof into cases and proving each case separately.
 ---
 .left-column[
 ## Methods of Proof
-### Cases
+### Proof by Cases
 ]
 .right-column[
 Theorem: Every party of 6 people includes a group of 3 peoples who, pairwise, have already met (friends), or a group of 3 strangers, who, pairwise, have never met (strangers).
@@ -233,13 +302,21 @@ Theorem: Every party of 6 people includes a group of 3 peoples who, pairwise, ha
 ---
 .left-column[
 ## Methods of Proof
-### Cases
+### Proof by Cases
+]
+.right-column[
+![](perfect-strangers-1.png)
+]
+---
+.left-column[
+## Methods of Proof
+### Proof by Cases
 ]
 .right-column[
 - Case 1: Among the other 5 people besides $x$, at least 3 have met $x$
-- Case 2: Among the other 5 people besides $x$, at least 3 have not met $x$.
     - Case 1.1: Among the three who have met $x$, none have met eachother (strangers)
     - Case 1.2: Among the three who have met $x$, at least one pair has met (friends)
+- Case 2: Among the other 5 people besides $x$, at least 3 have not met $x$.
     - Case 2.1: At least one pair has not met before (strangers)
     - Case 2.2: Every pair has met each other (friends) 
 - The proof holds for all sub-cases. $\square$
@@ -255,8 +332,16 @@ https://www.youtube.com/watch?v=xdiL-ADRTxQ
 ---
 .left-column[
 ## Methods of Proof
+### Proof by Cases
+]
+.right-column[
+![](perfect-strangers-2.png)
+]
+---
+.left-column[
+## Methods of Proof
 ## Proving an Implication
-### Assume P
+### Direct Proof (Assume P)
 ]
 .right-column[
 We wish to prove $P \Rightarrow Q$
@@ -275,7 +360,18 @@ We wish to prove $P \Rightarrow Q$
 .left-column[
 ## Methods of Proof
 ## Proving an Implication
-### Assume P
+### Direct Proof (Assume P)
+]
+.right-column[
+Theorem: $\forall n \in \mathbb{N},$ if $n$ is even then $n^2$ is even.
+- $P(n):=$ "$n$ is even", $Q(n):= $"$n^2$ is even"
+- $P(n) \Rightarrow Q(n)$
+]
+---
+.left-column[
+## Methods of Proof
+## Proving an Implication
+### Direct Proof (Assume P)
 ]
 .right-column[
 Theorem: $\forall n \in \mathbb{N},$ if $n$ is even then $n^2$ is even.
@@ -294,7 +390,18 @@ Proof: Assume P, i.e. we assume that $n$ is even
 .left-column[
 ## Methods of Proof
 ## Proving an Implication
-### Assume P
+### Direct Proof (Assume P)
+]
+.right-column[
+Theorem: $\forall n \in \mathbb{N},$ if $n$ is odd then $n^2$ is odd.
+- $P(n):=$ "$n$ is odd", $Q(n):= $"$n^2$ is odd"
+- $P(n) \Rightarrow Q(n)$
+]
+---
+.left-column[
+## Methods of Proof
+## Proving an Implication
+### Direct Proof (Assume P)
 ]
 .right-column[
 Theorem: $\forall n \in \mathbb{N},$ if $n$ is odd then $n^2$ is odd.
@@ -313,7 +420,18 @@ Proof: Assume P, i.e. we assume that $n$ is odd
 .left-column[
 ## Methods of Proof
 ## Proving an Implication
-### Assume P
+### Direct Proof (Assume P)
+]
+.right-column[
+Theorem: $\forall n \in \mathbb{N},$ if $n^2$ is odd then $n$ is odd.
+- $P(n):= $"$n^2$ is odd", $Q(n):=$ "$n$ is odd"
+- $P(n) \Rightarrow Q(n)$
+]
+---
+.left-column[
+## Methods of Proof
+## Proving an Implication
+### Direct Proof (Assume P)
 ]
 .right-column[
 Theorem: $\forall n \in \mathbb{N},$ if $n^2$ is odd then $n$ is odd.
@@ -324,6 +442,21 @@ Proof: Assume P, i.e. we assume that $n^2$ is odd
 - $n^2 = 2k+1, k \in \mathbb{N}$
 - $n = \sqrt{2k+1}$
 - ...?
+]
+---
+.left-column[
+## Methods of Proof
+## Proving an Implication
+### Assume the Contra- Positive
+]
+.right-column[
+Theorem: $\forall n \in \mathbb{N},$ if $n^2$ is odd then $n$ is odd.
+- $P(n):= $"$n^2$ is odd", $Q(n):=$ "$n$ is odd"
+- $P(n) \Rightarrow Q(n)$
+
+Proof: We assume the contrapositive
+
+$\neg Q(n) \Rightarrow \neg P(n)$
 ]
 ---
 .left-column[
@@ -356,7 +489,7 @@ $P \iff Q$
 
 $(P \implies Q) \wedge (Q \implies P)$
 
-Theorem: $\forall n \in \mathbb{N}. n^2 $is even if and only if n is even.
+Theorem: $\forall n \in \mathbb{N}. n^2 $is even if and only if $n$ is even.
 
 Proof: Prove that $P \implies Q$ and vice versa.
 
