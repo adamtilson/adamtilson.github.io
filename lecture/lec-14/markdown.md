@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 14: Algorithms for Solving Systems of Linear Equations
+### Lecture 12: Sums and Asymptotics
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
@@ -17,709 +17,618 @@ layout: false
   ## Agenda
 ]
 .right-column[
-1. Row, Column Vectors and Matrices
-2. Upper and Lower Triangular Matrices
-3. Identity Matrix
-4. Matrix Operations
-5. Matrix Laws
-6. Transpose
-7. Linear Independence
-8. Trace
-9. Determinant
-10. Rank
-11. System of Linear Equations
-12. Matrix Inversion
+1. Closed Form Solutions
+1. Perturbation
+1. Annuity
+1. Derivative Method
+1. Linear Combination Method
+1. Approximating Sums with Integrals
+1. Double Sums
+1. Products
+1. Asymptotic Notation
 ]
----
-## Row Vector, Column Vector and Matrix
-$
-\vec{r} = 
-\begin{bmatrix}
-1 & 2 & 3\\\\
-\end{bmatrix}
-$
-
-$
-\vec{c} = 
-\begin{bmatrix}
-1 \\\\
-2 \\\\
-3
-\end{bmatrix}
-$
-
-Orientation of vectors only matters when treating them like matrices.
-
-$
-M = 
-\begin{bmatrix}
-1 & 2 & 3\\\\
-2 & 3 & 4\\\\
-3 & 4 & 5 
-\end{bmatrix}
-$
----
-## Row Vector, Column Vector and Matrix
-
-`Square Matrix` - The number of rows and columns are equal, e.g. $3\times 3$, $5\times 5$
-
-$
-A = 
-\begin{bmatrix}
-1 & 2 & 3\\\\
-2 & 3 & 4\\\\
-3 & 4 & 5 
-\end{bmatrix}
-$
-
-$a\_{3,2}$ = element of $A$, row #$3$, column #$2 = 4$
-
-- Indexing system does not start at $0$!
----
-## Dot Product
-
-The `dot product` of two vectors of equal length is the sum of the element-wise products.
-
-$
-\begin{bmatrix}
-1 & 2 & 3\\\\
-\end{bmatrix} \cdot \begin{bmatrix}
-6 \\\\
-7 \\\\
-8
-\end{bmatrix}
-$
-
-= $(1 \times 6) + (2 \times 7) + (3 \times 8) = 6 + 14 + 24 = 44$
-
-For dot product, vector orientation doesn't matter.
 
 ---
-## Upper Triangular Matrix, Lower Triangular Matrix
+## Closed Form solutions
 
-$
-  \begin{bmatrix}
-    a\_{11} & a\_{12} & a\_{13} \\\\
-    a\_{21} & a\_{22} & a\_{23} \\\\
-    a\_{31} & a\_{32} & a\_{33}
-  \end{bmatrix} =
-  \begin{bmatrix}
-    \ell\_{11} &         0 & 0         \\\\
-    \ell\_{21} & \ell\_{22} & 0         \\\\
-    \ell\_{31} & \ell\_{32} & \ell\_{33}
-  \end{bmatrix}
-  \begin{bmatrix}
-    u\_{11} & u\_{12} & u\_{13} \\\\
-         0 & u\_{22} & u\_{23} \\\\
-         0 &      0 & u\_{33}
-  \end{bmatrix}
-$
+$$\sum_{i=1}^n i = 1 + 2 + ... + n = \frac{n(n+1)}{2}$$
+
+$$\sum_{i=1}^n i^2 = 1^2 + 2^2 + ... + n^2 = \frac{n(2n+1)(n+1)}{6}$$
+
+---
+## Closed Form solutions
+
+$$\sum_{i=0}^n r^i = r^0 + r^1 + r^2 ... + r^n = \frac{r^{n+1}-1}{r-1}$$
+
+$$n! = 1 \cdot 2  \cdot 3  \cdot ... \cdot n \ = \prod_{i=1}^n i$$
+
+*When $n = 0$, sums are only the zero'th term. Sometimes this is zero, e.g. $3n$, sometimes this is 1, e.g. $3^n$. If a term is out of the bounds, it is 0 by definition, e.g. the 0th term if we are starting from i=1*
+
+---
+## Perturbation
+- `Perturbation` is a method for finding the closed form solution of sums
+
+- e.g. $\sum_{i=1}^n i = 1 + 2 + ... + n = S$
+
+- We can add the sum forward and backward
+
+$  S = 1 + 2 + ... + (n-1) + n$
+
+$+ S = n + (n-1) + ... + 2 + 1$
+
+$S + S = (n+1) + (n+1) ... (n+1) + (n+1)$
+
+---
+## Perturbation Examples
+
+$S + S = (n+1) + (n+1) ... (n+1) + (n+1)$
+
+$2S = n(n+1)$
+
+$S = \frac{n(n+1)}{2}$
+
+---
+## Geometric Series
+
+- $S = 1 + r + r^2 + ... + r^{n-1} + r^n$
+
+- $rS = r + r^2 + ... + r(r^{n-1}) +r(r^n)$
+
+- $rS = r + r^2 + ... + r^n + r^{n+1}$
+
+- $S - rS = 1 - r^{n+1}$
+
+- $S (1-r) = 1 - r^{n+1}$
+
+- $S  = \frac{1 - r^{n+1}}{1-r}$
+
+---
+## Using Geometric Series
+- $S = 1 + 2 + 4 + 8 + ... + N$
+- $S = 2^0 + 2^1 + 2^2 + 2^3 + ... + 2^n$
+- $S = \frac{2^{n+1}-1}{2-1}$
+- $S = \frac{2 \cdot 2^n-1}{1}$
+- $S = 2 \cdot 2^n-1$
+- $S = 2 \cdot N-1$
+- e.g. if N = 8, S = 15. (1111)
+- e.g. if N = 16, S = 31. (11111)
+---
+## Annuity
+Def: An $n$-year, $m$-dollar payment annuity, pays $m$ dollars at the start of each year for $n$ years.
+- 50,000/Year for 20 years VS 1,000,000 today?
+- 50,000/Year for 20 years VS 700,000 today?
+
+Assume fixed interest rate P
+
+- i.e. $1$ today = $(1+p)$ in one year, $(1+p)^2$ in two years...
+- i.e. $1$ dollar in five years is $\frac{1}{(1+p)^5}$ today.
+---
+## Annuity payment
+Payments | Current Value
+---|---
+$m$ | $m$
+$m$ | $\frac{m}{1+p}$
+$m$ | $\frac{m}{(1+p)^2}$
+
+Total Value:
+
+$m + \frac{m}{1+p} + \frac{m}{(1+p)^2} + ... + \frac{m}{(1+p)^{n-1}}$
+
+$$\sum_{i=0}^{n-1} \frac{m}{(1+p)^i}$$
+---
+## Closed form Solution
+Let $x = \frac{1}{1+p}$
+
+$$= m \sum_{i=0}^{n-1} x^i$$
+
+$$= m \frac {1-x^n}{1-x}$$
+
+$$= m \frac {1- \frac{1}{(1+p)^n}}{1- \frac{1}{1+p}}$$
+---
+## Closed form Solution
+
+$$= m \frac {1- \frac{1}{(1+p)^n}}{1- \frac{1}{1+p}}$$
+
+$$= m \frac {1+p-\frac{1}{(1+p)^{n-1}}}{p}$$
+
+m = 50,000. n = 20. p = 0.06
+V = $607,906
+
+Not worth! Also, holy smokes, 6% interest? What year is this example from?!
+
+---
+## Payments Forever (Perpetuity)
+- What if you could have 50,000/yr forever vs 1,000,000 today?
+
+How can we compute it?
+
+Take the Limit as $n \rightarrow \infty$ of the previous formula.
+
+$$= m \frac {1+p}{p}$$
+
+At 6%, 50K/year = 883,333.33
+
+In other words, if you had 883,333.33 today, you could take out 50K/year forever @ 6% interest!
+
+---
+## Geometric Sums for Numbers < 1
+
+Corollary, from our geometric sum...
+
+$$ S  = \frac{1 - r^{n+1}}{1-r} $$
+
+if $-1 \lt r \lt 1$
+
+$$ \lim_{n \Rightarrow \infty} r^n = 0 $$
+
+$$ \sum_{i=0}^n r^i = \frac{1}{1-r} $$
+
+---
+## Geometric Sums for Numbers < 1
 
 e.g.
 
-$
-L = 
-\begin{bmatrix}
-1 & 0 & 0\\\\
-2 & 3 & 0\\\\
-3 & 4 & 5 
-\end{bmatrix} U = 
-\begin{bmatrix}
-1 & 2 & 3\\\\
-0 & 3 & 4\\\\
-0 & 0 & 5 
-\end{bmatrix}
-$
+$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + ... = 2$
+
+$1 + \frac{1}{3} + \frac{1}{9} + \frac{1}{27} + ... = \frac{3}{2}$
 ---
-## Diagonal and Identity Matrices 
+## More Perturbation
 
-`Diagonal Matrix` - Only has values along the diagonal
+$ \sum_{i=1}^{n} ir^i = r + 2r^2 + 3r^3 + .. + nr^n $
 
-$
-D = 
-\begin{bmatrix}
-1 & 0 & 0\\\\
-0 & 0 & 0\\\\
-0 & 0 & 5 
-\end{bmatrix}
-$
+$ S = r + 2r^2 + 3r^3 + .. + nr^n $
 
-`Identity Matrix` - All values along the diagonal = $1$, others = $0$.
+$ rS = r^2 + 2r^3 + 3r^4 + .. + (n-1)r^n + nr^{n+1} $
 
-$
-I = 
-\begin{bmatrix}
-1 & 0 & 0\\\\
-0 & 1 & 0\\\\
-0 & 0 & 1 
-\end{bmatrix}. AI = A
-$
----
-## Matrix Addition, Subtraction
+$ S-rS = r + r^2 + r^3 + ... + r^n - nr^{n+1} $  
 
-`Matrix Addition` is element-wise addition
+$ S(1-r) = \frac{1-r^{n+1}}{1-r} - 1 -nr^{n+1} $
 
-$C = A + B = B + A$
-
-`Matrix Subtraction` is element-wise subtraction
-
-$C = A - B$
-
-$A$, $B$, $C$ must have the same dimensions.
+$ S = \frac{r-(n+1)r^{n+1}+{nr^{n+2}}}{(1-r)^2} $
 
 ---
-## Matrix Multiplication
+## Derivative Method
 
-`Matrix Multiplication`, for matrices $A\_{m\times n}$, $B\_{n\times p}$,
+For $r \neq 1, \sum_{i=0}^n r^i = \frac{1-r^{n+1}}{1-r}$
 
-$\text{columns}(A) = \text{rows}(B)$
+Take the derivative of each side...
 
-$AB = C$, where
+$\sum_{i=1}^n ir^{i-1} = \frac{-(1-r)(n+1)r^n-(-1)(1-r)^{n+1}}{(1-r)^2}$
 
-Math style:
-
-$c\_{ij} = a\_{i1}b\_{1j} + a\_{i2}b\_{2j} +\cdots + a\_{in}b\_{nj}= \sum\_{k=1}^n a\_{ik}b\_{kj}$
+$= \frac{1-(n+1)r^n+nr^{n+1}}{(1-r)^2}$
 
 ---
-## Matrix Multiplication
+## Derivative Method Continued
 
-Pseudo-code style:
+What do we need to do to get what we want? Multiply by r.
 
-- For each row in $A$, create a row vector
-  - For each column in $B$, create a column vector
-      - take the dot product of the row and column vector
-      - Store the result in a new matrix in the intersection of the row and the column
+$\sum_{i=1}^n ir^i = \frac{r-(n+1)r^{n+1}+nr^{n+2}}{(1-r)^2}$
 
-$
-  \begin{bmatrix}
-    1 & 4 & 7 \\\\
-    2 & 5 & 8 \\\\
-    3 & 6 & 9
-  \end{bmatrix}
-  \begin{bmatrix}
-    3 & 4 & 5 \\\\
-    6 & 7 & 8 \\\\
-    9 & 10 & 11
-  \end{bmatrix}=
-  \begin{bmatrix}
-    90 & 102 & 114 \\\\
-    108 & 123 & 138 \\\\
-    126 & 144 & 162
-  \end{bmatrix}
-$
+Which is what we found earlier.
 
 ---
-## Matrix Multiplication
+## Formula Application - Business valuation
 
-![](matrix-multiplication.png)
+Theorem: If $-1 \leq x \leq 1, \sum_{i=1}^{\infty}ix^i = \frac{x}{(1-x)^2}$
 
-$(2 \times 5) + (5 \times 8) + (8 \times 11)$
+This can be used to value growing companies...
 
-$= 10 + 40 + 88 = 138$
+e.g. An annuity that pays $m$ dollars at the end of each year $i$=1,2,3 is...
 
----
-## Scalar Multiplication
+$m(\frac{ \frac{1}{1+p} }{(1-\frac{1}{(1+p)})^2})$
 
-When a matrix is multiplied by a scalar, every element in the matrix is multiplied by that scalar.
-
-e.g.
-
-$
-  3 \times
-  \begin{bmatrix}
-    3 & 4 & 5 \\\\
-    6 & 7 & 8 \\\\
-    9 & 10 & 11
-  \end{bmatrix}=
-  \begin{bmatrix}
-    9 & 12 & 15 \\\\
-    18 & 21 & 24 \\\\
-    27 & 30 & 33
-  \end{bmatrix}
-$
----
-## Matrix Laws
-Addition is commutative: 
-- $A + B = B + A$
-
-Multiplication is not: 
-- $AB \neq BA$
-
-However, the following rules hold: 
-- $(AB)C = A(BC)$
-- $A(B+C) = AB + AC$
-- $(A + B)C = AB + BC$
+$m(\frac{1+p}{p^2})$
 
 ---
-## Transpose
-$A=   \begin{bmatrix}
-    9 & 1  \\\\
-    8 & 2  \\\\
-    7 & 3 
-  \end{bmatrix}
-$
-$A^T=   \begin{bmatrix}
-    9 & 8 & 7  \\\\
-    1 & 2 & 3
-  \end{bmatrix}
-$
-
-If $A = A^T$, the matrix is `symmetric`
-
-$S = \begin{bmatrix}
-    9 & 8 & 7  \\\\
-    8 & 2 & 3  \\\\
-    7 & 3 & 4  \\\\
-\end{bmatrix}$
-
----
-## Linear Independence
-
-Vectors $\vec{v_1}, \vec{v_2}, \vec{v_3}$ are `Linearly independent` if none be re-written as a linear combination of others.
-
-$k_1 \begin{bmatrix}
-    a_1  \\\\
-    a_2  \\\\
-    a_3 
-  \end{bmatrix} + k_2   \begin{bmatrix}
-    b_1  \\\\
-    b_2  \\\\
-    b_3 
-  \end{bmatrix} + k_3   \begin{bmatrix}
-    c_1  \\\\
-    c_2  \\\\
-    c_3 
-  \end{bmatrix} = 0
-  $
-  
-  iff $k_1 = k_2 = k_3 = 0$. (No solutions)
----
-## Linear Independence
-
-e.g.
-
-$\vec{v_1}=   \begin{bmatrix}
-    1  \\\\
-    0  \\\\
-    0 
-  \end{bmatrix}, \vec{v_2}=   \begin{bmatrix}
-    0  \\\\
-    1  \\\\
-    0 
-  \end{bmatrix}, \vec{v_3}=   \begin{bmatrix}
-    0  \\\\
-    0  \\\\
-    1 
-  \end{bmatrix}
-$
-
-The only solution to: 
-
-$k\_1 \vec{v_1} + k\_2 \vec{v_2} + k\_3 \vec{v_3} = 0$ 
-
-$k_1 = k_2 = k_3 = 0$.
-
----
-## Linear Combination
-
-A `linear combination` can be made if the vectors are not linearly independent:
-
-$\vec{v_1}=   \begin{bmatrix}
-    1  \\\\
-    0  \\\\
-    0 
-  \end{bmatrix}, \vec{v_2}=   \begin{bmatrix}
-    0  \\\\
-    1  \\\\
-    0 
-  \end{bmatrix}, \vec{v_3}=   \begin{bmatrix}
-    5  \\\\
-    -5  \\\\
-    0
-  \end{bmatrix}
-$
-
-$k\_1 \vec{v_1} + k\_2 \vec{v_2} + k\_3 \vec{v_3} = 0$ 
-
-$\vec{v_3} = 5 \vec{v_1} -5 \vec{v_2}$.
-
-$k\_1 = 5, k\_2 = -5, k\_3 = 1$ 
-
----
-## Trace of a Matrix
-
-A `Trace` of a matrix is the sum of the elements on the diagonals
-
-$$\text{Trace}(A) = \sum\_{i=1}^{n}a\_{ii}$$
+## Formula Application - Business valuation
 
 e.g. 
-$
-  \text{Trace}\begin{pmatrix}\begin{bmatrix}
-    9 & 12 & 15 \\\\
-    18 & 21 & 24 \\\\
-    27 & 30 & 33
-  \end{bmatrix}\end{pmatrix} = 9 + 21 + 33 = 63
-$
+If we use the following value:
+- m=50k per year, at p=6% interest
+  - A company makes 50k more this year than the last year...
+- V = 14,722,222.
+  - The company is worth 14,722,222 today!
 
 ---
-## Determinant
+## Linear Combination Method
 
-An operation defined for square matrices of any size.
+$$\sum_{i=1}^n i^2 = 1^2 + 2^2 + ... + n^2 = \frac{n(2n+1)(n+1)}{6}$$
 
-For matrix $A$, written as $\text{det}(A)$ or $|A|$
+To derive this, we might suspect the formula is some third order polynomial, of the form...
 
-The determinant of a $2 \times 2$ matrix is:
-
-$
-\begin{align}|A| = \begin{vmatrix} a & b\\\\
-c & d \end{vmatrix}=ad-bc.\end{align}
-$
-
-We can use this in a recursive approach...
+$\sum_{i=1}^n i^2 = an^3 + bn^2 + cn + d$
 
 ---
-## Determinant
+## Linear Combination Method
 
-For larger matrices, take a recursive approach
+$\sum_{i=1}^n i^2 = an^3 + bn^2 + cn + d$
 
-- To find the determinant of a Matrix:
-  - Select any row or column of the Matrix
-  - The determinant is the sum of:
-      - Each element $a\_{i,j}$ in that row or column
-      - Multiplied by the `co-factor`, i.e.
-          - Take the corresponding sign from the `checkerboard` matrix
-          - Multiply by the determinant of the matrix where the row and column corresponding to $a\_{i,j}$ are removed.
-- Hint: Strategic row or column selection can minimize work
+Plug in:
+- $n = 0: 0 = d$
+- $n = 1: 1 = a + b + c + d$
+- $n = 2: 5 = 8a + 4b + 2c + d$
+- $n = 3: 14 = 27a + 9b + 3c + d$
 
----
-### Checkerboard Matrix
-
-
-$(-1)^{i+j} = 
-  \begin{bmatrix}
-    1 & -1 & 1 & \cdots \\\\
-    -1 & 1 & -1 & \cdots \\\\
-    1 & -1 & 1 & \cdots \\\\
-    \vdots & \vdots & \vdots& \ddots
-  \end{bmatrix}
-$
+Solving...
+$$ a = \frac{1}{3}, b = \frac{1}{2}, c = \frac{1}{6}$$
 
 ---
+## Linear Combination Warning
 
-### Determinant Example:
-$
-  \begin{vmatrix}
-    7 & 8 & 9 \\\\
-    0 & 10 & 3 \\\\
-    1 & 0 & 2
-  \end{vmatrix}
-$
+These solutions must be verified with induction, in case a polynomial does not fit all the terms!
 
-Checkerboard Matrix
-$
-  \begin{bmatrix}
-    1 & -1 & 1  \\\\
-    -1 & 1 & -1 \\\\
-    1 & -1 & 1
-  \end{bmatrix}
-$
+- In other words, our original assumption that the sum could be represented by a third order polynomial may have been incorrect!
 
-Using the top row...
-$= 7 \times (1) \times   \begin{vmatrix}
-    10 & 3 \\\\
-    0 & 2
-  \end{vmatrix} + (-1) \times 8 \times \begin{vmatrix}
-    0 & 3 \\\\
-    1 & 2
-  \end{vmatrix} + 9 \times (1) \times \begin{vmatrix}
-    0 & 10 \\\\
-    1 & 0
-  \end{vmatrix} $
+- The values we derived may describe part of the Sum, but not all of it
 
 ---
-$= 7 \times (1) \times   \begin{vmatrix}
-    10 & 3 \\\\
-    0 & 2
-  \end{vmatrix} + (-1) \times 8 \times \begin{vmatrix}
-    0 & 3 \\\\
-    1 & 2
-  \end{vmatrix} + 9 \times (1) \times \begin{vmatrix}
-    0 & 10 \\\\
-    1 & 0
-  \end{vmatrix} $
+## Approximation with Integrals
 
-$= 7 \times 1 \times (10 \times 2-0 \times 3) $
-$+ -1 \times 8 \times (0 \times 2-1 \times 3) $
-$+ 9 \times 1 \times (0 \times 0-1 \times 10) $
+What if we wanted to find the sum:
 
-$= 7 \times 20 - 8 \times -3 + 9 \times -10$
+$\sum_{i=1}^{n}\sqrt{i}$
 
-$= 140 + 24 -90$
+While it will be difficult to compute this directly, we can find the bounds using Integrals!
 
-$= 74$
+---
+## Sum
 
+![](actual-sum-value.png)
+
+---
+## Lower Bound
+
+![](lower-bound.png)
+
+---
+## Upper Bound
+
+![](upper-bound.png)
 
 ---
 
-### Determinant Example Take 2:
-$
-  \begin{vmatrix}
-    7 & 8 & 9 \\\\
-    0 & 10 & 3 \\\\
-    1 & 0 & 2
-  \end{vmatrix}
-$
+## Approximating Sums
 
-Checkerboard Matrix
-$
-  \begin{bmatrix}
-    1 & -1 & 1 \\\\
-    -1 & 1 & -1 \\\\
-    1 & -1 & 1
-  \end{bmatrix}
-$
+Let $S = \sum_{i=1}^{n} f(n)$
 
-Using the left-most column...
-$= 7 \times (1) \times   \begin{vmatrix}
-    10 & 3 \\\\
-    0 & 2
-  \end{vmatrix} + 1 \times (1) \times \begin{vmatrix}
-    8 & 3 \\\\
-    10 & 9
-  \end{vmatrix} $
+Let $I = \int_1^n f(x) \text{dx} $
 
----
-$= 7 \times (1) \times   \begin{vmatrix}
-    10 & 3 \\\\
-    0 & 2
-  \end{vmatrix} + 1 \times (1) \times \begin{vmatrix}
-    8 & 9 \\\\
-    10 & 3
-  \end{vmatrix} $
+Then, if the function is increasing...
 
-$= 7 \times 1 \times (10 \times 2-0 \times 3) $
-$+ 1 \times 1 \times (8 \times 3-10 \times 9) $
+$I + f(1) \leq S \leq I + f(n)$
 
-$= 7 \times 20 + 1 \times (24 - 90)$
+If the function is decreasing...
 
-$= 140 + 24 -90$
-
-$= 74$
----
-### Properties of a determinant
-
-- Theorem 1: If a row or column in an $n \times n$ matrix $A$ is zero, then $|A| = 0$.
-- Theorem 2: If a row in an $n \times n$ matrix $A$ is proportional to another row, $|A| = 0$.
-- Theorem 3: If a column in an $n \times n$ matrix $A$ is proportional to another column, $|A| = 0$.
-- Theorem 4: If a row or column in an $n \times n$ matrix $A$ is multiplied by $k$ to produce matrix $B$, i.e. $B = kA$, then $|B| = k |A|$.
-- Theorem 5: If A is an upper or lower triangular matrix, then $|A| = \prod\_{i=1}^{n}a\_{ii}$, i.e. the product of the elements of the diagonal.
-
----
-## Rank of a Matrix
-
-The rank of a matrix is defined as the order of the largest square sub-matrix whose determinant is non-zero.
-
-e.g. Rank is 3
-
-$
-  \begin{bmatrix}
-    7 & 8 & 9 & 1 \\\\
-    0 & 10 & 3 & 2\\\\
-    1 & 0 & 2 & 3
-  \end{bmatrix}
-$
-
----
-e.g. Rank is 2
-
-$
-  \begin{bmatrix}
-    7 & 8 & 9 & 1 \\\\
-    0 & 10 & 3 & 2\\\\
-    0 & 0 & 0 & 0
-  \end{bmatrix}
-$
-
-e.g. Rank is 4 (`Full Rank`)
-
-$
-  \begin{bmatrix}
-    1 & 0 & 0 & 0 \\\\
-    0 & 0 & 0 & 1\\\\
-    0 & 1 & 0 & 0\\\\
-    0 & 0 & 1 & 0
-  \end{bmatrix}
-$
-
----
-e.g. Rank is 2, because columns 1 and 2 are not linearly independent (`Rank deficient`)
-
-$ A =
-  \begin{bmatrix}
-    1 & 2 & 0\\\\
-    2 & 4 & 1\\\\
-    3 & 6 & 0
-  \end{bmatrix}
-$
-
-$|A| = 0$, so $\text{rank}(A) < 3$
-
----
-## Systems of Linear Equations
-- Can be expressed using matrices:
-
-$2x\_1 + 3x\_2 + x\_3 = 2$
-
-$x\_1 - 2x\_2 + 4x\_3 = 4$
-
-$x\_2 - x\_3 = 1$
-
-$\begin{bmatrix}
-    2 & 3 & 1\\\\
-    1 & -2 & 4\\\\
-    0 & 1 & -1
-  \end{bmatrix} 
-  \begin{bmatrix}
-    x\_1\\\\
-    x\_2\\\\
-    x\_3
-  \end{bmatrix}=\begin{bmatrix}
-    2\\\\
-    4\\\\
-    1
-  \end{bmatrix}$
-
----
-## Augmented Matrix
-
-$A\vec{x}=\vec{b}=\begin{bmatrix}
-    2 & 3 & 1\\\\
-    1 & -2 & 4\\\\
-    0 & 1 & -1
-  \end{bmatrix} 
-  \begin{bmatrix}
-    x\_1\\\\
-    x\_2\\\\
-    x\_3
-  \end{bmatrix}=\begin{bmatrix}
-    2\\\\
-    4\\\\
-    1
-  \end{bmatrix}$
-
-The `augmented matrix`, $A.B$ appends the `right-hand-side vector`, $B$, to the right of the `coefficient matrix`, $A$.
-
-$A.B = \begin{bmatrix}\begin{array}{ccc|c}
-    2 & 3 & 1 & 2\\\\
-    1 & -2 & 4 & 4\\\\
-    0 & 1 & -1 & 1
-  \end{array}\end{bmatrix}$
-
----
-## Possible Solutions:
-
-- No solutions
-- One unique solution
-- Infinitely many solutions
-
-![](solution-chart.png)
-
----
-### Possible Solutions Visualized:
-
-![](solutions-visualized.png)
-
----
-### Example: One unique solution
-$A.B = \begin{bmatrix}\begin{array}{ccc|c}
-    1 & 1 & 0 & 2\\\\
-    0 & 1 & 1 & 4\\\\
-    0 & 0 & 1 & 7
-  \end{array}\end{bmatrix} $
-
-$\text{Rank}(A) = \text{Rank}(A.B) = 3$
-
-$x_3 = 7, x_2 = -3, x_1 = 5$
----
-### Example: Infinitely many solutions
-$A.B = \begin{bmatrix}\begin{array}{ccc|c}
-    1 & 1 & 0 & 2\\\\
-    0 & 1 & 1 & 4\\\\
-    0 & 2 & 2 & 8
-  \end{array}\end{bmatrix} $
-
-$\text{Rank}(A) = 2$
-
-Number Unknowns $ = 3$
-
-$\text{Rank}(A) < $ Number Unknowns
-
-$x_1 + x_2 = 2, x_2 + x_3 = 4$
-
----
-### Example: No solutions
-$A.B = \begin{bmatrix}\begin{array}{ccc|c}
-    0 & 0 & 1 & 2\\\\
-    1 & 1 & 1 & 4\\\\
-    2 & 2 & 2 & 7
-  \end{array}\end{bmatrix} $
-
-Rows 2, 3 are inconsistent!
-2 (Row 2) - Row 3 => 0 = 1
----
-## Matrix Inversion
-
-A square matrix is invertible if $|A| \neq 0$
-
-$A A^{-1} = A^{-1} A = I$
-
-$A^{-1} = \frac{1}{|A|} (\text{adj}(A))$
-
-$\text{adj}(A)$ is the `adjugate matrix`
-
-$\text{adj}(A) = C^T$
-
-$C$ is the `co-factor matrix`
-
----
-### Matrix Inversion
-
-$\text{adj}(A) = C^T$
-
-$C$ is the `co-factor matrix`, which is the matrix where...
-- For each element $a\_{i,j}$ in that row or column
-- Take the the corresponding sign from the "checkerboard" matrix
-- Multiplied by the determinant of the matrix where the row and column corresponding to $a\_{i,j}$ are removed.
-- We've seen these co-factors when computing the determinant recursively!
----
-### Why to use Matrix Inversion
-
-If $A$ is invertible then...
-
-$A \vec{x} = \vec{b}$
-
-$A^{-1}A\vec{x} = A^{-1}\vec{b}$
-
-$I\vec{x} = A^{-1}\vec{b}$
-
-$\vec{x} = A^{-1}\vec{b}$
-
-If we compute $A^{-1}$ once, we could re-use it to rapidly get different $\vec{x}$ for different $\vec{b}$'s.
+$I + f(n) \leq S \leq I + f(1)$
 
 ---
 
-### Matrix Inversion Woes
+$\sum_{i=1}^{n}\sqrt{i}$
 
-The formally defined inversion process is prohibitively slow!
-- For every term in the co-factor matrix, you need to compute the `Minor`, i.e. the determinant of the Matrix with the row and column removed.
-- Since the process is recursive, this grows very fast as the matrices gets larger
+$f(x) = \sqrt{i}$
 
-In the next lecture we'll look at some methods for solving systems of linear equations!
+$= \int_1^n \sqrt{i} \text{di}$
+
+$=\frac{x^{\frac{3}{2}}}{\frac{3}{2}} \rvert_{i=1}^{i=n}$
+
+$= \frac{2}{3}(n^\frac{3}{2}-1)$
+
+$I + f(1) \leq S \leq I + f(n)$
+---
+
+$I + f(1) \leq S \leq I + f(n)$
+
+$\frac{2}{3}(n^\frac{3}{2}-1) + \sqrt{1} \leq S \leq \frac{2}{3}(n^\frac{3}{2}-1) + \sqrt{n}$
+
+$\frac{2}{3}n^\frac{3}{2} + \frac{1}{3} \leq S \leq \frac{2}{3}n^\frac{3}{2} + \sqrt{n} - \frac{2}{3}$
+
+if  n=100, $667 \leq S \leq 676$. There is a small margin of error. ($\delta$)
+
+$\sum_{i=1}^{n}\sqrt{i} = \frac{2}{3}n^\frac{3}{2} + \delta(n)$
+
+$\sum_{i=1}^{n}\sqrt{i} \approx \frac{2}{3}n^\frac{3}{2}$
+
+---
+
+## Approximation
+
+$g(x) \approx h(x)$ means $\lim\limits_{n\to \infty} \frac{g(x)}{h(x)}=1$
+
+$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2} + \delta(n)}{\frac{2}{3}n^\frac{3}{2}}$
+
+$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2} + \sqrt{n}}{\frac{2}{3}n^\frac{3}{2}}$
+
+---
+
+$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2} + \sqrt{n}}{\frac{2}{3}n^\frac{3}{2}}$
+
+$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2}}{\frac{2}{3}n^\frac{3}{2}} = 1$
+
+$ \lim\limits_{n\to \infty} \frac{\sqrt{n}}{\frac{2}{3}n^\frac{3}{2}}$
+
+$ = \lim\limits_{n\to \infty} \frac{n^{\frac{1}{2}}}{\frac{2}{3}n^\frac{3}{2}} = 0$
+
+---
+
+$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2}}{\frac{2}{3}n^\frac{3}{2}} = 1$
+
+$ = \lim\limits_{n\to \infty} \frac{n^{\frac{1}{2}}}{\frac{2}{3}n^\frac{3}{2}} = 0$
+
+$\lim\limits_{n\to \infty} \frac{g(x)}{h(x)}=1 \checkmark$
+
+---
+## Decreasing function
+
+![](decreasing-sum.png)
+---
+
+## Upper Bound
+
+![](decreasing-upper-bound.png)
+---
+
+## Lower Bound
+
+![](decreasing-lower-bound.png)
+
+---
+
+## Decreasing example
+
+$I + f(n) \leq S \leq I + f(1)$
+
+- These are the same formulas, only flipped!
+
+e.g.
+
+$\sum_{i=1}^{n}\frac{1}{\sqrt{i}}$
+
+---
+
+## Independent Variables
+
+$\sum_{i=1}^{n} j$
+
+$ =j + j + j + j + j + ... + j$       $n$-times!
+
+$ =nj$
+
+---
+
+## Sums not starting at 1?
+
+$\sum_{i=10}^{200} i$
+
+$= \sum\_{i=1}^{200} i - \sum\_{i=1}^{9} i$
+
+$= \frac{200 \cdot 201}{2} -\frac{9 \cdot 10}{2} $
+
+$= 20100 - 45 $
+
+$= 20055 $
+
+---
+
+## Double sums
+
+$ \sum\_{i=1}^{5} \sum\_{j=1}^{3} {i + j} $
+
+$= \sum\_{i=1}^{5} (\sum\_{j=1}^{3} {i + j}) $
+
+$= \sum\_{i=1}^{5} ((i + 1)+(i + 2)+(i + 3)) $
+
+$= \sum\_{i=1}^{5} (3i + 6) $
+
+$= (3(1) + 6) + (3(2) + 6) + (3(3) + 6) + (3(4) + 6) + (3(5) + 6)$
+
+$= 75$
+---
+
+## Double sums
+
+$ \sum\_{i=1}^{5} \sum\_{j=1}^{3} {i + j} $
+
+$ = \sum\_{i=1}^{5} \sum\_{j=1}^{3} {i} + \sum\_{i=1}^{5} \sum\_{j=1}^{3}{j} $
+
+$ = \sum\_{i=1}^{5} 3i + \sum\_{i=1}^{5} \dfrac {3 \cdot 4}{2} $
+
+$ = \sum\_{i=1}^{5} 3i + \sum\_{i=1}^{5} 6 $
+
+$ = 3 (\dfrac {6 \cdot 5}{2}) + 30 = 45 + 30 = 75$
+
+---
+
+## Products
+
+Taking a $\ln$ can turn a product into a sum!
+
+$$P = \prod\_{i=1}^{n} f(i) = f(1) \cdot f(2) \cdot f(3) \cdot f(4) \cdot ... \cdot f(n) $$
+
+$$\ln{(P)} = \sum\_{i=1}^{n} \ln{(f(i))} = \ln{(f(1))} + \ln{(f(2))} + ... + \ln{(f(n))} = S $$
+
+$$e^{\ln{(P)}} = e^{S} = P $$
+---
+
+## Asymptotic Notation
+- `Asymptotic Notation` is a shorthand notation used to give a quick measure of the behaviour of a function $f(n)$ as n grows large.
+- Also knows as `Algorithmic complexity`.
+
+---
+## Asymptotic Equality
+
+For real valued functions, $x \in \mathbb{R}$...
+- $f(x) \approx g(x)$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}=1$
+- We say these functions are `asymptotically equal`
+
+e.g. 
+- $f(x) = x^2 - 30000x + 10^{10}$
+- $g(x) = x^2 + 2x - 3$
+
+---
+## Asymptotic Equality
+
+e.g.
+- $f(x) = 3x + 4$
+- $g(x) = 4x + 5$
+
+---
+
+## Little Oh
+For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
+- with $g(x)$ non-negative
+- $f(x) \in o (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}=0$
+- This means $g(x)$ is a strict upper bound of $f(x)$
+- $f(x)$ is strictly asymptotically smaller
+- We can conclusively say $g(x)$ is growing faster than $f(x)$
+
+e.g.
+- $f(x) = x^2 - 30000x + 10^{10}$
+- $g(x) = x^3 - x^2 + 2x - 3$
+---
+
+## Little Oh
+
+- $f(x) = x^2 - 30000x + 10^{10}$
+- $g(x) = x^3 - x^2 + 2x - 3$
+
+$\lim\limits_{n\to \infty} \frac{x^2 - 30000x + 10^{10}}{x^3 - x^2 + 2x - 3}$
+
+$=\lim\limits_{n\to \infty} \frac{x^3(x^{-1} - 30000x^{-2} + 10^{10}x^{-3})}{x^3(1 - x^{-1} + 2x^{-2} - 3x^{-3})}$
+
+$=\frac{(0) - 30000(0) + 10^{10}(0)}{1 - (0) + 2(0) - 3(0)} = 0$
+
+---
+
+## Big Oh
+
+For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
+- with $f(x), g(x)$ non-negative
+- $f(x) \in O (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}<\infty$
+- i.e. for some constants $c, x\_0$
+  - $0 \leq f(x) \leq c \cdot g(x)$ for all $x \gt x\_0$
+- This means $g(x)$ may be a *tight* upper bound of $f(x)$
+- For large numbers ($x \gt x_0$), $g(x)$ is growing as fast or faster than $f(x)$, ignoring constants
+
+---
+## Big Oh
+
+![](big-oh.png)
+
+---
+
+## Big Oh Examples:
+
+The runtime to multiply $n \times n$ matrices
+
+$T(n) \in O(n^3)$
+
+"The run time is at most $n^3$"
+---
+## Tricky Big Oh Examples
+
+Is $4^x \in O (2^x)$?
+
+$\lim\limits_{n\to \infty} \frac{4^x}{2^x}$
+
+= $\lim\limits_{n\to \infty} 2^x$
+
+= $\infty$
+no!
+
+Is $10 \in O (1)$?
+yes.
+
+---
+
+## Little Omega
+For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
+- with $g(x)$ non-negative
+- $f(x) \in \omega (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}=\infty$
+- This means $g(x)$ is a strict lower bound of $f(x)$
+- $f(x)$ is strictly asymptotically larger
+- We can conclusively say $g(x)$ is growing slower than $f(x)$
+
+e.g.
+- $f(x) = x^4 - 30000x^3 + 10^{10}$
+- $g(x) = x^3 - x^2 + 2x - 3$
+
+---
+
+## Big Omega
+
+For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
+- with $f(x), g(x)$ non-negative
+- $f(x) \in \Omega (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}>0$
+- i.e. for some constants $c, x\_0$
+  - $0 \leq c \cdot g(x) \leq f(x)$ for all $x \gt x\_0$
+- This means $g(x)$ may be a *tight* lower bound of $f(x)$
+- For large numbers ($x \gt x_0$)
+  - $g(x)$ is growing as slow or slower than $f(x)$, ignoring constants
+
+---
+
+## Theta
+
+$f(x) \in \Theta (g(x))$
+
+iff
+
+$f(x) \in O(g(x))$
+
+and
+
+$f(x) \in \Omega (g(x))$
+
+i.e. $g(x)$ is a tight bound of $f(x)$
+
+---
+
+## Theta
+
+Big O:
+
+- i.e. for some constants $c_1, x\_1$
+  - $0 \leq f(x) \leq c_1 \cdot g(x)$ for all $x \gt x\_1$
+
+Big Omega:
+
+- i.e. for some constants $c_2, x\_2$
+  - $0 \leq c_2 \cdot g(x) \leq f(x)$ for all $x \gt x\_2$
+
+Theta
+- Both the preceding cases, with different $c$ and $x_0$ values.
+---
+## Summary
+
+Up to constant factors...
+
+||||
+|---|---|---|
+| $O$ | means | $f(x) \leq g(x)$|
+| $\Omega$ | means | $f(x) \geq g(x)$|
+| $\Theta$ | means | $f(x) = g(x)$|
+| $o$ | means | $f(x) \lt g(x)$|
+| $\omega$ | means | $f(x) \gt g(x)$|
+
+---
+
+## Not an Equality!
+
+In this course we are using the set notation symbol for asymptotic notation
+
+$f(x) \in O (g(x))$
+
+In the real world you typically see:
+
+$f(x) = O (g(x))$
+
+However, no equality exists. This is needless confusing, but is common usage.
 
 ---
 ### References
 
 - Dr. Abdul Bais's ENSE 350 Slides
+- Tom Leighton, and Marten Dijk. 6.042J Mathematics for Computer Science. Fall 2010, Lectures 12, 13. Massachusetts Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu. License: Creative Commons BY-NC-SA.
 ---
 
 name: inverse

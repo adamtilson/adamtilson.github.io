@@ -1,634 +1,536 @@
 name: inverse
 layout: true
 class: center, middle, inverse
-
 ---
-
 # ENSE 350: Math for Software Eng.
 
-### Lecture 12: Sums and Asymptotics
+### Lecture 7: Cryptography
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
-
 layout: false
 .left-column[
   ## Agenda
 ]
 .right-column[
-1. Closed Form Solutions
-1. Perturbation
-1. Annuity
-1. Derivative Method
-1. Linear Combination Method
-1. Approximating Sums with Integrals
-1. Double Sums
-1. Products
-1. Asymptotic Notation
+1. Prime Numbers
+2. Cryptography: Turing V1
+3. Modular Arithmetic Congruence
+4. Multiplicative Inverses
+5. Fermat's Little Theorem
+6. Cryptography: Turing V2
+7. Relatively Prime
+8. Euler's Totient Function $\phi$
+9. Euler's Theorem
+10. RSA Cyrptosystem
 ]
 
 ---
-## Closed Form solutions
+layout: false
+.left-column[
+## Prime Numbers
+]
+.right-column[
+- The building blocks of all integers
+- Efficient algorithms exist to test if a number is prime
+- $n = p \cdot q$
+  - if $p$ and $q$ are large, then there is no efficient algorithm to find $p, q$ from $n$.
+  - The inability to factor large primes is the foundation on which modern cryptography is based!
+]
+---
+## Cryptography: Turing V1
+- Beforehand - the sender and receiver agree on a secret key, $k$, which is a large prime number
+- Encryption - the sender encrypts the message, $m$ by computing
+$$m' = m \cdot k$$
+- Decryption: the receiver decrypts $m'$ by computing
+$$ \dfrac{m'}{k} = \dfrac{m' \cdot k}{k} = m $$
+---
+## How can we break turing V1
+- To defeat this system, all we need to do is collect two messages...
+$$m_1' = m_1 \cdot k$$
+$$m_2' = m_2 \cdot k$$
+$$k =\text{gcd}(m_1', m_2')$$
+- We know GCD can be computed very efficiently
+---
+.left-column[
+## Modular Arithmetic
+### Congruence
+]
+.right-column[
+$a$ is congruent to $b$ modulo $n$ iff $n \mid (a - b)$
 
-$$\sum_{i=1}^n i = 1 + 2 + ... + n = \frac{n(n+1)}{2}$$
+i.e.
 
-$$\sum_{i=1}^n i^2 = 1^2 + 2^2 + ... + n^2 = \frac{n(2n+1)(n+1)}{6}$$
+$a \equiv b (\text{mod } n)$
+- $n$ is a restricted domain of numbers we'll use, e.g. $(\text{mod } 9)$ would contain only numbers {$0, 1, ..., 8$}
+  - Any numbers outside of this range "roll over" until they are back in the range.
+- $1 \equiv 10 (\text{mod } 9)$
+- How do we quickly get a number in range? Take the remainder!
+]
+---
+.left-column[
+## Modular Arithmetic
+### Remainder
+]
+.right-column[
+$a \equiv b (\text{mod } n) \iff \text{rem}(a,n) = \text{rem}(b,n)$
+- $a = q_1 n + r_1, 0 \leq r_1 \leq n$
+- $b = q_2 n + r_2, 0 \leq r_2 \leq n$
+- $a-b = q_1 n + r_1 - q_2 n - r_2$
+- $a-b = (q_1 - q_2) n + (r_1 - r_2)$
+- $n \mid (a-b)$
+- $n \mid (q_1 - q_2) n + (r_1 - r_2)$
+- $n \mid (r_1 - r_2)$
+- $ r_1 - r_2 = 0$
+- $ r_1 = r_2$
+]
+---
+.left-column[
+## Modular Arithmetic
+### Remainder
+]
+.right-column[
+- $a \equiv \text{ rem} (a,n) (\text{mod } n)$
+- e.g. $15 \equiv \text{rem}(15,6) (\text{mod } 6)$
+- $15 \equiv 3 (\text{mod } 6)$
+
+Assume we are working in mod 5...
+- {..., -10, -5, 0, 5, 10, ...}
+- {..., -9, -4, 1, 6, 11, ...}
+- {..., -8, -3, 2, 7, 12, ...}
+- {..., -7, -2, 3, 8, 13, ...}
+- {..., -6, -1, 4, 9, 14, ...}
+- Any integers in each of these lines are equivalent
+]
+---
+.left-column[
+## Properties of Congruences (n $\geq 1$)
+### Remainder
+]
+.right-column[
+$1. a \equiv a (\text{mod }n)$
+
+$2. a \equiv b (\text{mod }n) \Rightarrow b \equiv a (\text{mod }n)$
+
+$3. (a \equiv b (\text{mod }n) \wedge b \equiv c (\text{mod }n))\Rightarrow a \equiv c (\text{mod }n)$
+
+$4. a \equiv b (\text{mod }n) \Rightarrow a + c \equiv b + c (\text{mod }n)$
+
+$5. a \equiv b (\text{mod }n) \Rightarrow a \cdot c \equiv b \cdot c (\text{mod }n)$
+
+$6. (a \equiv b (\text{mod }n) \wedge c \equiv d (\text{mod }n) ) \Rightarrow$
+$ a + c \equiv b + d (\text{mod }n)$
+
+$7. (a \equiv b (\text{mod }n) \wedge c \equiv d (\text{mod }n) )\Rightarrow$
+$ a \cdot c \equiv b \cdot d (\text{mod }n)$
+
+]
+---
+## Demonstrations:
+
+$3. (a \equiv b (\text{mod }n) \wedge b \equiv c (\text{mod }n))\Rightarrow a \equiv c (\text{mod }n)$
+
+Assume $a \equiv b (\text{mod }n) \wedge b \equiv c (\text{mod }n)$
+
+- $n \mid (a-b) \wedge n \mid (b-c)$
+- $n \mid (a-b) + (b-c)$
+- $n \mid a-c$
+- $\iff a \equiv c (\text{mod }n)$
 
 ---
-## Closed Form solutions
+## Demonstrations:
 
-$$\sum_{i=0}^n r^i = r^0 + r^1 + r^2 ... + r^n = \frac{r^{n+1}-1}{r-1}$$
+$4. a \equiv b (\text{mod }n) \Rightarrow a + c \equiv b + c (\text{mod }n)$
 
-$$n! = 1 \cdot 2  \cdot 3  \cdot ... \cdot n \ = \prod_{i=1}^n i$$
+- $n \mid (a-b)$
+- $n \mid (a+c) - (b+c)$
+- $a + c \equiv b+c(\text{mod }n)$
+---
+## Demonstrations:
 
-*When $n = 0$, sums are only the zero'th term. Sometimes this is zero, e.g. $3n$, sometimes this is 1, e.g. $3^n$. If a term is out of the bounds, it is 0 by definition, e.g. the 0th term if we are starting from i=1*
+$5. a \equiv b (\text{mod }n) \Rightarrow a \cdot c \equiv b \cdot c (\text{mod }n)$
+
+
+- $n \mid (a-b)$
+- $n \mid c(a-b)$
+- $n \mid a \cdot c - b \cdot c$
+- $a \cdot c \equiv b \cdot c (\text{mod }n)$
+---
+## Demonstrations:
+
+$6. (a \equiv b (\text{mod }n) \wedge c \equiv d (\text{mod }n) ) \Rightarrow$
+$ a + c \equiv b + d (\text{mod }n)$
+
+- $a + c \equiv b+c(\text{mod }n)$
+- $b + c \equiv b+d(\text{mod }n)$
+- $a + c \equiv b+d(\text{mod }n)$
+---
+## Multiplicative Inverse:
+
+Two numbers, when multiplied together, produce 1
+
+- Real Numbers:
+- $r \cdot \frac{1}{r} = 1$, if $r \neq 0$ 
+- $3 \cdot \frac{1}{3} = 1$
+
+- Integers:
+- There are no multiplicative inverse for integers
+- $\frac{1}{k}$ is not an integer
+- However, they do exist in modulus arithmetic!
 
 ---
-## Perturbation
-- `Perturbation` is a method for finding the closed form solution of sums
+## Multiplicative Inverses in Modulus Arithmetic:
+- Multiplicative inverses may exist in mod n...
+- $7 \times 3 \equiv 1 (\text{mod }5)$
+- $2 \times 3 \equiv 1 (\text{mod }5)$
+- $7 \times 8 \equiv 1 (\text{mod }5)$
 
-- e.g. $\sum_{i=1}^n i = 1 + 2 + ... + n = S$
+Lemma: If $p$ is prime and $k$ is not a multiple of $p$, then $k$ has a multiplicative inverse modulo $p$
+---
 
-- We can add the sum forward and backward
+## Multiplicative Inverses in Modulus Arithmetic:
+Lemma: If $p$ is prime and $k$ is not a multiple of $p$, then $k$ has a multiplicative inverse modulo $p$
+- $k \cdot t \equiv 1 (\text{mod }p)$
+- $t$ exists if $k$ is not a multiple of $p$
+- $\gcd(p, k) = 1$
+- $1 = s \cdot p + t \cdot k$
+- $s \cdot p = 1 - t \cdot k$
+- $p \mid s \cdot p$
+- $p \mid 1-t \cdot k$
+- $k \mid t \equiv 1 (\text{mod }p)$
+---
+## Consequences 
 
-$  S = 1 + 2 + ... + (n-1) + n$
+Lemma: If $p$ is prime and $k$ is not a multiple of $p$, then $k$ has a multiplicative inverse modulo $p$
 
-$+ S = n + (n-1) + ... + 2 + 1$
+- if $p$ is not prime, every integer that is not a factor of $p$ has a multiplicative inverse.
+- if $p$ is prime, every integer not a multiple of $p$ has a multiplicative inverse.
+  - This second one is more useful to us!
+---
+## Cancellation of Common Terms 
 
-$S + S = (n+1) + (n+1) ... (n+1) + (n+1)$
+In general, we cannot cancel common terms across an equivalency except in certain situations
+- e.g. $2 \cdot 3 \equiv 4 \cdot 3 (\text{mod }6)$
+- but $2 \not \equiv 4 (\text{mod }6)$
+
+- e.g. $5 \cdot 4 \equiv 1 \cdot 4  (\text{mod }16)$
+- but $5 \not \equiv 1 (\text{mod }16)$
+---
+## Cancellation of Common Terms
+
+Lemma: Suppose $p$ is prime and $k$ is not a multiple of $p$. Then...
+
+$ak \equiv bk  (\text{mod }p) \Rightarrow a \equiv b  (\text{mod }p)$
+
+- $k$ has a multiplicative inverse, $k^{-1}$
+- $ak \equiv bk  (\text{mod }p)$
+- $akk^{-1} \equiv bkk^{-1}  (\text{mod }p)$
+- $a \equiv b (\text{mod }p)$
 
 ---
-## Perturbation Examples
+## Fermat's Little Theorem
+Theorem: If $p$ is prime and $k$ is not a multiple of $p$, then $k^{p-1} \equiv 1 (\text{mod }p)$
 
-$S + S = (n+1) + (n+1) ... (n+1) + (n+1)$
-
-$2S = n(n+1)$
-
-$S = \frac{n(n+1)}{2}$
+- $k^{p-1} \equiv 1 (\text{mod }p)$
+- e.g. $3^4 \equiv 1 (\text{mod }5)$
+- e.g. $6^4 \equiv 1 (\text{mod }5)$
+- $k \cdot k^{p-2} \equiv 1 (\text{mod }p)$
+- $k \cdot k^{-1} \equiv 1 (\text{mod }p)$
+---
+## Using Fermat's Little Theorem
+- $p = 17$
+- $k = 30 \equiv 13 (\text{mod }17)$
+- $k^{-1} = ??$
+- $13^{16} \equiv 1 (\text{mod }17)$
+- $13 \cdot 13^{15} \equiv 1 (\text{mod }17)$
+---
+## Repeated Squaring
+- $13 = 13 (\text{mod }17)$
+- $13^2 = 169 \equiv \text{ rem}(169, 17) \equiv 16$
+  - $13^2 = 16 (\text{mod }17)$
+- $16^4 = 256 \equiv \text{ rem}(256, 17) \equiv 1$
+  - $13^4 = 1 (\text{mod }17)$
+- $13^8 = 1 (\text{mod }17)$
+- $15 = 8 + 4 + 2 + 1$  
+- $13^{15} = 13^{8} \cdot 13^{4} \cdot 13^{2} \cdot 13^{1}$
+- $13^{15} = 1 \cdot 1 \cdot 16 \cdot 13 = 208 \equiv 4 (\text{mod }17)$
+- $13 \cdot 4 \equiv 1 (\text{mod }17)$
 
 ---
-## Geometric Series
+## Pulverizer
 
-- $S = 1 + r + r^2 + ... + r^{n-1} + r^n$
+Pulverizer ($17, 13$). ($a$ is the mod, $b$ is the coefficient)
 
-- $rS = r + r^2 + ... + r(r^{n-1}) +r(r^n)$
-
-- $rS = r + r^2 + ... + r^n + r^{n+1}$
-
-- $S - rS = 1 - r^{n+1}$
-
-- $S (1-r) = 1 - r^{n+1}$
-
-- $S  = \frac{1 - r^{n+1}}{1-r}$
-
----
-## Using Geometric Series
-- $S = 1 + 2 + 4 + 8 + ... + N$
-- $S = 2^0 + 2^1 + 2^2 + 2^3 + ... + 2^n$
-- $S = \frac{2^{n+1}-1}{2-1}$
-- $S = \frac{2 \cdot 2^n-1}{1}$
-- $S = 2 \cdot 2^n-1$
-- $S = 2 \cdot N-1$
-- e.g. if N = 8, S = 15. (1111)
-- e.g. if N = 16, S = 31. (11111)
----
-## Annuity
-Def: An $n$-year, $m$-dollar payment annuity, pays $m$ dollars at the start of each year for $n$ years.
-- 50,000/Year for 20 years VS 1,000,000 today?
-- 50,000/Year for 20 years VS 700,000 today?
-
-Assume fixed interest rate P
-
-- i.e. $1$ today = $(1+p)$ in one year, $(1+p)^2$ in two years...
-- i.e. $1$ dollar in five years is $\frac{1}{(1+p)^5}$ today.
----
-## Annuity payment
-Payments | Current Value
----|---
-$m$ | $m$
-$m$ | $\frac{m}{1+p}$
-$m$ | $\frac{m}{(1+p)^2}$
-
-Total Value:
-
-$m + \frac{m}{1+p} + \frac{m}{(1+p)^2} + ... + \frac{m}{(1+p)^{n-1}}$
-
-$$\sum_{i=0}^{n-1} \frac{m}{(1+p)^i}$$
----
-## Closed form Solution
-Let $x = \frac{1}{1+p}$
-
-$$= m \sum_{i=0}^{n-1} x^i$$
-
-$$= m \frac {1-x^n}{1-x}$$
-
-$$= m \frac {1- \frac{1}{(1+p)^n}}{1- \frac{1}{1+p}}$$
----
-## Closed form Solution
-
-$$= m \frac {1- \frac{1}{(1+p)^n}}{1- \frac{1}{1+p}}$$
-
-$$= m \frac {1+p-\frac{1}{(1+p)^{n-1}}}{p}$$
-
-m = 50,000. n = 20. p = 0.06
-V = $607,906
-
-Not worth! Also, holy smokes, 6% interest? What year is this example from?!
+|$x$|$y$|$x/y$|$r=x-q \cdot y$|
+|---|---|---|---|
+|$17$|$13$|$1 r 4$ |$4 = 17 - 1 \cdot 13$|
+|$13$|$4$|$3 r 1$ |$1 = 13 - 3 \cdot 4$|
+| | | |$1 = -3 \times 17 + 4 \times 13$|
+- The $s \times a$ term becomes $-3 \times 17 \equiv 0 (\text{mod }17) $
+- We're left with $ 4 \times 13 \equiv 1 (\text{mod }17) $
+- $ 13^{-1} = 4 (\text{mod }17) $
+- You will always arrive at such a term, but it might be more work than repeated squaring, and may need to add multiples of $17$ to make the second term positive
 
 ---
-## Payments Forever (Perpetuity)
-- What if you could have 50,000/yr forever vs 1,000,000 today?
+## Cryptography: Turing V2
+Beforehand: The sender and receiver agree on a large prime, $p$, which may be made public. (This will be the modulus for all our arithmetic.) They also agree on a secret key $k \in 1, 2, ..., p-1$ with no common factor
 
-How can we compute it?
+Encryption: The message $m$ can be any integer in the set $0,1,2,...,p-1$; in particular, the message is no longer required to be a prime. The sender encrypts the message, $m$ to produce $m'$ by computing: $m' = \text{rem}(m \cdot k,p) \equiv m \cdot k (\text{mod }p)$
 
-Take the Limit as $n \rightarrow \infty$ of the previous formula.
+Decryption: $m' k^{-1} \equiv m (\text{mod }p)$
+- $mk k^{-1} \equiv m (\text{mod }p)$
+---
+## Breaking Turing V2
 
-$$= m \frac {1+p}{p}$$
+How can we break Turing v2
+- $k \in $ {$1, 2, ..., p-1$}
+- $m \in $ {$1, 2, ..., p-1$}
+- E: $mk \equiv m' (\text{mod }p)$
+- D: $m'k^{-1} \equiv m (\text{mod }p)$
 
-At 6%, 50K/year = 883,333.33
+We would need to know both the unencrypted and encrypted versions to make any ground...
+---
+## Plain text attack
 
-In other words, if you had 883,333.33 today, you could take out 50K/year forever @ 6% interest!
+If we had both an encrypted and decrypted version of a word, we could solve for the missing variable
+- e.g. Weather reports. Metadata.
+- $m' \equiv mk (\text{mod }p)$
+- $m^{-1}m' \equiv m^{-1}mk (\text{mod }p) \equiv k (\text{mod }p)$
+---
+## Defn: Relatively Prime
+
+$a$ and $b$ are relatively prime iff $\text{gcd}(a,b) = 1$ 
+- e.g. $\text{gcd}(5,16) = 1$
+- e.g. $\text{gcd}(4,9) = 1$
+- NOT an e.g. $\text{gcd}(3,9) = 3$
+---
+## Relatively Prime and Inverses
+Let $n$ be a positive integer. If $k$ is relatively prime to $n$ then there exists an integer $k^{-1}$ such that:
+
+$k \cdot k^{-1} \equiv 1 (\text{mod }n)$
+
+I believe we've already covered this, just not formally like this.
+
+Suppose we are working $(\text{mod }16)$:
+Numbers relatively prime to $16: 1,3,5,7,9,11,13,15$
+- $8$ numbers. We can compute this.
 
 ---
-## Geometric Sums for Numbers < 1
+## Euler's Totient Function
+- Returns the count of integers relatively prime to $n$, which are < $n$
+- For a prime number, $n$, this is simply $n-1$, as all numbers are relatively prime to $n$
 
-Corollary, from our geometric sum...
+$\phi(n) = n(1-\frac{1}{p_1})(1-\frac{1}{p_2})...(1-\frac{1}{p_n})$
+- Where $p_1, p_2$ are the prime factors.
 
-$$ S  = \frac{1 - r^{n+1}}{1-r} $$
-
-if $-1 \lt r \lt 1$
-
-$$ \lim_{n \Rightarrow \infty} r^n = 0 $$
-
-$$ \sum_{i=0}^n r^i = \frac{1}{1-r} $$
+- e.g.
+- $n = 16 = 2 \cdot 2 \cdot 2 \cdot 2$
+- $\phi(16) = 16(1-\frac{1}{2}) = 8 \checkmark$ 
 
 ---
-## Geometric Sums for Numbers < 1
+## Euler's Totient Function
+
+- $n = 200 = 2 \cdot 2 \cdot 2 \cdot 5 \cdot 5$
+- $\phi(200) = 200(1-\frac{1}{2})(1-\frac{1}{5}) = 200(\frac{1}{2})(\frac{4}{5}) = 80$ 
+
+
+- $n = 210 = 2 \cdot 3 \cdot 5 \cdot 7$
+- $\phi(210) = 210(1-\frac{1}{2})(1-\frac{1}{3})(1-\frac{1}{5})(1-\frac{1}{7})$ 
+- $= 210(\frac{1}{2})(\frac{2}{3})(\frac{4}{5})(\frac{6}{7}) = 48$ 
+---
+## Euler's Theorem
+- Theorem: Suppose $n$ is a positive integer $k$ is relatively prime to $n$. Then:
+$$ k^{\phi (n)} \equiv 1(\text {mod } n) $$
+- examples:
+  - $7^8 \equiv 1(\text {mod } 16) $
+  - $7^{80} \equiv 1(\text {mod } 200) $
+  - $11^{48} \equiv 1(\text {mod } 210) $
+---
+## Euler's Theorem
+- Euler's Theorem is a generalization of Fermatt's Little Theorem:
+  - $n = p \in $ primes
+  - $\phi(n) = p (1 - \dfrac{1}{p}) = p - 1$
+  - $k^{p-1} \equiv 1 (\text {mod } p)$
+- When $n$ has two prime factors...
+  - $n = pq, p, q \in $ primes
+  - $\phi(n) = \phi(pq), p, q \in $ primes
+  - $= pq (1 - \dfrac{1}{p}) (1 - \dfrac{1}{q})$
+---
+## Euler's Theorem
+  - $= pq (1 - \dfrac{1}{p}) (1 - \dfrac{1}{q})$
+  - $= pq (\dfrac{p-1}{p}) (\dfrac{q-1}{q})$
+  - $= (p-1)(q-1)$
 
 e.g.
-
-$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + ... = 2$
-
-$1 + \frac{1}{3} + \frac{1}{9} + \frac{1}{27} + ... = \frac{3}{2}$
+- $p = 13$
+- $q = 31$
+- $\phi (pq) = 12 \cdot 30 = 360$
 ---
-## More Perturbation
+## RSA Cryptosystem
+- Developed in 1977, By Rivest, Shamir and Adleman
+- Turing V1: $m' = m \cdot k$
+- Turing V2: $m' \equiv m \cdot k (\text {mod }  p)$
+- RSA: $m' \equiv m^{e} (\text {mod }  n)$
+- $m \equiv m'^{d} (\text {mod }  n)$
 
-$ \sum_{i=1}^{n} ir^i = r + 2r^2 + 3r^3 + .. + nr^n $
-
-$ S = r + 2r^2 + 3r^3 + .. + nr^n $
-
-$ rS = r^2 + 2r^3 + 3r^4 + .. + (n-1)r^n + nr^{n+1} $
-
-$ S-rS = r + r^2 + r^3 + ... + r^n - nr^{n+1} $  
-
-$ S(1-r) = \frac{1-r^{n+1}}{1-r} - 1 -nr^{n+1} $
-
-$ S = \frac{r-(n+1)r^{n+1}+{nr^{n+2}}}{(1-r)^2} $
-
+Why it works:
+- $(m^{e})^{d} \equiv m (\text {mod }  n)$
+  - if $de \equiv 1 (\text {mod }  \phi(n))$
 ---
-## Derivative Method
+### Two line proof
 
-For $r \neq 1, \sum_{i=0}^n r^i = \frac{1-r^{n+1}}{1-r}$
-
-Take the derivative of each side...
-
-$\sum_{i=1}^n ir^{i-1} = \frac{-(1-r)(n+1)r^n-(-1)(1-r)^{n+1}}{(1-r)^2}$
-
-$= \frac{1-(n+1)r^n+nr^{n+1}}{(1-r)^2}$
+$ed \equiv 1 (\text {mod } \phi(n)) = 1 + k\phi(n), k \in \mathbb{Z}$
+$m^{ed} = m^{1 + k\phi(n)} \equiv m(m^{k\phi(n)}) \equiv m(1)^k \equiv m(1) \equiv m (\text {mod } n)$
 
 ---
-## Derivative Method Continued
+## RSA Cryptosystem
 
-What do we need to do to get what we want? Multiply by r.
+Beforehand
 
-$\sum_{i=1}^n ir^i = \frac{r-(n+1)r^{n+1}+nr^{n+2}}{(1-r)^2}$
-
-Which is what we found earlier.
-
----
-## Formula Application - Business valuation
-
-Theorem: If $-1 \leq x \leq 1, \sum_{i=1}^{\infty}ix^i = \frac{x}{(1-x)^2}$
-
-This can be used to value growing companies...
-
-e.g. An annuity that pays $m$ dollars at the end of each year $i$=1,2,3 is...
-
-$m(\frac{ \frac{1}{1+p} }{(1-\frac{1}{(1+p)})^2})$
-
-$m(\frac{1+p}{p^2})$
+- The receiver creates a public key and a private key as follows
+  1. Generate two distinct primes, $p$, $q$. These must be kept secret.
+  2. Let $n = pq, \phi(n) = (p-1)(q-1)$
+  3. Select an integer $e$ such that $\text{gcd}(e, \phi(n)) = 1$
+    - The public key pair $(e,n)$ should be widely distributed
+  4. Compute $d$ such that $de \equiv 1 (\text{mod } \phi(n))$
+    - This can be done using the pulverizer
+    - The private key pair $(d,n)$ must be kept secret!
 
 ---
-## Formula Application - Business valuation
+## RSA Cryptosystem
 
-e.g. 
-If we use the following value:
-- m=50k per year, at p=6% interest
-  - A company makes 50k more this year than the last year...
-- V = 14,722,222.
-  - The company is worth 14,722,222 today!
+Encoding:
+
+- Given a message, $m$, the sender first checks that $\text{gcd}(m,n) = 1$
+- The sender encrypts message $m$ to produce $m'$ using the public key:
+
+  - $m' = \text{rem }(m^e, n))$
+  - $m^e \equiv m' (\text{mod } n)$
+---
+## RSA Cryptosystem
+
+Decoding:
+
+- The receiver decrypts message, $m'$ back to message $m$ using the secret key:
+  - $m = \text{rem}((m')^d,n)$
+  - $(m')^d \equiv m (\text{mod }n)$
 
 ---
-## Linear Combination Method
+## RSA Example
+1 Initial Setup:
+- Let $p = 31$
+- Let $q = 71$
+- $n = p \cdot q = 2201$
+- $\phi(n) = 30 \cdot 70 = 2100$
 
-$$\sum_{i=1}^n i^2 = 1^2 + 2^2 + ... + n^2 = \frac{n(2n+1)(n+1)}{6}$$
+2 Public Key Generation:
+- Let $e = 17$, (Any number relatively prime to $\phi(n)$)
+- public key = $(17, 2201)$
+---
+## RSA Example
+3 Private Key Generation (Pulverizer)
+- $e \cdot d \equiv 1 (\text{mod }\phi(n))$
+- $17d \equiv 1 (\text{mod }\phi(n))$
+- $17d \equiv 1 (\text{mod } 2100)$
+- $17^{\phi(2100)} \equiv 1 (\text{mod }2100)$
+- - $17^{480} \equiv 1 (\text{mod }2100)$
+- $17 \cdot 17^{479} \equiv 1 (\text{mod }2100)$
+- $d = 17^{479}$
+- We could use repeated squaring, or the pulverizer, to find $d$
+- Let's use the pulverizer.
+---
+## RSA Example
+- Pulverizer $(2100, 17)$ (Recall, $a$ is the mod, $b$ is the coefficient)
 
-To derive this, we might suspect the formula is some third order polynomial, of the form...
+|$x$|$y$|$x/y$|$r=x-q \cdot y$|
+|---|---|---|---|
+|$2100$|$17$|$123 r 9$ |$9 = 2100 - 123 \cdot 17$|
+|$17$|$9$|$1 r 8$ |$8 = 17 - 1 \cdot 9$|
+||||$8 = -1 \cdot 2100 + 124 \cdot 17$|
+|$9$|$8$|$1 r 1$|$1 = 9 - 1 \cdot 8$|
+||||$1 = 2 \cdot 2100 - 247 \cdot 17$|
 
-$\sum_{i=1}^n i^2 = an^3 + bn^2 + cn + d$
+$17^{479} = -247 (\text{mod }2100)$ is our inverse. 
+- But we want our inverse to be positive!
 
 ---
-## Linear Combination Method
+## RSA Example
+Effectively we are just adding multiples of $2100$ to make it positive.
+- How does this work in terms of our linear combination?
 
-$\sum_{i=1}^n i^2 = an^3 + bn^2 + cn + d$
+- $1 = sa + tb$
+- $1 = (sa + tb) + k(ba - ab), k \in \mathbb{Z}, k \geq 1$
+- $1 = 2 \cdot 2100 - 247 \cdot 17$
+- $   + -17 \cdot 2100 + 2100 \cdot 17$
+- $1 = -15 \cdot 2100 + 1853 \cdot 17$
 
-Plug in:
-- $n = 0: 0 = d$
-- $n = 1: 1 = a + b + c + d$
-- $n = 2: 5 = 8a + 4b + 2c + d$
-- $n = 3: 14 = 27a + 9b + 3c + d$
-
-Solving...
-$$ a = \frac{1}{3}, b = \frac{1}{2}, c = \frac{1}{6}$$
+$1853$ is our inverse, the private key is $d=(1853, 2201)$
+---
+## RSA Example
+4 Encryption, $m=3$
+- $m'=3^{17} (\text{mod }2201)$
+- Use repeated squaring...
+- $3 \equiv 3 (\text{mod }2201)$
+- $3^2 \equiv 9 (\text{mod }2201)$
+- $3^4 \equiv 81 (\text{mod }2201)$
+- $3^8 \equiv 2159 (\text{mod }2201)$
+- $3^{16} \equiv 1764 (\text{mod }2201)$
+- $3^{17} = 3 \cdot 3^{16} \equiv 3 \cdot 1764 (\text{mod }2201) \equiv 890 (\text{mod }2201)$
+- Our encrypted message is $m' = 890$
 
 ---
-## Linear Combination Warning
-
-These solutions must be verified with induction, in case a polynomial does not fit all the terms!
-
-- In other words, our original assumption that the sum could be represented by a third order polynomial may have been incorrect!
-
-- The values we derived may describe part of the Sum, but not all of it
-
----
-## Approximation with Integrals
-
-What if we wanted to find the sum:
-
-$\sum_{i=1}^{n}\sqrt{i}$
-
-While it will be difficult to compute this directly, we can find the bounds using Integrals!
+## RSA Example
+5 Decryption, $m'=890$
+- $m'=890^{1853} (\text{mod }2201)$
+- Use repeated squaring...
+- $890 \equiv 890 (\text{mod }2201)$
+- $890^{2} \equiv 1941 (\text{mod }2201)$
+- $890^{4} \equiv 1570 (\text{mod }2201)$
+- $890^{8} \equiv 1981 (\text{mod }2201)$
+- $890^{16} \equiv 2179 (\text{mod }2201)$
+- $890^{32} \equiv 484 (\text{mod }2201)$
 
 ---
-## Sum
+## RSA Example
+- $890^{64} \equiv 950 (\text{mod }2201)$
+- $890^{128} \equiv 90 (\text{mod }2201)$
+- $890^{256} \equiv 1497 (\text{mod }2201)$
+- $890^{512} \equiv 391 (\text{mod }2201)$
+- $890^{1024} \equiv 1012 (\text{mod }2201)$
 
-![](actual-sum-value.png)
+$890^{1853} = 890^{1024}\cdot 890^{512}\cdot 890^{256}\cdot 890^{32}\cdot 890^{16}\cdot 890^{8}\cdot 890^{4}\cdot 890^{1}$
+$\equiv 1012 \cdot 391 \cdot 1497 \cdot 484 \cdot 2179 \cdot 1981 \cdot 1570 \cdot 890 (\text{mod } 2201)$
+$\equiv 3 (\text{mod } 2201)$
 
----
-## Lower Bound
-
-![](lower-bound.png)
-
----
-## Upper Bound
-
-![](upper-bound.png)
-
----
-
-## Approximating Sums
-
-Let $S = \sum_{i=1}^{n} f(n)$
-
-Let $I = \int_1^n f(x) \text{dx} $
-
-Then, if the function is increasing...
-
-$I + f(1) \leq S \leq I + f(n)$
-
-If the function is decreasing...
-
-$I + f(n) \leq S \leq I + f(1)$
+* Watch out for overflow! Take the mod after each multiplication to keep the numbers small!
 
 ---
+## RSA Footnotes
 
-$\sum_{i=1}^{n}\sqrt{i}$
+### Signing Messages
 
-$f(x) = \sqrt{i}$
-
-$= \int_1^n \sqrt{i} \text{di}$
-
-$=\frac{x^{\frac{3}{2}}}{\frac{3}{2}} \rvert_{i=1}^{i=n}$
-
-$= \frac{2}{3}(n^\frac{3}{2}-1)$
-
-$I + f(1) \leq S \leq I + f(n)$
----
-
-$I + f(1) \leq S \leq I + f(n)$
-
-$\frac{2}{3}(n^\frac{3}{2}-1) + \sqrt{1} \leq S \leq \frac{2}{3}(n^\frac{3}{2}-1) + \sqrt{n}$
-
-$\frac{2}{3}n^\frac{3}{2} + \frac{1}{3} \leq S \leq \frac{2}{3}n^\frac{3}{2} + \sqrt{n} - \frac{2}{3}$
-
-if  n=100, $667 \leq S \leq 676$. There is a small margin of error. ($\delta$)
-
-$\sum_{i=1}^{n}\sqrt{i} = \frac{2}{3}n^\frac{3}{2} + \delta(n)$
-
-$\sum_{i=1}^{n}\sqrt{i} \approx \frac{2}{3}n^\frac{3}{2}$
+By using the keys in reverse (encrypt with the private key, decrypt with the public key), this can used so that any person can verify the identity of the private key holder.
+- This is called signing messages
 
 ---
+## RSA Footnotes
 
-## Approximation
+### Why is it good
 
-$g(x) \approx h(x)$ means $\lim\limits_{n\to \infty} \frac{g(x)}{h(x)}=1$
+- It's trivial to go from $p,q$ to $n, \phi(n)$
+- It's very difficult go from $n$ to $p,q$
 
-$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2} + \delta(n)}{\frac{2}{3}n^\frac{3}{2}}$
+### Why it's bad
 
-$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2} + \sqrt{n}}{\frac{2}{3}n^\frac{3}{2}}$
-
----
-
-$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2} + \sqrt{n}}{\frac{2}{3}n^\frac{3}{2}}$
-
-$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2}}{\frac{2}{3}n^\frac{3}{2}} = 1$
-
-$ \lim\limits_{n\to \infty} \frac{\sqrt{n}}{\frac{2}{3}n^\frac{3}{2}}$
-
-$ = \lim\limits_{n\to \infty} \frac{n^{\frac{1}{2}}}{\frac{2}{3}n^\frac{3}{2}} = 0$
-
----
-
-$\lim\limits_{n\to \infty} \frac{\frac{2}{3}n^\frac{3}{2}}{\frac{2}{3}n^\frac{3}{2}} = 1$
-
-$ = \lim\limits_{n\to \infty} \frac{n^{\frac{1}{2}}}{\frac{2}{3}n^\frac{3}{2}} = 0$
-
-$\lim\limits_{n\to \infty} \frac{g(x)}{h(x)}=1 \checkmark$
-
----
-## Decreasing function
-
-![](decreasing-sum.png)
----
-
-## Upper Bound
-
-![](decreasing-upper-bound.png)
----
-
-## Lower Bound
-
-![](decreasing-lower-bound.png)
-
----
-
-## Decreasing example
-
-$I + f(n) \leq S \leq I + f(1)$
-
-- These are the same formulas, only flipped!
-
-e.g.
-
-$\sum_{i=1}^{n}\frac{1}{\sqrt{i}}$
-
----
-
-## Independent Variables
-
-$\sum_{i=1}^{n} j$
-
-$ =j + j + j + j + j + ... + j$       $n$-times!
-
-$ =nj$
-
----
-
-## Sums not starting at 1?
-
-$\sum_{i=10}^{200} i$
-
-$= \sum\_{i=1}^{200} i - \sum\_{i=1}^{9} i$
-
-$= \frac{200 \cdot 201}{2} -\frac{9 \cdot 10}{2} $
-
-$= 20100 - 45 $
-
-$= 20055 $
-
----
-
-## Double sums
-
-$ \sum\_{i=1}^{5} \sum\_{j=1}^{3} {i + j} $
-
-$= \sum\_{i=1}^{5} (\sum\_{j=1}^{3} {i + j}) $
-
-$= \sum\_{i=1}^{5} ((i + 1)+(i + 2)+(i + 3)) $
-
-$= \sum\_{i=1}^{5} (3i + 6) $
-
-$= (3(1) + 6) + (3(2) + 6) + (3(3) + 6) + (3(4) + 6) + (3(5) + 6)$
-
-$= 75$
----
-
-## Double sums
-
-$ \sum\_{i=1}^{5} \sum\_{j=1}^{3} {i + j} $
-
-$ = \sum\_{i=1}^{5} \sum\_{j=1}^{3} {i} + \sum\_{i=1}^{5} \sum\_{j=1}^{3}{j} $
-
-$ = \sum\_{i=1}^{5} 3i + \sum\_{i=1}^{5} \dfrac {3 \cdot 4}{2} $
-
-$ = \sum\_{i=1}^{5} 3i + \sum\_{i=1}^{5} 6 $
-
-$ = 3 (\dfrac {6 \cdot 5}{2}) + 30 = 45 + 30 = 75$
-
----
-
-## Products
-
-Taking a $\ln$ can turn a product into a sum!
-
-$$P = \prod\_{i=1}^{n} f(i) = f(1) \cdot f(2) \cdot f(3) \cdot f(4) \cdot ... \cdot f(n) $$
-
-$$\ln{(P)} = \sum\_{i=1}^{n} \ln{(f(i))} = \ln{(f(1))} + \ln{(f(2))} + ... + \ln{(f(n))} = S $$
-
-$$e^{\ln{(P)}} = e^{S} = P $$
----
-
-## Asymptotic Notation
-- `Asymptotic Notation` is a shorthand notation used to give a quick measure of the behaviour of a function $f(n)$ as n grows large.
-- Also knows as `Algorithmic complexity`.
-
----
-## Asymptotic Equality
-
-For real valued functions, $x \in \mathbb{R}$...
-- $f(x) \approx g(x)$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}=1$
-- We say these functions are `asymptotically equal`
-
-e.g. 
-- $f(x) = x^2 - 30000x + 10^{10}$
-- $g(x) = x^2 + 2x - 3$
-
----
-## Asymptotic Equality
-
-e.g.
-- $f(x) = 3x + 4$
-- $g(x) = 4x + 5$
-
----
-
-## Little Oh
-For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
-- with $g(x)$ non-negative
-- $f(x) \in o (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}=0$
-- This means $g(x)$ is a strict upper bound of $f(x)$
-- $f(x)$ is strictly asymptotically smaller
-- We can conclusively say $g(x)$ is growing faster than $f(x)$
-
-e.g.
-- $f(x) = x^2 - 30000x + 10^{10}$
-- $g(x) = x^3 - x^2 + 2x - 3$
----
-
-## Little Oh
-
-- $f(x) = x^2 - 30000x + 10^{10}$
-- $g(x) = x^3 - x^2 + 2x - 3$
-
-$\lim\limits_{n\to \infty} \frac{x^2 - 30000x + 10^{10}}{x^3 - x^2 + 2x - 3}$
-
-$=\lim\limits_{n\to \infty} \frac{x^3(x^{-1} - 30000x^{-2} + 10^{10}x^{-3})}{x^3(1 - x^{-1} + 2x^{-2} - 3x^{-3})}$
-
-$=\frac{(0) - 30000(0) + 10^{10}(0)}{1 - (0) + 2(0) - 3(0)} = 0$
-
----
-
-## Big Oh
-
-For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
-- with $f(x), g(x)$ non-negative
-- $f(x) \in O (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}<\infty$
-- i.e. for some constants $c, x\_0$
-  - $0 \leq f(x) \leq c \cdot g(x)$ for all $x \gt x\_0$
-- This means $g(x)$ may be a *tight* upper bound of $f(x)$
-- For large numbers ($x \gt x_0$), $g(x)$ is growing as fast or faster than $f(x)$, ignoring constants
-
----
-## Big Oh
-
-![](big-oh.png)
-
----
-
-## Big Oh Examples:
-
-The runtime to multiply $n \times n$ matrices
-
-$T(n) \in O(n^3)$
-
-"The run time is at most $n^3$"
----
-## Tricky Big Oh Examples
-
-Is $4^x \in O (2^x)$?
-
-$\lim\limits_{n\to \infty} \frac{4^x}{2^x}$
-
-= $\lim\limits_{n\to \infty} 2^x$
-
-= $\infty$
-no!
-
-Is $10 \in O (1)$?
-yes.
-
----
-
-## Little Omega
-For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
-- with $g(x)$ non-negative
-- $f(x) \in \omega (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}=\infty$
-- This means $g(x)$ is a strict lower bound of $f(x)$
-- $f(x)$ is strictly asymptotically larger
-- We can conclusively say $g(x)$ is growing slower than $f(x)$
-
-e.g.
-- $f(x) = x^4 - 30000x^3 + 10^{10}$
-- $g(x) = x^3 - x^2 + 2x - 3$
-
----
-
-## Big Omega
-
-For real valued functions, $x, f(x), g(x) \in \mathbb{R}$...
-- with $f(x), g(x)$ non-negative
-- $f(x) \in \Omega (g(x))$ means $\lim\limits_{n\to \infty} \frac{f(x)}{g(x)}>0$
-- i.e. for some constants $c, x\_0$
-  - $0 \leq c \cdot g(x) \leq f(x)$ for all $x \gt x\_0$
-- This means $g(x)$ may be a *tight* lower bound of $f(x)$
-- For large numbers ($x \gt x_0$)
-  - $g(x)$ is growing as slow or slower than $f(x)$, ignoring constants
-
----
-
-## Theta
-
-$f(x) \in \Theta (g(x))$
-
-iff
-
-$f(x) \in O(g(x))$
-
-and
-
-$f(x) \in \Omega (g(x))$
-
-i.e. $g(x)$ is a tight bound of $f(x)$
-
----
-
-## Theta
-
-Big O:
-
-- i.e. for some constants $c_1, x\_1$
-  - $0 \leq f(x) \leq c_1 \cdot g(x)$ for all $x \gt x\_1$
-
-Big Omega:
-
-- i.e. for some constants $c_2, x\_2$
-  - $0 \leq c_2 \cdot g(x) \leq f(x)$ for all $x \gt x\_2$
-
-Theta
-- Both the preceding cases, with different $c$ and $x_0$ values.
----
-## Summary
-
-Up to constant factors...
-
-||||
-|---|---|---|
-| $O$ | means | $f(x) \leq g(x)$|
-| $\Omega$ | means | $f(x) \geq g(x)$|
-| $\Theta$ | means | $f(x) = g(x)$|
-| $o$ | means | $f(x) \lt g(x)$|
-| $\omega$ | means | $f(x) \gt g(x)$|
-
----
-
-## Not an Equality!
-
-In this course we are using the set notation symbol for asymptotic notation
-
-$f(x) \in O (g(x))$
-
-In the real world you typically see:
-
-$f(x) = O (g(x))$
-
-However, no equality exists. This is needless confusing, but is common usage.
+- It's slow, even for fast computers
+- However, it can be used to securely transmit keys for a quicker encryption method
 
 ---
 ### References
 
 - Dr. Abdul Bais's ENSE 350 Slides
-- Tom Leighton, and Marten Dijk. 6.042J Mathematics for Computer Science. Fall 2010, Lectures 12, 13. Massachusetts Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu. License: Creative Commons BY-NC-SA.
+- Tom Leighton, and Marten Dijk. 6.042J Mathematics for Computer Science. Fall 2010, Lecture 4. Massachusetts Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu. License: Creative Commons BY-NC-SA.
 ---
 
 name: inverse

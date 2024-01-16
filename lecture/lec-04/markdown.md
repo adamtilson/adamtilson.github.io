@@ -4,7 +4,7 @@ class: center, middle, inverse
 ---
 # ENSE 350: Math for Software Eng.
 
-### Lecture 4: Strong Induction, Well Ordering Principle
+### Lecture 4: Ordinary Induction
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
@@ -15,457 +15,421 @@ layout: false
 
 ]
 .right-column[
-1. Review: Lecture 3 Highlights
-1. 8-Puzzle
-1. Invariant
-1. Strong Induction
-1. Well Ordering Principle
-1. Examples
+1. Review: Lecture 2 Highlights
+1. Ordinary Induction
+1. Induction Examples
+1. Bad Proof: All Horses are the Same Color
+1. Tiling Puzzle
+1. Prove Something Harder
 ]
 ---
 
+## Ideal Set of Axoims
+- Should be *complete* and *consistent*
+
+Consistent - an axiom cannot be proven to be both true and false
+- Absolutely required
+
+Complete - an atomic set of axioms which can be used to prove all other axioms
+- Unfortunately this doesn't exist
+- People have dedicated their careers to finding them
+
+---
+## Logical Deduction
+- A proof is a set of small, logical steps
+- We can further structure our longer proofs with:
+  - Theorems (Thm) - An important proposition
+  - Lemma - A preliminary proposition used in proving later propositions (like a subroutine)
+  - Corollary - A proposition that follows, in a few logical steps, from a lemma or theorem
+---
+
+## Writing Rules of Logic
+- Premises (Antecedents)
+- Conclusion (Consequent)
+- Sound rules: A logical rule is sound if any assignment of truth values that make all the antecedents true must also make the consequent true
+- e.g. Modus Ponens
+$$ \frac{P, P\Rightarrow Q}{Q}$$
+- "if P is true, and P implies Q is true, then Q is true"
+???
+In your mind it's like a big old truth table. Each step you add a column to it, and recompute the T's and F's. They can't ever change from the previous column!
+---
+.left-column[
+## Methods of Proof
+
+]
+.right-column[
+- Proof by Cases
+- Direct Proof (Assume P)
+- Indirect Proof
+    - Assume the Contrapositive
+    - Proof by Contradiction
+- Prove and IFF
+    - Mutual implication
+    - Chain of IFFs
+- Today we'll learn another useful tool!
+]
+---
 ## Induction
 
 Goal: Prove something true for all values in a sequence.
-- (1) We prove that P(0) is true (Base Case)
+- (1) We prove that $P(1)$ is true (Base Case)
 - We want to prove that...
-    - $P(0) \Rightarrow P(1)$
     - $P(1) \Rightarrow P(2)$
     - $P(2) \Rightarrow P(3)$
     - $P(3) \Rightarrow P(4)$ ...
 - (2)  We do this symbolically by generalizing all these cases as:
-    - $P(n) \Rightarrow P(n+1)$ (Induction Step)
+    - $P(k) \Rightarrow P(k+1)$ (Induction Step)
+    - Prove it using Assume $P$: If $P$ is True, and $P \rightarrow Q$, $Q$ is True.
 - We conclude this is true for all values in the sequence.
 
 ---
 ## How Induction Works
 Symbolically:
 
-$\dfrac{P(0), \forall n \in \mathbb{N}, P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
+$\dfrac{P(1), \forall k \in \mathbb{N}, P(k) \Rightarrow P(k+1)}{\forall n \in \mathbb{N}, P(N)}$
 
 It's like knocking over dominoes 
 - you knock over the first domino, 
 - if you can prove that the previous domino will knock over the next one (for any arbitrary domino)
     - we conclude all dominoes will get knocked over
+---
+## Induction Example
+- Consider a hot dog stand with infinite hot dogs
+- If we can prove that the first person in the line gets a hot dog
+- And we can prove, for all people in the queue
+    - If one person gets a hot dog, the person behind them will get a hot dog
+- Thus, we conclude, everyone gets a hot dog. $\square$ 
+
+- This is a "template proof", and very useful
+---
+## More induction examples
+- Proof you can climb a ladder of any height
+- If we can prove we can climb the first rung
+- And we can prove that from any rung we can climb to the next rung
+- Then we can prove we can climb a ladder of any height!
 
 ---
 ## Induction
 Template:
 - State the strategy (Proof by ordinary induction)
-- Define predicate $P(n)$, known as the Inductive Hypothesis
-- Prove the Base Case, i.e. that $P(0)$ is true
-- Prove the implication $P(n) \Rightarrow P(n+1)$, known as the Inductive Step.
+- Define predicate $P(k)$, known as the Inductive Hypothesis
+- Prove the Base Case, i.e. that $P(1)$ is true
+- Prove the implication $P(k) \Rightarrow P(k+1)$, known as the Inductive Step.
 - Conclude, by the principle of induction, that the predicate is true for all values of $n$.
 
 ---
+## Example 1
+Theorem: $\forall n \in \mathbb{Z}^+ , 1+2+3+...+n = \dfrac{n(n+1)}{2}$
+
+We could also write this as:
+$$\sum_{i=1}^{n}i = \dfrac{n(n+1)}{2}$$
+
+Proof (by ordinary induction).
+
+Inductive Hypothesis: 
+$P(k) := 1+2+3+...+k = \dfrac{k(k+1)}{2}$
+---
+## Example 1
+Proof (by ordinary induction).  
+Inductive Hypothesis: $P(k) := 1+2+3+...+k = \dfrac{k(k+1)}{2}$
+
+Base Case:
+- $\sum_{i=1}^{1}i = \dfrac{1(1+1)}{2}$
+- $1 = 1 \checkmark$
+---
+## Example 1
+Inductive Step: $P(k) \Rightarrow P(k+1)$
+
+$ P(k) + (k+1) = P(k+1)$
+
+$ 1 + 2 + 3 + ... + k + (k+1) = \dfrac{(k+1)((k+1)+1)}{2} $
+
+$\dfrac{k(k+1)}{2} + (k+1) = \dfrac{(k+1)((k+1)+1)}{2}$
+
+$\dfrac{k(k+1)}{2} + \dfrac{2(k+1)}{2} = \dfrac{(k+1)(k+2)}{2}$
+
+---
+## Example 1
+
+$\dfrac{k(k+1)}{2} + \dfrac{2(k+1)}{2} = \dfrac{(k+1)(k+2)}{2}$
+
+$\dfrac{(k+1)(k+2)}{2} = \dfrac{(k+1)(k+2)}{2} \checkmark$
+
+Thus, by ordinary induction, $P(n)$ is true for all $\forall n \in \mathbb{Z}^+$
+
+---
+## Challenges:
+- Identifying the correct base case
+- Identifying the inductive hypothesis
+- Properly constructing the inductive step, that is
+    - showing that $P(k)$
+    - with the next value included in (however this would be appropriately constructed)
+    - equals $P(k+1)$
+- Doing the math to show that 
+---
+## Why do we substitute k?
+- With induction, we are trying to prove our predicate for any arbitrary $n$.
+- However, we don't know if this statement is true for $n$.
+- So we substitute in $k$, which is a set of values for which assume our predicate to be true.
+  - The set starts empty
+  - We begin adding elements to this set using the base case.
+  - We keep adding values to this set the inductive step
+  - Once we verify the inductive step, our set now includes all values
+- Thus, it is proven true for all $n$!
+---
+## Example 2
+
+Theorem: $\forall n \in \mathbb{N}, 3 \mid (n^3-n) $
+
+Is this true? Let's try 5? $(5^3-5) = (125-5) = 120.$ $3\mid 120 \checkmark$
+- Seeeeems to be true, but remember no number of examples can ever prove something true!
+
+Proof: By ordinary induction
+
+Induction Hypothesis: $\forall k \in \mathbb{N}, P(k) := 3 \mid (k^3-k)$
+
+Base Case:
+
+---
+## Example 2
+
+Proof: By ordinary induction
+
+Induction Hypothesis: $\forall k \in \mathbb{N}, P(k) := 3 \mid (k^3-k)$
+
+Base Case:
+
+$P(0)=0^3-0$
+$= 0$
+
+$3\mid 0 \checkmark$
+
+---
+## Example 2
+
+Induction step: Show $ P(k) \Rightarrow P(k+1)$ 
+
+$P(k+1) = 3 \mid ((k+1)^3 - (k+1))$ ?
+
+$= 3 \mid ((k+1)^3 - (k+1))$ ?
+
+$= 3 \mid (k^3 + 3k^2 + 3k + 1) - (k + 1)$ ?
+
+$= 3 \mid k^3 + 3k^2 + 2k$ ?
+
+? Now what ? We haven't really used the Induction Step yet.
+
+Hint: We should be using the assumption $3 | P(k)$
+
+---
+## Example 2
+
+$= 3 \mid k^3 + 3k^2 + 2k - k + k$ ?
+
+$= 3 \mid (k^3 - k) + 3k^2 + 3k$ ?
+
+$= 3 \mid (k^3 - k) + 3k^2 + 3k \checkmark$
+
+We know $3 \mid 3k, 3 \mid 3k^2$,
+
+By the inductive hypothesis, we assume $3 \mid (k^3 - k)$
+
+$\because 3 \mid $ each term, $3 \mid P(k+1)$
+
+$\therefore$, by ordinary induction,  $\forall n \in \mathbb{N}, P(n)$ is true. $\square$
+
+---
+### Bad Proof - All Horses are the Same Color
+
+Induction seems so powerful. Can anything go wrong with it?
+- Let's use it to prove that all horses are the same color.
+- Theorem: All horses are same color.
+- Proof: By ordinary induction.
+- Inductive hypothesis: 
+    - In any set of $n \geq 1$ horses, all the horses are the same color.
+- Base case: 
+    - We have a set of one horse. That horse must be the same color as itself. $\checkmark$
+
+---
+### Bad Proof - All Horses are the Same Color
+
+- Inductive step:
+    - Assume $P(k)$ to prove $P(k+1)$
+    - Assume a set of $k$ horses all have the same color.
+    - Name these horses $h_1$ to $h_k$
+    - Remove the leader, $h_1$, so the set is $h_2 ... h_k$ of size $k-1$.
+        - All these horses must be the same color. 
+    - Let's add to our subset a new arbitrary horse. 
+        - This makes a set of $k$ horses 
+        - By our assumption, sets of $k$ horses are all the same color
+    - Now let's add back in the leader horse to the set
+        - Now have a set of $k+1$ horses, all of which are the same color.
+---
+### Bad Proof - All Horses are the Same Color
+
+- Thus, we have transitioned from a set of $k$ horses of the same color, to $k+1$ horses of the same color. We completed the induction step.
+- $\therefore$ all horses are the same color. $\square$ 
+
+- What went wrong?
+
+---
+class: even-split
+.column[
+![](horses-same-color.png)
+
+]
+.column[
+- What we think happened:
+
+- $P(1) \checkmark$
+- $P(k) \Rightarrow P(k+1) \checkmark$
+
+
+- Image credit: Kmhkmh 
+    - CC-BY 4.0
+]
+---
+class: even-split
+.column[
+![](horses-not-the-same-color.png)
+
+]
+.column[
+- The proof works for the case of $k=1$, $k=3+$
+- but does not work for $k=2$
+- $P(1) \not \Rightarrow P(2)$
+- Our proof relied on there remaining at least one horse in the subset after removing the leader from which to observe a color.
+- This prompts the idea of Strong Induction, which we'll look at next week!
+
+- Image credit: Kmhkmh. CC-BY 4.0
+]
+
+
+---
+## Tiling Puzzle
+
+A wealthy benefactor wants to donate money to the university to fund a new green area.
+Their requirements :
+- The size of the courtyard be some size $2^n$ meter tiles.
+- A statue of them is on a tile which touches the center
+- The entire space must be tiled using $2 \times 2$ "L-tiles"
+
+---
+## L-Tile
+![](l-tile.png)
+
+---
+## n=0
+![](n-0-just-statue.png)
+---
+## n=1
+![](n-1-statue-1-tile.png)
+---
+## n=2
+![](n-2-statue-and-tiles.png)
+---
+## Proof:
+Prove, by induction, that this can be achieved for any $n$.
+
+Theorem: $\forall n \in \mathbb{N}, \exists$ a way to tile a $2^n \times 2^n$ region with a center square missing.
+
+Proof: By Induction.
+
+Induction Hypothesis. $P(k)$ = Theorem.
+
+Base Case: $k=0$. (Demonstrated in the previous slides)
+
+Induction Step: $P(k) \Rightarrow P(k+1)$
+
+---
+## Strategy
+
+We need to consider a $2^k \times 2^k$ courtyard, compared to a $2^{k+1} \times 2^{k+1}$ courtyard.
+
+Each time the dimensions double.
+
+The total size increases 4$\times$.
+
+---
+## Relationship between n and n+1...
+![](n-vs-n-plus-one.png)
+---
+## If only we could...
+![](if-only-1.png)
+---
+## If only we could...
+![](if-only-2.png)
+---
 ## Solve a Tougher Problem
-- Sometimes with induction, it's easier to solve a tougher problem!
+- Why can't we?
+    - Our inductive hypothesis relies on our $k \times k$ region having a center tile missing.
+- We could restructure our proof with Lemmas, Corallaries, etc.
+    
+- Sometimes it's easier to solve a tougher problem!
     - What is a "harder" formulation of this same problem which gives us more freedom?
-    - e.g. with the tile puzzle - placing the empty square in ANY square rather than a Center square
-    - This gave us more freedom in how we could use the inductive hypothesis P(n)
----
-## 8 Puzzle
-![](8-puzzle.png)
----
-
-class: even-split
-## 8 Puzzle
-
-.column[
-.image-60[![](flipped-puzzle.png)]
-]
-.column[
-- Legal move: slide pieces up, down, left and right into an adjacent empty square
-- Goal: Prove that the puzzle on the left cannot be solved using legal moves.
-]
 
 ---
-.left-column[
-    ## Legal Moves
-]
-.right-column[  
-- This is the goal state 
+## Solve a Tougher Problem
+- Prove instead that we can put the statue in ANY square
+- Theorem: $\forall n \in \mathbb{N}, \exists$ a way to tile a $2^n \times 2^n$ region with a any square missing.
+- (By inspecting $n=0$, $n=1$, $n=2$, does this theorem seem reasonable?)
 
-C1 | C2  | C3
----|---|---
-A |B |C
-D |E |F
-G |H |
-
-- If we list out all letters from top left to bottom right row by row we get:
-
-A B C D E F G H
-
-- We can legal moves into two cases: Row moves and column moves.
-
-]
+Proof: By ordinary induction
+- Base Case: $k=0$, Still one tile, still holds  
+- Induction Hypothesis: $P(k) \Rightarrow P(k+1)$
+    - "If we can tile a $2^k \times 2^k$ area with any square missing, we can tile an $2^{k+1} \times 2^{k+1}$ area with any square missing"
 ---
-.left-column[
-## Legal Moves
-### Row Move
-]
-.right-column[
-- We can slide pieces horizontally into rows
-
-- One row move from the goal state:
-
-C1 | C2  | C3
----|---|---
-A |B |C
-D |E |F
-G |  |H
-
-- If we list out all letters from top left to bottom right row by row we get:
-
-A B C D E F G H
-
-- Note that nothing has changed regarding the relative order of the pieces from the goal state.
-
-]
----
-.left-column[
-## Legal Moves
-### Column Move
-]
-.right-column[
-- We can slide pieces vertically through columns
-- One column move from the goal state:
-
-C1 | C2  | C3
----|---|---
-A |B |C
-D |E |
-G |H |F
-
-- If we list out all letters from top left to bottom right row by row we get:
-
-A B C D E **G H F**
-
-- Exactly 3 letters which have changed places
-- i.e., 2 inversions have occurred, we need to swap 2 pairs of tiles to return to the correct order.
-
-]
----
-.left-column[
-## Legal Moves
-### Column Move
-]
-.right-column[
-- Two column moves from the goal state
-
-C1 | C2  | C3
----|---|---
-A |B |
-D |E |C
-G |H |F
-
-- Order: A B **D E C G H F**
-
-- Exactly 5 letters which have changed places
-- Another way we could say this is 4 inversions have occured, as we would need to swap 4 pairs of tiles to return to the correct order.
-- In both cases, we have an *even* number of inversions
-
-]
----
-.left-column[
-## Legal Moves
-### Our Problem
-]
-.right-column[
-- The problem we were asked to prove is
-
-C1 | C2  | C3
----|---|---
-A |B |C
-D |E |F
-H |G |
-
-- Order: A B C D E F H G
-
-- Exactly 1 pair of letters have changed places (odd number)
-- Is there any way we can get from this state to the goal state?
-- How do we formally prove this?
-
-]
----
-## Invariant
-- The invariant is some property of the system which is true in the start state of the system, and true in every legal move. 
-- We can use this to prove if the system is in a winnable state, or an unwinnable state.
+## Tougher Problem Proof
+- Assume we can place the statue in any square of a $2^k \times 2^k$ area
+- A $2^{k+1} \times 2^{k+1}$ area consists of four $2^k \times 2^k$ regions 
+- Choose any of the four regions, and place the empty square in any location
+- In the remaining three regions:
+    - Since we can place the empty square anywhere (Induction Hypothesis)
+    - We will place the empty square touching the center of the new $2^{k+1} \times 2^{k+1}$ region, i.e., the corner of the respective $2^k \times 2^k$ regions.
+    - We tile the three adjacent empty squares with a single L-tile
+- Since $P(0), P(k) \Rightarrow P(k+1)$, the theorem is true for all $n$. $\square$
 
 ---
-### Complete proof
-Lemma 1: A row move does not change the relative order of the tiles
-- Proof: In a row move we move an item form some cell $i$ into an adjacent cell $(i+1)$ or $(i-1)$. Nothing else moves, hence the order is preserved. $\square$
-
-Lemma 2: A column move changes the order of precisely two pairs of items
-- Proof: in a column move, we move an item from cell $i$ into a blank spot $(i+3)$ or $(i-3)$. When an item moves three positions, it changes order with two items: ${(i-2), (i-1)}$ or ${(i+1), (i+2)}$ $\square$
-
----
-### Complete proof
-
-Def: A pair of letters, L1, L2, is an inversion (aka inverted pair) if L1 preceds L2 in the alphabet, but L1 is after L2 in the puzzle.
-
-Lemma 3: During a move, the number of inversions can only increase by 2, decrease by 2, or stay the same:
-- Proof: By Lemma 1, a row move has no changes. By Lemma 2, a column move changes +/- 2 changes.
-    - A: Both pairs in order $\Rightarrow$ # inversion increases by 2
-    - B: Both pairs inverted $\Rightarrow$ # inversion decreases by 2
-    - C: One pair inverted $\Rightarrow$ # stays the same. $\square$
-
----
-### Complete proof
-
-Corollary 1: During a move, the parity (even/odd) of number of inversions does not change.
-- Proof: Adding or subtracting 2 does not change parity. $\square$
-
----
-### Complete proof
-
-Lemma 4: Every state reachable from the puzzle given is odd.
-- Proof: By ordinary induction
-- Inductive hypothesis: After any sequence of $n$ moves from the start state, the parity of # inversions stays the same (odd).
-- Base case:
-    - The puzzle can be represented as A B C D E F H G which has exactly 1 inversion, H and G. 1 is odd. $\checkmark$
-
----
-### Complete proof
-
-- Inductive Step: For $n \geq 0$ show that $P(n) \Rightarrow P(n+1)$
-    - By the inductive hypothesis, we know the parity of the number of inversions after the $n$'th move was odd.
-    - By Corollary 1, we know the parity of the number of inversions does not change by any legal move. 
-- Thus the number of inversions will still be odd after the $n+1$'th move. $\square$
----
-### Complete proof
-Proof of Theorem:
-- The number of inversions in the goal state is 0. 
-- The parity of the number of inversions of the goal state is even. 
-- By Lemma 4, every state reachable from the starting state has an odd parity of the number of inversions.
-- $\therefore$ the goal state cannot be reached. $\square$
-
----
-
-### Strong Induction
-- Last class we saw: Solve a Tougher Problem
-- We can also use a stronger form of induction
-- In strong induction, we need to...
-    - Prove the base cases (May be several!)
-    - Set up the hypothesis that *EVERY* step together implies the induction step
-    - Rather than assuming $P(n)$ is true, we assume $P$ is true for every number up to and including $n$
-    - Prove the hypothesis
-- If we knock down the first domino,
-    - AND the second domino is knocked over, AND the third, AND...
-    - Then all dominos are knocked over
-
----
-
-### Strong Induction Comparison
-
-Ordinary Induction:
-
-$\dfrac{P(0), \forall n \in \mathbb{N}, P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
-
-Strong Induction:
-
-$\dfrac{P(0)+, \forall n \in \mathbb{N}, P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
-
-???
-Which problem did we look at that would have been solved by strong induction?
-
----
-
-### When to use Strong Induction
-
-- When there is no obvious connection between $P(n)$ and $P(n+1)$
-
-- i.e. we can't use $P(n)$ directly to prove $P(n+1)$
-
-- However, we may be able to use some combination of $P(0), P(1), P(2) ... P(n)$
-
----
-
-### How to use Strong Induction: Proof Template
-
-- State that we are solving the problem by strong induction
-- Define our Induction Hypothesis, $P(n)$, defining the induction variable $n$
-- Prove the base case(s): $P(0)$ is true, may be others
-- Prove the inductive step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
-- By strong induction, conclude $P(n)$ is true for all $n \in \mathbb{D}$
-
-Warning: Sometimes using strong induction means you need to prove additional base cases!
+## Final Tips on Induction
+- Did I prove the base case?
+- Did I use the induction hypothesis, i.e. use $P(k)$ somewhere in the proof?
+- Did I logically show, assuming $P(k)$, that $P(k+1)$ is also true?
+- Are there any steps from $1...k$ where this induction would not hold?
+    - We'll look at strategies for this in the next lecture!
 
 ---
 
 class: even-split
-### Example:
-Prove: By strong induction, that every integer greater than 1 is a product of primes.
-
-- Is this true?
+### Cheat Sheet o' Math Symbols
 
 .column[
-- $2 = 2$
-- $3 = 3$
-- $4 = 2 \times 2$
-- $5 = 5$
-- $6 = 2 \times 3$
-- $7 = 7$
-- $8 = 2 \times 2 \times 2$
+$$\sum_{i=1}^{n}i$$
+- The sum of all numbers from 1 to n.
+
+- $\not \Rightarrow$ Not implies
 ]
 .column[
-- $9 = 3 \times 3$
-- $10 = 2 \times 5$
-- $11 = 11$
-- $12 = 2 \times 2 \times 3$
-- $13 = 13$
-- $14 = 2 \times 7$
-- ...
+
 ]
 ---
-### Proof: By ordinary induction
-- Base Case: $P(2)$; $2$ is a prime, so it is the product of a single prime
-- Inductive Hypothesis: $P(n)$ is a product of two primes
-- Induction Step: $P(n) \Rightarrow P(n+1)$
-- By cases:
-    - Case A: $P(n+1)$ is prime. Then it's a product of itself. $\checkmark$
-    - Case B: $P(n+1)$ is not prime. Then it must be a product of two integers smaller than itself.
-    - What we need to make this work: All integers smaller than itself: $P(2), P(3), P(4), ..., P(n)$
-    - What we have access to at this point: Only $P(n)$
-    - We are stuck.
----
-### Proof: By strong induction
-- Base Case: $P(2)$; $2$ is a prime, so it is the product of a single prime
-- Inductive Hypothesis: $P(n)$ is a product of two primes
-- Induction Step: $P(2) \wedge P(3) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
-- By cases:
-    - Case A: $P(n+1)$ is prime. Then it's a product of itself. $\checkmark$
-    - Case B: $P(n+1)$ is not prime.
-    - Then there exists some integers $a,b$ for all of $n$ , $2 \leq (a,b) \leq n$, such that 
-        - $n+1 = a \times b$
-    - By strong induction, both $a$ and $b$ are the product of primes. Thus $n+1 = a \times b$ is the product of primes. $\square$
+class: even-split
+### Cheat Sheet o' Axoims
 
----
-## The N-Block game
-- You and your opponent have a stack of 8 blocks.
-- In each move, you can split any remaining stack into 2 stacks.
-- Your score for that round is the product of blocks left if in the two stacks you split.
-- e.g. 8 => 4, 4. Score = 4 * 4 = 16.
-- 4 => 2, 2. Score = 2 * 2 = 4. 16 + 4 = 20
-- ...
-- e.g. 8 => 7, 1. Score = 7 * 1 = 7.
-- e.g. 7 => 6, 1. Score = 6 * 1 = 6. 7 + 6 = 13.
-- ...
-Which strategy is better? Very even splits or very uneven splits?
----
-
-## The N-Block game
-- You and your opponent have a stack of 8 blocks.
-- In each move, you can split any remaining stack into 2 stacks.
-- Your score for that round is the product of blocks left if in the two stacks you split.
-- Let's look at two strategies for playing this game.
-
----
-## The N-Block game - First strategy
-![](N-block-first-strategy.png)
----
-## The N-Block game - First strategy
-
-| move | move score | cumulative score |
-|---|---|---|
-|8 => 4, 4 | 16 | 16|
-|4 => 2, 2 | 4 | 20|
-|...|...|...|
-
----
-## The N-Block game - Second strategy
-![](N-block-second-strategy.png)
----
-## The N-Block game - Second strategy
-| move | move score | cumulative score |
-|---|---|---|
-|8 => 7, 1 | 7 | 7|
-|7 => 6, 1 | 6 | 13|
-|...|...|...|
+.column[
+- $\forall n \geq 0, 1+2+3+...+n = \dfrac{n(n+1)}{2}$
+- All numbers divide 0
 
 
-Which strategy is better?
----
-## First Strategy
-| move | move score | cumulative score |
-|---|---|---|
-|8 => 4, 4 | 16 | 16|
-|4 => 2, 2 | 4 | 20|
-|4 => 2, 2 | 4 | 24|
-|2 => 1, 1 | 1 | 25|
-|2 => 1, 1 | 1 | 26| 
-|2 => 1, 1 | 1 | 27| 
-|2 => 1, 1 | 1 | 28|
+]
+.column[
 
----
-## Second Strategy
-| move | move score | cumulative score |
-|---|---|---|
-|8 => 7, 1 | 7 | 7|
-|7 => 6, 1 | 6 | 13|
-|6 => 5, 1 | 5 | 18|
-|5 => 4, 1 | 4 | 22|
-|4 => 3, 1 | 3 | 25|
-|3 => 2, 1 | 2 | 27|
-|2 => 1, 1 | 1 | 28|
----
-## Every strategy produces the same result
-- These two strategies tied.
-- It turns out every strategy ties!
-- Can you prove it?
-
-Theorem: All strategies for the n-block game produce the same score.
-
----
-
-Proof: By strong induction
-Induction Hypothesis: For all $n \in \mathbb{N}, n \geq 2$ all strategies for the n-block game produce the same score, $S(n) = \dfrac{n(n-1)}{2}$
-
-Base Case: $n=2$.
-
-$S(2) = 1 \times 1 = 1.$
-
-$S(2) = \dfrac{2(2-1)}{2} = 1 \checkmark $. 
-
-Inductive Step: Assume $P(1) \wedge P(2) \wedge ... \wedge P(n)$ to prove $P(n+1)$
----
-Inductive Step: Assume $P(1) \wedge P(2) \wedge ... \wedge P(n)$ to prove $P(n+1)$
-
-$Let$ $k :=$ the the number of blocks remaining in the left pile after a split, $k \leq n$.
-
-The blocks remaining in each pile in a split from n blocks thus $k$, $n-k$
-
-The blocks remaining in each pile in a split from n+1 blocks thus $k$, $n+1-k$
-
-The Score for a turn is thus $k(n+1-k)$
-
-We can recursively compute the scores for each sub pile as $P(k)$, $P(n+1-k)$ 
-
----
-$S(n+1) = k(n+1-k) + P(k) + P(n+1-k)$
-
-$= k(n+1-k) + \dfrac{k(k-1)}{2} + \dfrac{(n+1-k)((n+1-k)-1)}{2}$
-
-$= \dfrac{2k(n+1-k)}{2} + \dfrac{k(k-1)}{2} + \dfrac{(n+1-k)(n-k)}{2}$
-
-$= \dfrac{2kn+2k-2k^2}{2} + \dfrac{k^2-k}{2} + \dfrac{n^2+n-nk-nk-k+k^2}{2}$
-
-$= \dfrac{2kn+2k-2k^2 + k^2-k + n^2+n-nk-nk-k+k^2}{2}$
----
-- $= \dfrac{2kn+2k-2k^2 + k^2-k + n^2+n-nk-nk-k+k^2}{2}$
-- $= \dfrac{n^2+n}{2}$
-- $ S(n+1) = \dfrac{(n+1)(n+1-1)}{2}$
-- $ S(n+1) = \dfrac{(n+1)(n)}{2}$
-- $ S(n+1) = \dfrac{n^2+n}{2} \checkmark$
-- $\therefore$ all strategies for the n-block game produce the same score. $\square$
-
+]
 ---
 
 ### References
 
 - Dr. Abdul Bais's ENSE 350 Slides
-- Tom Leighton, and Marten Dijk. 6.042J Mathematics for Computer Science. Fall 2010, Lecture 3. Massachusetts Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu. License: Creative Commons BY-NC-SA.
+- Tom Leighton, and Marten Dijk. 6.042J Mathematics for Computer Science. Fall 2010, Lecture 2. Massachusetts Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu. License: Creative Commons BY-NC-SA.
 ---
 name: inverse
 layout: true

@@ -4,440 +4,469 @@ class: center, middle, inverse
 ---
 # ENSE 350: Math for Software Eng.
 
-### Lecture 9: Introduction to Graph Theory
+### Lecture 5: Strong Induction, Well Ordering Principle
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
 ---
 layout: false
 .left-column[
-  ## Agenda
+    ## Agenda
+
 ]
 .right-column[
-1. Intro to Graphs
-1. Connectivity
-1. Graph Coloring
-1. Greedy Algorithm
-1. Walks, Paths, Closed Walks and Cycles
-1. Trees
-1. Spanning Trees
-1. Minimum Spanning Trees
+1. Review: Lecture 3 Highlights
+1. 8-Puzzle
+1. Invariant
+1. Strong Induction
+1. Well Ordering Principle
+1. Examples
 ]
-
----
-## Graph
-![](graph.png)
----
-## Graph
-- A graph, $G$, is a pair of sets, $(V,E)$.
-  - $V$ is a non-empty set of vertices (nodes)
-  - $E$ is a set of two item subsets of $V$ called edges
-- e.g. $V = ${$x_1, x_2, x_3, x_4, x_5, x_6, ..., x_n$}
-- $E = $ { { $x_1, x_2$ }, { $x_2, x_3$ }, { $x_1, x_4$ }, ... }
-
----
-## Graph Definitions
-- `Adjacent`: Two notes $x_i$ and $x_j$ are adjacent if {$x_i, x_j$}$ \in E$
-- `Incident`: An edge $e=${$x_i, x_j$} is incident to $x_i, x_j$
-- `Degree`: The degree of a vertex is the number of edges adjacent to it
-- `Cardinality` of set $V$, $|V|$, is the number of vertices 
-- `Simple`: A graph is simple if it has no `loops` or `multiple edges`
-  - `Loops` are created when nodes connect to themselves
-  - `Multi-edges` are created when a pair of nodes share more than one edge
-
 ---
 
-## Connectivity
-- Def: Vertices $u$ and $v$ are `connected` if there is a path from $u$ to $v$
-- Def: A `graph is connected` if every pair of vertices is connected.
+## Induction
+
+Goal: Prove something true for all values in a sequence.
+- (1) We prove that P(0) is true (Base Case)
+- We want to prove that...
+    - $P(0) \Rightarrow P(1)$
+    - $P(1) \Rightarrow P(2)$
+    - $P(2) \Rightarrow P(3)$
+    - $P(3) \Rightarrow P(4)$ ...
+- (2)  We do this symbolically by generalizing all these cases as:
+    - $P(n) \Rightarrow P(n+1)$ (Induction Step)
+- We conclude this is true for all values in the sequence.
 
 ---
+## How Induction Works
+Symbolically:
 
-## k-Connected Graph
-Def: Two vertices in a graph are `k-edge connected` if they remain connected in every subgraph obtained by deleting $k-1$ edges. 
+$\dfrac{P(0), \forall n \in \mathbb{N}, P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
 
-- The graph remains connected if you remove less than k-edges!
-
-- All 3-connected graphs are also 2-connected, but not vice versa!
-
----
-## k-Connected Examples
-
-![](k-connected-1.png)
-
+It's like knocking over dominoes 
+- you knock over the first domino, 
+- if you can prove that the previous domino will knock over the next one (for any arbitrary domino)
+    - we conclude all dominoes will get knocked over
 
 ---
-## k-Connected Examples
-
-![](k-connected-2.png)
-
----
-
-## Complete Graph
-
-- A `graph is complete` if every pair of vertices share an edge
-
-![](complete-graph.png)
----
-## Empty Graph
-- An `empty graph` has no edges
-
-![](empty-graph.png)
+## Induction
+Template:
+- State the strategy (Proof by ordinary induction)
+- Define predicate $P(n)$, known as the Inductive Hypothesis
+- Prove the Base Case, i.e. that $P(0)$ is true
+- Prove the implication $P(n) \Rightarrow P(n+1)$, known as the Inductive Step.
+- Conclude, by the principle of induction, that the predicate is true for all values of $n$.
 
 ---
-## Line Graph
-- A `line graph` is a connected graph with $n$ nodes, $n-1$ edges, and at most degree 2
-  
-![](line-graph.png)
-
+## Solve a Tougher Problem
+- Sometimes with induction, it's easier to solve a tougher problem!
+    - What is a "harder" formulation of this same problem which gives us more freedom?
+    - e.g. with the tile puzzle - placing the empty square in ANY square rather than a Center square
+    - This gave us more freedom in how we could use the inductive hypothesis P(n)
 ---
-## Subgraph
-A graph $G_1 = (V,E)$ is a subgraph of $G_2 = (V_2, E_2)$ if $V_1 \subseteq V_2$ and $E_1 \subseteq E_2$
-
-($\subseteq$ means "is a subset of")
-
-![](subgraph.png)
-
+## 8 Puzzle
+![](8-puzzle.png)
 ---
-## Adjacency Matrix
-As alternate way to draw a graph is is in an `adjacency matrix`
-- For unweighted graphs
-  - The vertices are represented by the rows and columns
-  - An edge is represented by a 1
-  - No edge is represented by 0
 
-$
-a_{ij} =
-  \begin{cases}
-    1 & \text{if \\{} v_i, v_j \text{\\}}\in E \\\
-    0 & \text{otherwise}
-  \end{cases}      
-$
-
-- For a weighted graph
-  - The weight is represented in place of a 1
-
-
-
----
 class: even-split
-### Adjacency Matrix
+## 8 Puzzle
 
 .column[
-![](adj-matrix.png)
-
+.image-60[![](flipped-puzzle.png)]
 ]
 .column[
-
-$\begin{bmatrix} 
-0 & 1 & 0 & 1 & 1 & 0 & 0 & 0 \\\\ 
-1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\\\ 
-0 & 1 & 0 & 1 & 0 & 0 & 1 & 0 \\\\ 
-1 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\\\ 
-1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\\\ 
-0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 \\\\ 
-0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 \\\\ 
-0 & 0 & 0 & 1 & 1 & 0 & 1 & 0
-\end{bmatrix}$
+- Legal move: slide pieces up, down, left and right into an adjacent empty square
+- Goal: Prove that the puzzle on the left cannot be solved using legal moves.
 ]
 
 ---
-### Adjacency Matrix
+.left-column[
+    ## Legal Moves
+]
+.right-column[  
+- This is the goal state 
 
-![](adj-one.png)
+C1 | C2  | C3
+---|---|---
+A |B |C
+D |E |F
+G |H |
+
+- If we list out all letters from top left to bottom right row by row we get:
+
+A B C D E F G H
+
+- We can legal moves into two cases: Row moves and column moves.
+
+]
+---
+.left-column[
+## Legal Moves
+### Row Move
+]
+.right-column[
+- We can slide pieces horizontally into rows
+
+- One row move from the goal state:
+
+C1 | C2  | C3
+---|---|---
+A |B |C
+D |E |F
+G |  |H
+
+- If we list out all letters from top left to bottom right row by row we get:
+
+A B C D E F G H
+
+- Note that nothing has changed regarding the relative order of the pieces from the goal state.
+
+]
+---
+.left-column[
+## Legal Moves
+### Column Move
+]
+.right-column[
+- We can slide pieces vertically through columns
+- One column move from the goal state:
+
+C1 | C2  | C3
+---|---|---
+A |B |C
+D |E |
+G |H |F
+
+- If we list out all letters from top left to bottom right row by row we get:
+
+A B C D E **G H F**
+
+- Exactly 3 letters which have changed places
+- i.e., 2 inversions have occurred, we need to swap 2 pairs of tiles to return to the correct order.
+
+]
+---
+.left-column[
+## Legal Moves
+### Column Move
+]
+.right-column[
+- Two column moves from the goal state
+
+C1 | C2  | C3
+---|---|---
+A |B |
+D |E |C
+G |H |F
+
+- Order: A B **D E C G H F**
+
+- Exactly 5 letters which have changed places
+- Another way we could say this is 4 inversions have occured, as we would need to swap 4 pairs of tiles to return to the correct order.
+- In both cases, we have an *even* number of inversions
+
+]
+---
+.left-column[
+## Legal Moves
+### Our Problem
+]
+.right-column[
+- The problem we were asked to prove is
+
+C1 | C2  | C3
+---|---|---
+A |B |C
+D |E |F
+H |G |
+
+- Order: A B C D E F H G
+
+- Exactly 1 pair of letters have changed places (odd number)
+- Is there any way we can get from this state to the goal state?
+- How do we formally prove this?
+
+]
+---
+## Invariant
+- The invariant is some property of the system which is true in the start state of the system, and true in every legal move. 
+- We can use this to prove if the system is in a winnable state, or an unwinnable state.
 
 ---
-### Adjacency Matrix
+### Complete proof
+Lemma 1: A row move does not change the relative order of the tiles
+- Proof: In a row move we move an item form some cell $i$ into an adjacent cell $(i+1)$ or $(i-1)$. Nothing else moves, hence the order is preserved. $\square$
 
-![](adj-two.png)
+Lemma 2: A column move changes the order of precisely two pairs of items
+- Proof: in a column move, we move an item from cell $i$ into a blank spot $(i+3)$ or $(i-3)$. When an item moves three positions, it changes order with two items: ${(i-2), (i-1)}$ or ${(i+1), (i+2)}$ $\square$
+
+---
+### Complete proof
+
+Def: A pair of letters, L1, L2, is an inversion (aka inverted pair) if L1 preceds L2 in the alphabet, but L1 is after L2 in the puzzle.
+
+Lemma 3: During a move, the number of inversions can only increase by 2, decrease by 2, or stay the same:
+- Proof: By Lemma 1, a row move has no changes. By Lemma 2, a column move changes +/- 2 changes.
+    - A: Both pairs in order $\Rightarrow$ # inversion increases by 2
+    - B: Both pairs inverted $\Rightarrow$ # inversion decreases by 2
+    - C: One pair inverted $\Rightarrow$ # stays the same. $\square$
+
+---
+### Complete proof
+
+Corollary 1: During a move, the parity (even/odd) of number of inversions does not change.
+- Proof: Adding or subtracting 2 does not change parity. $\square$
+
+---
+### Complete proof
+
+Lemma 4: Every state reachable from the puzzle given is odd.
+- Proof: By ordinary induction
+- Inductive hypothesis: After any sequence of $n$ moves from the start state, the parity of # inversions stays the same (odd).
+- Base case:
+    - The puzzle can be represented as A B C D E F H G which has exactly 1 inversion, H and G. 1 is odd. $\checkmark$
+
+---
+### Complete proof
+
+- Inductive Step: For $n \geq 0$ show that $P(n) \Rightarrow P(n+1)$
+    - By the inductive hypothesis, we know the parity of the number of inversions after the $n$'th move was odd.
+    - By Corollary 1, we know the parity of the number of inversions does not change by any legal move. 
+- Thus the number of inversions will still be odd after the $n+1$'th move. $\square$
+---
+### Complete proof
+Proof of Theorem:
+- The number of inversions in the goal state is 0. 
+- The parity of the number of inversions of the goal state is even. 
+- By Lemma 4, every state reachable from the starting state has an odd parity of the number of inversions.
+- $\therefore$ the goal state cannot be reached. $\square$
 
 ---
 
-
-### Example: Exam Scheduling
-- Students are enrolled in multiple courses at once
-- Any two courses which a student could be expected to be enrolled in simultaneously must not have the same time schedule
-- e.g. We can model this problem using graph theory
-
----
-### Example: Exam Scheduling
-
-![](exam-scheduling.png)
-
-
----
-### Example: Exam Scheduling
-`Graph Coloring Problem`: Given a graph $G$, and $K$ colors, assign a color to each node so adjacent notes all have different colors
-
-Def: `Chromatic Number`: The minimum value of $k$ for which such a coloring exists. $\mathcal{X} (G)$ "Chi (G)"
+### Strong Induction
+- Last class we saw: Solve a Tougher Problem
+- We can also use a stronger form of induction
+- In strong induction, we need to...
+    - Prove the base cases (May be several!)
+    - Set up the hypothesis that *EVERY* step together implies the induction step
+    - Rather than assuming $P(n)$ is true, we assume $P$ is true for every number up to and including $n$
+    - Prove the hypothesis
+- If we knock down the first domino,
+    - AND the second domino is knocked over, AND the third, AND...
+    - Then all dominos are knocked over
 
 ---
-### Example: Exam Scheduling
-![](exam-scheduling-color.png)
 
----
-### Minimum Number of Colors
-There is no easy way to find the chromatic number.
-- Trivial to do for complete graphs, where all vertices are connected
-  - e.g for three nodes, a triangle of edges
-  - e.g. for four nodes, a box of edges with diagonals
-  - A starting point is to find the largest complete subgraph
-- A graph that can be colored with $k$ colors is `k-colorable`.
-- e.g. `The Three-Coloring Problem` - can we color it with only 3?
-- This problem is `NP hard` - It's easy to verify a solution, but exponentially harder to solve
-  - Solving `NP` problems is a central challenge to CS!
+### Strong Induction Comparison
+
+Ordinary Induction:
+
+$\dfrac{P(0), \forall n \in \mathbb{N}, P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
+
+Strong Induction:
+
+$\dfrac{P(0)+, \forall n \in \mathbb{N}, P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
+
 ???
-In hardness
-P - Polynomial Time. 2-Colorable
-NP - Nondeterministic Polynomial Time - Can be verified in P time
-NP-Complete - Every NP-Complete problem can be reduced to the SATisfiability problem
-NP-Hard - The Halting Problem - Will program P, with input I, ever halt?
-
----
-### Greedy Graph Coloring Algorithm
-- For $G = (V,E)$
-1. Order the nodes $v_1, v_2, ..., v_n$
-2. Order the colors $c_1, c_2, ..., c_n$
-3. For $i=1,2...n$, assign the lowest legal color to $v_i$
-  
-Naturally this will be highly dependant on the order of nodes.
-- On average, you use fewer colors, when you sort the nodes by the highest degree descending
-- This is a `greedy algorithm` - take the first solution that works, never go back and try to do better.
----
-### Basic Graph Coloring Example
-![](coloring-algorithm-example.png)
----
-## Maximum Colors Proof
-- Theorem: If every node in $G(V,E)$ has degree $\leq d$, the greedy coloring algorithm uses at most $d+1$ colors
-- Proof: By induction
-- Induction Hypothesis: 
-  - $P(n) :=$ If every node in $n$-node $G(V,E)$ has degree $\leq d$, the basic algorithm uses at most $d+1$ colors
-- Base Case: 
-  - $P(1)$. One node, zero edges. 
-  - $d = 0.$ 
-  - $1$ colors. $\checkmark$.
----
-## Maximum Colors Proof
-Induction Step.
-- Let $G(V, E)$ be an $(n+1)$ vertex graph with maximum degree $d$.
-- Remove vertex $v_i$ and all edges incident to it.
-  - This leaves an $n$-vertex subgraph, $H$
-  - The maximum degree of $H$ must be $d\_h$
-  - Thus $H$ is $(d\_h+1)$ colorable (by the Inductive Hypothesis). 
-- Add back in $v_i$ and incident edges
-  - $v_i$ will be assigned a color different than all adjacent vertices
-  - $v_i$ will have at most $d$ vertices
-  - at least one of the $(d+1)$ colors will be available
-- $\therefore$ $G$ is $(d+1)$ colorable. $\square$
-
-???
-
-Why do we need to do that thing where we remove things. This reminds me of the horse coloring fiasco.
-
-Apparently this has to do with set theory - the only way you can show you can get to a bigger set from any smaller set legal smaller set, is by starting with the bigger set and then removing from it. This is also why we did this with the horses. Huh. 
-
----
-## Is d+1 the best we can do?
-
-Let's look at some graphs for which $(d+1)$ is not so great...
-
-![](different-graphs.png)
-
----
-## Is d+1 the best we can do?
-
-![](bipartite-graphs.png)
-
----
-## Greedy Approach - ordering matters
-
-How does the greedy algorithm work on the following graphs?
-
-![](bipartite-divorced.png)
-
----
-## Greedy Approach - ordering matters
-
-![](bipartite-divorced-colors.png)
-
----
-## Bipartite Graphs
-
-Def: A graph $G(V, E)$ is said to be `bipartite` if $V$ can be split into $V_L, V_R$ so that every edge in $E$ connects a node in $V_L$ to a node in $V_R$. These graphs are `2-colorable`.
-
-![](bipartites.png)
+Which problem did we look at that would have been solved by strong induction?
 
 ---
 
-## Real World Applications of Coloring
+### When to use Strong Induction
 
-- Server maintenance (the cloud)
-- Transferring Variables to Registers
-- Map coloring
-- Radio Station Interference
+- When there is no obvious connection between $P(n)$ and $P(n+1)$
 
----
+- i.e. we can't use $P(n)$ directly to prove $P(n+1)$
 
-## Walk and Paths
-
-Def: A `walk` is a sequence of vertices connected by edges:
-- $v_0 - v_1, - ... v_k$ (length k)
-
-*A walk can traverse the same vertex multiple times*
-
-Def: A `path` is a walk where all $v_i$'s are different.
-
-- For a weighted graph, the length is the sum of weights in the path
+- However, we may be able to use some combination of $P(0), P(1), P(2) ... P(n)$
 
 ---
 
-### Lemma - Walks vs Paths
+### How to use Strong Induction: Proof Template
 
-Lemma: If $\exists$ a walk from $u$ to $v$, $\exists$ a path from $u$ to $v$.
-- Proof (By the well ordering principle): 
-- Assume $\exists$ a walk from $u$ to $v$ which is the minimal length. 
-- $u = v_0 - v_1 - ... v_k = v$
+- State that we are solving the problem by strong induction
+- Define our Induction Hypothesis, $P(n)$, defining the induction variable $n$
+- Prove the base case(s): $P(0)$ is true, may be others
+- Prove the inductive step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
+- By strong induction, conclude $P(n)$ is true for all $n \in \mathbb{D}$
 
----
-### Lemma - Walks vs Paths
-
-- By Cases: 
-  - $k=0. \checkmark$ 
-  - $k=1.$  $u - v \checkmark$
-  - $k \geq 2$ 
-    - Suppose walk is not a path. $\exists i \neq j, v_i = v_j$ 
-      - i.e. the same vertex is reached twice 
-    - $u = v_0 - ... - v_i - ... - v_j - ... -v_k = v$
-    - We could remove this loop:
-    - $u = v_0 - ... - v_i -... -v_k = v$
-    - This is a shorter walk. Our walk was not minimum length. ⨳
-- $\therefore$ by the well ordering principle, if there is a walk from $u$ to $v$, there is also  a path from $u$ to $v$.
+Warning: Sometimes using strong induction means you need to prove additional base cases!
 
 ---
 
-## Cycles and Closed Walks
-Def: A `closed walk` is a walk in which the starting and ending vertex are the same.
-- $v_0 - ... - v_i - ... -v_k = v_0$
+class: even-split
+### Example:
+Prove: By strong induction, that every integer greater than 1 is a product of primes.
 
-Def: If $k \geq 3$, and each visited vertex is different, we have a `cycle`
+- Is this true?
 
-Def: A graph without a cycle is `acyclic`.
+.column[
+- $2 = 2$
+- $3 = 3$
+- $4 = 2 \times 2$
+- $5 = 5$
+- $6 = 2 \times 3$
+- $7 = 7$
+- $8 = 2 \times 2 \times 2$
+]
+.column[
+- $9 = 3 \times 3$
+- $10 = 2 \times 5$
+- $11 = 11$
+- $12 = 2 \times 2 \times 3$
+- $13 = 13$
+- $14 = 2 \times 7$
+- ...
+]
+---
+### Proof: By ordinary induction
+- Base Case: $P(2)$; $2$ is a prime, so it is the product of a single prime
+- Inductive Hypothesis: $P(n)$ is a product of two primes
+- Induction Step: $P(n) \Rightarrow P(n+1)$
+- By cases:
+    - Case A: $P(n+1)$ is prime. Then it's a product of itself. $\checkmark$
+    - Case B: $P(n+1)$ is not prime. Then it must be a product of two integers smaller than itself.
+    - What we need to make this work: All integers smaller than itself: $P(2), P(3), P(4), ..., P(n)$
+    - What we have access to at this point: Only $P(n)$
+    - We are stuck.
+---
+### Proof: By strong induction
+- Base Case: $P(2)$; $2$ is a prime, so it is the product of a single prime
+- Inductive Hypothesis: $P(n)$ is a product of two primes
+- Induction Step: $P(2) \wedge P(3) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
+- By cases:
+    - Case A: $P(n+1)$ is prime. Then it's a product of itself. $\checkmark$
+    - Case B: $P(n+1)$ is not prime.
+    - Then there exists some integers $a,b$ for all of $n$ , $2 \leq (a,b) \leq n$, such that 
+        - $n+1 = a \times b$
+    - By strong induction, both $a$ and $b$ are the product of primes. Thus $n+1 = a \times b$ is the product of primes. $\square$
 
 ---
-## Odd Cycles and 2-colorability
-The following properties of a graph are equivalent
-- The graph is bipartite
-- The graph is 2-colorable
-- The graph does not contain any cycles with odd length
-- The graph does not contain any closed walks with odd length
-
-* If a graph contains an odd cycle, a minimum of 3 colors will be needed.
+## The N-Block game
+- You and your opponent have a stack of 8 blocks.
+- In each move, you can split any remaining stack into 2 stacks.
+- Your score for that round is the product of blocks left if in the two stacks you split.
+- e.g. 8 => 4, 4. Score = 4 * 4 = 16.
+- 4 => 2, 2. Score = 2 * 2 = 4. 16 + 4 = 20
+- ...
+- e.g. 8 => 7, 1. Score = 7 * 1 = 7.
+- e.g. 7 => 6, 1. Score = 6 * 1 = 6. 7 + 6 = 13.
+- ...
+Which strategy is better? Very even splits or very uneven splits?
 ---
 
-## Trees
-Def: A `tree` is a connected, acyclic graph.
-  
-Def: A `leaf` is a node in a tree with a degree of 1.
+## The N-Block game
+- You and your opponent have a stack of 8 blocks.
+- In each move, you can split any remaining stack into 2 stacks.
+- Your score for that round is the product of blocks left if in the two stacks you split.
+- Let's look at two strategies for playing this game.
 
 ---
-### Pruning Lemma
-Any connected subgraphs of trees are also trees.
-- Proof: By contradiction
-- Suppose a subgraph exists which is not a tree
-- In that case it must have a cycle
-- Since it is a subgraph of the larger graph, if it has a cycle the larger graph must have a cycle
-   - But the whole graph is a tree! ⨳
+## The N-Block game - First strategy
+![](N-block-first-strategy.png)
 ---
-### Lemma - Tree vertices and edges
-- Lemma: A tree with n vertices has n-1 edges.
-- Proof (by ordinary induction)
-- Induction of Hypothesis: $P(n)$ in any tree of $n$-vertices, there are $n-1$ edges.
-- Base case
-  - $P(1)$ - 1 vertex. No edges. $\checkmark$
----
-### Lemma - Tree vertices and edges
-- Inductive step.
-  - Assume $P(n)$ to prove $P(n+1)$
-  - Let $T$ be a tree with $n+1$ vertices
-    - Let's prune a leaf from $T$, (so that it is still a tree.)
-    - Now we have a connected subgraph which is also a tree. (previous Lemma)
-    - Re-attach $v$ : $T$ has $(n-1)$ edges + $1$ edge = $n$ edges. $\square$
----
-### Spanning Tree
-- Def: A `spanning tree` of a connected graph is subgraph that is a tree which contains every vertex in the original tree
+## The N-Block game - First strategy
 
-Theorem: Every connected graph has a spanning tree
-
-- Proof: By contradiction. 
-- Assume we have a connected graph $G$ which does not have a spanning tree.
+| move | move score | cumulative score |
+|---|---|---|
+|8 => 4, 4 | 16 | 16|
+|4 => 2, 2 | 4 | 20|
+|...|...|...|
 
 ---
-### Spanning Tree
-- Let $T$ be a connected subgraph of $G$ with same vertices and the smallest number of edges possible
-  - $T$ is not a spanning tree, so it must have a cycle
-  - But if we remove one of the edges of that cycle, we have constructed a smaller connected subgraph (Lemma)
-  - Thus we didn't have the smallest number of edges. ⨳
+## The N-Block game - Second strategy
+![](N-block-second-strategy.png)
+---
+## The N-Block game - Second strategy
+| move | move score | cumulative score |
+|---|---|---|
+|8 => 7, 1 | 7 | 7|
+|7 => 6, 1 | 6 | 13|
+|...|...|...|
+
+
+Which strategy is better?
+---
+## First Strategy
+| move | move score | cumulative score |
+|---|---|---|
+|8 => 4, 4 | 16 | 16|
+|4 => 2, 2 | 4 | 20|
+|4 => 2, 2 | 4 | 24|
+|2 => 1, 1 | 1 | 25|
+|2 => 1, 1 | 1 | 26| 
+|2 => 1, 1 | 1 | 27| 
+|2 => 1, 1 | 1 | 28|
 
 ---
-### Spanning Tree
-Lemma: Removing an edge from a cycle does not change the connectivity of a graph
-- Case 1: The path between arbitrary vertices, $v_x$ and $v_y$, did not go through the cycle.
-  - No change to connectivity
-- Case 2: The path between arbitrary vertices, $v_x$ and $v_y$, did go through the cycle
-  - Now the path between $v_x$ and $v_y$ is changed to take the long road around the cycle (detour).
+## Second Strategy
+| move | move score | cumulative score |
+|---|---|---|
+|8 => 7, 1 | 7 | 7|
+|7 => 6, 1 | 6 | 13|
+|6 => 5, 1 | 5 | 18|
+|5 => 4, 1 | 4 | 22|
+|4 => 3, 1 | 3 | 25|
+|3 => 2, 1 | 2 | 27|
+|2 => 1, 1 | 1 | 28|
+---
+## Every strategy produces the same result
+- These two strategies tied.
+- It turns out every strategy ties!
+- Can you prove it?
+
+Theorem: All strategies for the n-block game produce the same score.
 
 ---
-### Weighted Graphs
-- Graphs can have weights assigned to the edges
-- These weights have a number of real-world applications
-  - e.g. Network parameters
-  - e.g. Airline routes
-  - e.g. Street routes with different types of streets, roads
-  - e.g. Search Engine PageRank (directed)
-- Typically lower weights are preferred!
+
+Proof: By strong induction
+Induction Hypothesis: For all $n \in \mathbb{N}, n \geq 2$ all strategies for the n-block game produce the same score, $S(n) = \dfrac{n(n-1)}{2}$
+
+Base Case: $n=2$.
+
+$S(2) = 1 \times 1 = 1.$
+
+$S(2) = \dfrac{2(2-1)}{2} = 1 \checkmark $. 
+
+Inductive Step: Assume $P(1) \wedge P(2) \wedge ... \wedge P(n)$ to prove $P(n+1)$
 ---
-### Weighted Graphs
-![](weighted-graph.png)
+Inductive Step: Assume $P(1) \wedge P(2) \wedge ... \wedge P(n)$ to prove $P(n+1)$
 
----
-### Weighted Spanning Tree
-![](weighted-spanning-tree.png)
+$Let$ $k :=$ the the number of blocks remaining in the left pile after a split, $k \leq n$.
 
----
-### Minimum Spanning Tree
-![](minimum-spanning-tree.png)
+The blocks remaining in each pile in a split from n blocks thus $k$, $n-k$
 
----
-### Minimum Spanning Tree
-Def: The `Minimum Spanning Tree` (MST) of an edge-weighted graph $G$ is the spanning tree of $G$ with the smallest possible sum of edge weights.
+The blocks remaining in each pile in a split from n+1 blocks thus $k$, $n+1-k$
 
-Algorithm: Grow a subgraph one edge at a time
+The Score for a turn is thus $k(n+1-k)$
 
-- At each step:
-  - Add the minimum weighted edge that keeps the graph acyclic
-  - Continue until all vertices are connected
+We can recursively compute the scores for each sub pile as $P(k)$, $P(n+1-k)$ 
 
 ---
-### MST Algorithm
-![](mst-algorithm.png)
+$S(n+1) = k(n+1-k) + P(k) + P(n+1-k)$
 
+$= k(n+1-k) + \dfrac{k(k-1)}{2} + \dfrac{(n+1-k)((n+1-k)-1)}{2}$
+
+$= \dfrac{2k(n+1-k)}{2} + \dfrac{k(k-1)}{2} + \dfrac{(n+1-k)(n-k)}{2}$
+
+$= \dfrac{2kn+2k-2k^2}{2} + \dfrac{k^2-k}{2} + \dfrac{n^2+n-nk-nk-k+k^2}{2}$
+
+$= \dfrac{2kn+2k-2k^2 + k^2-k + n^2+n-nk-nk-k+k^2}{2}$
 ---
-### Graph Theory Sample Question Topics:
-
-- General application of concepts
-- Graph Theory Proofs (grrr)
-- Creating graphs from adjacency matrices and vice versa
-- Using the greedy algorithm for graph coloring
-- Growing Minimum Spanning Trees
+- $= \dfrac{2kn+2k-2k^2 + k^2-k + n^2+n-nk-nk-k+k^2}{2}$
+- $= \dfrac{n^2+n}{2}$
+- $ S(n+1) = \dfrac{(n+1)(n+1-1)}{2}$
+- $ S(n+1) = \dfrac{(n+1)(n)}{2}$
+- $ S(n+1) = \dfrac{n^2+n}{2} \checkmark$
+- $\therefore$ all strategies for the n-block game produce the same score. $\square$
 
 ---
 
 ### References
 
 - Dr. Abdul Bais's ENSE 350 Slides
-- Tom Leighton, and Marten Dijk. 6.042J Mathematics for Computer Science. Fall 2010, Lectures 6, 8. Massachusetts Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu. License: Creative Commons BY-NC-SA.
+- Tom Leighton, and Marten Dijk. 6.042J Mathematics for Computer Science. Fall 2010, Lecture 3. Massachusetts Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu. License: Creative Commons BY-NC-SA.
 ---
-
 name: inverse
 layout: true
 class: center, middle, inverse

@@ -297,19 +297,23 @@ else:
 ]
 .right-column[
 
-Here are some ways to express implies in english:
+Some ways to express $ p \Rightarrow q $ in english:
+- "$p$ implies $q$"
+- "if $p$, then $q$"
+- "$p$ is sufficient for $q$"
+- "$q$ when $p$"
+- "$q$ follows from $p$"
 
-- "if p, then q"
-- "p is sufficient for q"
-- "q when p"
-- "p implies q"
-- "q follows from p"
-- "a sufficient condition for q is p"
+Tricky wordings:
+- "$p$ only if $q$"
+  - i.e. contrapositive: $\neg q \rightarrow \neg p$.
+- "a sufficient condition for $q$ is $p$"
+- "a necessary condition for $p$ is $q$"
+- "$q$ is necessary for $p$"
 
-Some wordings are trickier than others:
-
-- "p only if q"
-- "a necessary condition for p is q"
+???
+A is a necessary condition of B, if when A is false, B must be false.
+A is a sufficient condition of B, if when A is true, B must be true
 ]
 
 ---

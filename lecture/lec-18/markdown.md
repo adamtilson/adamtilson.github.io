@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 18: Iterative Methods for Root Finding
+### Lecture 17: Iterative Methods for Root Finding
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
@@ -17,63 +17,234 @@ layout: false
   ## Agenda
 ]
 .right-column[
-1. Problems
+1. Root Finding
+2. Newton-Raphson
+3. Secant
+4. Bisection
 ]
 ---
-Let's work through some practice problems!
+## Goal
 
-Q1. Find a non-zero solution to the equation:
+The purpose of this chapter is to explore iterative numerical methods for finding roots to non-linear equations
+- Recall, with linear and polynomial functions, we can find roots by solving for $f(x) = 0$.
+- $x^3-8x^2-35x+150=0$
+- $(x-3)(x+5)(x-10)=0$
+- $x=3, x=-5, x=10$
 
-$$\sin x = x^2$$
-
----
-Q2. Use the bisection method to find where the polynomial
-
-$$2x^3-4x^2+3x$$
-
-crosses the line
-
-$$y=2$$
-
-Perform 7 iterations, but keep track of midpoints and give the best approximation you found.
+However, with non-linear equations, this process may not be so trivial
+- We will investigate three methods to find roots without needing to explicitly find them symbolically
 
 ---
-Q3. Use the Newton-Raphson method to provide compute the root of the function
+## Newton-Raphson
 
-$$f(x)=e^{-0.5x}(4-x)-2$$
-
-Compare guesses of 2, 6, 8. Explain the algorithm behavior.
+![](derivation-1.png)
 
 ---
-Q4. Find the lowest positive root of the function:
+## Newton-Raphson
 
-$$f(x)=\frac{7 \sin(x)}{e^x}-1$$
-
-By conducting graphical analysis, determine which method(s) would be inappropriate and use an appropriate method.
+![](derivation-2.png)
 
 ---
-Q5. An iterative method for computing an inverse is based on the function:
-$$f(x) = a - \frac{1}{x} = 0$$, where x is the inverse of a.
+## Newton-Raphson
 
-a) Using the Newton-Raphson method, and simplifying, show why this formulation may be beneficial for computers.
+![](derivation-3.png)
 
-b) Find the inverse of 2.5, using an initial guess of 0.1. Perform four iterations and compute the per. abs. rel. true error.
+---
+## Newton-Raphson
 
-c) Using the Secant method, and simplifying, determine if this method would have the same benefits as Newton-Raphson.
+- $\tan\theta = \frac{f(x_1)}{x_1 - x_2} $
+  
+- $f'(x_1) = \frac{f(x_1)}{x_1 - x_2} $
+
+- $x_1 - x_2 = \frac{f(x_1)}{f'(x_1)}  $
+  
+- $x_2 = x_1 - \frac{f(x_1)}{f'(x_1)}  $
+
 ---
 
-Q6. A start-up company is manufacturing boutique hand-held gaming computers. The company estimates that the total profit versus number of units sold is given by the function:
+## Newton-Raphson Iteration
 
-$$f(n) = 40n^{1.5}-875n+35000$$
+![](iteration-1.png)
 
-Find the minimum number of units the company must sell to make a profit.
+---
+## Newton-Raphson Convergence
+
+![](iteration-2.png)
+
+---
+## Newton-Raphson
+
+The Newton-Raphson method attempts to find the root by:
+- Finding the equation for the derivative symbolically, $f'(x)$
+- Create an initial guess, $x_0 = \text{value}$.
+- Iteratively...
+  - Find a better value for the guess using the computation $x_{i+1}=x_i - \frac{f(x_i)}{f'(x_i)}$
+  - Compute the Absolute Relative Approximate Error $\epsilon_a$ and if it is below a certain threshold, $\epsilon_s$, stop. Otherwise, keep iterating!
+
+---
+### Newton-Raphson Advantages
+
+- If able to converge, it typically converges quickly (quadratic rather than linear)!
+- Only requires one guess
+
+---
+### Newton-Raphson Disadvantages
+
+- Near inflection points, the algorithm may overshoot and diverging away from the solution
+- May oscillate near local minima and maxima
+- Division by zero
+- May jump some roots
+- Need to compute / code the symbolic derivative
+
+---
+## Netwton-Raphson - Divergence
+![](divergence.png)
+---
+## Newton-Raphson - Oscillation
+![](oscillation-1.png)
+---
+## Newton-Raphson - Oscillation
+![](oscillation-2.png)
+---
+## Newton-Raphson - Oscillation
+![](oscillation-3.png)
+---
+## Newton-Raphson - Divide by zero
+![](divide-by-zero.png)
+---
+## Newton-Raphson - Jumping a Root
+![](jump-root-1.png)
+---
+## Newton-Raphson - Jumping a Root
+![](jump-root-2.png)
+---
+## Newton-Raphson - Jumping a Root
+![](jump-root-3.png)
+---
+## Secant Method
+The Newton-Raphson method depended on computing the tangent of the function, using the first derivative.
+
+But what if we are unable to symbolically compute it?
+
+We may instead approximate the derivative as such:
+
+$f'(x\_i) = \frac{f(x\_i) - f(x\_{i-1})}{x\_i - x\_{i-1}}$
+
+???
+
+Trivia - the Secant method actually predates Newtons method by over 3000 years!
+---
+## Secant Derivation
+
+![](secant-fig.png)
+
+---
+## Secant Algorithm
+
+The Secant method attempts to find the root by:
+- Create two initial guesses, $x_0, x_1$.
+- Iteratively...
+  - Let the newer guess become the older guess
+  - Find a better value for the newer guesses using the $x\_{i+1}=x\_i - \frac{f(x\_i)(x\_i - x\_{i-1})}{(f(x\_i) - f(x\_{i-1}))}$
+  - Compute the Absolute Relative Approximate Error $\epsilon_a$ and if it is below a certain threshold, $\epsilon_s$, stop. Otherwise, keep iterating!
+
+---
+### Secant Discussion
+- Unlike Newton-Raphson, do not need to take a symbolic derivative
+- Unlike Newton-Raphson, need two guesses
+- Otherwise, convergence behaviour is similar to Newton-Raphson, including:
+  - Generally speedy convergence, (not quite quadratic, but faster than linear) excepting:
+      - Overshoot and diverge
+      - Division by Zero
+      - Oscillation
+      - Root Jumping
+- Generally only preferable to Newton Raphson when finding the symbolic derivative is not feasible
+---
+## Bisection Method
+
+The Bisection Method attempts to find a root through a process akin to binary search
+- Create an interval bounded by two values, $x_l$ (left) and $x_r$ (right) which bracket a solution
+  - If this interval is ascending, $x_l \lt x_r$, specifically, $x_l \lt 0, x_r \gt 0$
+  - If this interval is descending, $x_l \gt x_r$, specifically, $x_l \gt 0, x_l \lt 0$
+
+---
+## Bisection Method
+
+- Find the midpoint, $x_m$, and evaluate it at $f(x_m)$
+  - If the interval is ascending
+      - If $f(x_m)$ is less than 0, set $x_l \leftarrow x_m$
+      - If $f(x_m)$ is greater than 0, set $x_r \leftarrow x_m$
+  - If the interval is descending
+      - If $f(x_m)$ is less than 0, set $x_r \leftarrow x_m$
+      - If $f(x_m)$ is greater than 0, set $x_l \leftarrow x_m$
+- Repeat until the Absolute Relative Approximate Error $\epsilon_a$ between successive $x_m$'s, is less than the stopping error $\epsilon_s$  
+  - Our root is the final midpoint $x_m$
+---
+## Bisection Example
+![](bisection-1.png)
+---
+## Bisection Example
+![](bisection-2.png)
+---
+## Bisection Example
+![](bisection-3.png)
+---
+## Bisection Example
+![](bisection-4.png)
+---
+## Bisection Example
+![](bisection-5.png)
+---
+## Bisection Example
+![](bisection-6.png)
+---
+## Bisection Example
+![](bisection-7.png)
+---
+## Bisection Example
+![](bisection-8.png)
+---
+## Bisection Example
+![](bisection-9.png)
+---
+## Bisection Example
+![](bisection-10.png)
+
+---
+### Bisection Discussion
+
+- Always converges
+- Always makes consistent progress towards a root
+- Typically slower than other methods discussed (linear instead of quadratic)
+- Better performance when our guesses are approximately equal distance from the root - the more skewed to one side, the slower the convergence, and particularly bad if one of the guesses is very close.
+- Unable to find roots that do not cross the x-axis
+- Can be fooled by asymptotes on the x-axis
+
+---
+### Root Not Finable by Bisection
+
+![](cant-find-bisection.png)
+
+---
+
+### Fooled by asymptote
+
+![](fooled-by-asymptote.png)
+
+---
+## To come
+
+In the lab
+- We will be implementing all three methods
+
+In the class
+- Worked examples by hand.
 
 ---
 
 ### References
 
-"Dr. K. Dow, Dr. S. Adeeb, Dr. L. Westover, Dr. Y. Li, W. Qiu" (2022). "Introduction to Numerical Analysis for Engineers". Retrieved from https://engcourses-uofa.ca 
-
+- Dr. Abdul Bais's ENSE 350 Slides
 ---
 
 name: inverse
