@@ -23,38 +23,36 @@ layout: false
 1. Examples
 ]
 ---
-
 ## Induction
 
 Goal: Prove something true for all values in a sequence.
-- (1) We prove that P(0) is true (Base Case)
+- (1) We prove that $P(1)$ is true (Base Case)
 - We want to prove that...
-    - $P(0) \Rightarrow P(1)$
     - $P(1) \Rightarrow P(2)$
     - $P(2) \Rightarrow P(3)$
     - $P(3) \Rightarrow P(4)$ ...
 - (2)  We do this symbolically by generalizing all these cases as:
-    - $P(n) \Rightarrow P(n+1)$ (Induction Step)
+    - $P(k) \Rightarrow P(k+1)$ (Induction Step)
+    - Prove it using Assume $P$: If $P$ is True, and $P \rightarrow Q$, $Q$ is True.
 - We conclude this is true for all values in the sequence.
 
 ---
 ## How Induction Works
 Symbolically:
 
-$\dfrac{P(0), \forall n \in \mathbb{N}, P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
+$\dfrac{P(1), \forall k \in \mathbb{N}, P(k) \Rightarrow P(k+1)}{\forall n \in \mathbb{N}, P(N)}$
 
 It's like knocking over dominoes 
 - you knock over the first domino, 
 - if you can prove that the previous domino will knock over the next one (for any arbitrary domino)
     - we conclude all dominoes will get knocked over
-
 ---
 ## Induction
 Template:
 - State the strategy (Proof by ordinary induction)
-- Define predicate $P(n)$, known as the Inductive Hypothesis
-- Prove the Base Case, i.e. that $P(0)$ is true
-- Prove the implication $P(n) \Rightarrow P(n+1)$, known as the Inductive Step.
+- Define predicate $P(k)$, known as the Inductive Hypothesis
+- Prove the Base Case, i.e. that $P(1)$ is true
+- Prove the implication $P(k) \Rightarrow P(k+1)$, known as the Inductive Step.
 - Conclude, by the principle of induction, that the predicate is true for all values of $n$.
 
 ---
@@ -62,7 +60,7 @@ Template:
 - Sometimes with induction, it's easier to solve a tougher problem!
     - What is a "harder" formulation of this same problem which gives us more freedom?
     - e.g. with the tile puzzle - placing the empty square in ANY square rather than a Center square
-    - This gave us more freedom in how we could use the inductive hypothesis P(n)
+    - This gave us more freedom in how we could use the inductive hypothesis $P(k)$
 ---
 ## 8 Puzzle
 ![](8-puzzle.png)
@@ -96,7 +94,7 @@ G |H |
 
 A B C D E F G H
 
-- We can legal moves into two cases: Row moves and column moves.
+- We can sort legal moves into two cases: Row moves and column moves.
 
 ]
 ---
@@ -243,13 +241,13 @@ Proof of Theorem:
 
 ---
 
-### Strong Induction
+## Strong Induction
 - Last class we saw: Solve a Tougher Problem
 - We can also use a stronger form of induction
 - In strong induction, we need to...
     - Prove the base cases (May be several!)
     - Set up the hypothesis that *EVERY* step together implies the induction step
-    - Rather than assuming $P(n)$ is true, we assume $P$ is true for every number up to and including $n$
+    - Rather than assuming $P(k)$ is true, we assume $P$ is true for every number up to and including $k$
     - Prove the hypothesis
 - If we knock down the first domino,
     - AND the second domino is knocked over, AND the third, AND...
@@ -257,40 +255,40 @@ Proof of Theorem:
 
 ---
 
-### Strong Induction Comparison
+## Strong Induction Comparison
 
 Ordinary Induction:
 
-$\dfrac{P(0), \forall n \in \mathbb{N}, P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
+$\dfrac{P(0), \forall k \in \mathbb{N}, P(k) \Rightarrow P(k+1)}{\forall n \in \mathbb{N}, P(n)}$
 
 Strong Induction:
 
-$\dfrac{P(0)+, \forall n \in \mathbb{N}, P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)}{\forall m \in \mathbb{N}, P(m)}$
+$\dfrac{P(0)+, \forall k \in \mathbb{N}, P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(k) \Rightarrow P(k+1)}{\forall n \in \mathbb{N}, P(n)}$
 
 ???
 Which problem did we look at that would have been solved by strong induction?
 
 ---
 
-### When to use Strong Induction
+## When to use Strong Induction
 
-- When there is no obvious connection between $P(n)$ and $P(n+1)$
+- When there is no obvious connection between $P(k)$ and $P(k+1)$
 
-- i.e. we can't use $P(n)$ directly to prove $P(n+1)$
+- i.e. we can't use $P(k)$ directly to prove $P(k+1)$
 
-- However, we may be able to use some combination of $P(0), P(1), P(2) ... P(n)$
+- However, we may be able to use some combination of $P(0), P(1), P(2) ... P(k)$
 
 ---
 
-### How to use Strong Induction: Proof Template
+## How to use Strong Induction: Proof Template
 
 - State that we are solving the problem by strong induction
-- Define our Induction Hypothesis, $P(n)$, defining the induction variable $n$
-- Prove the base case(s): $P(0)$ is true, may be others
-- Prove the inductive step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
-- By strong induction, conclude $P(n)$ is true for all $n \in \mathbb{D}$
+- Define our Induction Hypothesis, $P(k)$, defining the induction variable $k$
+- Prove the base case(s): $P(0)$ is true, and any others we may need in proving $P(k+1)$
+- Prove the inductive step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(k) \Rightarrow P(k+1)$
+- By strong induction, conclude $P(n)$ is true for all $n \in \mathbb{N}$
 
-Warning: Sometimes using strong induction means you need to prove additional base cases!
+Sometimes using strong induction means you need to prove additional base cases!
 
 ---
 
@@ -321,26 +319,40 @@ Prove: By strong induction, that every integer greater than 1 is a product of pr
 ---
 ### Proof: By ordinary induction
 - Base Case: $P(2)$; $2$ is a prime, so it is the product of a single prime
-- Inductive Hypothesis: $P(n)$ is a product of two primes
-- Induction Step: $P(n) \Rightarrow P(n+1)$
+- Inductive Hypothesis: $P(k)$ is a product of two primes
+- Induction Step: $P(k) \Rightarrow P(k+1)$
 - By cases:
-    - Case A: $P(n+1)$ is prime. Then it's a product of itself. $\checkmark$
-    - Case B: $P(n+1)$ is not prime. Then it must be a product of two integers smaller than itself.
-    - What we need to make this work: All integers smaller than itself: $P(2), P(3), P(4), ..., P(n)$
-    - What we have access to at this point: Only $P(n)$
+    - Case A: $P(k+1)$ is prime. Then it's a product of itself. $\checkmark$
+    - Case B: $P(k+1)$ is not prime. Then it must be a product of two integers smaller than itself.
+    - What we need to make this work: All integers smaller than itself: $P(2), P(3), P(4), ..., P(k)$
+    - What we have access to at this point: Only $P(k)$
     - We are stuck.
 ---
 ### Proof: By strong induction
 - Base Case: $P(2)$; $2$ is a prime, so it is the product of a single prime
-- Inductive Hypothesis: $P(n)$ is a product of two primes
-- Induction Step: $P(2) \wedge P(3) \wedge ... \wedge P(n) \Rightarrow P(n+1)$
+- Inductive Hypothesis: $P(k)$ is a product of two primes
+- Induction Step: $P(2) \wedge P(3) \wedge ... \wedge P(k) \Rightarrow P(k+1)$
 - By cases:
-    - Case A: $P(n+1)$ is prime. Then it's a product of itself. $\checkmark$
-    - Case B: $P(n+1)$ is not prime.
-    - Then there exists some integers $a,b$ for all of $n$ , $2 \leq (a,b) \leq n$, such that 
-        - $n+1 = a \times b$
-    - By strong induction, both $a$ and $b$ are the product of primes. Thus $n+1 = a \times b$ is the product of primes. $\square$
-
+    - Case A: $P(k+1)$ is prime. Then it's a product of itself. $\checkmark$
+    - Case B: $P(k+1)$ is not prime.
+    - Then there exists some integers $a,b$ for every $k$ , $2 \leq (a,b) \leq k$, such that 
+        - $k+1 = a \times b$
+    - By strong induction, both $a$ and $b$ are the product of primes. Thus $k+1 = a \times b$ is the product of primes. $\square$
+---
+### How to know if we need more base cases
+- Think: Are there any values in the range of $(0,1,2...k)$ which cannot be generalized in your proof using $P(k) \rightarrow P(k+1)$
+- If yes, you will need to explicitly prove those cases.
+- If not, then you will not need to explicitly prove additional base cases
+  - Example: combinations of change, recursion, etc.
+  - e.g. the Fibbonacci sequence is defined recursively. Elements 1 and 2 are by definition. Elements 3+ are combinations of previous elements.
+---
+## Programming analogy - induction as a function
+- Using what we know about programming, we can think of the inductive step as a function
+- In ordinary induction, we have only passed in $k$, and we need to return $k+1$
+  - If we have enough information to do it, plus axioms and inferences, we are good to go
+- In strong induction, we have passed in an array containing $[0,1,2...k]$ and we need to return $k+1$
+  - We now have more information, but we may need to do a bit of extra setup to create that array!
+  - This is why we need to prove additional base cases
 ---
 ## The N-Block game
 - You and your opponent have a stack of 8 blocks.
@@ -420,44 +432,44 @@ Theorem: All strategies for the n-block game produce the same score.
 ---
 
 Proof: By strong induction
-Induction Hypothesis: For all $n \in \mathbb{N}, n \geq 2$ all strategies for the n-block game produce the same score, $S(n) = \dfrac{n(n-1)}{2}$
+Induction Hypothesis: For all $k \in \mathbb{N}, k \geq 2$ all strategies for the n-block game produce the same score, $S(k) = \dfrac{k(k-1)}{2}$
 
-Base Case: $n=2$.
+Base Case: $k=2$.
 
-$S(2) = 1 \times 1 = 1.$
+$S(k) = 1 \times 1 = 1.$
 
-$S(2) = \dfrac{2(2-1)}{2} = 1 \checkmark $. 
+$S(k) = \dfrac{2(2-1)}{2} = 1 \checkmark $. 
 
-Inductive Step: Assume $P(1) \wedge P(2) \wedge ... \wedge P(n)$ to prove $P(n+1)$
+Inductive Step: Assume $P(1) \wedge P(2) \wedge ... \wedge P(k)$ to prove $P(k+1)$
 ---
-Inductive Step: Assume $P(1) \wedge P(2) \wedge ... \wedge P(n)$ to prove $P(n+1)$
+Inductive Step: Assume $P(1) \wedge P(2) \wedge ... \wedge P(k)$ to prove $P(k+1)$
 
-$Let$ $k :=$ the the number of blocks remaining in the left pile after a split, $k \leq n$.
+$Let$ $b :=$ the the number of blocks remaining in the left pile after a split, $b \leq k$.
 
-The blocks remaining in each pile in a split from n blocks thus $k$, $n-k$
+The blocks remaining in each pile in a split from k blocks thus $b$, $k-b$
 
-The blocks remaining in each pile in a split from n+1 blocks thus $k$, $n+1-k$
+The blocks remaining in each pile in a split from k+1 blocks thus $b$, $k+1-b$
 
-The Score for a turn is thus $k(n+1-k)$
+The Score for a turn is thus $b(k+1-b)$
 
-We can recursively compute the scores for each sub pile as $P(k)$, $P(n+1-k)$ 
+We can recursively compute the scores for each sub pile as $P(k)$, $P(k+1-b)$ 
 
 ---
-$S(n+1) = k(n+1-k) + P(k) + P(n+1-k)$
+$S(k+1) = b(k+1-b) + P(b) + P(k+1-b)$
 
-$= k(n+1-k) + \dfrac{k(k-1)}{2} + \dfrac{(n+1-k)((n+1-k)-1)}{2}$
+$= b(k+1-b) + \dfrac{b(b-1)}{2} + \dfrac{(k+1-b)((k+1-b)-1)}{2}$
 
-$= \dfrac{2k(n+1-k)}{2} + \dfrac{k(k-1)}{2} + \dfrac{(n+1-k)(n-k)}{2}$
+$= \dfrac{2b(k+1-b)}{2} + \dfrac{b(b-1)}{2} + \dfrac{(k+1-b)(k-b)}{2}$
 
-$= \dfrac{2kn+2k-2k^2}{2} + \dfrac{k^2-k}{2} + \dfrac{n^2+n-nk-nk-k+k^2}{2}$
+$= \dfrac{2bk+2b-2b^2}{2} + \dfrac{b^2-b}{2} + \dfrac{k^2+k-kb-kb-b+b^2}{2}$
 
-$= \dfrac{2kn+2k-2k^2 + k^2-k + n^2+n-nk-nk-k+k^2}{2}$
+$= \dfrac{2bk+2b-2b^2 + b^2-b + k^2+k-kb-kb-b+b^2}{2}$
 ---
-- $= \dfrac{2kn+2k-2k^2 + k^2-k + n^2+n-nk-nk-k+k^2}{2}$
-- $= \dfrac{n^2+n}{2}$
-- $ S(n+1) = \dfrac{(n+1)(n+1-1)}{2}$
-- $ S(n+1) = \dfrac{(n+1)(n)}{2}$
-- $ S(n+1) = \dfrac{n^2+n}{2} \checkmark$
+- $= \dfrac{2bk+2b-2b^2 + b^2-b + k^2+k-kb-kb-b+b^2}{2}$
+- $= \dfrac{k^2+k}{2}$
+- $ S(k+1) = \dfrac{(k+1)(k+1-1)}{2}$
+- $ S(k+1) = \dfrac{(k+1)(k)}{2}$
+- $ S(k+1) = \dfrac{k^2+k}{2} \checkmark$
 - $\therefore$ all strategies for the n-block game produce the same score. $\square$
 
 ---
