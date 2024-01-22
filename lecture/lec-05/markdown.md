@@ -354,6 +354,32 @@ Prove: By strong induction, that every integer greater than 1 is a product of pr
   - We now have more information, but we may need to do a bit of extra setup to create that array!
   - This is why we need to prove additional base cases
 ---
+
+## Proof - Sum of Cents - Strong Induction
+
+Theorem: Any amount of money of least 8¢ can be made using 3¢ and 5¢ coins.
+
+Proof: By strong induction
+
+Induction Hypothesis: $P(k) := 8¢ + k$ can be made using $3$¢ and $5$¢ coins. $\forall k \gt 0 \in \mathbb{N}$.
+
+- Base Cases:
+  - $P(0): 8¢ = 3¢ + 5¢. \checkmark$
+  - $P(1): 9¢ = 3¢ + 3¢ + 3¢. \checkmark$
+  - $P(2): 10¢ = 5¢ + 5¢. \checkmark$
+---
+## Proof - Sum of Cents - Strong Induction
+
+Induction Hypothesis: $P(k) := 8¢ + k$ can be made using $3$¢ and $5$¢ coins. $\forall k \gt 0 \in \mathbb{N}$.
+
+Induction Step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(k) \Rightarrow P(k+1)$
+
+- $\forall k > 2,$ we can make $P(k+1)$ with $P(k-2) + 3¢$.
+- $\forall k > 0,$ we can $8 + k¢$.
+- $\therefore P(k)$ is true by strong induction. $\square$
+
+---
+
 ## The N-Block game
 - You and your opponent have a stack of 8 blocks.
 - In each move, you can split any remaining stack into 2 stacks.
@@ -488,22 +514,11 @@ This seems very obvious, but can actually be used to formulate some powerful pro
 - Define the set $S$, of counter-examples for which $P(n)$ is false, i.e. $\exists n, \neg P(n)$
 - By the well-ordering principle, define $s$ as the lowest element in $S$
 - Do a proof by contradiction (open ended)
-  - e.g. show that a value smaller than $s$ satisfies $\neg P(n)$
-  - Thus that value is also in $S$
-  - Thus $s$ was not the lowest value in $S$
-- Contradiction ⨳
-- By the well-ordering principle, $S$ must be empty. $P(n)$ must be true for all $n$.
-
----
-## Well-Ordering Principle - Other Strategies
-
-Other ways to reach a contradiction:
-- Prove that $s$ is not in $S$
-  - i.e. that, for $s$, $P(n)$ was actually true
+  - e.g. start with a value smaller than $s$ satisfies $P(n)$
+  - Using mathematical reasoning, show that $s$ can't be in $S$
   - i.e. your smallest counter-example was not a counter-example
-
-The same warning with Proof by Contradiction applies:
-  - The contradiction must be reached through sound logic and not a mathematical error!
+  - Contradiction ⨳
+- By the well-ordering principle, $S$ must be empty. $P(n)$ must be true for all $n$.
 
 ---
 
@@ -528,33 +543,6 @@ The same warning with Proof by Contradiction applies:
 - We have reached a contradiction. ⨳
 - Thus, {counter-examples} is empty. 
 - $\therefore$ by the well ordering principle, $P(n)$ is true. $\square$
-
----
-
-## Proof - Sum of Cents - Strong Induction
-
-Theorem: Any amount of money of least 8¢ can be made using 3¢ and 5¢ coins.
-
-Proof: By strong induction
-
-Induction Hypothesis: $P(k) := 8¢ + k$ can be made using $3$¢ and $5$¢ coins. $\forall k \gt 0 \in \mathbb{N}$.
-
-- Base Cases:
-  - $P(0): 8¢ = 3¢ + 5¢. \checkmark$
-  - $P(1): 9¢ = 3¢ + 3¢ + 3¢. \checkmark$
-  - $P(2): 10¢ = 5¢ + 5¢. \checkmark$
----
-## Proof - Sum of Cents - Strong Induction
-
-Induction Hypothesis: $P(k) := 8¢ + k$ can be made using $3$¢ and $5$¢ coins. $\forall k \gt 0 \in \mathbb{N}$.
-
-Induction Step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(k) \Rightarrow P(k+1)$
-
-- $\forall k > 2,$ we can make $P(k+1)$ with $P(k-2) + 3¢$.
-- $\forall k > 0,$ we can $8 + k¢$.
-- $\therefore P(k)$ is true by strong induction. $\square$
-
----
 
 ## Proof - Product of Primes by Well-ordering
 
