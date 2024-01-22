@@ -473,6 +473,142 @@ $= \dfrac{2bk+2b-2b^2 + b^2-b + k^2+k-kb-kb-b+b^2}{2}$
 - $\therefore$ all strategies for the n-block game produce the same score. $\square$
 
 ---
+## Well-Ordering Principle
+The well-ordering principle states that:
+
+- every non-empty set 
+- of non-negative integers 
+- has a smallest element
+ 
+This seems very obvious, but can actually be used to formulate some powerful proofs.
+
+---
+## Well-Ordering Principle - Common Formulation
+- Goal: prove some $P(n)$ is true, ie. $\forall n, P(n)$
+- Define the set $S$, of counter-examples for which $P(n)$ is false, i.e. $\exists n, \neg P(n)$
+- By the well-ordering principle, define $s$ as the lowest element in $S$
+- Do a proof by contradiction (open ended)
+  - e.g. show that a value smaller than $s$ satisfies $\neg P(n)$
+  - Thus that value is also in $S$
+  - Thus $s$ was not the lowest value in $S$
+- Contradiction ⨳
+- By the well-ordering principle, $S$ must be empty. $P(n)$ must be true for all $n$.
+
+---
+## Well-Ordering Principle - Other Strategies
+
+Other ways to reach a contradiction:
+- Prove that $s$ is not in $S$
+  - i.e. that, for $s$, $P(n)$ was actually true
+  - i.e. your smallest counter-example was not a counter-example
+
+The same warning with Proof by Contradiction applies:
+  - The contradiction must be reached through sound logic and not a mathematical error!
+
+---
+
+## Proof - Sum of Cents - Well Ordering Principle
+
+- Theorem: Any amount of money of least 8¢ can be made using 3¢ and 5¢ coins.
+- Proof: By the well-ordering principle
+- Suppose NOT any amount of money...
+- Let $m$ be the least counter-example.
+- Since $m$ is the least number which cannot be made of 3¢ and 5¢ coins, any number smaller than it can.
+- $m \neq 8$, because $8¢ = 3¢ + 5¢$
+- $m \neq 9$, because $9¢ = 3¢ + 3¢ + 3¢$
+- $m \neq 10$, because $10¢ = 5¢ + 5¢$
+- Hence, $m \geq 11$.
+
+---
+## Proof - Sum of Cents - Well Ordering Principle
+
+- Hence, $m \geq 11$.
+- For $m \geq 11, (m-3)$ is not a counter-example
+- but then $m$ is also not a counter-example, since $(m-3)+3¢ = m$
+- We have reached a contradiction. ⨳
+- Thus, {counter-examples} is empty. 
+- $\therefore$ by the well ordering principle, $P(n)$ is true. $\square$
+
+---
+
+## Proof - Sum of Cents - Strong Induction
+
+Theorem: Any amount of money of least 8¢ can be made using 3¢ and 5¢ coins.
+
+Proof: By strong induction
+
+Induction Hypothesis: $P(k) := 8¢ + k$ can be made using $3$¢ and $5$¢ coins. $\forall k \gt 0 \in \mathbb{N}$.
+
+- Base Cases:
+  - $P(0): 8¢ = 3¢ + 5¢. \checkmark$
+  - $P(1): 9¢ = 3¢ + 3¢ + 3¢. \checkmark$
+  - $P(2): 10¢ = 5¢ + 5¢. \checkmark$
+---
+## Proof - Sum of Cents - Strong Induction
+
+Induction Hypothesis: $P(k) := 8¢ + k$ can be made using $3$¢ and $5$¢ coins. $\forall k \gt 0 \in \mathbb{N}$.
+
+Induction Step: $P(0) \wedge P(1) \wedge P(2) \wedge ... \wedge P(k) \Rightarrow P(k+1)$
+
+- $\forall k > 2,$ we can make $P(k+1)$ with $P(k-2) + 3¢$.
+- $\forall k > 0,$ we can $8 + k¢$.
+- $\therefore P(k)$ is true by strong induction. $\square$
+
+---
+
+## Proof - Product of Primes by Well-ordering
+
+Theorem: Every integer > 1 is a product of primes.
+- We already proved this with strong induction. Let's prove it with Well Ordering Principle.
+- Proof: By well-ordering principle, by contradiction
+- Suppose {nonproducts} is non-empty. By W.o.P., there is at least $m \gt 1$ that is a non-product.
+  - $m$ is not a prime. (as it would then also be a product of 1 prime)
+  - $m$ must have positive divisors greater than 1, which is true for all composite numbers.
+
+---
+
+## Proof - Product of Primes by Well-ordering
+
+- So $m = j \times k$ for integers $j,k$ where $m \gt j,k > 1$.
+  - Since, by the well ordering principle, $m$ is the smallest non-product of primes... 
+    - Now $j,k < m$ so they both must be prime products.
+    - $j = p_1 \times p_2 \times ... \times p_x$
+    - $k = q_1 \times q_2 \times ... \times q_y$
+- $m = j \times k = p_1 \times p_2 \times ... \times p_x \times q_1 \times q_2 \times ... \times q_y$
+  - Thus, $m$ is a prime product, which is a contradiction. ⨳
+- Thus, {nonproducts} is empty. $\square$
+
+---
+## Proof - Geometric Sums
+Theorem:
+$1 + r + r^2 + r^3 + ... + r^n = \dfrac{r^{n+1}-1}{r-1}$
+- holds for all real numbers $r \geq 1$, all integers $n \in \mathbb{N}$
+- Proof by the W.O.P.
+- Let $m$ be smallest $n$ where this equality does not hold.
+- $m=0$? 
+- $\sum_{i=0}^0 r^i=r^0=1$
+- $\dfrac{r^{0+1}-1}{r-1}=1$
+- $1=1$ Holds.
+  - so $m>0$
+  
+---
+## Proof - Geometric Sums
+- Since $m$ is the lowest example for which this does not hold, we assume the following equality holds:
+- $1 + r + r^2 + r^3 + ... + r^{m-1} = \dfrac{r^{(m-1)+1}-1}{r-1}$
+- $1 + r + r^2 + r^3 + ... + r^{m-1} = \dfrac{r^m-1}{r-1}$
+- Lets add $r^m$ to both sides.
+- LHS: $1 + r + r^2 + r^3 + ... + r^{m-1} + r^m$
+- RHS: $\dfrac{r^m-1}{r-1} + r^m = \dfrac{r^m-1}{r-1} + \dfrac{r^{{m+1}} - r^m}{r-1} =\dfrac{r^{m+1}-1}{r-1} $
+
+---
+## Proof - Geometric Sums
+
+- LHS: $1 + r + r^2 + r^3 + ... + r^{m-1} + r^m$
+- RHS: $\dfrac{r^m-1}{r-1} + r^m = \dfrac{r^m-1}{r-1} + \dfrac{r^{{m+1}} - r^m}{r-1} =\dfrac{r^{m+1}-1}{r-1} $
+
+- This is the identity we claimed did not hold. ⨳
+- Thus the set of counterexamples must be empty.  $\square$
+---
 
 ### References
 
