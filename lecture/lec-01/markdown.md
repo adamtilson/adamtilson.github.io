@@ -438,6 +438,15 @@ This is because the converse is the contrapositive of the inverse.
 My head hurts.
 
 ---
+
+## Negating an Implication
+The negation of $ P \Rightarrow Q $
+is $ P \Rightarrow \neg Q $
+- An implication is false only when the premise is true but the conclusion is false.
+- This can be useful when setting up Proof by Contradiction
+- e.g. "If x is odd then y is even" is negated as "If x is odd then y is odd".
+- e.g. "If a triange contains a right angle then it is a right triangle" is negated as "If a triangle contains a right angle then it is not a right triangle."
+---
 ## Predicate
 A proposition whose truth value depends on the value of a variable, or multiple variables
 - e.g. "$n$ is a prime number"

@@ -521,6 +521,17 @@ This seems very obvious, but can actually be used to formulate some powerful pro
 - By the well-ordering principle, $S$ must be empty. $P(n)$ must be true for all $n$.
 
 ---
+## Well-Ordering Principle - Contrapositive connection
+- Recall in Induction we are proving: $P(n) \rightarrow P(n+1)$
+- By the contrapositive: $\neg P(n+1) \rightarrow \neg P(n)$
+- Shifting by one position: $\neg P(n) \rightarrow \neg P(n-1)$
+- However, we want to find a contradiction
+- Recall, to contradict an implication, the premise is true but the conclusion is false
+    - If we assume for contradiction: $\neg P(n) \rightarrow P(n-1)$.
+      - i.e. $P(n)$ is a counterexample, but $P(n-1)$ isn't
+      - we are bound to eventually reach a contradiction!
+- In this way, Well-Ordering Principle is a mirror to (strong) induction.
+---
 
 ## Proof - Sum of Cents - Well Ordering Principle
 
@@ -544,6 +555,7 @@ This seems very obvious, but can actually be used to formulate some powerful pro
 - Thus, {counter-examples} is empty. 
 - $\therefore$ by the well ordering principle, $P(n)$ is true. $\square$
 
+---
 ## Proof - Product of Primes by Well-ordering
 
 Theorem: Every integer > 1 is a product of primes.

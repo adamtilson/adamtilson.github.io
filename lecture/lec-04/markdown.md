@@ -173,7 +173,7 @@ Thus, by ordinary induction, $P(n)$ is true for all $\forall n \in \mathbb{Z}^+$
 - So we substitute in $k$, which is a set of values for which assume our predicate to be true.
   - The set starts empty
   - We begin adding elements to this set using the base case.
-  - We keep adding values to this set the inductive step
+  - We keep adding values to this set in the inductive step
   - Once we verify the inductive step, our set now includes all values
 - Thus, it is proven true for all $n$!
 ---

@@ -4,7 +4,7 @@ class: center, middle, inverse
 ---
 # ENSE 350: Math for Software Eng.
 
-### Lecture 6: Introduction to Number Theory
+### Lecture 7: Introduction to Number Theory
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
@@ -59,23 +59,23 @@ This seems very obvious, but can actually be used to formulate some powerful pro
 - Define the set $S$, of counter-examples for which $P(n)$ is false, i.e. $\exists n, \neg P(n)$
 - By the well-ordering principle, define $s$ as the lowest element in $S$
 - Do a proof by contradiction (open ended)
-  - e.g. show that a value smaller than $s$ satisfies $\neg P(n)$
-  - Thus that value is also in $S$
-  - Thus $s$ was not the lowest value in $S$
-- Contradiction ⨳
+  - e.g. start with a value smaller than $s$ satisfies $P(n)$
+  - Using mathematical reasoning, show that $s$ can't be in $S$
+  - i.e. your smallest counter-example was not a counter-example
+  - Contradiction ⨳
 - By the well-ordering principle, $S$ must be empty. $P(n)$ must be true for all $n$.
 
 ---
-## Well-Ordering Principle - Other Strategies
-
-Other ways to reach a contradiction:
-- Prove that $s$ is not in $S$
-  - i.e. that, for $s$, $P(n)$ was actually true
-  - i.e. your smallest counter-example was not a counter-example
-
-The same warning with Proof by Contradiction applies:
-  - The contradiction must be reached through sound logic and not a mathematical error!
-
+## Well-Ordering Principle - Contrapositive connection
+- Recall in Induction we are proving: $P(n) \rightarrow P(n+1)$
+- By the contrapositive: $\neg P(n+1) \rightarrow \neg P(n)$
+- Shifting by one position: $\neg P(n) \rightarrow \neg P(n-1)$
+- However, we want to find a contradiction
+- Recall, to contradict an implication, the premise is true but the conclusion is false
+    - If we assume for contradiction: $\neg P(n) \rightarrow P(n-1)$.
+      - i.e. $P(n)$ is a counterexample, but $P(n-1)$ isn't
+      - we are bound to eventually reach a contradiction!
+- In this way, Well-Ordering Principle is a mirror to (strong) induction.
 ---
 
 ## Proof - Sum of Cents - Well Ordering Principle
@@ -140,17 +140,17 @@ layout: false
 ## Divisibility
 ]
 .right-column[
-For this lecture, unless otherwise specified, assume we are talking all integers $\mathbb{Z}$
+For this section of the course, unless otherwise specified, assume we are only discussing integers $\mathbb{Z}$
 
 $a$ divides $b \iff a \cdot k = b$ for some $k$  
 $a \mid b \iff a \cdot k = b$ for some $k$  
 
-e.g. $2 \mid 6$ 
-- $6 = 3 \cdot 2$
-- $0 = 3 \cdot 0$
-- $0 = n \cdot 0$  ~~0 divides all numbers~~
-- all numbers divide $0$ !
-- A pizza with 0 slices can be divided by any number of people, but they all get 0 slices. Sad times.
+- e.g. $2 \mid 6  \iff 2k = 6. (k=3) $ 
+- e.g. $3 \mid 0  \iff 3k = 0. (k=0) $
+- e.g. $n \mid 0  \iff n \cdot k = 0. (k=0) $ 
+  - ~~0 divides all numbers?~~
+  - all numbers divide $0$ !
+- A pizza with 0 slices can be divided by any number of people, but they all get 0 slices. Sad.
 ]
 ---
 layout: false
@@ -206,10 +206,10 @@ Let $n$ and $d$ be integers such that $d \gt 0$. There there exists a unique pai
 - $d := $denominator
 - $q := $quotient
 - $r := $remainder
-- if $r = 0, d \mid n$
-- e.g. $7 = 3 \cdot 2 + 1$
-- not an e.g. $9 = 2 \cdot 2 + 5$
-  - $5 \not \lt 2$
+  - if $r = 0, d \mid n$
+- e.g.  $7 = 3 \cdot 2 + 1$
+- not an e.g.  $9 = 2 \cdot 2 + 5$
+  - why? Because $5 \not \lt 2$
 - e.g. $9 = 4 \cdot 2 + 1.$
 ]
 
@@ -278,7 +278,7 @@ Proof: By Well Ordering Principle
 ---
 ## GCD and Integer Linear Combination (Bezout)
 Lemma: $m \mid a$
-- Dividing a by m with the division theorem yields:
+- Dividing $a$ by $m$ with the division theorem yields:
 - $a = mq + r, 0 \leq r \lt m$
 - $r = a - qm$
 - $r = a - q(sa+tb)$
@@ -357,13 +357,13 @@ Wrap up
 ### Properties of the GCD
 ]
 .right-column[
-5: $\text{gcd}(a, b) = \text{gcd}(b, \text{rem}(a,b))$
-- Using the division theorem:
-- $a = qb + r$
-- $r = a - qb$
-- Any common divisor of $a$ and $b$ would also divide $r$
-- $\text{gcd}(a,b) = \text{gcd}(a,r) = \text{gcd}(b,r)$
-- This property is known as Euclid's Algorithm
+5: Euclid's Algorithm:
+- $\text{gcd}(a, b) = \text{gcd}(b, \text{rem}(a,b))$
+  - Using the division theorem:
+  - $a = qb + r$
+  - $r = a - qb$
+  - Any common divisor of $a$ and $b$ would also divide $r$
+  - $\text{gcd}(a,b) = \text{gcd}(a,r) = \text{gcd}(b,r)$
 ]
 ---
 .left-column[
@@ -482,10 +482,12 @@ Vs...
 Take away: as long as the GCD between two numbers is 1, any number can be made as a linear combination of them!
 ---
 ### The Extended Euclidean Algorithm (Pulverizer)
-It would be nice if there was a way to reliably calculate the s,t in the equations:
+It would be nice if there was a way to reliably calculate the $s,t$ in the equations:
 $\text{gcd}(a,b) = sa+tb$
 - In particular, the lowest combination.
 - e.g. compute $\text{gcd}(a,b)$, $s$, $t$, such that $\text{gcd}(220, 41) = s \cdot 220 + t \cdot 41$
+
+Turns out there is, and it's thousands of years old!
 
 ---
 ### Pulverizer Algorithm
