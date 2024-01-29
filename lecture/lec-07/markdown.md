@@ -441,9 +441,15 @@ We cannot pour part of a jug from one to the other!
 ## The Die Hard Problem
 
 - $(x,y) \rightarrow (0, x+y), x+y \leq b$
+  
 - $(x,y) \rightarrow (x-(b-y)), b) = (x+y-b),b); x+y \geq b$
+
 - $(x,y) \rightarrow (x+y, 0), x+t \leq a$
+
 - $(x,y) \rightarrow (a, x+y-a), x+y \geq a$
+
+---
+## The Die Hard Problem
 
 Solution, using these operations
 
