@@ -4,7 +4,7 @@ class: center, middle, inverse
 ---
 # ENSE 350: Math for Software Eng.
 
-### Lecture 7: Cryptography
+### Lecture 8: Cryptography
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
@@ -44,7 +44,7 @@ layout: false
 - Encryption - the sender encrypts the message, $m$ by computing
 $$m' = m \cdot k$$
 - Decryption: the receiver decrypts $m'$ by computing
-$$ \dfrac{m'}{k} = \dfrac{m' \cdot k}{k} = m $$
+$$ \dfrac{m'}{k} = \dfrac{m \cdot k}{k} = m $$
 ---
 ## How can we break turing V1
 - To defeat this system, all we need to do is collect two messages...
