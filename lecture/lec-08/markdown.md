@@ -376,7 +376,6 @@ $\phi(n) = n(1-\frac{1}{p_1})(1-\frac{1}{p_2})...(1-\frac{1}{p_n})$
 ## Euler's Theorem
 - Theorem: Suppose $n$ is a positive integer $k$ is relatively prime to $n$. Then:
 $$ k^{\phi (n)} \equiv 1(\text {mod } n) $$
-- examples:
   - $7^8 \equiv 1(\text {mod } 16) $
   - $7^{80} \equiv 1(\text {mod } 200) $
   - $11^{48} \equiv 1(\text {mod } 210) $
@@ -406,7 +405,7 @@ e.g.
 - Turing V1: $m' = m \cdot k$
 - Turing V2: $m' \equiv m \cdot k (\text {mod }  p)$
 - RSA: $m' \equiv m^{e} (\text {mod }  n)$
-- $m \equiv m'^{d} (\text {mod }  n)$
+- $m \equiv (m')^{d} (\text {mod }  n)$
 
 Why it works:
 - $(m^{e})^{d} \equiv m (\text {mod }  n)$
@@ -425,8 +424,7 @@ Beforehand
 - The receiver creates a public key and a private key as follows
   1. Generate two distinct primes, $p$, $q$. These must be kept secret.
   2. Let $n = pq, \phi(n) = (p-1)(q-1)$
-  3. Select an integer $e$ such that $\text{gcd}(e, \phi(n)) = 1$
-    - The public key pair $(e,n)$ should be widely distributed
+  3. Select an integer $e$ such that $\text{gcd}(e, \phi(n)) = 1$. The public key pair $(e,n)$ should be widely distributed
   4. Compute $d$ such that $de \equiv 1 (\text{mod } \phi(n))$
     - This can be done using the pulverizer
     - The private key pair $(d,n)$ must be kept secret!
