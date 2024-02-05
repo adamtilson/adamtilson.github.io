@@ -381,8 +381,8 @@ $$ k^{\phi (n)} \equiv 1(\text {mod } n) $$
   - $11^{48} \equiv 1(\text {mod } 210) $
 ---
 ## Euler's Theorem
-- Euler's Theorem is a generalization of Fermatt's Little Theorem:
-  - $n = p \in $ primes
+- Euler's Theorem is a generalization of Fermatt's Little Theorem which works for all numbers, not just primes:
+  - When n is prime... $n = p \in $ primes
   - $\phi(n) = p (1 - \dfrac{1}{p}) = p - 1$
   - $k^{p-1} \equiv 1 (\text {mod } p)$
 - When $n$ has two prime factors...
