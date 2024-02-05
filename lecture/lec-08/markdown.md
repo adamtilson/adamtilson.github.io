@@ -230,7 +230,10 @@ $ak \equiv bk  (\text{mod }p) \Rightarrow a \equiv b  (\text{mod }p)$
 
 ---
 ## Fermat's Little Theorem
-Theorem: If $p$ is prime and $k$ is not a multiple of $p$, then $k^{p-1} \equiv 1 (\text{mod }p)$
+Theorem: If $p$ is prime and $k$ is not a multiple of $p$, then 
+$k^{p} \equiv k (\text{mod }p)$ 
+and 
+$k^{p-1} \equiv 1 (\text{mod }p)$
 
 - $k^{p-1} \equiv 1 (\text{mod }p)$
 - e.g. $3^4 \equiv 1 (\text{mod }5)$
