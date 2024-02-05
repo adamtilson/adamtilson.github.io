@@ -235,6 +235,18 @@ $k^{p} \equiv k (\text{mod }p)$
 and 
 $k^{p-1} \equiv 1 (\text{mod }p)$
 
+- $k^{p} \equiv k (\text{mod }p)$
+- e.g.  $3^5 \equiv 3 (\text{mod }5)$
+- e.g.  $4^5 \equiv 4 (\text{mod }5)$
+
+
+---
+## Fermat's Little Theorem
+Theorem: If $p$ is prime and $k$ is not a multiple of $p$, then 
+$k^{p} \equiv k (\text{mod }p)$ 
+and 
+$k^{p-1} \equiv 1 (\text{mod }p)$
+
 - $k^{p-1} \equiv 1 (\text{mod }p)$
 - e.g. $3^4 \equiv 1 (\text{mod }5)$
 - e.g. $6^4 \equiv 1 (\text{mod }5)$
@@ -247,12 +259,19 @@ $k^{p-1} \equiv 1 (\text{mod }p)$
 - $k^{-1} = ??$
 - $13^{16} \equiv 1 (\text{mod }17)$
 - $13 \cdot 13^{15} \equiv 1 (\text{mod }17)$
+
+So, what's $13^{15} (\text{mod }17)$?
+$13^{15}$ might overflow our calculators, and our brains
+- No problem, we are working in a mod domain
+  - we never need to think about any numbers higher than 17!
+  - Introducing Repeated Squaring
+
 ---
 ## Repeated Squaring
 - $13 = 13 (\text{mod }17)$
 - $13^2 = 169 \equiv \text{ rem}(169, 17) \equiv 16$
   - $13^2 = 16 (\text{mod }17)$
-- $16^4 = 256 \equiv \text{ rem}(256, 17) \equiv 1$
+- $13^4 = 16^4 = 256 \equiv \text{ rem}(256, 17) \equiv 1$
   - $13^4 = 1 (\text{mod }17)$
 - $13^8 = 1 (\text{mod }17)$
 - $15 = 8 + 4 + 2 + 1$  
@@ -283,6 +302,18 @@ Encryption: The message $m$ can be any integer in the set $0,1,2,...,p-1$; in pa
 
 Decryption: $m' k^{-1} \equiv m (\text{mod }p)$
 - $mk k^{-1} \equiv m (\text{mod }p)$
+---
+## Turing V2 Example
+Consider a Turing V2 with public key `83` and secret key `47`.
+We want to encrypt 13
+1. Find the multiplicative inverse to $47 (\text{mod } 83) = 53$
+2. Encrypt $13.$
+   
+    $13 \times 47 \equiv 30 (\text{mod } 83)$
+3. Decrypt $30$
+   
+    $30 \times 53 \equiv 13 (\text{mod } 83)$
+
 ---
 ## Breaking Turing V2
 
