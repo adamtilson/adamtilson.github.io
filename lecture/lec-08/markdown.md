@@ -198,7 +198,7 @@ Lemma: If $p$ is prime and $k$ is not a multiple of $p$, then $k$ has a multipli
 - $s \cdot p = 1 - t \cdot k$
 - $p \mid s \cdot p$
 - $p \mid 1-t \cdot k$
-- $k \mid t \equiv 1 (\text{mod }p)$
+- $k \cdot t \equiv 1 (\text{mod }p)$
 ---
 ## Consequences 
 
