@@ -332,6 +332,18 @@ If we had both an encrypted and decrypted version of a word, we could solve for 
 - $m' \equiv mk (\text{mod }p)$
 - $m^{-1}m' \equiv m^{-1}mk (\text{mod }p) \equiv k (\text{mod }p)$
 ---
+
+## Turing V2 Plain text attack example
+
+Examples:
+
+- Decrypted message: $13 $
+- Encrypted message: $30 $
+- Key?
+  - $13^{81} \equiv 32 (\text{mod } 83)$
+  - $32 \times 30 \equiv 47 (\text{mod } 83)$
+   
+---
 ## Defn: Relatively Prime
 
 $a$ and $b$ are relatively prime iff $\text{gcd}(a,b) = 1$ 
