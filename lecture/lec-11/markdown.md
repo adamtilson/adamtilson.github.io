@@ -35,6 +35,9 @@ layout: false
 - e.g. $V = ${$x_1, x_2, x_3, x_4, x_5, x_6, ..., x_n$}
 - $E = $ { { $x_1, x_2$ }, { $x_2, x_3$ }, { $x_1, x_4$ }, ... }
 
+- With sets, order doesn't matter. Either you are in the set or not.
+- With graphs, how you draw it doesn't matter, as long as the edges and verticies match
+
 ---
 ## Graph Definitions
 - `Adjacent`: Two notes $x_i$ and $x_j$ are adjacent if {$x_i, x_j$}$ \in E$
@@ -370,14 +373,6 @@ Theorem: Every connected graph has a spanning tree
 
 - Proof: By contradiction. 
 - Assume we have a connected graph $G$ which does not have a spanning tree.
-
----
-### Spanning Tree
-- Let $T$ be a connected subgraph of $G$ with same vertices and the smallest number of edges possible
-  - $T$ is not a spanning tree, so it must have a cycle
-  - But if we remove one of the edges of that cycle, we have constructed a smaller connected subgraph (Lemma)
-  - Thus we didn't have the smallest number of edges. ⨳
-
 ---
 ### Spanning Tree
 Lemma: Removing an edge from a cycle does not change the connectivity of a graph
@@ -385,6 +380,13 @@ Lemma: Removing an edge from a cycle does not change the connectivity of a graph
   - No change to connectivity
 - Case 2: The path between arbitrary vertices, $v_x$ and $v_y$, did go through the cycle
   - Now the path between $v_x$ and $v_y$ is changed to take the long road around the cycle (detour).
+
+---
+### Spanning Tree
+- Let $T$ be a connected subgraph of $G$ with same vertices and the smallest number of edges possible
+  - $T$ is not a spanning tree, so it must have a cycle
+  - But if we remove one of the edges of that cycle, we have constructed a smaller connected subgraph (Lemma)
+  - Thus we didn't have the smallest number of edges. ⨳
 
 ---
 ### Weighted Graphs
