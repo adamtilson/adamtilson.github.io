@@ -4,7 +4,7 @@ class: center, middle, inverse
 ---
 # ENSE 350: Math for Software Eng.
 
-### Lecture 9: Introduction to Graph Theory
+### Lecture 11: Introduction to Graph Theory
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
