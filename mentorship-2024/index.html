@@ -421,26 +421,199 @@ The children will be a Sprite2D and a CollisionPolygon2D</p>
 
       <p>To start with we will need another art asset to show a crash. Here’s my artistic skills on display:</p>
 
+      <p><img src="res/crash.png" alt="" /></p>
+
+      <p>Let’s add this as a new sprite in our player class:</p>
+
+      <p><img src="res/crash-in-editor.png" alt="" /></p>
+
+      <p>We will now need to see if our ship has crashed with the walls. We will do this using a new feature of the engine called <code class="language-plaintext highlighter-rouge">Signals</code>.</p>
+
+      <p>Go back to the RigidBody2D in the Player class, and add a signal:</p>
+
+      <p><img src="res/connecting-a-signal.png" alt="" /></p>
+
+      <p>Use the default settings and connect. You can see that a new function appears in your code where this occured:</p>
+
+      <p><img src="res/new-function.png" alt="" /></p>
+
+      <p>This function will be invoked whenever our condition occurs. What we are going to want to do is make the crash visible. We will also want to disable our engine controls and fire from appearing.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extends</span> <span class="n">RigidBody2D</span>
+
+<span class="n">var</span> <span class="n">turn_speed</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">var</span> <span class="n">impulse_strength</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">var</span> <span class="n">alive</span>
+
+<span class="c1"># Called when the node enters the scene tree for the first time.
+</span><span class="n">func</span> <span class="n">_ready</span><span class="p">():</span>
+	<span class="n">alive</span> <span class="o">=</span> <span class="n">true</span>
+	<span class="err">$</span><span class="n">Crash</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+
+<span class="c1"># Called every frame. 'delta' is the elapsed time since the previous frame.
+</span><span class="n">func</span> <span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+	<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+	<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+	<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+	
+	<span class="k">if</span> <span class="n">alive</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"right"</span><span class="p">):</span>
+			<span class="n">apply_torque</span><span class="p">(</span><span class="n">turn_speed</span><span class="p">)</span>
+			<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+			
+		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"left"</span><span class="p">):</span>
+			<span class="n">apply_torque</span><span class="p">(</span><span class="o">-</span><span class="n">turn_speed</span><span class="p">)</span>
+			<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+			
+		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"up"</span><span class="p">):</span>
+			<span class="n">var</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">rotation</span><span class="o">-</span><span class="n">PI</span><span class="o">/</span><span class="mi">2</span>
+			<span class="n">apply_central_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">*</span> <span class="n">impulse_strength</span><span class="p">)</span>
+			<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+			
+<span class="n">func</span> <span class="n">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+	<span class="n">alive</span> <span class="o">=</span> <span class="n">false</span>
+	<span class="err">$</span><span class="n">Crash</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+</code></pre></div>      </div>
+
+      <p>Neat. Now we are failing when we crash.</p>
+
+      <p><img src="res/fail-on-crash.png" alt="" /></p>
+
+      <p>The next thing we should do is create a win condition.</p>
+
     </div></div></section>
-<section id="creatingthegoallocation"><button class="collapsible">Creating the goal location</button><div class="text-content"><div class="text-inner">
+<section id="creatingthegoalassets"><button class="collapsible">Creating the goal assets</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s create a couple more assets, a goal location and a flag to show we have won:</p>
+
+      <p>Flag:</p>
+
+      <p><img src="res/flag.png" alt="" /></p>
+
+      <p>Landing Platform:</p>
+
+      <p><img src="res/landing-platform.png" alt="" /></p>
+
+      <p>Now that we have the assets made, we will start by adding the flag to our ship. As before, we will control it using code.</p>
+
+      <p><img src="res/adding-flag-to-ship.png" alt="" /></p>
+
+      <p>Let’s also create a new object for our goal position. This should work the same as your rock chunks - Create a new scene, use a StaticBody as a base with a CollisionPolygon and a Sprite, and then add this new scene to the game world:</p>
+
+      <p><img src="res/landing-platform-object.png" alt="" /></p>
+
+      <p>Add it to the game world.</p>
+
+      <p><img src="res/landing-platform-in-the-game-world.png" alt="" /></p>
 
     </div></div></section>
 <section id="creatingthewinconditionofhittingthegoal"><button class="collapsible">Creating the win condition of hitting the goal</button><div class="text-content"><div class="text-inner">
 
-      <p>Stretch Goals</p>
+      <p>Now we need to add some code to make this work. We will ues another new feature of the engine, groups, to check if we have collided with the landing zone rather just some random rocks. Start by adding the landing platform to the goal group:</p>
+
+      <p><img src="res/add-to-goal-group.png" alt="" /></p>
+
+      <p>Now we will add some code to handle successfully landing on the landing zone. This code will check that we have hit the correct zone, and that we landed with the appropriate velocity and rotation.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extends</span> <span class="n">RigidBody2D</span>
+
+<span class="n">var</span> <span class="n">turn_speed</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">var</span> <span class="n">impulse_strength</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">var</span> <span class="n">alive</span>
+<span class="n">var</span> <span class="n">v_y</span>
+
+<span class="c1"># Called when the node enters the scene tree for the first time.
+</span><span class="n">func</span> <span class="n">_ready</span><span class="p">():</span>
+	<span class="n">alive</span> <span class="o">=</span> <span class="n">true</span>
+	<span class="err">$</span><span class="n">Crash</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+	<span class="err">$</span><span class="n">Flag</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+
+<span class="c1"># Called every frame. 'delta' is the elapsed time since the previous frame.
+</span><span class="n">func</span> <span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+	<span class="n">v_y</span> <span class="o">=</span> <span class="n">linear_velocity</span><span class="p">.</span><span class="n">y</span>
+	<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+	<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+	<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+	
+	<span class="k">if</span> <span class="n">alive</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"right"</span><span class="p">):</span>
+			<span class="n">apply_torque</span><span class="p">(</span><span class="n">turn_speed</span><span class="p">)</span>
+			<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+			
+		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"left"</span><span class="p">):</span>
+			<span class="n">apply_torque</span><span class="p">(</span><span class="o">-</span><span class="n">turn_speed</span><span class="p">)</span>
+			<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+			
+		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"up"</span><span class="p">):</span>
+			<span class="n">var</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">rotation</span><span class="o">-</span><span class="n">PI</span><span class="o">/</span><span class="mi">2</span>
+			<span class="n">apply_central_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">*</span> <span class="n">impulse_strength</span><span class="p">)</span>
+			<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+
+<span class="n">func</span> <span class="n">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">body</span><span class="p">.</span><span class="n">is_in_group</span><span class="p">(</span><span class="s">"goal"</span><span class="p">)</span> <span class="ow">and</span> <span class="o">-</span><span class="mf">0.1</span> <span class="o">&lt;</span> <span class="n">rotation</span> <span class="ow">and</span> <span class="n">rotation</span> <span class="o">&lt;</span> <span class="mf">0.1</span> <span class="ow">and</span> <span class="n">v_y</span> <span class="o">&lt;</span> <span class="mi">35</span><span class="p">:</span>
+		<span class="err">$</span><span class="n">Flag</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="err">$</span><span class="n">Crash</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+	<span class="n">alive</span> <span class="o">=</span> <span class="n">false</span>
+
+</code></pre></div>      </div>
+
+      <p>As before, depending on how physics is working your engine, you may wish to modify these values.</p>
+
+      <p>Congratulations, you now have a working game loop, including failure and success conditions.</p>
+
+      <p><img src="res/made-it.png" alt="" /></p>
 
     </div></div></section>
-<section id="addingsomeuserinterfaceelementstoshowcauseofsuccessandfailure"><button class="collapsible">Adding some User Interface elements to show cause of success and failure</button><div class="text-content"><div class="text-inner">
+<section id="stretchgoals"><button class="collapsible">Stretch Goals:</button><div class="text-content"><div class="text-inner">
 
-    </div></div></section>
-<section id="addingfueltoplayer"><button class="collapsible">Adding fuel to player</button><div class="text-content"><div class="text-inner">
+      <p>Since the following sections are only stretch goals, there will not be as much detail listed here. Rather, just some suggestions of how to proceed:</p>
 
-    </div></div></section>
-<section id="displayinglimitedfuel"><button class="collapsible">Displaying limited fuel</button><div class="text-content"><div class="text-inner">
+      <h3 id="adding-some-user-interface-elements-to-show-cause-of-success-and-failure">Adding some User Interface elements to show cause of success and failure</h3>
 
-    </div></div></section>
-<section id="addingadditionallevels"><button class="collapsible">Adding additional levels</button><div class="text-content"><div class="text-inner">
+      <ul>
+        <li>Create a game label in the object where you give status reports</li>
+        <li>Create a custom signal in the player to emit a status update whenever something important happens</li>
+        <li>Create a new script in the game scene</li>
+        <li>Link the signal from the player to the game scene</li>
+        <li>Whenever the signal is emitted from the player, update the label for status updates</li>
+      </ul>
 
+      <h3 id="adding-fuel-to-player">Adding fuel to player</h3>
+
+      <ul>
+        <li>Create a new class variable in the player for fuel</li>
+        <li>Start at a high value, like 5000</li>
+        <li>Whenever the player pressed left or right, decrease fuel by a bit</li>
+        <li>Whenever the player hits the main thrusters, decrease fuel more</li>
+        <li>When fuel runs out, the player crashess</li>
+      </ul>
+
+      <h3 id="displaying-limited-fuel">Displaying limited fuel</h3>
+
+      <ul>
+        <li>Add a label as you did two sections ago</li>
+        <li>Use another custom signal from the player to the Game to update when fuel is decreased</li>
+        <li>Whenever fuel is decreased, update the label</li>
+      </ul>
+
+      <h3 id="adding-additional-levels">Adding additional levels</h3>
+
+      <ul>
+        <li>You can make additional levels by configuring the rock objects in different ways.</li>
+        <li>Make a copy of the game scene, and move around the rocks</li>
+        <li>Some things to try
+          <ul>
+            <li>Can you make the landing spot in a cave?</li>
+            <li>Can you make the player need to go over a tall rock to get to the landing zone?</li>
+            <li>Can you put the landing zone in a deep valley?</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><img src="res/is-this-even-possible.png" alt="" /></p>
     </div></div></section>
 
     </main>
