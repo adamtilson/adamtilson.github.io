@@ -388,7 +388,7 @@ Lemma: Removing an edge from a cycle does not change the connectivity of a graph
   - But if we remove one of the edges of that cycle, we have constructed a smaller connected subgraph (Lemma)
   - Thus we didn't have the smallest number of edges. ⨳
 
----
+  ---
 ### Weighted Graphs
 - Graphs can have weights assigned to the edges
 - These weights have a number of real-world applications
