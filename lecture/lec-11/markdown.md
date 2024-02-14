@@ -43,6 +43,7 @@ layout: false
 - `Adjacent`: Two notes $x_i$ and $x_j$ are adjacent if {$x_i, x_j$}$ \in E$
 - `Incident`: An edge $e=${$x_i, x_j$} is incident to $x_i, x_j$
 - `Degree`: The degree of a vertex is the number of edges adjacent to it
+  - The `Degree` of a graph is the sum of the degrees of the vertices.
 - `Cardinality` of set $V$, $|V|$, is the number of vertices 
 - `Simple`: A graph is simple if it has no `loops` or `multiple edges`
   - `Loops` are created when nodes connect to themselves
@@ -322,7 +323,7 @@ Lemma: If $\exists$ a walk from $u$ to $v$, $\exists$ a path from $u$ to $v$.
 Def: A `closed walk` is a walk in which the starting and ending vertex are the same.
 - $v_0 - ... - v_i - ... -v_k = v_0$
 
-Def: If $k \geq 3$, and each visited vertex is different, we have a `cycle`
+Def: If $k \geq 3$, and each visited vertex is different, we have a `cycle` (also known as a `circuit`.)
 
 Def: A graph without a cycle is `acyclic`.
 
