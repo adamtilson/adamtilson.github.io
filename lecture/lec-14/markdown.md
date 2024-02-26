@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 12: Sums and Asymptotics
+### Lecture 13: Sums and Asymptotics
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
