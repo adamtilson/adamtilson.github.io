@@ -54,7 +54,7 @@ layout: false
 ## Connectivity
 - Def: Vertices $u$ and $v$ are `connected` if there is a path from $u$ to $v$
 - Def: A `graph is connected` if every pair of vertices is connected.
-
+ 
 ---
 
 ## k-Connected Graph
