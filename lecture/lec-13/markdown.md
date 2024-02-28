@@ -192,7 +192,7 @@ For $r \neq 1, \sum_{i=0}^n r^i = \frac{1-r^{n+1}}{1-r}$
 
 Take the derivative of each side...
 
-$\sum_{i=1}^n ir^{i-1} = \frac{-(1-r)(n+1)r^n-(-1)(1-r)^{n+1}}{(1-r)^2}$
+$\sum_{i=1}^n ir^{i-1} = \frac{-(n+1)r^n(1-r)-(1-r^{n+1})(-1)}{(1-r)^2}$
 
 $= \frac{1-(n+1)r^n+nr^{n+1}}{(1-r)^2}$
 
