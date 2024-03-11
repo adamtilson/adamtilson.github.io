@@ -27,17 +27,10 @@ layout: false
 8. Trace
 9. Determinant
 10. Rank
----
-layout: false
-.left-column[
-  ## Agenda
-]
-.right-column[
-11 System of Linear Equations
-12 Matrix Inversion
-13 Gauss-Jordan Elimination
-14 Gauss-Jordan Elimination with Partial Pivoting and Matrix Inversion
-15 LU Decomposition
+11. System of Linear Equations
+12. Matrix Inversion
+13. Gauss-Jordan Elimination
+14. LU Decomposition
 ]
 ---
 ## Row Vector, Column Vector and Matrix
