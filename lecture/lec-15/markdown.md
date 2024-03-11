@@ -27,11 +27,17 @@ layout: false
 8. Trace
 9. Determinant
 10. Rank
-11. System of Linear Equations
-12. Matrix Inversion
-13. Gauss-Jordan Elimination
-14. Gauss-Jordan Elimination with Partial Pivoting and Matrix Inversion
-15. LU Decomposition
+---
+layout: false
+.left-column[
+  ## Agenda
+]
+.right-column[
+11 System of Linear Equations
+12 Matrix Inversion
+13 Gauss-Jordan Elimination
+14 Gauss-Jordan Elimination with Partial Pivoting and Matrix Inversion
+15 LU Decomposition
 ]
 ---
 ## Row Vector, Column Vector and Matrix
@@ -1201,6 +1207,9 @@ Forward Pass
 - $LU\vec{x} = \vec{b}$
 - $U\vec{x} = \vec{y}$
 - $L\vec{y} = \vec{b}$
+
+---
+## LU Decomposition Theory
 
 Use back Substitution to:
 - Solve for $\vec{y}$: $L\vec{y} = \vec{b}$
