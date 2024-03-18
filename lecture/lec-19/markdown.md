@@ -130,7 +130,7 @@ Note: "Absolute" in this sense means "Absolute Value".
 
 ---
 
-## apAbsolute Relative True Error
+## Percent Absolute Relative True Error
 - $|\epsilon_t| = |\frac{E_t}{\text{True Value}}| \times 100\\%$
 - $|\epsilon_t| = 25\\%$
 
