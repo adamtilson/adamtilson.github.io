@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 15: Algorithms for Solving Systems of Linear Equations
+### Lecture 16: Algorithms for Solving Systems of Linear Equations
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
