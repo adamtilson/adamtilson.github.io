@@ -66,7 +66,7 @@ Q6. A start-up company is manufacturing boutique hand-held gaming computers. The
 
 $$f(n) = 40n^{1.5}-875n+35000$$
 
-Find the minimum number of units the company must sell to make a profit.
+For $n>100$. Find the minimum number of units the company must sell to make a profit.
 
 ---
 
