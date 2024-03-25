@@ -297,7 +297,7 @@ This process is called `Simpson's 1/3 rule`.
 ![](simpsons-derivation-figure.png)
 
 ---
-### Derivation
+### Derivation Continued
 
 $\text{Area} = \int_{a}^{b} Ax^2 + Bx + C \text{ dx}$
 
@@ -321,10 +321,12 @@ $= Ah^2 + Bh + C$
 $f(m) = A(0)^2 + B(0) + C$
 $= C$
 
+The clever observation that makes this work:
+
 $f(a) + 4f(m) + f(b)$
 $= 2Ah^2 + 6C$
 ---
-### Derivation 
+### Derivation Continued 
 
 $\text{Area} = \frac{h}{3}[2Ah^2 + 6c]$
 
