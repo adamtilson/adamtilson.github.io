@@ -165,7 +165,7 @@ The Secant method attempts to find the root by:
 The Bisection Method attempts to find a root through a process akin to binary search
 - Create an interval bounded by two values, $x_l$ (left) and $x_r$ (right) which bracket a solution
   - If this interval is ascending, $x_l \lt x_r$, specifically, $x_l \lt 0, x_r \gt 0$
-  - If this interval is descending, $x_l \gt x_r$, specifically, $x_l \gt 0, x_l \lt 0$
+  - If this interval is descending, $x_l \gt x_r$, specifically, $x_l \gt 0, x_r \lt 0$
 
 ---
 ## Bisection Method

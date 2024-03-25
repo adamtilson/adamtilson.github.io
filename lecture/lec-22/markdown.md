@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 19: Numerical Integration
+### Lecture 22: Numerical Integration
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
