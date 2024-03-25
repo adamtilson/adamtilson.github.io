@@ -349,6 +349,8 @@ $$ \text{Area} = \sum\_{i=0}^{N-1} \frac{(x\_{i+1}-x\_i)}{6} \left( f(x\_i) + 4f
 
 $$ \text{Area} = \frac{\Delta\_x}{6} \sum\_{i=0}^{N-1} \left( f(x\_i) + 4f \left( \frac{x\_i+x\_{i+1}}{2} \right) + f(x\_{i+1}) \right) $$
 
+When we chain multiple segments, we see a coefficient pattern emerge `1, 4, 2, 4, ... 2, 4, 1`
+
 ---
 ### Simpsons Rule in Python - More Divisions
 ![](simpson-python-1.png)
@@ -374,6 +376,9 @@ $$ \text{Area} = \frac{\Delta\_x}{6} \sum\_{i=0}^{N-1} \left( f(x\_i) + 4f \left
 ### References
 
 - Dr. Abdul Bais's ENSE 350 Slides
+
+- [PatrickJMT's derivation of Simposns Rule is awesome](https://www.youtube.com/watch?v=7MoRzPObRf0)
+
 ---
 
 name: inverse
