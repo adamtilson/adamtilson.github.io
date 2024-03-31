@@ -48,17 +48,21 @@ Q3. A transportation engineering study requires calculating the number of cars t
 
 Using an appropriate method (or combination of methods), estimate the number total number of cars through the intersection from 7:30 to 9:15.
 
----
-Q4. The amount of mass transported via a pipe over a periodd of time can be computed as:
+???
 
-$\int_{t_1}^{t_2}Q(t)c(t)\text{d}t$
+Will vary depending on approach. Simpsons, Trap, Trap is exactly 500 though!
+
+---
+Q4. The amount of mass transported via a pipe over a period of time can be computed as:
+
+$M = \int_{t_1}^{t_2}Q(t)c(t)\text{d}t$
 
 Where:
-- $M$ is the mass in $mg$
-- $t_1$ is the initial time, in $min$
-- $t_2$ is the final time in $min$
-- $Q(t)$ is the flow rate, in $\frac{m^3}{min}$
-- $c(t)$ is the concentration in $\frac{mg}{min}$
+- $M$ is the mass in $\text{mg}$
+- $t_1$ is the initial time, in $\text{min}$
+- $t_2$ is the final time in $\text{min}$
+- $Q(t)$ is the flow rate, in $\frac{\text{m}^3}{\text{min}}$
+- $c(t)$ is the concentration in $\frac{\text{mg}}{\text{min}}$
 
 (ctd.)
 
@@ -99,6 +103,14 @@ The mean of a course is $\mu=67\\%$ with a standard deviation of $\sigma=17\\%$.
 ---
 
 ![](grade-distribution.png)
+
+---
+
+Assuming the students grades can be approximated using the gaussian distribution, predict how many people in the course of 95 people failed. Use 1/3 simpsons rule and 1 segment.
+
+
+???
+Note: The true percent value of failures is 0.158161 
 
 ---
 
