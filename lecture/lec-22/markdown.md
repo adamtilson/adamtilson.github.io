@@ -209,7 +209,7 @@ $$ \text{Area} = \sum\_{i=0}^{N-1} (x\_{i+1}-x\_i) \times \frac{ f(x\_{i+1}) + f
 
 As with the midpoint formula, since the widths of each trapezoid is consistent, we may factor this out...
 
-$$ \text{Area} = \Delta\_x \sum\_{i=0}^{N-1} \frac{ f(x\_{i+1}) + f(x_i)}{2} $$
+$$ \text{Area} =  \frac{\Delta\_x}{2} \sum\_{i=0}^{N-1} (f(x\_{i+1}) + f(x_i)) $$
 
 ---
 ### Trapzoid N=1
