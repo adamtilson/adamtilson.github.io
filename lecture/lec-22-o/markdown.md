@@ -138,8 +138,95 @@ The euler method enables us to solve these initial value problems without taking
   
 For the purposes of solving this IVP, the original function is unknown, but we know it is $x(t)=t-\sin(t)+30$
 ---
+## Visualizing Solutions to ODEs
+
+Consider the function:
+
+$f'(x) = x$
+
+We know the solution to this ODE is
+
+$f(x) = x^2 + c$
+
+But we don't know what this constant is, meaning we have infinitely many solutions
+
+---
+## Visualizing Solutions to ODEs
+
+We can visualize this as a direction field (slope field)
+.image-50[
+![](slope-field-1.png)
+]
+
+---
+## Visualizing Solutions to ODEs
+
+Each solution fits into this slope field
+
+.image-50[
+![](slope-field-solutions.png)
+]
+
+---
+## Initial Value Problem
+- In an initial value problem, you know the starting conditions and typically want to know the value at a given time
+- A numerical approach involves taking small steps through the slope field following the slope at that point
+- We can use various Methods to do this with different levels of accuract
+---
+## Initial Value Problem Visualized
+
+.image-50[
+![](ivp-solution-visualized.png)
+]
+
+---
+
+## Initial Value Problem Visualized
+
+.image-50[
+![](ivp-solution-vis-2.png)
+]
+
+---
+
+## Initial Value Problem Visualized
+
+.image-50[
+![](ivp-solution-vis-3.png)
+]
+
+---
+
+## Initial Value Problem Visualized
+
+.image-50[
+![](ivp-solution-vis-4.png)
+]
+
+---
+
+## Initial Value Problem Visualized
+
+.image-50[
+![](ivp-solution-vis-5.png)
+]
+
+---
+
+## Initial Value Problem Visualized
+
+.image-50[
+![](ivp-solution-vis-6.png)
+]
+
+---
+
 ### Euler's Example
-$x(t)=t-\sin(t)+30$
+$x(t)=t-\sin(t)+30. \text{ Find } t=5$. Our slope field:
+![](direction-fields.png)
+
+---
+By setting $t=0$, we know $x=30$
 .image-50[
 ![](t-sin-t-30.png)
 ]
@@ -175,13 +262,6 @@ $x(t)=t-\sin(t)+30$
 ![](graphically-5.png)
 
 ---
-### Direction fields
-
-Note: if we don't explicitly know the indefinite integral, we are essentially travelling through `direction fields`. (We don't know which "wave" we are on.)
-
-![](direction-fields.png)
-
----
 ### Euler Method Mathematically
 
 ![](euler-formula-0-1.png)
@@ -198,7 +278,7 @@ Setup:
 - $t_0 = 0$
 - $x(0) = 30$
 - $x'(0) = 0$
-
+  
 First iteration:
 - $x(t\_1) \approx x(t_0) + \Delta_t \cdot x'(t_0)$
 - $= 30 + 1 - \cos(0)$
@@ -284,8 +364,9 @@ Find $y_2$
 ---
 ### Second example slope field:
 
+.image-50[
 ![](slope-field.png)
-
+]
 ---
 
 ### Math...
@@ -385,26 +466,58 @@ However, if:
 - It's taking a lot of iterations to get close, but it is possible!
 
 ---
-## Runge-Kutta 4th Order
+### What's going wrong?
 
-An alternative method to solving ODE IVP's is the Runge-Kutta 4th Order approximation. It is a formulation of Simpsons's Rule from approximating integrals, and may be derived using the Taylor series.
+- In an exponential function, the slope is changing very quickly, so taking the slope only at the beginning of the line is not an accurate representation of the slope during the entire step
+
+---
+### What's going wrong?
+
+- Slope at beginning:
+
+.image-50[
+![](slope-at-different-points.png)
+]
+
+---
+### What's going wrong?
+
+- Slope at end:
+
+.image-50[
+![](slope-at-different-end.png)
+]
+
+---
+### What's going wrong?
+
+- We need something in the middle, which the next method will help us find:
+
+.image-50[
+![](slope-at-different-ideal.png)
+]
+
+---
+## Runge-Kutta 4th Order (RK4)
+
+An alternative method to solving ODE IVP's is the Runge-Kutta 4th Order approximation. It is akin to Simpsons's Rule from approximating integrals, and makes use of Taylor Polynomials. We will not derive it!
 
 $\frac{dy}{dx} = y'(x, y(x))$
 
 $y(x_0) = y_0$
 
 - $x\_{n+1} = x\_n + \Delta_x$
-- $y\_{n+1} = y_n + \frac{1}{6}h\left(k\_1 + 2k\_2 + 2k\_3 + k\_4 \right)$
+- $y\_{n+1} = y_n + \frac{1}{6} \Delta_x \left(k\_1 + 2k\_2 + 2k\_3 + k\_4 \right)$
 
 ---
-## Runge-Kutta 4th
+## Runge-Kutta 4th (RK4)
 
 - $y\_{n+1} = y_n + \frac{1}{6}\Delta_x\left(k\_1 + 2k\_2 + 2k\_3 + k\_4 \right)$
 - $k\_1 = \ y'(x\_n, y\_n)$
 - $k\_2 = \ y'\left(x\_n + \frac{\Delta_x}{2}, y\_n + \Delta_x\frac{k\_1}{2}\right)$
 - $k\_3 = \ y'\left(x\_n + \frac{\Delta_x}{2}, y\_n + \Delta_x\frac{k\_2}{2}\right)$
-
 - $k\_4 = \ y'\left(x\_n + \Delta_x, y\_n + \Delta_x k\_3\right)$
+
 Intuitively, our four terms are: 
 - the slope at the beginning of the line,
 - the slope at the end of the line, 
@@ -440,6 +553,8 @@ Much quicker than the Euler Method!
 ### References
 
 - Dr. Abdul Bais's ENSE 350 Slides
+- https://mathweb.ucsd.edu/~math20d/Lab2.shtml
+
 ---
 
 name: inverse
