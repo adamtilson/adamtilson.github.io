@@ -94,49 +94,6 @@ Recall that an `Initial Value Problem` (IVP) is an ODE which contains some unkno
   - Recall that integrating an ODE, i.e. computing the symbolic anti-derivative, produces some constant value, $c$ which we cannot determine without more information. 
   - The `Initial Value` gives us that information to solve our problem.
 
-
----
-### IVP Example - Position and Velocity
-e.g. Consider a particle with following position function: 
-- $x(t) = t - \sin(t) + 30$
-
-The change of position w.r.t time is velocity:
-- $v\_x (t) = x'(t) = 1 - \cos(t)$
-
----
-### IVP Example - Position and Velocity
-
-If we wished to recover the original position, we could integrate both sides:
-- $v_x(t) = x'(t) = 1 - \cos(t)$
-- $\int v_x(t) \text{d}t = \int 1 - \cos(t) \text{d}t$
-- $x(t) = t - \sin(t) + c$
-
-We have lost information. We do not know the value of the constant term, $c$. 
----
-### IVP Example - Position and Velocity
-However, if we were provided the initial conditions:
-- $x(0) = 30$
-
-We could substitute this in to solve for c:
-- $x(0) = 0 - \sin(0) + c = 30$
-- $c = 30$
-- $x(t) = t - \sin(t) + 30$
-
----
-### IVP Example - Position and Velocity
-We now have enough information that we could evaluate our function at a new point in time.
-- e.g. Find $x(30)$
-- $x(30) = 30 - \sin(30) + 30 \approx 60.99$
-
----
-### Numerical Methods Motivation
-The euler method enables us to solve these initial value problems without taking a symbolic integral.
-- Assume we are given 
-  - $v\_x (t) = x'(t) = 1 - \cos(t)$
-  - $x(0) = 30$
-- Find $x(5)$
-  
-For the purposes of solving this IVP, the original function is unknown, but we know it is $x(t)=t-\sin(t)+30$
 ---
 ## Visualizing Solutions to ODEs
 
@@ -171,7 +128,9 @@ Each solution fits into this slope field
 ## Initial Value Problem
 - In an initial value problem, you know the starting conditions and typically want to know the value at a given time
 - A numerical approach involves taking small steps through the slope field following the slope at that point
-- We can use various Methods to do this with different levels of accuract
+- We will look at three methods to do this with different levels of accuracy
+- Taking constant steps while following the slope at the current point is called the Euler's Method
+
 ---
 ## Initial Value Problem Visualized
 
@@ -220,16 +179,63 @@ Each solution fits into this slope field
 ]
 
 ---
+### IVP Example - Position and Velocity
+e.g. Consider a particle with following position function: 
+- $x(t) = t - \sin(t) + 30$
+
+What if we didn't know the position function, we only knew the velocity function, that is, the
+change of position w.r.t:
+- $v\_x (t) = x'(t) = 1 - \cos(t)$
+
+---
+### IVP Example - Position and Velocity
+
+If we wished to recover the original position, we could integrate both sides:
+- $v_x(t) = x'(t) = 1 - \cos(t)$
+- $\int v_x(t) \text{d}t = \int 1 - \cos(t) \text{d}t$
+- $x(t) = t - \sin(t) + c$
+
+We have lost information. We do not know the value of the constant term, $c$. 
+---
+### IVP Example - Position and Velocity
+However, if we were provided the initial conditions:
+- $x(0) = 30$
+
+We could substitute this in to solve for c:
+- $x(0) = 0 - \sin(0) + c = 30$
+- $c = 30$
+
+Our original function was:
+- $x(t) = t - \sin(t) + 30$
+
+---
+### IVP Example - Position and Velocity
+We now have enough information that we could evaluate our function at a new point in time.
+- e.g. Find $x(30)$
+- $x(30) = 30 - \sin(30) + 30 \approx 60.99$
+
+---
+### Numerical Methods Motivation
+The euler method enables us to solve these initial value problems without taking a symbolic integral.
+- Assume we are given 
+  - $v\_x (t) = x'(t) = 1 - \cos(t)$
+  - $x(0) = 30$
+- Find $x(5)$
+  
+For the purposes of solving this IVP, the original function is unknown, but we know it is $x(t)=t-\sin(t)+30$
+
+---
 
 ### Euler's Example
-$x(t)=t-\sin(t)+30. \text{ Find } t=5$. Our slope field:
+$x'(t)=1-\cos(t). \text{ Find } t=5$. We know our function is one of:
 ![](direction-fields.png)
 
 ---
-By setting $t=0$, we know $x=30$
+By setting $t=0$, we know $x=30$. Thus we know which function.
 .image-50[
 ![](t-sin-t-30.png)
 ]
+(*This is for visualization purposes, in the real world we won't have or need this actual function!)
 ---
 ### What we know:
 - We know where we are starting ($t=0, x=30$)
@@ -271,22 +277,29 @@ By setting $t=0$, we know $x=30$
 ![](euler-formula-n-n-1.png)
 
 ---
-### Computing our example mathematically
+### Computing Euler's method
 Setup:
 - $x'(t) = 1 - \cos(t)$
 - $\Delta_t = 1$
 - $t_0 = 0$
 - $x(0) = 30$
 - $x'(0) = 0$
-  
+
+---
+### Computing Euler's method
+
+- $t_0 = 0$
+- $x(0) = 30$
+- $x'(0) = 0$
+
+
 First iteration:
 - $x(t\_1) \approx x(t_0) + \Delta_t \cdot x'(t_0)$
 - $= 30 + 1 - \cos(0)$
 - $= 30 + 1 - 1 = 30$
 
 ---
-### Computing our example mathematically
-Setup:
+### Computing Euler's method:
 
 - $t_1 = t_0 + \Delta_t = 0 + 1 = 1$
 - $\approx x(1) = 30$
@@ -498,9 +511,76 @@ However, if:
 ]
 
 ---
+
+## Method 2: Improved Euler's Method
+
+The improved Euler's Method attempts to get a better approximation of the slope in the overall region by considering the slope at the beginning and the end and averaging them.
+
+`\[
+m_i = \frac{f(x_i, y_i)+f(x_{i+1}, y_{i+1})}{2}
+\]`
+
+Subbing this into Euler's Method gives us:
+
+`\[
+y_{i+1} = y(x_i) + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_{i+1}))
+\]`
+
+---
+
+## Improved Euler's Method Continued
+
+Our $y(x_i)$ is our previous estimate, $y_i$
+
+`\[
+y_{i+1} = y_i + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_{i+1}))
+\]`
+
+However, we have a problem: we don't know what our endpoint slope is! We are going to need to estimate this as well, using Euler's Method
+
+`\[
+y_{i+1} = y_i + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_i + \Delta_x f(x_i, y_i)))
+\]`
+
+---
+
+## Improved Euler's Method Complete
+
+`\[
+y_{i+1} = y_i + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_i + \Delta_x f(x_i, y_i)))
+\]`
+
+However, this forumaltion is a bit cumbersome. To make it easier to calculate, we formulate it as follows
+
+`\[
+k_1 = f(x_i, y_i)
+\]`
+`\[
+k_2 = f(x_i + \Delta_x, y_i + \Delta_x k_1)
+\]`
+`\[
+y_{i+1} = y_i + \frac{\Delta_x}{2}(k_1 + k_2)
+\]`
+
+---
+## Comparison: Eulers vs. Improved Eulers
+
+In our comparison for
+
+$y'(x) = y(x)$ i.e. $y(x)=e^x$
+
+to find $x=1$, by starting at $x=0, y(0)=1$
+
+|n|Eulers|Improved Eulers|Actual|
+|---|---|---|---|
+|12|2.6130|2.7072|2.7183|
+|24|2.6637|2.7153|2.7183|
+|48|2.6905|2.7175|2.7183|
+
+---
 ## Runge-Kutta 4th Order (RK4)
 
-An alternative method to solving ODE IVP's is the Runge-Kutta 4th Order approximation. It is akin to Simpsons's Rule from approximating integrals, and makes use of Taylor Polynomials. We will not derive it!
+We can do even better by by using the Runge-Kutta 4th Order approximation. It is akin to Simpsons's Rule derived using Taylor Polynomials. We will not derive it! It has a formulation similar to the Improved Euler's method, but with additional midpoints included:
 
 $\frac{dy}{dx} = y'(x, y(x))$
 
@@ -510,6 +590,7 @@ $y(x_0) = y_0$
 - $y\_{n+1} = y_n + \frac{1}{6} \Delta_x \left(k\_1 + 2k\_2 + 2k\_3 + k\_4 \right)$
 
 ---
+
 ## Runge-Kutta 4th (RK4)
 
 - $y\_{n+1} = y_n + \frac{1}{6}\Delta_x\left(k\_1 + 2k\_2 + 2k\_3 + k\_4 \right)$
@@ -522,6 +603,22 @@ Intuitively, our four terms are:
 - the slope at the beginning of the line,
 - the slope at the end of the line, 
 - and two midpoint terms which are weighted heavier
+
+---
+## Demonstrating equivalency to Simpson's Rule
+
+For RK4, if we integrate our function such that $y'(x) = f(x)$, then the method becomes:
+
+`\(k_1 = f(x_i) \)`
+`\(k_2 = f(x_i + \frac{\Delta_x}{2}) \)`
+`\(k_3 = f(x_i + \frac{\Delta_x}{2}) \)`
+`\(k_4 = f(x_i + \Delta_x) \)`
+
+`\(y_{i + 1} = y_i + \frac{\Delta_x}{6}(k_1 + 2k_2 + 2k_3 + k_4) \)`
+
+`\(= y_i + \frac{\Delta_x}{6}(f(x_i) + 4f(x_i + \frac{\Delta_x}{2}) + f(x_i + \Delta_x)) \)`
+
+Which is the Simpson's 1/3 rule for approximating integrals. Neat!
 
 ---
 e.g. Runge-Kutta 4th of the exponential:
@@ -538,23 +635,31 @@ e.g. Runge-Kutta 4th of the exponential:
 - $y_1 = 65.375$
 
 Way better than Euler for n=1.
+
 ---
-## Runge-Kutta 4th Example
 
-Runge-Kutta 4th for different N's:
+## Comparison: Eulers vs. Improved Eulers vs. Runge-Kutta
 
-- n = 1: $y_1 = 65.4$
-- n = 2: $y_2 = 117.9$
-- n = 10: $y_{10} = 148.2$
+In our comparison for
 
-Much quicker than the Euler Method!
+$y'(x) = y(x)$ i.e. $y(x)=e^x$
+
+to find $x=1$, by starting at $x=0, y(0)=1$
+
+|n|Eulers|Improved Eulers|Runge-Kutta|Actual|
+|---|---|---|---|---|
+|12|2.613035290|2.707188994|2.718069764|2.7183|
+|24|2.663731258|2.715327371|2.718266612|2.7183|
+|48|2.690496599|2.717519565|2.718280809|2.7183|
+
 ---
 
 ### References
 
 - Dr. Abdul Bais's ENSE 350 Slides
 - https://mathweb.ucsd.edu/~math20d/Lab2.shtml
-
+- https://math.libretexts.org/Courses/Monroe_Community_College/MTH_225_Differential_Equations/03%3A_Numerical_Methods/3.02%3A_The_Improved_Euler_Method_and_Related_Methods
+- https://math.stackexchange.com/questions/3939238/demonstrating-equivalency-between-runge-kutta-and-simpsons-rule
 ---
 
 name: inverse
