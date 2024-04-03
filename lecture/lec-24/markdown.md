@@ -517,13 +517,13 @@ However, if:
 The improved Euler's Method attempts to get a better approximation of the slope in the overall region by considering the slope at the beginning and the end and averaging them.
 
 `\[
-m_i = \frac{f(x_i, y_i)+f(x_{i+1}, y_{i+1})}{2}
+m_i = \frac{f'(x_i, y_i)+f('x_{i+1}, y_{i+1})}{2}
 \]`
 
 Subbing this into Euler's Method gives us:
 
 `\[
-y_{i+1} = y(x_i) + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_{i+1}))
+y_{i+1} = y(x_i) + \frac{\Delta_x}{2}(f'(x_i, y_i)+f'(x_{i+1}, y_{i+1}))
 \]`
 
 ---
@@ -533,13 +533,13 @@ y_{i+1} = y(x_i) + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_{i+1}))
 Our $y(x_i)$ is our previous estimate, $y_i$
 
 `\[
-y_{i+1} = y_i + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_{i+1}))
+y_{i+1} = y_i + \frac{\Delta_x}{2}(f'(x_i, y_i)+f'(x_{i+1}, y_{i+1}))
 \]`
 
 However, we have a problem: we don't know what our endpoint slope is! We are going to need to estimate this as well, using Euler's Method
 
 `\[
-y_{i+1} = y_i + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_i + \Delta_x f(x_i, y_i)))
+y_{i+1} = y_i + \frac{\Delta_x}{2}(f'(x_i, y_i)+f(x_{i+1}, y_i + \Delta_x f'(x_i, y_i)))
 \]`
 
 ---
@@ -547,16 +547,16 @@ y_{i+1} = y_i + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_i + \Delta_x f(x_i, 
 ## Improved Euler's Method Complete
 
 `\[
-y_{i+1} = y_i + \frac{\Delta_x}{2}(f(x_i, y_i)+f(x_{i+1}, y_i + \Delta_x f(x_i, y_i)))
+y_{i+1} = y_i + \frac{\Delta_x}{2}(f'(x_i, y_i)+f'(x_{i+1}, y_i + \Delta_x f'(x_i, y_i)))
 \]`
 
 However, this forumaltion is a bit cumbersome. To make it easier to calculate, we formulate it as follows
 
 `\[
-k_1 = f(x_i, y_i)
+k_1 = f'(x_i, y_i)
 \]`
 `\[
-k_2 = f(x_i + \Delta_x, y_i + \Delta_x k_1)
+k_2 = f'(x_i + \Delta_x, y_i + \Delta_x k_1)
 \]`
 `\[
 y_{i+1} = y_i + \frac{\Delta_x}{2}(k_1 + k_2)
