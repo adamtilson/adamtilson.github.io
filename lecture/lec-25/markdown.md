@@ -109,6 +109,18 @@ The radioactive decay constant, $k$, of a substance is $2.28 s^{-1}$ If the mass
 
 ---
 
+Q5. The Radioactive decay of a material is given by the formula:
+
+$Q'(t)=-kQ(t)$
+
+Where the mass present at time $t=t_0$ is $Q_0$, and $k$ is the decay constant. 
+
+The radioactive decay constant, $k$, of a substance is $2.28 s^{-1}$ If the mass is currently $4g$, approximately how long until less than $1g$ remain? Use the Inproved Euler Method with a step size of $0.1 s$ Approximate to the nearest $0.1 s$.
+
+Hint: Actual is $t = 0.6080$
+
+---
+
 ### References
 
 "Dr. K. Dow, Dr. S. Adeeb, Dr. L. Westover, Dr. Y. Li, W. Qiu" (2022). "Introduction to Numerical Analysis for Engineers". Retrieved from https://engcourses-uofa.ca 
