@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 # ENSE 350: Math for Software Eng.
 
-### Lecture 21: Numerical Differentiation: Iterative Solutions to Initial Value Problems
+### Lecture 24: Numerical Differentiation: Iterative Solutions to Initial Value Problems
 
 $\cdot$ Adam Tilson, M.A.Sc., P.Eng
 
