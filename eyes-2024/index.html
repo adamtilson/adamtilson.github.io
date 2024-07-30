@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!-- Top Navigation modified from CodingNepal - https://www.codingnepalweb.com/mega-menu-and-dropdown-menu-html-css/ -->
+<!-- Side navigation modified from Sticky, Smooth, Active Nav by Chris Coyier https://codepen.io/chriscoyier/pen/qyELzd -->
+<!-- Collabsibles from W3Schools https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> EYES SSE Activity </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+  <link rel="stylesheet" href="/assets/css/style.css?v=">
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/at.svg">
+  <!-- for mathjax support -->
+
+</head>
+<body>
+  <nav id="site">
+    <div class="wrapper">
+      <div class="logo"><a href="#"><img
+        src="/assets/svg/at.svg" alt="logo" height="35" width="35" /></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <!-- <li><a href="#">Blog</a></li>
+        <li>
+          <a href="#" class="desktop-item">CV ▾</a>
+          <input type="checkbox" id="showDrop">
+          <label for="showDrop" class="mobile-item">CV ▾</label>
+          <ul class="drop-menu">
+            <li><a href="#">Technical</a></li>
+            <li><a href="#">Academic</a></li>
+          </ul>
+        </li> -->
+        <li>
+          <a href="#" class="desktop-item">Laboratory ▾</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Laboratory ▾</label>
+          <div class="mega-box">
+            <div class="content">
+
+
+              <div class="row">
+                <header>ENSE 271</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-271/">Schedule</a></li>
+                  <li><a href="/labs/ense-271/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-271/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-271/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-271/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-271/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-271/lab-6">Lab 6</a></li>
+                  <!-- <li><a href="/labs/ense-271/lab-7">Lab 7</a></li> -->
+                </ul>
+              </div>
+
+              <!-- <div class="row">
+                <header>ENSE 374</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-374/">Schedule</a></li>
+                  <li><a href="/labs/ense-374/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-374/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-374/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-374/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-374/lab-5">Lab 5</a></li>
+                  <li><a href="/labs/ense-374/lab-6">Lab 6</a></li>
+                  <li><a href="/labs/ense-374/lab-7">Lab 7</a></li>
+                  <li><a href="/labs/ense-374/lab-8">Lab 8</a></li>
+                  <li><a href="/labs/ense-374/lab-9">Lab 9</a></li>
+                </ul>
+              </div> -->
+
+              <!-- <div class="row">
+                <header>ENSE 411</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-411/schedule">Schedule</a></li>
+                  <li><a href="/labs/ense-411/lab-0">Lab 0</a></li>
+                  <li><a href="/labs/ense-411/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-411/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-411/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-411/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-411/lab-5">Lab 5</a></li>
+                </ul>
+              </div> -->
+
+              <!-- <div class="row">
+                <header>ENSE 472</header>
+                <ul class="mega-links">
+                  <li><a href="/labs/ense-472/">Schedule</a></li>
+                  <li><a href="/labs/ense-472/lab-1">Lab 1</a></li>
+                  <li><a href="/labs/ense-472/lab-2">Lab 2</a></li>
+                  <li><a href="/labs/ense-472/lab-3">Lab 3</a></li>
+                  <li><a href="/labs/ense-472/lab-4">Lab 4</a></li>
+                  <li><a href="/labs/ense-472/lab-5">Lab 5</a></li>
+                </ul>
+              </div> -->
+            </div>
+          </div>
+        </li>
+        <li><a href="javascript:void(0);" id="darklink">🌞︎</a></li>
+      </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+  <div class="body">
+    <nav id="toc-nav">
+      <ul id="toc">
+
+      </ul>
+    </nav>
+
+    <main id="content" class="main-content" role="main">
+        <p></p>
+        <h1 id="eyes---software-systems-engineering---exercise">EYES - Software Systems Engineering - Exercise</h1>
+<p>University of Regina - Engineering and Applied Science - Software Systems Engineering</p>
+
+<p>Lab Instructor: <a href="mailto:Adam.Tilson@uregina.ca">Adam Tilson</a></p>
+
+<hr />
+
+<p><button class="expandall">Collapse All</button></p>
+<section id="introsoftwaresystemsengineering"><button class="collapsible">Intro - Software Systems Engineering</button><div class="text-content"><div class="text-inner">
+
+      <p>Software Systems Engineering is the branch of Engineering which is concerned with the development of Software Systems and their life-cycles. A Software System can be comprised of Software (e.g. programs, code), Hardware (e.g. computers, smart phones), and development artifacts (e.g. diagrams, documentation). While most students primarily focus on developing software, you will get exposure to math, natural sciences, computer science, and electronics. Essentially you will learn to solve engineering problems by developing software as the primary component (but not only component) of the solution. Example areas of study include networks, artificial intelligence and machine learning, embedded systems, desktop and web applications, and game development. Software Development Life-cycles include the requirements, planning, design, development, testing, deployment, maintenance and decommissioning of these systems.</p>
+
+      <p>When most students think of Software Engineering they think of writing code. And while that is a key aspect of the role, there are other significant activities which exist outside of the code-writing scope. One of these activities is prototyping applications. Prototyping is an activity in which desginers and engineers create simple objects which represent a finished program, which could be a whiteboard sketch, a paper sketch, or a file produced using prototyping software, like Figma. In this activity we will investigate the prototyping Software Figma, then working together develop some new prototype apps.</p>
+
+      <h3 id="about-me">About me</h3>
+
+      <p><img src="res/adam-150-150.jpg" alt="" /></p>
+
+      <p>My name is Adam Tilson, M.A.Sc., P.Eng., I am a Lab Instructor in Software Systems Engineering. My teaching portfolio currently consists of Software Management Lab, Networks Lab, Artificial Intelligence Lab, Machine Learning Lab, People Centered Design Lab, and Math Programming Lab. In addition to teaching in the lab, I mentor students in their capstone project, and I serve on a number of committees and organizations, internal and external.</p>
+
+    </div></div></section>
+<section id="agenda"><button class="collapsible">Agenda</button><div class="text-content"><div class="text-inner">
+
+      <ul>
+        <li>Creating Snake using MakeCode Arcade
+          <ul>
+            <li>Programming using Blocks and Python</li>
+          </ul>
+        </li>
+        <li>Deploying to a hardware device</li>
+      </ul>
+
+    </div></div></section>
+<section id="gettingstartedwithmakecodearcade"><button class="collapsible">Getting started with MakeCode Arcade</button><div class="text-content"><div class="text-inner">
+
+      <p>MakeCode Arcade is a free Game Engine created by Microsoft which runs in your browser. It allows rapid development of 2D pixel-art style games by simplifying your ability to create sprites, move and position them, detect collisions, play sounds and animations, and much more. Users can code games using a visual block-style or text-based languages JavaScript and Python.</p>
+
+      <p>The games created with this engine can be run in your browser and shared, or loaded to handheld devices. Overall this tool is a great introduction to game development and programming.</p>
+
+      <p>Begin by browsing to the MakeCode Arcade Website:</p>
+
+      <p><a href="https://arcade.makecode.com/">https://arcade.makecode.com/</a></p>
+
+      <p>We are going to start a new project:</p>
+
+      <p><img src="res/new-project.png" alt="" /></p>
+
+      <p>Name your project as <code class="language-plaintext highlighter-rouge">snake</code>, click Create, and away you go!</p>
+
+      <p><img src="res/first-project-settings.png" alt="" /></p>
+
+      <p>Hint: If you plan to make several projects, it may be a good idea to use your Microsoft Account to enable cloud storage. Otherwise your projects are saved to your browser.</p>
+
+    </div></div></section>
+<section id="overview"><button class="collapsible">Overview</button><div class="text-content"><div class="text-inner">
+
+      <p><img src="res/project-overview.png" alt="" /></p>
+
+      <p>Some important parts to notice are:</p>
+      <ul>
+        <li>the simulator on the left, which can be operated using keys on the keyboard</li>
+        <li>The language selection at the top, which defaults to Blocks</li>
+        <li>The block selector (middle)</li>
+        <li>The block editor (right)</li>
+      </ul>
+
+    </div></div></section>
+<section id="makingacharacter"><button class="collapsible">Making a character</button><div class="text-content"><div class="text-inner">
+
+      <p>To begin, our snake needs a head. Let’s make this:</p>
+
+      <p><img src="res/new-picture.png" alt="" /></p>
+
+      <p>For our sprite, we will make an Image</p>
+
+      <p><img src="res/make-an-image.png" alt="" /></p>
+
+      <p>You can select drawing tools and colors on the right side, and color in your snakes’s head. Don’t just follow my lead, use your own artistic skills.</p>
+
+      <p><img src="res/snake-head.png" alt="" /></p>
+
+    </div></div></section>
+
+    </main>
+
+  </div>
+  <footer>
+    2022 Adam Tilson.
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/"
+      >CC-BY-NC-SA</a
+    >
+  </footer>
+  <button onclick="topFunction()" id="topButton" title="Go to top">▲ Top</button> 
+  <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
