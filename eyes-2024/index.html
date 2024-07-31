@@ -254,19 +254,19 @@
 
       <p>Let’s talk about the idea of a game loop. This is a piece of code that runs at a set interval. MakeCode Arcade had a built in function for this, but we are going to create our own so that we can modify how fast the game runs. For this we will need a variable and a loop.</p>
 
-      <p>Start by creating a new variable called delay. This will be set to 640 (ms) in the On Start function.</p>
+      <p>Start by creating a new variable called game_delay. This will be set to 640 (ms) in the On Start function.</p>
 
       <p><img src="res/set-a-variable.png" alt="" /></p>
 
-      <p>We want to rename the variable to delay</p>
+      <p>We want to rename the variable to game_delay</p>
 
       <p><img src="res/rename.png" alt="" /></p>
 
-      <p>Set the variable name to <code class="language-plaintext highlighter-rouge">delay</code> and the value to <code class="language-plaintext highlighter-rouge">640</code>, and then sync it into the <code class="language-plaintext highlighter-rouge">on start</code> block</p>
+      <p>Set the variable name to <code class="language-plaintext highlighter-rouge">game_delay</code> and the value to <code class="language-plaintext highlighter-rouge">640</code>, and then sync it into the <code class="language-plaintext highlighter-rouge">on start</code> block</p>
 
       <p><img src="res/delay.png" alt="" /></p>
 
-      <p>Now we will use this delay in a forever loop. We will grab the <code class="language-plaintext highlighter-rouge">forever</code> block from the Loops module, and place in the Pause function.</p>
+      <p>Now we will use this global(game_delay) in a forever loop. We will grab the <code class="language-plaintext highlighter-rouge">forever</code> block from the Loops module, and place in the Pause function.</p>
 
       <p><img src="res/forever-and-pause.png" alt="" /></p>
 
@@ -360,7 +360,7 @@
       <p>Here is the structure of the code we have so far:</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_forever</span><span class="p">():</span>
-    <span class="n">pause</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="n">pause</span><span class="p">(</span><span class="n">game_delay</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"left"</span><span class="p">:</span>
         <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">16</span>
     <span class="k">elif</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
@@ -432,7 +432,7 @@
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_forever</span><span class="p">():</span>
     <span class="k">global</span> <span class="n">current_direction</span>
     <span class="k">global</span> <span class="n">next_direction</span>
-    <span class="n">pause</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="n">pause</span><span class="p">(</span><span class="n">game_delay</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"left"</span><span class="p">:</span>
         <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">16</span>
     <span class="k">elif</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
@@ -548,7 +548,7 @@
       <p>Let’s also make sure we are calling this function right before we move. Find your on_forever function and add to it:</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_forever</span><span class="p">():</span>
-    <span class="n">pause</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="n">pause</span><span class="p">(</span><span class="n">game_delay</span><span class="p">)</span>
     <span class="n">grow</span><span class="p">()</span>
     <span class="n">move</span><span class="p">()</span>
     <span class="n">turn</span><span class="p">()</span>
@@ -729,125 +729,218 @@
 
       <p>Okay, time to eat some food and grow our snake!</p>
 
-      <details>
-<summary>Complete code so far</summary>
-```
-def on_up_pressed():
-    global next_direction
-    next_direction = "up"
-controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
-
-def check_oob():
-    if mySprite.x &lt; 0 or mySprite.y &lt; 0 or mySprite.x &gt; scene.screen_width() or mySprite.y &gt; scene.screen_height():
-        game.set_game_over_message(False, "Game Over. Score: " + convert_to_text(length - 3))
-        game.game_over(False)
-
-def on_left_pressed():
-    global next_direction
-    next_direction = "left"
-controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
-
-def spawn_food():
-    global food_pickup, overlaps
-    food_pickup = sprites.create(assets.image("""
-        food
-    """), SpriteKind.food)
-    food_pickup.x += randint(-4, 4) * 16
-    food_pickup.y += randint(-3, 3) * 16
-    if food_pickup.overlaps_with(mySprite):
-        overlaps = True
-    for current_segment2 in tail_segments:
-        if food_pickup.overlaps_with(current_segment2):
-            overlaps = True
-    while overlaps == True:
-        overlaps = False
-        sprites.destroy(food_pickup)
-        food_pickup = sprites.create(assets.image("""
-            food
-        """), SpriteKind.food)
-        food_pickup.x += randint(-4, 4) * 16
-        food_pickup.y += randint(-3, 3) * 16
-        if food_pickup.overlaps_with(mySprite):
-            overlaps = True
-        for current_tail_segment in tail_segments:
-            if food_pickup.overlaps_with(current_tail_segment):
-                overlaps = True
-
-def on_right_pressed():
-    global next_direction
-    next_direction = "right"
-controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
-
-def grow():
-    global tail_segment
-    for current_segment in tail_segments:
-        sprites.change_data_number_by(current_segment, "ticks_remaining", -1)
-        if sprites.read_data_number(current_segment, "ticks_remaining") == 0:
-            sprites.destroy(current_segment)
-    tail_segment = sprites.create(assets.image("""
-        body
-    """), SpriteKind.enemy)
-    tail_segment.set_position(mySprite.x, mySprite.y)
-    tail_segments.append(tail_segment)
-    sprites.set_data_number(tail_segment, "ticks_remaining", length)
-def turn():
-    global current_direction
-    if current_direction == "left" or current_direction == "right":
-        if next_direction == "up":
-            current_direction = "up"
-        if next_direction == "down":
-            current_direction = "down"
-    if current_direction == "up" or current_direction == "down":
-        if next_direction == "left":
-            current_direction = "left"
-        if next_direction == "right":
-            current_direction = "right"
-
-def on_down_pressed():
-    global next_direction
-    next_direction = "down"
-controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
-
-def move():
-    if current_direction == "left":
-        mySprite.x += -16
-    elif current_direction == "right":
-        mySprite.x += 16
-    elif current_direction == "up":
-        mySprite.y += -16
-    else:
-        mySprite.y += 16
-tail_segment: Sprite = None
-tail_segments: List[Sprite] = []
-overlaps = False
-food_pickup: Sprite = None
-length = 0
-next_direction = ""
-current_direction = ""
-mySprite: Sprite = None
-mySprite = sprites.create(assets.image("""
-    face
-"""), SpriteKind.player)
-delay = 640
-current_direction = "down"
-next_direction = "down"
-length = 3
-spawn_food()
-
-def on_forever():
-    pause(delay)
-    grow()
-    move()
-    turn()
-    check_oob()
-forever(on_forever)
-```
-</details>
-
     </div></div></section>
 <section id="eatingfood"><button class="collapsible">Eating food</button><div class="text-content"><div class="text-inner">
 
-      <p>For our snake to grow it needs to be able to eat the food. So we need to check</p>
+      <p>For our snake to grow it needs to be able to eat the food. So we need to check if it overlapping with food, and if so, devour it! If it does, let’s do four things</p>
+      <ul>
+        <li>destory the food</li>
+        <li>we are going to speed up the game a big by decreasing the pause delay,</li>
+        <li>we are also going to spawn in a new food</li>
+        <li>we are going to increase the snakes length
+Let’s put all of this in a new function called <code class="language-plaintext highlighter-rouge">check_eat</code></li>
+      </ul>
+
+      <p>Challenge - you have the tools to do all of these things! It’s just checking collisions, setting variables and calling functions. Take a stab at writing it yourself first. Also, where are you going to call the check?</p>
+
+      <p>Extra challenge - because we ate food, all the existing segments should stick around for one extra tick. Can you figure out how to increment them all by one?</p>
+
+      <p>Solution:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_eat</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">game_delay</span>
+    <span class="k">global</span> <span class="n">length</span>
+    <span class="k">global</span> <span class="n">tail_segments</span>
+    <span class="k">if</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">food_pickup</span><span class="p">):</span>
+        <span class="n">game_delay</span> <span class="o">-=</span> <span class="mi">10</span>
+        <span class="n">length</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">sprites</span><span class="p">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">food_pickup</span><span class="p">)</span>
+        <span class="n">spawn_food</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">current_segment</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+            <span class="n">sprites</span><span class="p">.</span><span class="n">change_data_number_by</span><span class="p">(</span><span class="n">current_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>I am calling this function in the forever-loop, after move:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_forever</span><span class="p">():</span>
+    <span class="k">global</span><span class="p">(</span><span class="n">game_delay</span><span class="p">)</span>
+    <span class="n">pause</span><span class="p">(</span><span class="n">game_delay</span><span class="p">)</span>
+    <span class="n">grow</span><span class="p">()</span>
+    <span class="n">move</span><span class="p">()</span>
+    <span class="n">check_eat</span><span class="p">()</span>
+    <span class="n">turn</span><span class="p">()</span>
+    <span class="n">check_oob</span><span class="p">()</span>
+<span class="n">forever</span><span class="p">(</span><span class="n">on_forever</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="canttouchtail"><button class="collapsible">Can't Touch Tail</button><div class="text-content"><div class="text-inner">
+
+      <p>A secondary loss condition in this game is getting a game over if the head collides with any segment of the tail. You have all the tools you need to implement this. Here’s the strategy:</p>
+      <ul>
+        <li>Define the function
+          <ul>
+            <li>Loop over each segment of the tail</li>
+            <li>Check if the head has collided with that segment</li>
+            <li>If it has, call the Game Over code we looked at earlier</li>
+          </ul>
+        </li>
+        <li>Call the function at an appropriate time</li>
+      </ul>
+
+      <p>Good Luck!</p>
+
+    </div></div></section>
+<section id="deployingonhardware"><button class="collapsible">Deploying on Hardware</button><div class="text-content"><div class="text-inner">
+
+      <p>To deploy your project on the kit from the lab, download it here:</p>
+
+      <p><img src="res/download-for-hardware.png" alt="" /></p>
+
+      <p>The first time you try to download, it will ask you which type of device you have. We have the following:</p>
+
+      <p><img src="res/retro-arcade.png" alt="" /></p>
+
+      <p>A file will get saved to your computer.</p>
+
+      <p>Connect a USB cable to both the console as well as your computer. The system will mount as a USB storage device. Simply drag and drop the file over, and watch the magic happen!</p>
+
+      <p><img src="res/adam-is-bad-at-snake.png" alt="" /></p>
+
+      <p><img src="res/well-maybe-not-that-bad.png" alt="" /></p>
+
+    </div></div></section>
+<section id="finalcode"><button class="collapsible">Final Code</button><div class="text-content"><div class="text-inner">
+
+      <p>For your records, here is my copy of the final code. If this doesn’t work for you out of the box, then you likely named your sprites incorrectly.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_up_pressed</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">next_direction</span>
+    <span class="n">next_direction</span> <span class="o">=</span> <span class="s">"up"</span>
+<span class="n">controller</span><span class="p">.</span><span class="n">up</span><span class="p">.</span><span class="n">on_event</span><span class="p">(</span><span class="n">ControllerButtonEvent</span><span class="p">.</span><span class="n">PRESSED</span><span class="p">,</span> <span class="n">on_up_pressed</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">check_oob</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">scene</span><span class="p">.</span><span class="n">screen_width</span><span class="p">()</span> <span class="ow">or</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">scene</span><span class="p">.</span><span class="n">screen_height</span><span class="p">():</span>
+        <span class="n">game</span><span class="p">.</span><span class="n">set_game_over_message</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="s">"Game Over. Score: "</span> <span class="o">+</span> <span class="n">convert_to_text</span><span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">game</span><span class="p">.</span><span class="n">game_over</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_left_pressed</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">next_direction</span>
+    <span class="n">next_direction</span> <span class="o">=</span> <span class="s">"left"</span>
+<span class="n">controller</span><span class="p">.</span><span class="n">left</span><span class="p">.</span><span class="n">on_event</span><span class="p">(</span><span class="n">ControllerButtonEvent</span><span class="p">.</span><span class="n">PRESSED</span><span class="p">,</span> <span class="n">on_left_pressed</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">spawn_food</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">food_pickup</span><span class="p">,</span> <span class="n">overlaps</span>
+    <span class="n">food_pickup</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+        food
+    """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">food</span><span class="p">)</span>
+    <span class="n">food_pickup</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span>
+    <span class="n">food_pickup</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span>
+    <span class="k">if</span> <span class="n">food_pickup</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">mySprite</span><span class="p">):</span>
+        <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">for</span> <span class="n">current_segment22</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">food_pickup</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">current_segment22</span><span class="p">):</span>
+            <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">while</span> <span class="n">overlaps</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">sprites</span><span class="p">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">food_pickup</span><span class="p">)</span>
+        <span class="n">food_pickup</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+            food
+        """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">food</span><span class="p">)</span>
+        <span class="n">food_pickup</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span>
+        <span class="n">food_pickup</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span>
+        <span class="k">if</span> <span class="n">food_pickup</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">mySprite</span><span class="p">):</span>
+            <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">for</span> <span class="n">current_tail_segment</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">food_pickup</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">current_tail_segment</span><span class="p">):</span>
+                <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">def</span> <span class="nf">check_eat</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">game_delay</span><span class="p">,</span> <span class="n">length</span>
+    <span class="k">if</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">food_pickup</span><span class="p">):</span>
+        <span class="n">game_delay</span> <span class="o">+=</span> <span class="mi">0</span> <span class="o">-</span> <span class="mi">10</span>
+        <span class="n">length</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">sprites</span><span class="p">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">food_pickup</span><span class="p">)</span>
+        <span class="n">spawn_food</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">current_segment2</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+            <span class="n">sprites</span><span class="p">.</span><span class="n">change_data_number_by</span><span class="p">(</span><span class="n">current_segment2</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_right_pressed</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">next_direction</span>
+    <span class="n">next_direction</span> <span class="o">=</span> <span class="s">"right"</span>
+<span class="n">controller</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">on_event</span><span class="p">(</span><span class="n">ControllerButtonEvent</span><span class="p">.</span><span class="n">PRESSED</span><span class="p">,</span> <span class="n">on_right_pressed</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">grow</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">tail_segment</span>
+    <span class="k">for</span> <span class="n">current_segment</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+        <span class="n">sprites</span><span class="p">.</span><span class="n">change_data_number_by</span><span class="p">(</span><span class="n">current_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sprites</span><span class="p">.</span><span class="n">read_data_number</span><span class="p">(</span><span class="n">current_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sprites</span><span class="p">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">current_segment</span><span class="p">)</span>
+    <span class="n">tail_segment</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+        body
+    """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">enemy</span><span class="p">)</span>
+    <span class="n">tail_segment</span><span class="p">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">mySprite</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">tail_segments</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tail_segment</span><span class="p">)</span>
+    <span class="n">sprites</span><span class="p">.</span><span class="n">set_data_number</span><span class="p">(</span><span class="n">tail_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">turn</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">current_direction</span>
+    <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"left"</span> <span class="ow">or</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"up"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"up"</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"down"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"down"</span>
+    <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"up"</span> <span class="ow">or</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"down"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"left"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"left"</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"right"</span>
+
+<span class="k">def</span> <span class="nf">on_down_pressed</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">next_direction</span>
+    <span class="n">next_direction</span> <span class="o">=</span> <span class="s">"down"</span>
+<span class="n">controller</span><span class="p">.</span><span class="n">down</span><span class="p">.</span><span class="n">on_event</span><span class="p">(</span><span class="n">ControllerButtonEvent</span><span class="p">.</span><span class="n">PRESSED</span><span class="p">,</span> <span class="n">on_down_pressed</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">move</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"left"</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">16</span>
+    <span class="k">elif</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="mi">16</span>
+    <span class="k">elif</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"up"</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">16</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="mi">16</span>
+
+<span class="k">def</span> <span class="nf">check_eating_tail</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">current_segment3</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">current_segment3</span><span class="p">):</span>
+            <span class="n">game</span><span class="p">.</span><span class="n">set_game_over_message</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="s">"Game Over. Score: "</span> <span class="o">+</span> <span class="n">convert_to_text</span><span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">game</span><span class="p">.</span><span class="n">game_over</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">tail_segment</span><span class="p">:</span> <span class="n">Sprite</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">tail_segments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Sprite</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">overlaps</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">food_pickup</span><span class="p">:</span> <span class="n">Sprite</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">next_direction</span> <span class="o">=</span> <span class="s">""</span>
+<span class="n">current_direction</span> <span class="o">=</span> <span class="s">""</span>
+<span class="n">mySprite</span><span class="p">:</span> <span class="n">Sprite</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">mySprite</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+    face
+"""</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">player</span><span class="p">)</span>
+<span class="n">game_delay</span> <span class="o">=</span> <span class="mi">640</span>
+<span class="n">current_direction</span> <span class="o">=</span> <span class="s">"down"</span>
+<span class="n">next_direction</span> <span class="o">=</span> <span class="s">"down"</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">spawn_food</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">on_forever</span><span class="p">():</span>
+    <span class="n">pause</span><span class="p">(</span><span class="n">game_delay</span><span class="p">)</span>
+    <span class="n">grow</span><span class="p">()</span>
+    <span class="n">move</span><span class="p">()</span>
+    <span class="n">check_eat</span><span class="p">()</span>
+    <span class="n">turn</span><span class="p">()</span>
+    <span class="n">check_oob</span><span class="p">()</span>
+    <span class="n">check_eating_tail</span><span class="p">()</span>
+<span class="n">forever</span><span class="p">(</span><span class="n">on_forever</span><span class="p">)</span>
+
+</code></pre></div>      </div>
     </div></div></section>
 
     </main>
