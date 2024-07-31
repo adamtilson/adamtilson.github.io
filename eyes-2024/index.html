@@ -193,6 +193,175 @@
 
       <p><img src="res/snake-head.png" alt="" /></p>
 
+      <p>Once you are happy, be sure to name your image as <code class="language-plaintext highlighter-rouge">face</code> and save it with Done. We’ll be able to look at this later.</p>
+
+    </div></div></section>
+<section id="addingourfaceasourplayer"><button class="collapsible">Adding our face as our player</button><div class="text-content"><div class="text-inner">
+
+      <p>To add our face as our player, let’s start with the Block interface.</p>
+
+      <p>Go to Sprites and grab the top Block. Then add it to the OnStart receptical.</p>
+
+      <p>All of the lines of code in the <code class="language-plaintext highlighter-rouge">on start</code> block will run every time the game starts up!</p>
+
+      <p><img src="res/adding-the-face.png" alt="" /></p>
+
+      <p>This will result in your player being in your game:</p>
+
+      <p><img src="res/player-in-game.png" alt="" /></p>
+
+      <p>Let’s take a peak at what this looks like in Python code:</p>
+
+      <p><img src="res/python.png" alt="" /></p>
+
+      <p>Hint: You may need to use the dropdown to change from JavaScript to Python</p>
+
+      <p>We can see a few things here, we have created a new variable called <code class="language-plaintext highlighter-rouge">mySprite</code>. This invoked a constructor of the sprites class called create, which looked in our assets folder for the face asset, and set the SpriteKind to player.</p>
+
+      <p>Note: Switching back and forth between Blocks view and Python view can occasionally mess up your Blocks layout or your python formatting. We will go back and forth for a bit before committing to Python.</p>
+
+    </div></div></section>
+<section id="movingourplayer"><button class="collapsible">Moving our player</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s hop back to the Blocks view, and start to create the code to move our player around:</p>
+
+      <p><img src="res/pressing-a-button.png" alt="" /></p>
+
+      <p>This creates an event, that occurs whenever a button is pressed:</p>
+
+      <p><img src="res/change-a-property.png" alt="" /></p>
+
+      <p>When the event occurs, we want to change a property of our sprite, namely the x-position. Configure it as follows:</p>
+
+      <p><img src="res/change-position.png" alt="" /></p>
+
+      <p>We want to move our player 16 pixels at a time, as this is the space of one tile.</p>
+
+      <p>Hint: The game world in MakeCode arcade uses an XY coordinate system, like you saw in math, but the origin is at the top left, and with the y-axis flipped so that positive y-values move down:</p>
+
+      <p><img src="res/coordinate-system.png" alt="" /></p>
+
+      <p>This means that, to move left, we had to move in the negative-x direction. Based on this knowledge, can you figure out how to set the remaining 3 directions? Try to figure it out before you peek the solution ahead.</p>
+
+      <p><img src="res/moving-in-four-directions.png" alt="" /></p>
+
+      <p>Demo your game, you should be able to move your snake head all around the game.</p>
+
+      <p>However, if you have actually played snake, you know that the snake does not move when you press buttons, but instead moves automatically at a set interval. In the next section we will modify our code to make the snake instead move automatically.</p>
+
+    </div></div></section>
+<section id="gameupdateloopautomovingsnake"><button class="collapsible">Game Update Loop - Auto moving snake</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s talk about the idea of a game loop. This is a piece of code that runs at a set interval. MakeCode Arcade had a built in function for this, but we are going to create our own so that we can modify how fast the game runs. For this we will need a variable and a loop.</p>
+
+      <p>Start by creating a new variable called delay. This will be set to 640 (ms) in the On Start function.</p>
+
+      <p><img src="res/set-a-variable.png" alt="" /></p>
+
+      <p>We want to rename the variable to delay</p>
+
+      <p><img src="res/rename.png" alt="" /></p>
+
+      <p>Set the variable name to <code class="language-plaintext highlighter-rouge">delay</code> and the value to <code class="language-plaintext highlighter-rouge">640</code>, and then sync it into the <code class="language-plaintext highlighter-rouge">on start</code> block</p>
+
+      <p><img src="res/delay.png" alt="" /></p>
+
+      <p>Now we will use this delay in a forever loop. We will grab the <code class="language-plaintext highlighter-rouge">forever</code> block from the Loops module, and place in the Pause function.</p>
+
+      <p><img src="res/forever-and-pause.png" alt="" /></p>
+
+      <p>Put them together, but rather than using a fixed value for the pause, we are going to use the delay variable we chose earlier:</p>
+
+      <p><img src="res/grabbing-a-variable.png" alt="" /></p>
+
+      <p>Let’s put it all together:</p>
+
+      <p><img src="res/forever-pause-delay.png" alt="" /></p>
+
+      <p>This block of code will run, and then pause for our delay time, about 2/3rds of a second. After that any code that follows it will run. Once that code is complete, it will loop again, beginning with the pause. This allows us to make a game loop with variable time, which will be useful for later on to speed up the game dynamically as the player gets better at it.</p>
+
+      <p>Let’s try automatically moving our player down each update cycle by copying the “down” instruction from our controller and placing it after the delay.</p>
+
+      <p>Hint: You can copy and paste a block by selecting it, then pressing ctrl+c then ctrl+v.</p>
+
+      <p><img src="res/auto-down.png" alt="" /></p>
+
+      <p>When you play now, you should see your player basically fall off the screen. We will handle that in the next section.</p>
+
+    </div></div></section>
+<section id="snakesteering"><button class="collapsible">Snake Steering</button><div class="text-content"><div class="text-inner">
+
+      <p>We don’t want our player to only move down. We want it to move in a direction you chooose. This means it needs to</p>
+      <ul>
+        <li>know which direction it’s currently going</li>
+        <li>try to change direction if you press a button
+          <ul>
+            <li>But it can only turn to one of the two sides. It can’t reverse, and going forward again wouldn’t change anything.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>This is going to require two varaibles, and some conditional logic.</p>
+
+      <p>Let’s start by setting up two new variables in our starting function:</p>
+
+      <p>create variables called <code class="language-plaintext highlighter-rouge">current_direction</code> and <code class="language-plaintext highlighter-rouge">next_direction</code>.</p>
+
+      <p>Hint: new variable blocks will default to variables you have already created. To make an new variable, explicitly click New variable…</p>
+
+      <p><img src="res/new-variable.png" alt="" /></p>
+
+      <p>We want to set these variables to a new type, <code class="language-plaintext highlighter-rouge">Text</code>. To do this we are going to need to grab some Text boxes from the Text function and drag them in.</p>
+
+      <p><img src="res/text-directions.png" alt="" /></p>
+
+      <p>This will allow you to type text in the box. Type <code class="language-plaintext highlighter-rouge">down</code> in each box, so that your new variables look as follows:</p>
+
+      <p><img src="res/steering-variables.png" alt="" /></p>
+
+      <p>Next let’s use conditional logic to move our snake based on the direction it is currently moving:</p>
+
+      <p>We will need a condition block to check which direction it is moving, and go from there:</p>
+
+      <p><img src="res/logic.png" alt="" /></p>
+
+      <p>What this block does is checks if a condition is met, and if it is performs some code. Otherwise it runs some other code. We acually need 4 branches, one for each direction. You can do this by hitting the (+) on the bottom of the block.</p>
+
+      <p><img src="res/four-branches.png" alt="" /></p>
+
+      <p>What we want to do in these four branches is see which direction is set, and based on that, move our player. Let’s grab a text comparison block:</p>
+
+      <p><img src="res/text-comparison-block.png" alt="" /></p>
+
+      <p>Let’s put it into the top three branches of our comparator:</p>
+
+      <p><img src="res/setting-up-comparisons.png" alt="" /></p>
+
+      <p>On the left side of each of these, we want to use our <code class="language-plaintext highlighter-rouge">current_direction</code> variable. On the right side, we need to type in the words <code class="language-plaintext highlighter-rouge">left</code>, <code class="language-plaintext highlighter-rouge">right</code>, and <code class="language-plaintext highlighter-rouge">up</code>. We won’t need to do down, since by process of elimination, if we are not moving in any of these three directions, we must be moving down!</p>
+
+      <p><img src="res/setting-up-comparisons-2.png" alt="" /></p>
+
+      <p>Now we just need to move the code for moving from the controller to the conditions in the appropriate place:</p>
+
+      <p><img src="res/moving-around-code.png" alt="" /></p>
+
+      <p>Now we will move correctly based on the direction. However, our controllers are empty.</p>
+
+      <p>Let’s fix this by using them to set the <code class="language-plaintext highlighter-rouge">next_direction</code> variable in each of the four directions. You should know how to do this by now. As a hint, don’t forget to grab the Text data type from the Text block in advanced:</p>
+
+      <p><img src="res/setting-directions.png" alt="" /></p>
+
+      <p>The reason we have two sets of directions, next_direction and current_direction, is because our snake can only go from some directions to others. It can’t go backwards, and it can’t go forwards. This means this is actually a rudimentary finite state machine.</p>
+
+      <p>However, currently there are no limits on how far your snake can move.</p>
+
+      <p>Let’s use some conditional logic next to make sure the snake stays in bounds</p>
+
+    </div></div></section>
+<section id="losingifwegooutofbounds"><button class="collapsible">Losing if we go out of bounds</button><div class="text-content"><div class="text-inner">
+
+      <p>To make our snake die if we go out of bounds, we will need to use some conditional logic to check it’s position, and if it is off the screen, give a game over:</p>
+
     </div></div></section>
 
     </main>
