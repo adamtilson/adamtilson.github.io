@@ -351,7 +351,301 @@
 
       <p><img src="res/setting-directions.png" alt="" /></p>
 
-      <p>The reason we have two sets of directions, next_direction and current_direction, is because our snake can only go from some directions to others. It can’t go backwards, and it can’t go forwards. This means this is actually a rudimentary finite state machine.</p>
+      <p>The reason we have two sets of directions, next_direction and current_direction, is because our snake can only go from some directions to others. It can’t go backwards, and it can’t go forwards. This means this is actually a rudimentary finite state machine. Engineering is everywhere, you cannot escape it!</p>
+
+      <p><img src="res/fsm.png" alt="" /></p>
+
+      <p>Let’s use conditional logic to protect against this. However, it is very slow to do this in Blocks. This is a perfect time to take a peak and see what Python is up to:</p>
+
+      <p>Here is the structure of the code we have so far:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_forever</span><span class="p">():</span>
+    <span class="n">pause</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"left"</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">16</span>
+    <span class="k">elif</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="mi">16</span>
+    <span class="k">elif</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"up"</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">16</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="mi">16</span>
+<span class="n">forever</span><span class="p">(</span><span class="n">on_forever</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>We can see the way that condition blocks work in python.</p>
+      <ul>
+        <li>In the <code class="language-plaintext highlighter-rouge">if</code> line we check the condition
+          <ul>
+            <li>What happens if that is true is inside, indented in with four spaces</li>
+            <li>A comparison is done with <code class="language-plaintext highlighter-rouge">==</code></li>
+            <li>Finally, we end a line with a <code class="language-plaintext highlighter-rouge">:</code></li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">elif</code> checks a second branch
+          <ul>
+            <li>With it’s contents inside</li>
+          </ul>
+        </li>
+        <li>and <code class="language-plaintext highlighter-rouge">else</code> is what happens if no other conditions are true
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">else</code> doesn’t need a condition.</li>
+          </ul>
+        </li>
+        <li>text, (known as Strings in python), have <code class="language-plaintext highlighter-rouge">"quotes"</code> around them.</li>
+      </ul>
+
+      <p>Let’s try to use the same structure to guard against our code.</p>
+      <ul>
+        <li>We want to set our current direction to <code class="language-plaintext highlighter-rouge">up</code> only if our next direction is <code class="language-plaintext highlighter-rouge">up</code> and our current direction is  <code class="language-plaintext highlighter-rouge">right</code> or <code class="language-plaintext highlighter-rouge">left</code></li>
+        <li>we want to set our current direction to <code class="language-plaintext highlighter-rouge">right</code> only if our next direction is <code class="language-plaintext highlighter-rouge">right</code> and our current direction is <code class="language-plaintext highlighter-rouge">up</code> or <code class="language-plaintext highlighter-rouge">down</code></li>
+        <li>And we have two other cases as well.</li>
+        <li>See if you can figure out code to make this work.
+          <ul>
+            <li>Hint: The keyword “or” lets you logically combine two conditions and evaluate to true if either is true</li>
+            <li>Hint: You can also nest if statements</li>
+            <li>Final hint: in order to use the current_direction and next_direction variables from your code, add the following at the start of the on_forever function
+              <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">global</span> <span class="n">next_direction</span>
+<span class="k">global</span> <span class="n">current_direction</span>
+</code></pre></div>              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Here is one possible solution to make this work for turning up and down:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"left"</span> <span class="ow">or</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"up"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"up"</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"down"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"down"</span>
+</code></pre></div>      </div>
+      <p>Try to make it work for “right” and “left” as well, before peaking the solution below:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"up"</span> <span class="ow">or</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"down"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"left"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"left"</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"right"</span>
+</code></pre></div>      </div>
+
+      <p>Here is the complete block of code for the on_forever function. You can replace yours with this if you are having errors:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_forever</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">current_direction</span>
+    <span class="k">global</span> <span class="n">next_direction</span>
+    <span class="n">pause</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"left"</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">16</span>
+    <span class="k">elif</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="mi">16</span>
+    <span class="k">elif</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"up"</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">16</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="mi">16</span>
+    <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"left"</span> <span class="ow">or</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"up"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"up"</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"down"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"down"</span>
+    <span class="k">if</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"up"</span> <span class="ow">or</span> <span class="n">current_direction</span> <span class="o">==</span> <span class="s">"down"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"left"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"left"</span>
+        <span class="k">if</span> <span class="n">next_direction</span> <span class="o">==</span> <span class="s">"right"</span><span class="p">:</span>
+            <span class="n">current_direction</span> <span class="o">=</span> <span class="s">"right"</span>
+<span class="n">forever</span><span class="p">(</span><span class="n">on_forever</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>With this all implemented, you can hop over to your game and give it a shot.</p>
+
+    </div></div></section>
+<section id="tidyingupourcodewithfunctions"><button class="collapsible">Tidying up our code with functions</button><div class="text-content"><div class="text-inner">
+
+      <p>If we look back at our game loop blocks, we can see they are getting very very ugly!</p>
+
+      <p><img src="res/ugly-blocks-need-refactoring.png" alt="" /></p>
+
+      <p>This is a good opportunity to learn about functions. Functions are reuable blocks of code. You can define a function which groups together code, and then call that function so that you can use all that code quickly.</p>
+
+      <p>Let’s break this code out into functions to make it easier to work with. Create two functions as blocks and name them <code class="language-plaintext highlighter-rouge">move</code> and <code class="language-plaintext highlighter-rouge">turn</code></p>
+
+      <p><img src="res/make-a-function.png" alt="" /></p>
+
+      <p>Name your function to move</p>
+
+      <p><img src="res/a-function-called-move.png" alt="" /></p>
+
+      <p>Drag the move code into the function:</p>
+
+      <p><img src="res/move-code.png" alt="" /></p>
+
+      <p>Then do a function call to invoke move from the forever-loop:</p>
+
+      <p><img src="res/function-call-move.png" alt="" /></p>
+
+      <p><img src="res/move-inline.png" alt="" /></p>
+
+      <p>See if you can do the same with the second condition block, which we will call <code class="language-plaintext highlighter-rouge">turn</code>. When you are complete, here is what it should look like. The arrows indicate the order in which your program will flow:</p>
+
+      <p><img src="res/function-flow.png" alt="" /></p>
+
+      <p>Our snake is still just a head, and that’s sad. Let’s see if we can give it a body</p>
+
+    </div></div></section>
+<section id="givingyoursnakeabody"><button class="collapsible">Giving your snake a body</button><div class="text-content"><div class="text-inner">
+
+      <p>To begin, let’s draw a body image for our snake.</p>
+
+      <p>Assets -&gt; New -&gt; Image</p>
+
+      <p>Here’s what I am doing for mine:</p>
+
+      <p><img src="res/body.png" alt="" /></p>
+
+      <p>Be sure to give it a name, <code class="language-plaintext highlighter-rouge">body</code>, and save it with done.</p>
+
+      <p>We need our snake to be of a certain length. Let’s create a variable that our snakes length. Let’s see how to do this in python instead of Blocks. Find where your other variables are located, and add one for length:</p>
+
+      <p><img src="res/length-variable.png" alt="" /></p>
+
+      <p>That is much quicker than blocks!</p>
+
+      <p>What does length=3 mean. It means your snake is going to have 3 body segments following it around.</p>
+
+      <p>A lot of game programming is like performing a magic trick. It would be a lot of work to create a series of segments and have them follow us one after another. An easier thing to do would be to spawn a body segment where we are, and once we have moved 3 tiles, to despawn it. Once we become a length 4 snake, they will only get despawned after moving 4 tiles, etc.</p>
+
+      <p>So we have a number of challenges to solve:</p>
+      <ul>
+        <li>How do we create new segments
+          <ul>
+            <li>We’ll need to do this right before we move</li>
+          </ul>
+        </li>
+        <li>How do we keep track of all of these segments
+          <ul>
+            <li>We’ll use an array for this</li>
+          </ul>
+        </li>
+        <li>How do we keep track of how old a segment is
+          <ul>
+            <li>We’ll use a data variable attached to the sprite for this, like one might use for HP in a game</li>
+          </ul>
+        </li>
+        <li>How do we destory segments
+          <ul>
+            <li>Once their age is zero, we will have to despawn them.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>This is how software engineering is done - analyze a big problem, break it down into little pieces, and solve them one by one. Let’s start by spawning in pieces after we move. We’ll create a new function for this called <code class="language-plaintext highlighter-rouge">grow</code>. Let’s do it right in python:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">grow</span><span class="p">():</span>
+    <span class="n">tail_segment</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+        body
+    """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">enemy</span><span class="p">)</span>
+    <span class="n">tail_segment</span><span class="p">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">mySprite</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span><span class="p">),</span>
+</code></pre></div>      </div>
+
+      <p>Let’s also make sure we are calling this function right before we move. Find your on_forever function and add to it:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_forever</span><span class="p">():</span>
+    <span class="n">pause</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="n">grow</span><span class="p">()</span>
+    <span class="n">move</span><span class="p">()</span>
+    <span class="n">turn</span><span class="p">()</span>
+<span class="n">forever</span><span class="p">(</span><span class="n">on_forever</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>When you test your game now, you should have an infinitely growing snake:</p>
+
+      <p><img src="res/infinite-snake-unlocked.png" alt="" /></p>
+
+      <p>We do have a problem though, and that is that we have a (theoretically) infinite number of sprites being added with no way to keep track of them all. It wouldn’t make sense to name every single one something unique (like <code class="language-plaintext highlighter-rouge">body_1</code>, <code class="language-plaintext highlighter-rouge">body_2</code>, <code class="language-plaintext highlighter-rouge">body_400</code>, etc.), so instead we will use an array, which is like a list of variables, in this case, sprites.</p>
+
+      <p>First we create an empty array with the rest of our variable initializations:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="n">current_direction</span> <span class="o">=</span> <span class="s">"down"</span>
+<span class="n">next_direction</span> <span class="o">=</span> <span class="s">"down"</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">tail_segments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Sprite</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="p">...</span>
+</code></pre></div>      </div>
+
+      <p>and then whenever we create a new piece, we need to add it to the list:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">grow</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">tail_segments</span>
+    <span class="n">tail_segment</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+        body
+    """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">enemy</span><span class="p">)</span>
+    <span class="n">tail_segment</span><span class="p">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">mySprite</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">tail_segments</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tail_segment</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Cool, now we won’t lose any of our segments, because they will all be in the list.</p>
+
+      <p>The next thing we want our snake segments to age and dissapear over time. We will need an extension for this. Click on extensions:</p>
+
+      <p><img src="res/extensions.png" alt="" /></p>
+
+      <p>Type in <code class="language-plaintext highlighter-rouge">data</code>, and check out the extension called <code class="language-plaintext highlighter-rouge">arcade-sprite-data</code></p>
+
+      <p><img src="res/arcade-sprite-data-install.png" alt="" /></p>
+
+      <p>You will know that it is properly installed because there will now be a <code class="language-plaintext highlighter-rouge">Data</code> section under sprite:</p>
+
+      <p><img src="res/data-in-sprite.png" alt="" /></p>
+
+      <p>Let’s head back to python:</p>
+
+      <p>Update your grow() function as follows:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">grow</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">tail_segments</span>
+    <span class="k">global</span> <span class="n">length</span>
+    <span class="n">tail_segment</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+        body
+    """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">enemy</span><span class="p">)</span>
+    <span class="n">tail_segment</span><span class="p">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">mySprite</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">tail_segments</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tail_segment</span><span class="p">)</span>
+    <span class="n">sprites</span><span class="p">.</span><span class="n">set_data_number</span><span class="p">(</span><span class="n">tail_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>We have just create a new variable that will always live with that tail segment. It is called <code class="language-plaintext highlighter-rouge">ticks_remaining</code> and it is set to 3, which is our current length.</p>
+
+      <p>The next thing we need to do is age our tail segments. We can actually do this at the starting of the function we are on right now:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">grow</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">tail_segments</span>
+    <span class="k">global</span> <span class="n">length</span>
+    <span class="k">for</span> <span class="n">current_segment</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+        <span class="n">sprites</span><span class="p">.</span><span class="n">change_data_number_by</span><span class="p">(</span><span class="n">current_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">tail_segment</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+        body
+    """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">enemy</span><span class="p">)</span>
+    <span class="n">tail_segment</span><span class="p">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">mySprite</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">tail_segments</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tail_segment</span><span class="p">)</span>
+    <span class="n">sprites</span><span class="p">.</span><span class="n">set_data_number</span><span class="p">(</span><span class="n">tail_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>In this code we are looping over the tail_segments, and for each we are decreasing the <code class="language-plaintext highlighter-rouge">ticks_remaining</code> by one.</p>
+
+      <p>Finally, once the age reaches <code class="language-plaintext highlighter-rouge">ticks_remaining</code>, we want to destory this piece of the tail. Here is the final complete version of the grow() function:</p>
+
+      <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">grow</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">tail_segments</span>
+    <span class="k">global</span> <span class="n">length</span>
+    <span class="k">for</span> <span class="n">current_segment</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+        <span class="n">sprites</span><span class="p">.</span><span class="n">change_data_number_by</span><span class="p">(</span><span class="n">current_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sprites</span><span class="p">.</span><span class="n">read_data_number</span><span class="p">(</span><span class="n">current_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sprites</span><span class="p">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">current_segment</span><span class="p">)</span>
+    <span class="n">tail_segment</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+        body
+    """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">enemy</span><span class="p">)</span>
+    <span class="n">tail_segment</span><span class="p">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">mySprite</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">tail_segments</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tail_segment</span><span class="p">)</span>
+    <span class="n">sprites</span><span class="p">.</span><span class="n">set_data_number</span><span class="p">(</span><span class="n">tail_segment</span><span class="p">,</span> <span class="s">"ticks_remaining"</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</code></pre></div>      </div>
 
       <p>However, currently there are no limits on how far your snake can move.</p>
 
@@ -360,8 +654,200 @@
     </div></div></section>
 <section id="losingifwegooutofbounds"><button class="collapsible">Losing if we go out of bounds</button><div class="text-content"><div class="text-inner">
 
-      <p>To make our snake die if we go out of bounds, we will need to use some conditional logic to check it’s position, and if it is off the screen, give a game over:</p>
+      <p>To make our snake die if we go out of bounds, we will need to use some conditional logic to check it’s position, and if it is off the screen, give a game over.</p>
 
+      <p>Let’s go ahead and put this in a new function called <code class="language-plaintext highlighter-rouge">check_oob</code>:</p>
+
+      <p><img src="res/check-oob.png" alt="" /></p>
+
+      <p>This is going to be more conditional logic, so let’s write this in python:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_oob</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">scene</span><span class="p">.</span><span class="n">screen_width</span><span class="p">()</span> <span class="ow">or</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">scene</span><span class="p">.</span><span class="n">screen_height</span><span class="p">():</span>
+        <span class="n">game</span><span class="p">.</span><span class="n">game_over</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>However, we can also give a custom game over message. Let’s tell the user their score, based on their current length minus their starting legnth:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_oob</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">length</span>
+    <span class="k">if</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">scene</span><span class="p">.</span><span class="n">screen_width</span><span class="p">()</span> <span class="ow">or</span> <span class="n">mySprite</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">scene</span><span class="p">.</span><span class="n">screen_height</span><span class="p">():</span>
+        <span class="n">game</span><span class="p">.</span><span class="n">set_game_over_message</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="s">"Game Over. Score: "</span> <span class="o">+</span> <span class="n">convert_to_text</span><span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span>
+        <span class="n">game</span><span class="p">.</span><span class="n">game_over</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Of course, not being able to get any score is no good, let’s work on that next</p>
+
+    </div></div></section>
+<section id="growingyoursnake"><button class="collapsible">Growing your snake</button><div class="text-content"><div class="text-inner">
+
+      <p>Your snake grows by eating food that randomly spawns in on the map.</p>
+
+      <p>Let’s go ahead and create an art asset for the food:</p>
+
+      <p><img src="res/egg.png" alt="" /></p>
+
+      <p>We need to spawn the egg randomly onto the field. But it’s very important we don’t spawn it on top of the snake, either the head or the body. This is going to require chance, but also some checks. Let’s create a new variable called <code class="language-plaintext highlighter-rouge">food_pickup</code> and a new function called <code class="language-plaintext highlighter-rouge">spawn_food</code>.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">length</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">tail_segments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Sprite</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">food_pickup</span><span class="p">:</span> <span class="n">Sprite</span> <span class="o">=</span> <span class="bp">None</span>
+</code></pre></div>      </div>
+
+      <p>This code is a bit complicated. We are spawing in our food, moving it to a random location, checking if it overlaps with any part of the snake, and if it does, destroying it, creating a new one, and trying again.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">spawn_food</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">food_pickup</span>
+    <span class="k">global</span> <span class="n">tail_segments</span>
+    <span class="n">food_pickup</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+        food
+    """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">food</span><span class="p">)</span>
+    <span class="n">food_pickup</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span>
+    <span class="n">food_pickup</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span>
+    <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="n">food_pickup</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">mySprite</span><span class="p">):</span>
+        <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">for</span> <span class="n">current_segment</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">food_pickup</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">current_segment</span><span class="p">):</span>
+            <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">while</span> <span class="n">overlaps</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">sprites</span><span class="p">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">food_pickup</span><span class="p">)</span>
+        <span class="n">food_pickup</span> <span class="o">=</span> <span class="n">sprites</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">assets</span><span class="p">.</span><span class="n">image</span><span class="p">(</span><span class="s">"""
+                food
+            """</span><span class="p">),</span> <span class="n">SpriteKind</span><span class="p">.</span><span class="n">food</span><span class="p">)</span>
+        <span class="n">food_pickup</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span>
+        <span class="n">food_pickup</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span>
+        <span class="k">if</span> <span class="n">food_pickup</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">mySprite</span><span class="p">):</span>
+                <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">for</span> <span class="n">current_tail_segment</span> <span class="ow">in</span> <span class="n">tail_segments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">food_pickup</span><span class="p">.</span><span class="n">overlaps_with</span><span class="p">(</span><span class="n">current_tail_segment</span><span class="p">):</span>
+                <span class="n">overlaps</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div>      </div>
+
+      <p>Don’t forget to call this function in your spawn_food function!</p>
+
+      <p>Okay, time to eat some food and grow our snake!</p>
+
+      <details>
+<summary>Complete code so far</summary>
+```
+def on_up_pressed():
+    global next_direction
+    next_direction = "up"
+controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
+
+def check_oob():
+    if mySprite.x &lt; 0 or mySprite.y &lt; 0 or mySprite.x &gt; scene.screen_width() or mySprite.y &gt; scene.screen_height():
+        game.set_game_over_message(False, "Game Over. Score: " + convert_to_text(length - 3))
+        game.game_over(False)
+
+def on_left_pressed():
+    global next_direction
+    next_direction = "left"
+controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
+
+def spawn_food():
+    global food_pickup, overlaps
+    food_pickup = sprites.create(assets.image("""
+        food
+    """), SpriteKind.food)
+    food_pickup.x += randint(-4, 4) * 16
+    food_pickup.y += randint(-3, 3) * 16
+    if food_pickup.overlaps_with(mySprite):
+        overlaps = True
+    for current_segment2 in tail_segments:
+        if food_pickup.overlaps_with(current_segment2):
+            overlaps = True
+    while overlaps == True:
+        overlaps = False
+        sprites.destroy(food_pickup)
+        food_pickup = sprites.create(assets.image("""
+            food
+        """), SpriteKind.food)
+        food_pickup.x += randint(-4, 4) * 16
+        food_pickup.y += randint(-3, 3) * 16
+        if food_pickup.overlaps_with(mySprite):
+            overlaps = True
+        for current_tail_segment in tail_segments:
+            if food_pickup.overlaps_with(current_tail_segment):
+                overlaps = True
+
+def on_right_pressed():
+    global next_direction
+    next_direction = "right"
+controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
+
+def grow():
+    global tail_segment
+    for current_segment in tail_segments:
+        sprites.change_data_number_by(current_segment, "ticks_remaining", -1)
+        if sprites.read_data_number(current_segment, "ticks_remaining") == 0:
+            sprites.destroy(current_segment)
+    tail_segment = sprites.create(assets.image("""
+        body
+    """), SpriteKind.enemy)
+    tail_segment.set_position(mySprite.x, mySprite.y)
+    tail_segments.append(tail_segment)
+    sprites.set_data_number(tail_segment, "ticks_remaining", length)
+def turn():
+    global current_direction
+    if current_direction == "left" or current_direction == "right":
+        if next_direction == "up":
+            current_direction = "up"
+        if next_direction == "down":
+            current_direction = "down"
+    if current_direction == "up" or current_direction == "down":
+        if next_direction == "left":
+            current_direction = "left"
+        if next_direction == "right":
+            current_direction = "right"
+
+def on_down_pressed():
+    global next_direction
+    next_direction = "down"
+controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
+
+def move():
+    if current_direction == "left":
+        mySprite.x += -16
+    elif current_direction == "right":
+        mySprite.x += 16
+    elif current_direction == "up":
+        mySprite.y += -16
+    else:
+        mySprite.y += 16
+tail_segment: Sprite = None
+tail_segments: List[Sprite] = []
+overlaps = False
+food_pickup: Sprite = None
+length = 0
+next_direction = ""
+current_direction = ""
+mySprite: Sprite = None
+mySprite = sprites.create(assets.image("""
+    face
+"""), SpriteKind.player)
+delay = 640
+current_direction = "down"
+next_direction = "down"
+length = 3
+spawn_food()
+
+def on_forever():
+    pause(delay)
+    grow()
+    move()
+    turn()
+    check_oob()
+forever(on_forever)
+```
+</details>
+
+    </div></div></section>
+<section id="eatingfood"><button class="collapsible">Eating food</button><div class="text-content"><div class="text-inner">
+
+      <p>For our snake to grow it needs to be able to eat the food. So we need to check</p>
     </div></div></section>
 
     </main>
