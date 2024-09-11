@@ -386,6 +386,17 @@ In windows you can check by:</p>
 git config --global user.email you@yourdomain.ca
 </code></pre></div>      </div>
 
+      <p>Exact spelling matters here - make sure things are spelled correctly!</p>
+
+      <h3 id="lockfile-woes-2024">Lockfile Woes? (2024+)</h3>
+      <p>Since Fall 2024, these commands are failing on some machines in the lab. In this case, we will instead need to set up our user name and password locally for the repo. Proceed to the next step to initialize the repo, and once it is complete, set your name and email as follows:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config user.name "Your Name"
+git config user.email "you@yourdomain.ca"
+</code></pre></div>      </div>
+
+      <p>Note that this will only be active for the selected repository.</p>
+
       <h3 id="git-init">git init</h3>
 
       <p>Navigate to a directory we want to become a repo, and run the command:</p>
@@ -510,6 +521,8 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 &gt; git branch -M main
 &gt; git push -u origin main
 </code></pre></div>      </div>
+
+      <p>Note that you may have a browser window may pop up with GitHub that will require you to authenticate Git to use your account. Please allow it to do so!</p>
 
       <h3 id="check-status-on-web">Check status on web</h3>
 
