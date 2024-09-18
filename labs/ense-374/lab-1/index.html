@@ -483,9 +483,22 @@ git checkout -b main
         <li>Create a name, description, and you can omit the rest for now</li>
       </ul>
 
-      <h3 id="new-creating-a-key-pair-for-secure-communication">NEW: Creating a Key Pair for secure communication</h3>
+      <h3 id="new-easiest-way-to-authorize">NEW: Easiest way to Authorize</h3>
 
-      <p>In some system configurations, you will need to generate a cryptographic key pair for securely uploading files to github. I believe this only happens on Windows.</p>
+      <p>If you are using Git For Windows, the easiest way to authorize your local Git to work with your GitHub is by using the Credential Manager, an O-Auth client. You can run this using the following command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config credential.helper manager
+</code></pre></div>      </div>
+
+      <p>When you go to push your repo, a window will pop up. Use your browser to authorize git to access your repos. Easy.</p>
+
+      <p>Note: I was able to make this work in the lab.</p>
+
+      <h3 id="alt-creating-a-key-pair-for-secure-communication">Alt: Creating a Key Pair for secure communication</h3>
+
+      <p>If you are not using Git For Windows, and alternate method to authorize your Git account to use your GitHub via SSH is as follows. Note: This does not seem to be working in the lab currently.</p>
+
+      <p>The following generates a cryptographic key pair for securely uploading files to github.</p>
 
       <p>This section comes from the following github documentation: <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></p>
 
@@ -508,9 +521,7 @@ ssh-keygen -t ed25519 -C "your-email@uregina.ca"
 
       <p><img src="res/uploading-a-key.png" alt="" /></p>
 
-      <p>With this, GitHub will recognize this computer and accept your contributions.</p>
-
-      <p>Note: In other configurations, a separate window will pop up allowing authentication through the browser. If this happens for you, you may use this instead. I am investigating what causes this to appear.</p>
+      <p>With this, GitHub will recognize this computer and accept your contributions over SSH.</p>
 
       <h3 id="link-and-push-to-remote">Link and push to remote</h3>
 
