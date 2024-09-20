@@ -620,7 +620,7 @@ e.g. on a client, Firefox may be running 6 different tabs on port 52197, 52198, 
 
 <span class="k">def</span> <span class="nf">timed_output</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">server_active</span><span class="p">):</span>
     <span class="k">while</span> <span class="n">server_active</span><span class="p">.</span><span class="n">is_set</span><span class="p">():</span>
-        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
         <span class="k">print</span> <span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: New Message!"</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
