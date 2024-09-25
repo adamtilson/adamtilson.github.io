@@ -1,8 +1,0 @@
-login-bootstrap.png
-login-css.png
-login-html.png
-notes-bootstrap.png
-notes-css.png
-notes-html.png
-register-bootstrap.png
-
