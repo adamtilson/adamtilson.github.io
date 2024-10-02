@@ -236,6 +236,7 @@
           </ul>
         </li>
         <li><a href="https://www.w3schools.com/js/js_reserved.asp">no reserved words allowed!</a></li>
+        <li>no dashes, as they represent minus (which will clash with CSS naming conventions in some contexts)</li>
         <li>camelCase is preferred</li>
       </ul>
 
@@ -310,11 +311,12 @@
 
       <p>Template Literals</p>
       <ul>
+        <li>strings which allow inline insertion of variables or other code</li>
         <li>strings declared surrounded by the backtick character: e.g. :`
           <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">`I counted </span><span class="p">${</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="p">}</span><span class="s2"> apples`</span> 
 </code></pre></div>          </div>
           <ul>
-            <li>Any JS in the <code class="language-plaintext highlighter-rouge">${ }</code>’s is evaluated.</li>
+            <li>Any JS in the ${ }`’s is evaluated.</li>
             <li>If you want the ‘$’ in the string, do ‘$$’.</li>
           </ul>
         </li>
@@ -1347,9 +1349,33 @@ This is passed as the first arg of the callback, typically given the variable �
         <li>
           <p>An ad-hoc method, where you use the post form to add elements directly to the DOM using JavaScript, and then remove them in a similar fashion with the Burn Button.</p>
         </li>
-        <li>
-          <p>An MVC approach where you store all of the data in a separate list of objects (model). When you post an item, add it to the model. Then, on the view side, clear any elements that exist, loop through the model, and add each to the view separately. When you delete an object, remove it from the model, then as before, clear the view, loop through the model, and each element back to the view. This may seem more difficult and time consuming, but will actually make your life much easier!</p>
+        <li>An MVC approach where you store all of the data in a separate list of objects (model).
+          <ul>
+            <li>When you post an item, add it to the model.
+              <ul>
+                <li>Then, on the view side
+                  <ul>
+                    <li>clear any elements that exist.</li>
+                    <li>loop through the model,</li>
+                    <li>and add each to the view separately.</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>When you delete an object, remove it from the model,
+              <ul>
+                <li>then as before, on the view side:
+                  <ul>
+                    <li>clear the view,</li>
+                    <li>loop through the model,</li>
+                    <li>and add each element back to the view.</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </li>
+        <li>This approach may seem more difficult and time consuming, but will actually make your life much easier!</li>
       </ul>
 
       <p>For this lab, I am not going to force the MVC approach, but I will in the next lab!</p>
@@ -1367,6 +1393,7 @@ This is passed as the first arg of the callback, typically given the variable �
         <li>The note’s text, (text)</li>
         <li>A list of usernames who upvoted the note, (list of text)</li>
         <li>A list of usernames who downvoted the note, (list of text)</li>
+        <li>Anything else you think would be needed</li>
       </ul>
 
       <p>Create 3 sample notes according to this model. Note that we will NOT display this in the view in this lab, it will only appear in Lab 5.</p>
