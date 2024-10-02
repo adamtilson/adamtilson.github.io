@@ -1260,72 +1260,80 @@ This is passed as the first arg of the callback, typically given the variable �
 
       <p>If you need to, you can use <code class="language-plaintext highlighter-rouge">event.stopPropagation()</code> to halt the bubbling process prematurely. Just be careful this doesn’t break other expected functionality - in other words, bubbling in JavaScript / DOM is an intended feature, not a bug, so you should have a good reason for disabling it!</p>
 
-      <p>exercise:</p>
+      <p>Exercise:</p>
 
       <p>Create a page with a title and some text. Have a button that swaps between a dark theme and a light theme by attaching or removing pre-created CSS classes.</p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>We’re going to have two parts for today’s lab. The first part takes a break from our main project for now - we’ll get back to that in the next lab, however this lab will help in this.</p>
+      <p>We’re going to have two parts for today’s lab. The first part takes a break from our main project for now - we’ll get back to that in the next lab. This exercise is purely to understand Front End JavaScript and the DOM.</p>
 
-      <h3 id="part-1-sorting-a-list">Part 1: Sorting a list</h3>
+      <h3 id="part-1-burn-after-reading">Part 1: Burn after Reading</h3>
 
-      <p>For the first part of this lab, we’re going to implement a sorted list form.</p>
+      <p>For the first part of this lab, we’re going to implement a simple application where users can add sticky notes to a page, and delete them once they are done.</p>
 
       <p>The purpose is to get you used to finding and modifying DOM elements with JavaScript.</p>
 
-      <p>Consider a list of textboxes of any length, with an extra text box at the bottom</p>
+      <p>In this application, you will create a simple form for adding sticky notes, using a bootstrap card component:</p>
+
+      <p><img src="res/post-a-note.png" alt="" /></p>
+
+      <p>When you press post, this will add a new sticky note to the app:</p>
+
+      <p><img src="res/adding-notes.png" alt="" /></p>
+
+      <p>Pressing the “burn” button on each note will cause the note to be removed from the application:</p>
+
+      <p><img src="res/removing-notes.png" alt="" /></p>
+
+      <p>Extra: Make the notes rotate between different colors. Use the following colors:</p>
+
       <ul>
-        <li>I’m using a style similar to the previous assignment. You should have completed this and get this style basically for free</li>
+        <li><code class="language-plaintext highlighter-rouge">#ff7eb9</code></li>
+        <li><code class="language-plaintext highlighter-rouge">#ff65a3</code></li>
+        <li><code class="language-plaintext highlighter-rouge">#7afcff</code></li>
+        <li><code class="language-plaintext highlighter-rouge">#feff9c</code></li>
+        <li><code class="language-plaintext highlighter-rouge">#fff740</code></li>
+      </ul>
+
+      <p>Thanks to <a href="https://www.color-hex.com/color-palette/29241">color-hex</a></p>
+
+      <p>When you delete notes, make sure the the colors of the notes do not change. Position can change.</p>
+
+      <p>Hint: There are two approaches you could use:</p>
+
+      <ul>
         <li>
-          <p>You can add as many elements as you like and sort them.</p>
+          <p>An ad-hoc method, where you use the post form to add elements directly to the DOM using JavaScript, and then remove them in a similar fashion with the Burn Button.</p>
         </li>
-        <li>The list will start empty</li>
+        <li>
+          <p>An MVC approach where you store all of the data in a separate list of objects (model). When you post an item, add it to the model. Then, on the view side, clear any elements that exist, loop through the model, and add each to the view separately. When you delete an object, remove it from the model, then as before, clear the view, loop through the model, and each element back to the view. This may seem more difficult and time consuming, but will actually make your life much easier!</p>
+        </li>
       </ul>
 
-      <p><img src="res/sorta-easy-2-blank.png" alt="" /></p>
+      <p>For this lab, I am not going to force the MVC approach, but I will in the next lab!</p>
 
-      <ul>
-        <li>When you add an element it appears in the list</li>
-      </ul>
-
-      <p><img src="res/sorta-easy-2-add.png" alt="" /></p>
-
-      <ul>
-        <li>regardless of the length of the list, sort works as expected</li>
-      </ul>
-
-      <p><img src="res/sorta-easy-2-sort.png" alt="" /></p>
-
-      <ul>
-        <li>adding more elements just pushes them to the bottom of the list</li>
-      </ul>
-
-      <h3 id="part-2-to-do-list-model-as-javascript-objects">Part 2: To-Do list Model as JavaScript Objects</h3>
+      <h3 id="part-2-note-vote-model-as-javascript-objects">Part 2: Note-Vote Model as JavaScript Objects</h3>
 
       <p>Recall in an MVC, the purpose is to separate the data for our application (model) from the presentation (view).</p>
 
-      <p>In the second part of the lab, you are to create a JavaScript Object to represent the model for the first version of our To-Do list. This type of syntax is called JavaScript Object Notation (JSON), and when saved in a separate file, is a popular way to store database-like data.</p>
+      <p>In the second part of the lab, you are to create a JavaScript Object to represent the model for the first prototype version of our Note-Vote app. This type of syntax is called JavaScript Object Notation (JSON), and when saved in a separate file, is a popular way to store database-like data.</p>
 
       <p>This object should include:</p>
       <ul>
-        <li>A unique identifier for the task (numerical)</li>
-        <li>Task creator, text</li>
-        <li>Task claimer, text</li>
-        <li>The text of the task</li>
-        <li>The state of the task, which can be between <code class="language-plaintext highlighter-rouge">unclaimed</code>, <code class="language-plaintext highlighter-rouge">unfinished</code> and <code class="language-plaintext highlighter-rouge">finished</code>.</li>
+        <li>A unique identifier for the note, (numerical)</li>
+        <li>The note creator, (text)</li>
+        <li>The note’s text, (text)</li>
+        <li>A list of usernames who upvoted the note, (list of text)</li>
+        <li>A list of usernames who downvoted the note, (list of text)</li>
       </ul>
 
-      <p>Create 3 samples of tasks in the model for the to-do list. Note that we will NOT display this in the view in this lab, it will only appear in Lab 5.</p>
+      <p>Create 3 sample notes according to this model. Note that we will NOT display this in the view in this lab, it will only appear in Lab 5.</p>
 
       <h3 id="submission">Submission</h3>
 
-      <p>You may complete any of the versions.</p>
-      <ul>
-        <li>The things you learn will be directly applicable to the next hand-in assignment.</li>
-        <li>Your progress will be checked by a demo next week! Good Luck.</li>
-      </ul>
+      <p>Your progress will be checked by a demo next week! Happy scripting.</p>
     </div></div></section>
 
     </main>
