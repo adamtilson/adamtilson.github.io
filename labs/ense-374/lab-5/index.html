@@ -265,6 +265,15 @@
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#my-div</span><span class="dl">"</span> <span class="p">).</span><span class="nx">text</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Some new text</span><span class="dl">"</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
+      <h3 id="using-a-vanilla-dom-object">Using a vanilla DOM object</h3>
+
+      <p>If for some reason you end up with a vanilla DOM object, and still wish to use jQuery functions on it, you will need to wrap it in the jQuery selector function:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myHeader</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-header</span><span class="dl">"</span><span class="p">);</span><span class="c1">// found an object the old way</span>
+<span class="nx">$</span><span class="p">(</span> <span class="nx">myHeader</span> <span class="p">).</span><span class="nx">text</span><span class="p">(</span> <span class="dl">"</span><span class="s2">New header text</span><span class="dl">"</span> <span class="p">);</span>
+
+</code></pre></div>      </div>
+
     </div></div></section>
 <section id="part3addingandremovingelements"><button class="collapsible">Part 3: Adding and Removing elements</button><div class="text-content"><div class="text-inner">
 
@@ -282,6 +291,8 @@
    ^        ^               ^         ^
 before   prepend         append     after
 </code></pre></div>      </div>
+
+      <p>Note the use of HTML code in the function argument string. This is a great place to use Template Literals!</p>
 
       <h3 id="removing-elements">Removing elements</h3>
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">element</span><span class="dl">"</span> <span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
@@ -333,7 +344,9 @@ before   prepend         append     after
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span> <span class="p">).</span><span class="nx">text</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Bye</span><span class="dl">"</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
-      <p>Similarly, rather than <code class="language-plaintext highlighter-rouge">InnerHTML</code>, in jQuery it’s <code class="language-plaintext highlighter-rouge">HTML</code></p>
+      <p>Similarly, rather than <code class="language-plaintext highlighter-rouge">InnerHTML</code>, in jQuery it’s <code class="language-plaintext highlighter-rouge">html</code></p>
+
+      <p>Note the use of setter-style, akin to Object Oriented Programming, rather than assignment style.</p>
 
       <h3 id="manipulating-attributes">Manipulating Attributes</h3>
 
@@ -347,7 +360,7 @@ before   prepend         append     after
 
       <h3 id="getting-form-values">Getting Form Values</h3>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#my-text-input</span><span class="dl">"</span> <span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">textValue</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#my-text-input</span><span class="dl">"</span> <span class="p">).</span><span class="nx">val</span><span class="p">()</span>
 </code></pre></div>      </div>
 
     </div></div></section>
