@@ -265,13 +265,20 @@
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#my-div</span><span class="dl">"</span> <span class="p">).</span><span class="nx">text</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Some new text</span><span class="dl">"</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
-      <h3 id="using-a-vanilla-dom-object">Using a vanilla DOM object</h3>
+      <h3 id="from-vanilla-dom-to-jquery">From vanilla DOM to JQuery</h3>
 
       <p>If for some reason you end up with a vanilla DOM object, and still wish to use jQuery functions on it, you will need to wrap it in the jQuery selector function:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myHeader</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-header</span><span class="dl">"</span><span class="p">);</span><span class="c1">// found an object the old way</span>
 <span class="nx">$</span><span class="p">(</span> <span class="nx">myHeader</span> <span class="p">).</span><span class="nx">text</span><span class="p">(</span> <span class="dl">"</span><span class="s2">New header text</span><span class="dl">"</span> <span class="p">);</span>
 
+</code></pre></div>      </div>
+
+      <h3 id="from-jquery-back-to-vanilla-dom">From jQuery back to vanilla DOM</h3>
+
+      <p>Conversely, if you ever wish to go back from a jQuery object to a vanilla DOM object, you can do this by using the following syntax:</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">header</span><span class="dl">"</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </code></pre></div>      </div>
 
     </div></div></section>
@@ -362,6 +369,19 @@ before   prepend         append     after
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">textValue</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#my-text-input</span><span class="dl">"</span> <span class="p">).</span><span class="nx">val</span><span class="p">()</span>
 </code></pre></div>      </div>
+
+      <h3 id="arbitrary-data">Arbitrary Data</h3>
+
+      <p>Sometimes it’s useful to put arbitrary data in an HTML object. This can be done as follows:</p>
+
+      <pre><code class="language-HTML">&lt;button id="btn-stars" data-star-rating="5"&gt;*****&lt;/button&gt;
+</code></pre>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">stars</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#btn-stars</span><span class="dl">"</span> <span class="p">).</span><span class="nx">data</span><span class="p">(</span> <span class="dl">"</span><span class="s2">star-rating</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stars</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>The syntax is a bit tricky. Data member attributes are always prefaced with the <code class="language-plaintext highlighter-rouge">data-</code> name when written in HTML, and then accessed from the data function using jQuery by providing pnly the name after <code class="language-plaintext highlighter-rouge">data-</code>. Note: this feature also exists in vanilla JavaScript using the <code class="language-plaintext highlighter-rouge">dataset</code> property of a vanilla DOM object.</p>
 
     </div></div></section>
 <section id="part6events"><button class="collapsible">Part 6: Events</button><div class="text-content"><div class="text-inner">
