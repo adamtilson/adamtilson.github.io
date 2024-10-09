@@ -164,7 +164,7 @@
         <li>For bigger projects, it may be better to use a FrameWork like Vue, React or Angular</li>
         <li>Recently BootStrap dropped it as a dependency in favour of vanilla JavaScript</li>
         <li>Most of the advantages of using it are now native in JavaScript, or CSS (animations)</li>
-        <li>It is still useful to learn to support legacy projects using it, like ~77% of the web (2022).</li>
+        <li>It is still useful to learn to support legacy projects using it, like ~94.4% of the web (2023).</li>
       </ul>
 
       <h3 id="how-do-we-get-it">How do we get it</h3>
@@ -185,6 +185,15 @@
         <li>Your browser reads HTML top to bottom, so we want to know about jQuery functionality before running our own scripts</li>
       </ul>
 
+      <p>in <code class="language-plaintext highlighter-rouge">index.html</code>…</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- your code up here --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>      </div>
+
       <h3 id="where-can-i-get-help">Where can I get help?</h3>
 
       <p>The official docs are not bad: <a href="https://api.jquery.com/">jQuery API</a></p>
@@ -197,24 +206,15 @@
         <li>Create a JavaScript file, link it in the HTML (After the jQuery link), and add the following:</li>
       </ul>
 
-      <p>in <code class="language-plaintext highlighter-rouge">index.html</code>…</p>
-
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- ... --&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>      </div>
-
       <p>in <code class="language-plaintext highlighter-rouge">script.js</code>…</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> 
- <span class="c1">//...</span>
+ <span class="c1">//Put your javascript in here</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
       <ul>
-        <li>Recall this is callback syntax with an anonymous function being called when the document is ready</li>
+        <li>Recall this is callback syntax with an anonymous function being called when the document is ready. You can think of this like the ‘main’ function in other languages.</li>
       </ul>
 
       <h3 id="minifyed-libraries">“Minify”ed Libraries</h3>
@@ -242,7 +242,7 @@
             <li>Recall this is the same as CSS selectors</li>
           </ul>
         </li>
-        <li>the basic selection function is: <code class="language-plaintext highlighter-rouge">$("...")</code></li>
+        <li>the basic selection function is: <code class="language-plaintext highlighter-rouge">$( "..." )</code></li>
       </ul>
 
       <p>e.g.</p>
@@ -261,6 +261,7 @@
       <h3 id="cascading">Cascading</h3>
 
       <p>Recall from last week we can cascade function calls. This is the intended usage of jQuery, rather than storing things in variables where possible:</p>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#my-div</span><span class="dl">"</span> <span class="p">).</span><span class="nx">text</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Some new text</span><span class="dl">"</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
@@ -269,15 +270,17 @@
 
       <h3 id="adding-elements">Adding elements</h3>
 
-      <p><code class="language-plaintext highlighter-rouge">before</code>, <code class="language-plaintext highlighter-rouge">after</code> -&gt; before or after an elements, outside the tag
-<code class="language-plaintext highlighter-rouge">prepend</code>, <code class="language-plaintext highlighter-rouge">append</code> -&gt; first or last thing inside the element tag</p>
+      <p>To add an element, first you need to find an element relative to where you wish to insert. Then you can use the following four function to insert:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">before</code>, <code class="language-plaintext highlighter-rouge">after</code> -&gt; before or after the selected element, outside the tag
+<code class="language-plaintext highlighter-rouge">prepend</code>, <code class="language-plaintext highlighter-rouge">append</code> -&gt; first or last thing inside the selected element</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span> <span class="p">).</span><span class="nx">before</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;button&gt;new&lt;/button&gt;</span><span class="dl">"</span> <span class="p">)</span>
 </code></pre></div>      </div>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;h1&gt;</span>     Hello World     <span class="nt">&lt;/h1&gt;</span>  
-   ^       ^              ^        ^
-before   prepend      append     after
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="nt">&lt;h1&gt;</span>     Hello World     <span class="nt">&lt;/h1&gt;</span>  
+   ^        ^               ^         ^
+before   prepend         append     after
 </code></pre></div>      </div>
 
       <h3 id="removing-elements">Removing elements</h3>
@@ -308,13 +311,12 @@ before   prepend      append     after
 
       <h3 id="css-separation-of-concern">CSS Separation of Concern</h3>
 
-      <p>Recall last week Tutorial</p>
+      <p>Recall last week’s tutorial</p>
       <ul>
         <li>it’s a bad move to do CSS styles through JS / DOM,</li>
-        <li>it makes more sense just to change classes</li>
+        <li>instead it makes more sense just to attach or remove classes with pre-defined styles</li>
+        <li>using jQuery…</li>
       </ul>
-
-      <p>Instead use functions:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">p</span><span class="dl">"</span> <span class="p">).</span><span class="nx">hasClass</span><span class="p">(</span> <span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span> <span class="p">)</span>
 <span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">p</span><span class="dl">"</span> <span class="p">).</span><span class="nx">addClass</span><span class="p">(</span> <span class="dl">"</span><span class="s2">big-title</span><span class="dl">"</span> <span class="p">)</span>
@@ -336,10 +338,16 @@ before   prepend      append     after
       <h3 id="manipulating-attributes">Manipulating Attributes</h3>
 
       <p>getter:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">img</span><span class="dl">"</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="dl">"</span><span class="s2">src</span><span class="dl">"</span> <span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">a</span><span class="dl">"</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="dl">"</span><span class="s2">href</span><span class="dl">"</span> <span class="p">)</span>
 </code></pre></div>      </div>
+
       <p>setter:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">img</span><span class="dl">"</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">https://www.google.com</span><span class="dl">"</span> <span class="p">)</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">a</span><span class="dl">"</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="dl">"</span><span class="s2">href</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">https://www.google.com/</span><span class="dl">"</span> <span class="p">)</span>
+</code></pre></div>      </div>
+
+      <h3 id="getting-form-values">Getting Form Values</h3>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">#my-text-input</span><span class="dl">"</span> <span class="p">).</span><span class="nx">val</span><span class="p">()</span>
 </code></pre></div>      </div>
 
     </div></div></section>
@@ -347,8 +355,8 @@ before   prepend      append     after
 
       <h3 id="adding-event-listeners">Adding event listeners</h3>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span> <span class="p">).</span><span class="nx">click</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">h1</span><span class="dl">"</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// your onclick code goes here!</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
@@ -357,7 +365,7 @@ before   prepend      append     after
       <p>To an element…</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">input</span><span class="dl">"</span> <span class="p">).</span><span class="nx">keypress</span><span class="p">(</span> <span class="p">(</span> <span class="nx">e</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="c1">//  ...</span>
+    <span class="c1">// your onkeypress code goes here!</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
       <p>To a document…</p>
@@ -373,17 +381,31 @@ before   prepend      append     after
 <span class="p">});</span>
 </code></pre></div>      </div>
 
+      <h3 id="adding-listeners-for-all-buttons-in-a-class">Adding listeners for all buttons in a class</h3>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.dropdown-item</span><span class="dl">'</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">()</span> <span class="p">)</span>
+    <span class="p">})</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
     </div></div></section>
 <section id="part7animatingwithjquery"><button class="collapsible">Part 7: Animating with jQuery</button><div class="text-content"><div class="text-inner">
 
       <ul>
-        <li>jQuery lets you animate over CSS properties</li>
-        <li>You start at one position and end at another
+        <li>jQuery lets you animate over CSS properties
           <ul>
-            <li>This is called “tweening”</li>
+            <li>that is, change a CSS property over time</li>
+            <li>Your element starts at a starting value
+              <ul>
+                <li>And it ends at a value provided by you</li>
+                <li>You can optionally choose the time as well, and easing method</li>
+              </ul>
+            </li>
+            <li>The value changes over time, which is called “tweening”</li>
           </ul>
         </li>
-        <li>Only works with numeric values, with the exceptions of show, hide and toggle</li>
+        <li>This only works with numeric values, with the exceptions of show, hide and toggle</li>
       </ul>
 
       <p><a href="https://www.w3schools.com/jquery/eff_animate.asp">Animating with jQuery</a></p>
@@ -548,67 +570,150 @@ before   prepend      append     after
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>In this lab we come back to the lab project. Recall, the end goal is to create a collaborative to-do list. For now, we are going to simulate the a single users’ interactivity using JavaScript, jQuery and DOM manipulations. Later, you will replace much of this functionality with server-side Node.js code. This lab will be primarily JavaScript / jQuery, but you can modify as needed your HTML, CSS, Bootstrap, and JavaScript.</p>
+      <p>In this lab we return to the lab project. We are going to make a front-end only protoype of our application using JavaScript and jQuery, using the Model-View-Controller pattern. Recall, the end goal is to create a multi-user mesage posting application with voting capabilities. For now, we are going to simulate the applications usage using JavaScript, jQuery and DOM manipulations. We will create three sample users, selectable from a dropdown, to use the system from each of these views. Later, you will replace much of this functionality with server-side Node.js code. This lab will be primarily JavaScript / jQuery, but you can modify as needed your HTML, CSS, Bootstrap, and JavaScript.</p>
 
-      <p><img src="res/jquery.svg" alt="" /></p>
+      <p><img src="res/progression.svg" alt="" /></p>
 
       <h3 id="non-persistent-interactivity">Non-persistent interactivity</h3>
 
-      <p>Using JavaScript / jQuery DOM manipulation, add the following functionality to the <code class="language-plaintext highlighter-rouge">todo</code> page:</p>
+      <p>You do not need to modify the login/register page.</p>
+
+      <p>You do need to modify the note-vote page to include a dropdown of three sample users, as in the following screenshot:</p>
+
+      <p><img src="res/switch-users.png" alt="" /></p>
+
+      <p>I am using the bootstrap dropdown found here, with minimal changes:</p>
+
+      <p><a href="https://getbootstrap.com/docs/5.0/components/dropdowns/">Bootstrap 5 Dropdown Buttons</a></p>
+
+      <p>Using JavaScript / jQuery DOM manipulation, add the following functionality to the <code class="language-plaintext highlighter-rouge">note-vote</code> page:</p>
 
       <ul>
-        <li>When the user enters text and clicks the add task button, create and add an unclaimed task to the task list
-          <ul>
-            <li>Ensure the task text matches the textbox content</li>
-            <li>Experiment with jQuery animations for adding the new task</li>
-          </ul>
-        </li>
-        <li>Ensure the task properly transitions through the following states (for one user):
-          <ul>
-            <li><code class="language-plaintext highlighter-rouge">unclaimed</code> -&gt; <code class="language-plaintext highlighter-rouge">claimed but unfinished</code> (Claim button)</li>
-            <li><code class="language-plaintext highlighter-rouge">claimed but unfinished</code> -&gt; <code class="language-plaintext highlighter-rouge">unclaimed</code> (Abandon)</li>
-            <li><code class="language-plaintext highlighter-rouge">claimed but unfinished</code> -&gt; <code class="language-plaintext highlighter-rouge">finished</code> (Checkbox to checked)</li>
-            <li><code class="language-plaintext highlighter-rouge">finished</code> -&gt; <code class="language-plaintext highlighter-rouge">claimed but unfinished </code> (Checkbox to unchecked)</li>
-          </ul>
-        </li>
-        <li>Finally, when the user clicks remove complete, remove all of the completed tasks
-          <ul>
-            <li>Experiment with jQuery animations for removing completed tasks</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p>Interaction is further described by the following diagram:</p>
-
-      <p><img src="res/states.png" alt="" /></p>
-
-      <ul>
-        <li>when the user enters a new task (a) and presses button (b), a new task is created as in 2.</li>
-        <li>When the user presses the claim button (d), the task is transformed into state 3.</li>
-        <li>when the user clicks the abandon button (f), the task returns to state 2.</li>
-        <li>when the user clicks the checkbox (e), the task transitions to state 4</li>
-        <li>when the user unclicks the checkbox (g), the task transitions back to state 3</li>
         <li>
-          <p>When the user clicks remove complete (c), all of the completed tasks (state 4) are removed</p>
+          <p>When the Tester uses the user selection dropdown, switch the view so that it shows up as though that user was logged in.</p>
         </li>
-        <li>Note: You may now remove the old template tasks from the previous labs, but keep a backup of the code for a future lab! *</li>
+        <li>
+          <p>When the user types in a note and adds it, it should appear in the note list.</p>
+        </li>
+        <li>
+          <p>Our note-vote system has the following rules</p>
+          <ul>
+            <li>If a given user wrote a note, they cannot vote on it, but they can always see the score</li>
+            <li>If a given user did not write the note, and have not yet voted, they also cannot see the score
+              <ul>
+                <li>However, if they upvote the note, the upvote button becomes green and they can see the score</li>
+                <li>If they downvote the note, the downvote button becomes red and they can see the score</li>
+              </ul>
+            </li>
+            <li>The score of a note is the total number of upvotes, minus the total number of downvotes</li>
+          </ul>
+        </li>
       </ul>
 
-      <p>IMPORTANT: Remember to separate the Model from the View.</p>
+      <p>Consider the following scenario to completely understand the usage of the system.</p>
+
+      <p>User A logs into a brand new system and posts their first note:</p>
+
+      <p><img src="res/process-01.png" alt="" /></p>
+
+      <p><img src="res/process-02.png" alt="" /></p>
+
+      <p>Note that User A can see the score, but cannot vote.</p>
+
+      <p>Now we switch to user B who can vote:</p>
+
+      <p><img src="res/process-03.png" alt="" /></p>
+
+      <p><img src="res/process-04.png" alt="" /></p>
+
+      <p>Let’s have user B upvote the note:</p>
+
+      <p><img src="res/process-05.png" alt="" /></p>
+
+      <p>We can see the button is now green, indicating an upvote, with a score of 1.</p>
+
+      <p>Let’s go back to User A:</p>
+
+      <p><img src="res/process-06.png" alt="" /></p>
+
+      <p>User A can still not vote, but can see the new score:</p>
+
+      <p><img src="res/process-07.png" alt="" /></p>
+
+      <p>Let’s switch to User C next:</p>
+
+      <p><img src="res/process-08.png" alt="" /></p>
+
+      <p><img src="res/process-09.png" alt="" /></p>
+
+      <p>User C has not voted yet, so they cannot see the score. Let’s have them downvote:</p>
+
+      <p><img src="res/process-10.png" alt="" /></p>
+
+      <p>The score is now 0. Why? Because the one upvote and one downvote cancel each other out. Hopping back to A:</p>
+
+      <p><img src="res/process-11.png" alt="" /></p>
+
+      <p><img src="res/process-12.png" alt="" /></p>
+
+      <p>User A has no way to tell if their note is controversial, or just unseen.</p>
+
+      <p>Let’s hop back to B next:</p>
+
+      <p><img src="res/process-13.png" alt="" /></p>
+
+      <p>User B sees the score is Zero, even though they upvoted.</p>
+
+      <p><img src="res/process-14.png" alt="" /></p>
+
+      <p>By clicking on upvote again, they remove their vote:</p>
+
+      <p><img src="res/process-15.png" alt="" /></p>
+
+      <p>Again, the score is hidden, as they seemingly have not yet voted.</p>
+
+      <p><img src="res/process-16.png" alt="" /></p>
+
+      <p>Let’s have User B upvote again to get their score back:</p>
+
+      <p><img src="res/process-17.png" alt="" /></p>
+
+      <p>We are back to the previous state:</p>
+
+      <p><img src="res/process-18.png" alt="" /></p>
+
+      <p>Finally, let’s have B change their mind altogether, and move directly to a downvote:</p>
+
+      <p><img src="res/process-19.png" alt="" /></p>
+
+      <p>By clicking the downvote button, their upvote is removed and a downvote is issued, making the final score -2:</p>
+
+      <p><img src="res/process-20.png" alt="" /></p>
+
+      <p>Implementation:</p>
+
+      <p>IMPORTANT: This app must be developed as a Model-View-Controller. That means you need to separate the Model from the View.</p>
       <ul>
-        <li>This means you have some data structure (e.g. JavaScript Objects) which represents the tasks</li>
-        <li>When you do any interaction which updates the system…
+        <li>You already did this last week, using JSON
           <ul>
-            <li>First update the model (change something in the JavaScript Objects)</li>
-            <li>Use the updated model to update the view</li>
-            <li>The easiest way to do this is remove all tasks, and recreate from the model from scratch</li>
+            <li>This makes excellent test data as you are building your controller and view</li>
+          </ul>
+        </li>
+        <li>Always perform updates according to the MVC strategy:</li>
+        <li>When any user interacts with the system…
+          <ul>
+            <li>First update the model (change something in the list of JavaScript Objects)</li>
+            <li>Then use the updated model to update the view</li>
+            <li>The easiest way to do this is remove all view elements, and recreate from the view from scratch</li>
           </ul>
         </li>
       </ul>
 
       <h3 id="submission">Submission</h3>
 
-      <p>Please submit to URCourses by the due date.</p>
+      <p>This is a submission based lab, please submit to URCourses by the due date.</p>
+
+      <p>Please include HTML, CSS and JavaScript files so that the complete system may by run by the grader.</p>
     </div></div></section>
 
     </main>
