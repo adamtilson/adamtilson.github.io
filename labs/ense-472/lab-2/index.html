@@ -162,7 +162,7 @@
     </div></div></section>
 <section id="introduction"><button class="collapsible">Introduction</button><div class="text-content"><div class="text-inner">
 
-      <p>Previously, we looked at low-level socket programming in Python. We observed this was very powerful, but also tedious - you needed to be aware of low-level concerns like creating threads, handling shared memory, and properly setting up sockets. Alternatively, one can use higher-level APIs to manage much of this for you. One example of this is using Twisted Python. We will use this to quickly prototype some simple application. We will also use WireShark in this lab to examine the packets which these applications generate to get more idea of what is happening on our network.</p>
+      <p>Previously, we looked at low-level socket programming in Python. We observed this was very powerful, but also tedious - you needed to be aware of low-level concerns like creating threads, handling shared memory, and properly setting up sockets. Alternatively, one can use higher-level APIs to manage much of this for you. One example of this is using Twisted Python. We will use this to quickly prototype some simple applications. We will also use WireShark in this lab to examine the packets which these applications generate to get more idea of what is happening on our network.</p>
 
     </div></div></section>
 <section id="part1twistedpython"><button class="collapsible">Part 1: Twisted Python</button><div class="text-content"><div class="text-inner">
@@ -181,7 +181,7 @@
         <li>A FOSS (MIT-licensed) project since 2001</li>
         <li>Event-Driven - we are back to a single thread, however we can try to not block when we don’t need to so that the application remains responsive</li>
         <li>Influential - the <code class="language-plaintext highlighter-rouge">deferred</code> system they popularized would go on to inspire similar methods, such as promises, which would be used jQuery, dojo, Node.js and JavaScript</li>
-        <li>Supports unit Testing supported with <code class="language-plaintext highlighter-rouge">twisted.trial</code></li>
+        <li>Supports unit testing supported with <code class="language-plaintext highlighter-rouge">twisted.trial</code></li>
       </ul>
 
       <h3 id="parts-of-twisted">Parts of Twisted</h3>
@@ -267,10 +267,10 @@
 
 <span class="k">class</span> <span class="nc">EchoClient</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">Protocol</span><span class="p">):</span>
    <span class="k">def</span> <span class="nf">connectionMade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-       <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">,</span> <span class="s">'utf-8'</span><span class="p">))</span>
 
    <span class="k">def</span> <span class="nf">dataReceived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-       <span class="k">print</span> <span class="s">"Server said:"</span><span class="p">,</span> <span class="n">data</span>
+       <span class="k">print</span> <span class="p">(</span><span class="s">"Server said:"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
        <span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">loseConnection</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">EchoFactory</span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="n">ClientFactory</span><span class="p">):</span>
@@ -278,11 +278,11 @@
        <span class="k">return</span> <span class="n">EchoClient</span><span class="p">()</span>
 
    <span class="k">def</span> <span class="nf">clientConnectionFailed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connector</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
-       <span class="k">print</span> <span class="s">"Connection failed."</span>
+       <span class="k">print</span> <span class="p">(</span><span class="s">"Connection failed."</span><span class="p">)</span>
        <span class="n">reactor</span><span class="p">.</span><span class="n">stop</span><span class="p">()</span>
 
    <span class="k">def</span> <span class="nf">clientConnectionLost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connector</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
-       <span class="k">print</span> <span class="s">"Connection lost."</span>
+       <span class="k">print</span> <span class="p">(</span><span class="s">"Connection lost."</span><span class="p">)</span>
        <span class="n">reactor</span><span class="p">.</span><span class="n">stop</span><span class="p">()</span> 
 
 <span class="n">reactor</span><span class="p">.</span><span class="n">connectTCP</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="n">EchoFactory</span><span class="p">())</span>
@@ -297,7 +297,7 @@
 
       <h3 id="udp-echo-server">UDP Echo Server</h3>
 
-      <p>In Twisted, tt is relatively easy to change the protocol. Here is an example of an equivalent server using UDP:</p>
+      <p>In Twisted, it is relatively easy to change the protocol. Here is an example of an equivalent server using UDP:</p>
 
       <p><code class="language-plaintext highlighter-rouge">echo_udp.py</code></p>
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">endpoints</span>
@@ -324,7 +324,7 @@
 
       <p><img src="res/echo-udp.png" alt="" /></p>
 
-      <p>This is a connectionless protocol is osuspptimized for speed rather than reliability, and will thus not send all of the extra control packets. However, if a packet is missed, there is no way to know based on the protocol, so the application must handle this.</p>
+      <p>This is a connectionless protocol that is optimized for speed rather than reliability, and will thus not send all of the extra control packets. However, if a packet is missed, there is no way to know based on the protocol, so the application must handle this.</p>
 
       <p>Note: The UDP echo client would be much more streamlined. For some examples of what this would be like using similar syntax to what we have used, you can check out <a href="https://twisted.org/documents/12.3.0/core/howto/udp.html">Twisted UDP 12.3.0</a> or the <a href="https://twisted.org/documents/12.3.0/core/examples/index.html">Twisted 12.3.0 Examples</a></p>
 
@@ -420,7 +420,7 @@
 
       <p><a href="https://www.wireshark.org/download.html">Wireshark - downloads</a></p>
 
-      <p>On linux, you will need to run this as a superuser, and as an Admin on Windows. If you are in the lab I can help you get set up with this.</p>
+      <p>On linux, you will need to run this as a superuser, (<code class="language-plaintext highlighter-rouge">sudo wireshark</code>) and as an Admin on Windows. If you are in the lab I can help you get set up with this.</p>
 
       <p>Once you pop into WireShark, you can see a list of the interfaces. We are going to get started using the loopback (localhost) interface</p>
 
@@ -461,6 +461,8 @@
 
     </div></div></section>
 <section id="part4twistedchat"><button class="collapsible">Part 4: Twisted Chat</button><div class="text-content"><div class="text-inner">
+
+      <p>Let’s look at an example of a chat application running in Twisted Python:</p>
 
       <p><code class="language-plaintext highlighter-rouge">tcp_server.py</code></p>
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">endpoints</span>
@@ -542,6 +544,8 @@
     <span class="n">reactor</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>      </div>
 
+      <p>This is a server-client application: users connect to the server, and then issue chat commands which are sent to all other users. Using what you know about Wireshark, are you able to eavesdrop on conversations that are sent over the network?</p>
+
     </div></div></section>
 <section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
 
@@ -549,9 +553,9 @@
 
       <p>Phase 1: Using the Twisted Chat application we developed in Part 4 and WireShark, create a session with one server and two clients. Send a messages from the first client to the second client. Using WireShark, examine the packets. In a text document, using screen captures, show some annotated captures from these packets - in particular show which order the packets travelled. Flag anything which might identify source, content, or message. Are these messages secure? Why or why not?</p>
 
-      <p>Phase 2: Upgrade the Twisted Chat application to use end-to-end encryption with SSL. Using the encrypted version, repeat the packet collection process from phase 1. Which Protocol is being used now? Are you able to see the messages being sent? Has anything changed functionality from the users point of view? As before, flag anything you can, such as certificates being exchanged.</p>
+      <p>Phase 2: Upgrade the Twisted Chat application to use end-to-end encryption with SSL. Using the encrypted version, repeat the packet collection process from phase 1, again documented in a text file. Which Protocol is being used now? Are you able to see the messages being sent? Would an end-user be able to tell that anything different is happening that in the TCP Client? As before, flag anything you can, such as certificates being exchanged.</p>
 
-      <p>Phase 3: Modify the Twisted Chat application to use UDP instead of TCP. Note that UDP does not have any notion of connections, thus you will need to simply assume the first Datagram recieved from the user is their name, and subsequent sends are chat messages until the disconnect message is recieved. Repeat the packet collection excercise from phase 1. What has changed on the network side? Which benefits and drawbacks of this technology are apparent compared to TCP by examining the code and packets?</p>
+      <p>Phase 3: Modify the Twisted Chat application to use UDP instead of TCP. Note that UDP does not have any notion of connections, thus you will need to simply assume the first Datagram recieved from the user is their name, and subsequent sends are chat messages until the disconnect message is recieved. Repeat the packet collection and documentation excercise from phase 1. What has changed on the network side? Which benefits and drawbacks of this technology are apparent compared to TCP by examining the code and packets?</p>
 
     </div></div></section>
 <section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
