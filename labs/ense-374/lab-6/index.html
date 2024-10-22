@@ -872,23 +872,40 @@
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>For this assignment, use <code class="language-plaintext highlighter-rouge">node.js</code> and <code class="language-plaintext highlighter-rouge">express</code> to create a server which which hosts your site as it exists at the end of lab 5.</p>
+      <p>For this assignment, use <code class="language-plaintext highlighter-rouge">node.js</code> and <code class="language-plaintext highlighter-rouge">express</code> to create a server which which hosts your prototype project as it exists at the end of lab 5.</p>
+
+      <p>SETUP:</p>
       <ul>
-        <li>All of the files developed so far should get sent.
+        <li>Create a JSON file which is accessible to the server.
           <ul>
-            <li>This includes the <code class="language-plaintext highlighter-rouge">.css</code>, <code class="language-plaintext highlighter-rouge">.js</code>, and one HTML page per request</li>
-            <li>The <code class="language-plaintext highlighter-rouge">/</code> route should present the user with the login page</li>
+            <li>This should contains a list of objects, each of which contains a <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> field.</li>
+            <li>Store a set of sample usernames and corresponding passwords in this file
+              <ul>
+                <li>e.g. <code class="language-plaintext highlighter-rouge">a@a.a</code> <code class="language-plaintext highlighter-rouge">aPassword</code>, etc.</li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li>Create a JSON file with an object with a <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> field.</li>
-        <li>If the user attempts to log in to the login page using the username and password stored in the JSON object, admit them to the todo list.
+      </ul>
+
+      <p><em>Warning - storing passwords in plain text / JSON is a very bad practice! We are only doing to learn. We will replace it with more secure methods in the future!</em></p>
+
+      <ul>
+        <li>Create an express server which can host all of the files developed so far for lab 5.
           <ul>
-            <li>In other words, when the user submits the form, submit it to a new route, e.g. <code class="language-plaintext highlighter-rouge">/todo</code>
+            <li>This includes the <code class="language-plaintext highlighter-rouge">.css</code>, <code class="language-plaintext highlighter-rouge">.js</code>, and one HTML page per request</li>
+          </ul>
+        </li>
+        <li>The <code class="language-plaintext highlighter-rouge">/</code> route should cause the user user to be directed to the login page
+          <ul>
+            <li>If the user attempts to log in to the login page using any of the username and corresponding passwords from the JSON object
               <ul>
-                <li>In the code for <code class="language-plaintext highlighter-rouge">/todo</code>, check username and password
+                <li>Admit them to the prototype application.</li>
+                <li>i.e., when the user submits the form, submit it to a new route, e.g. <code class="language-plaintext highlighter-rouge">/app</code></li>
+                <li>In the code for <code class="language-plaintext highlighter-rouge">/app</code>, check username and password
                   <ul>
-                    <li>Only grant access to the page if username and password are both correct</li>
-                    <li>If the username and password is not correct, send them back to the login page.</li>
+                    <li>Only grant access to the page if a username exists and the corresponding password was entered</li>
+                    <li>Else send them back to the login page.</li>
                   </ul>
                 </li>
               </ul>
@@ -910,8 +927,6 @@
           </ul>
         </li>
       </ul>
-
-      <p><em>Warning - storing passwords in plain text / JSON is a very bad practice! We are only doing to learn. We will replace it with more secure methods in the future!</em></p>
 
       <h3 id="submission">Submission</h3>
 
