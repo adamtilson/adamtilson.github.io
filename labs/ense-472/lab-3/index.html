@@ -992,19 +992,29 @@ From 10.0.0.1 icmp_seq=3 Destination Host Unreachable
     </div></div></section>
 <section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>As with the previous assignment, in this one you will be submitting a report. Please collect figures and screenshot as you go!</p>
+      <p>As with the previous assignment, in this one you will be submitting a report. Please collect figures and screenshot as you go, as you will be summarize your findings in a brief report!</p>
 
       <p>In this assignment, you are to use mininet to build a custom tree structure as shown in the following figure:</p>
 
       <p><img src="res/architecture.png" alt="" /></p>
 
-      <p>Create a mininet simulation and verify connectivity using the default mininet controller from h1 and h8.</p>
-
-      <p>Next, replace the controller with the flooding algorithm from POX. Does this still work as expected? Are there any broadcast storms? How can you tell? Can every computer see the traffic? How can you verify?</p>
-
-      <p>Next load up the TCP-based chat server from lab 2 with the server on h5, and clients on h1 and h8. Using the Flooding algorithm, see that the algorithm works. Next, verify that an eavesdropper on the network is able to see the contents of all the packets unencrypted. Capture this data as figures. Does this eavesdropping still occur with the Mininet controller?</p>
-
-      <p>Finally, using the TLS-based chat protocol from Part 2 of lab 2, using the flooding algorithm. Capture packets on an eavesdropping machine and see if any messages can be decrypted.</p>
+      <ol>
+        <li>
+          <p>Create a mininet simulation and verify connectivity using the default mininet controller from h1 and h8, and simple ping tests.</p>
+        </li>
+        <li>
+          <p>Load the TCP-based chat server from lab 2 with the server on h5, and clients on h1 and h8. Using the mininet controller for routing, and wireshark for testing, see if either h4 and/or h6 can see the chat packets being sent and read their contents.</p>
+        </li>
+        <li>
+          <p>Replace the mininet controller with the POX Flooding algorithm. Do the TCP-based chat packets still arive at their destination? Are there any broadcast storms?</p>
+        </li>
+        <li>
+          <p>With the flooding controller, verify if either h4 and/or h6 can see the chat packets being sent and read their contents.</p>
+        </li>
+        <li>
+          <p>Finally, using the SSL-based chat protocol from Part 2 of lab 2, using the flooding algorithm. See if either h4 and/or h6 can see the chat packets being sent and read their contents.</p>
+        </li>
+      </ol>
 
       <p>As with Lab 2, please summarize your findings in a report. Also submit source code for the mininet network. Please use screen capture figures to demonstrate your findings.</p>
 
