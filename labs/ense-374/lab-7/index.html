@@ -570,45 +570,44 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
         </li>
       </ul>
 
-      <p><img src="res/what-is-a-task.png" alt="" /></p>
+      <p><img src="res/what-is-a-post.png" alt="" /></p>
 
       <p>This struggle showcases the difficulty when your <code class="language-plaintext highlighter-rouge">model</code> is not separated from your <code class="language-plaintext highlighter-rouge">view</code>!</p>
 
-      <p>Let’s think about the data which is used to describe a task:</p>
+      <p>Let’s think about the data which is used to describe a post or posts:</p>
 
       <ul>
-        <li>What order the task are tasks displayed in?</li>
-        <li>What state is the task in?</li>
-        <li>What is the text of the task?</li>
-        <li>Who made the task?</li>
-        <li>Has anyone claimed the task?
+        <li>What order are the posts displayed in?</li>
+        <li>Who wrote the post?</li>
+        <li>What is the text of the post?</li>
+        <li>How many upvotes does the post have?
           <ul>
-            <li>If so, who claimed the task?</li>
+            <li>How many downvotes?</li>
           </ul>
         </li>
-        <li>Is the task done?
+        <li>Who upvoted the post?
           <ul>
-            <li>Is the task cleared?</li>
+            <li>Who downvoted it?</li>
           </ul>
         </li>
       </ul>
 
       <p>We can describe this data as an Object, using <code class="language-plaintext highlighter-rouge">UML Class Diagram</code> notation:</p>
 
-      <p><img src="res/class-diagram.png" alt="" /></p>
+      <p><img src="res/uml-class.png" alt="" /></p>
 
       <p>With this in your mind, you can be thinking:</p>
 
-      <p><img src="res/model-vs-view.png" alt="" /></p>
+      <p><img src="res/model-vs-view-1.png" alt="" /></p>
 
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>In this lab you will implement the remaining functionality of the application, but without the added security and database operations which we will discuss in the following weeks. In place of this, we will simply read from and write to JSON files. Consider this lab a learning exercise on using node and passing data with the controller: not everything we do will be best practices and should not be followed in production environments!</p>
+      <p>In this lab you will implement the remaining controller functionality for the application, but without the added security and database operations which we will discuss in the following weeks. In place of this, we will simply read from and write to JSON files. Consider this lab a learning exercise on using node and passing data with the controller: not everything we do will be best practices and should not be followed in production environments!</p>
 
-      <p><img src="res/jquery.svg" alt="" /></p>
+      <p><img src="res/progression.svg" alt="" /></p>
 
-      <p>Note that this application forks from lab 3, most of the JQuery JavaScript (Front End functionality) will be removed from the application in favour of back end functionality. However, the logic may be similar, depending on you implemented it.</p>
+      <p>Note that this application forks from lab 3, most of the JQuery JavaScript (Front End functionality) will be removed from the application in favour of back end functionality. However, the logic will likely be similar, depending on you implemented it.</p>
 
       <h3 id="data-setup---the-model">Data setup - The Model</h3>
 
@@ -620,61 +619,41 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
         <li>password (string)</li>
       </ul>
 
-      <p><code class="language-plaintext highlighter-rouge">Task</code> object:</p>
-      <ul>
-        <li>_id (int) - assign sequential numbers, must be unique</li>
-        <li>text (string)</li>
-        <li>state (string)</li>
-        <li>creator (User)</li>
-        <li>isTaskClaimed (boolean)</li>
-        <li>claimingUser (User)</li>
-        <li>isTaskDone (boolean)</li>
-        <li>isTaskCleared (boolean)</li>
-      </ul>
+      <p><code class="language-plaintext highlighter-rouge">Post</code> object:
+_id: int
+text: string
+creator: User
+upvotes: User[]
+downvotes: User[]</p>
 
       <p>Create an array of each type of object</p>
       <ul>
         <li>Have an array of two <code class="language-plaintext highlighter-rouge">Users</code></li>
-        <li>Have an array of five <code class="language-plaintext highlighter-rouge">Tasks</code></li>
-        <li>The tasks must be:
+        <li>Have an array of five <code class="language-plaintext highlighter-rouge">Posts</code></li>
+        <li>The posts must be:
           <ul>
-            <li>1 unclaimed task</li>
-            <li>1 claimed by user1 and unfinished</li>
-            <li>1 claimed by user2 and unfinished</li>
-            <li>1 claimed by user1 and finished</li>
-            <li>1 claimed by user2 and finished</li>
+            <li>1 post made by User1 with no upvotes or downvotes</li>
+            <li>1 post made by User1 with 1 upvote by User2</li>
+            <li>1 post made by User1 with 1 downvote by User2</li>
+            <li>1 post made by User2 with no upvotes or downvotes</li>
+            <li>1 post made by User2 with 1 upvote by User1</li>
+            <li>1 post made by User2 with 1 downvote by User1</li>
           </ul>
         </li>
       </ul>
 
-      <p>For unclaimed tasks, the <code class="language-plaintext highlighter-rouge">claimingUser</code> should be <code class="language-plaintext highlighter-rouge">null</code></p>
-
-      <p>Additionally, create functions for saving and loading each array to or from a <code class="language-plaintext highlighter-rouge">.json</code> file, then save them.</p>
+      <p>Additionally, create functions in Node.js for saving and loading each array to or from a <code class="language-plaintext highlighter-rouge">.json</code> file, and save them.</p>
       <ul>
-        <li>Save them once, them comment out the function call
-          <ul>
-            <li>Only save again if something changes in the lists</li>
-          </ul>
-        </li>
-        <li>On future runs, load the existing lists (the saved ones) rather than the ones in your code!</li>
+        <li>Write the code for the sample posts in Node.js, save them once, them comment out the function call</li>
+      </ul>
+
+      <p>On future runs, load the existing lists (the saved ones) rather than the ones in your code!</p>
+      <ul>
         <li>Whenever you perform an operation which would read from the Model, load the JSON first.</li>
         <li>Whenever you perform an operation which updates the Model, write to the JSON file. This way they remain synchroized!</li>
       </ul>
 
-      <p>** Note: It is extremely insecure to save user passwords in plain text objects. Do not use any realistic passwords for any accounts! We will make this more secure in Lab 4! **</p>
-
-      <h3 id="faq---how-do-i-store-an-array-into-a-json-file">FAQ - How do I store an array into a JSON file?</h3>
-
-      <p>Use syntax similar to:</p>
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="dl">"</span><span class="s2">employees</span><span class="dl">"</span><span class="p">:[</span>    
-    <span class="p">{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Ram</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">ram@gmail.com</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span><span class="mi">23</span><span class="p">},</span>    
-    <span class="p">{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Shyam</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">shyam23@gmail.com</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span><span class="mi">28</span><span class="p">},</span>  
-    <span class="p">{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">john@gmail.com</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span><span class="mi">33</span><span class="p">},</span>    
-    <span class="p">{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Bob</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">bob32@gmail.com</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span><span class="mi">41</span><span class="p">}</span>   
-<span class="p">]}</span> 
-</code></pre></div>      </div>
-
-      <p><a href="https://www.javatpoint.com/json-array">Source</a></p>
+      <p>** Note: It is extremely insecure to save user passwords in plain text objects. Do not use any realistic passwords for any accounts! We will make this more secure in Lab 9! **</p>
 
       <h3 id="user-registration-and-login">User registration and login</h3>
 
@@ -691,7 +670,7 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
 
       <p>Link the register form to the “/register” route. In this route perform the following:</p>
       <ul>
-        <li>ensure that the sign up <code class="language-plaintext highlighter-rouge">authorization</code> field matches a constant value of <code class="language-plaintext highlighter-rouge">todo2022</code></li>
+        <li>ensure that the sign up <code class="language-plaintext highlighter-rouge">Invite Code</code> field matches a constant value of <code class="language-plaintext highlighter-rouge">Note Vote 2024</code></li>
         <li>check that no users exists with the username entered</li>
         <li>If no users with that name exist, create a new user with the username and password supplied</li>
         <li>finally, redirect with the POST variables to the “/todo” route.</li>
@@ -701,7 +680,7 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
 
       <h3 id="faq">FAQ</h3>
 
-      <p>How do I do a redirect which maintains the form data from one route to another?</p>
+      <p>How do I do a redirect which maintains the POST data from one route to another?</p>
 
       <p>Use this syntax:</p>
 
@@ -717,61 +696,74 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
 
       <h3 id="to-do-list-display">To-do list display</h3>
 
-      <p>Use EJS to render the to-do list on the “/todo” route</p>
+      <p>Use EJS to render the to-do list on the <code class="language-plaintext highlighter-rouge">/note-vote</code> route</p>
 
       <p>When rendering the route, ensure the following data is passed to the EJS file</p>
       <ul>
         <li>the logged in user’s username (string)</li>
-        <li>the list of tasks (array)</li>
+        <li>the list of posts (array)</li>
       </ul>
 
-      <p>On the todo list, render the following:</p>
+      <p>On the note-vote page, render the following:</p>
       <ul>
         <li>The logout block</li>
-        <li>The to-do list display</li>
-        <li>Each of the different task states:
+        <li>The note-vote display</li>
+        <li>Each of the different votes rendered correctly:
           <ul>
-            <li>Recall the starting state of the Task list includes one of each:
+            <li>Consider each of the following states:
               <ul>
-                <li>Unclaimed</li>
-                <li>Claimed by the current user but unfinished</li>
-                <li>Claimed by the current user and finished</li>
-                <li>Claimed by a different user but unfinished</li>
-                <li>Claimed by a different user and finished</li>
+                <li>A note made by the signed in user with no votes</li>
+                <li>A note made by the signed in user with votes</li>
+                <li>A note made by another user which the signed in user has not interacted with yet</li>
+                <li>A note made by another user which the signed in user has upvoted</li>
+                <li>A note made by another user which the signed in user has downvoted</li>
               </ul>
             </li>
             <li>Use EJS Partials to render each of these as partials</li>
           </ul>
         </li>
-        <li>A section for adding new tasks</li>
-        <li>A button for removing complete tasks</li>
+        <li>A section for adding new posts</li>
       </ul>
 
-      <p>Any Task flagged as “cleared” should not be displayed</p>
-
-      <p>The Tasks should be decorated as in the previous labs.</p>
+      <p>The posts should be decorated as in the previous labs.</p>
 
       <p>Hints:</p>
 
       <ul>
-        <li>Think about the total flow of the data, from the Model to the View
+        <li>Think about the total flow of the information, from the Model to the View and back again
           <ul>
-            <li>Loading in the data from the JSON</li>
-            <li>Passing it to an EJS file through Express</li>
-            <li>Loop through the array using an appropriate control structure</li>
-            <li>For each task…
+            <li>When the user tries to load a page
               <ul>
-                <li>(optional) pass it in to an appropriate partial</li>
-                <li>Use that partial to render the task correctly, modified from code you created earlier
+                <li>Express must load the data from the model (JSON)</li>
+                <li>Next it must pass it to an EJS file through Express</li>
+                <li>In the EJS file, loop through the array using an appropriate control structure</li>
+                <li>For each post…
                   <ul>
-                    <li>You may need to look at task properties, and the username, and compare it to the logged in user</li>
+                    <li>Pass it in to an appropriate partial</li>
+                    <li>Use that partial to render the task correctly
+                      <ul>
+                        <li>Consider the post</li>
+                        <li>Consider the logged in user</li>
+                        <li>Consider if the logged in user has interacted with the post, and if so, how?</li>
+                      </ul>
+                    </li>
                   </ul>
                 </li>
-                <li>Wrap the code in a form which can be submitted to an appropriate route</li>
+                <li>When rendering the partials for each task
+                  <ul>
+                    <li>there must be one (or many) forms which can be submitted to the server</li>
+                  </ul>
+                </li>
               </ul>
             </li>
-            <li>In the submission route, unpack the data submitted</li>
-            <li>Use the data submitted to update the model appropriate</li>
+          </ul>
+        </li>
+        <li>Now the user can see the page. They attempt to interact with it, for example, upvoting a post
+          <ul>
+            <li>The user will submit the appropriate form, containing POST data to a submission route</li>
+            <li>In the submission route, unpack the POST data</li>
+            <li>Use the data submitted to update the model appropriately</li>
+            <li>Render the page again!</li>
           </ul>
         </li>
       </ul>
@@ -779,22 +771,33 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
       <p>More Hints:</p>
 
       <ul>
-        <li>when adding a task to the page, use a <code class="language-plaintext highlighter-rouge">hidden</code> HTML virtuinput element to contain the task’s _id to uniquely identify it</li>
-        <li>You can submit a form when a checkbox is clicked using <code class="language-plaintext highlighter-rouge">&lt;input onChange="this.form.submit()" ... 
-  /&gt;</code></li>
-        <li>You can use a <code class="language-plaintext highlighter-rouge">hidden</code> input type to store the username of the currently logged in user.
+        <li>Consider making a separate form for the post button, as well as each upvote and downvote button
           <ul>
-            <li>This will automatically pass it back to Node.js when you submit as a POST parameter</li>
+            <li>When any of these forms are submitted:
+              <ul>
+                <li>We need to know which user submitted the form</li>
+                <li>We need to know what that user wants to do</li>
+                <li>We may need to know which task the user wants to do something to</li>
+                <li>There doesn’t need to be a visible DOM element to display this, but it does need to be stored in the HTML form in some way
+                  <ul>
+                    <li>A good strategy for this is to use a <code class="language-plaintext highlighter-rouge">hidden</code> HTML input element</li>
+                    <li>This could contain, for example, the posts’s _id or the username of the user who is logged in</li>
+                    <li>When you submit the form, you see all these parameters will get passed back to Node.js as POST parameters</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
 
+      <p><img src="res/buttons-are-complete-forms.png" alt="" /></p>
+
       <p>** Note: Storing the current user in POST and passing it around via redirects works, but it’s not best practice. In Lab 9 we’ll replace this functionality with sessions**</p>
 
-      <h3 id="to-do-list-functionality">To-do list functionality</h3>
+      <h3 id="note-vote-routes">Note-vote Routes</h3>
 
-      <p>Finally, code up all of the routes to give your application functionality
-Name your routes, use the methods, and implement as follows:</p>
+      <p>You will need several submission routes on the back end to properly use the system</p>
 
       <table>
         <thead>
@@ -806,41 +809,47 @@ Name your routes, use the methods, and implement as follows:</p>
         </thead>
         <tbody>
           <tr>
-            <td>/logout</td>
+            <td><code class="language-plaintext highlighter-rouge">/</code></td>
+            <td>get</td>
+            <td>lets the user log-in or register for the application</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">/note-vote</code></td>
+            <td>post</td>
+            <td>lets the user see the application</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">/logout</code></td>
             <td>get</td>
             <td>logs out the user and returns to the main screen</td>
           </tr>
           <tr>
-            <td>/addtask</td>
+            <td><code class="language-plaintext highlighter-rouge">/addpost</code></td>
             <td>post</td>
-            <td>adds a new unclaimed task to the task list, and redirects to “/todo”</td>
+            <td>adds a new post to the task list, and then redirects to “/note-vote”</td>
           </tr>
           <tr>
-            <td>/claim</td>
+            <td><code class="language-plaintext highlighter-rouge">/upvote</code></td>
             <td>post</td>
-            <td>claims the task for the user who clicks on the claim button, and redirects back to “/todo”</td>
+            <td>upvotes the post associated with the button used to submit this form, then redirects back to “/note-vote”</td>
           </tr>
           <tr>
-            <td>/abandonorcomplete</td>
+            <td><code class="language-plaintext highlighter-rouge">/downvote</code></td>
             <td>post</td>
-            <td>checks if the user clicked on abandon or complete, updates the task appropriately, and redirects to “/todo”</td>
-          </tr>
-          <tr>
-            <td>/unfinish</td>
-            <td>post</td>
-            <td>for the selected task, sets the task state to unfinished, and redirects back to “/todo”</td>
-          </tr>
-          <tr>
-            <td>/purge</td>
-            <td>post</td>
-            <td>Set all tasks where “done” is true such that “cleared” is true. and redirects back to “/todo”</td>
+            <td>downvotes the post associated with the button used to submit this form, then redirects back to “/note-vote”</td>
           </tr>
         </tbody>
       </table>
 
-      <p>The following state diagram represents state transition for tasks owned by the currently signed in user:</p>
+      <p>Note: there are also four edge cases you need to deal with</p>
+      <ul>
+        <li>remove an upvote</li>
+        <li>remove an upvote and add a downvote at the same time</li>
+        <li>remove a downvote</li>
+        <li>remove a downvote and add an upvote at the same time</li>
+      </ul>
 
-      <p><img src="res/state-diagram.png" alt="" /></p>
+      <p>You could either add more complex logic inside of the <code class="language-plaintext highlighter-rouge">/upvote</code> and <code class="language-plaintext highlighter-rouge">/downvote</code> routes, but it will almost certainly be easier to add four additional routes: <code class="language-plaintext highlighter-rouge">/remove-upvote</code>, <code class="language-plaintext highlighter-rouge">/remove-upvote-and-downvote</code>, <code class="language-plaintext highlighter-rouge">/remove-downvote</code>, <code class="language-plaintext highlighter-rouge">/remove-downvote-and-upvote</code>. Consider the logic you will need inside each of these, and when these routes should be added as actions in the forms!</p>
 
       <h3 id="submission">Submission</h3>
 

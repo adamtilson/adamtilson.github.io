@@ -1,0 +1,8 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>50</x><y>40</y><w>140</w><h>120</h></coordinates><panel_attributes>Post
+--
+_id: int
+text: string
+creator: User
+upvotes: User[]
+downvotes: User[]
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>
