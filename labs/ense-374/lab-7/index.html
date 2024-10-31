@@ -621,12 +621,14 @@ The second argument is a JavaScript object of name, value pairs, in this case:</
         <li>password (string)</li>
       </ul>
 
-      <p><code class="language-plaintext highlighter-rouge">Post</code> object:
-_id: int
-text: string
-creator: User
-upvotes: User[]
-downvotes: User[]</p>
+      <p><code class="language-plaintext highlighter-rouge">Post</code> object:</p>
+      <ul>
+        <li>_id: int</li>
+        <li>text: string</li>
+        <li>creator: User</li>
+        <li>upvotes: User[]</li>
+        <li>downvotes: User[]</li>
+      </ul>
 
       <p>Create an array of each type of object</p>
       <ul>
@@ -663,11 +665,11 @@ downvotes: User[]</p>
 
       <p>Give the following functionality to the login page:</p>
 
-      <p>Link the login form to the “/login” route with POST. In this route perform the following:</p>
+      <p>Link the login form to the <code class="language-plaintext highlighter-rouge">/login</code> route with POST. In this route perform the following:</p>
       <ul>
         <li>check through the user list to see if the entered username is registered</li>
         <li>if so, check if the user’s password matches the password for the entry</li>
-        <li>if so, redirect the user with the POST variables to the “/todo” route.</li>
+        <li>if so, redirect the user with the POST variables to the <code class="language-plaintext highlighter-rouge">/note-vote</code> route.</li>
       </ul>
 
       <p>Link the register form to the “/register” route. In this route perform the following:</p>
@@ -675,7 +677,7 @@ downvotes: User[]</p>
         <li>ensure that the sign up <code class="language-plaintext highlighter-rouge">Invite Code</code> field matches a constant value of <code class="language-plaintext highlighter-rouge">Note Vote 2024</code></li>
         <li>check that no users exists with the username entered</li>
         <li>If no users with that name exist, create a new user with the username and password supplied</li>
-        <li>finally, redirect with the POST variables to the “/todo” route.</li>
+        <li>finally, redirect with the POST variables to the <code class="language-plaintext highlighter-rouge">/note-vote</code> route.</li>
       </ul>
 
       <p><em>Be sure to save the updated user list to the JSON file when a user registers</em></p>
@@ -696,9 +698,9 @@ downvotes: User[]</p>
 
       <p>Make sure this code runs before any <code class="language-plaintext highlighter-rouge">app.listen</code>, <code class="language-plaintext highlighter-rouge">app.post</code> or <code class="language-plaintext highlighter-rouge">app.get</code> calls!</p>
 
-      <h3 id="to-do-list-display">To-do list display</h3>
+      <h3 id="note-vote-display">Note-Vote display</h3>
 
-      <p>Use EJS to render the to-do list on the <code class="language-plaintext highlighter-rouge">/note-vote</code> route</p>
+      <p>Use EJS to render the note-vote on the <code class="language-plaintext highlighter-rouge">/note-vote</code> route</p>
 
       <p>When rendering the route, ensure the following data is passed to the EJS file</p>
       <ul>
