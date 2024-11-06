@@ -898,8 +898,7 @@ In the lab, note that anything you put in the database will be accessible to oth
 
 <span class="c1">// connects to the "test" database (ensure mongod is running!)</span>
 <span class="c1">// the later arguments fix some deprecation warnings</span>
-<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongodb://localhost:27017/test</span><span class="dl">'</span><span class="p">,</span> 
-                  <span class="p">{</span> <span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongodb://localhost:27017/test</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// create a schema</span>
 <span class="kd">const</span> <span class="nx">Cat</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span> <span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="nb">String</span> <span class="p">});</span>
@@ -919,8 +918,7 @@ In the lab, note that anything you put in the database will be accessible to oth
 
 <span class="c1">// connects to the "testdb" database (ensure mongod is running!)</span>
 <span class="c1">// the later arguments fix some deprecation warnings</span>
-<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongodb://localhost:27017/testdb</span><span class="dl">'</span><span class="p">,</span> 
-                  <span class="p">{</span> <span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongodb://localhost:27017/testdb</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <h3 id="creating-a-schema">Creating a Schema</h3>
@@ -1341,9 +1339,7 @@ npm i express ejs
         <li>in requires:
           <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">"</span><span class="s2">mongoose</span><span class="dl">"</span> <span class="p">);</span>
 <span class="c1">// connect to mongoose on port 27017</span>
-<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">mongodb://localhost:27017/games</span><span class="dl">"</span><span class="p">,</span> 
-                <span class="p">{</span> <span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> 
-                  <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span><span class="p">});</span>
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">mongodb://localhost:27017/games</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -1366,7 +1362,7 @@ npm i express ejs
       <h3 id="capture-form-data-into-the-database">Capture form data into the database</h3>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// save into the database on post</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/submit</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/submit</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span> <span class="p">(</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">A user is posting the following review</span><span class="dl">"</span> <span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span> <span class="p">)</span>
@@ -1378,7 +1374,7 @@ npm i express ejs
         <span class="na">reviewText</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">reviewText</span>
     <span class="p">});</span>
 
-    <span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+    <span class="k">await</span> <span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
 
     <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span> <span class="dl">"</span><span class="s2">/reviews</span><span class="dl">"</span> <span class="p">)</span>
 <span class="p">});</span>
