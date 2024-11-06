@@ -910,6 +910,19 @@ In the lab, note that anything you put in the database will be accessible to oth
 </code></pre></div>      </div>
       <p>That’s all it takes to do database stuff from Node! Let’s look at these in more depth…</p>
 
+      <h3 id="connecting-to-the-database">Connecting to the database</h3>
+
+      <p>The following code connects to our game database</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Bring in mongoose</span>
+<span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongoose</span><span class="dl">'</span> <span class="p">);</span>
+
+<span class="c1">// connects to the "testdb" database (ensure mongod is running!)</span>
+<span class="c1">// the later arguments fix some deprecation warnings</span>
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongodb://localhost:27017/testdb</span><span class="dl">'</span><span class="p">,</span> 
+                  <span class="p">{</span> <span class="na">useNewUrlParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">useUnifiedTopology</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+</code></pre></div>      </div>
+
       <h3 id="creating-a-schema">Creating a Schema</h3>
 
       <p>Creating a schema for our game example:</p>
@@ -987,6 +1000,48 @@ db.games.find()
 
 </code></pre></div>      </div>
 
+      <h3 id="closing-the-connection">Closing the connection</h3>
+
+      <p>The last time you use Mongoose, you should close the connection</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</code></pre></div>      </div>
+      <ul>
+        <li>e.g. in the last find callback.</li>
+        <li>In our server operations, the server will stay open, so we don’t need to explicitly close</li>
+      </ul>
+
+      <h3 id="complete-game-creation-code">Complete game creation code</h3>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Bring in mongoose</span>
+<span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongoose</span><span class="dl">'</span> <span class="p">);</span>
+
+<span class="c1">// connects to the "test" database (ensure mongod is running!)</span>
+<span class="c1">// the later arguments fix some deprecation warnings</span>
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mongodb://localhost:27017/testdb</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">gameSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">rating</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="na">review</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">});</span>
+
+<span class="c1">// this creates a collection called `games` (Weird, but intuitive)</span>
+<span class="kd">const</span> <span class="nx">Game</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span> <span class="p">(</span> <span class="dl">"</span><span class="s2">Game</span><span class="dl">"</span><span class="p">,</span> <span class="nx">gameSchema</span> <span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Game</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">rating</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span>
+    <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">classic</span><span class="dl">"</span>
+<span class="p">});</span>
+
+<span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span><span class="o">=&gt;</span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">close</span><span class="p">());</span>
+</code></pre></div>      </div>
+
+      <p>Note that we have the complete code, we can see we need to run the connection close inside of the <code class="language-plaintext highlighter-rouge">.then()</code> callback. This is because Mongo calls are Asynchronous. We’ll look at the implications of this in a sec!</p>
+
       <h3 id="mongoose-help">Mongoose Help</h3>
 
       <p><a href="https://mongoosejs.com/docs/guide.html">The docs. That are… just okay.</a></p>
@@ -1030,25 +1085,21 @@ db.games.find()
 
       <p><em>The reason we are forced to look at this is now is: Mongoose has no synchronous API! We have to use async, either through callbacks, promises, or async/await</em></p>
 
-      <h3 id="reading-from-a-mongodb">Reading from a MongoDB</h3>
+      <h3 id="weird-tip---making-whole-program-asynchronous">Weird tip - making whole program asynchronous</h3>
 
-      <p>Here’s doing a find operation using callback syntax:</p>
+      <p>If you wish to make your entire application run asynchronously, you can bookend it in the following way:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span> <span class="p">},</span> <span class="p">(</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">results</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">error</span> <span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">results</span> <span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span> <span class="nx">results</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">no results found</span><span class="dl">"</span> <span class="p">);</span>
-            <span class="k">return</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="c1">// this is where we have access to our results</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// all your code here</span>
+<span class="p">})();</span>
 </code></pre></div>      </div>
 
-      <p>Or we can use the <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code> syntax.</p>
+      <p>If you pay attention to the syntax, this is creating async anonomous function, and then immediately calling it. This will allow you to embed awaits wherever needed!, e.g. <code class="language-plaintext highlighter-rouge">await game.save()</code></p>
+
+      <h3 id="reading-from-a-mongodb">Reading from a MongoDB</h3>
+
+      <p>Since Mongoose V8, we need to use the <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code> syntax.</p>
+
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">async</span> <span class="kd">function</span> <span class="nx">findInDatabase</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
@@ -1065,13 +1116,10 @@ db.games.find()
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nx">findInDatabase</span><span class="p">();</span>
+<span class="k">await</span> <span class="nx">findInDatabase</span><span class="p">();</span>
 </code></pre></div>      </div>
 
-      <p>While these may seem similar, if you are doing repeated calls which require the results of multiple functions, your code can get very deeply nested in the callback approach.</p>
-
-      <p>Enough syntax talk, what does our code actually do?</p>
-
+      <p>What our code is actually doing:</p>
       <ul>
         <li>returns an array of our games in a JavaScript object called ‘results’
           <ul>
@@ -1082,44 +1130,42 @@ db.games.find()
         </li>
       </ul>
 
-      <h3 id="closing-the-connection">Closing the connection</h3>
-
-      <p>The last time you use Mongoose, you should close the connection</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-</code></pre></div>      </div>
-      <ul>
-        <li>e.g. in the last find callback.</li>
-        <li>In our server operations, the server will stay open, so we don’t need to explicitly close</li>
-      </ul>
-
       <h3 id="update-2">Update</h3>
 
-      <p>Here we can do an async update by creating an async anonymous function and immediately calling it:</p>
+      <p>Let’s create a new game, and then update it:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">game2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Game</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Resident Evil 4</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">rating</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span><span class="p">,</span>
+    <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">New and Shiny!</span><span class="dl">"</span>
+<span class="p">});</span>
+
+<span class="k">await</span> <span class="nx">game2</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">updateGames</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
-        <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span> <span class="p">{</span> <span class="na">gameName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Resident Evil 4</span><span class="dl">"</span><span class="p">},</span> 
-                              <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">rating</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">});</span>
-        <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span> <span class="p">{</span> <span class="na">gameName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Resident Evil 4</span><span class="dl">"</span><span class="p">},</span> 
-                              <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">review</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I like the original more</span><span class="dl">"</span> <span class="p">}</span> <span class="p">});</span>
+        <span class="kd">const</span> <span class="nx">newGame</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Resident Evil 4</span><span class="dl">"</span><span class="p">})</span>
+        <span class="nx">newGame</span><span class="p">.</span><span class="nx">rating</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="nx">newGame</span><span class="p">.</span><span class="nx">review</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I like the old one better</span><span class="dl">"</span>
+        <span class="nx">newGame</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+
     <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">})();</span>
+<span class="p">};</span>
+
+<span class="k">await</span> <span class="nx">updateGames</span><span class="p">();</span>
 </code></pre></div>      </div>
 
-      <p>This is an example where the await syntax avoided us nesting callbacks</p>
+      <p>Pretty neat, load up what you found, update it, and then make a change</p>
 
       <h3 id="delete-2">Delete</h3>
 
       <p>Back to callback syntax:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Game</span><span class="p">.</span><span class="nx">deleteOne</span> <span class="p">(</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span> <span class="p">},</span> <span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">deleteOne</span> <span class="p">(</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inscryption</span><span class="dl">"</span> <span class="p">}</span> <span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>There is also a deleteMany function.</p>
