@@ -138,8 +138,11 @@
 
       <p>OR</p>
 
-      <p>The VirtualBox image provided on URCourses. This is a Zorin (Ubuntu) instance, with username and password both set as <code class="language-plaintext highlighter-rouge">Zorin</code>. Node.js and MongoDB are already installed, and Mongo will automatically run at startup.
-If you would like some help on this, check out this link: Oracle - <a href="https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html">Importing an Existing Virtual Machine into VirtualBox</a></p>
+      <p>The VirtualBox image provided on URCourses. This is a Zorin (Ubuntu) instance, with username and password both set as <code class="language-plaintext highlighter-rouge">zorin</code>. Node.js, MongoDB, Firefox and VSCode are already installed, and Mongo should automatically be running at startup, but if it crashes, you can follow the guidance in this document to get it working again.</p>
+
+      <p>You will need to <a href="https://www.virtualbox.org/">download and install VirtualBox</a>, download my image from URCourses, and them import it.</p>
+
+      <p>If you would like some help on this, check out this link: Oracle - <a href="https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html">Importing an Existing Virtual Machine into VirtualBox</a></p>
 
     </div></div></section>
 <section id="part1sql"><button class="collapsible">Part 1: SQL</button><div class="text-content"><div class="text-inner">
@@ -203,6 +206,8 @@ If you would like some help on this, check out this link: Oracle - <a href="http
 </code></pre></div>      </div>
 
       <p><img src="res/games.png" alt="" /></p>
+
+      <p>Note: The PRIMARY KEY uniquely identifies the row, there must be no duplicates in this field among entries</p>
 
       <h3 id="create">Create</h3>
 
@@ -313,6 +318,13 @@ If you would like some help on this, check out this link: Oracle - <a href="http
 
       <h3 id="relationships">Relationships</h3>
 
+      <p>To avoid redundancy in our databases, we will create relationships.</p>
+      <ul>
+        <li>This is like a cross reference between two different tables</li>
+        <li>e.g. if many reviewers review the same game, we don’t want to have multiple copies of all of the data for that game in one table</li>
+        <li>A FOREIGN KEY references the row associated with the PRIMARY KEY of another table</li>
+      </ul>
+
       <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">ratings</span> <span class="p">(</span>
     <span class="n">id</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="n">game_id</span> <span class="nb">INT</span><span class="p">,</span>
@@ -388,6 +400,10 @@ If you would like some help on this, check out this link: Oracle - <a href="http
 
       <h3 id="installation">Installation</h3>
 
+      <p>Note: If you are working on a lab machine, installation will no longer work. Instead, please use the VirtualBox Image provided on URCourses. VirtualBox will already be installed on the machines.</p>
+
+      <p>If you are using your own Windows PC, please follow the following:</p>
+
       <p>This procedure will discuss Windows. Download the Community Server from their website…</p>
 
       <p><img src="res/download.png" alt="" /></p>
@@ -458,11 +474,6 @@ Set-Alias mongosh "C:\Program Files\MongoDB\Server\6.0\bin\mongosh.exe"
         </li>
       </ul>
 
-      <p>Alternatively, in the lab, from the powershell you could instead run:</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&amp; 'C:\Program Files\MongoDB\Server\6.0\bin\mongosh.exe'
-</code></pre></div>      </div>
-
       <!-- Create a data directory -->
 
       <!-- create the folders: -->
@@ -507,13 +518,6 @@ In the lab, note that anything you put in the database will be accessible to oth
         <li>To connect to the database, open a second terminal, and run <code class="language-plaintext highlighter-rouge">mongosh</code>, the Mongo shell</li>
       </ul>
 
-      <h3 id="help">Help</h3>
-
-      <p>To show help, run…</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>help
-</code></pre></div>      </div>
-
       <h3 id="mongo-shell">Mongo shell</h3>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongosh
@@ -521,7 +525,15 @@ In the lab, note that anything you put in the database will be accessible to oth
 
       <ul>
         <li>Command line application to perform database operations</li>
+        <li>Useful for initializing databases and debugging, though we will use different tools once inside of Node / Express</li>
       </ul>
+
+      <h3 id="help">Help</h3>
+
+      <p>To show help, run…</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>help
+</code></pre></div>      </div>
 
       <h3 id="the-database-db">The Database (db)</h3>
 
@@ -639,6 +651,11 @@ In the lab, note that anything you put in the database will be accessible to oth
 </code></pre></div>      </div>
 
       <p>Which shows all of the games.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span> <span class="p">{</span> <span class="na">_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Inscryption</span><span class="dl">'</span><span class="p">,</span> <span class="na">price</span><span class="p">:</span> <span class="mf">4.99</span> <span class="p">}</span> <span class="p">]</span>
+</code></pre></div>      </div>
+
+      <p>Note that this looks like a simple JavaScript Array of JavaScript Objects</p>
 
       <p>We can also pass a json object into find( … ) to only match certain criteria.</p>
       <ul>
