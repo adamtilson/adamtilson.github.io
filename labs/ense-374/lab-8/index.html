@@ -138,7 +138,8 @@
 
       <p>OR</p>
 
-      <p>The VirtualBox image provided on URCourses. This is a Zorin (Ubuntu) instance, with username and password both set as <code class="language-plaintext highlighter-rouge">Zorin</code>. Node.js and MongoDB are already installed, and Mongo will automatically run at startup.</p>
+      <p>The VirtualBox image provided on URCourses. This is a Zorin (Ubuntu) instance, with username and password both set as <code class="language-plaintext highlighter-rouge">Zorin</code>. Node.js and MongoDB are already installed, and Mongo will automatically run at startup.
+If you would like some help on this, check out this link: Oracle - <a href="https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html">Importing an Existing Virtual Machine into VirtualBox</a></p>
 
     </div></div></section>
 <section id="part1sql"><button class="collapsible">Part 1: SQL</button><div class="text-content"><div class="text-inner">
@@ -207,7 +208,7 @@
 
       <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">games</span> <span class="k">VALUES</span><span class="p">(</span>
     <span class="mi">1</span><span class="p">,</span>
-    <span class="nv">"Inscryption"</span><span class="p">,</span>
+    <span class="s1">'Inscryption'</span><span class="p">,</span>
     <span class="mi">4</span><span class="p">.</span><span class="mi">99</span>
 <span class="p">)</span>
 </code></pre></div>      </div>
@@ -222,7 +223,7 @@
 <span class="p">)</span>
 <span class="k">VALUES</span><span class="p">(</span>
     <span class="mi">2</span><span class="p">,</span>
-    <span class="nv">"Outlast"</span>
+    <span class="s1">'Outlast'</span>
 <span class="p">)</span>
 </code></pre></div>      </div>
 
@@ -248,7 +249,7 @@
 
       <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">games</span>
 <span class="k">SET</span> <span class="n">price</span> <span class="o">=</span> <span class="mi">22</span><span class="p">.</span><span class="mi">79</span>
-<span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="nv">"Outlast"</span>
+<span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">'Outlast'</span>
 </code></pre></div>      </div>
 
       <p><img src="res/price-update.png" alt="" /></p>
@@ -290,7 +291,7 @@
 
       <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">games</span>
 <span class="k">SET</span> <span class="n">rating</span> <span class="o">=</span> <span class="mi">80</span>
-<span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="nv">"Outlast"</span>
+<span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">'Outlast'</span>
 
 </code></pre></div>      </div>
 
@@ -301,7 +302,7 @@
       <p>Dangerous, don’t run without a WHERE, or you could remove all rows!</p>
 
       <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">games</span>
-<span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="nv">"Outlast"</span>
+<span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">'Outlast'</span>
 </code></pre></div>      </div>
 
       <p>better</p>
@@ -326,7 +327,7 @@
       <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">ratings</span> <span class="k">VALUES</span> <span class="p">(</span>
     <span class="mi">1</span><span class="p">,</span>
     <span class="mi">1</span><span class="p">,</span>
-    <span class="nv">"An ordinary card game, nothing strange happening here"</span>
+    <span class="s1">'An ordinary card game, nothing strange happening here'</span>
 <span class="p">)</span>
 </code></pre></div>      </div>
 
@@ -342,7 +343,7 @@
 
       <h3 id="sql-vs-nosql">SQL vs NoSQL</h3>
 
-      <p>Structured Query Language vs. Not only Structure Query Language</p>
+      <p>Structured Query Language vs. <em>Not only</em> Structure Query Language</p>
       <ul>
         <li>SQL: MySQL, PostgreSQL</li>
         <li>NoSQL: Mongo, Redis</li>
