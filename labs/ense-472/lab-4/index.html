@@ -208,7 +208,7 @@
 
       <p>These devices are considered to be on two separate networks, and typically require a layer-3 routing device to transmit packets between them.</p>
 
-      <p>In particular, the 192.168.X.X/16 IP address is a private address, meaning any device can use this address, so multiple of these networks with the same addresses may exist. Let’s see how this works in the real world. Let’s create the simple mininet default network</p>
+      <p>In particular, the 192.168.X.X/16 IP address is a private address, meaning any device can use this address, so multiple of these hosts with the same addresses may exist, as long as they are on different networks. Let’s see how this works in the real world. Let’s create the simple mininet default network</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo mn
 mininet&gt; h1 ifconfig
@@ -849,10 +849,16 @@ h2 ip route add default via 192.168.02.01
       <p>We can see this interface has no address and is DOWN. Let’s fix these things:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh ip addr add 192.168.02.01/24 dev s1
-sh ip link set s1 up
 </code></pre></div>      </div>
 
       <p>Please note - you may run these lines multiple times to add multiple addresses to a router. This will be useful if you want your router to span multiple networks!</p>
+
+      <p>If you wish to make a device visible as a network adapter in your VirtualBox, run:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh ip link set s1 up
+</code></pre></div>      </div>
+
+      <p>This will give you access to your network via this router on s1</p>
 
       <p>Running again we see:</p>
 
@@ -933,19 +939,72 @@ nano index.html
       <p>Save it, (ctrl+x, y, enter) then let’s run it using our simple python server</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -m http.server
 </code></pre></div>      </div>
-
       <p>Now, from our VirtualBox instance:</p>
 
       <p><img src="res/server-in-virutalbox.png" alt="" /></p>
 
       <p>In a similar fashion, you can run more complex application which rely on multiple parts which are spread across the virtual network. Uses for this range from prototyping functionality to deploying modular network applications.</p>
 
+      <h3 id="a-second-mini-internet">A second, mini internet</h3>
+
+      <p>Because we made s1 visible to our VirtualBox, it can access any of the virtual network devices that are connected to the same network as s1. However, we have seen instances where our devices can be connected to multiple networks.</p>
+
+      <p>Our VirtualBox will try to access the internet via it’s default gateway, however it want to access the mininet via a different route - and changing the default is dangerous, as we would lose connection to the internet!</p>
+
+      <p>Let’s see how it is configured by default with the following command, from inside mininet:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">sh ip route show</code></p>
+
+      <p>(Note: sh causes this to run directly on the VirtualBox, even though we are running it from inside mininet. Weird!)</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default via 10.0.2.2 dev enp0s3 proto dhcp metric 100 
+10.0.2.0/24 dev enp0s3 proto kernel scope link src 10.0.2.15 metric 100 
+169.254.0.0/16 dev enp0s3 scope link metric 1000 
+192.168.2.0/24 dev s1 proto kernel scope link src 192.168.2.1 
+</code></pre></div>      </div>
+
+      <p>You can see in here we have a path to our mininet via a switch s1.</p>
+
+      <p>You can add new routes using the following:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">sh ip route add {NETWORK/MASK} via {GATEWAYIP}</code></p>
+
+      <p><code class="language-plaintext highlighter-rouge">sh ip route add {NETWORK/MASK} dev {DEVICE}</code></p>
+
+      <p><code class="language-plaintext highlighter-rouge">sh ip route add default {NETWORK/MASK} dev {DEVICE}</code> &lt;- dangerous, this is where ALL network traffic goes by default</p>
+
+      <p><code class="language-plaintext highlighter-rouge">sh ip route add default {NETWORK/MASK} via {GATEWAYIP}</code> &lt;- dangerous, this is where ALL network traffic goes by default</p>
+
+      <p>Be careful, if you change your default, your VirtualBox will lose access to the internet, at least until you close your mininet!</p>
+
+      <p>You can always revert a change you have made using, for example:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">sh ip route del {NETWORK/MASK} via {GATEWAYIP}</code></p>
+
+      <p>To give it access to the “innernet”, we could so something like:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">sh ip route add 192.168.0.0/24 dev s2</code></p>
+
+      <p>And further, if we know there is another network behind that address we also want to access, e.g. the <code class="language-plaintext highlighter-rouge">10.0.0.0/8</code> network</p>
+
+      <p><code class="language-plaintext highlighter-rouge">sh ip route add 10.0.0.0/8 via 192.168.2.1</code></p>
+
+      <p>(Or whatever the correct address would be for your switch’s address on the mininet!)</p>
+
     </div></div></section>
 <section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
 
       <p>This lab has two parts. These are seperate exercises, and do not rely on the other. As with Labs 2 and 3, a short report will be necessary to document information which may not be easily captured in source code.</p>
 
-      <p>Part 1: L3 Static Routes with Ryu</p>
+      <p>Big hint for the assignment: When performing repetitive configuration tasks from the command line, you may instead save the commands in a text file called:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">config.mn</code></p>
+
+      <p>and then run these from inside mininet using:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">source config.mn</code></p>
+
+      <p>Part 1: Layer 3 Static Routes with Ryu</p>
 
       <p>Consider the following network configuration:</p>
 
@@ -957,7 +1016,7 @@ nano index.html
 
       <p>Part 2: Running a model of the Internet with a Web App</p>
 
-      <p>For the second part of the lab assignment, we are going to create a miniature working model of the internet, including:</p>
+      <p>For the second part of the lab assignment, we are going to create a miniature working model of the internet, the mini-internet including:</p>
       <ul>
         <li>A home network part</li>
         <li>An Internet part</li>
@@ -969,30 +1028,25 @@ nano index.html
 
       <p><img src="res/assignment-4-q-2.png" alt="" /></p>
 
-      <p>Update - I removed the loop, it was causign some grief.</p>
-
-      <p>Note that all switches and routers may be modelled the same way in your mininet, as a switch device. You may use any addressing scheme you believe would work best for this configuration, but ensure the home network, and each cloud server are on different subnets. (Please see the hint in Section 5 if you are struggling with getting the VirtualBox to connect to the different Subnets). Run the network using any appropriate controller, again keeping in mind the strengths and limitations of each controller.</p>
+      <p>Note that all switches and routers may be modelled the same way in your mininet, as a switch device, and all hosts modeled as hosts.  You may use any addressing scheme you believe would work best for this configuration, but ensure the home network, and each cloud server are on different subnets. (Please see the final part of Section 5 if you are struggling with getting the VirtualBox to connect to the different Subnets). Run the network using any appropriate controller, again keeping in mind the strengths and limitations of each controller. You may even use the default mininet controller if you prefer.</p>
 
       <p>Once the network is constructed, create host a web application server on the <code class="language-plaintext highlighter-rouge">virtual web server</code> and deploy the TCP-based chat server application on the <code class="language-plaintext highlighter-rouge">virtual chat server</code>.</p>
 
       <p>Demonstrate that your system is functioning with the following:</p>
       <ul>
         <li>Confirm you have complete connectivity between all hosts</li>
+        <li>Confirm that your VirtualBox can ping all of the hosts on the mini-internet. You are only allowed one interface device connecting your VirtualBox to the mini-internet.</li>
         <li>Demonstrate that the VirtualBox can access the web server</li>
         <li>Demonstrate that the VirtualBox can chat with a virtual host using the TCP chat application</li>
       </ul>
 
       <p>Demonstrate everything is working with appropriate screenshots.</p>
 
+      <p>Hint: If everything is working inside mininet for connectivity, but not from the VirtualBox, consider the ip routes for the VirtualBox itself! Refer again to section 5!</p>
+
+      <p><img src="res/assignment-4-into-the-mininet.png" alt="" /></p>
+
       <p>Submit both your topology, and any commands which were required to initialize it, either on the VirtualBox or inside the mininet.</p>
-
-      <p>hint: When performing repetitive configuration tasks from the command line, you may instead save the commands in a text file called:</p>
-
-      <p><code class="language-plaintext highlighter-rouge">config.mn</code></p>
-
-      <p>and then run these from inside mininet using:</p>
-
-      <p><code class="language-plaintext highlighter-rouge">source config.mn</code></p>
 
     </div></div></section>
 <section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
