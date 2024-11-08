@@ -1028,7 +1028,9 @@ nano index.html
 
       <p><img src="res/assignment-4-q-2.png" alt="" /></p>
 
-      <p>Note that all switches and routers may be modelled the same way in your mininet, as a switch device, and all hosts modeled as hosts.  You may use any addressing scheme you believe would work best for this configuration, but ensure the home network, and each cloud server are on different subnets. (Please see the final part of Section 5 if you are struggling with getting the VirtualBox to connect to the different Subnets). Run the network using any appropriate controller, again keeping in mind the strengths and limitations of each controller. You may even use the default mininet controller if you prefer.</p>
+      <p>Hint: Switches in this diagram are just layer 2 devices and can be safely ignored - they will not straddle two IP networks. You can omit them, and focus on the routers.</p>
+
+      <p>Note that in mininet all routers may be modelled as <code class="language-plaintext highlighter-rouge">mininet switch</code>, and all hosts modeled as <code class="language-plaintext highlighter-rouge">mininet hosts</code>.  You may use any addressing scheme you believe would work best for this configuration, but ensure the home network, and each cloud server are on different subnets. (Please see the final part of Section 5 if you are struggling with getting the VirtualBox to connect to the different Subnets). Run the network using any appropriate controller, again keeping in mind the strengths and limitations of each controller. You may even use the default mininet controller if you prefer.</p>
 
       <p>Once the network is constructed, create host a web application server on the <code class="language-plaintext highlighter-rouge">virtual web server</code> and deploy the TCP-based chat server application on the <code class="language-plaintext highlighter-rouge">virtual chat server</code>.</p>
 
