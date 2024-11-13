@@ -184,43 +184,44 @@
 
       <h3 id="environment-variables">Environment Variables</h3>
 
-      <p>We need a method to securely store our Secrets, and other important environment variables.</p>
+      <p>Several of these forms of encryption, as well as other back end tasks, require what we call “secrets”. These are variables which are unique to the system, and must be carefully protected. The should not, for example, be mindlessly pushed to github!</p>
 
-      <p>(We will include this approach in our final product)</p>
+      <p>We need a method to securely store our Secrets, and other important environment variables. This approach can even be used in our production environments.</p>
 
       <ul>
-        <li>We could use tht <code class="language-plaintext highlighter-rouge">.env</code> file
+        <li>We could use the <code class="language-plaintext highlighter-rouge">.env</code> file
           <ul>
-            <li>A hidden file which can stores our secrets in a safe location</li>
-            <li>We can use this for our “Authorization” key in the todo list application.
+            <li>A hidden file which can stores our secrets in a safe location
               <ul>
-                <li>We could also use it for any API keys</li>
+                <li>We could also use it for any API keys, Database login credentials, encryption values, etc.</li>
               </ul>
             </li>
           </ul>
         </li>
       </ul>
 
+      <p>Install the dotenv module:</p>
+
       <p>From npm:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install dotenv
 </code></pre></div>      </div>
 
-      <p>In our js file:</p>
+      <p>In our node.js application:</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">dotenv</span><span class="dl">"</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span>
 </code></pre></div>      </div>
 
       <p>In our root directory:</p>
 
-      <p>Create a <code class="language-plaintext highlighter-rouge">.env</code> file in the root.</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">.env</code> file in the root of the project.</p>
       <ul>
-        <li>This is the whole name of the file
+        <li>This is the whole name of the file. There is no name before the <code class="language-plaintext highlighter-rouge">.</code>
           <ul>
-            <li>Similar to the <code class="language-plaintext highlighter-rouge">.gitignore</code> file</li>
+            <li>Similar naming scheme to the <code class="language-plaintext highlighter-rouge">.gitignore</code> file</li>
           </ul>
         </li>
-        <li>Save your variables here:</li>
+        <li>Initalize your secret variables here, in the following format:</li>
       </ul>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DB_HOST=localhost
@@ -229,18 +230,20 @@ DB_USER=root
 
       <p>No quotations for strings. Multiple words after the equals are fine.</p>
 
-      <p>Access in variables in our node js file:</p>
+      <p>Later, we can access these variables in our node.js file:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DB_HOST</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DB_HOST</span><span class="p">)</span>
 </code></pre></div>      </div>
 
-      <p>Finally, add this file to your gitignore!</p>
+      <p>Finally, make sure you add this file to your gitignore!</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.env
 </code></pre></div>      </div>
 
-      <p>This will keep the file from getting pushed to the github.</p>
+      <p>This will keep the file from accidentally getting pushed to the github.</p>
 
-      <p>When you upload your files to the server, securely upload your Environment Variables rather than push and pulling from GitHub!</p>
+      <ul>
+        <li>Most modern web hosting frameworks will give you an interface to securely upload your Environment Variables</li>
+      </ul>
 
       <h3 id="hashing">Hashing</h3>
 
@@ -253,16 +256,20 @@ DB_USER=root
         <li>Deterministic, so the same input always produces the same hash</li>
         <li>It’s impossible (or at least ridiculously hard) to go backwards
           <ul>
-            <li>This is called a “one-way function”</li>
+            <li>This is called a “one-way function”
+              <ul>
+                <li>Example: multiplying two prime numbers together is trivial. Decomposing the result back into prime factors can take days, weeks, even years.</li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
 
-      <p>We know going forward function call produces consistent results</p>
+      <p>The function is deterministic, that is, forward function call always produce the same results</p>
       <ul>
         <li>At registration time, we can ask for a password,
           <ul>
-            <li>hash it,</li>
+            <li>hash it, which will create a seemingly arbitrary hashed value</li>
             <li>and store the hashed value in our database.</li>
           </ul>
         </li>
@@ -347,7 +354,7 @@ DB_USER=root
       <p>Once the user is logged in, how do we track which user they are?</p>
       <ul>
         <li>This is done through cookies and sessions</li>
-        <li>We saw how painful it was to track a user without this last week!</li>
+        <li>We saw how painful it was to track a user without this in lab 7!</li>
         <li>We’ll generate an <em>Access Token</em>, and store in on the user’s computer</li>
       </ul>
 
@@ -364,7 +371,11 @@ DB_USER=root
             </li>
           </ul>
         </li>
-        <li>Cookies persist between visits, which is why you do not need to manually log back into websites</li>
+        <li>Cookies persist between visits, which is why you do not need to manually log back into websites
+          <ul>
+            <li>Unfortunately, these days they are typically used to spy on users browsing habits</li>
+          </ul>
+        </li>
       </ul>
 
       <h3 id="sessions">Sessions</h3>
@@ -660,7 +671,7 @@ npm i express ejs mongoose
       <ul>
         <li><code class="language-plaintext highlighter-rouge">passport</code> - An authentication middleware for express making use of different strategies</li>
         <li><code class="language-plaintext highlighter-rouge">passport-local</code> - A username and password authentication strategy</li>
-        <li><code class="language-plaintext highlighter-rouge">passport-local-mongoose</code> - Simplifies using username/password with Mongo</li>
+        <li><code class="language-plaintext highlighter-rouge">passport-local-mongoose</code> - Simplifies using username/password with Mongoose</li>
         <li><code class="language-plaintext highlighter-rouge">express-session</code> (not express-sessions) -Middleware for creating sessions.</li>
       </ul>
 
@@ -709,6 +720,7 @@ npm i express ejs mongoose
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 3. Create the userSchema /////////////////////////////////////////</span>
 <span class="c1">// It is important not to change these names</span>
 <span class="c1">// passport-local-mongoose expects these. Use `username` and `password`!</span>
+<span class="c1">// If you use `email` and `password`, it will not work!</span>
 <span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">({</span>
     <span class="na">username</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
     <span class="na">password</span><span class="p">:</span> <span class="nb">String</span>
@@ -872,11 +884,11 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
     </div></div></section>
 <section id="labassignment"><button class="collapsible">Lab Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>For the final big assignment, you will add complete database integration into the application from Lab 7. You finally have a stack which is ready for a production environment!</p>
+      <p>For the final assignment, you will add complete database integration into the application from Lab 7. You finally have a stack which is ready for a production environment! This lab should not be as intense as Lab 7, particularly if you used JSON correctly!</p>
 
       <h3 id="schema">Schema</h3>
 
-      <p>Update you Schemas from Lab 8, if needed, to work with Passport / Mongoose. Changes will likely be minimal.</p>
+      <p>Update you Schemas from Lab 8, if needed, to work with Passport / Mongoose. Changes will likely be minimal. WARNING: Specific fields are required, see code chunk (3.) above!</p>
 
       <h3 id="user-registration-and-login">User registration and login:</h3>
 
