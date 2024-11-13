@@ -876,7 +876,7 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
 
       <h3 id="schema">Schema</h3>
 
-      <p>Update you Schemas from Lab 8, if needed, to work with Passport / Mongoose</p>
+      <p>Update you Schemas from Lab 8, if needed, to work with Passport / Mongoose. Changes will likely be minimal.</p>
 
       <h3 id="user-registration-and-login">User registration and login:</h3>
 
@@ -886,29 +886,33 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
       <ul>
         <li>Using passport, log in and authenticate the user</li>
         <li>If authentication fails, redirect back to “/”</li>
-        <li>If registration succeeds, redirect to “/todo”</li>
+        <li>If registration succeeds, redirect to “/note-vote”</li>
       </ul>
 
       <p>Link the register form to the “/register” route. In this route perform the following:</p>
       <ul>
         <li>Register a new user using passport</li>
         <li>If registration fails, redirect back to “/”</li>
-        <li>If registration succeed, redirect to “/todo”</li>
-        <li>The Authentication key, which is checked against when registering users, should be stored in the <code class="language-plaintext highlighter-rouge">.env</code> file!</li>
+        <li>If registration succeed, redirect to “/note-vote”</li>
+        <li>The invite code, which is checked against when registering users, should be stored in the <code class="language-plaintext highlighter-rouge">.env</code> file!</li>
       </ul>
 
-      <p><code class="language-plaintext highlighter-rouge">todo</code> should only be available to Authenticated users.</p>
+      <p>“/note-vote” should only be available to Authenticated users.</p>
       <ul>
-        <li>As long as user is authenticated, they should be able to return to “/todo” without logging in again, until the cookie expires or they log out.</li>
+        <li>As long as user is authenticated, they should be able to return to “/note-vote” without logging in again, until the cookie expires or they log out.</li>
       </ul>
 
       <h3 id="to-do-list-display">To-do list display</h3>
 
-      <p>Use EJS to render the to-do list on the <code class="language-plaintext highlighter-rouge">/todo</code> route</p>
+      <p>Use EJS to render the to-do list on the <code class="language-plaintext highlighter-rouge">/note-vote</code> route</p>
 
       <ul>
-        <li>Modify your code from Lab 7 to instead read from the database for building lists of tasks.</li>
-        <li>Modify any usernames which were saved in hidden inputs to instead directly use the username in <code class="language-plaintext highlighter-rouge">req.user.username</code></li>
+        <li>Modify your code from Lab 7 to instead read from the database for building lists of tasks.
+          <ul>
+            <li>hint: anywhere you previously read from JSON will now be a database call</li>
+          </ul>
+        </li>
+        <li>Modify any usernames which were previously saved in hidden inputs to instead directly use the passport username in <code class="language-plaintext highlighter-rouge">req.user.username</code></li>
         <li>Reuse as much code as possible! The front-end should have minimal changes.</li>
       </ul>
 
@@ -927,9 +931,9 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
 
       <p>Please submit to URCourses by the due date!</p>
 
-      <h3 id="aside-the-next-steps">Aside: The Next Steps</h3>
+      <h3 id="aside-the-next-steps-of-the-full-stack-journey">Aside: The Next Steps of the Full Stack Journey</h3>
 
-      <p>If Full-Stack Web Dev has won you over as your dream job, in my opinion, the most important things we did not cover in this lab are:</p>
+      <p>Despite it’s seeming scale, this lab really just introduces you to the basics of Full-Stack Web Development. Here are, in my opinion, the most important things we did not cover in this lab:</p>
 
       <ul>
         <li>
@@ -941,9 +945,10 @@ passportLocalMongoose, which we plugged in earlier, is doing the heavy lifting f
         <li>
           <p>(3) Having your Browser-side JavaScript talk directly to the Server-side Node.js, e.g. with AJAX, or with the Fetch API</p>
           <ul>
-            <li>With this you could link up Labs 5 and 9 to create a site which updates on demand without refreshing the page!</li>
-            <li>With this, if our to-do list app was live, we could periodically check if other users had added new data, and if so automatically update our site using the DOM</li>
+            <li>With this you combine elements of Labs 5 and 9 to create a site which updates on demand without refreshing the page!</li>
+            <li>With this, if our note-vote app was live, we could periodically check if other users had added new data, and if so automatically update our site using the DOM</li>
             <li>This is how infinite scroll websites fetch data without reloading the page!</li>
+            <li>It is also how we might see upvotes appearing in real time, e.g. on YouTube</li>
           </ul>
         </li>
       </ul>
