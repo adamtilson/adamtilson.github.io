@@ -143,18 +143,21 @@
     </div></div></section>
 <section id="part1godotoverview"><button class="collapsible">Part 1: Godot Overview</button><div class="text-content"><div class="text-inner">
 
-      <p>To get started, download the LTS version of Godot. This is currently on version 3.5.3 (Nov 2023.) Note that Godot 4 is newest in best version of the engine, with many changes, however for this lab we will stick to Godot 3 for now.</p>
+      <p>To get started, download the most recent version of Godot. This is currently on version 4.3 (Aug 2024.) Note that Godot 4, which launched in early 2024, is a major overhaul of the engine, making guides based on version 3 less reliable.</p>
 
       <p><img src="res/dl-godot-1.png" alt="" />
-<img src="res/dl-godot-2.png" alt="" />
-<img src="res/new-project.png" alt="" />
-<img src="res/create-folder.png" alt="" /></p>
+<img src="res/dl-godot-2.png" alt="" /></p>
 
       <p>Unzip, and run the executable. This is the entire game engine, IDE, everything in a single program. Cool!</p>
       <ul>
         <li>On MAC you may need to give Godot permissions to run in your system settings</li>
-        <li>Leave the console window open, if you close it godot will close!</li>
       </ul>
+
+      <p><img src="res/new-project.png" alt="" />
+<img src="res/create-folder.png" alt="" /></p>
+
+      <p>Behold, the UI!
+Note: The following screenshot is from Godot 3, but there should be no major interface changes:</p>
 
       <p><img src="res/ui.png" alt="" /></p>
 
@@ -221,6 +224,10 @@
       </ul>
 
       <p><a href="https://docs.godotengine.org/en/stable/index.html">The official godot docs</a></p>
+
+      <h3 id="simple-introductory-project">Simple Introductory Project</h3>
+
+      <p>This section introduces you to some of the basics of the engine, as well as some powerful features which set it apart from other engines. We will look at the simple activity of making rectangles fall according to physics and bounce when they collide with other rectangles.</p>
 
       <h3 id="scenes-and-nodes">Scenes and Nodes</h3>
 
@@ -400,13 +407,19 @@
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extends</span> <span class="n">RigidBody2D</span>
 
-<span class="n">func</span> <span class="n">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="c1"># Called every frame. 'delta' is the elapsed time since the previous frame.
+</span><span class="n">func</span> <span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">void</span><span class="p">:</span>
 	<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_just_pressed</span><span class="p">(</span><span class="s">"ui_accept"</span><span class="p">):</span>
 		<span class="n">linear_velocity</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">)</span>
 </code></pre></div>      </div>
 
-      <p>Note, these controller buttons can be customized from <code class="language-plaintext highlighter-rouge">Project</code> -&gt; <code class="language-plaintext highlighter-rouge">Project Settings</code> -&gt; <code class="language-plaintext highlighter-rouge">Input Map</code>
-Also note that Vector2’s are coordinate pairs corresponding to x,y pairs, where the origin is in the top left of the screen.</p>
+      <p>Note, these controller buttons can be customized from <code class="language-plaintext highlighter-rouge">Project</code> -&gt; <code class="language-plaintext highlighter-rouge">Project Settings</code> -&gt; <code class="language-plaintext highlighter-rouge">Input Map</code></p>
+
+      <p>Make sure you turn on <code class="language-plaintext highlighter-rouge">Show Built-in Actions</code></p>
+
+      <p><img src="res/built-in-actions.png" alt="" /></p>
+
+      <p>Also note that Vector2’s are coordinate pairs corresponding to x,y pairs, where the origin is in the top left of the screen.</p>
 
       <p><a href="https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html">GDScript Basics</a></p>
 
@@ -431,9 +444,9 @@ Also note that Vector2’s are coordinate pairs corresponding to x,y pairs, wher
       <p>Let’s add some code too:</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># make sure the name matches the name generated when connecting the signal!
-</span><span class="n">func</span> <span class="n">_on_RigidBody2D4_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+</span><span class="n">func</span> <span class="n">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">void</span><span class="p">:</span>
 	<span class="k">if</span> <span class="n">body</span> <span class="ow">is</span> <span class="n">StaticBody2D</span><span class="p">:</span>
-		<span class="n">apply_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">))</span>
+		<span class="n">apply_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
 </code></pre></div>      </div>
 
       <p>Finally, we need to configure the RigidBody2D to report collisions, since it does not by default:</p>
@@ -449,7 +462,7 @@ Also note that Vector2’s are coordinate pairs corresponding to x,y pairs, wher
       <p><code class="language-plaintext highlighter-rouge">Right Click</code> -&gt; <code class="language-plaintext highlighter-rouge">Save Branch as Scene</code></p>
       <ul>
         <li>Save it as <code class="language-plaintext highlighter-rouge">JumpingBox.tscn</code></li>
-        <li>Remove the other instances of RigidBody2Ds, and replace them with JumpingBoxes</li>
+        <li>Remove the other instances of RigidBody2Ds, and replace them with JumpingBoxes .</li>
       </ul>
 
       <p>With the combination of the scene and the script, this now acts as a self-contained class!</p>
@@ -467,10 +480,10 @@ We could put them in a group to easily find them:</p>
 
       <p>Now we can modify our code to only work for the group.</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">_on_RigidBody2D4_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">void</span><span class="p">:</span>
 	<span class="n">var</span> <span class="n">floors</span> <span class="o">=</span> <span class="n">get_tree</span><span class="p">().</span><span class="n">get_nodes_in_group</span><span class="p">(</span><span class="s">"floors"</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">floors</span><span class="p">:</span>
-		<span class="n">apply_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">))</span>
+		<span class="n">apply_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">500</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
 </code></pre></div>      </div>
 
       <p>This would be useful if we had other StaticBodies, for example, walls</p>
@@ -481,7 +494,7 @@ We could put them in a group to easily find them:</p>
 
       <p><code class="language-plaintext highlighter-rouge">AutoLoads</code> are scripts which are loaded at the time the game is instantiated. There is thus one globally accessible reference. This is an implementation of the Singleton design pattern.</p>
 
-      <p>We can access the AutoLoads from the menu <code class="language-plaintext highlighter-rouge">Project</code> -&gt; <code class="language-plaintext highlighter-rouge">Project Settings</code> -&gt; <code class="language-plaintext highlighter-rouge">AutoLoad</code></p>
+      <p>We can access the AutoLoads from the menu <code class="language-plaintext highlighter-rouge">Project</code> -&gt; <code class="language-plaintext highlighter-rouge">Project Settings</code> -&gt; <code class="language-plaintext highlighter-rouge">Globals</code> -&gt; <code class="language-plaintext highlighter-rouge">AutoLoad</code></p>
 
       <p>Let’s create an AutoLoad script for spawning blocks at regular intervals:</p>
 
@@ -494,18 +507,18 @@ We could put them in a group to easily find them:</p>
 
 <span class="n">var</span> <span class="n">jumping_box_scene</span> <span class="o">=</span> <span class="n">preload</span><span class="p">(</span><span class="s">"res://JumpingBox.tscn"</span><span class="p">)</span>
 
-<span class="n">func</span> <span class="n">_ready</span><span class="p">():</span>
+<span class="n">func</span> <span class="n">_ready</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">void</span><span class="p">:</span>
 	<span class="n">timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">.</span><span class="n">new</span><span class="p">()</span>
 	<span class="n">timer</span><span class="p">.</span><span class="n">set_wait_time</span><span class="p">(</span><span class="n">spawn_interval</span><span class="p">)</span>
 	<span class="n">timer</span><span class="p">.</span><span class="n">set_one_shot</span><span class="p">(</span><span class="n">false</span><span class="p">)</span>
-	<span class="n">timer</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"timeout"</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="s">"_on_timer_timeout"</span><span class="p">)</span>
+	<span class="n">timer</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"timeout"</span><span class="p">,</span> <span class="n">_on_timer_timeout</span><span class="p">)</span>
 	<span class="n">timer</span><span class="p">.</span><span class="n">set_autostart</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
 	<span class="n">add_child</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span>
 
-<span class="n">func</span> <span class="n">_on_timer_timeout</span><span class="p">():</span>
-	<span class="n">var</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">)</span>
-	<span class="n">var</span> <span class="n">x</span> <span class="o">=</span> <span class="n">rand_range</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
-	<span class="n">var</span> <span class="n">new_block</span> <span class="o">=</span> <span class="n">jumping_box_scene</span><span class="p">.</span><span class="n">instance</span><span class="p">()</span>
+<span class="n">func</span> <span class="n">_on_timer_timeout</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">void</span><span class="p">:</span>
+	<span class="n">var</span> <span class="n">y</span> <span class="o">=</span> <span class="n">randf_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">)</span>
+	<span class="n">var</span> <span class="n">x</span> <span class="o">=</span> <span class="n">randf_range</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
+	<span class="n">var</span> <span class="n">new_block</span> <span class="o">=</span> <span class="n">jumping_box_scene</span><span class="p">.</span><span class="n">instantiate</span><span class="p">()</span>
 	<span class="n">new_block</span><span class="p">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 	<span class="n">get_tree</span><span class="p">().</span><span class="n">get_root</span><span class="p">().</span><span class="n">add_child</span><span class="p">(</span><span class="n">new_block</span><span class="p">)</span>
 </code></pre></div>      </div>
@@ -524,11 +537,11 @@ Spawner.timer.stop()
       <p><a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html">Singletons (AutoLoad)</a></p>
 
     </div></div></section>
-<section id="part2projectsetup"><button class="collapsible">Part 2: Project Setup</button><div class="text-content"><div class="text-inner">
+<section id="part2ourlabprojectsetup"><button class="collapsible">Part 2: Our Lab Project Setup</button><div class="text-content"><div class="text-inner">
 
       <h3 id="the-game-offline-phase-1">The Game Offline (Phase 1)</h3>
 
-      <p>The Game we are going to add network multiplayer to is as follows:</p>
+      <p>We are going to build a simple 2D Arena Battler using Godot Network-based Multiplayer.</p>
 
       <p>Goal:</p>
       <ul>
@@ -552,7 +565,7 @@ Spawner.timer.stop()
 
       <p>Find the starter code on URCourses…</p>
       <ul>
-        <li>Note that it is in 3 phases, before multiplayer, with Lobby support but no extras, and with completed.</li>
+        <li>Note that it is in 3 phases, before multiplayer, with Lobby support but no actual multiplayer interactivity, and with peer-to-peer multiplayer completed.</li>
       </ul>
 
       <p>A brief walk through the classes:</p>
@@ -562,7 +575,8 @@ Spawner.timer.stop()
         <li>Instantiates players in the <code class="language-plaintext highlighter-rouge">_ready</code> function</li>
         <li>Handles scoring</li>
         <li>Awards points</li>
-        <li><em>Important</em> we are manually creating our players right now. We’re going to be having the Network API do it for us later on!</li>
+        <li><em>Important</em> we are manually creating our players right now. We’ll do it directly via the Network API later on!</li>
+        <li>Note: Some of this code will move to <code class="language-plaintext highlighter-rouge">gamestate.gd</code> in phase 2 to be more consistent with the multiplayer demo provided.</li>
       </ul>
 
       <p>Spawner (<code class="language-plaintext highlighter-rouge">Spawner.gd</code>, <code class="language-plaintext highlighter-rouge">Spawner.tscn</code>)</p>
@@ -646,7 +660,7 @@ Spawner.timer.stop()
         <li>Recall <code class="language-plaintext highlighter-rouge">127.0.0.1</code> is the loopback address, also known as localhost, meaning connect to the local device</li>
       </ul>
 
-      <p>My lobby has been borrowed from the <a href="https://godotengine.org/asset-library/asset/139">Bomberman-style Multiplayer Example</a></p>
+      <p>My lobby has been borrowed from the <a href="https://godotengine.org/asset-library/asset/139">Bomberman-style Multiplayer Example</a>. This was a Godot 3 example, which requires a decent amount of porting to work in Godot 4 - so far in testing nothing appears broken, but I can’t guarantee that will always be true!</p>
 
       <ul>
         <li>Modifications from Phase 1:
@@ -654,15 +668,15 @@ Spawner.timer.stop()
             <li>Added <code class="language-plaintext highlighter-rouge">lobby.gd</code>
               <ul>
                 <li>This make heavy use of UI and signals</li>
-                <li>In particular, the <code class="language-plaintext highlighter-rouge">$</code> is a shortcut to find nodes</li>
+                <li>In particular, the <code class="language-plaintext highlighter-rouge">$</code> is a shortcut to find nodes in our tree</li>
                 <li>e.g. <code class="language-plaintext highlighter-rouge">$Connect.hide()</code> is finding the part of the UI named Connect, and hiding it.</li>
               </ul>
             </li>
             <li>Added <code class="language-plaintext highlighter-rouge">lobby.tscn</code></li>
             <li>Added <code class="language-plaintext highlighter-rouge">gamestate.gd</code> (AutoLoad)
               <ul>
-                <li>Migrated all of the spawning code from <code class="language-plaintext highlighter-rouge">GameLogic.gd</code> into <code class="language-plaintext highlighter-rouge">gamestate.gd</code></li>
-                <li>This was to stay consistent with the Tutorial</li>
+                <li>I migrated all of the spawning code from <code class="language-plaintext highlighter-rouge">GameLogic.gd</code> into <code class="language-plaintext highlighter-rouge">gamestate.gd</code></li>
+                <li>This was to stay consistent with the tutorial</li>
               </ul>
             </li>
             <li>Change <code class="language-plaintext highlighter-rouge">lobby.tscn</code> to the main scene to load
@@ -682,9 +696,11 @@ Spawner.timer.stop()
 
       <p>Right now we have two unique instances of the game which have the ability to to communicate between them, but they are not sharing all of the data needed to synchronize gameplay. We need to figure out how to make that communication such that each instance can only control their player, and the game state gets updated appropriately.</p>
 
+      <p>Once two or more players join the game, the entire game world will be built on each peer’s device. That means each player will have a unique copy of each of the player sprites, the game world, the UI, the script files, everything! Nothing will be synchronized in the actual game logic just yet!</p>
+
       <h4 id="testing-multiple-instances">Testing Multiple Instances</h4>
 
-      <p>During testing, if you need to run a second instance of the game, you can copy the Godot Engine (.exe) into the project directory, and then run it from there, which will autoload the game. Efficient!</p>
+      <p>During testing, if you need to run a second instance of the game, you can copy the Godot Engine (.exe) into the project directory, and then run it from there, which will autoload the game in a preview. Efficient!</p>
 
       <h3 id="design-for-network-application">Design for Network Application</h3>
 
@@ -695,12 +711,12 @@ Spawner.timer.stop()
         <li>Most importantly is the score, as this determines the winner</li>
         <li>But also, in order for players to see where the other players are, and dodge them, their position needs to be updated too
           <ul>
-            <li>Consider if we only synchronize position?</li>
-            <li>Consider if we synchronize both position and velocity?
+            <li>What might happen if we only synchronize position?</li>
+            <li>What might happen if we synchronize both position and velocity?
               <ul>
                 <li>This leads to an important concept - <code class="language-plaintext highlighter-rouge">prediction</code>
                   <ul>
-                    <li>If we are given gaps in information, can we fill in the bits we don’t using the physics engine?</li>
+                    <li>In other words, if we are given gaps in information, can we fill in the bits we don’t using something we do know, e.g. the physics engine?</li>
                   </ul>
                 </li>
               </ul>
@@ -708,10 +724,11 @@ Spawner.timer.stop()
           </ul>
         </li>
         <li>
-          <p>Finally, we also need to handle movement?</p>
+          <p>Finally, we also need to handle movement.</p>
         </li>
-        <li>Which game instance should be in charge of which players?
+        <li>Another design decision:
           <ul>
+            <li>Which game instance should be in charge of which players, i.e. the Authority over that sprite?</li>
             <li>We will implement it such that each game instance is in charge of it’s own player’s movement.
               <ul>
                 <li>I am the one true source of knowledge on my location
@@ -721,14 +738,23 @@ Spawner.timer.stop()
                 </li>
               </ul>
             </li>
-            <li>Players could also be in charge of when they are defeated
+            <li>Players will also be in charge of when they are defeated
               <ul>
                 <li>This leads to another important concept - security and tampering - which we’ll investigate in the assignment</li>
               </ul>
             </li>
           </ul>
         </li>
-        <li>Each time a game state is synchronized, a message is passed getween game instances. Which ones are the most important? Which ones can we occasionally miss?</li>
+        <li>Each time a game state is synchronized, a message is passed getween game instances.
+          <ul>
+            <li>Which messages being sent need to be guaranteed to arrive?</li>
+            <li>Which ones can we occasionally miss?
+              <ul>
+                <li>What do we gain and lose by requiring messages to be recieved?</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
 
       <p>Together these considerations point to three important concepts to consider are: performance, reliability and security.</p>
@@ -743,7 +769,7 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
             <li>Four total Player classes across two games!</li>
           </ul>
         </li>
-        <li>GameA is in control of PlayerA, GameB is in control of PlayerB
+        <li>Our goal: GameA is in control of PlayerA, GameB is in control of PlayerB
           <ul>
             <li>The copy of PlayerB in GameA is just a puppet, observing the state of PlayerB in GameB</li>
             <li>Ditto for PlayerA in GameB</li>
@@ -753,117 +779,152 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
 
       <p><img src="res/master-of-puppets.png" alt="" /></p>
 
+      <p>Please see <a href="https://docs.godotengine.org/en/stable/tutorials/networking/high_level_multiplayer.html">High Level Multiplayer</a> for an in-depth discussion of the following topics!</p>
+
       <p><code class="language-plaintext highlighter-rouge">rpc</code> functions are Remote Procedure Calls. They call a function on other devices, assuming those devices have permission.</p>
       <ul>
-        <li>Permission are given by keywords before the function:
+        <li>RPC functions have a unique syntax in Godot 4:</li>
+        <li>The function is begun with the <code class="language-plaintext highlighter-rouge">@rcp(...)</code> syntax
           <ul>
-            <li><code class="language-plaintext highlighter-rouge">remote</code> - the function is only called from a remote peer</li>
-            <li><code class="language-plaintext highlighter-rouge">remotesync</code> - the function is called remotely and locally</li>
-            <li><code class="language-plaintext highlighter-rouge">master</code> - a delegated network master has the ability to call this function</li>
-            <li><code class="language-plaintext highlighter-rouge">puppet</code> - non-network masters will instead use this function</li>
-          </ul>
-        </li>
-        <li><code class="language-plaintext highlighter-rouge">rpc</code>s have <code class="language-plaintext highlighter-rouge">reliable</code> (default) and <code class="language-plaintext highlighter-rouge">unreliable</code> variants
-          <ul>
-            <li>We can call an RCP on just one instance with <code class="language-plaintext highlighter-rouge">rpc_id</code>. The default <code class="language-plaintext highlighter-rouge">rpc</code> calls it on all instances.</li>
+            <li>inside the parenthese are a list of keyword strings which can be added to detemine who has the authority to call this function, where it should be run, and the reliability of the function.</li>
+            <li>These can be passed in any order</li>
+            <li>Some keywords are:
+              <ul>
+                <li>mode: <code class="language-plaintext highlighter-rouge">"authority"</code> or <code class="language-plaintext highlighter-rouge">"any peer"</code> explains who can call this function</li>
+                <li>sync: <code class="language-plaintext highlighter-rouge">"call remote"</code> or <code class="language-plaintext highlighter-rouge">"call local"</code> explains where this function should run, call remote will only call it on other clients, wheras call local can also call it locally - useful in peer-to-peer communications where the server is also a player</li>
+                <li>transfer_mode: <code class="language-plaintext highlighter-rouge">"reliable"</code>, <code class="language-plaintext highlighter-rouge">"unreliable"</code> - reliable guarantees a packet will arrive, wheras unreliable does not. Which protocols previously discussed likely underly these transfer modes?</li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
 
-      <p><code class="language-plaintext highlighter-rouge">rset</code> is how to remotely synchronize a variable</p>
-      <ul>
-        <li>as with <code class="language-plaintext highlighter-rouge">rpc</code>, there are reliable and unreliable versions</li>
-        <li><code class="language-plaintext highlighter-rouge">master</code> / <code class="language-plaintext highlighter-rouge">puppet</code> make sense in this context, for example, as a player you are the <code class="language-plaintext highlighter-rouge">master</code> of your location. The copy of your player appearing in everyone else’s game is merely a <code class="language-plaintext highlighter-rouge">puppet</code>.</li>
-      </ul>
+      <p>It can also be useful to get and set variables across hosts. Here’s an example of such a configuration:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">rpc</span><span class="p">(</span><span class="s">"unreliable"</span><span class="p">,</span><span class="s">"authority"</span><span class="p">)</span> <span class="n">func</span> <span class="n">update_puppet_health</span> <span class="p">(</span><span class="n">health</span><span class="p">):</span>
+  <span class="n">puppet_health</span> <span class="o">=</span> <span class="n">health</span>
+</code></pre></div>      </div>
 
     </div></div></section>
 <section id="part5peertopeerapplication"><button class="collapsible">Part 5:Peer-to-peer Application</button><div class="text-content"><div class="text-inner">
+
+      <p>When we drop into the game, the contoller will control every instance of every player. We only want it to control our own, we want other players to control their own instance, and simply observe these changes over the internet. In other words, we want our other instances to be puppets, controller by the authority.</p>
 
       <p>To add network functionality to our application, we must make the following changes:</p>
 
       <ol>
         <li>Make sure each player controls their character, and only their character
           <ul>
-            <li>In the player script, modify the value of the <code class="language-plaintext highlighter-rouge">is_controllable</code> bool to <code class="language-plaintext highlighter-rouge">is_network_master()</code>
+            <li>In the player script, modify the value of the <code class="language-plaintext highlighter-rouge">is_controllable</code> bool to <code class="language-plaintext highlighter-rouge">is_multiplayer_authority()</code>
               <ul>
                 <li>This will automatically make a player controllable only if they are the player associated with that game instance</li>
-                <li>e.g. PlayerA in GameA, PlayerB in GameB
-                  <ul>
-                    <li>You need to also remove setting controllable from in <code class="language-plaintext highlighter-rouge">gamestate.gd</code></li>
-                  </ul>
-                </li>
+                <li>e.g. PlayerA in GameA, PlayerB in GameB</li>
               </ul>
             </li>
           </ul>
-
-          <p>On line 26:</p>
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span> <span class="n">is_master</span>            <span class="o">=</span> <span class="n">false</span>
-</code></pre></div>          </div>
-
-          <p>On line 32, inside the _ready function:</p>
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">is_master</span> <span class="o">=</span> <span class="n">is_network_master</span><span class="p">()</span>
-</code></pre></div>          </div>
         </li>
+      </ol>
+
+      <p>In the physics process function</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">func</span> <span class="n">_physics_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">):</span>
+	
+    <span class="c1"># sometimes jumping on a player teleports you with them. This will recover you.
+</span>    <span class="k">if</span> <span class="n">position</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">10000</span><span class="p">:</span>
+      <span class="n">position</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    
+    <span class="c1"># changed so you control the network master
+</span>    <span class="k">if</span> <span class="n">is_multiplayer_authority</span><span class="p">():</span> <span class="c1">#Add this change around the movement section
+</span>      <span class="k">if</span> <span class="ow">not</span> <span class="n">pounding</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_on_floor</span><span class="p">():</span>
+          <span class="n">check_iad</span><span class="p">()</span>
+    <span class="c1">#...
+</span></code></pre></div>      </div>
+
+      <ol>
         <li>Modify player position and velocity to be a synchronized variable
           <ul>
             <li>In particular, you will want to create a puppet position and puppet velocity in addition to the true ones</li>
-            <li>And update them using the <code class="language-plaintext highlighter-rouge">rset</code> or <code class="language-plaintext highlighter-rouge">rset_unreliable</code> functions</li>
-          </ul>
-
-          <p>In the class variables, at the top:</p>
-
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">puppet</span> <span class="n">var</span> <span class="n">puppet_position</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">()</span>
-<span class="n">puppet</span> <span class="n">var</span> <span class="n">puppet_velocity</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">()</span>
-</code></pre></div>          </div>
-
-          <p>And, when controlling the player, update these variables and add an <code class="language-plaintext highlighter-rouge">else</code> case to the player movement, on line 80:</p>
-
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		<span class="n">rset_unreliable</span><span class="p">(</span><span class="s">"puppet_position"</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
-		<span class="n">rset_unreliable</span><span class="p">(</span><span class="s">"puppet_velocity"</span><span class="p">,</span> <span class="n">velocity</span><span class="p">)</span>
-   	
-	<span class="k">else</span><span class="p">:</span>
-		<span class="n">position</span> <span class="o">=</span> <span class="n">puppet_position</span>
-		<span class="n">velocity</span> <span class="o">=</span> <span class="n">puppet_velocity</span>
-</code></pre></div>          </div>
-
-          <p>What would happen if we only tracked <code class="language-plaintext highlighter-rouge">position</code> instead of both <code class="language-plaintext highlighter-rouge">position</code> and <code class="language-plaintext highlighter-rouge">velocity</code>?</p>
-        </li>
-        <li>Ensure that award_point is a synchronized function. Ditto with decrement score.
-          <ul>
-            <li>This ensures that it gets called on all clients</li>
-          </ul>
-
-          <p>change the function from:</p>
-
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">award_point</span> <span class="p">(</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">):</span>
-</code></pre></div>          </div>
-
-          <p>to</p>
-
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">remotesync</span> <span class="n">func</span> <span class="n">award_point</span> <span class="p">(</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">):</span>
-</code></pre></div>          </div>
-
-          <p>And make sure it is called correctly, around line 198, update the following call:</p>
-
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			<span class="n">award_point</span><span class="p">(</span><span class="n">body</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-</code></pre></div>          </div>
-
-          <p>to</p>
-
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			<span class="n">rpc</span><span class="p">(</span><span class="s">"award_point"</span><span class="p">,</span> <span class="n">body</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-</code></pre></div>          </div>
-        </li>
-        <li>
-          <p>Perform similar updates for decrementing score. The function is defined around 144, and called on 212. Can you figure out how to update it? Do we need to pass any arguments?</p>
-        </li>
-        <li>In the go_to_timeout() function, ensure that it only runs if you are the network master
-          <ul>
-            <li>All others will simply do nothing.</li>
-            <li>Position will thus be handled by it being a synchronized variable</li>
-            <li>We should also make sure the score decrements as an RPC!</li>
+            <li>These will updated only by the network authority</li>
           </ul>
         </li>
       </ol>
+
+      <p>In the class variables, at the top:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># the Player's position and velocity if a puppet
+</span>  <span class="n">var</span> <span class="n">puppet_position</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">()</span>
+  <span class="n">var</span> <span class="n">puppet_velocity</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <p>Let’s add an RPC setter function to update these variables</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">@</span><span class="n">rpc</span><span class="p">(</span><span class="s">"unreliable"</span><span class="p">,</span><span class="s">"authority"</span><span class="p">)</span> <span class="n">func</span> <span class="n">update_puppet_states</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">velocity</span><span class="p">):</span>
+	  <span class="n">puppet_position</span> <span class="o">=</span> <span class="n">position</span>
+	  <span class="n">puppet_velocity</span> <span class="o">=</span> <span class="n">velocity</span>
+</code></pre></div>      </div>
+
+      <p>And, when controlling the player, send our updates to other players if we are the the network authority, otherwise just set our position and velocity to the values supplied by other network authorities:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="c1"># At the end of our controller code...
+</span>        <span class="k">if</span> <span class="p">(</span><span class="n">dash_frames</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+          <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">GRAVITY</span>
+        
+        <span class="n">velocity</span> <span class="o">=</span> <span class="n">velocity</span><span class="p">.</span><span class="n">lerp</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">velocity</span><span class="p">.</span><span class="n">y</span><span class="p">),.</span><span class="mi">1</span><span class="p">)</span>
+      
+        <span class="n">rpc</span><span class="p">(</span><span class="s">"update_puppet_states"</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">velocity</span><span class="p">)</span>
+      
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="n">puppet_position</span>
+        <span class="n">velocity</span> <span class="o">=</span> <span class="n">puppet_velocity</span>
+</code></pre></div>      </div>
+
+      <p>What would happen if we only tracked <code class="language-plaintext highlighter-rouge">position</code> instead of both <code class="language-plaintext highlighter-rouge">position</code> and <code class="language-plaintext highlighter-rouge">velocity</code>?</p>
+
+      <ol>
+        <li>Ensure that <code class="language-plaintext highlighter-rouge">award_point</code> is a synchronized function. Ditto with <code class="language-plaintext highlighter-rouge">decrement_score</code>.</li>
+      </ol>
+
+      <p>Update <code class="language-plaintext highlighter-rouge">award_point</code> as an RPC</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">rpc</span><span class="p">(</span><span class="s">"any_peer"</span><span class="p">,</span> <span class="s">"call_local"</span><span class="p">)</span> <span class="n">func</span> <span class="n">award_point</span> <span class="p">(</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">):</span>
+	<span class="err">$</span><span class="s">"/root/Battlefield"</span><span class="p">.</span><span class="n">get_node</span><span class="p">(</span><span class="n">NodePath</span><span class="p">(</span><span class="n">winner</span><span class="p">)).</span><span class="n">increment_score</span><span class="p">()</span>
+	<span class="err">$</span><span class="s">"/root/Battlefield"</span><span class="p">.</span><span class="n">get_node</span><span class="p">(</span><span class="n">NodePath</span><span class="p">(</span><span class="n">loser</span><span class="p">)).</span><span class="n">go_to_timeout</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <p>Call it as such</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">_on_Hurtbox_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">body</span> <span class="ow">is</span> <span class="n">Player</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">!=</span><span class="n">body</span><span class="p">:</span>
+		<span class="n">body</span><span class="p">.</span><span class="n">bounce</span><span class="p">();</span>
+		<span class="k">if</span> <span class="n">is_multiplayer_authority</span><span class="p">():</span>
+			<span class="n">rpc</span><span class="p">(</span><span class="s">"award_point"</span><span class="p">,</span> <span class="n">body</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Update <code class="language-plaintext highlighter-rouge">decrement_score</code> as an RPC</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">rpc</span><span class="p">(</span><span class="s">"any_peer"</span><span class="p">,</span> <span class="s">"call_local"</span><span class="p">)</span> <span class="n">func</span> <span class="n">decrement_score</span> <span class="p">():</span>
+	<span class="n">score</span> <span class="o">-=</span> <span class="mi">1</span>
+	<span class="n">score_label</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Call it as such</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">plummet</span><span class="p">():</span>
+	<span class="k">if</span> <span class="n">is_multiplayer_authority</span><span class="p">():</span>
+		<span class="n">rpc</span><span class="p">(</span><span class="s">"decrement_score"</span><span class="p">)</span>
+		<span class="k">await</span> <span class="n">get_tree</span><span class="p">().</span><span class="n">create_timer</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">timeout</span>
+		<span class="n">respawn</span><span class="p">()</span>
+</code></pre></div>      </div>
+
+      <ol>
+        <li>Update the go to timeout function to only call if you are the network authority, to set a cooldown before respawning</li>
+      </ol>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func</span> <span class="n">go_to_timeout</span><span class="p">():</span>
+	<span class="k">if</span> <span class="n">is_multiplayer_authority</span><span class="p">():</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">(</span><span class="n">randi</span><span class="p">()</span> <span class="o">%</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
+		<span class="k">await</span> <span class="n">get_tree</span><span class="p">().</span><span class="n">create_timer</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">timeout</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">respawn</span><span class="p">()</span>
+</code></pre></div>      </div>
 
       <p>The stage three code, included has this functionality implemented. You may start your assignment from Stage 3.</p>
 
@@ -883,7 +944,7 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
             </li>
             <li>Maintain all other aspects of functionality - do not change any data structures.
               <ul>
-                <li>It should work with clients from Phase 3 with minimal changes (simple not spawning a player with network id 1)</li>
+                <li>It should work with clients from Phase 3 with minimal changes (simply not spawning a player with network id 1)</li>
               </ul>
             </li>
           </ul>
@@ -899,15 +960,15 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
         <li>Modify the client and server code such that there is no player assigned to the host.
           <ul>
             <li>Hint: Where are the players instanced? Which id is assigned to the host?</li>
-            <li>The host should automatically be waiting for players mode when no game is playing, and return there when a game ends</li>
+            <li>The host should automatically be waiting for players when no game is playing, and return to this screen when a game ends</li>
             <li>You may wish to see how the <code class="language-plaintext highlighter-rouge">lobby</code> works, and skip the first screen altogether
               <ul>
                 <li>Once all of the players have joined, a player will need to manually start the game</li>
               </ul>
             </li>
-            <li>No person should not need to interact with the server instance directly, it could theoretically run on a headless system.
+            <li>The server should be entirely automated, no human should ever need press any button on it. It could theoretically run on a machine with no monitor and no keyboard/mouse (headless system).
               <ul>
-                <li>However, the client will still show the game in progress visually</li>
+                <li>However, the server will still show the game in progress visually, for debugging purposes</li>
               </ul>
             </li>
             <li>The client should no longer be able to host, and should instead just connect to the server.</li>
@@ -930,13 +991,13 @@ Next, gamestate creates the <code class="language-plaintext highlighter-rouge">P
 
       <p>In part 2, make a third version of the project called <code class="language-plaintext highlighter-rouge">cheat-client</code>, which is a version of the client which cheats in some way.</p>
       <ul>
-        <li>The cheats should work with the server logic, i.e. not cause a crash</li>
+        <li>The cheats should work with the server logic, i.e. not cause a crash or desync</li>
         <li>Think about what the player is in control of, vs. what the server is in control of.</li>
         <li>As we are not validating legal data, these should go undetected by the server, and give some advantage in the game.</li>
         <li>Your cheat client should not crash the server!</li>
       </ul>
 
-      <p>I was planning to mark this lab through a live demo, where you connect to my server and demonstrate your application. However, as this is our last scheduled lab session, we will instead do submission via URCourses. Please zip up your project for all three phases (<code class="language-plaintext highlighter-rouge">server</code>, <code class="language-plaintext highlighter-rouge">client</code> and <code class="language-plaintext highlighter-rouge">cheat-client</code>). Include a readme file which explains your cheat-client’s functionality.</p>
+      <p>Finally, explain in a text file of some sort how you caused the <code class="language-plaintext highlighter-rouge">cheat-client</code> to cheat, and also what you could do on the server side to detect this cheat. (You need not implement it, just explain the approach.) What trade-offs do you anticipate with this detection routine?</p>
 
     </div></div></section>
 <section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
