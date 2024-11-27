@@ -120,500 +120,500 @@
 <hr />
 
 <p><button class="expandall">Collapse All</button></p>
-<section id="introgamedevelopmentingodot4engine"><button class="collapsible">Intro - Game Development in Godot 4 Engine</button><div class="text-content"><div class="text-inner">
+<section id="introledmatrixwitharduinosintinkercad"><button class="collapsible">Intro - LED Matrix with Arduinos in TinkerCAD</button><div class="text-content"><div class="text-inner">
 
-      <p>In this lab exercise, we will introduce you to the Godot game engine by recreating one of my favourite games, Lunar Lander. In this 2D side-view game, you use simulated physics to guide a lunar lander module safely to a safe landing zone. You will be constrained by how much fuel the lander has, with a successful landing using less fuel getting a better score. However, the lander is very fragile, so hitting the ground outside this area results in a failure.  Time permitting we will touch on the following topics:</p>
-      <ul>
-        <li>Downloading and running the godot engine</li>
-        <li>Making a new project</li>
-        <li>Creating sprites for the player</li>
-        <li>Creating a player controller</li>
-        <li>Writing the physics code to control the player</li>
-        <li>Creating environments</li>
-        <li>Creating the failure condition of hitting the environments</li>
-        <li>Creating the goal location</li>
-        <li>Creating the win condition of hitting the goal
-Stretch Goals</li>
-        <li>Adding some User Interface elements to show cause of success and failure</li>
-        <li>Adding fuel to player</li>
-        <li>Displaying limited fuel</li>
-        <li>Adding additional levels</li>
-      </ul>
+      <p>In this exercise, you will learn to make an LED matrix using Tinkercad and an Arduino Microcontroller. This will begin with a review of the material covered in What is Engineering Fall 2024. After that we will create a 3x3 LED Matrix, and learn how to program it. We will then scale it up to a 4x4 LED Matrix. Finally, we will replace this with a 4x4 RGB LED Matrix. Time permitting, you will see if you can design an interesting light show using the 3x3 matrix.</p>
 
     </div></div></section>
-<section id="downloadingandrunningthegodotengine"><button class="collapsible">Downloading and running the Godot Engine</button><div class="text-content"><div class="text-inner">
+<section id="tinkercad"><button class="collapsible">TinkerCad</button><div class="text-content"><div class="text-inner">
 
-      <p>You can grab the Godot 4 Engine here: <a href="https://godotengine.org/download/windows/">https://godotengine.org/download/windows/</a></p>
+      <p>In this exercise, we will simulate embedded systems using TinkerCad. Please join the classroom here:</p>
 
-      <p><img src="res/godot-get.png" alt="" /></p>
+      <p><a href="https://www.tinkercad.com/joinclass/FITVZUZT8">https://www.tinkercad.com/joinclass/FITVZUZT8</a></p>
 
-      <p>To run it you only need to double click on the downloaded file, and the engine will pop up.</p>
+      <p>And use the nickname <code class="language-plaintext highlighter-rouge">pcx</code>, where <code class="language-plaintext highlighter-rouge">x</code> is the station number of your machine. e.g. <code class="language-plaintext highlighter-rouge">pc1</code>.</p>
 
-    </div></div></section>
-<section id="startinganewproject"><button class="collapsible">Starting a new project</button><div class="text-content"><div class="text-inner">
+      <p>After that go to classes -&gt; what is engineering -&gt; ardy</p>
 
-      <p>To create a new project, click new:</p>
+      <p><img src="res/joining.png" alt="" /></p>
 
-      <p><img src="res/new-project.png" alt="" /></p>
+      <p>Then do a <code class="language-plaintext highlighter-rouge">Copy and Tinker</code> of the starting circuit.</p>
 
-      <p>Give it a name and an empty folder:</p>
-
-      <p><img src="res/name-and-folder.png" alt="" /></p>
-
-      <p>Welcome to the editor!</p>
-
-      <p><img src="res/welcome-to-the-editor.png" alt="" /></p>
-
-      <p>The following areas will be of interest to us:</p>
-
-      <p>(1) The scene tree is where all of our objects in the game will be visible</p>
-
-      <p>(2) The FileSystem is where the files for our project will be saved</p>
-
-      <p>(3) This is where we will be able to position things in 2D</p>
-
-      <p>(4) This is where we will do some scripting</p>
-
-      <p>(5) This is where we will be able to play our game</p>
-
-      <p>(6) This is where we will edit the properties of our game objects</p>
+      <p>We will work on this project in four phases. If you fall behind at any phase, you can always return to this screen, and instead Copy and Tinker the next checkpoint.</p>
 
     </div></div></section>
-<section id="creatingspritesfortheplayer"><button class="collapsible">Creating sprites for the player</button><div class="text-content"><div class="text-inner">
+<section id="startingstate"><button class="collapsible">Starting State</button><div class="text-content"><div class="text-inner">
 
-      <p>Let’s start by creating some sprites for our player.</p>
+      <h3 id="arduino-microcontoller">Arduino Microcontoller</h3>
+
+      <p>Our project is going to be simulated using the Arduino Uno R3 microcontroller board. This is a popuar hobbyist board which allows building simple circuits and programming them using logic.</p>
+
+      <p>To begin, identify the two lines of pins on each side of the microcontroller. These are places where wires can be attached.</p>
+
+      <p>To begin let’s create a very simple circuit with the following</p>
+
+      <p>5V pin -&gt; 330 Ohm resistor -&gt; LED anode -&gt; LED cathode -&gt; GND (any ground pin will work fine.)</p>
 
       <ul>
-        <li>Let’s grab a simple image editor which supports transparency, PhotoDemon:
+        <li>You can add components to TinkerCad by dragging them from the right pane
           <ul>
-            <li><a href="https://photodemon.org/">https://photodemon.org/</a></li>
-            <li>Download the zip, unzip, and run PhotoDemon</li>
-          </ul>
-        </li>
-        <li>Create a new image which is 200x200, transparent background</li>
-      </ul>
-
-      <p><img src="res/transparent-background.png" alt="" /></p>
-
-      <ul>
-        <li>In classic Atari fashion, our sprite will be a simple triangle</li>
-        <li>Click a color you like, and then click the pencil tool</li>
-        <li>Click on the first corner of your triangle
-          <ul>
-            <li>After that hold down the SHIFT key on the keyboard so that the line tool appears</li>
-            <li>Click the second vertex</li>
-            <li>Do the same for the third, and then back to the first</li>
+            <li>add a resistor</li>
+            <li>add an LED</li>
           </ul>
         </li>
       </ul>
 
-      <p><img src="res/triangle.png" alt="" /></p>
+      <p><img src="res/first-few-components.png" alt="" /></p>
 
       <ul>
-        <li>After this, we will fill in our triangle using the bucket tool:</li>
-      </ul>
-
-      <p><img src="res/filled-triangle.png" alt="" /></p>
-
-      <ul>
-        <li>Once you are done, save your sprite (ctrl+s) as a PNG in the same folder that you made your project.</li>
-      </ul>
-
-      <p><img src="res/add-an-image.png" alt="" /></p>
-
-      <p>Save with the default settings.</p>
-
-      <p>Great, now it will appear directly in your project:</p>
-
-      <p><img src="res/sprite-appears-in-engine.png" alt="" /></p>
-
-      <p>Awesome. This is enough to get us going. However, we will be making several more sprites to follow, so keep this process in mind!</p>
-
-      <p>Alternatively, you can use my artwork, found here: <a href="res/assets.zip">Adam’s Art Assets</a></p>
-
-    </div></div></section>
-<section id="creatingaplayercontroller"><button class="collapsible">Creating a player controller</button><div class="text-content"><div class="text-inner">
-
-      <p>The first thing we will want to do in our game is create our player controller.</p>
-
-      <p>Let’s switch into 2D mode and add our first object</p>
-
-      <p><img src="res/first-object.png" alt="" /></p>
-
-      <p>In Godot, Game Objects are known as nodes. Each of the different types of nodes in the engine will give us different capabilities.</p>
-
-      <p>To make our player to begin, we will need three objects, nested as such:</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RigidBody2D
-|-- Sprite 
-|-- CollisionPolygon2D
-</code></pre></div>      </div>
-
-      <p>You can add each of these from the plus menu, and then drag them around to assure they appear in the right locations</p>
-
-      <p><img src="res/adding-nodes.png" alt="" /></p>
-
-      <p>Continue to add the others similarly, then arrange them as shown:</p>
-
-      <p><img src="res/player-nodes.png" alt="" /></p>
-
-      <p>Some of our nodes will require additional configuration to work. Our sprite will need our triange attached to it.</p>
-
-      <p><img src="res/attaching-the-triange.png" alt="" /></p>
-
-      <p>We will also want to make our sprite a bit smaller. Do this is follows:</p>
-
-      <p><img src="res/make-it-smaller.png" alt="" /></p>
-
-      <p>The next component we need to configure is the CollisionPolygon2D. We need to create a collision polygon which matches the shape of our sprite.</p>
-
-      <p><img src="res/make-collision-polygon.png" alt="" /></p>
-
-      <p>Finally, we will need to configure the RigidBody2D to report when collisions occur:</p>
-
-      <p><img src="res/configure-rigidbody.png" alt="" /></p>
-
-      <p>Okay, our system is set up. A RigidBody is an object which physics act on, such as gravity. Let’s check this out by playing our scene:</p>
-
-      <p><img src="res/play-scene.png" alt="" /></p>
-
-      <p>You will need to choose a name for your scene. <code class="language-plaintext highlighter-rouge">player.tscn</code> is a good name for it.</p>
-
-      <p>Aaaand our ship falls off the screen very quickly. Since this is a space game, we are going to want “floatier” physics than this. We can configure this by turning down the gravity scale for our object.</p>
-
-      <p><img src="res/gravity-scale.png" alt="" /></p>
-
-    </div></div></section>
-<section id="writingthephysicscodetocontroltheplayer"><button class="collapsible">Writing the physics code to control the player</button><div class="text-content"><div class="text-inner">
-
-      <p>So, the next thing we want to do is to write some code to move our player. We need to first attach a script to our class:</p>
-
-      <p><img src="res/attach-script.png" alt="" /></p>
-
-      <p>And now we are going to add some code to our script.</p>
-
-      <p>Copy and paste the following over all of the code in your script.</p>
-
-      <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extends</span> <span class="n">RigidBody2D</span>
-
-<span class="n">var</span> <span class="n">turn_speed</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">var</span> <span class="n">impulse_strength</span> <span class="o">=</span> <span class="mi">4</span>
-
-<span class="c1"># Called when the node enters the scene tree for the first time.
-</span><span class="n">func</span> <span class="n">_ready</span><span class="p">():</span>
-	<span class="k">pass</span> <span class="c1"># Replace with function body.
-</span>
-<span class="c1"># Called every frame. 'delta' is the elapsed time since the previous frame.
-</span><span class="n">func</span> <span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"right"</span><span class="p">):</span>
-		<span class="n">apply_torque</span><span class="p">(</span><span class="n">turn_speed</span><span class="p">)</span>
-		
-	<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"left"</span><span class="p">):</span>
-		<span class="n">apply_torque</span><span class="p">(</span><span class="o">-</span><span class="n">turn_speed</span><span class="p">)</span>
-		
-	<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"up"</span><span class="p">):</span>
-		<span class="n">var</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">rotation</span><span class="o">-</span><span class="n">PI</span><span class="o">/</span><span class="mi">2</span>
-		<span class="n">apply_central_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">*</span> <span class="n">impulse_strength</span><span class="p">)</span>
-</code></pre></div>      </div>
-
-      <p>We are checking to see if a player has pushed up, left or right, and depending on which one is pressed, to move our ship.</p>
-
-      <p>However, we actually haven’t assigned these buttons yet. We can do this in the project settings:</p>
-      <ul>
-        <li>File Menu</li>
-        <li>Project -&gt; Project Settings</li>
-      </ul>
-
-      <p>Switch to the input map tab</p>
-
-      <p><img src="res/adding-input-1.png" alt="" /></p>
-
-      <p>Then click the add button next to hit, hit the <code class="language-plaintext highlighter-rouge">left</code> key on your keyboard, and hit OK.</p>
-
-      <p><img src="res/add-a-left-input.png" alt="" /></p>
-
-      <p>Do the same for right and up so that the final inputs look as follows:</p>
-
-      <p><img src="res/actions-completed.png" alt="" /></p>
-
-      <p>Awesome. Now try previewing your game again. How does the ship handle?</p>
-
-      <p>This is what is commonly called tank controls, where left and right turn, and forward makes your character go up. It takes some practice to get good with, but is extremely versatile once it works.</p>
-
-      <p>Note that this is going to be dependent on the physics of your ship, so you may need to adjust the variables at the top (turn_speed and impulse_strength) until you are happy with the results.</p>
-
-      <p>Even though our ship is working, it would be nice to have some visual feedback that it is running. You get to be creative now and create a fire effect for your ship, in a similar fashion to how you created the triangle. Here’s mine:</p>
-
-      <p><img src="res/flames.png" alt="" /></p>
-
-      <p>We are going to make three copies of these flame sprites, and attach them to our ship as follows. Do you remember how to create a sprite and attach it to the player class?</p>
-
-      <p><img src="res/attaching-flames.png" alt="" /></p>
-
-      <p>Now, we will need to adjust our code to only show our flames when we are pushing the appropriate button:</p>
-
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extends</span> <span class="n">RigidBody2D</span>
-
-<span class="n">var</span> <span class="n">turn_speed</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">var</span> <span class="n">impulse_strength</span> <span class="o">=</span> <span class="mi">4</span>
-
-<span class="c1"># Called when the node enters the scene tree for the first time.
-</span><span class="n">func</span> <span class="n">_ready</span><span class="p">():</span>
-	<span class="k">pass</span> <span class="c1"># Replace with function body.
-</span>
-<span class="c1"># Called every frame. 'delta' is the elapsed time since the previous frame.
-</span><span class="n">func</span> <span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
-	<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	
-	<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"right"</span><span class="p">):</span>
-		<span class="n">apply_torque</span><span class="p">(</span><span class="n">turn_speed</span><span class="p">)</span>
-		<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-		
-	<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"left"</span><span class="p">):</span>
-		<span class="n">apply_torque</span><span class="p">(</span><span class="o">-</span><span class="n">turn_speed</span><span class="p">)</span>
-		<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-		
-	<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"up"</span><span class="p">):</span>
-		<span class="n">var</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">rotation</span><span class="o">-</span><span class="n">PI</span><span class="o">/</span><span class="mi">2</span>
-		<span class="n">apply_central_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">*</span> <span class="n">impulse_strength</span><span class="p">)</span>
-		<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-
-</code></pre></div>      </div>
-
-      <p>Awesome, we should now have some good feedback for how our ship is working.</p>
-
-    </div></div></section>
-<section id="creatingenvironments"><button class="collapsible">Creating environments</button><div class="text-content"><div class="text-inner">
-
-      <p>Now we are going to create some environemnts. To do this, create some convex polygons in your image editor. Here are the ones I created.</p>
-
-      <p>Note, these must be convex, otherwise they will not work with our collisions in Godot! It is also a good idea for at least one of them to have a flat top for our landing pad.</p>
-
-      <p><img src="res/creating-some-rocks.png" alt="" /></p>
-
-      <p>So, now that you have four rocks, let’s also create a scene for each of these. Each of these will have the same structure.</p>
-
-      <p>To create a new scene, go to Scene -&gt; New Scene</p>
-
-      <p>This time you want to start with a StaticBody2D
-The children will be a Sprite2D and a CollisionPolygon2D</p>
-
-      <p><img src="res/rock-structure.png" alt="" /></p>
-
-      <p>The only difference here between the ship we created earlier is the base type (StaticBody2D rather than RigidBody2D). Otherwise the same process works for importing in the sprites, and creating the collision shapes.</p>
-
-      <p>Let’s also draw a background for our game, a simple starfield:</p>
-
-      <p><img src="res/simple-starfield.png" alt="" /></p>
-
-      <p>Now we have some rocks, and a background. Let’s create one more scene for our game. The parent will be a simple Node2D. We’ll add our background as a sprite, our player class from the FileSystem, as well as a few copies of our rocks positioned around in a neat manner:</p>
-
-      <p><img src="res/adding-objects-to-your-world.png" alt="" /></p>
-
-      <p>Play the new scene and see what happens. You should be able to move around and hit the rocks on the bottom of your world.</p>
-
-      <p>Awesome. The next thing we will do is make some changes so that when you hit the ground, your ship explodes.</p>
-
-    </div></div></section>
-<section id="creatingthefailureconditionofhittingtheenvironments"><button class="collapsible">Creating the failure condition of hitting the environments</button><div class="text-content"><div class="text-inner">
-
-      <p>To start with we will need another art asset to show a crash. Here’s my artistic skills on display:</p>
-
-      <p><img src="res/crash.png" alt="" /></p>
-
-      <p>Let’s add this as a new sprite in our player class:</p>
-
-      <p><img src="res/crash-in-editor.png" alt="" /></p>
-
-      <p>We will now need to see if our ship has crashed with the walls. We will do this using a new feature of the engine called <code class="language-plaintext highlighter-rouge">Signals</code>.</p>
-
-      <p>Go back to the RigidBody2D in the Player class, and add a signal:</p>
-
-      <p><img src="res/connecting-a-signal.png" alt="" /></p>
-
-      <p>Use the default settings and connect. You can see that a new function appears in your code where this occured:</p>
-
-      <p><img src="res/new-function.png" alt="" /></p>
-
-      <p>This function will be invoked whenever our condition occurs. What we are going to want to do is make the crash visible. We will also want to disable our engine controls and fire from appearing.</p>
-
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extends</span> <span class="n">RigidBody2D</span>
-
-<span class="n">var</span> <span class="n">turn_speed</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">var</span> <span class="n">impulse_strength</span> <span class="o">=</span> <span class="mi">4</span>
-
-<span class="n">var</span> <span class="n">alive</span>
-
-<span class="c1"># Called when the node enters the scene tree for the first time.
-</span><span class="n">func</span> <span class="n">_ready</span><span class="p">():</span>
-	<span class="n">alive</span> <span class="o">=</span> <span class="n">true</span>
-	<span class="err">$</span><span class="n">Crash</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-
-<span class="c1"># Called every frame. 'delta' is the elapsed time since the previous frame.
-</span><span class="n">func</span> <span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
-	<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	
-	<span class="k">if</span> <span class="n">alive</span><span class="p">:</span>
-		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"right"</span><span class="p">):</span>
-			<span class="n">apply_torque</span><span class="p">(</span><span class="n">turn_speed</span><span class="p">)</span>
-			<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-			
-		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"left"</span><span class="p">):</span>
-			<span class="n">apply_torque</span><span class="p">(</span><span class="o">-</span><span class="n">turn_speed</span><span class="p">)</span>
-			<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-			
-		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"up"</span><span class="p">):</span>
-			<span class="n">var</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">rotation</span><span class="o">-</span><span class="n">PI</span><span class="o">/</span><span class="mi">2</span>
-			<span class="n">apply_central_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">*</span> <span class="n">impulse_strength</span><span class="p">)</span>
-			<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-			
-<span class="n">func</span> <span class="n">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
-	<span class="n">alive</span> <span class="o">=</span> <span class="n">false</span>
-	<span class="err">$</span><span class="n">Crash</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-</code></pre></div>      </div>
-
-      <p>Neat. Now we are failing when we crash.</p>
-
-      <p><img src="res/fail-on-crash.png" alt="" /></p>
-
-      <p>The next thing we should do is create a win condition.</p>
-
-    </div></div></section>
-<section id="creatingthegoalassets"><button class="collapsible">Creating the goal assets</button><div class="text-content"><div class="text-inner">
-
-      <p>Let’s create a couple more assets, a goal location and a flag to show we have won:</p>
-
-      <p>Flag:</p>
-
-      <p><img src="res/flag.png" alt="" /></p>
-
-      <p>Landing Platform:</p>
-
-      <p><img src="res/landing-platform.png" alt="" /></p>
-
-      <p>Now that we have the assets made, we will start by adding the flag to our ship. As before, we will control it using code.</p>
-
-      <p><img src="res/adding-flag-to-ship.png" alt="" /></p>
-
-      <p>Let’s also create a new object for our goal position. This should work the same as your rock chunks - Create a new scene, use a StaticBody as a base with a CollisionPolygon and a Sprite, and then add this new scene to the game world:</p>
-
-      <p><img src="res/landing-platform-object.png" alt="" /></p>
-
-      <p>Add it to the game world.</p>
-
-      <p><img src="res/landing-platform-in-the-game-world.png" alt="" /></p>
-
-    </div></div></section>
-<section id="creatingthewinconditionofhittingthegoal"><button class="collapsible">Creating the win condition of hitting the goal</button><div class="text-content"><div class="text-inner">
-
-      <p>Now we need to add some code to make this work. We will ues another new feature of the engine, groups, to check if we have collided with the landing zone rather just some random rocks. Start by adding the landing platform to the goal group:</p>
-
-      <p><img src="res/add-to-goal-group.png" alt="" /></p>
-
-      <p>Now we will add some code to handle successfully landing on the landing zone. This code will check that we have hit the correct zone, and that we landed with the appropriate velocity and rotation.</p>
-
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extends</span> <span class="n">RigidBody2D</span>
-
-<span class="n">var</span> <span class="n">turn_speed</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">var</span> <span class="n">impulse_strength</span> <span class="o">=</span> <span class="mi">4</span>
-
-<span class="n">var</span> <span class="n">alive</span>
-<span class="n">var</span> <span class="n">v_y</span>
-
-<span class="c1"># Called when the node enters the scene tree for the first time.
-</span><span class="n">func</span> <span class="n">_ready</span><span class="p">():</span>
-	<span class="n">alive</span> <span class="o">=</span> <span class="n">true</span>
-	<span class="err">$</span><span class="n">Crash</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	<span class="err">$</span><span class="n">Flag</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-
-<span class="c1"># Called every frame. 'delta' is the elapsed time since the previous frame.
-</span><span class="n">func</span> <span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
-	<span class="n">v_y</span> <span class="o">=</span> <span class="n">linear_velocity</span><span class="p">.</span><span class="n">y</span>
-	<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
-	
-	<span class="k">if</span> <span class="n">alive</span><span class="p">:</span>
-		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"right"</span><span class="p">):</span>
-			<span class="n">apply_torque</span><span class="p">(</span><span class="n">turn_speed</span><span class="p">)</span>
-			<span class="err">$</span><span class="n">fire_right</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-			
-		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"left"</span><span class="p">):</span>
-			<span class="n">apply_torque</span><span class="p">(</span><span class="o">-</span><span class="n">turn_speed</span><span class="p">)</span>
-			<span class="err">$</span><span class="n">fire_left</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-			
-		<span class="k">if</span> <span class="n">Input</span><span class="p">.</span><span class="n">is_action_pressed</span><span class="p">(</span><span class="s">"up"</span><span class="p">):</span>
-			<span class="n">var</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">rotation</span><span class="o">-</span><span class="n">PI</span><span class="o">/</span><span class="mi">2</span>
-			<span class="n">apply_central_impulse</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">*</span> <span class="n">impulse_strength</span><span class="p">)</span>
-			<span class="err">$</span><span class="n">fire</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-
-<span class="n">func</span> <span class="n">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">body</span><span class="p">.</span><span class="n">is_in_group</span><span class="p">(</span><span class="s">"goal"</span><span class="p">)</span> <span class="ow">and</span> <span class="o">-</span><span class="mf">0.1</span> <span class="o">&lt;</span> <span class="n">rotation</span> <span class="ow">and</span> <span class="n">rotation</span> <span class="o">&lt;</span> <span class="mf">0.1</span> <span class="ow">and</span> <span class="n">v_y</span> <span class="o">&lt;</span> <span class="mi">35</span><span class="p">:</span>
-		<span class="err">$</span><span class="n">Flag</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-	<span class="k">else</span><span class="p">:</span>
-		<span class="err">$</span><span class="n">Crash</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
-	<span class="n">alive</span> <span class="o">=</span> <span class="n">false</span>
-
-</code></pre></div>      </div>
-
-      <p>As before, depending on how physics is working your engine, you may wish to modify these values.</p>
-
-      <p>Congratulations, you now have a working game loop, including failure and success conditions.</p>
-
-      <p><img src="res/made-it.png" alt="" /></p>
-
-    </div></div></section>
-<section id="stretchgoals"><button class="collapsible">Stretch Goals:</button><div class="text-content"><div class="text-inner">
-
-      <p>Since the following sections are only stretch goals, there will not be as much detail listed here. Rather, just some suggestions of how to proceed:</p>
-
-      <h3 id="adding-some-user-interface-elements-to-show-cause-of-success-and-failure">Adding some User Interface elements to show cause of success and failure</h3>
-
-      <ul>
-        <li>Create a game label in the object where you give status reports</li>
-        <li>Create a custom signal in the player to emit a status update whenever something important happens</li>
-        <li>Create a new script in the game scene</li>
-        <li>Link the signal from the player to the game scene</li>
-        <li>Whenever the signal is emitted from the player, update the label for status updates</li>
-      </ul>
-
-      <h3 id="adding-fuel-to-player">Adding fuel to player</h3>
-
-      <ul>
-        <li>Create a new class variable in the player for fuel</li>
-        <li>Start at a high value, like 5000</li>
-        <li>Whenever the player pressed left or right, decrease fuel by a bit</li>
-        <li>Whenever the player hits the main thrusters, decrease fuel more</li>
-        <li>When fuel runs out, the player crashess</li>
-      </ul>
-
-      <h3 id="displaying-limited-fuel">Displaying limited fuel</h3>
-
-      <ul>
-        <li>Add a label as you did two sections ago</li>
-        <li>Use another custom signal from the player to the Game to update when fuel is decreased</li>
-        <li>Whenever fuel is decreased, update the label</li>
-      </ul>
-
-      <h3 id="adding-additional-levels">Adding additional levels</h3>
-
-      <ul>
-        <li>You can make additional levels by configuring the rock objects in different ways.</li>
-        <li>Make a copy of the game scene, and move around the rocks</li>
-        <li>Some things to try
+        <li>You can modify some properties of devices by clicking on them, and then changing values in the popup
           <ul>
-            <li>Can you make the landing spot in a cave?</li>
-            <li>Can you make the player need to go over a tall rock to get to the landing zone?</li>
-            <li>Can you put the landing zone in a deep valley?</li>
+            <li>use this to change the resistor value to 330 Ohms</li>
           </ul>
         </li>
       </ul>
 
-      <p><img src="res/is-this-even-possible.png" alt="" /></p>
+      <p><img src="res/simple-circuit-modify-resistor.png" alt="" /></p>
+
+      <ul>
+        <li>You can add wires to your circuit by dragging from pin ports to terminals on devices
+          <ul>
+            <li>You can change the colors of wires in the upper left, by convention it is a good idea to use black wires for ground wires, and red wires for the higher voltages</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><img src="res/simple-circuit-complete.png" alt="" /></p>
+
+      <h3 id="turn-it-on">Turn it on!</h3>
+
+      <ul>
+        <li>You can run your simulation using the start simulation button at the top.</li>
+        <li>If you wired it correctly, your light will be on.</li>
+        <li>If the light is not on
+          <ul>
+            <li>check that the LED was not installed backwards</li>
+            <li>check that resistor’s resistance (Ohms) is set correctly</li>
+            <li>check that all wires are connected</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><img src="res/light-up.png" alt="" /></p>
+
+      <h3 id="adding-a-breadboard">Adding a breadboard</h3>
+
+      <p>Unfortunately just having components floating around in space is not useful. For this reason we use a breadboard.</p>
+
+      <p>These series of holes are actually connected in two ways - rails along the sides, and two chunks of connected columns, as in the following diagram:</p>
+
+      <p><img src="res/breadboard.png" alt="" /></p>
+
+      <p>With this we can rebuild our circuit using the breadboard.</p>
+
+      <p>Note - it is usually a good idea to first connect both sides of the rails and grounds to power</p>
+
+      <p><img src="res/power-up-those-rails.png" alt="" /></p>
+
+      <p>Hint: You can make tidy wires by clicking to add a bend.</p>
+
+      <p>Add back in your resistor and led, with a few little jump wires and you are done. Run it to see that it still works:</p>
+
+      <p><img src="res/system-has-light.png" alt="" /></p>
+
+      <p>So far, our microcontroller is only acting like a power source - the same could be accomplished with a few batteries! Let’s modify our circuit so that we can actually control the state of the LED with the microcontroller</p>
+
+    </div></div></section>
+<section id="phase2interactivity"><button class="collapsible">Phase 2: Interactivity</button><div class="text-content"><div class="text-inner">
+
+      <p>Note, you can pick up here by “Copy and Tinker” the <code class="language-plaintext highlighter-rouge">phase-1-checkpoint</code> circuit.</p>
+
+      <p>Remove the wire from the anode of the LED, and replace it with a wire going to Pin 1 of the microcontroller. Now, we can control the volate on this side through code. Open up the code editor of TinkerCad.</p>
+
+      <p>We will use the <code class="language-plaintext highlighter-rouge">blocks</code> system to start, similar to languages like Scratch.</p>
+
+      <p>Let’s start by simply making our light turn on:</p>
+
+      <p><img src="res/connected-to-pin.png" alt="" /></p>
+
+      <p>But we can do much more than this, we can also make our light blink, by modifying the code:</p>
+
+      <p>Hint: You can find the <code class="language-plaintext highlighter-rouge">wait</code> instruction under <code class="language-plaintext highlighter-rouge">control</code></p>
+
+      <p><img src="res/blinky.png" alt="" /></p>
+
+      <p>Next let’s modify the circuit so that we have a button, and when the button is pressed it controls the circuit:</p>
+
+      <p><img src="res/button-circuit.png" alt="" /></p>
+
+      <p>Hints:</p>
+      <ul>
+        <li>The new component is called a pushbutton
+          <ul>
+            <li>It’s terminals are on the four corners, pay attention to which columns they are in!</li>
+          </ul>
+        </li>
+        <li>Set the switches resistor to 10K Ohm.
+          <ul>
+            <li>Connect one side directly to the ground rail</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Modify your code to the following:</p>
+
+      <p><img src="res/modified-code.png" alt="" /></p>
+
+      <p>If everything is working correctly, at this point you can press the button, and when pressed the light will turn on.</p>
+
+      <h1 id="phase-3-a-3x3-led-matrix">Phase 3: A 3x3 LED Matrix</h1>
+
+      <p>Create a new circuit, and create the following diagram.</p>
+
+      <p>Hint: The resisters are 220 Ohm.</p>
+
+      <p>Hint: The RED wires will connect to each terminal of the devices in a row.</p>
+
+      <p>Hint: The Black wires will connect to each terminal of the devices in a column.</p>
+
+      <p><img src="res/matrix.png" alt="" /></p>
+
+      <p>If can be handy to label our connections as well so we know which wire is which at a glance, using the commenting tool in the toolbar:</p>
+
+      <p><img src="res/commented.png" alt="" /></p>
+
+      <p>Let’s visualize a grid system for our pins, with an X and Y axis.</p>
+
+      <p><img src="res/axes.png" alt="" /></p>
+
+      <h3 id="turning-on-just-one-led">Turning on just one LED</h3>
+
+      <p>Let’s say our goal was to turn on only the pin at 0,0. (lower left).</p>
+
+      <p>To begin with, let’s make each of our pins A0, A1, A2, 0, 1 and 2 low.</p>
+
+      <p>We want our Anode of this LED to be High, which is connected to 0. We want our Cathode of this LED to be Low, which is connected to A0.</p>
+      <ul>
+        <li>So, if we set 0 to high and A0 to low, we should be all good, right? (hint: not right!)</li>
+        <li>Let’s try it and see!</li>
+      </ul>
+
+      <p><img src="res/only-one-led.png" alt="" /></p>
+
+      <p>What actually happens?</p>
+
+      <p><img src="res/bottom-row-is-on.png" alt="" /></p>
+
+      <p>So the entire bottom row is on. Why might that be? Because if we think about it, all of the LEDs on the bottom row have a HIGH value at the anode, and a LOW value at the cathode. So they are all ON!</p>
+
+      <p>Recall that current down not flow if both sides of a device are LOW, or both sides of a device are HIGH. Also recall that current can only flow one direction through an LED from Anode to Cathode.</p>
+
+      <p>In order to make this not the case, we will need to set the cathodes of the second and third LEDs in this row to HIGH. Note that these are connected to A1 and A2.</p>
+
+      <p><img src="res/just-one-code.png" alt="" /></p>
+
+      <p><img src="res/just-one-led-is-on.png" alt="" /></p>
+
+      <p>Here is the overall logic to what is happening here:</p>
+
+      <p>Moving forward Blocks are going to be too slow. Let’s switch to C++.</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// C++ code</span>
+<span class="c1">//</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">A0</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A0</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A0</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// Delay a little bit to improve simulation performance</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Turning on a single pin is quite useful. Let’s create a function so that we can turn on the pin at (0,0), and then call this function:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// C++ code</span>
+<span class="c1">//</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">A0</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">turn_on_led_0_0</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// Delay a little bit to improve simulation performance</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">turn_on_led_0_0</span><span class="p">(){</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A0</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>We could write similar functions for turning on <code class="language-plaintext highlighter-rouge">led_0_1</code> and <code class="language-plaintext highlighter-rouge">led_1_2</code></p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">turn_on_led_1_0</span><span class="p">(){</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A0</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">turn_on_led_2_1</span><span class="p">(){</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A0</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>So if you can only have on one LED at a time, how can we ever light up multiple at the same time?</p>
+
+      <p>Well, it’s easy enough to blink between two of them every second:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">turn_on_led_0_1</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">turn_on_led_1_2</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Note the little flash on (1,1) and (2,1)? This is because when we set and clear pins, for tiny instants the LEDs are on. This is called ghosting, and for now, we will consider this is an acceptable behavior, but in the real world there are methods for dealing with it.</p>
+
+      <p>Let’s flash between them faster:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">turn_on_led_0_1</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="n">turn_on_led_1_2</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Faster!</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">turn_on_led_0_1</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+  <span class="n">turn_on_led_1_2</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Full speed ahead!</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">turn_on_led_0_1</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">turn_on_led_1_2</span><span class="p">();</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>At this point it basically looks like 2 lights are on all the time! (Note that the ghosting also causes two other lights to appear as if they are almost on.)</p>
+
+    </div></div></section>
+<section id="part4coderefactor"><button class="collapsible">Part 4: Code Refactor</button><div class="text-content"><div class="text-inner">
+
+      <p>Note that this code is not very flexible. It would be much nicer if we could just turn on any pin with a single function. This prompts the idea of having functions with arguments. This may seem a bit tricky, but bare with me, we’ll discuss it together:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">NUM_X_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">X_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">A0</span><span class="p">,</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">NUM_Y_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">Y_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">turn_on_led</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">xi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">NUM_X_PINS</span><span class="p">;</span> <span class="n">xi</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">xi</span> <span class="o">==</span> <span class="n">x</span><span class="p">){</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">yi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">yi</span> <span class="o">&lt;</span> <span class="n">NUM_Y_PINS</span><span class="p">;</span> <span class="n">yi</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">yi</span> <span class="o">==</span> <span class="n">y</span><span class="p">){</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Update your loop functions as follows:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">turn_on_led</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">turn_on_led</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Everything should still work fine! Here are some comments on what we are doing:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// contant integer variables describing the number of pins in each direction </span>
+<span class="kt">int</span> <span class="n">NUM_X_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">NUM_Y_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="c1">// constant integer arrays referring to which pins those are connected to</span>
+<span class="kt">int</span> <span class="n">X_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">A0</span><span class="p">,</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">Y_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+
+<span class="c1">// function arguments specify the pin we wish to turn on</span>
+<span class="kt">void</span> <span class="nf">turn_on_led</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// loop over each pin in our set of pins for x</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">xi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">NUM_X_PINS</span><span class="p">;</span> <span class="n">xi</span><span class="o">++</span><span class="p">){</span>
+    <span class="c1">// if this is the pin we wish to turn on</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">xi</span> <span class="o">==</span> <span class="n">x</span><span class="p">){</span>
+       <span class="c1">// make that pin name LOW</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="c1">// else make it high</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">// ditto for the y pins</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">yi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">yi</span> <span class="o">&lt;</span> <span class="n">NUM_Y_PINS</span><span class="p">;</span> <span class="n">yi</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">yi</span> <span class="o">==</span> <span class="n">y</span><span class="p">){</span>
+       <span class="c1">// except the logic is reversed</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Why is this type of refactor awesome? For two reasons - it separates the actual pins from the code using the <code class="language-plaintext highlighter-rouge">_PIN_NAMES</code> variables, and it also allows changing the number of total pins for each grid. In fact, we don’t even need to have square grids!</p>
+
+      <p>If you move your constants to the top, you can even use this for the initial setup for the pins:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">NUM_X_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">NUM_Y_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">X_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">A0</span><span class="p">,</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">Y_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">xi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">NUM_X_PINS</span><span class="p">;</span> <span class="n">xi</span><span class="o">++</span><span class="p">){</span>
+	  <span class="n">pinMode</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">yi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">yi</span> <span class="o">&lt;</span> <span class="n">NUM_Y_PINS</span><span class="p">;</span> <span class="n">yi</span><span class="o">++</span><span class="p">){</span>
+	  <span class="n">pinMode</span><span class="p">(</span><span class="n">Y_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">OUTPUT</span><span class="p">);</span>   
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div>      </div>
+
+    </div></div></section>
+<section id="part5upgradetoa4x4"><button class="collapsible">Part 5: Upgrade to a 4x4</button><div class="text-content"><div class="text-inner">
+
+      <p>CHALLENGE: Upgrade your circuit to a 4x4 grid. Turn on all of the pins in the diagonal like <code class="language-plaintext highlighter-rouge">/</code>.</p>
+
+      <p><img src="res/adams-4-solution.png" alt="" /></p>
+
+    </div></div></section>
+<section id="part6anrgb4x4"><button class="collapsible">Part 6: An RGB 4x4</button><div class="text-content"><div class="text-inner">
+
+      <p>An RGB LED is similar to an ordinary LED, except it has 3 terminals, one for RED, GREEN and BLUE.</p>
+
+      <p>If that terminal has a high signal, then it will shine that color.</p>
+
+      <p>If it has a combination of signals, it will create a color which blends the two according to the principles of light:</p>
+
+      <ul>
+        <li>RED + GREEN = YELLOW</li>
+        <li>RED + BLUE = MAGENTA</li>
+        <li>GREEN + BLUE = CYAN</li>
+      </ul>
+
+      <p>Here is the completed project. You probably don’t want to wire this from scratch!</p>
+
+      <p><img src="res/rgb-led.png" alt="" /></p>
+
+      <p>You can grab this from the class files!</p>
+
+      <p>The code is more complicated, but not significantly more. I’ve added a third arguement to the function which allows you to specify the color you would like the pixel to be:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">turn_on_led</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">red</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">green</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">blue</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">xi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">NUM_X_PINS</span><span class="p">;</span> <span class="n">xi</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">xi</span> <span class="o">==</span> <span class="n">x</span><span class="p">){</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">yi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">yi</span> <span class="o">&lt;</span> <span class="n">NUM_Y_PINS</span><span class="p">;</span> <span class="n">yi</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">red</span> <span class="o">&amp;&amp;</span> <span class="n">yi</span> <span class="o">==</span> <span class="n">y</span><span class="p">){</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_R_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_R_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">green</span> <span class="o">&amp;&amp;</span> <span class="n">yi</span> <span class="o">==</span> <span class="n">y</span><span class="p">){</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_G_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_G_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">blue</span> <span class="o">&amp;&amp;</span> <span class="n">yi</span> <span class="o">==</span> <span class="n">y</span><span class="p">){</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_B_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_B_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>You can call this argument either manually specifying three boolean values:</p>
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">turn_on_led</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="nb">false</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Or by using one of the defines I included at the top:</p>
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define RED true,false,false
+#define GREEN false,true,false
+#define BLUE false,false,true
+#define CYAN false,true,true
+#define YELLOW true,true,false
+#define MAGENTA true,false,true
+</span></code></pre></div>      </div>
+
+      <p>e.g.</p>
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">turn_on_led</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>I have several demos of things you can do with the screen. Build off of this to see if you can make your own RGB lightshow or screensaver!</p>
     </div></div></section>
 
     </main>
