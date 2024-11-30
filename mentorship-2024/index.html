@@ -451,11 +451,77 @@
     </div></div></section>
 <section id="part4coderefactor"><button class="collapsible">Part 4: Code Refactor</button><div class="text-content"><div class="text-inner">
 
-      <p>Note that this code is not very flexible. It would be much nicer if we could just turn on any pin with a single function. This prompts the idea of having functions with arguments. This may seem a bit tricky, but bare with me, we’ll discuss it together:</p>
+      <p>Note that this code is not very flexible. It would be much nicer if we could just turn on any pin with a single function. By looking at the function for a single pin, can we figure out the algorithm?</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">turn_on_led_2_1</span><span class="p">(){</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A0</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>From this we can see that, in order to make this work, we can see that in the A bank of pins, we want to set every pin to HIGH, and then make the one we care about low, in this case, <code class="language-plaintext highlighter-rouge">A2</code>. In the numbered bank of pins, we want to est every pin to LOW, except for the one we care about, in this case <code class="language-plaintext highlighter-rouge">1</code>, which we will set to HIGH. We can accomplish this with loops, and use arrays to look up the pin names:</p>
 
       <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">NUM_X_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">X_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">A0</span><span class="p">,</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">};</span>
 <span class="kt">int</span> <span class="n">NUM_Y_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">X_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">A0</span><span class="p">,</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">Y_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">turn_on_led_2_1</span><span class="p">()</span> <span class="p">{</span>
+  
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">xi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">NUM_X_PINS</span><span class="p">;</span> <span class="n">xi</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">yi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">yi</span> <span class="o">&lt;</span> <span class="n">NUM_Y_PINS</span><span class="p">;</span> <span class="n">yi</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">]],</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_PIN_NAMES</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>We can also modify this to use arguments, so that we can turn on any pin arbitrarily:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">NUM_X_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">NUM_Y_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">X_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">A0</span><span class="p">,</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">Y_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">turn_on_led</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+  
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">xi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">NUM_X_PINS</span><span class="p">;</span> <span class="n">xi</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">X_PIN_NAMES</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">yi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">yi</span> <span class="o">&lt;</span> <span class="n">NUM_Y_PINS</span><span class="p">;</span> <span class="n">yi</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_PIN_NAMES</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">Y_PIN_NAMES</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Update your loop functions as follows:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">turn_on_led</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">turn_on_led</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Finally, this code is a bit inefficent, since it requires 4 total operations where we set pins. We can bring this down to 3 by using if/else logic:</p>
+
+      <p>This prompts the idea of having functions with arguments. This may seem a bit tricky, but bare with me, we’ll discuss it together:</p>
+
+      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">NUM_X_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">NUM_Y_PINS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">X_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">A0</span><span class="p">,</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">};</span>
 <span class="kt">int</span> <span class="n">Y_PIN_NAMES</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
 
 <span class="kt">void</span> <span class="nf">turn_on_led</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
@@ -475,17 +541,6 @@
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
-
-      <p>Update your loop functions as follows:</p>
-
-      <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">turn_on_led</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-  <span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-  <span class="n">turn_on_led</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-  <span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>      </div>
-
       <p>Everything should still work fine! Here are some comments on what we are doing:</p>
 
       <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// contant integer variables describing the number of pins in each direction </span>
@@ -569,7 +624,7 @@
 
       <p>You can grab this from the class files!</p>
 
-      <p>The code is more complicated, but not significantly more. I’ve added a third arguement to the function which allows you to specify the color you would like the pixel to be:</p>
+      <p>The code is more complicated, but not significantly more. I’ve added third, fourth and fifth arguements to the function which allows you to specify the color you would like the pixel to be:</p>
 
       <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">turn_on_led</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">red</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">green</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">blue</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">xi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">NUM_X_PINS</span><span class="p">;</span> <span class="n">xi</span><span class="o">++</span><span class="p">){</span>
