@@ -257,12 +257,12 @@ F | F | T
 ]
 .right-column[
 
-Evaluating an implication, by example:
+Implications can be expressed as `if` statements, e.g.:
 - "If you get 100% in this class, then I'll buy you a pizza!"
-- The statement is true if I keep my promise, and false if I don't.
-- If you get 100% and I buy you a pizza, the statement is true.
-- If you get 100% and I don't buy you a pizza, the statement is false.
-- If you don't get 100%, the statement is true, whether or not I buy you a pizza.
+	- The statement is true if I keep my promise, and false if I don't.
+	- If you get 100% and I buy you a pizza, the statement is true.
+	- If you get 100% and I don't buy you a pizza, the statement is false.
+	- If you don't get 100%, the statement is true, whether or not I buy you a pizza.
 ]
 ---
 
