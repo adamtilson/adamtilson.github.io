@@ -473,6 +473,24 @@ Proof: We assume the contrapositive
 
 $\neg Q(n) \Rightarrow \neg P(n)$
 
+Recall, Contrapositive is logically equivalent to original implication!
+
+]
+---
+.left-column[
+## Methods of Proof
+## Proving an Implication
+### Assume the Contra- Positive
+]
+.right-column[
+Theorem: $\forall n \in \mathbb{N},$ if $n^2$ is odd then $n$ is odd.
+- $P(n):= $"$n^2$ is odd", $Q(n):=$ "$n$ is odd"
+- $P(n) \Rightarrow Q(n)$
+
+Proof: We assume the contrapositive
+
+$\neg Q(n) \Rightarrow \neg P(n)$
+
 $\forall n \in \mathbb{N},$ if $n$ is even then $n^2$ is even.
 
 - Hey, we already proved that! $\square$

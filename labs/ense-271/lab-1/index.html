@@ -382,9 +382,9 @@
       </ul>
 
     </div></div></section>
-<section id="originalmethodineightsteps"><button class="collapsible">Original Method in Eight Steps</button><div class="text-content"><div class="text-inner">
+<section id="theprocessuserstorymapping"><button class="collapsible">The Process (User Story Mapping)</button><div class="text-content"><div class="text-inner">
 
-      <p>Originally, eight steps were given to describe user-story mapping. These need not be followed rigidly, but provide a nice narrative to the process.</p>
+      <p>Originally, eight steps were given to describe user-story mapping. These need not be followed rigidly, but provide a nice narrative to the User Story Mapping process.</p>
 
       <ol>
         <li>Collect Features</li>
@@ -421,7 +421,7 @@
 
           <hr />
 
-          <p><strong>create po for vendor</strong></p>
+          <p><strong>create PO for vendor</strong></p>
 
           <p>(merchandise buyer)</p>
 
@@ -439,12 +439,31 @@
               <p>Note that this style has later been standardized by Mike Cohn to the User Story approach:</p>
 
               <ul>
-                <li>As a <em>type of user</em> I want <em>some goal</em> so that <em>some reason</em>.</li>
+                <li>As a <em>type of user</em> I want <em>to do some goal</em> so that <em>I accomplish some purpose</em>.</li>
               </ul>
             </li>
-            <li>
-              <p>This method is preferred in this course where appropriate.</p>
-            </li>
+          </ul>
+
+          <p>i.e.</p>
+
+          <ul>
+            <li>As a <em>who</em>, I want to <em>what</em>, so that <em>why</em>.</li>
+          </ul>
+
+          <p>e.g.</p>
+
+          <hr />
+
+          <p><strong>create PO for vendor</strong></p>
+
+          <ul>
+            <li>As a <em>merchandise buyer</em>, I want to <em>create a Purchase Order</em>, so that I may <em>allocate funds to outstanding purchases</em>.</li>
+          </ul>
+
+          <hr />
+
+          <ul>
+            <li>This method is preferred in this course where appropriate.</li>
           </ul>
         </li>
         <li>
@@ -460,36 +479,28 @@
                 </li>
                 <li>label the Y-axis “Criticality”
                   <ul>
-                    <li>Features at the top are always used, features at the bottom are rarely used
-                      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                      Usage Sequence
-  Used Earlier                                       Used Later
-  &lt;------------------------------------------------------------&gt;
-  (Always Used)
-  ^
-  | 
-  | Criticality
-  v
-  (Never Used)
-</code></pre></div>                      </div>
-                    </li>
+                    <li>Features at the top are always used, features at the bottom are rarely used</li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li>Usage sequence refers to tasks that have to happen in order,
-              <ul>
-                <li>e.g. collect ingredients before starting cooking</li>
-              </ul>
-            </li>
-            <li>If events happen simultaneously, arrange them logically.
-              <ul>
-                <li>e.g. If I asked you: “List everything your system does”, what order would you list the features?</li>
-                <li>That should be the order you place them.</li>
-              </ul>
-            </li>
-            <li>As a group, place the cards in just one row across the top.</li>
           </ul>
         </li>
+      </ol>
+
+      <p><img src="res/criticality.png" alt="" /></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Usage sequence refers to tasks that have to happen in order, 
+    - e.g. collect ingredients before starting cooking
+
+- If events happen simultaneously, arrange them logically. 
+    - e.g. If I asked you: "List everything your system does", what order would you list the features? 
+    - That should be the order you place them.
+
+- As a group, place the cards in just one row across the top. 
+</code></pre></div>      </div>
+
+      <ol>
         <li>
           <p>Group by Frequency</p>
 
@@ -501,8 +512,6 @@
               <p>We’ve gone from playing Monopoly to Twister!</p>
             </li>
           </ul>
-
-          <p><img src="res/1-cards.png" alt="Laying out cards" title="Laying out cards" /></p>
         </li>
         <li>
           <p>Note Logical breaks in Workflow</p>
@@ -512,12 +521,20 @@
               <p>As you go left to right through the model, you’ll find breaks, typically where tasks shift from one person performing the task to another.</p>
             </li>
             <li>
-              <p>Draw in vertical dashed lines at these points to divide into business processes.</p>
+              <p>Draw in vertical dashed lines at these points to divide into business processes. (swimlanes)</p>
             </li>
             <li>
               <p>If you are having difficulty finding these divides, discuss why, which may lead to important new insights about the project.</p>
             </li>
+            <li>
+              <p>Place a new card at the top of Column which describes the biggest goal being accomplished her (the <code class="language-plaintext highlighter-rouge">Activity</code> or <code class="language-plaintext highlighter-rouge">Epic</code>)</p>
+              <ul>
+                <li>Place one or more cards in the second row of the column describing the individiual actions taken to accomplish that bigger goal (the <code class="language-plaintext highlighter-rouge">Steps</code>)</li>
+              </ul>
+            </li>
           </ul>
+
+          <p><img src="res/laying-out-cards-update.png" alt="" /></p>
         </li>
         <li>
           <p>Mark the First System Span</p>
@@ -536,10 +553,11 @@
               <p>These are the highest priority features in each business process</p>
             </li>
             <li>
-              <p>Some vertical lanes might be empty.</p>
+              <p>Some vertical lanes might be empty, this is okay.</p>
             </li>
             <li>
               <p>This top row represents the bare minimum of features which must be in your first release, even if this is only an internal release, so that you can start testing.</p>
+
               <ul>
                 <li>This initial system span is called a Minimum Viable Product, MVP</li>
               </ul>
@@ -560,43 +578,28 @@
             <li>Have the business people decide which features need to be in each successive release, by drawing additional horizontal jagged lines across the remainder of the poster.</li>
           </ul>
 
-          <p><img src="res/3-successive-builds.png" alt="Drawing lines for iterative releases" title="Drawing lines for iterative releases" /></p>
+          <p><img src="res/releases.png" alt="" /></p>
         </li>
       </ol>
 
     </div></div></section>
-<section id="artifact"><button class="collapsible">Artifact</button><div class="text-content"><div class="text-inner">
+<section id="theartifactauserstorymap"><button class="collapsible">The Artifact (A User Story Map)</button><div class="text-content"><div class="text-inner">
 
-      <ul>
-        <li>In Software Systems Engineering, an “Artifact” refers to any physical (or virtual) objects created in the process of aiding software development. This includes things like User Story Maps, Kanban boards, UML models, requirements documents.</li>
-      </ul>
+      <hr />
+      <p>In Software Systems Engineering, an <code class="language-plaintext highlighter-rouge">Artifact</code> refers to any physical (or virtual) objects created in the process of aiding software development. This includes User Story Maps, Kanban boards, UML models, Requirements Documents. In fact, depending on your point in your career, you may spend more time creating these objects than creating actual code!
+—</p>
 
       <p>Looking at the physical artifact we have developed, we can see:</p>
 
       <ul>
-        <li>We’ve found dependencies. We’ve found criticality.</li>
-        <li>We know the features set to get your system up and running.</li>
-        <li>We can also see functionality needed for a single person or role</li>
+        <li>We’ve found dependencies (left to right). We’ve found criticality (top to bottom).</li>
+        <li>We know the features set to get your system up and running (MVP).</li>
+        <li>We can also see functionality needed for a single person or role (vertical swim lanes)</li>
       </ul>
 
-      <h3 id="limitations">Limitations</h3>
+      <h3 id="naming-different-parts-of-the-map">Naming different parts of the map</h3>
 
-      <ul>
-        <li>
-          <p>Useful processes rarely remain static. This one naturally evolved with contributions from the original author and other contributors.</p>
-        </li>
-        <li>
-          <p>The biggest limitation of the original model was “Granularity”.</p>
-          <ul>
-            <li>All of the current tasks are framed as small tasks.</li>
-            <li>We need to extract the big picture to contextualize the tasks.</li>
-          </ul>
-        </li>
-      </ul>
-
-      <h3 id="further-advances">Further Advances</h3>
-
-      <p>In the aim of addressing the granularity problem, the following adjustments were adopted:</p>
+      <p>Originally, User Story Mapping did not extract Epics and Steps. These were added later, and given the following terminology:</p>
 
       <ul>
         <li>In the top tier is the “Big Stories”, a.k.a. <code class="language-plaintext highlighter-rouge">User Activities</code> (Norman)
@@ -610,7 +613,7 @@
             </li>
           </ul>
         </li>
-        <li>The second row down are the <code class="language-plaintext highlighter-rouge">Steps</code>. together making the <code class="language-plaintext highlighter-rouge">Walking Skeleton</code> (Cockburn).
+        <li>The second row down are the <code class="language-plaintext highlighter-rouge">Steps</code>. together making the <code class="language-plaintext highlighter-rouge">Walking Skeleton</code> (Cockburn). <a href="https://youtu.be/vOGhAV-84iI?si=w93WwZSYXPTqK3UL&amp;t=152">???</a>
           <ul>
             <li>You should be able to walk through the tasks in this row and feel everything fits together logically
               <ul>
@@ -629,7 +632,7 @@
         </li>
       </ul>
 
-      <p><img src="res/2-areas-labeled.png" alt="Mapping the terminology of the map" title="Mapping the terminology of the map" /></p>
+      <p><img src="res/map-terminology.png" alt="" /></p>
 
       <ul>
         <li>Some sources use minor differences in terminology for different levels of granuarity</li>
@@ -639,7 +642,11 @@
       <ul>
         <li>You’re a problem solver, you should be using whatever tool best solves the problem, not trying to fit the problem to a rigid tool!</li>
         <li>Some people want more levels of granularity, some want fewer.</li>
-        <li>You may see two colours of cards used, one for the backbone and one for tasks, or three colours, for the backbone, walking skeleton and tasks, or more.</li>
+        <li>You may see two colours of cards used, one for the backbone and one for tasks, or three colours, for the backbone, walking skeleton and tasks, or more.
+          <ul>
+            <li>With this in mind, StoriesOnBoard, the software we are using, will let you customize things significantly further</li>
+          </ul>
+        </li>
       </ul>
 
       <p>Finally, software has made this process completely virtual, which we will demonstrate using Stories on Board.</p>
@@ -647,84 +654,98 @@
     </div></div></section>
 <section id="part3storiesonboard"><button class="collapsible">Part 3: StoriesOnBoard</button><div class="text-content"><div class="text-inner">
 
-      <p>Let’s head over to <a href="https://app.storiesonboard.com/login">storiesonboard</a>. Tim should have set you up with accounts.</p>
+      <p>Let’s head over to <a href="https://app.storiesonboard.com/login">storiesonboard</a>. Tim should have set you up with accounts, if you haven’t already set it up, please check your email, and be sure to register using your <code class="language-plaintext highlighter-rouge">uregina.ca</code> email!</p>
 
       <p>In order to quickly see the capabilities of the software, you should create a new board, and instead of starting from scratch, start from the Guide Map:</p>
 
-      <p><img src="res/4-new-map.png" alt="New Map" title="New Map" /></p>
+      <p><img src="res/new-map-2025.png" alt="" /></p>
 
       <p><img src="res/5-new-example-map.png" alt="New Example Map" title="New Example Map" /></p>
 
       <p>You should see a new board:</p>
 
-      <p><img src="res/6-guide-map.PNG" alt="Guide Map" title="Guide Map" /></p>
+      <p><img src="res/guide-map-2025.png" alt="" /></p>
 
       <p>It is somewhat intimidating. Let’s take a look around, moving clockwise from top-right…</p>
 
-      <p><img src="res/7-guide-map-annotated.png" alt="Guide Map Annotated" title="Guide Map Annotated" /></p>
+      <p><img src="res/guide-map-zones.png" alt="" /></p>
+
       <ol>
-        <li>Here we can navigate between this and other maps</li>
-        <li>In this section we can add collaborators, zoom our map, filter which cards are displayed, and change what appears in the sidebar.</li>
-        <li>This is the sidebar, in this area you can perform various task depending on what you have selected from section 2, such as view board conventions, edit personas, and discuss the board.</li>
+        <li>See where your map is stored</li>
+        <li>Switch between different views of your map, for this lab we will primarily look at <code class="language-plaintext highlighter-rouge">Discovery</code> and <code class="language-plaintext highlighter-rouge">Backlog</code>.</li>
+        <li>Zoom and hide information in your map.</li>
+        <li>Customize some settings of your map, search and filter for stories.</li>
         <li>Center stage - this is where you will spend most of your time working, adding cards, organizing them, adding time estimates, and moving them through the various stages.</li>
       </ol>
 
-      <p>Let’s zoom in on the upper left of center stage:</p>
+      <p>Let’s zoom in on center stage while in Discovery mode:</p>
 
-      <p><img src="res/8-center-stage-zoom.png" alt="Center Stage Zoom" title="Center Stage Zoom" /></p>
+      <p><img src="res/center-stage-zoom.png" alt="" /></p>
 
       <ol>
+        <li>Ensure you are in discovery mode</li>
         <li>As the vertical lanes tend to correspond to different people or roles, it may make sense to assign personas to these tasks.</li>
-        <li>Time estimates for our larger stories are derived from the sum of the time estimates of the smaller tasks below them.</li>
-        <li>We can create releases and assign cards into each. Some feedback is given for the release, including how many cards and hours remain, and how many cards are not yet estimated.</li>
-        <li>We can set the status of a given card, from the options of <code class="language-plaintext highlighter-rouge">TODO</code>, <code class="language-plaintext highlighter-rouge">READY</code>, <code class="language-plaintext highlighter-rouge">DOING</code> and <code class="language-plaintext highlighter-rouge">DONE</code>.</li>
-        <li>We can set a time estimate for each task, which is used for computing the total time for a given lane, as well as the time remaining for a given release.</li>
-        <li>Cards can be annotated with a number of symbols explained in the “About This Board” legend.</li>
+        <li>We can create releases and assign cards into each.</li>
+        <li>The text of the User Story can be added, here it is simplified to explain only the <code class="language-plaintext highlighter-rouge">what</code>, excluding the <code class="language-plaintext highlighter-rouge">who</code> and <code class="language-plaintext highlighter-rouge">why</code>.</li>
       </ol>
 
-      <p>We can also see an overview of our progress by clicking on the progress part of the release, e.g. <code class="language-plaintext highlighter-rouge">14 CARDS, 76 LEFT OF 91 HOURS</code></p>
+      <p>Let’s switch over to <code class="language-plaintext highlighter-rouge">Backlog</code> mode:</p>
 
-      <p><img src="res/9-release-progress.PNG" alt="Release Progress" title="Release Progress" /></p>
-
-      <p>Simple card modifications such as renaming and adding can be accessed from the menu in the bottom right of a card</p>
-
-      <p><img src="res/10-card-detail-zoom.png" alt="Simple Card Details" title="Simple Card Details" /></p>
-
-      <p>Let’s Interact with a card in detail…</p>
-      <ul>
-        <li>Right Click to change color</li>
-        <li>Double Click to edit in detail…</li>
-      </ul>
-
-      <p><img src="res/11-card-details.png" alt="Card Details" title="Card Details" /></p>
+      <p><img src="res/center-stage-backlog.png" alt="" /></p>
 
       <ol>
-        <li>Here we can see the title of the card</li>
-        <li>The user story, as well as some details about the card go here. You can use <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">MarkDown</a> to make this look better, add images, links, etc.</li>
-        <li>Comments for other members of the team</li>
-        <li>Modify the card</li>
-        <li>Details about the card such as status and estimate. You can add your time estimate here.</li>
+        <li>Ensure you are in backlog mode</li>
+        <li>You can see that Activities have an automated sum of time estimates</li>
+        <li>Releases are broken down into summaries of the associated stories</li>
+        <li>Individual stories can be assigned statuses between <code class="language-plaintext highlighter-rouge">todo</code>, <code class="language-plaintext highlighter-rouge">doing</code>, <code class="language-plaintext highlighter-rouge">ready</code>, and <code class="language-plaintext highlighter-rouge">done</code></li>
+        <li>Additionally, time estimates can be assigned to individual stories, using a time method agreed on for the project, typically hours or days</li>
       </ol>
 
-      <p>This is a good overview of the software. Before you leave the Guide Map and head into your own map, check out the cards in this region:</p>
+      <p>Backlog also allows you to see a breakdown of release progress by clicking on the release name.</p>
 
-      <p><img src="res/12-examples.png" alt="Examples" title="Examples" /></p>
+      <p><img src="res/release-progress.png" alt="" /></p>
 
-      <p>And if you want more help, check out the documentation here: <a href="http://docs.storiesonboard.com/en/">Read Some Docs!</a></p>
+      <p>If you wish to add a story, return to the Discovery view, and click one of the add story areas:</p>
+
+      <p><img src="res/add-card.png" alt="" /></p>
+
+      <p>Double click on a story to edit details…</p>
+
+      <p><img src="res/set-card-details.png" alt="" /></p>
+
+      <p>Here you can modify your story as follows:</p>
+      <ol>
+        <li>Change story title</li>
+        <li>Add some details to your story, using Markdown</li>
+        <li>Modify details for your story, such as current development status and time estimation.</li>
+      </ol>
+
+      <p>To schedule a release, hover your mouse below the walking skeleton:</p>
+
+      <p><img src="res/schedule-release.png" alt="" /></p>
+
+      <p>Once details are added you can drag stories into your release.</p>
+
+      <p>This is a brief overview of the web app, however much more can be done. To learn more, check out the documentation here: <a href="http://docs.storiesonboard.com/en/">Read Some Docs!</a></p>
 
     </div></div></section>
 <section id="workedexample"><button class="collapsible">Worked Example:</button><div class="text-content"><div class="text-inner">
 
-      <p>Imagine you are tasked with building an application for a food delivery service. Use User Story Mapping to plan building such an app.</p>
+      <p>Imagine you are tasked with building an application for micro-blogging. Use User Story Mapping to plan building such an app.</p>
 
-      <p>In accomplishing this, think in terms of: Who are the users? What are the user’s goals(Activities), and what smaller operations must they do (Steps, Tasks) in order to accomplish this goal?</p>
+      <p>In accomplishing this, think in terms of:</p>
+      <ul>
+        <li>Who are the users?</li>
+        <li>What are the user’s goals (Activities),</li>
+        <li>What smaller operations must they do (Steps, Tasks) in order to accomplish this goal?</li>
+      </ul>
 
     </div></div></section>
 <section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>Video App:</p>
+      <p>Grocery Delivery App:</p>
 
-      <p>Using StoriesOnBoard, create a new, private, solo board which represents the User Story Map for an application for sharing videos on the internet, e.g. YouTube, TikTok, etc. Focus primarily on the user side of the application. Perform User Story Mapping to develop a map which captures the most necessary user stories for this application. In accomplishing this, you should have:</p>
+      <p>Using StoriesOnBoard, create a new, private, solo board which represents the User Story Map for an application for getting groceries delivered. Focus primarily on the user side of the application, e.g. less on the drivers or administrators. Perform User Story Mapping to develop a map which captures the most necessary user stories for this application. In accomplishing this, you should have:</p>
 
       <ul>
         <li>At least three epics in the backbone</li>
@@ -732,26 +753,37 @@
         <li>At least 18 total tasks
           <ul>
             <li>All tasks need to have a name, status and time estimate, but the estimates need not be realistic</li>
-            <li>Edit the details for at least three tasks and try out different <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a> features</li>
+          </ul>
+        </li>
+        <li>At least 3 detailed tasks
+          <ul>
+            <li>Edit the details for at least three tasks and try out at least three different features available in <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a> features</li>
           </ul>
         </li>
         <li>At least 2 releases, including some unscheduled tasks</li>
-        <li>Experiment at least one extra feature, such as additional card colors, annotations or personas</li>
+        <li>At least 1 extra feature not discussed in lab, such as additional card colors, annotations or personas</li>
+        <li>A <code class="language-plaintext highlighter-rouge">readme.txt</code> file which explains the following:
+          <ul>
+            <li>Your general thought process for developing your user story map</li>
+            <li>At least three decisions you made when creating the stories in map
+              <ul>
+                <li>Why you made those decision</li>
+                <li>How the results of those decision are captured in the user story map</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
 
-      <p>The map does not need to exhaustively capture every feature of the application.</p>
-
-      <p>Hint: Try to think of different users of the application system, such as viewers, content developers, and administrators.</p>
+      <p>Please note that the map does not need to exhaustively capture every feature of the application.</p>
 
       <p>Running Assignment - Development Portfolio</p>
 
       <ul>
         <li>Start a new (private for now) GitHub Repo which will be your portfolio for the course</li>
         <li>Upon completing assignments, take screenshots and push them to the repo</li>
-        <li>You can investigate GitHub Pages if you want them to be totally on the web</li>
-        <li>Use GitHub best practices to create a high quality repo</li>
         <li>You will add to this repo all semester!</li>
-        <li>For this lab, you only need to have a <code class="language-plaintext highlighter-rouge">readme.md</code> uploaded</li>
+        <li>For this lab, you only need to have a <code class="language-plaintext highlighter-rouge">readme.md</code> uploaded, which contains markdown code that explains the purpose of the repoistory.</li>
       </ul>
 
     </div></div></section>
@@ -761,10 +793,9 @@
       <ul>
         <li>
           <ol>
-            <li>A screen capture of the overview of the User Story Map
+            <li>One or more screen captures of the overview of the User Story Map
               <ul>
-                <li>Open the side bar to the left so that I can see your username</li>
-                <li>If this hides some of your tasks, you can do an additional screenshots so that I can see your name</li>
+                <li>Ensure that your username is visible in the map</li>
               </ul>
             </li>
           </ol>
@@ -786,7 +817,7 @@
         </li>
       </ul>
 
-      <p>(This should be a total of 6-7 files)</p>
+      <p>(This should be a total of 6+ files)</p>
 
       <p>Please submit to URCourses by the deadline.</p>
 
