@@ -545,7 +545,7 @@ Prove the standard deviation is zero if and only if all values are equal to the 
 ]
 .right-column[
 
-Proof: By constructing a chain of "iff" implications...
+Proof: By constructing a chain of "iff" statements...
 
 $\sqrt{\dfrac{(x_1-\mu)^2+(x_2-\mu)^2+...+(x_n-\mu)^2}{n}}=0$
 

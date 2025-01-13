@@ -97,7 +97,7 @@ It's like knocking over dominoes
 - Consider a hot dog stand with infinite hot dogs
 - If we can prove that the first person in the line gets a hot dog
 - And we can prove, for all people in the queue
-    - If one person gets a hot dog, the person behind them will get a hot dog
+    - If an arbitrary person gets a hot dog, the person behind them will get a hot dog
 - Thus, we conclude, everyone gets a hot dog. $\square$ 
 
 - This is a "template proof", and very useful
