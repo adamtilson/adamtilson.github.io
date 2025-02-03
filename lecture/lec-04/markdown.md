@@ -243,9 +243,11 @@ $\therefore$, by ordinary induction,  $\forall n \in \mathbb{N}, P(n)$ is true. 
 
 Occasionally we will need to apply induction to elements in sets
 
-The tricky thing here is that we need to assume, for a set of `k+1` elements, that the inductive hypothesis holds for any `k` subset of elements.
+A tricky assumption: for a set of `k+1` elements, that the inductive hypothesis holds for any `k` subset of elements.
 
-If this is true, then by the inductive hypothesis, a rule holding for the set $= \{ s_0, s_1, s_2, s_3 ... s_k \}$ should also apply to $\{ s_1, s_2, s_3 ... s_{k+1} \}$ .
+If true, by the inductive hypothesis, a rule holding for the set 
+
+{ $ s_0, s_1, s_2, s_3, ..., s_k $ } should also apply to { $s_1,s_2,s_3,...,s$ <sub>k+1</sub> }
 
 It is very important to ensure this is true when moving from the base case(s) to the general case. The following is a demonstration of what can go wrong here:
 
