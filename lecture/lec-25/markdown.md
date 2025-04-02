@@ -28,7 +28,7 @@ $y'(x)=2x(25-y(x))$
 
 If the coordinate $(x,y) = (0, 26)$ appears on the graph, find the value of $y(1)$. Compare: 
 - Euler's Method with 4 steps, 
-- the improved Euler's (Huen's) method with 2 steps, 
+- the improved Euler's (Heun's) method with 2 steps, 
 - and Runge-Kutta 4th with 1 step.
 
 ---
