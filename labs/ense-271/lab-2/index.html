@@ -123,7 +123,7 @@
 <p><button class="expandall">Collapse All</button></p>
 <section id="introduction"><button class="collapsible">Introduction</button><div class="text-content"><div class="text-inner">
 
-      <p>In this lab, we are going to look at ways of documenting a high level view of a web application, including mapping out the pages that you need using SiteMaps, and mapping out the content needed and completed using a spreadsheet application. These activities broadly fall under the UX category of Information Architecture, which has roots in Library science (organizing and prioritizing content), and Cognitive Psychology (making it quick to learn, easy to understand and navigate).</p>
+      <p>In this lab, we are going to look at ways of documenting the components which comprise a web application, including mapping out the pages that you need using SiteMaps in Figma, and mapping out the content in an Asset Inventory using a spreadsheet application, like Excel or LibreOffice Calc. These activities broadly fall under the UX category of Information Architecture (IA), which has roots in Library science (organizing and prioritizing content), and Cognitive Psychology (making it quick to learn, easy to understand and navigate). Considering this as a larger component of People-Centred Design, this will help us to plan the interactions which users will engage with, to ensure the final application brings the user joy.</p>
 
     </div></div></section>
 <section id="10sitemap"><button class="collapsible">1.0 Site Map</button><div class="text-content"><div class="text-inner">
@@ -182,7 +182,7 @@
             </li>
             <li>What clear path can they take to get to their goal?
               <ul>
-                <li>More important than the “3-click-rule”</li>
+                <li>More important than the <code class="language-plaintext highlighter-rouge">3-click-rule</code></li>
               </ul>
             </li>
           </ul>
@@ -217,6 +217,41 @@
 
       <p><img src="res/hierarchy.png" alt="Hierarchy" title="Wide vs. Deep Hierarchy" /></p>
 
+      <h3 id="representing-hierarchy-in-design---breadcrumbs-pattern">Representing Hierarchy in Design - Breadcrumbs Pattern</h3>
+
+      <p>The breadcrumbs pattern is a web design principle which lets you see where you are in the hierarchy. This is useful as it can quickly help you move back up the hierarchy in case there is something you missed. For example:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>home &gt; tutorials &gt; digital painting &gt; digital impasto techniques &gt; digital impasto brush packs
+</code></pre></div>      </div>
+
+      <p>This can be very helpful if you perhaps discover a brush back from a Google search, but don’t know how to use it (go back one), or just need an overview on digital painting in general (go back two steps.)</p>
+
+      <h3 id="why-does-hierarchy-matter---a-case-study">Why does Hierarchy Matter - A Case Study</h3>
+
+      <p>Consider the current University of Regina website, with respect to Software Systems Engineering. Here’s a few places that pages appear relevant to this discipline:</p>
+
+      <ul>
+        <li>This page is run by recruitment</li>
+      </ul>
+
+      <p><a href="https://www.uregina.ca/academics/programs/engineering/software-systems-engineering.html">U OF R HOME &gt; ACADEMICS &gt; PROGRAMS &gt; FACULTY OF ENGINEERING AND APPLIED SCIENCE &gt; SOFTWARE SYSTEMS ENGINEERING</a></p>
+
+      <ul>
+        <li>This page is run by the Faculty of Engineering and Applied Science</li>
+      </ul>
+
+      <p><a href="https://www.uregina.ca/engineering/students/programs/software-systems.html">U OF R HOME &gt; ENGINEERING AND APPLIED SCIENCE &gt; STUDENT &gt; PROGRAMS &gt; SOFTWARE SYSTEMS ENGINEERING</a></p>
+
+      <ul>
+        <li>This page is run by the Faculty of Graduate Studies and Research</li>
+      </ul>
+
+      <p><a href="https://www.uregina.ca/graduate-studies-research/graduate-calendar/all-programs/engg-sse.html">U OF R HOME &gt; GRADUATE STUDIES RESEARCH &gt; GRADUATE CALENDAR &gt; PROGRAMS &gt; SOFTWARE SYSTEMS ENGINEERING</a></p>
+
+      <p>Why do you think this is structured like this? Is this good? Bad? Why? What might be the design decisions that lead to this kind of design?</p>
+
+      <h3 id="aside---xml-sitemaps">Aside - XML Sitemaps</h3>
+
       <p>Note: The Visual Sitemap is not be confused with:</p>
 
       <p><code class="language-plaintext highlighter-rouge">XML Sitemap</code> - Once your website is complete, you should include your sitemap formatted in an XML file. This is for robots, such as search engine webcrawlers, and may help them quickly index your website based on how the pages link together.</p>
@@ -227,30 +262,69 @@
       <ul>
         <li>Assets refer to the contents of your web app
           <ul>
-            <li><code class="language-plaintext highlighter-rouge">text</code> - broadly refers to all text assets
+            <li><code class="language-plaintext highlighter-rouge">text</code> - broadly refers to all text assets</li>
+            <li>
               <ul>
-                <li><code class="language-plaintext highlighter-rouge">copy</code> - refers to text assets, written by a <code class="language-plaintext highlighter-rouge">copywriter</code>. Copy typically lies somewhere between informational and marketing, in that you are typically trying to persuade the reader to do something, a <code class="language-plaintext highlighter-rouge">call to action</code>.</li>
-                <li>All text assets should be shared in a Text Document, e.g. Word, so that writers who are not web experts can easily update this.</li>
+                <li><code class="language-plaintext highlighter-rouge">copy</code> - refers to text assets, written by a <code class="language-plaintext highlighter-rouge">copywriter</code>. Copy typically lies somewhere between informational and marketing, in that you are typically trying to persuade the reader to do something, a <code class="language-plaintext highlighter-rouge">call to action</code>. 
+<img src="res/saskinteractive-copy.png" alt="" /> Source: <a href="saskinteractive.com">SaskInteractive.com</a>
+                  <ul>
+                    <li>All text assets should be shared in a Text Document, e.g. Word, so that writers who are not web experts can easily update this.</li>
+                  </ul>
+                </li>
               </ul>
             </li>
-            <li><code class="language-plaintext highlighter-rouge">images</code> - pictures for your website, which may be supplied from an artist or taken from stock photos. Typically separated between <code class="language-plaintext highlighter-rouge">graphics</code> and <code class="language-plaintext highlighter-rouge">photographs</code>
+            <li><code class="language-plaintext highlighter-rouge">images</code> - pictures for your website, which may be supplied from an artist or taken from stock photos. Typically separated between <code class="language-plaintext highlighter-rouge">graphics</code> and <code class="language-plaintext highlighter-rouge">photographs</code></li>
+          </ul>
+
+          <p>e.g. graphics:</p>
+
+          <p><img src="res/graphics.png" alt="" /></p>
+
+          <p>Source: <a href="https://www.saskinteractive.com/">SaskInteractive.com</a></p>
+
+          <p>e.g. photographs:</p>
+
+          <p><img src="res/photographs.png" alt="" /></p>
+
+          <p>Source: <a href="https://www.saskinteractive.com/">SaskInteractive.com</a></p>
+
+          <ul>
+            <li>Typically images are modified (cropped) and exported as compressed variants for the web. It can be useful to keep the originals in case further changes need to be done later, e.g. photoshop files.
               <ul>
-                <li>Typically images are modified (cropped) and exported as compressed variants for the web. It can be useful to keep the originals in case further changes need to be done later, e.g. photoshop files.</li>
                 <li>Some lossless types are used in the web, e.g. <code class="language-plaintext highlighter-rouge">.png</code> and <code class="language-plaintext highlighter-rouge">.svg</code>, but these are not appropriate for photographs</li>
               </ul>
             </li>
-            <li>other asset types may include <code class="language-plaintext highlighter-rouge">videos</code>, <code class="language-plaintext highlighter-rouge">icons</code>, <code class="language-plaintext highlighter-rouge">ui elements</code> (<code class="language-plaintext highlighter-rouge">buttons</code>), <code class="language-plaintext highlighter-rouge">audio</code>, <code class="language-plaintext highlighter-rouge">fonts</code>, <code class="language-plaintext highlighter-rouge">palettes</code> and <code class="language-plaintext highlighter-rouge">databases</code>.</li>
-            <li>It is increasingly popular to use assets hosted by third party services, such as icons and fonts, with trade-offs to this approach</li>
+            <li>
+              <p>other asset types may include <code class="language-plaintext highlighter-rouge">videos</code>, <code class="language-plaintext highlighter-rouge">icons</code>, <code class="language-plaintext highlighter-rouge">ui elements</code> (<code class="language-plaintext highlighter-rouge">buttons</code>), <code class="language-plaintext highlighter-rouge">audio</code>, <code class="language-plaintext highlighter-rouge">fonts</code>, <code class="language-plaintext highlighter-rouge">palettes</code>, <code class="language-plaintext highlighter-rouge">databases</code>, <code class="language-plaintext highlighter-rouge">scripts</code>, <code class="language-plaintext highlighter-rouge">forms</code>, and even <code class="language-plaintext highlighter-rouge">metadata</code> (data about data, e.g. <code class="language-plaintext highlighter-rouge">alt-text</code>).</p>
+            </li>
+            <li>We will refer to <code class="language-plaintext highlighter-rouge">database</code> assets as elements that are generated automatically based on some data structure behind the scenes. This could include, for example:
+              <ul>
+                <li>Products in a Store</li>
+                <li>Menu items in a Restaurant</li>
+                <li>Member directory</li>
+                <li>Blog Posts
+                  <ul>
+                    <li>These are compound assets, in that each asset could contain sub assets (a picture, text, etc.)</li>
+                    <li>Generally I don’t recommend meticulously documenting these assets, since these pages are not necessarily considered evergreen, and are less likely to be updated over time, and are typically handled by external services, e.g. inventory applications to notify when out of stock, membership sign up pages, etc.</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>It is increasingly popular to use assets hosted by third party services, such as icons and fonts, with trade-offs to this approach
+  e.g. Font Awesome icons
+  <img src="res/font-awesome.png" alt="" /> Source: <a href="https://fontawesome.com/icons">Font Awesome</a></li>
           </ul>
         </li>
         <li>
           <p>During design the asset inventory should be created before or in parallel the sitemap. This way, you are ensuring that your site structure matches your content, and not the other way around. This is called <code class="language-plaintext highlighter-rouge">content first</code> design.</p>
         </li>
-        <li>
-          <p>It is important to track these assets so that, at a glance, one can easily see which assets are found, and which ones are still needed. Highlighting is great for this. It can also be useful to see when assets were last updated, to quickly catch ones that might need an update.</p>
+        <li>It is important to track these assets so that, at a glance, one can easily see which assets are found, and which ones are still needed. Highlighting is great for this. It can also be useful to see when assets were last updated, to quickly catch ones that might need an update.
+          <ul>
+            <li>I like the four step approach: <code class="language-plaintext highlighter-rouge">missing</code>, <code class="language-plaintext highlighter-rouge">needs update</code>, <code class="language-plaintext highlighter-rouge">ready to deplay</code> and <code class="language-plaintext highlighter-rouge">up-to-date</code>.</li>
+          </ul>
         </li>
         <li>
-          <p>There are a number of ways in which we can track the assets we have and need. A spreadsheet is a good idea, which can be shared among the team, either by tracking through github, or using a collaborative office software, like Google Docs.</p>
+          <p>There are a number of ways in which we can track the assets we have and need. A spreadsheet is a good idea, which can be shared among the team, either by tracking through github, or using a collaborative office software, like Google Docs, Microsoft Office 365 or OnlyOffice.</p>
         </li>
         <li>This is a living document, which should be updated as you go through your creation process</li>
       </ul>
@@ -291,101 +365,117 @@
 
       <p>Create an account using your school email.</p>
 
-      <p>Here are some sample settings which may help with validation, but you should tailor these as needed for you:</p>
+      <p>Here are some sample settings which may help with validation, but you should tailor these as needed for you.</p>
+
+      <p><strong>Note - this interface has likely changed, but I haven’t gone through the process in a while to update</strong> - Let me know if you have any problems signing up, though I am not sure there is anything I’ll be able to do, but hopefully!</p>
 
       <p><img src="res/sign-up.png" alt="" /></p>
 
       <p><img src="res/get-validated-info.png" alt="" /></p>
 
-      <p>Let me know if you have any problems signing up, though I am not sure there is anything I’ll be able to do, but hopefully!</p>
+      <p><strong>Note:</strong> Figma’s free edition allows for Unlimited drafts, but a limit on files which you can collaborate on. Getting verified for education will increase this limit. If you plan to use this primarily for you own projects, and do not plan to collaborate, free is fine, just make sure you save everything in drafts!</p>
 
     </div></div></section>
 <section id="40figmaoverview"><button class="collapsible">4.0 Figma Overview</button><div class="text-content"><div class="text-inner">
 
       <p>Figma has the ability to create both design files and FigJam files. Design are for creating UI mockups, wheras FigJam are for use as Whiteboards and diagramming. We’ll be using design files for this lab:</p>
 
-      <p><img src="res/new-design-file.png" alt="" /></p>
+      <p><img src="res/new-design-file-draft.png" alt="" /></p>
 
       <p>Let’s learn the UI of a design file</p>
 
       <p><img src="res/ui-overview.png" alt="" /></p>
 
       <ol>
-        <li>The file menu and design tools are up here
+        <li>The file menu is here
           <ul>
             <li>The Figma Icon acts like the top bar menu you would see in typical desktop appliactions
               <ul>
                 <li>e.g. <code class="language-plaintext highlighter-rouge">File</code>, <code class="language-plaintext highlighter-rouge">Edit</code>, <code class="language-plaintext highlighter-rouge">View</code>, etc.</li>
               </ul>
             </li>
+          </ul>
+        </li>
+        <li>
+          <p>This collapses the left pane</p>
+        </li>
+        <li>This is where you can set the filename and see where it is saved
+          <ul>
+            <li>Your files will automatically get saved in the cloud on Figma’s servers</li>
+            <li>To save it locally, instead do a <code class="language-plaintext highlighter-rouge">Figma</code> -&gt; <code class="language-plaintext highlighter-rouge">File</code> -&gt; <code class="language-plaintext highlighter-rouge">Save local copy...</code></li>
+          </ul>
+        </li>
+        <li>
+          <p>Switch between File Mode and Assets Mode (not relevant to us)</p>
+        </li>
+        <li>
+          <p>For designs with multiple pages (not relevant to us)</p>
+        </li>
+        <li>This region has layers, assets and pages
+          <ul>
+            <li>Layers</li>
+          </ul>
+          <ul>
+            <li>You can think of placing elements on the page like a paper collage.</li>
+            <li>Things placed earlier fall below other things.</li>
+            <li>You can use this menu to manually adjust the depth of elements by dragging them up and down.</li>
+            <li>You can also group elements together to move them together, toggle visibility, and lock them to prevent accidentally moving them
+<img src="res/layers-example.png" alt="" />
+        - Assets - The assets tab houses libraries of reusable components to add to your project.</li>
+          </ul>
+        </li>
+        <li>
+          <p>Center Stage - this is where you will actually draw and position your objectss</p>
+        </li>
+        <li>Tools - this is what you will use to create objects and select them:
+          <ul>
             <li>Left to right, we have:
               <ul>
-                <li>Selection Tools (<code class="language-plaintext highlighter-rouge">Select</code>, <code class="language-plaintext highlighter-rouge">Move</code> <code class="language-plaintext highlighter-rouge">V</code>, <code class="language-plaintext highlighter-rouge">Scale</code> <code class="language-plaintext highlighter-rouge">K</code>)</li>
-                <li>Frame Tools, which we can use to creates our pages or views (<code class="language-plaintext highlighter-rouge">Frame</code> <code class="language-plaintext highlighter-rouge">F</code>, <code class="language-plaintext highlighter-rouge">Slice</code> <code class="language-plaintext highlighter-rouge">S</code>)
+                <li>Selection Tools (<code class="language-plaintext highlighter-rouge">Select</code>, <code class="language-plaintext highlighter-rouge">Move</code> <code class="language-plaintext highlighter-rouge">V</code>, <code class="language-plaintext highlighter-rouge">Scale</code> <code class="language-plaintext highlighter-rouge">K</code>, <code class="language-plaintext highlighter-rouge">Hand</code> <code class="language-plaintext highlighter-rouge">H</code>)</li>
+                <li>Frame Tools, which we can use to creates our pages or views (<code class="language-plaintext highlighter-rouge">Frame</code> <code class="language-plaintext highlighter-rouge">F</code>, <code class="language-plaintext highlighter-rouge">Selection</code> <code class="language-plaintext highlighter-rouge">Shift+S</code>, <code class="language-plaintext highlighter-rouge">Slice</code> <code class="language-plaintext highlighter-rouge">S</code>)
                   <ul>
-                    <li>Frames can both represent complete pages, as well as individual components</li>
+                    <li>Frames can both represent complete pages, as well as individual component groups
+                      <ul>
+                        <li>I tend to prefer the group option instead though - we’ll look at the pros and cons on this later</li>
+                      </ul>
+                    </li>
                   </ul>
                 </li>
-                <li>Shape tools, for drawing geometric primitives (<code class="language-plaintext highlighter-rouge">Rectangle</code> <code class="language-plaintext highlighter-rouge">R</code>, <code class="language-plaintext highlighter-rouge">Line</code> <code class="language-plaintext highlighter-rouge">L</code>, <code class="language-plaintext highlighter-rouge">Arrow</code>, <code class="language-plaintext highlighter-rouge">Ellipse</code> <code class="language-plaintext highlighter-rouge">O</code>, <code class="language-plaintext highlighter-rouge">Polygon</code>, <code class="language-plaintext highlighter-rouge">Star</code>, <code class="language-plaintext highlighter-rouge">Image</code>)
+                <li>Shape tools, for drawing geometric primitives (<code class="language-plaintext highlighter-rouge">Rectangle</code> <code class="language-plaintext highlighter-rouge">R</code>, <code class="language-plaintext highlighter-rouge">Line</code> <code class="language-plaintext highlighter-rouge">L</code>, <code class="language-plaintext highlighter-rouge">Arrow</code> <code class="language-plaintext highlighter-rouge">Shift+L</code>, <code class="language-plaintext highlighter-rouge">Ellipse</code> <code class="language-plaintext highlighter-rouge">O</code>, <code class="language-plaintext highlighter-rouge">Polygon</code>, <code class="language-plaintext highlighter-rouge">Star</code>, <code class="language-plaintext highlighter-rouge">Image</code> <code class="language-plaintext highlighter-rouge">Ctrl+Shift+K</code>)
                   <ul>
                     <li><a href="https://www.youtube.com/watch?v=YGBIc6oJCos">This video explains the primitive shapes</a></li>
                   </ul>
                 </li>
-                <li>Drawing tools for creating Bézier curves or freehand (<code class="language-plaintext highlighter-rouge">Pen</code> <code class="language-plaintext highlighter-rouge">P</code>, <code class="language-plaintext highlighter-rouge">Pencil</code>)</li>
+                <li>Drawing tools for creating Bézier curves or freehand (<code class="language-plaintext highlighter-rouge">Pen</code> <code class="language-plaintext highlighter-rouge">P</code>, <code class="language-plaintext highlighter-rouge">Pencil</code> <code class="language-plaintext highlighter-rouge">Shift+P</code>)</li>
                 <li><code class="language-plaintext highlighter-rouge">Text</code> <code class="language-plaintext highlighter-rouge">T</code></li>
                 <li><code class="language-plaintext highlighter-rouge">Hand</code> <code class="language-plaintext highlighter-rouge">H</code> (pan)</li>
                 <li><code class="language-plaintext highlighter-rouge">Comment</code> <code class="language-plaintext highlighter-rouge">C</code></li>
+                <li><code class="language-plaintext highlighter-rouge">Actions</code> <code class="language-plaintext highlighter-rouge">Ctrl+K</code> - One of my favourite design patterns, if there’s a command you want to perform, but don’t know where it is, you can search for it here. Amazing!
+                  <ul>
+                    <li>We won’t need the next three tools in this course, <code class="language-plaintext highlighter-rouge">Draw</code>, <code class="language-plaintext highlighter-rouge">Design</code> and <code class="language-plaintext highlighter-rouge">Dev</code>, and these may be locked to higher account types.</li>
+                  </ul>
+                </li>
               </ul>
             </li>
-          </ul>
-        </li>
-        <li>Filename - Set your filename here
-          <ul>
-            <li>Your files will automatically get saved in the cloud on Figma’s servers</li>
-            <li>To save it locally, instead do a <code class="language-plaintext highlighter-rouge">Figma</code> -&gt; <code class="language-plaintext highlighter-rouge">File</code> -&gt; <code class="language-plaintext highlighter-rouge">Save local copy...</code></li>
-            <li>Note: When modifying some objects, this area will also change to have more operations, like masking and boolean operations
-<img src="res/filename-changes-to-options.png" alt="" /></li>
           </ul>
         </li>
         <li>This region has sharing tools, preview tools, and zoom tools</li>
-        <li>This region has layers, assets and pages
-          <ul>
-            <li>Layers
-              <ul>
-                <li>You can think of placing elements on the page like a paper collage.</li>
-                <li>Things placed earlier fall below other things.</li>
-                <li>You can use this menu to manually adjust the depth of elements by dragging them up and down.</li>
-                <li>You can also group elements together to move them together, toggle visibility, and lock them to prevent accidentally moving them
-<img src="res/layers-example.png" alt="" /></li>
-              </ul>
-            </li>
-            <li>Assets - The assets tab houses libraries of reusable components to add to your project.</li>
-            <li>You can create these yourself or import other libraries</li>
-            <li>Pages
-              <ul>
-                <li>Pages allow you to have multiple pages in one file. This is akin to the multiple sheets in a spreadsheet we saw last week.</li>
-              </ul>
-            </li>
-            <li>The area directly below will change depending on the tab you have selected above</li>
-          </ul>
-        </li>
         <li>This area switch modes between
           <ul>
             <li>Design - where we arrange objects in our screen.</li>
             <li>Prototype - where we add interactions to our prototypes. We’ll look at this next week.</li>
-            <li>Inspect - get detailed info about your objects, like specific position or colors.</li>
           </ul>
         </li>
-        <li>In this region to you can modify some details about your selected objects. This will update depending on the context of the object selected. e.g. if we have selected text, we will see options like for fonts and text aligning. If we have selected a rectangle, we can modify properties such as the outline color, thickness, and fill color and opacity.
-<img src="res/text-example.png" alt="" /></li>
+        <li>When mutliple objects are selected, some special tools may appear here, like Boolean Operator
+  <img src="res/filename-changes-to-options.png" alt="" /></li>
+        <li>In this region to you can modify some details about your selected objects. This will update depending on the context of the object selected. e.g. if we have selected text, we will see options like for fonts and text aligning. If we have selected a rectangle, we can modify properties such as the outline color, thickness, and fill color and opacity.<img src="res/text-example.png" alt="" /></li>
+        <li>Get Help</li>
       </ol>
-
-      <p>Of course, center stage is where we’ll actually do all of our designing!</p>
 
     </div></div></section>
 <section id="50creatingasitemapinfigma"><button class="collapsible">5.0 Creating a Sitemap in Figma:</button><div class="text-content"><div class="text-inner">
 
-      <p>Note, Figma has a mode specially designed for doing quick diagrams like SiteMaps, which is called the FigJam. However, I want you to build your skills using the Design workflow, so we will work there for this portion of the lab!</p>
+      <p>Note, Figma has a mode specially designed for doing quick diagrams like SiteMaps, which is called the FigJam. However, I want you to build your skills using the Design workflow, so we will work there for this portion of the lab! Some things will be more difficult in this mode, but that’s okay.</p>
 
       <p>Quickly sketch up a sitemap:</p>
       <ul>
