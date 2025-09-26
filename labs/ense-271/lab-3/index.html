@@ -146,32 +146,47 @@
         <li>You can select frames by clicking on their name in the upper left</li>
       </ul>
 
+      <p><img src="res/frames-1.png" alt="" /></p>
+
+      <p><img src="res/frames-2.png" alt="" /></p>
+
       <h3 id="fine-tuning-shapes">Fine tuning shapes</h3>
       <ul>
         <li>Once you place a rectangle, you may want to fine tune. Typically these changes will be made from:
           <ul>
             <li>The right-click context menu</li>
             <li>The widgets which appear when the object is selected</li>
-            <li>The properties panel to the right of the application
-<img src="res/modify-rectangle-properties.png" alt="" /></li>
+            <li>The properties panel to the right of the application</li>
+            <li><img src="res/modify-rectangle-properties.png" alt="" /></li>
           </ul>
         </li>
       </ul>
 
       <h3 id="gradients">Gradients</h3>
 
-      <p><img src="res/gradients.png" alt="" /></p>
       <ul>
         <li>To create a fill which is a gradient, perform the following steps
           <ol>
+            <li>Create a component to be filled, like a rectangle</li>
             <li>Click on the fill color</li>
-            <li>Change the fill type from solid to linear</li>
-            <li>You can set the individual points in the gradient in this area</li>
-            <li>You can fine tune the gradient, e.g. change the rotation, here.
-Experiment with some of the other gradient types!</li>
+            <li>Change the fill type from <code class="language-plaintext highlighter-rouge">solid</code> to <code class="language-plaintext highlighter-rouge">gradient</code></li>
           </ol>
+
+          <p><img src="res/gradient-find.png" alt="" /></p>
         </li>
       </ul>
+
+      <ol>
+        <li>
+          <p>You can set the individual points in the gradient in this area</p>
+
+          <p><img src="res/gradient-update.png" alt="" /></p>
+        </li>
+        <li>
+          <p>You can fine tune the gradient, e.g. change the rotation, here.
+Experiment with some of the other gradient types!</p>
+        </li>
+      </ol>
 
       <h3 id="boolean-operations">Boolean Operations</h3>
       <ul>
@@ -180,29 +195,37 @@ Experiment with some of the other gradient types!</li>
             <li>These are non-destructive so you can modify them later</li>
           </ul>
         </li>
-        <li>e.g. create a user icon with the following three circles:
-<img src="res/boolean-1.png" alt="" /></li>
-        <li>select the objects with shift click, in order, background, then each of the circles</li>
-        <li>from the menu at (2), select <code class="language-plaintext highlighter-rouge">Subtract Selection</code></li>
-        <li>This will create a new shape with the other two parts cut out
-<img src="res/boolean-2.png" alt="" />
-Experiment with some of the other boolean operations</li>
-        <li>An alternative approach to creating interesting shapes is to turn your primitives into raw vector data, and modify control points from there!</li>
+        <li>e.g. create a user icon with the following three circles:</li>
       </ul>
 
-      <p><a href="https://help.figma.com/hc/en-us/articles/360039957534-Boolean-Operations">Learn more about boolean operations here</a>
-<a href="https://www.youtube.com/watch?v=GetLzfMC6H0">A video on boolean operations</a></p>
+      <p><img src="res/boolean-0.png" alt="" /></p>
 
-      <h3 id="auto-layout">Auto Layout</h3>
       <ul>
-        <li>AutoLayout is a tool in Figma which groups elements together into a row or column and allows you align them and add spacing and/or padding between the elements</li>
+        <li>select the objects with shift click, select the two foreground circles</li>
       </ul>
 
-      <p><a href="https://www.youtube.com/watch?v=TyaGpGDFczw">A video on Auto Layout</a></p>
+      <p><img src="res/boolean-1.png" alt="" /></p>
+
+      <ul>
+        <li>click on the union operation. This makes a composite shape comprised of the two foreground circles.</li>
+        <li>again, using select, in order click the background circle then shift-click your new union</li>
+        <li>from the menu, select <code class="language-plaintext highlighter-rouge">Subtract Selection</code></li>
+        <li>This will create a new shape with the other two parts cut out</li>
+      </ul>
+
+      <p><img src="res/boolean-3.png" alt="" /></p>
+
+      <p>Here are the merged results. You could also add a third circle to the background and modify the color to make the icon stand out against light backgrounds:</p>
+
+      <p><img src="res/icon-finished.png" alt="" /></p>
+
+      <p>Experiment with some of the other boolean operations</p>
+
+      <p><a href="https://help.figma.com/hc/en-us/articles/360039957534-Boolean-operations">Learn more about boolean operations here</a></p>
 
       <h3 id="groups">Groups</h3>
       <ul>
-        <li>lets make our user icon slightly better with an outline.</li>
+        <li>As we would like our person with a background icon as one object, we can group it</li>
         <li>First, lets draw a circle slightly bigger than our icon</li>
         <li>Make sure it is behind the icon either through layers, or right-click -&gt; <code class="language-plaintext highlighter-rouge">Send to back</code></li>
         <li>Make sure it has a Stroke, and remove its fill</li>
@@ -213,7 +236,90 @@ Experiment with some of the other boolean operations</li>
 
       <p><a href="https://www.figma.com/best-practices/groups-versus-frames/">Learn more about groups versus frames here</a></p>
 
+      <h3 id="vector-operations">Vector Operations</h3>
+      <ul>
+        <li>An alternative approach to creating interesting shapes is to turn your primitives into raw vector data, and modify control points from there!</li>
+        <li>You may also wish to start with pen tool, and other primitives (disabling fill but enabling outline)</li>
+        <li>Let’s try to make this globe from <a href="https://fontawesome.com/icons/packs/sharp">fontawesome.com</a></li>
+      </ul>
+
+      <p><img src="res/globe-from-fontawesome.png" alt="" /></p>
+
+      <p><img src="res/circle-globe.png" alt="" /></p>
+
+      <p><img src="res/circle-2.png" alt="" /></p>
+
+      <p><img src="res/circle-3.png" alt="" /></p>
+
+      <p><img src="res/globey-1.png" alt="" /></p>
+
+      <ul>
+        <li>duplicate (ctrl+d), flip horizontal (shift+h), and slide it over to the right</li>
+      </ul>
+
+      <p><img src="res/eyebally.png" alt="" /></p>
+
+      <ul>
+        <li>finish with a line</li>
+      </ul>
+
+      <p><img src="res/done-the-globe.png" alt="" /></p>
+
+      <p>Hint - you can also double click on rectancle, circle, etc. and switch to vector mode where you move around control points, e.g. to make a trapezoid or parallelogram. Yay geometry!</p>
+
+      <p><a href="https://help.figma.com/hc/en-us/articles/360040450213-Vector-networks">Learn more about vector operations here</a></p>
+
+      <h3 id="auto-layout">Auto Layout</h3>
+      <ul>
+        <li>AutoLayout is a tool in Figma which groups elements together into a row or column and allows you align them and add spacing and/or padding between the elements
+          <ul>
+            <li>Based on the documentation, it is growing quite rapidly in scope, but we’ll just scratch the surface.</li>
+            <li>Let’s make a little keyboard
+              <ul>
+                <li>Create an inner key, (rectangle, rectangle, tweaks, letter)
+                  <ul>
+                    <li>Group it!</li>
+                    <li><img src="res/its-a-key.png" alt="" /></li>
+                  </ul>
+                </li>
+                <li>Duplicate the group
+                  <ul>
+                    <li>Shift it to the right (shift + drag)</li>
+                    <li>Now you have two groups</li>
+                    <li><img src="res/two-keys.png" alt="" /></li>
+                  </ul>
+                </li>
+                <li>Group the groups
+                  <ul>
+                    <li>the tree is now</li>
+                    <li><img src="res/key-tree.png" alt="" /></li>
+                  </ul>
+                </li>
+                <li>Select the outermost group</li>
+                <li>Select the autolayout on the right, choosing horizontal
+                  <ul>
+                    <li>This creates an auto layout</li>
+                    <li><img src="res/keys-autolayout.png" alt="" /></li>
+                  </ul>
+                </li>
+                <li>Pop back inside the tree, and duplicate another key
+                  <ul>
+                    <li>It will join the auto layout horizontally</li>
+                    <li><img src="res/add-a-key.png" alt="" /></li>
+                  </ul>
+                </li>
+                <li>Autolayout provides tools to modify elements together, such as spacing between them, and much more</li>
+                <li><img src="res/keyboard.png" alt="" /></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><a href="https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout">A guide on autolayouts</a></p>
+
       <h3 id="masked-images">Masked Images</h3>
+
       <ul>
         <li>Sometimes we want images to be masked by another shape
           <ul>
@@ -221,12 +327,18 @@ Experiment with some of the other boolean operations</li>
             <li>We can think of this like a window which is looking through to an image behind it.</li>
             <li>we can do this by
               <ul>
-                <li>uploading an image using the image tool, under the rectangle</li>
-                <li>adding a shape on top</li>
-                <li>select the shape and click on the mask button</li>
-                <li>in the layer pane, drag the image <em>above</em> the mask</li>
-                <li>the image can by fine tunes by double clicking it and them manipulating it
-<img src="res/image-being-masked-by-circle.png" alt="" /></li>
+                <li>paste, or drag and drop an image in</li>
+                <li>adding a shape on top, like a circle</li>
+                <li>right click on the shape, and click <code class="language-plaintext highlighter-rouge">Use as mask (Ctrl+Alt+M)</code></li>
+                <li>in the layer pane, drag the image <em>above</em> the mask (it should nest inside)</li>
+                <li><img src="res/image-being-masked-by-circle.png" alt="" /></li>
+              </ul>
+            </li>
+            <li>as with the boolean operations, this process is non destructive
+              <ul>
+                <li>the image can be fine tuned by double clicking it and them manipulating it</li>
+                <li>the circle can be manipulated too</li>
+                <li>you can also add multiple things inside the mask, like an alpha gradient to tink the image</li>
               </ul>
             </li>
           </ul>
@@ -297,14 +409,33 @@ Experiment with some of the other boolean operations</li>
 
       <p>Rules:</p>
       <ul>
-        <li>If elements are clearly just images, you may screen-capture them, or find a similar image on the internet. Max 3 elements can be just pictures. If your design has more pictures, that’s fine, but you’ll need at 7 least seven more component.</li>
-        <li>If an element is not an image, and is just geometry, you must attempt to make it. (Rounded rectangles, clipped chunks, etc.)</li>
-        <li>Repeated elements only count as one module, even if there are minor variations, e.g. different photos or different text do not count as different components</li>
-        <li>Component may be nested</li>
-        <li>Do not choose a project that is too ambitious!</li>
-        <li>You may choose a mobile or desktop design.</li>
-        <li>You can do just one or two pages of a multi-page design as long as it has at least 10 components.</li>
-        <li>Please cite the designer of your website or app, especially if you plan to use this on a portfolio afterwards (give credit where credit is due!).</li>
+        <li>If a graphical element is a photograph or render, you may either use a screen-capture to isolate the image, or find a similar image on the internet. A max of 3 elements can be just pictures - if your design has more pictures, that’s fine, but you’ll need at 7 least seven additional components.
+          <ul>
+            <li>If the images are masked, you should try to mask them too!</li>
+          </ul>
+        </li>
+        <li>If an element is not an image, and is just geometry, like an icon, you must attempt to make it using the vector manipulations operations we saw in figma. (Rounded rectangles, clipped chunks, pen tool, boolean operations, etc.)</li>
+        <li>Repeated elements only count as one module, even if there are minor variations, e.g. different photos or different text do not count as different components
+          <ul>
+            <li>Component may be nested, e.g. a card with an icon, a title and a tag</li>
+            <li>This would count as 4 elements - one for the overall layout, and one for each component</li>
+          </ul>
+        </li>
+        <li>Do not choose a project that is too ambitious!
+          <ul>
+            <li>You may choose a mobile or desktop design.</li>
+            <li>You can do just one or two pages of a multi-page design as long as it has at least 10 components.</li>
+          </ul>
+        </li>
+        <li>Please cite the designer of your website or app, especially if you plan to use this on your portfolio for this class. (Give credit where credit is due!)
+          <ul>
+            <li>You should not be using this on your portfolio in general as you didn’t actually design the layout, colors, etc., this is just an excercise to hone your skills.
+              <ul>
+                <li>Using what you learned to make your own design would make an excellent portfolio piece, but is well outside the scope of this lab activity!</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
 
     </div></div></section>
