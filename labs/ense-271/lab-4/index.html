@@ -150,19 +150,17 @@
 
       <p>To add interactivity to our design, we need to be in prototyping mode. Switch to prototyping mode using the top menu:</p>
 
-      <p><img src="res/1-prototype.png" alt="Prototype mode" /></p>
+      <p><img src="res/1-prototype.png" alt="" /></p>
 
       <p>A journey through our prototype is called a <code class="language-plaintext highlighter-rouge">flow</code>. We need to set a default flow starting point, so that when we start our presentation Figma knows which screen to start on. The home screen may already be set as the default flow starting point.</p>
 
-      <p><img src="res/2-home.png" alt="Starting flow" /></p>
+      <p><img src="res/2-home.png" alt="" /></p>
 
       <p><img src="res/flow-working.png" alt="" /></p>
 
       <p>You can configure your present mode to simulate an android phone using the following settings</p>
 
       <p><img src="res/configure-present-for-android-1.png" alt="" /></p>
-
-      <p><img src="res/configure-present-for-android-2.png" alt="" /></p>
 
       <p>You can preview your page by clicking on the preview icon.</p>
 
@@ -229,17 +227,17 @@
 
       <p><img src="res/10.1-weird-stuff.png" alt="Weird stuff lints" /></p>
 
+      <p><img src="10.1.1-new-settings.png" alt="" /></p>
+
       <p>This will create a push effect. We don’t typically see this on the web, but they may be used in a mobile app.</p>
 
       <p>Repeat for the other two pages.</p>
 
       <p>Each of these pages has a back button, which we can wire back to the weird stuff page. However, we can simply set the interaction style to back, which will return to the previous page, and attempt to reverse the interaction as well! (Though I sometimes encountered bugs with it):</p>
 
-      <p><img src="res/10.2-back.png" alt="Back" /></p>
+      <p><img src="res/10.2-back.png" alt="" /></p>
 
       <p>Alternatively, you could hard code the destination, and just be sure the mirror the direction of the “push”.</p>
-
-      <p><img src="res/push-back.png" alt="" /></p>
 
       <p>This may also be a fun time to try the different easings, e.g. <code class="language-plaintext highlighter-rouge">Bouncy</code></p>
 
@@ -266,8 +264,7 @@
 
       <p>Connect the first artboard to the second with the following settings:</p>
 
-      <p>![Carousel transition](
-<img src="res/12-carousel-transition.png" alt="" /></p>
+      <p><img src="res/12-carousel-transition.png" alt="" /></p>
 
       <p>Wire up the second to the third screen, and the third screen back to the first. Unfortunately you will update the settings on each page. Alternatively, you can copy and paste, as we saw earlier, and move the destination.</p>
 
@@ -282,7 +279,7 @@
 
       <p>Move the location page near the four lightboxes, and wire the links together with the following settings:</p>
 
-      <p><img src="res/22-lightboxes.png" alt="light boxes" /></p>
+      <p><img src="res/22-lightboxes.png" alt="" /></p>
 
       <p>We can also wire the close buttons back to close the overlay.</p>
 
@@ -358,31 +355,33 @@
     </div></div></section>
 <section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>Your project for this lab is to create a <code class="language-plaintext highlighter-rouge">virtual tour</code>, a prototype of a simple webpage which simulates touring a real-world (or fictional) location such as a national park, a tourist destination, or a science-fiction or fantasy world from a book, media or game. You virtual tour should include:</p>
+      <p>Your project for this lab is to create a <code class="language-plaintext highlighter-rouge">virtual tour</code>, a prototype of a simple webpage which simulates touring somewhere you know very well. This could be a place you are originally from, a place that you visit in your daily life, or a fictional location that you know well, such as from a science-fiction or fantasy world from a book, media or game. I also love seeing any worlds you have created - show off your worldbuilding skills! You virtual tour should include:</p>
       <ul>
         <li>A home page</li>
-        <li>Some type of menu (properly connected so that every page is accessible)</li>
-        <li>Three landmark pages, which showcases a specific feature of your locale, with a page for each
+        <li>A menu (properly connected so that every page is accessible)</li>
+        <li>Three <code class="language-plaintext highlighter-rouge">landmark</code> pages, which showcases a specific feature of your locale, with a page for each
           <ul>
-            <li>Each landmark should have a name, a set of images and text description</li>
+            <li>Each landmark should have, at a minimum, a name, a set of images and text description</li>
             <li>The images should be stored in some type of interactive image container
               <ul>
-                <li>You can use ones from the pre-lab, or create your own</li>
-              </ul>
-            </li>
-            <li>Use a different type of interaction for each page
-              <ul>
-                <li>At least one of the three must include a <code class="language-plaintext highlighter-rouge">Smart Animate</code> of a transform, such as size</li>
-                <li>Leave a note in the figma file to explicitly show where you are using the <code class="language-plaintext highlighter-rouge">Smart Animate</code></li>
+                <li>You can use up to two from the pre-lab, but I’d like to see you try to create at least one of your own</li>
+                <li>Use a different type of interaction for each page
+                  <ul>
+                    <li>At least one of the three must include a <code class="language-plaintext highlighter-rouge">Smart Animate</code> of a transform, such as size</li>
+                    <li>Leave a note in the figma file to explicitly show where you are using the <code class="language-plaintext highlighter-rouge">Smart Animate</code>, and how to navigate any interactions which may not be obvious.</li>
+                  </ul>
+                </li>
               </ul>
             </li>
           </ul>
         </li>
       </ul>
 
-      <p>Please include some images from the landmarks. You can find many images on the web in the creative commons, but for education purposes, it is okay to included copyrighted images as this project as it is for educational / non-commercial purposes. Just be aware of the implications if you intend to use this in your portfolio.</p>
+      <p>Please include some images from the landmarks. If using a common real world location, you can find many images on the web in the creative commons, but for education purposes, it is okay to included copyrighted images as this project as it is for educational / non-commercial purposes. Just be aware of the implications if you intend to use this in your portfolio. If doing a virtual world, concept art, game screen captures, sketches, whatever to showcase the visual identity of the world.</p>
 
-      <p>As we are now at the half way point of the lab, do not forget about your running assignment of maintaining a github portfolio! This would be a good time to ensure everything is up to date, well organized, and easy to navigate. Think about users browsing your page as a portfolio, are they likely to download and open up “.fig” files, or would they rather see screen capture images presented in easily to see markdown files?</p>
+      <p>As we are now at the half way point of the lab, do not forget about your running assignment of maintaining a github portfolio! This would be a good time to ensure everything is up to date, well organized, and easy to navigate. Think about users browsing your page as a portfolio, are they likely to download and open up “.fig” files, or would they rather see screen capture images presented in easily to see markdown files? How would you show off your interaction design?</p>
+
+      <p>Bonus points - start to think about the overall feel of your application - what colors of banners fit the theme? What fonts? Is there anything else that would help it stand out?</p>
 
       <hr />
 
