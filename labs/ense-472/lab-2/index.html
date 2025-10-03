@@ -167,12 +167,12 @@
     </div></div></section>
 <section id="part1twistedpython"><button class="collapsible">Part 1: Twisted Python</button><div class="text-content"><div class="text-inner">
 
-      <p>Last week we saw sockets in python, a very low level interface for programming network applications. While this helps you to understand how the operating system handles these tasks, there were some significant challenges!</p>
+      <p>Last week we saw sockets in Python, a very low level interface for programming network applications. While this helps you to understand how the operating system handles these tasks, there were some significant challenges:</p>
 
       <ul>
         <li>It was very low level - you needed to manage your own sockets entirely</li>
         <li>There was somewhat inconsistent behaviour between Windows and Linux environment, e.g. with catching Socket errors</li>
-        <li>Python still only supports Blocking Input, unless you create (or use a library) which performs some Socket redirection type stuff</li>
+        <li>Python only supported Blocking Input, unless you write code (or use a library) which structured your code in some manner that Sockets would not block</li>
         <li>In order to keep your application responsive, you needed to do multithreading, which also involved keeping your memory secure and preventing race conditions</li>
       </ul>
 
@@ -260,7 +260,7 @@
 
       <p>TCP is a secure communications protocol, which means that a sophisticated set of handshakes will be performed to establish connection between the client and the server. After that messages will be sent and delivered reliably to and from the server and the client. Finally messages will be sent to close the connection to the server. In the next sections we will look at these protocols in more detail, and see these packets being exchanged using WireShark.</p>
 
-      <p>Of course, maybe we don’t want to connect from a server, and would rather connect from a client. Let’s look at some code which can do that, and examine some of the callbacks within:</p>
+      <p>Instead of using a Telnet server, we may wish to connect from a dedicated client. Let’s look at some code which can do that, and examine some of the callbacks within:</p>
 
       <p><code class="language-plaintext highlighter-rouge">echo_tcp_client.py</code></p>
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">protocol</span>
@@ -336,7 +336,7 @@
 
       <p><code class="language-plaintext highlighter-rouge">openssl req -newkey rsa:2048 -keyout domain.key -x509 -days 365 -out domain.crt</code></p>
 
-      <p>Enter a passphrase for the PEM. Don’t forget it - you will need it every time you spin up the server when you use the key! You are going to be self-signing this certificate, so you may fill out the fields as follows.</p>
+      <p>Enter a passphrase for the PEM. Don’t forget it - you will need it every time you spin up the server when you use the key! You are going to be self-signing this certificate, so you may fill out the fields appropriately.</p>
 
       <p>Now we need to create our server:</p>
 
@@ -365,7 +365,7 @@
 
       <p><img src="res/echo-ssl-much-info.png" alt="" /></p>
 
-      <p>This is an end-to-end encrypted protocol. We will get to examine this protocol in more depth in section 3. Please note that in 2023 this protocol is deprecated in favour of TLS for performance and security concerns, however we will still be able to use it to investigate encryption.</p>
+      <p>This is an end-to-end encrypted protocol. We will get to examine this protocol in more depth in section 3.</p>
 
       <p>Note: Modern versions of Twisted use a much more complicated TLS setup than our simple SSL. It might be worth checking out this version of the documentation for help with this:
 <a href="https://twisted.org/documents/12.3.0/core/howto/ssl.html">Twisted Documentation: Using SSL in Twisted</a></p>
@@ -391,7 +391,7 @@
 
       <p><img src="res/encapsulation-hidden.svg" alt="" /></p>
 
-      <p>There is quite a few fields inside each of these packets. Here is a simplified view with some of the contents which are of relevance to us.</p>
+      <p>There are quite a few fields inside each of these packets. Here is a simplified view with some of the contents which are of relevance to us.</p>
 
       <p><img src="res/packet-contents-simplified.svg" alt="" /></p>
 
@@ -405,7 +405,7 @@
 
       <p><img src="res/IP-packet-format.png" alt="" /></p>
 
-      <p>At the hardware level (ethernet), the only thing being sent are strings of bits, (1’s and 0’s). However, if we know these protocols, we could put back together the contents of the information being sent.</p>
+      <p>At the hardware level (ethernet), all of these packets are sent only as arrays of bits, (1’s and 0’s - high vs. low signals). However, if we know these protocols, we could put back together the contents of the information being sent.</p>
 
       <p>One way to do this would be to use some kind of hardware monitor, which would physically exist on the network, however these are very costly.</p>
 
@@ -549,18 +549,18 @@
     </div></div></section>
 <section id="assignment"><button class="collapsible">Assignment</button><div class="text-content"><div class="text-inner">
 
-      <p>As with the previous assignment, this one will be completed in three phases. Please take a checkpoint after each phase of your code.</p>
+      <p>As with the previous assignment, this one will be completed in three phases. Please take a checkpoint after each phase of your code. You will also be submitting a lab report to accompany your code.</p>
 
-      <p>Phase 1: Using the Twisted Chat application we developed in Part 4 and WireShark, create a session with one server and two clients. Send a messages from the first client to the second client. Using WireShark, examine the packets. In a text document, using screen captures, show some annotated captures from these packets - in particular show which order the packets travelled. Flag anything which might identify source, content, or message. Are these messages secure? Why or why not?</p>
+      <p><strong>Phase 1:</strong> Using the Twisted Chat application we developed in Part 4 and WireShark, create a session with one server and two clients. Send a messages from the first client to the second client. Using WireShark, examine the packets. In your lab report, annotate some screen captures of these packets - in particular show which order the packets travelled. Flag anything which might identify source, content, or message. Are these messages secure? Why or why not?</p>
 
-      <p>Phase 2: Upgrade the Twisted Chat application to use end-to-end encryption with SSL. Using the encrypted version, repeat the packet collection process from phase 1, again documented in a text file. Which Protocol is being used now? Are you able to see the messages being sent? Would an end-user be able to tell that anything different is happening that in the TCP Client? As before, flag anything you can, such as certificates being exchanged.</p>
+      <p><strong>Phase 2:</strong> Upgrade the Twisted Chat application to use end-to-end encryption with SSL. Using the encrypted version, repeat the packet collection process from phase 1, again documented in your lab report. Which Protocol is being used now? Are you able to see the messages being sent? Would an end-user be able to tell that anything different is happening that in the TCP Client? As before, flag anything you can see visibly, such as certificates being exchanged.</p>
 
-      <p>Phase 3: Modify the Twisted Chat application to use UDP instead of TCP. Note that UDP does not have any notion of connections, thus you will need to simply assume the first Datagram recieved from the user is their name, and subsequent sends are chat messages until the disconnect message is recieved. Repeat the packet collection and documentation excercise from phase 1. What has changed on the network side? Which benefits and drawbacks of this technology are apparent compared to TCP by examining the code and packets?</p>
+      <p><strong>Phase 3:</strong> Modify the Twisted Chat application from Part 1 to use UDP instead of TCP. Note that UDP does not have any notion of connections, thus you will need to simply assume the first Datagram recieved from the user is their name, and subsequent sends are chat messages until the disconnect message is recieved. Repeat the packet collection and documentation excercise from phase 1. What has changed on the network side? Which benefits and drawbacks of this technology are apparent compared to TCP by examining the code and packets?</p>
 
     </div></div></section>
 <section id="submission"><button class="collapsible">Submission</button><div class="text-content"><div class="text-inner">
 
-      <p>Please submit your lab documents and code for phases 2 and 3 to URCourses by the due date. If you are working with a partner, you need only submit one copy, but please include both partners names on all assignments.</p>
+      <p>Please submit your lab report and code for phases 2 and 3 to URCourses by the due date. If you are working with a partner, you need only submit one copy, but please include both partners names on all assignments.</p>
 
     </div></div></section>
 <section id="references"><button class="collapsible">References</button><div class="text-content"><div class="text-inner">
