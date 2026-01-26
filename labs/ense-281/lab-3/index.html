@@ -159,11 +159,11 @@
 
       <p>As with our spreadsheets, the link goes in the head, <em>before</em> our custom styles. (This will allow our custom styles to override theirs as needed - recall that when two styles have the same priority, the style defined later will override the style defined earlier.)</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"</span><span class="nt">&gt;</span>
 </code></pre></div>      </div>
       <p>You will also need to paste a JavaScript library into your HTML body. This script tag is added in the last line of the body of the document, before your custome JavaScript.</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"</span><span class="nt">&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div>      </div>
       <p>We’ll investigate more about the placement of JavaScript scripts next lab.</p>
 
