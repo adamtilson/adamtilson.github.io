@@ -344,13 +344,6 @@ before   prepend         append     after
     </div></div></section>
 <section id="part5changingattributes"><button class="collapsible">Part 5: Changing Attributes</button><div class="text-content"><div class="text-inner">
 
-      <h3 id="finding-an-element-by-attribute">Finding an element by Attribute</h3>
-
-      <p>If you wish to find an element by a particular attribute, you may using something like:</p>
-
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">[href='https://www.youtube.com/watch?v=dQw4w9WgXcQ']</span><span class="dl">"</span><span class="p">)</span>
-</code></pre></div>      </div>
-
       <h3 id="setting-text">Setting text</h3>
 
       <p>Rather than DOM <code class="language-plaintext highlighter-rouge">innerText</code>, it’s just <code class="language-plaintext highlighter-rouge">text</code></p>
@@ -389,6 +382,13 @@ before   prepend         append     after
 </code></pre></div>      </div>
 
       <p>The syntax is a bit tricky. Data member attributes are always prefaced with the <code class="language-plaintext highlighter-rouge">data-</code> name when written in HTML, and then accessed from the data function using jQuery by providing pnly the name after <code class="language-plaintext highlighter-rouge">data-</code>. Note: this feature also exists in vanilla JavaScript using the <code class="language-plaintext highlighter-rouge">dataset</code> property of a vanilla DOM object.</p>
+
+      <h3 id="finding-an-element-by-attribute">Finding an element by Attribute</h3>
+
+      <p>If you wish to find an element by a particular attribute, you may using something like:</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="dl">"</span><span class="s2">[href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'</span><span class="dl">"</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="dl">'</span><span class="s1">href</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">https://www.youtube.com/watch?v=izGwDsrQ1eQ</span><span class="dl">'</span> <span class="p">)</span>
+</code></pre></div>      </div>
 
     </div></div></section>
 <section id="part6events"><button class="collapsible">Part 6: Events</button><div class="text-content"><div class="text-inner">
