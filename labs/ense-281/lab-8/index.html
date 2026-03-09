@@ -400,7 +400,9 @@
 
       <h3 id="installation">Installation</h3>
 
-      <p>Note: If you are working on a lab machine, installation will no longer work. Instead, please use the VirtualBox Image provided on URCourses. VirtualBox will already be installed on the machines.</p>
+      <p>Note: If you are working on a lab machine, installation will no longer work. Instead, please you may use the VirtualBox Image provided on URCourses. VirtualBox will already be installed on the machines. Alternatively you may unzip and run without installing. (See below!)</p>
+
+      <p><strong>Your own windows PC</strong></p>
 
       <p>If you are using your own Windows PC, please follow the following:</p>
 
@@ -493,15 +495,64 @@ Set-Alias mongosh "C:\Program Files\MongoDB\Server\6.0\bin\mongosh.exe"
 
       <p><img src="res/working-on-windows.png" alt="" /></p>
 
-      <p><em>** Important **</em>
-In the lab, note that anything you put in the database will be accessible to other users who sign on to the computer. Please cleanup your databases when done!</p>
-
       <h3 id="installation-guides">Installation guides</h3>
+
+      <p><strong>Your own PC running something other than windows</strong></p>
 
       <p><a href="https://docs.mongodb.com/manual/administration/install-on-linux/">Linux</a>
 <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">Ubuntu</a>
 <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x">Mac</a>
 <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/">Windows</a></p>
+
+      <h3 id="new---2026---running-from-a-zip-on-windows">New - 2026 - Running from a Zip on windows:</h3>
+
+      <p><strong>Use this if you are in the lab in 2026</strong></p>
+
+      <ul>
+        <li>If you are working on the lab computers, you will not be able to install MongdoDB using the msi as you do not have administrator privileges
+          <ul>
+            <li>Similar to NodeJS we can grab it from a zip file, unzip it and run it on our local machines</li>
+          </ul>
+        </li>
+        <li>You will need to grab two zip files:</li>
+        <li>https://www.mongodb.com/docs/v7.0/tutorial/install-mongodb-on-windows-zip/
+          <ul>
+            <li>https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-8.2.5.zip</li>
+            <li>https://downloads.mongodb.com/compass/mongosh-2.7.0-win32-x64.zip</li>
+          </ul>
+        </li>
+        <li>Unzip these both into the same folder
+          <ul>
+            <li>e.g. <code class="language-plaintext highlighter-rouge">C:\users\tilsona\mongo</code> , but you should use your username instead of ‘tilsona’</li>
+          </ul>
+        </li>
+        <li>Create a folder where you would like to have your database stored
+          <ul>
+            <li>e.g. <code class="language-plaintext highlighter-rouge">C:\users\tilsona\mongo\db</code></li>
+          </ul>
+        </li>
+        <li>The directory should include:
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|- mongo
+  |- bin
+  |   |- mongod
+  |   |- mongosh
+  | - db
+</code></pre></div>          </div>
+        </li>
+        <li>In a terminal, run the Mongo Daemon (Mongod)
+          <ul>
+            <li>e.g. <code class="language-plaintext highlighter-rouge">C:\users\tilsona\mongo\bin\mongod --dbpath="C:\users\tilsona\mongo\db"</code></li>
+            <li>leave this window running</li>
+          </ul>
+        </li>
+        <li>In a second terminal, run the Mongo Shell (Mongosh)
+          <ul>
+            <li>e.g. <code class="language-plaintext highlighter-rouge">C:\users\tilsona\mongo\bin\mongosh</code></li>
+            <li>In this second terminal we can run Mongo commands</li>
+            <li>We will also be able to connect to our database from a Node.js application using Mongoose, which we will see in a second!</li>
+          </ul>
+        </li>
+      </ul>
 
       <h3 id="mongod">mongod</h3>
 
